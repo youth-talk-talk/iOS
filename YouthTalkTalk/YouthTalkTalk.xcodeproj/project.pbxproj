@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
+		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
+		AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF52BF0FDB500A13991 /* ViewController.swift */; };
+		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
+		AC5A7BFE2BF0FDB600A13991 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFD2BF0FDB600A13991 /* Base */; };
+		AC5A7C092BF0FDB700A13991 /* YouthTalkTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C082BF0FDB700A13991 /* YouthTalkTalkTests.swift */; };
+		AC5A7C132BF0FDB700A13991 /* YouthTalkTalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C122BF0FDB700A13991 /* YouthTalkTalkUITests.swift */; };
+		AC5A7C152BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC5A7C052BF0FDB700A13991 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC5A7BE62BF0FDB500A13991 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC5A7BED2BF0FDB500A13991;
+			remoteInfo = YouthTalkTalk;
+		};
+		AC5A7C0F2BF0FDB700A13991 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC5A7BE62BF0FDB500A13991 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC5A7BED2BF0FDB500A13991;
+			remoteInfo = YouthTalkTalk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AC5A7BF52BF0FDB500A13991 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC5A7BFD2BF0FDB600A13991 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AC5A7BFF2BF0FDB600A13991 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC5A7C042BF0FDB700A13991 /* YouthTalkTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouthTalkTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC5A7C082BF0FDB700A13991 /* YouthTalkTalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTalkTalkTests.swift; sourceTree = "<group>"; };
+		AC5A7C0E2BF0FDB700A13991 /* YouthTalkTalkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouthTalkTalkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC5A7C122BF0FDB700A13991 /* YouthTalkTalkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTalkTalkUITests.swift; sourceTree = "<group>"; };
+		AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTalkTalkUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC5A7BEB2BF0FDB500A13991 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5A7C012BF0FDB700A13991 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5A7C0B2BF0FDB700A13991 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC5A7BE52BF0FDB500A13991 = {
+			isa = PBXGroup;
+			children = (
+				AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */,
+				AC5A7C072BF0FDB700A13991 /* YouthTalkTalkTests */,
+				AC5A7C112BF0FDB700A13991 /* YouthTalkTalkUITests */,
+				AC5A7BEF2BF0FDB500A13991 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC5A7BEF2BF0FDB500A13991 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */,
+				AC5A7C042BF0FDB700A13991 /* YouthTalkTalkTests.xctest */,
+				AC5A7C0E2BF0FDB700A13991 /* YouthTalkTalkUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7C222BF1015800A13991 /* Present */,
+				AC5A7C212BF100A600A13991 /* App */,
+			);
+			path = YouthTalkTalk;
+			sourceTree = "<group>";
+		};
+		AC5A7C072BF0FDB700A13991 /* YouthTalkTalkTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7C082BF0FDB700A13991 /* YouthTalkTalkTests.swift */,
+			);
+			path = YouthTalkTalkTests;
+			sourceTree = "<group>";
+		};
+		AC5A7C112BF0FDB700A13991 /* YouthTalkTalkUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7C122BF0FDB700A13991 /* YouthTalkTalkUITests.swift */,
+				AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */,
+			);
+			path = YouthTalkTalkUITests;
+			sourceTree = "<group>";
+		};
+		AC5A7C212BF100A600A13991 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */,
+				AC5A7BFC2BF0FDB600A13991 /* LaunchScreen.storyboard */,
+				AC5A7BFF2BF0FDB600A13991 /* Info.plist */,
+				AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */,
+				AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AC5A7C222BF1015800A13991 /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7BF52BF0FDB500A13991 /* ViewController.swift */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC5A7BED2BF0FDB500A13991 /* YouthTalkTalk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC5A7C182BF0FDB700A13991 /* Build configuration list for PBXNativeTarget "YouthTalkTalk" */;
+			buildPhases = (
+				AC5A7BEA2BF0FDB500A13991 /* Sources */,
+				AC5A7BEB2BF0FDB500A13991 /* Frameworks */,
+				AC5A7BEC2BF0FDB500A13991 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YouthTalkTalk;
+			productName = YouthTalkTalk;
+			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC5A7C032BF0FDB700A13991 /* YouthTalkTalkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC5A7C1B2BF0FDB700A13991 /* Build configuration list for PBXNativeTarget "YouthTalkTalkTests" */;
+			buildPhases = (
+				AC5A7C002BF0FDB700A13991 /* Sources */,
+				AC5A7C012BF0FDB700A13991 /* Frameworks */,
+				AC5A7C022BF0FDB700A13991 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC5A7C062BF0FDB700A13991 /* PBXTargetDependency */,
+			);
+			name = YouthTalkTalkTests;
+			productName = YouthTalkTalkTests;
+			productReference = AC5A7C042BF0FDB700A13991 /* YouthTalkTalkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AC5A7C0D2BF0FDB700A13991 /* YouthTalkTalkUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC5A7C1E2BF0FDB700A13991 /* Build configuration list for PBXNativeTarget "YouthTalkTalkUITests" */;
+			buildPhases = (
+				AC5A7C0A2BF0FDB700A13991 /* Sources */,
+				AC5A7C0B2BF0FDB700A13991 /* Frameworks */,
+				AC5A7C0C2BF0FDB700A13991 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC5A7C102BF0FDB700A13991 /* PBXTargetDependency */,
+			);
+			name = YouthTalkTalkUITests;
+			productName = YouthTalkTalkUITests;
+			productReference = AC5A7C0E2BF0FDB700A13991 /* YouthTalkTalkUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC5A7BE62BF0FDB500A13991 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					AC5A7BED2BF0FDB500A13991 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					AC5A7C032BF0FDB700A13991 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = AC5A7BED2BF0FDB500A13991;
+					};
+					AC5A7C0D2BF0FDB700A13991 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = AC5A7BED2BF0FDB500A13991;
+					};
+				};
+			};
+			buildConfigurationList = AC5A7BE92BF0FDB500A13991 /* Build configuration list for PBXProject "YouthTalkTalk" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC5A7BE52BF0FDB500A13991;
+			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC5A7BED2BF0FDB500A13991 /* YouthTalkTalk */,
+				AC5A7C032BF0FDB700A13991 /* YouthTalkTalkTests */,
+				AC5A7C0D2BF0FDB700A13991 /* YouthTalkTalkUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC5A7BEC2BF0FDB500A13991 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */,
+				AC5A7BFE2BF0FDB600A13991 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5A7C022BF0FDB700A13991 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5A7C0C2BF0FDB700A13991 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC5A7BEA2BF0FDB500A13991 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */,
+				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
+				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5A7C002BF0FDB700A13991 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC5A7C092BF0FDB700A13991 /* YouthTalkTalkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5A7C0A2BF0FDB700A13991 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC5A7C152BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift in Sources */,
+				AC5A7C132BF0FDB700A13991 /* YouthTalkTalkUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC5A7C062BF0FDB700A13991 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC5A7BED2BF0FDB500A13991 /* YouthTalkTalk */;
+			targetProxy = AC5A7C052BF0FDB700A13991 /* PBXContainerItemProxy */;
+		};
+		AC5A7C102BF0FDB700A13991 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC5A7BED2BF0FDB500A13991 /* YouthTalkTalk */;
+			targetProxy = AC5A7C0F2BF0FDB700A13991 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AC5A7BFC2BF0FDB600A13991 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC5A7BFD2BF0FDB600A13991 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AC5A7C162BF0FDB700A13991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC5A7C172BF0FDB700A13991 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC5A7C192BF0FDB700A13991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC5A7C1A2BF0FDB700A13991 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AC5A7C1C2BF0FDB700A13991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YouthTalkTalk.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YouthTalkTalk";
+			};
+			name = Debug;
+		};
+		AC5A7C1D2BF0FDB700A13991 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YouthTalkTalk.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YouthTalkTalk";
+			};
+			name = Release;
+		};
+		AC5A7C1F2BF0FDB700A13991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YouthTalkTalk;
+			};
+			name = Debug;
+		};
+		AC5A7C202BF0FDB700A13991 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YouthTalkTalk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC5A7BE92BF0FDB500A13991 /* Build configuration list for PBXProject "YouthTalkTalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC5A7C162BF0FDB700A13991 /* Debug */,
+				AC5A7C172BF0FDB700A13991 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC5A7C182BF0FDB700A13991 /* Build configuration list for PBXNativeTarget "YouthTalkTalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC5A7C192BF0FDB700A13991 /* Debug */,
+				AC5A7C1A2BF0FDB700A13991 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC5A7C1B2BF0FDB700A13991 /* Build configuration list for PBXNativeTarget "YouthTalkTalkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC5A7C1C2BF0FDB700A13991 /* Debug */,
+				AC5A7C1D2BF0FDB700A13991 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC5A7C1E2BF0FDB700A13991 /* Build configuration list for PBXNativeTarget "YouthTalkTalkUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC5A7C1F2BF0FDB700A13991 /* Debug */,
+				AC5A7C202BF0FDB700A13991 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC5A7BE62BF0FDB500A13991 /* Project object */;
+}
