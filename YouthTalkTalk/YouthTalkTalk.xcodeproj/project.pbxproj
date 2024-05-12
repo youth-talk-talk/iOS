@@ -15,6 +15,8 @@
 		AC5A7C092BF0FDB700A13991 /* YouthTalkTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C082BF0FDB700A13991 /* YouthTalkTalkTests.swift */; };
 		AC5A7C132BF0FDB700A13991 /* YouthTalkTalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C122BF0FDB700A13991 /* YouthTalkTalkUITests.swift */; };
 		AC5A7C152BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */; };
+		AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C242BF102D600A13991 /* BaseViewController.swift */; };
+		AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C262BF102E900A13991 /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		AC5A7C0E2BF0FDB700A13991 /* YouthTalkTalkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouthTalkTalkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7C122BF0FDB700A13991 /* YouthTalkTalkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTalkTalkUITests.swift; sourceTree = "<group>"; };
 		AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTalkTalkUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AC5A7C242BF102D600A13991 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AC5A7C262BF102E900A13991 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				AC5A7C222BF1015800A13991 /* Present */,
+				AC5A7C232BF102B800A13991 /* Base */,
 				AC5A7C212BF100A600A13991 /* App */,
 			);
 			path = YouthTalkTalk;
@@ -138,6 +143,15 @@
 				AC5A7BF52BF0FDB500A13991 /* ViewController.swift */,
 			);
 			path = Present;
+			sourceTree = "<group>";
+		};
+		AC5A7C232BF102B800A13991 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7C262BF102E900A13991 /* BaseView.swift */,
+				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */,
+				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
+				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 			);
