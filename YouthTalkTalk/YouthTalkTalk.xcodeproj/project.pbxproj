@@ -17,6 +17,9 @@
 		AC5A7C152BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */; };
 		AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C242BF102D600A13991 /* BaseViewController.swift */; };
 		AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C262BF102E900A13991 /* BaseView.swift */; };
+		AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C292BF108AF00A13991 /* Coordinator.swift */; };
+		AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */; };
+		AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		AC5A7C142BF0FDB700A13991 /* YouthTalkTalkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTalkTalkUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		AC5A7C242BF102D600A13991 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		AC5A7C262BF102E900A13991 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		AC5A7C292BF108AF00A13991 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AC5A7C282BF1081F00A13991 /* Coordinator */,
 				AC5A7C222BF1015800A13991 /* Present */,
 				AC5A7C232BF102B800A13991 /* Base */,
 				AC5A7C212BF100A600A13991 /* App */,
@@ -152,6 +159,16 @@
 				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		AC5A7C282BF1081F00A13991 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7C292BF108AF00A13991 /* Coordinator.swift */,
+				AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */,
+				AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,8 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
+				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
+				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
