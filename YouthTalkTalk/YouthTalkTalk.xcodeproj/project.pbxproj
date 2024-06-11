@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DC2C183AF4005FC370 /* PinLayout */; };
+		AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DF2C183B05005FC370 /* FlexLayout */; };
+		AC4B42E32C183B2F005FC370 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E22C183B2F005FC370 /* FontManager.swift */; };
+		AC4B42E62C183F8F005FC370 /* UILable++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E52C183F8F005FC370 /* UILable++.swift */; };
+		AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */; };
+		AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */; };
+		AC4B42F92C18904F005FC370 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF52BF0FDB500A13991 /* ViewController.swift */; };
@@ -40,6 +47,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC4B42E22C183B2F005FC370 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		AC4B42E52C183F8F005FC370 /* UILable++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILable++.swift"; sourceTree = "<group>"; };
+		AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */,
+				AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +98,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC4B42E12C183B1F005FC370 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B42E22C183B2F005FC370 /* FontManager.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		AC4B42E42C183F81005FC370 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B42E52C183F8F005FC370 /* UILable++.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AC4B42E92C189038005FC370 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */,
+				AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */,
+				AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +147,9 @@
 		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B42E92C189038005FC370 /* Font */,
+				AC4B42E42C183F81005FC370 /* Extension */,
+				AC4B42E12C183B1F005FC370 /* Util */,
 				AC5A7C282BF1081F00A13991 /* Coordinator */,
 				AC5A7C222BF1015800A13991 /* Present */,
 				AC5A7C232BF102B800A13991 /* Base */,
@@ -187,6 +230,10 @@
 			dependencies = (
 			);
 			name = YouthTalkTalk;
+			packageProductDependencies = (
+				AC4B42DC2C183AF4005FC370 /* PinLayout */,
+				AC4B42DF2C183B05005FC370 /* FlexLayout */,
+			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
 			productType = "com.apple.product-type.application";
@@ -259,6 +306,10 @@
 				Base,
 			);
 			mainGroup = AC5A7BE52BF0FDB500A13991;
+			packageReferences = (
+				AC4B42DB2C183AF4005FC370 /* XCRemoteSwiftPackageReference "PinLayout" */,
+				AC4B42DE2C183B05005FC370 /* XCRemoteSwiftPackageReference "FlexLayout" */,
+			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,6 +328,9 @@
 			files = (
 				AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */,
 				AC5A7BFE2BF0FDB600A13991 /* Base in Resources */,
+				AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */,
+				AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */,
+				AC4B42F92C18904F005FC370 /* Pretendard-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,8 +357,10 @@
 			files = (
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */,
+				AC4B42E62C183F8F005FC370 /* UILable++.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
+				AC4B42E32C183B2F005FC370 /* FontManager.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
@@ -487,7 +543,6 @@
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -515,7 +570,6 @@
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -647,6 +701,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC4B42DB2C183AF4005FC370 /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.5;
+			};
+		};
+		AC4B42DE2C183B05005FC370 /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/FlexLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC4B42DC2C183AF4005FC370 /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC4B42DB2C183AF4005FC370 /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
+		AC4B42DF2C183B05005FC370 /* FlexLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC4B42DE2C183B05005FC370 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AC5A7BE62BF0FDB500A13991 /* Project object */;
 }
