@@ -1,5 +1,5 @@
 //
-//  UILable++.swift
+//  UILabel++.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/11/24.
@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     
-    func designed(text: String, fontType: FontType) {
+    func designed(text: String, fontType: FontType, textColor: UIColor = .black) {
         
         let familyName = "Pretendard-"
         var fontWeight = ""
@@ -109,6 +109,7 @@ extension UILabel {
         }
         
         self.text = text
+        self.textColor = textColor
         self.font = .init(name: "\(familyName)\(fontWeight)", size: fontSize)
         self.setTextWithLineHeight(text: text, lineHeight: lineHeight)
     }
