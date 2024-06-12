@@ -11,7 +11,7 @@ extension UILabel {
     
     func designed(text: String, fontType: FontType) {
         
-        var familyName = "Pretendard-"
+        let familyName = "Pretendard-"
         var fontWeight = ""
         var lineHeight: CGFloat = 0
         var fontSize: CGFloat = 0
@@ -121,7 +121,7 @@ extension UILabel {
             
             let attributes: [NSAttributedString.Key: Any] = [
                 .paragraphStyle: style,
-                .baselineOffset: (lineHeight - font.lineHeight) / 4
+                .baselineOffset: (lineHeight - font.lineHeight) / 2
             ]
             
             let attrString = NSAttributedString(string: text,

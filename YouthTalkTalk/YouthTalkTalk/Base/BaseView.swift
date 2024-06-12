@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import PinLayout
+import FlexLayout
 
 class BaseView: UIView {
 
+    let flexView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureHierarchy()
+        backgroundColor = .clear
+        addSubview(flexView)
+        
         configureLayout()
         configureView()
     }
@@ -21,13 +27,14 @@ class BaseView: UIView {
         
         super.init(coder: coder)
     }
-}
-
-extension BaseView {
     
-    func configureHierarchy() { }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        flexView.pin.all(self.pin.safeArea)
+        flexView.flex.layout()
+    }
     
-    func configureLayout() { }
-    
-    func configureView() { }
+    func configureLayout() {}
+    func configureView() {}
 }

@@ -14,9 +14,10 @@
 		AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */; };
 		AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */; };
 		AC4B42F92C18904F005FC370 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */; };
+		AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */; };
+		AC4B43002C197015005FC370 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42FF2C197015005FC370 /* SignInView.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
-		AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF52BF0FDB500A13991 /* ViewController.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
 		AC5A7BFE2BF0FDB600A13991 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFD2BF0FDB600A13991 /* Base */; };
 		AC5A7C092BF0FDB700A13991 /* YouthTalkTalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C082BF0FDB700A13991 /* YouthTalkTalkTests.swift */; };
@@ -52,10 +53,11 @@
 		AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		AC4B42FF2C197015005FC370 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AC5A7BF52BF0FDB500A13991 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC5A7BFD2BF0FDB600A13991 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC5A7BFF2BF0FDB600A13991 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,15 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		AC4B42FC2C196FEB005FC370 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */,
+				AC4B42FF2C197015005FC370 /* SignInView.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +201,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				AC5A7BF52BF0FDB500A13991 /* ViewController.swift */,
+				AC4B42FC2C196FEB005FC370 /* SignIn */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -356,7 +367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
-				AC5A7BF62BF0FDB500A13991 /* ViewController.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILable++.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
@@ -364,6 +374,8 @@
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
+				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
+				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
