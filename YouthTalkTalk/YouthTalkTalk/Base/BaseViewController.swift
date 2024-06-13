@@ -9,7 +9,7 @@ import UIKit
 
 class BaseViewController<LayoutView: UIView>: UIViewController {
     
-    var layoutView: UIView {
+    var layoutView: LayoutView {
         return view as! LayoutView
     }
     
@@ -31,9 +31,6 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         
         self.layoutView.endEditing(true)
     }
-}
-
-extension BaseViewController {
     
     func configureView() { }
     
