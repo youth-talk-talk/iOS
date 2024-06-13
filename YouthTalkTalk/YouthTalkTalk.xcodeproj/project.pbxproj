@@ -17,6 +17,10 @@
 		AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */; };
 		AC4B43002C197015005FC370 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42FF2C197015005FC370 /* SignInView.swift */; };
 		AC4B43032C19C829005FC370 /* Flex++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43022C19C829005FC370 /* Flex++.swift */; };
+		AC4B43062C1B141F005FC370 /* ViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43052C1B141F005FC370 /* ViewModelInterface.swift */; };
+		AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B43082C1B147F005FC370 /* RxCocoa */; };
+		AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B430A2C1B147F005FC370 /* RxSwift */; };
+		AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -58,6 +62,8 @@
 		AC4B42FF2C197015005FC370 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YouthTalkTalk.entitlements; sourceTree = "<group>"; };
 		AC4B43022C19C829005FC370 /* Flex++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flex++.swift"; sourceTree = "<group>"; };
+		AC4B43052C1B141F005FC370 /* ViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelInterface.swift; sourceTree = "<group>"; };
+		AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +87,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */,
 				AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */,
+				AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */,
 				AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +147,22 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		AC4B43042C1B125C005FC370 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B43052C1B141F005FC370 /* ViewModelInterface.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		AC4B430C2C1B14AE005FC370 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */,
+				AC4B43042C1B125C005FC370 /* Interface */,
+				AC4B430C2C1B14AE005FC370 /* ViewModel */,
 				AC4B42E92C189038005FC370 /* Font */,
 				AC4B42E42C183F81005FC370 /* Extension */,
 				AC4B42E12C183B1F005FC370 /* Util */,
@@ -249,6 +275,8 @@
 			packageProductDependencies = (
 				AC4B42DC2C183AF4005FC370 /* PinLayout */,
 				AC4B42DF2C183B05005FC370 /* FlexLayout */,
+				AC4B43082C1B147F005FC370 /* RxCocoa */,
+				AC4B430A2C1B147F005FC370 /* RxSwift */,
 			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
@@ -325,6 +353,7 @@
 			packageReferences = (
 				AC4B42DB2C183AF4005FC370 /* XCRemoteSwiftPackageReference "PinLayout" */,
 				AC4B42DE2C183B05005FC370 /* XCRemoteSwiftPackageReference "FlexLayout" */,
+				AC4B43072C1B147F005FC370 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
@@ -378,6 +407,8 @@
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				AC4B42E32C183B2F005FC370 /* FontManager.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
+				AC4B43062C1B141F005FC370 /* ViewModelInterface.swift in Sources */,
+				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
@@ -739,6 +770,14 @@
 				minimumVersion = 2.0.7;
 			};
 		};
+		AC4B43072C1B147F005FC370 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,6 +790,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AC4B42DE2C183B05005FC370 /* XCRemoteSwiftPackageReference "FlexLayout" */;
 			productName = FlexLayout;
+		};
+		AC4B43082C1B147F005FC370 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC4B43072C1B147F005FC370 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		AC4B430A2C1B147F005FC370 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC4B43072C1B147F005FC370 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
