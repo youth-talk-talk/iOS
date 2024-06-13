@@ -7,14 +7,15 @@
 
 import UIKit
 import FlexLayout
+import AuthenticationServices
 
 class SignInView: BaseView {
     
     let logoImageView = UIImageView()
     let appTitleLabel = UILabel()
     let appSubTitleLabel = UILabel()
-    let appleLoginButton = UIButton()
-    let kakaoLoginButton = UIButton()
+    let appleSignInButton = UIButton()
+    let kakaoSignInButton = UIButton()
     
     override func configureLayout() {
         
@@ -42,15 +43,15 @@ class SignInView: BaseView {
                 
                 flex.addItem().grow(1)
                 
-                flex.addItem(appleLoginButton)
+                flex.addItem(appleSignInButton)
                     .signInButton()
                     .marginBottom(10)
-                    .backgroundColor(.red)
+                    .cornerRadius(8)
                 
-                flex.addItem(kakaoLoginButton)
+                flex.addItem(kakaoSignInButton)
                     .signInButton()
                     .marginBottom(20)
-                    .backgroundColor(.red)
+                    .cornerRadius(8)
             }
         }
     }
@@ -62,5 +63,9 @@ class SignInView: BaseView {
         
         appTitleLabel.designed(text: "청년톡톡", fontType: .titleForAppBold)
         appSubTitleLabel.designed(text: "한눈에 보는 청년정책, 청년톡톡과 함께하세요!", fontType: .bodyRegular)
+        
+        appleSignInButton.layer.masksToBounds = true
+        appleSignInButton.setBackgroundImage(UIImage.appleLogin, for: .normal)
+        kakaoSignInButton.setBackgroundImage(UIImage.kakaoLogin, for: .normal)
     }
 }

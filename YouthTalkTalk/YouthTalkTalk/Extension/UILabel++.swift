@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     
-    func designed(text: String, fontType: FontType, textColor: UIColor = .black) {
+    func designed(text: String, fontType: FontType, textColor: TextColor = .darkGray) {
         
         let familyName = "Pretendard-"
         var fontWeight = ""
@@ -109,7 +109,7 @@ extension UILabel {
         }
         
         self.text = text
-        self.textColor = textColor
+        self.textColor = textColor.value
         self.font = .init(name: "\(familyName)\(fontWeight)", size: fontSize)
         self.setTextWithLineHeight(text: text, lineHeight: lineHeight)
     }
