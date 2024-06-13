@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let rootVC = SignInViewController()
+        let viewModel = SignInViewModel()
+        let rootVC = SignInViewController(viewModel: viewModel)
         let naviVC = UINavigationController(rootViewController: rootVC)
         
         self.window = window
