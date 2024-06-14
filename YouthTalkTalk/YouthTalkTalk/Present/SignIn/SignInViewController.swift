@@ -39,7 +39,7 @@ class SignInViewController: BaseViewController<SignInView> {
         // apple 로그인 버튼 클릭 이벤트 전달
         layoutView.appleSignInButton.rx.tap
             .bind(with: self) { owner, event in
-                input.appleSignIn.accept(event)
+                input.appleSignInButtonClicked.accept(event)
             }.disposed(by: disposeBag)
         
         // Output
@@ -47,8 +47,8 @@ class SignInViewController: BaseViewController<SignInView> {
         
         // apple 로그인 처리
         output.signInForApple
-            .drive(with: self) { owner, _ in
-                print("asdf")
+            .drive(with: self) { owner, controller in
+                
             }.disposed(by: disposeBag)
     }
 }
