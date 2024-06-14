@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DC2C183AF4005FC370 /* PinLayout */; };
 		AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DF2C183B05005FC370 /* FlexLayout */; };
-		AC4B42E32C183B2F005FC370 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E22C183B2F005FC370 /* FontManager.swift */; };
 		AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E52C183F8F005FC370 /* UILabel++.swift */; };
 		AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */; };
 		AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */; };
@@ -21,6 +20,8 @@
 		AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B43082C1B147F005FC370 /* RxCocoa */; };
 		AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B430A2C1B147F005FC370 /* RxSwift */; };
 		AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */; };
+		AC4B43102C1C900D005FC370 /* FontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B430F2C1C900D005FC370 /* FontType.swift */; };
+		AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43112C1C9027005FC370 /* FontColor.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -53,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AC4B42E22C183B2F005FC370 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		AC4B42E52C183F8F005FC370 /* UILabel++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel++.swift"; sourceTree = "<group>"; };
 		AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -64,6 +64,8 @@
 		AC4B43022C19C829005FC370 /* Flex++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flex++.swift"; sourceTree = "<group>"; };
 		AC4B43052C1B141F005FC370 /* ViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelInterface.swift; sourceTree = "<group>"; };
 		AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		AC4B430F2C1C900D005FC370 /* FontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontType.swift; sourceTree = "<group>"; };
+		AC4B43112C1C9027005FC370 /* FontColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontColor.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,7 +116,6 @@
 		AC4B42E12C183B1F005FC370 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				AC4B42E22C183B2F005FC370 /* FontManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -134,6 +135,8 @@
 				AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */,
 				AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */,
 				AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */,
+				AC4B430F2C1C900D005FC370 /* FontType.swift */,
+				AC4B43112C1C9027005FC370 /* FontColor.swift */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -400,12 +403,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
+				AC4B43102C1C900D005FC370 /* FontType.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
-				AC4B42E32C183B2F005FC370 /* FontManager.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B43062C1B141F005FC370 /* ViewModelInterface.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,

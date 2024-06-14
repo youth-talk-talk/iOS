@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     
-    func designed(text: String, fontType: FontType, textColor: TextColor = .darkGray) {
+    func designed(text: String, fontType: FontType, textColor: FontColor = .darkGray) {
         
         let familyName = "Pretendard-"
         var fontWeight = ""
