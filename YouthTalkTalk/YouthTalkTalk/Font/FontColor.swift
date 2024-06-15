@@ -12,31 +12,31 @@ enum FontColor {
     var value: UIColor {
         
         switch self {
-        case .lightGray:
+        case .gray10:
             
-            return .customLightGray
-        case .semiLightGray:
+            return .gray10
+        case .gray20:
             
-            return .semiLightGray
-        case .baseGray:
+            return .gray20
+        case .gray30:
             
-            return .baseGray
-        case .midGray:
+            return .gray30
+        case .gray40:
             
-            return .midGray
-        case .semiDarkGray:
+            return .gray40
+        case .gray50:
             
-            return .semiDarkGray
-        case .darkGray:
+            return .gray50
+        case .gray60:
             
-            return .customDarkGray
+            return .gray60
         }
     }
     
-    case lightGray
-    case semiLightGray
-    case baseGray
-    case midGray
-    case semiDarkGray
-    case darkGray
+    case gray10
+    case gray20
+    case gray30
+    case gray40
+    case gray50
+    case gray60
 }
