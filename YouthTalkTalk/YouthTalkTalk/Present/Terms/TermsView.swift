@@ -33,15 +33,12 @@ class TermsView: BaseView {
                 flex.addItem().define { flex in
                     
                     flex.addItem(cancelButton)
-                        .height(48)
+                        .defaultButton()
                         .grow(1)
-                        .cornerRadius(8)
                     
                     flex.addItem(confirmButton)
-                        .height(48)
+                        .defaultButton()
                         .grow(1)
-                        .cornerRadius(8)
-                    
                 }
                 .direction(.row)
                 .width(90%)

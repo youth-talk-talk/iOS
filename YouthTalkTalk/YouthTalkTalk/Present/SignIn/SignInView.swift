@@ -53,16 +53,11 @@ class SignInView: BaseView {
                 flex.addItem(appleSignInButton)
                     .signInButton()
                     .marginBottom(10)
-                    .cornerRadius(8)
-                    .alignSelf(.center)
-                    .width(100%)
+                    
                 
                 flex.addItem(kakaoSignInButton)
                     .signInButton()
                     .marginBottom(20)
-                    .cornerRadius(8)
-                    .alignSelf(.center)
-                    .width(100%)
             }
             .direction(.column)
             .justifyContent(.end)
