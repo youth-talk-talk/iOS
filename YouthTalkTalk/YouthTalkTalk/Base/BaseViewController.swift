@@ -39,4 +39,11 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     func configureCollectionView() { }
     
     func bind() { }
+    
+    func updateNavigationTitle(title: String) {
+        
+        let titleLabel = UILabel()
+        titleLabel.designed(text: title, fontType: .subTitleForPolicyBold)
+        self.navigationItem.titleView = titleLabel
+    }
 }
