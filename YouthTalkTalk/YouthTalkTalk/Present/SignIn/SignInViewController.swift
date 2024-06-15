@@ -30,6 +30,17 @@ class SignInViewController: BaseViewController<SignInView> {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func bind() {
         
         guard let signInViewModel = viewModel as? SignInViewModel else { return }
@@ -50,10 +61,6 @@ class SignInViewController: BaseViewController<SignInView> {
             .drive(with: self) { owner, controller in
                 
                 let nextVC = TermsViewController()
-                
-                let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
-                backButton.tintColor = .black
-                owner.navigationItem.backBarButtonItem = backButton
                 
                 owner.navigationController?.pushViewController(nextVC, animated: true)
                 
