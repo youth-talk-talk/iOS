@@ -49,6 +49,14 @@ class SignInViewController: BaseViewController<SignInView> {
         output.signInForApple
             .drive(with: self) { owner, controller in
                 
+                let nextVC = TermsViewController()
+                
+                let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+                backButton.tintColor = .black
+                owner.navigationItem.backBarButtonItem = backButton
+                
+                owner.navigationController?.pushViewController(nextVC, animated: true)
+                
             }.disposed(by: disposeBag)
     }
 }

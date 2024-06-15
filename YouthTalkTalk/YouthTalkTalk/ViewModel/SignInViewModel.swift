@@ -19,6 +19,7 @@ final class SignInViewModel: NSObject, ViewModelInterface {
     struct Input {
         
         let appleSignInButtonClicked = PublishRelay<Void>()
+        let appleSignInCompleted = PublishRelay<Void>()
     }
     
     struct Output {
@@ -44,6 +45,11 @@ final class SignInViewModel: NSObject, ViewModelInterface {
                 
             }.disposed(by: disposeBag)
         
+        input.appleSignInCompleted
+            .subscribe(with: self) { owner, _ in
+                appleSignIn.accept(())
+            }.disposed(by: disposeBag)
+        
         return Output(signInForApple: appleSignIn.asDriver(onErrorJustReturn: ()))
     }
 }
@@ -63,6 +69,8 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
             // 약관 동의 화면으로 이동
         // 2-3. 애플 로그인 유저
             // 홈 뷰로 전환
+        
+        input.appleSignInCompleted.accept(())
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
