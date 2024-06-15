@@ -19,40 +19,56 @@ class SignInView: BaseView {
     
     override func configureLayout() {
         
-        flexView.flex.define { flex in
+        let ratio: CGFloat = 1/3 * 100
+        
+        flexView.flex.justifyContent(.center).define { flex in
             
             // 상단 (여백)
-            flex.addItem().grow(1)
+            flex.addItem()
+                .height(ratio%)
             
             // 중단 (로고 및 어플 명)
-            flex.addItem().direction(.column).alignItems(.center).define { flex in
+            flex.addItem().define { flex in
             
                 flex.addItem(logoImageView)
                     .width(88)
                     .aspectRatio(1)
+                    .alignSelf(.center)
                 
                 flex.addItem(appTitleLabel)
                     .marginTop(11)
+                    .alignSelf(.center)
                 
                 flex.addItem(appSubTitleLabel)
                     .marginTop(7)
+                    .alignSelf(.center)
             }
+            .direction(.column)
+            .justifyContent(.center)
+            .height(ratio%)
             
             // 하단 (애플 로그인 / 카카오 로그인)
-            flex.addItem().grow(1).define { flex in
-                
-                flex.addItem().grow(1)
+            flex.addItem().define { flex in
                 
                 flex.addItem(appleSignInButton)
                     .signInButton()
                     .marginBottom(10)
                     .cornerRadius(8)
+                    .alignSelf(.center)
+                    .width(100%)
                 
                 flex.addItem(kakaoSignInButton)
                     .signInButton()
                     .marginBottom(20)
                     .cornerRadius(8)
+                    .alignSelf(.center)
+                    .width(100%)
             }
+            .direction(.column)
+            .justifyContent(.end)
+            .alignSelf(.center)
+            .height(ratio%)
+            .width(90%)
         }
     }
 
