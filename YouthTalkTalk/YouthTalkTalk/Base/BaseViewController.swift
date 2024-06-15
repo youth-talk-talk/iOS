@@ -25,6 +25,8 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         configureTableView()
         configureCollectionView()
         bind()
+        
+        updateNavigationBackButtonTitle(title: "")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,5 +47,12 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         let titleLabel = UILabel()
         titleLabel.designed(text: title, fontType: .subTitleForPolicyBold)
         self.navigationItem.titleView = titleLabel
+    }
+    
+    func updateNavigationBackButtonTitle(title: String) {
+        
+        let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+        backButton.tintColor = .black
+        self.navigationItem.backBarButtonItem = backButton
     }
 }
