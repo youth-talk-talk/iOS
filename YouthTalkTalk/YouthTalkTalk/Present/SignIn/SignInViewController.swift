@@ -13,8 +13,6 @@ class SignInViewController: BaseViewController<SignInView> {
     
     var viewModel: any ViewModelInterface
     
-    let disposeBag = DisposeBag()
-    
     init(viewModel: any ViewModelInterface) {
         self.viewModel = viewModel
         
@@ -50,7 +48,14 @@ class SignInViewController: BaseViewController<SignInView> {
         // apple 로그인 버튼 클릭 이벤트 전달
         layoutView.appleSignInButton.rx.tap
             .bind(with: self) { owner, event in
+                
+                #if DEBUG
+                let nextVC = TermsViewController()
+                owner.navigationController?.pushViewController(nextVC, animated: true)
+                #else
                 input.appleSignInButtonClicked.accept(event)
+                #endif
+                
             }.disposed(by: disposeBag)
         
         // Output
