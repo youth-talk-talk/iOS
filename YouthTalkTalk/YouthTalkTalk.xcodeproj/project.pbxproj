@@ -26,6 +26,8 @@
 		AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43172C1D7041005FC370 /* TermsViewController.swift */; };
 		AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43192C1EB6E6005FC370 /* FontManager.swift */; };
 		AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */; };
+		AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */; };
+		AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43202C1EE02C005FC370 /* SignUpView.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		AC4B43172C1D7041005FC370 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		AC4B43192C1EB6E6005FC370 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton++.swift"; sourceTree = "<group>"; };
+		AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		AC4B43202C1EE02C005FC370 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +189,15 @@
 			path = Terms;
 			sourceTree = "<group>";
 		};
+		AC4B431D2C1EE016005FC370 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */,
+				AC4B43202C1EE02C005FC370 /* SignUpView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +267,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B431D2C1EE016005FC370 /* SignUp */,
 				AC4B43142C1D702B005FC370 /* Terms */,
 				AC4B42FC2C196FEB005FC370 /* SignIn */,
 			);
@@ -433,10 +447,12 @@
 				AC4B43102C1C900D005FC370 /* FontType.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
+				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B43062C1B141F005FC370 /* ViewModelInterface.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
+				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,

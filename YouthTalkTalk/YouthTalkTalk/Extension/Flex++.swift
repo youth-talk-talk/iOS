@@ -11,13 +11,13 @@ import FlexLayout
 extension Flex {
     
     @discardableResult
-    func defaultButtonCornerRadius(_ radius: CGFloat = 8) -> Flex {
+    func defaultCornerRadius(_ radius: CGFloat = 8) -> Flex {
         
         self.cornerRadius(radius)
     }
     
     @discardableResult
-    func defaultButtonHeight(_ height: CGFloat = 48) -> Flex {
+    func defaultHeight(_ height: CGFloat = 48) -> Flex {
         
         self.height(height)
     }
@@ -25,15 +25,15 @@ extension Flex {
     @discardableResult
     func defaultButton() -> Flex {
         
-        self.defaultButtonHeight()
-            .defaultButtonCornerRadius()
+        self.defaultHeight()
+            .defaultCornerRadius()
     }
     
     @discardableResult
     func signInButton() -> Flex {
         
         self.height(54)
-            .defaultButtonCornerRadius()
+            .defaultCornerRadius()
             .alignSelf(.center)
             .width(100%)
     }

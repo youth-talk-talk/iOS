@@ -20,7 +20,10 @@ class TermsViewController: BaseViewController<TermsView> {
         
         layoutView.confirmButton.rx.tap
             .bind(with: self) { owner, _ in
-                print("수락 버튼 클릭")
+                
+                let nextVC = SignUpViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
             }.disposed(by: disposeBag)
         
         layoutView.cancelButton.rx.tap
