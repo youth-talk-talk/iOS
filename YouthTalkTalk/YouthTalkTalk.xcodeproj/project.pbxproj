@@ -24,6 +24,7 @@
 		AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43112C1C9027005FC370 /* FontColor.swift */; };
 		AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43152C1D7036005FC370 /* TermsView.swift */; };
 		AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43172C1D7041005FC370 /* TermsViewController.swift */; };
+		AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43192C1EB6E6005FC370 /* FontManager.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		AC4B43112C1C9027005FC370 /* FontColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontColor.swift; sourceTree = "<group>"; };
 		AC4B43152C1D7036005FC370 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		AC4B43172C1D7041005FC370 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		AC4B43192C1EB6E6005FC370 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		AC4B42E12C183B1F005FC370 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B43192C1EB6E6005FC370 /* FontManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
+				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				AC4B43102C1C900D005FC370 /* FontType.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
