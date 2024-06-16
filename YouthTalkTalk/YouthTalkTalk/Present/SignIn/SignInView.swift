@@ -53,7 +53,6 @@ class SignInView: BaseView {
                 flex.addItem(appleSignInButton)
                     .signInButton()
                     .marginBottom(10)
-                    
                 
                 flex.addItem(kakaoSignInButton)
                     .signInButton()
@@ -76,7 +75,7 @@ class SignInView: BaseView {
         appSubTitleLabel.designed(text: "한눈에 보는 청년정책, 청년톡톡과 함께하세요!", fontType: .bodyRegular)
         
         appleSignInButton.layer.masksToBounds = true
-        appleSignInButton.setBackgroundImage(UIImage.appleLogin, for: .normal)
-        kakaoSignInButton.setBackgroundImage(UIImage.kakaoLogin, for: .normal)
+        appleSignInButton.designedByImage(.appleLogin)
+        kakaoSignInButton.designedByImage(.kakaoLogin)
     }
 }

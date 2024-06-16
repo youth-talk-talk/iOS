@@ -34,13 +34,17 @@ class TermsView: BaseView {
                     
                     flex.addItem(cancelButton)
                         .defaultButton()
+                        .maxWidth(45%)
                         .grow(1)
                     
                     flex.addItem(confirmButton)
                         .defaultButton()
+                        .maxWidth(45%)
                         .grow(1)
+                    
                 }
                 .direction(.row)
+                .justifyContent(.center)
                 .width(90%)
                 .columnGap(16)
                 .marginTop(14)
@@ -58,7 +62,7 @@ class TermsView: BaseView {
         commentLabel.designed(text: "청년톡톡 서비스 약관에 동의하시겠습니까?", fontType: .bodyBold)
         subcommentLabel.designed(text: "약관 미동의 시 서비스 이용이 불가합니다", fontType: .bodyRegular, textColor: .gray40)
         
-        cancelButton.backgroundColor = .green
-        confirmButton.backgroundColor = .brown
+        cancelButton.designed(title: "아니요", bgColor: .gray20)
+        confirmButton.designed(title: "예")
     }
 }
