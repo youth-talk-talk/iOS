@@ -93,7 +93,7 @@ class FontManager {
         case .bodyForTermsRegular:
             
             fontWeight = "Regular"
-            fontSize = 16
+            fontSize = 12
         }
         
         return UIFont(name: "\(familyName)\(fontWeight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
