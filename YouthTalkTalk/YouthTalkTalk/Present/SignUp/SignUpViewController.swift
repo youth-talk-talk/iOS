@@ -19,7 +19,6 @@ class SignUpViewController: BaseViewController<SignUpView> {
         layoutView.pullDownTableView.delegate = self
         layoutView.pullDownTableView.dataSource = self
         layoutView.pullDownTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        layoutView.pullDownTableView.estimatedRowHeight = UITableView.automaticDimension
         
         layoutView.regionPopupButton.rx.tap
             .bind(with: self) { owner, _ in
@@ -33,20 +32,25 @@ class SignUpViewController: BaseViewController<SignUpView> {
 extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return LocationKR.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.backgroundColor = .brown
-        
+        if let location = LocationKR(rawValue: indexPath.row) {
+            
+            cell.textLabel?.text = location.korean
+            cell.textLabel?.font = FontManager.font(.bodyRegular)
+            cell.textLabel?.textColor = .gray40
+        }
+            
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return UITableView.automaticDimension
+        return 36
     }
 }

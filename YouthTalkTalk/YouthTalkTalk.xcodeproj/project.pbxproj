@@ -28,6 +28,8 @@
 		AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */; };
 		AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */; };
 		AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43202C1EE02C005FC370 /* SignUpView.swift */; };
+		AC4B43242C206839005FC370 /* LocationKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43232C206839005FC370 /* LocationKR.swift */; };
+		AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43262C2072E2005FC370 /* DropdownView.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -78,6 +80,8 @@
 		AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton++.swift"; sourceTree = "<group>"; };
 		AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC4B43202C1EE02C005FC370 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		AC4B43232C206839005FC370 /* LocationKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationKR.swift; sourceTree = "<group>"; };
+		AC4B43262C2072E2005FC370 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,22 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		AC4B43222C2067A5005FC370 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B43232C206839005FC370 /* LocationKR.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC4B43252C2072BE005FC370 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B43262C2072E2005FC370 /* DropdownView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -221,8 +241,10 @@
 		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B43252C2072BE005FC370 /* CustomView */,
 				AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */,
 				AC4B43042C1B125C005FC370 /* Interface */,
+				AC4B43222C2067A5005FC370 /* Model */,
 				AC4B430C2C1B14AE005FC370 /* ViewModel */,
 				AC4B42E92C189038005FC370 /* Font */,
 				AC4B42E42C183F81005FC370 /* Extension */,
@@ -438,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
+				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
@@ -453,6 +476,7 @@
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
+				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
