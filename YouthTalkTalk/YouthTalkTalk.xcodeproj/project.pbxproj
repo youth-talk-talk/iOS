@@ -43,6 +43,8 @@
 		AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */; };
 		AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
+		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
+		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
+		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +296,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A25F2C215A2700FE8D63 /* Home */,
 				AC4B431D2C1EE016005FC370 /* SignUp */,
 				AC4B43142C1D702B005FC370 /* Terms */,
 				AC4B42FC2C196FEB005FC370 /* SignIn */,
@@ -316,6 +321,15 @@
 				AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		ACF2A25F2C215A2700FE8D63 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
+				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,6 +479,7 @@
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
+				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
@@ -472,6 +487,7 @@
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				AC4B43102C1C900D005FC370 /* FontType.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
+				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,

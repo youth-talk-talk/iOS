@@ -29,6 +29,23 @@ class SignUpViewController: BaseViewController<SignUpView> {
                 owner.layoutView.toggleTableViewHidden()
                 
             }.disposed(by: disposeBag)
+        
+        layoutView.signUpButton.rx.tap
+            .bind(with: self) { owner, _ in
+                
+                guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
+                guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
+                
+                let newRootVC = HomeViewController()
+                let naviVC = UINavigationController(rootViewController: newRootVC)
+                let tabVC = UITabBarController()
+                
+                tabVC.setViewControllers([naviVC], animated: true)
+                
+                sceneDelegate.window?.rootViewController = newRootVC
+                sceneDelegate.window?.makeKeyAndVisible()
+                
+            }.disposed(by: disposeBag)
     }
 }
 
