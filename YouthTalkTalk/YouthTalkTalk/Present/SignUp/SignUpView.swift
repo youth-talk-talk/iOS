@@ -68,21 +68,12 @@ class SignUpView: BaseView {
         nicknameGuidelineLabel.designed(text: "원하는 닉네임이 있는 경우 직접 설정이 가능해요!(단, 한글 8자 이내)", fontType: .bodyForTermsRegular, textColor: .gray40)
         
         // NickName TextField
-        // 왼쪽 여백
-        let leftPadding = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: nicknameTextField.frame.height))
-        nicknameTextField.leftView = leftPadding
-        nicknameTextField.leftViewMode = .always
-        
-        let textPlaceHolder = "씩씩한 청년"
-        nicknameTextField.placeholder = textPlaceHolder
-        nicknameTextField.attributedPlaceholder = NSAttributedString(string: textPlaceHolder, attributes: [.font: FontManager.font(.bodyBold), .foregroundColor: UIColor.black])
-        
+        nicknameTextField.makeLeftPaddingView()
+        nicknameTextField.designedPlaceholder(placeholder: "씩씩한 청년")
         nicknameTextField.font = FontManager.font(.bodyBold)
         
         // Region Literal Label
         regionLiteralLabel.designed(text: "지역설정", fontType: .bodyForCategorySemibold)
-        
-        // Region Dropdown View
         
         // TableView
         pullDownTableView.backgroundColor = .clear
@@ -107,13 +98,6 @@ class SignUpView: BaseView {
         updateTableViewHeight()
     }
     
-    func updateLocation(_ location: LocationKR) {
-        regionDropDownView.regionDropdownLabel.designed(text: location.korean,
-                                                                   fontType: .bodyBold)
-
-        pullDownTableView.isHidden = true
-    }
-    
     private func updateTableViewHeight() {
         
         // 셀의 높이 계산
@@ -131,5 +115,12 @@ class SignUpView: BaseView {
         
         // TableView의 높이 업데이트
         pullDownTableView.pin.height(finalTableViewHeight)
+    }
+    
+    func updateLocation(_ location: LocationKR) {
+        regionDropDownView.regionDropdownLabel.designed(text: location.korean,
+                                                                   fontType: .bodyBold)
+
+        pullDownTableView.isHidden = true
     }
 }

@@ -42,6 +42,7 @@
 		AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C292BF108AF00A13991 /* Coordinator.swift */; };
 		AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */; };
 		AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */; };
+		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		AC5A7C292BF108AF00A13991 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				AC4B42E52C183F8F005FC370 /* UILabel++.swift */,
 				AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */,
 				AC4B43022C19C829005FC370 /* Flex++.swift */,
+				ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
+				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
