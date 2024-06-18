@@ -20,12 +20,12 @@ final class DropDownView: BaseView {
             
             flex.addItem(regionDropdownLabel)
                 .marginLeft(20)
-            
-            flex.addItem()
                 .grow(1)
             
             flex.addItem(regionDropdownImage)
                 .marginRight(20)
+                .alignSelf(.center)
+                
         }
         .defaultButton()
         .direction(.row)
@@ -36,8 +36,11 @@ final class DropDownView: BaseView {
         
         regionDropdownLabel.designed(text: "전체지역", fontType: .bodyBold, textColor: .gray40)
         
+        let imageConfiguration = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "chevron.down")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        regionDropdownImage.image = image
+        regionDropdownImage.image = image?.withConfiguration(imageConfiguration)
+        
+        self.isUserInteractionEnabled = true
     }
     
     override func layoutSubviews() {

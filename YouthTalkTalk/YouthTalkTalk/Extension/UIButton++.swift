@@ -20,7 +20,7 @@ extension UIButton {
     }
     
     // 기본 버튼 디자인
-    func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .bodyRegular) {
+    func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .bodyRegular, withAction: Bool = true) {
         
         var titleAttrribute = AttributedString.init(title)
         titleAttrribute.font = FontManager.font(fontType)
@@ -34,7 +34,7 @@ extension UIButton {
         
         self.configuration = buttonConfiguration
         
-        updateHandler(bgColor: bgColor)
+        if withAction { updateHandler(bgColor: bgColor) }
     }
     
     // 버튼 업데이트 핸들러
