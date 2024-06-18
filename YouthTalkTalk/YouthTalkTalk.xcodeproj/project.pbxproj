@@ -45,6 +45,10 @@
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
+		ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */; };
+		ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */; };
+		ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */; };
+		ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +108,10 @@
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLayout.swift; sourceTree = "<group>"; };
+		ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularHeaderReusableView.swift; sourceTree = "<group>"; };
+		ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject++.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +158,7 @@
 				AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */,
 				AC4B43022C19C829005FC370 /* Flex++.swift */,
 				ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */,
+				ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -248,6 +257,7 @@
 		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */,
 				AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
 				AC4B43042C1B125C005FC370 /* Interface */,
@@ -328,8 +338,18 @@
 			children = (
 				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
 				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
+				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
+				ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */,
+			);
+			path = CompositionalLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,12 +497,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
+				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
+				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
 				AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
+				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				AC4B43102C1C900D005FC370 /* FontType.swift in Sources */,
@@ -493,6 +516,7 @@
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B43062C1B141F005FC370 /* ViewModelInterface.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
+				ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,

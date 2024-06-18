@@ -6,13 +6,22 @@
 //
 
 import UIKit
+import FlexLayout
 
 class HomeView: BaseView {
 
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: HomeLayout.layout())
+    
+    override func configureLayout() {
+     
+        flexView.flex.define { flex in
+            
+            flex.addItem(collectionView).grow(1)
+        }
+    }
     
     override func configureView() {
         
         backgroundColor = .gray40
     }
-
 }
