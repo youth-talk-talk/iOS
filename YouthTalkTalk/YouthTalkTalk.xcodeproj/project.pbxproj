@@ -244,8 +244,8 @@
 		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
 			isa = PBXGroup;
 			children = (
-				AC4B43252C2072BE005FC370 /* CustomView */,
 				AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */,
+				AC4B43252C2072BE005FC370 /* CustomView */,
 				AC4B43042C1B125C005FC370 /* Interface */,
 				AC4B43222C2067A5005FC370 /* Model */,
 				AC4B430C2C1B14AE005FC370 /* ViewModel */,

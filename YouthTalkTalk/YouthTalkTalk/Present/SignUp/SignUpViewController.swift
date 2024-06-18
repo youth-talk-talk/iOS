@@ -20,13 +20,13 @@ class SignUpViewController: BaseViewController<SignUpView> {
         layoutView.pullDownTableView.dataSource = self
         layoutView.pullDownTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
-        let tapGesture = UITapGestureRecognizer(target: nil, action: nil)
-        layoutView.regionDropDownView.addGestureRecognizer(tapGesture)
+        guard let gesture = layoutView.regionDropDownView.gestureRecognizers?.first else { return }
         
-        tapGesture.rx.event
+        // Dropdown(tableview) visible/hidden 토글
+        gesture.rx.event
             .bind(with: self) { owner, _ in
                 
-                owner.layoutView.pullDownTableView.isHidden = !owner.layoutView.pullDownTableView.isHidden
+                owner.layoutView.toggleTableViewHidden()
                 
             }.disposed(by: disposeBag)
     }

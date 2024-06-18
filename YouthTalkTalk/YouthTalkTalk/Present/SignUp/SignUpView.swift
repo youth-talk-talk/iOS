@@ -121,6 +121,11 @@ class SignUpView: BaseView {
         regionDropDownView.regionDropdownLabel.designed(text: location.korean,
                                                                    fontType: .bodyBold)
 
-        pullDownTableView.isHidden = true
+        toggleTableViewHidden()
+    }
+    
+    func toggleTableViewHidden() {
+        
+        pullDownTableView.isHidden = !pullDownTableView.isHidden
     }
 }

@@ -34,13 +34,18 @@ final class DropDownView: BaseView {
     
     override func configureView() {
         
+        // Region Dropdown Label
         regionDropdownLabel.designed(text: "전체지역", fontType: .bodyBold, textColor: .gray40)
         
+        // RegionDropdownImage
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "chevron.down")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
         regionDropdownImage.image = image?.withConfiguration(imageConfiguration)
         
+        // 탭 제스처 추가
         self.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer()
+        self.addGestureRecognizer(tapGesture)
     }
     
     override func layoutSubviews() {
