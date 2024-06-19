@@ -22,6 +22,5 @@ class HomeView: BaseView {
     
     override func configureView() {
         
-        backgroundColor = .gray40
     }
 }

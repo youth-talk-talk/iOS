@@ -9,6 +9,7 @@ import UIKit
 
 enum HomeLayout: Int, CaseIterable {
     
+    case category
     case popular
     case recent
     
@@ -19,6 +20,8 @@ enum HomeLayout: Int, CaseIterable {
             let section = HomeLayout(rawValue: section) ?? .popular
             
             switch section {
+            case .category:
+                return categoryLayout()
             case .popular:
                 return popularLayout()
             case .recent:
@@ -27,9 +30,22 @@ enum HomeLayout: Int, CaseIterable {
         }
     }
     
+    static func categoryLayout() -> NSCollectionLayoutSection {
+        
+        let insets = UIScreen.main.bounds.width * 0.05
+        
+        let section = NSCollectionLayoutSection(group: createEmptyGroup())
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: insets, bottom: 0, trailing: insets)
+        section.boundarySupplementaryItems = [createHeader(CategoryCollectionReusableView.identifier)]
+        
+        // section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+        
+        return section
+    }
+    
     static func popularLayout() -> NSCollectionLayoutSection {
         
-        let insets = UIScreen.main.bounds.width * 0.1
+        let insets = UIScreen.main.bounds.width * 0.05
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(141),
                                               heightDimension: .absolute(152))
@@ -79,5 +95,11 @@ enum HomeLayout: Int, CaseIterable {
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: elementKind, alignment: .top)
         
         return header
+    }
+    
+    private static func createEmptyGroup() -> NSCollectionLayoutGroup {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0)))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0)), subitems: [item])
+        return group
     }
 }

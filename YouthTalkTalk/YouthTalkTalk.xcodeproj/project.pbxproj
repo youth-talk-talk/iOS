@@ -49,6 +49,8 @@
 		ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */; };
 		ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */; };
 		ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */; };
+		ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */; };
+		ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +114,8 @@
 		ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularHeaderReusableView.swift; sourceTree = "<group>"; };
 		ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject++.swift"; sourceTree = "<group>"; };
+		ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionReusableView.swift; sourceTree = "<group>"; };
+		ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +323,7 @@
 			children = (
 				AC5A7C262BF102E900A13991 /* BaseView.swift */,
 				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
+				ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -338,8 +343,9 @@
 			children = (
 				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
 				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
-				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
-				ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */,
+				ACF2A2702C229D8500FE8D63 /* CategorySection */,
+				ACF2A26F2C229D7900FE8D63 /* PopularSection */,
+				ACF2A2712C229D9700FE8D63 /* recentSection */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -350,6 +356,30 @@
 				ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */,
 			);
 			path = CompositionalLayout;
+			sourceTree = "<group>";
+		};
+		ACF2A26F2C229D7900FE8D63 /* PopularSection */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
+				ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */,
+			);
+			path = PopularSection;
+			sourceTree = "<group>";
+		};
+		ACF2A2702C229D8500FE8D63 /* CategorySection */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */,
+			);
+			path = CategorySection;
+			sourceTree = "<group>";
+		};
+		ACF2A2712C229D9700FE8D63 /* recentSection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = recentSection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,7 +526,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
+				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,

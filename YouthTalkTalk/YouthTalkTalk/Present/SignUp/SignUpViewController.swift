@@ -42,7 +42,7 @@ class SignUpViewController: BaseViewController<SignUpView> {
                 
                 tabVC.setViewControllers([naviVC], animated: true)
                 
-                sceneDelegate.window?.rootViewController = newRootVC
+                sceneDelegate.window?.rootViewController = tabVC
                 sceneDelegate.window?.makeKeyAndVisible()
                 
             }.disposed(by: disposeBag)

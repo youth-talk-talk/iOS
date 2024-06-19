@@ -7,6 +7,6 @@
 
 import UIKit
 
-class PopularHeaderReusableView: UICollectionReusableView {
+class PopularHeaderReusableView: BaseCollectionReusableView {
         
 }

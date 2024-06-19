@@ -6,22 +6,31 @@
 //
 
 import UIKit
+import PinLayout
 
 class HomeViewController: BaseViewController<HomeView> {
     
     var dataSource: UICollectionViewDiffableDataSource<HomeLayout, AnyHashable>!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-     
+    
+    override func configureCollectionView() {
+    
+        cellRegistration()
+        headerRegistration()
+        update()
+    }
+    
+    private func cellRegistration() {
+        
         let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
             
-            guard let self, let section = HomeLayout(rawValue: indexPath.section) else { return nil }
+            guard let section = HomeLayout(rawValue: indexPath.section) else { return nil }
+            
+            if section == .category { return nil }
             
             if section == .popular {
                 
@@ -35,8 +44,17 @@ class HomeViewController: BaseViewController<HomeView> {
             
             return nil
         }
+    }
+    
+    private func headerRegistration() {
         
-        // Header Registration
+        // Category Header Registration
+        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+            
+        }
+        
+        
+        // Popular Header Registration
         let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
             guard let section = HomeLayout(rawValue: indexPath.section) else { return }
@@ -54,6 +72,10 @@ class HomeViewController: BaseViewController<HomeView> {
             guard let self else { return nil }
             
             switch kind {
+            case CategoryCollectionReusableView.identifier:
+                return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: categoryHeaderRegistration, for: index)
+                
             case PopularHeaderReusableView.identifier:
                 
                 return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
@@ -61,16 +83,29 @@ class HomeViewController: BaseViewController<HomeView> {
                 
             default: return nil
             }
-            
         }
+    }
+    
+    func update() {
         
-        // update
         var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, AnyHashable>()
         
-        snapshot.appendSections([.popular])
+        snapshot.appendSections([.category, .popular])
         
         snapshot.appendItems(["1", "2", "3", "4"], toSection: .popular)
-     
+        
         self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    override func configureNavigation() {
+        let titleLabel = UILabel()
+        titleLabel.designed(text: "청년톡톡", fontType: .titleForAppBold, textColor: .gray60)
+        titleLabel.sizeToFit()
+        let customView = UIView(frame: titleLabel.bounds)
+        customView.addSubview(titleLabel)
+        
+        let customItem = UIBarButtonItem(customView: customView)
+        
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = customItem
     }
 }

@@ -27,6 +27,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         configureView()
         configureTableView()
         configureCollectionView()
+        configureNavigation()
         bind()
         
         updateNavigationBackButtonTitle(title: "")
@@ -45,6 +46,8 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     
     func bind() { }
     
+    func configureNavigation() { }
+    
     func updateNavigationTitle(title: String) {
         
         let titleLabel = UILabel()
@@ -52,7 +55,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         self.navigationItem.titleView = titleLabel
     }
     
-    func updateNavigationBackButtonTitle(title: String) {
+    private func updateNavigationBackButtonTitle(title: String) {
         
         let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
         backButton.tintColor = .black
