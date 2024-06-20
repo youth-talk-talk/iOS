@@ -13,10 +13,21 @@ class HomeViewController: BaseViewController<HomeView> {
     var dataSource: UICollectionViewDiffableDataSource<HomeLayout, AnyHashable>!
     
     override func configureCollectionView() {
-    
+        
         cellRegistration()
         headerRegistration()
         update()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func cellRegistration() {
@@ -49,8 +60,13 @@ class HomeViewController: BaseViewController<HomeView> {
     private func headerRegistration() {
         
         // Category Header Registration
-        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
+            guard let self else { return }
+            
+            let safeAreaInset = self.layoutView.safeAreaInsets.top
+            
+            supplementaryView.layout(safeAreaInset: safeAreaInset)
         }
         
         
@@ -95,17 +111,5 @@ class HomeViewController: BaseViewController<HomeView> {
         snapshot.appendItems(["1", "2", "3", "4"], toSection: .popular)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
-    }
-    
-    override func configureNavigation() {
-        let titleLabel = UILabel()
-        titleLabel.designed(text: "청년톡톡", fontType: .titleForAppBold, textColor: .gray60)
-        titleLabel.sizeToFit()
-        let customView = UIView(frame: titleLabel.bounds)
-        customView.addSubview(titleLabel)
-        
-        let customItem = UIBarButtonItem(customView: customView)
-        
-        navigationController?.navigationBar.topItem?.leftBarButtonItem = customItem
     }
 }

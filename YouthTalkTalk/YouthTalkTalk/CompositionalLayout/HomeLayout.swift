@@ -32,13 +32,11 @@ enum HomeLayout: Int, CaseIterable {
     
     static func categoryLayout() -> NSCollectionLayoutSection {
         
-        let insets = UIScreen.main.bounds.width * 0.05
+        // let insets = UIScreen.main.bounds.width * 0.05
         
         let section = NSCollectionLayoutSection(group: createEmptyGroup())
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: insets, bottom: 0, trailing: insets)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         section.boundarySupplementaryItems = [createHeader(CategoryCollectionReusableView.identifier)]
-        
-        // section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
         
         return section
     }
@@ -60,8 +58,6 @@ enum HomeLayout: Int, CaseIterable {
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: insets, bottom: 0, trailing: insets)
         section.boundarySupplementaryItems = [createHeader(PopularHeaderReusableView.identifier)]
-        
-        // section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
         
         return section
     }
