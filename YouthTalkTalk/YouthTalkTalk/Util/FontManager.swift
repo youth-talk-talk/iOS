@@ -15,7 +15,7 @@ class FontManager {
     /// 폰트
     static func font(_ fontType: FontType) -> UIFont {
         
-        let familyName = "Pretendard-"
+        var familyName = "Pretendard-"
         var fontWeight = ""
         var fontSize: CGFloat = 0
         
@@ -32,8 +32,9 @@ class FontManager {
             
         case .titleForAppBold:
             
+            familyName = "GmarketSans"
             fontWeight = "Bold"
-            fontSize = 22
+            fontSize = 20
             
         case .titleForAppRegular:
             
@@ -112,7 +113,7 @@ class FontManager {
             lineHeight = 32
             
         case .titleForAppBold:
-            lineHeight = 32
+            lineHeight = 24
             
         case .titleForAppRegular:
             lineHeight = 32

@@ -30,6 +30,10 @@ enum FontColor {
         case .gray60:
             
             return .gray60
+            
+        case .black:
+            
+            return .black
         }
     }
     
@@ -39,4 +43,5 @@ enum FontColor {
     case gray40
     case gray50
     case gray60
+    case black
 }

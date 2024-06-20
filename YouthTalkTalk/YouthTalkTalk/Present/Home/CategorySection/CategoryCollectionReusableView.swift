@@ -25,7 +25,7 @@ class CategoryCollectionReusableView: BaseCollectionReusableView {
         gradientView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
         gradientView.layer.masksToBounds = true
         
-        appLabel.designed(text: "청년톡톡", fontType: .titleForAppBold)
+        appLabel.designed(text: "청년톡톡", fontType: .titleForAppBold, textColor: .black)
         
         searchBar.layer.masksToBounds = true
         searchBar.searchTextField.backgroundColor = .clear
