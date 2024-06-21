@@ -10,6 +10,10 @@ import FlexLayout
 
 extension Flex {
     
+    static var defaultHeight: CGFloat {
+        return 48
+    }
+    
     @discardableResult
     func defaultCornerRadius(_ radius: CGFloat = 8) -> Flex {
         
@@ -17,7 +21,7 @@ extension Flex {
     }
     
     @discardableResult
-    func defaultHeight(_ height: CGFloat = 48) -> Flex {
+    func defaultHeight(_ height: CGFloat = defaultHeight) -> Flex {
         
         self.height(height)
     }

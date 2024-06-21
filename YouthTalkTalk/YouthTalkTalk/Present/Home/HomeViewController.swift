@@ -19,17 +19,6 @@ class HomeViewController: BaseViewController<HomeView> {
         update()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
     private func cellRegistration() {
         
         let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
@@ -62,11 +51,7 @@ class HomeViewController: BaseViewController<HomeView> {
         // Category Header Registration
         let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
-            guard let self else { return }
-            
-            let safeAreaInset = self.layoutView.safeAreaInsets.top
-            
-            supplementaryView.layout(safeAreaInset: safeAreaInset)
+            // guard let self else { return }
         }
         
         
@@ -102,13 +87,23 @@ class HomeViewController: BaseViewController<HomeView> {
         }
     }
     
+    override func configureNavigation() {
+        
+        let customLabel = UILabel()
+        customLabel.designed(text: "청년톡톡", fontType: .titleForAppBold, textColor: .black)
+        
+        let customView = UIBarButtonItem(customView: customLabel)
+        
+        self.navigationItem.leftBarButtonItem = customView
+    }
+    
     func update() {
         
         var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, AnyHashable>()
         
         snapshot.appendSections([.category, .popular])
         
-        snapshot.appendItems(["1", "2", "3", "4"], toSection: .popular)
+        snapshot.appendItems(["1", "2", "3", "4", "5", "6"], toSection: .popular)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }

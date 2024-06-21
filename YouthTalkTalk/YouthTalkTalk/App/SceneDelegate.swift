@@ -18,9 +18,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
+        // MARK: Navigation bar appearance
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .clear
+        navigationBarAppearance.shadowColor = .clear
+        
+        // 일반 네이게이션 바 appearance settings
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        // 랜드스케이프 되었을 때 네이게이션 바 appearance settings
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+        // 스크롤 엣지가 닿았을 때 네이게이션 바 appearance settings
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        
         let viewModel = SignInViewModel()
         let rootVC = SignInViewController(viewModel: viewModel)
-        let naviVC = UINavigationController(rootViewController: rootVC)
+        let testVC = HomeViewController()
+        let naviVC = UINavigationController(rootViewController: testVC)
         
         self.window = window
         
