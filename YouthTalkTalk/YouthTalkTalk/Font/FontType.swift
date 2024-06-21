@@ -31,4 +31,6 @@ enum FontType {
     
     case bodyForTermsSemibold
     case bodyForTermsRegular
+    
+    case sectionHeaderBold
 }

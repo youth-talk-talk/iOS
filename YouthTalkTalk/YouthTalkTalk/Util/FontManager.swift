@@ -8,7 +8,7 @@
 import Foundation
 import UIKit.UIFont
 
-class FontManager {
+final class FontManager {
     
     private init() { }
     
@@ -95,6 +95,12 @@ class FontManager {
             
             fontWeight = "Regular"
             fontSize = 12
+            
+        case .sectionHeaderBold:
+            
+            familyName = "GmarketSans"
+            fontWeight = "Bold"
+            fontSize = 14
         }
         
         return UIFont(name: "\(familyName)\(fontWeight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
@@ -151,6 +157,8 @@ class FontManager {
         case .bodyForTermsRegular:
             lineHeight = 24
             
+        case .sectionHeaderBold:
+            lineHeight = 16
         }
         
         return lineHeight
