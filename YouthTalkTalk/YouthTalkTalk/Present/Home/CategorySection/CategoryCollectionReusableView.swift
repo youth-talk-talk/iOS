@@ -14,7 +14,11 @@ class CategoryCollectionReusableView: BaseCollectionReusableView {
     let gradientView = UIView()
     
     let searchBar = UISearchBar()
-    let jobImageView = UIImageView()
+    
+    let jobCategoryButton = UIButton()
+    let educationCategoryButton = UIButton()
+    let cultureCategoryButton = UIButton()
+    let collaborateCategoryButton = UIButton()
     
     override func configureLayout() {
         
@@ -35,6 +39,34 @@ class CategoryCollectionReusableView: BaseCollectionReusableView {
                 .marginTop(16)
                 .border(1, .gray20)
                 .width(90%)
+            
+            // 카테고리
+            flex.addItem().define { flex in
+                
+                flex.addItem(jobCategoryButton)
+                    .width(50)
+                    .height(70)
+                    .grow(1)
+                
+                flex.addItem(educationCategoryButton)
+                    .width(50)
+                    .height(70)
+                    .grow(1)
+                
+                flex.addItem(cultureCategoryButton)
+                    .width(50)
+                    .height(70)
+                    .grow(1)
+                
+                flex.addItem(collaborateCategoryButton)
+                    .width(50)
+                    .height(70)
+                    .grow(1)
+            }
+            .marginTop(12)
+            .direction(.row)
+            .width(90%)
+            
         }
         .alignItems(.center)
     }
@@ -52,6 +84,11 @@ class CategoryCollectionReusableView: BaseCollectionReusableView {
         searchBar.backgroundColor = .white.withAlphaComponent(0.95)
         searchBar.searchTextField.leftView?.tintColor = .lime40
         
+        jobCategoryButton.designedCategoryLayout(title: "일자리", image: .job)
+        educationCategoryButton.designedCategoryLayout(title: "교육", image: .education)
+        cultureCategoryButton.designedCategoryLayout(title: "생활지원", image: .culture)
+        collaborateCategoryButton.designedCategoryLayout(title: "참여", image: .collaborate)
+        
         if let textfieldBackgroundView = searchBar.searchTextField.subviews.first {
             textfieldBackgroundView.isHidden = true
         }
@@ -62,6 +99,8 @@ class CategoryCollectionReusableView: BaseCollectionReusableView {
         let height = searchBar.frame.maxY - (Flex.defaultHeight / 2)
         
         gradientView.flex.height(height)
+        
+        flexView.pin.all(self.pin.safeArea)
         flexView.flex.layout(mode: .adjustHeight)
         
         return flexView.frame.size

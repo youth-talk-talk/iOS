@@ -37,6 +37,24 @@ extension UIButton {
         if withAction { updateHandler(bgColor: bgColor) }
     }
     
+    func designedCategoryLayout(title: String, image: UIImage) {
+        
+        var titleAttrribute = AttributedString.init(title)
+        titleAttrribute.font = FontManager.font(.bodyForCategorySemibold)
+        
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.title = title
+        buttonConfiguration.attributedTitle = titleAttrribute
+        buttonConfiguration.baseBackgroundColor = .clear
+        buttonConfiguration.baseForegroundColor = .gray60
+        
+        buttonConfiguration.image = image
+        buttonConfiguration.imagePlacement = .top
+        buttonConfiguration.imagePadding = 5
+        
+        self.configuration = buttonConfiguration
+    }
+    
     // 버튼 업데이트 핸들러
     private func updateHandler(bgColor: UIColor) {
         

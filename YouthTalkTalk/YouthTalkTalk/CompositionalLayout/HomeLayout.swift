@@ -32,8 +32,6 @@ enum HomeLayout: Int, CaseIterable {
     
     static func categoryLayout() -> NSCollectionLayoutSection {
         
-        // let insets = UIScreen.main.bounds.width * 0.05
-        
         let section = NSCollectionLayoutSection(group: createEmptyGroup())
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         section.boundarySupplementaryItems = [createHeader(CategoryCollectionReusableView.identifier)]
@@ -78,13 +76,13 @@ enum HomeLayout: Int, CaseIterable {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = groupInterSpacing
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        // section.boundarySupplementaryItems = [createHeader(TripCardCollectionReusableView.identifier)]
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
         
         return section
     }
     
+    // 헤더 생성
     private static func createHeader(_ elementKind: String) -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                 heightDimension: .estimated(44))
