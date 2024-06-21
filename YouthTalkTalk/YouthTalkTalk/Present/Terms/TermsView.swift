@@ -8,7 +8,7 @@
 import UIKit
 import FlexLayout
 
-class TermsView: BaseView {
+final class TermsView: BaseView {
     
     let commentLabel = UILabel()
     let subcommentLabel = UILabel()
