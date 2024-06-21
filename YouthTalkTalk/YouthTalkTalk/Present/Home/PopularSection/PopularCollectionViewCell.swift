@@ -7,15 +7,9 @@
 
 import UIKit
 
-class PopularCollectionViewCell: UICollectionViewCell {
+final class PopularCollectionViewCell: BaseCollectionViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        contentView.backgroundColor = .brown
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    override func configureView() {
+        backgroundColor = .brown
     }
 }

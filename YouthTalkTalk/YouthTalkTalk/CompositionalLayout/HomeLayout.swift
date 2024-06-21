@@ -30,6 +30,7 @@ enum HomeLayout: Int, CaseIterable {
         }
         
         layout.register(PopularDecoReusableView.self, forDecorationViewOfKind: PopularDecoReusableView.identifier)
+        layout.register(RecentDecoReusableView.self, forDecorationViewOfKind: RecentDecoReusableView.identifier)
         
         return layout
     }
@@ -59,8 +60,11 @@ enum HomeLayout: Int, CaseIterable {
         section.interGroupSpacing = 7
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
+        
+        // 헤더 추가
         section.boundarySupplementaryItems = [createHeader(PopularHeaderReusableView.identifier)]
         
+        // 데코뷰 추가
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: PopularDecoReusableView.identifier)
         sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         section.decorationItems = [sectionBackgroundDecoration]
@@ -70,22 +74,27 @@ enum HomeLayout: Int, CaseIterable {
     
     static func recentLayout() -> NSCollectionLayoutSection {
         
-        let ratio: CGFloat = 0.7
-        let groupInterSpacing = UIScreen.main.bounds.width * (1.0 - ratio) / 4
+        let insets = UIScreen.main.bounds.width * 0.05
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .estimated(100))
+                                              heightDimension: .absolute(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(ratio),
-                                               heightDimension: .estimated(100))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(100))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = groupInterSpacing
-        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.interGroupSpacing = 12
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+        // 헤더 추가
+        section.boundarySupplementaryItems = [createHeader(RecentHeaderReusableView.identifier)]
+        
+        // 데코뷰 추가
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: RecentDecoReusableView.identifier)
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.decorationItems = [sectionBackgroundDecoration]
         
         return section
     }

@@ -19,9 +19,17 @@ final class HomeViewController: BaseViewController<HomeView> {
         update()
     }
     
+    //MARK: Cell Registration
     private func cellRegistration() {
         
+        // 인기정책 Section
         let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
+        }
+        
+        // 최근 업데이트 Section
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
         }
@@ -42,29 +50,40 @@ final class HomeViewController: BaseViewController<HomeView> {
                 return cell
             }
             
+            if section == .recent {
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
+                
+                cell.layer.cornerRadius = 10
+                cell.layer.masksToBounds = true
+                
+                return cell
+            }
+            
             return nil
         }
     }
     
+    //MARK: Header Registration
     private func headerRegistration() {
         
-        // Category Header Registration
-        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+        // 카테고리 Header Registration
+        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
             // guard let self else { return }
         }
         
         
-        // Popular Header Registration
+        // 인기정책 Header Registration
         let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
-            guard let section = HomeLayout(rawValue: indexPath.section) else { return }
+            // guard let section = HomeLayout(rawValue: indexPath.section) else { return }
+        }
+        
+        // 최근업데이트 Header Registration
+        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentHeaderReusableView>(elementKind: RecentHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
-            switch section {
-            case .popular:
-                break
-            default: break
-            }
+            // guard let self else { return }
         }
         
         // Header 등록
@@ -75,12 +94,20 @@ final class HomeViewController: BaseViewController<HomeView> {
             switch kind {
             case CategoryCollectionReusableView.identifier:
                 return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: categoryHeaderRegistration, for: index)
+                    using: categoryHeaderRegistration,
+                    for: index)
                 
             case PopularHeaderReusableView.identifier:
                 
                 return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: popularHeaderRegistration, for: index)
+                    using: popularHeaderRegistration,
+                    for: index)
+                
+            case RecentHeaderReusableView.identifier:
+                
+                return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: recentHeaderRegistration,
+                    for: index)
                 
             default: return nil
             }
@@ -101,9 +128,10 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, AnyHashable>()
         
-        snapshot.appendSections([.category, .popular])
+        snapshot.appendSections([.category, .popular, .recent])
         
         snapshot.appendItems(["1", "2", "3", "4", "5", "6"], toSection: .popular)
+        snapshot.appendItems(["a", "b", "c", "d", "e", "f"], toSection: .recent)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }

@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class HomeView: BaseView {
+final class HomeView: BaseView {
     
     let colorView = UIView()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: HomeLayout.layout())
@@ -43,10 +43,13 @@ class HomeView: BaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let inset = self.safeAreaInsets.top
+        let topInset = self.safeAreaInsets.top
+        let bottomInset = self.safeAreaInsets.bottom
         
-        colorView.flex.height(inset)
-        collectionView.flex.top(inset)
+        colorView.flex.height(topInset)
+        collectionView.flex
+            .top(topInset)
+            .marginBottom(topInset)
         
         flexView.pin.all()
         flexView.flex.layout()

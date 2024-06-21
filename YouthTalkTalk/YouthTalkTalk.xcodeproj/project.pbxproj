@@ -54,6 +54,9 @@
 		ACF2A2772C2451DD00FE8D63 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */; };
 		ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */; };
 		ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */; };
+		ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */; };
+		ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */; };
+		ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +125,9 @@
 		ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularDecoReusableView.swift; sourceTree = "<group>"; };
 		ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDecoReusableView.swift; sourceTree = "<group>"; };
+		ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeaderReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +336,7 @@
 			children = (
 				AC5A7C262BF102E900A13991 /* BaseView.swift */,
 				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
+				ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */,
 				ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */,
 			);
 			path = Base;
@@ -386,6 +393,8 @@
 		ACF2A2712C229D9700FE8D63 /* recentSection */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */,
+				ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */,
 			);
 			path = recentSection;
 			sourceTree = "<group>";
@@ -550,6 +559,7 @@
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
+				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
@@ -573,9 +583,11 @@
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
+				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
+				ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 				ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */,
 			);
