@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class SignUpView: BaseView {
+class SignUpView: BaseView {
     
     let nicknameLiteralLabel = UILabel()
     let nicknameTextField = UITextField()

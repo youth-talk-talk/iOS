@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class SignInViewController: BaseViewController<SignInView> {
+class SignInViewController: BaseViewController<SignInView> {
     
     var viewModel: any ViewModelInterface
     
