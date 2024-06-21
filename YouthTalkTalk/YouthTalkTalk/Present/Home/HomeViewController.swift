@@ -8,7 +8,7 @@
 import UIKit
 import PinLayout
 
-class HomeViewController: BaseViewController<HomeView> {
+final class HomeViewController: BaseViewController<HomeView> {
     
     var dataSource: UICollectionViewDiffableDataSource<HomeLayout, AnyHashable>!
     
@@ -62,7 +62,7 @@ class HomeViewController: BaseViewController<HomeView> {
             
             switch section {
             case .popular:
-                supplementaryView.backgroundColor = .brown
+                break
             default: break
             }
         }

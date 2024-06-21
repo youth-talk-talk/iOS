@@ -15,7 +15,7 @@ enum HomeLayout: Int, CaseIterable {
     
     static func layout() -> UICollectionViewCompositionalLayout {
         
-        return UICollectionViewCompositionalLayout { section, environment in
+        let layout = UICollectionViewCompositionalLayout { section, environment in
             
             let section = HomeLayout(rawValue: section) ?? .popular
             
@@ -28,6 +28,10 @@ enum HomeLayout: Int, CaseIterable {
                 return recentLayout()
             }
         }
+        
+        layout.register(PopularDecoReusableView.self, forDecorationViewOfKind: PopularDecoReusableView.identifier)
+        
+        return layout
     }
     
     static func categoryLayout() -> NSCollectionLayoutSection {
@@ -54,8 +58,12 @@ enum HomeLayout: Int, CaseIterable {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 7
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: insets, bottom: 0, trailing: insets)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         section.boundarySupplementaryItems = [createHeader(PopularHeaderReusableView.identifier)]
+        
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: PopularDecoReusableView.identifier)
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.decorationItems = [sectionBackgroundDecoration]
         
         return section
     }

@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class CategoryCollectionReusableView: BaseCollectionReusableView {
+final class CategoryCollectionReusableView: BaseCollectionReusableView {
     
     let gradientView = UIView()
     
@@ -66,6 +66,7 @@ class CategoryCollectionReusableView: BaseCollectionReusableView {
             .marginTop(12)
             .direction(.row)
             .width(90%)
+            .marginBottom(12)
             
         }
         .alignItems(.center)

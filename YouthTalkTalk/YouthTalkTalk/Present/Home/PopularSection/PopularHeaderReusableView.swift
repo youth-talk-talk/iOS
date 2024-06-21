@@ -6,7 +6,25 @@
 //
 
 import UIKit
+import FlexLayout
+import PinLayout
 
-class PopularHeaderReusableView: BaseCollectionReusableView {
+final class PopularHeaderReusableView: BaseCollectionReusableView {
         
+    let titleLabel = UILabel()
+    
+    override func configureLayout() {
+        
+        flexView.flex.define { flex in
+            
+            flex.addItem(titleLabel)
+                .marginTop(15)
+                .marginBottom(12)
+        }
+    }
+    
+    override func configureView() {
+        
+        titleLabel.designed(text: "인기정책", fontType: .sectionHeaderBold, textColor: .gray60)
+    }
 }

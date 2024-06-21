@@ -52,6 +52,8 @@
 		ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */; };
 		ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */; };
 		ACF2A2772C2451DD00FE8D63 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */; };
+		ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */; };
+		ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionReusableView.swift; sourceTree = "<group>"; };
 		ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
+		ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularDecoReusableView.swift; sourceTree = "<group>"; };
+		ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDecoReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +350,7 @@
 			children = (
 				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
 				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
+				ACF2A2782C25842300FE8D63 /* DecorationView */,
 				ACF2A2702C229D8500FE8D63 /* CategorySection */,
 				ACF2A26F2C229D7900FE8D63 /* PopularSection */,
 				ACF2A2712C229D9700FE8D63 /* recentSection */,
@@ -383,6 +388,15 @@
 			children = (
 			);
 			path = recentSection;
+			sourceTree = "<group>";
+		};
+		ACF2A2782C25842300FE8D63 /* DecorationView */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */,
+				ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */,
+			);
+			path = DecorationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -535,6 +549,7 @@
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
+				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
@@ -562,6 +577,7 @@
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
+				ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
