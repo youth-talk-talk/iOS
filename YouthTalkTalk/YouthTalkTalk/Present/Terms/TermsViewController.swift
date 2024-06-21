@@ -8,7 +8,7 @@
 import UIKit
 import RxCocoa
 
-class TermsViewController: BaseViewController<TermsView> {
+final class TermsViewController: BaseViewController<TermsView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()

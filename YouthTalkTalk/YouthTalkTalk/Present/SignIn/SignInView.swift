@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import AuthenticationServices
 
-class SignInView: BaseView {
+final class SignInView: BaseView {
     
     let logoImageView = UIImageView()
     let appTitleLabel = UILabel()

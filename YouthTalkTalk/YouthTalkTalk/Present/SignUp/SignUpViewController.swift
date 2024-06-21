@@ -8,7 +8,7 @@
 import UIKit
 import RxCocoa
 
-class SignUpViewController: BaseViewController<SignUpView> {
+final class SignUpViewController: BaseViewController<SignUpView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
