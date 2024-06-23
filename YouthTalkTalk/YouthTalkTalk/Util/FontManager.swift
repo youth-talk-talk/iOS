@@ -8,6 +8,73 @@
 import Foundation
 import UIKit.UIFont
 
+enum FontType {
+ 
+    case titleForPolicySemibold
+    case titleForPolicyRegular
+    
+    case titleForAppBold
+    case titleForAppRegular
+    
+    case titleForNormalSemiBold
+    case titleForNormalRegular
+    
+    case subTitleForPolicyBold
+    case subTitleForPolicyRegular
+    
+    case bodyBold
+    case bodyRegular
+    
+    case bodyForCategorySemibold
+    
+    case bodyForPolicyBold
+    case bodyForPolicyRegular
+    
+    case bodyForTermsSemibold
+    case bodyForTermsRegular
+    
+    case sectionHeaderBold
+}
+
+enum FontColor {
+    
+    var value: UIColor {
+        
+        switch self {
+        case .gray10:
+            
+            return .gray10
+        case .gray20:
+            
+            return .gray20
+        case .gray30:
+            
+            return .gray30
+        case .gray40:
+            
+            return .gray40
+        case .gray50:
+            
+            return .gray50
+        case .gray60:
+            
+            return .gray60
+            
+        case .black:
+            
+            return .black
+        }
+    }
+    
+    case gray10
+    case gray20
+    case gray30
+    case gray40
+    case gray50
+    case gray60
+    case black
+}
+
 final class FontManager {
     
     private init() { }
@@ -164,3 +231,4 @@ final class FontManager {
         return lineHeight
     }
 }
+

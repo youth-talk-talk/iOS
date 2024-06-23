@@ -16,17 +16,24 @@ final class SignInViewModel: NSObject, SignInInterface {
     var output: SignInOutput { return self }
     
     private let disposeBag: DisposeBag = DisposeBag()
+    private var appleSignInUseCase: AppleSignInUseCase
     
     // Inputs
     let appleSignInButtonClicked = PublishRelay<Void>()
-    let appleSignInCompleted = PublishRelay<Void>()
     
     // Ouputs
-    var signInForApple: Driver<Void>
+    var signInSuccessApple: Driver<String>
+    var signInFailureApple: Driver<ASAuthorizationError>
     
-    override init() {
+    private let signInSuccessAppleRelay = PublishRelay<String>()
+    private let signInFailureAppleRelay = PublishRelay<ASAuthorizationError>()
+    
+    init(appleSignInUseCase: AppleSignInUseCase) {
         
-        signInForApple = appleSignInCompleted.asDriver(onErrorJustReturn: ())
+        signInSuccessApple = signInSuccessAppleRelay.asDriver(onErrorJustReturn: "성공")
+        signInFailureApple = signInFailureAppleRelay.asDriver(onErrorJustReturn: .init(.unknown))
+        
+        self.appleSignInUseCase = appleSignInUseCase
         
         super.init()
         
@@ -55,9 +62,6 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
         
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
         
-        let userIdentifier = appleIDCredential.user
-        print(userIdentifier)
-        
         // 1. userIdentifier로 서버 통신
         // 2-1. 최초 회원가입 유저
         // 약관 동의 화면으로 이동
@@ -66,7 +70,17 @@ extension SignInViewModel: ASAuthorizationControllerDelegate {
         // 2-3. 애플 로그인 유저
         // 홈 뷰로 전환
         
-        appleSignInCompleted.accept(())
+        appleSignInUseCase.loginWithApple(credentials: appleIDCredential)
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let userData):
+                    owner.signInSuccessAppleRelay.accept(userData)
+                    
+                case .failure(let error):
+                    owner.signInFailureAppleRelay.accept(error)
+                }
+            }.disposed(by: disposeBag)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {

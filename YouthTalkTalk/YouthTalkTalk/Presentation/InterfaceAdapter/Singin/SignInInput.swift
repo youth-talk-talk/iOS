@@ -11,5 +11,4 @@ import RxCocoa
 protocol SignInInput {
     
     var appleSignInButtonClicked: PublishRelay<Void> { get }
-    var appleSignInCompleted: PublishRelay<Void> { get }
 }

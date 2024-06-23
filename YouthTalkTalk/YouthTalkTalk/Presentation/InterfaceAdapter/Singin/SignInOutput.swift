@@ -7,8 +7,10 @@
 
 import Foundation
 import RxCocoa
+import AuthenticationServices
 
 protocol SignInOutput {
     
-    var signInForApple: Driver<Void> { get }
+    var signInSuccessApple: Driver<String> { get }
+    var signInFailureApple: Driver<ASAuthorizationError> { get }
 }

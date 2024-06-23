@@ -19,8 +19,6 @@
 		AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B43082C1B147F005FC370 /* RxCocoa */; };
 		AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B430A2C1B147F005FC370 /* RxSwift */; };
 		AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */; };
-		AC4B43102C1C900D005FC370 /* FontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B430F2C1C900D005FC370 /* FontType.swift */; };
-		AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43112C1C9027005FC370 /* FontColor.swift */; };
 		AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43152C1D7036005FC370 /* TermsView.swift */; };
 		AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43172C1D7041005FC370 /* TermsViewController.swift */; };
 		AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43192C1EB6E6005FC370 /* FontManager.swift */; };
@@ -59,6 +57,9 @@
 		ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */; };
 		ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */; };
 		ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */; };
+		ACF2A2972C28691F00FE8D63 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* AppleSignInUseCase.swift */; };
+		ACF2A29B2C28698D00FE8D63 /* AppleSignInImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* AppleSignInImpl.swift */; };
+		ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +89,6 @@
 		AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YouthTalkTalk.entitlements; sourceTree = "<group>"; };
 		AC4B43022C19C829005FC370 /* Flex++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flex++.swift"; sourceTree = "<group>"; };
 		AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		AC4B430F2C1C900D005FC370 /* FontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontType.swift; sourceTree = "<group>"; };
-		AC4B43112C1C9027005FC370 /* FontColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontColor.swift; sourceTree = "<group>"; };
 		AC4B43152C1D7036005FC370 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		AC4B43172C1D7041005FC370 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		AC4B43192C1EB6E6005FC370 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
@@ -132,6 +131,9 @@
 		ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInterface.swift; sourceTree = "<group>"; };
 		ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInput.swift; sourceTree = "<group>"; };
 		ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOutput.swift; sourceTree = "<group>"; };
+		ACF2A2962C28691F00FE8D63 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
+		ACF2A29A2C28698D00FE8D63 /* AppleSignInImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInImpl.swift; sourceTree = "<group>"; };
+		ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		AC4B42E12C183B1F005FC370 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B42E42C183F81005FC370 /* Extension */,
 				AC4B43192C1EB6E6005FC370 /* FontManager.swift */,
 			);
 			path = Util;
@@ -190,8 +193,6 @@
 				AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */,
 				AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */,
 				ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */,
-				AC4B430F2C1C900D005FC370 /* FontType.swift */,
-				AC4B43112C1C9027005FC370 /* FontColor.swift */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -200,25 +201,18 @@
 			isa = PBXGroup;
 			children = (
 				AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */,
+				AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */,
 				AC4B42FF2C197015005FC370 /* SignInView.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
 		};
-		AC4B43042C1B125C005FC370 /* Interface */ = {
+		AC4B43042C1B125C005FC370 /* InterfaceAdapter */ = {
 			isa = PBXGroup;
 			children = (
 				ACF2A28B2C281F6200FE8D63 /* Singin */,
 			);
-			path = Interface;
-			sourceTree = "<group>";
-		};
-		AC4B430C2C1B14AE005FC370 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */,
-			);
-			path = ViewModel;
+			path = InterfaceAdapter;
 			sourceTree = "<group>";
 		};
 		AC4B43142C1D702B005FC370 /* Terms */ = {
@@ -239,12 +233,12 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		AC4B43222C2067A5005FC370 /* Model */ = {
+		AC4B43222C2067A5005FC370 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				AC4B43232C206839005FC370 /* LocationKR.swift */,
 			);
-			path = Model;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		AC4B43252C2072BE005FC370 /* CustomView */ = {
@@ -278,19 +272,13 @@
 		AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */ = {
 			isa = PBXGroup;
 			children = (
-				AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */,
-				ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */,
-				AC4B43252C2072BE005FC370 /* CustomView */,
-				AC4B43042C1B125C005FC370 /* Interface */,
-				AC4B43222C2067A5005FC370 /* Model */,
-				AC4B430C2C1B14AE005FC370 /* ViewModel */,
-				AC4B42E92C189038005FC370 /* Font */,
-				AC4B42E42C183F81005FC370 /* Extension */,
-				AC4B42E12C183B1F005FC370 /* Util */,
-				AC5A7C282BF1081F00A13991 /* Coordinator */,
-				AC5A7C222BF1015800A13991 /* Present */,
-				AC5A7C232BF102B800A13991 /* Base */,
+				ACF2A2922C28409A00FE8D63 /* Resource */,
 				AC5A7C212BF100A600A13991 /* App */,
+				AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */,
+				ACF2A2912C28404C00FE8D63 /* Presentation */,
+				ACF2A2932C2840DD00FE8D63 /* Data */,
+				ACF2A2942C28423000FE8D63 /* Domain */,
+				AC4B42E12C183B1F005FC370 /* Util */,
 			);
 			path = YouthTalkTalk;
 			sourceTree = "<group>";
@@ -315,8 +303,6 @@
 		AC5A7C212BF100A600A13991 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */,
-				AC5A7BFC2BF0FDB600A13991 /* LaunchScreen.storyboard */,
 				AC5A7BFF2BF0FDB600A13991 /* Info.plist */,
 				AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */,
 				AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */,
@@ -327,6 +313,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B43252C2072BE005FC370 /* CustomView */,
 				ACF2A25F2C215A2700FE8D63 /* Home */,
 				AC4B431D2C1EE016005FC370 /* SignUp */,
 				AC4B43142C1D702B005FC370 /* Terms */,
@@ -420,6 +407,86 @@
 				ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */,
 			);
 			path = Singin;
+			sourceTree = "<group>";
+		};
+		ACF2A2912C28404C00FE8D63 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */,
+				AC4B43042C1B125C005FC370 /* InterfaceAdapter */,
+				AC5A7C282BF1081F00A13991 /* Coordinator */,
+				AC5A7C222BF1015800A13991 /* Present */,
+				AC5A7C232BF102B800A13991 /* Base */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		ACF2A2922C28409A00FE8D63 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A7BFC2BF0FDB600A13991 /* LaunchScreen.storyboard */,
+				AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */,
+				AC4B42E92C189038005FC370 /* Font */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		ACF2A2932C2840DD00FE8D63 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		ACF2A2942C28423000FE8D63 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A29C2C2869F300FE8D63 /* Error */,
+				ACF2A2952C2844C300FE8D63 /* UseCase */,
+				AC4B43222C2067A5005FC370 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		ACF2A2952C2844C300FE8D63 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2982C28695100FE8D63 /* Interface */,
+				ACF2A2992C28695C00FE8D63 /* Impl */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		ACF2A2982C28695100FE8D63 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2962C28691F00FE8D63 /* AppleSignInUseCase.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		ACF2A2992C28695C00FE8D63 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A29A2C28698D00FE8D63 /* AppleSignInImpl.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		ACF2A29C2C2869F300FE8D63 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A29D2C286A6600FE8D63 /* Interface */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		ACF2A29D2C286A6600FE8D63 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,6 +635,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
+				ACF2A29B2C28698D00FE8D63 /* AppleSignInImpl.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
@@ -579,17 +647,17 @@
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
-				AC4B43122C1C9027005FC370 /* FontColor.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
+				ACF2A2972C28691F00FE8D63 /* AppleSignInUseCase.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
-				AC4B43102C1C900D005FC370 /* FontType.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
 				ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
+				ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,

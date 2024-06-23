@@ -48,13 +48,21 @@ final class SignInViewController: BaseViewController<SignInView> {
             .disposed(by: disposeBag)
         
         // Outputs
-        // apple 로그인 처리
-        viewModel.output.signInForApple
+        // apple 로그인 성공
+        viewModel.output.signInSuccessApple
             .drive(with: self) { owner, controller in
                 
                 let nextVC = TermsViewController()
                 
                 owner.navigationController?.pushViewController(nextVC, animated: true)
+                
+            }.disposed(by: disposeBag)
+        
+        // apple 로그인 실패
+        viewModel.output.signInFailureApple
+            .drive(with: self) { owner, error in
+                
+                dump(error.localizedDescription)
                 
             }.disposed(by: disposeBag)
     }
