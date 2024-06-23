@@ -25,6 +25,6 @@ final class RecentHeaderReusableView: BaseCollectionReusableView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "최근 업데이트", fontType: .sectionHeaderBold, textColor: .gray60)
+        titleLabel.designed(text: "최근 업데이트", fontType: .g14Bold, textColor: .gray60)
     }
 }

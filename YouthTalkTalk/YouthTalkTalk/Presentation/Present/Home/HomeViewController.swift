@@ -117,7 +117,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     override func configureNavigation() {
         
         let customLabel = UILabel()
-        customLabel.designed(text: "청년톡톡", fontType: .titleForAppBold, textColor: .black)
+        customLabel.designed(text: "청년톡톡", fontType: .g20Bold, textColor: .black)
         
         let customView = UIBarButtonItem(customView: customLabel)
         

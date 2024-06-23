@@ -20,6 +20,6 @@ extension UITextField {
     func designedPlaceholder(placeholder: String, textColor: UIColor = .gray40) {
         
         self.placeholder = placeholder
-        self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.font: FontManager.font(.bodyBold), .foregroundColor: textColor])
+        self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.font: FontManager.font(.p16Bold), .foregroundColor: textColor])
     }
 }

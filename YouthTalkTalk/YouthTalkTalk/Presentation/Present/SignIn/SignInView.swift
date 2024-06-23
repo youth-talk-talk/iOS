@@ -71,8 +71,8 @@ final class SignInView: BaseView {
         backgroundColor = .white
         logoImageView.backgroundColor = .black
         
-        appTitleLabel.designed(text: "청년톡톡", fontType: .titleForAppBold)
-        appSubTitleLabel.designed(text: "한눈에 보는 청년정책, 청년톡톡과 함께하세요!", fontType: .bodyRegular)
+        appTitleLabel.designed(text: "청년톡톡", fontType: .g20Bold)
+        appSubTitleLabel.designed(text: "한눈에 보는 청년정책, 청년톡톡과 함께하세요!", fontType: .p14Regular)
         
         appleSignInButton.layer.masksToBounds = true
         appleSignInButton.designedByImage(.appleLogin)

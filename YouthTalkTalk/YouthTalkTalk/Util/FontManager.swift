@@ -10,30 +10,24 @@ import UIKit.UIFont
 
 enum FontType {
  
-    case titleForPolicySemibold
-    case titleForPolicyRegular
+    case p24Bold
     
-    case titleForAppBold
-    case titleForAppRegular
+    case p18Bold
     
-    case titleForNormalSemiBold
-    case titleForNormalRegular
+    case p16Bold
+    case p16SemiBold
+    case p16Regualr
     
-    case subTitleForPolicyBold
-    case subTitleForPolicyRegular
+    case p14Bold
+    case p14Regular
     
-    case bodyBold
-    case bodyRegular
+    case p12Bold
+    case p12Regular
     
-    case bodyForCategorySemibold
+    case p10Regular
     
-    case bodyForPolicyBold
-    case bodyForPolicyRegular
-    
-    case bodyForTermsSemibold
-    case bodyForTermsRegular
-    
-    case sectionHeaderBold
+    case g20Bold
+    case g14Bold
 }
 
 enum FontColor {
@@ -41,6 +35,9 @@ enum FontColor {
     var value: UIColor {
         
         switch self {
+        case .white:
+            
+            return .white
         case .gray10:
             
             return .gray10
@@ -66,6 +63,7 @@ enum FontColor {
         }
     }
     
+    case white
     case gray10
     case gray20
     case gray30
@@ -87,87 +85,68 @@ final class FontManager {
         var fontSize: CGFloat = 0
         
         switch fontType {
-        case .titleForPolicySemibold:
+        case .p24Bold:
+            
+            fontWeight = "Bold"
+            fontSize = 24
+            
+        case .p18Bold:
+            
+            fontWeight = "Bold"
+            fontSize = 18
+            
+        case .p16Bold:
+            
+            fontWeight = "Bold"
+            fontSize = 16
+            
+        case .p16SemiBold:
             
             fontWeight = "SemiBold"
-            fontSize = 28
+            fontSize = 16
             
-        case .titleForPolicyRegular:
+        case .p16Regualr:
             
             fontWeight = "Regular"
-            fontSize = 22
+            fontSize = 16
             
-        case .titleForAppBold:
+        case .p14Bold:
+            
+            fontWeight = "Bold"
+            fontSize = 14
+            
+        case .p14Regular:
+            
+            fontWeight = "Regular"
+            fontSize = 14
+            
+        case .p12Bold:
+            
+            fontWeight = "Bold"
+            fontSize = 12
+            
+        case .p12Regular:
+            
+            fontWeight = "Regular"
+            fontSize = 12
+            
+        case .p10Regular:
+            
+            fontWeight = "Regular"
+            fontSize = 10
+            
+        case .g20Bold:
             
             familyName = "GmarketSans"
             fontWeight = "Bold"
             fontSize = 20
             
-        case .titleForAppRegular:
-            
-            fontWeight = "Regular"
-            fontSize = 24
-            
-        case .titleForNormalSemiBold:
-            
-            fontWeight = "SemiBold"
-            fontSize = 20
-            
-        case .titleForNormalRegular:
-            
-            fontWeight = "Regular"
-            fontSize = 24
-            
-        case .subTitleForPolicyBold:
-            
-            fontWeight = "Bold"
-            fontSize = 18
-            
-        case .subTitleForPolicyRegular:
-            
-            fontWeight = "Regular"
-            fontSize = 18
-            
-        case .bodyBold:
-            
-            fontWeight = "Bold"
-            fontSize = 16
-            
-        case .bodyRegular:
-            
-            fontWeight = "Regular"
-            fontSize = 16
-            
-        case .bodyForCategorySemibold:
-            
-            fontWeight = "SemiBold"
-            fontSize = 16
-            
-        case .bodyForPolicyBold:
-            
-            fontWeight = "Bold"
-            fontSize = 14
-            
-        case .bodyForPolicyRegular:
-            
-            fontWeight = "Regular"
-            fontSize = 14
-            
-        case .bodyForTermsSemibold:
-            
-            fontWeight = "SemiBold"
-            fontSize = 12
-            
-        case .bodyForTermsRegular:
-            
-            fontWeight = "Regular"
-            fontSize = 12
-            
-        case .sectionHeaderBold:
+        case .g14Bold:
             
             familyName = "GmarketSans"
             fontWeight = "Bold"
             fontSize = 14
+            
         }
         
         return UIFont(name: "\(familyName)\(fontWeight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
@@ -179,52 +158,29 @@ final class FontManager {
         var lineHeight: CGFloat = 0
         
         switch fontType {
-        case .titleForPolicySemibold:
-            lineHeight = 44
-            
-        case .titleForPolicyRegular:
-            lineHeight = 32
-            
-        case .titleForAppBold:
+        case .p24Bold:
             lineHeight = 24
-            
-        case .titleForAppRegular:
-            lineHeight = 32
-            
-        case .titleForNormalSemiBold:
-            lineHeight = 32
-            
-        case .titleForNormalRegular:
-            lineHeight = 32
-            
-        case .subTitleForPolicyBold:
+        case .p18Bold:
             lineHeight = 24
-            
-        case .subTitleForPolicyRegular:
+        case .p16Bold:
             lineHeight = 24
-            
-        case .bodyBold:
+        case .p16SemiBold:
             lineHeight = 24
-            
-        case .bodyRegular:
+        case .p16Regualr:
             lineHeight = 24
-            
-        case .bodyForCategorySemibold:
-            lineHeight = 24
-            
-        case .bodyForPolicyBold:
+        case .p14Bold:
             lineHeight = 20
-            
-        case .bodyForPolicyRegular:
+        case .p14Regular:
             lineHeight = 20
-            
-        case .bodyForTermsSemibold:
+        case .p12Bold:
             lineHeight = 16
-            
-        case .bodyForTermsRegular:
+        case .p12Regular:
+            lineHeight = 16
+        case .p10Regular:
+            lineHeight = 16
+        case .g20Bold:
             lineHeight = 24
-            
-        case .sectionHeaderBold:
+        case .g14Bold:
             lineHeight = 16
         }
         

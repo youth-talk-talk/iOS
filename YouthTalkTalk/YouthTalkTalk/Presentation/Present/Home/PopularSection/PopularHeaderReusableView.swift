@@ -25,6 +25,6 @@ final class PopularHeaderReusableView: BaseCollectionReusableView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "인기정책", fontType: .sectionHeaderBold, textColor: .gray60)
+        titleLabel.designed(text: "인기정책", fontType: .g14Bold, textColor: .gray60)
     }
 }

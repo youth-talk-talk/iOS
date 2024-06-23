@@ -62,18 +62,18 @@ final class SignUpView: BaseView {
     override func configureView() {
         
         // Nickname Literal Label
-        nicknameLiteralLabel.designed(text: "닉네임 설정", fontType: .bodyForCategorySemibold)
+        nicknameLiteralLabel.designed(text: "닉네임 설정", fontType: .p16SemiBold)
         
         // Nickname Guideline Label
-        nicknameGuidelineLabel.designed(text: "원하는 닉네임이 있는 경우 직접 설정이 가능해요!(단, 한글 8자 이내)", fontType: .bodyForTermsRegular, textColor: .gray40)
+        nicknameGuidelineLabel.designed(text: "원하는 닉네임이 있는 경우 직접 설정이 가능해요!(단, 한글 8자 이내)", fontType: .p12Regular, textColor: .gray40)
         
         // NickName TextField
         nicknameTextField.makeLeftPaddingView()
         nicknameTextField.designedPlaceholder(placeholder: "씩씩한 청년")
-        nicknameTextField.font = FontManager.font(.bodyBold)
+        nicknameTextField.font = FontManager.font(.p16Regualr)
         
         // Region Literal Label
-        regionLiteralLabel.designed(text: "지역설정", fontType: .bodyForCategorySemibold)
+        regionLiteralLabel.designed(text: "지역설정", fontType: .p16SemiBold)
         
         // TableView
         pullDownTableView.backgroundColor = .clear
@@ -119,7 +119,7 @@ final class SignUpView: BaseView {
     
     func updateLocation(_ location: LocationKR) {
         regionDropDownView.regionDropdownLabel.designed(text: location.korean,
-                                                                   fontType: .bodyBold)
+                                                        fontType: .p16Regualr)
 
         toggleTableViewHidden()
     }

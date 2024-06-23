@@ -51,7 +51,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     func updateNavigationTitle(title: String) {
         
         let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .subTitleForPolicyBold)
+        titleLabel.designed(text: title, fontType: .p18Bold)
         self.navigationItem.titleView = titleLabel
     }
     
