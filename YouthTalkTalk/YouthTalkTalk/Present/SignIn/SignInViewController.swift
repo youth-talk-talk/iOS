@@ -11,9 +11,9 @@ import RxCocoa
 
 final class SignInViewController: BaseViewController<SignInView> {
     
-    var viewModel: any ViewModelInterface
+    var viewModel: SignInInterface
     
-    init(viewModel: any ViewModelInterface) {
+    init(viewModel: SignInInterface) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -41,28 +41,15 @@ final class SignInViewController: BaseViewController<SignInView> {
     
     override func bind() {
         
-        guard let signInViewModel = viewModel as? SignInViewModel else { return }
-        
-        let input = signInViewModel.input
-        
+        // Inputs
         // apple 로그인 버튼 클릭 이벤트 전달
         layoutView.appleSignInButton.rx.tap
-            .bind(with: self) { owner, event in
-                
-                #if DEBUG
-                let nextVC = TermsViewController()
-                owner.navigationController?.pushViewController(nextVC, animated: true)
-                #else
-                input.appleSignInButtonClicked.accept(event)
-                #endif
-                
-            }.disposed(by: disposeBag)
+            .bind(to: viewModel.input.appleSignInButtonClicked)
+            .disposed(by: disposeBag)
         
-        // Output
-        let output = signInViewModel.transform(input: input)
-        
+        // Outputs
         // apple 로그인 처리
-        output.signInForApple
+        viewModel.output.signInForApple
             .drive(with: self) { owner, controller in
                 
                 let nextVC = TermsViewController()
