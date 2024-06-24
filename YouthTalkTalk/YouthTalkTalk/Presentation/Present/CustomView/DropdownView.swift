@@ -35,7 +35,7 @@ final class DropDownView: BaseView {
     override func configureView() {
         
         // Region Dropdown Label
-        regionDropdownLabel.designed(text: "전체지역", fontType: .p16Regualr, textColor: .gray40)
+        regionDropdownLabel.designed(text: "전체지역", fontType: .p16Regular16, textColor: .gray40)
         
         // RegionDropdownImage
         let imageConfiguration = UIImage.SymbolConfiguration(scale: .medium)

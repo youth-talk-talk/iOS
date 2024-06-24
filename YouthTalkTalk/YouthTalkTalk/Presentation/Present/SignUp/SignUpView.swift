@@ -70,7 +70,7 @@ final class SignUpView: BaseView {
         // NickName TextField
         nicknameTextField.makeLeftPaddingView()
         nicknameTextField.designedPlaceholder(placeholder: "씩씩한 청년")
-        nicknameTextField.font = FontManager.font(.p16Regualr)
+        nicknameTextField.font = FontManager.font(.p16Regular16)
         
         // Region Literal Label
         regionLiteralLabel.designed(text: "지역설정", fontType: .p16SemiBold)
@@ -119,7 +119,7 @@ final class SignUpView: BaseView {
     
     func updateLocation(_ location: LocationKR) {
         regionDropDownView.regionDropdownLabel.designed(text: location.korean,
-                                                        fontType: .p16Regualr)
+                                                        fontType: .p16Regular16)
 
         toggleTableViewHidden()
     }

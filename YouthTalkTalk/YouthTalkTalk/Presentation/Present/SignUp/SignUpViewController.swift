@@ -62,7 +62,7 @@ extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
         if let location = LocationKR(rawValue: indexPath.row) {
             
             cell.textLabel?.text = location.korean
-            cell.textLabel?.font = FontManager.font(.p16Regualr)
+            cell.textLabel?.font = FontManager.font(.p16Regular16)
             cell.textLabel?.textColor = .gray40
         }
             

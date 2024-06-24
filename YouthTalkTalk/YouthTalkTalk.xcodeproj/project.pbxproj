@@ -278,7 +278,6 @@
 				ACF2A2912C28404C00FE8D63 /* Presentation */,
 				ACF2A2932C2840DD00FE8D63 /* Data */,
 				ACF2A2942C28423000FE8D63 /* Domain */,
-				AC4B42E12C183B1F005FC370 /* Util */,
 			);
 			path = YouthTalkTalk;
 			sourceTree = "<group>";
@@ -313,6 +312,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC5A7C232BF102B800A13991 /* Base */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
 				ACF2A25F2C215A2700FE8D63 /* Home */,
 				AC4B431D2C1EE016005FC370 /* SignUp */,
@@ -412,11 +412,11 @@
 		ACF2A2912C28404C00FE8D63 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AC4B42E12C183B1F005FC370 /* Util */,
 				ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */,
 				AC4B43042C1B125C005FC370 /* InterfaceAdapter */,
 				AC5A7C282BF1081F00A13991 /* Coordinator */,
 				AC5A7C222BF1015800A13991 /* Present */,
-				AC5A7C232BF102B800A13991 /* Base */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
