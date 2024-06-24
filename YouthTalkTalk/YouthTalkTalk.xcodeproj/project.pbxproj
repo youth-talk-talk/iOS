@@ -207,12 +207,12 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
-		AC4B43042C1B125C005FC370 /* InterfaceAdapter */ = {
+		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
 				ACF2A28B2C281F6200FE8D63 /* Singin */,
 			);
-			path = InterfaceAdapter;
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		AC4B43142C1D702B005FC370 /* Terms */ = {
@@ -414,7 +414,7 @@
 			children = (
 				AC4B42E12C183B1F005FC370 /* Util */,
 				ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */,
-				AC4B43042C1B125C005FC370 /* InterfaceAdapter */,
+				AC4B43042C1B125C005FC370 /* Interface */,
 				AC5A7C282BF1081F00A13991 /* Coordinator */,
 				AC5A7C222BF1015800A13991 /* Present */,
 			);
