@@ -126,8 +126,6 @@ final class SignUpView: BaseView {
     
     func toggleTableViewHidden() {
         
-        print(pullDownTableView.isHidden)
         pullDownTableView.isHidden = !pullDownTableView.isHidden
-        print(pullDownTableView.isHidden)
     }
 }
