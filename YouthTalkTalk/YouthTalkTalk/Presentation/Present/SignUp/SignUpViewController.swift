@@ -69,7 +69,6 @@ final class SignUpViewController: BaseViewController<SignUpView> {
         viewModel.output.policyLocations
             .drive(layoutView.pullDownTableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { _, location, cell in
                 
-                print("12345")
                 cell.textLabel?.designed(text: location.displayName, fontType: .p16Regular16, textColor: .gray40)
                 
             }.disposed(by: disposeBag)
@@ -81,6 +80,9 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                 owner.layoutView.updateLocation(policyLocation)
                 
             }.disposed(by: disposeBag)
+        
+        // 이벤트 전달
+        viewModel.input.policyLocationRelay.accept(())
     }
 }
 

@@ -33,9 +33,7 @@ final class SignUpViewModel: SignUpInterface {
         // 모든 정책 구역 데이터
         policyLocations = policyLocationRelay.map { _ -> [PolicyLocationInterface] in
             
-            print("check")
             let allCase = policyLocationUseCase.fetchAllCase(entity: PolicyLocationKR.self)
-            print(allCase)
             
             return allCase
         }
