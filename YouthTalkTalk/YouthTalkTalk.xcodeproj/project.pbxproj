@@ -25,7 +25,7 @@
 		AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */; };
 		AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */; };
 		AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43202C1EE02C005FC370 /* SignUpView.swift */; };
-		AC4B43242C206839005FC370 /* LocationKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43232C206839005FC370 /* LocationKR.swift */; };
+		AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43232C206839005FC370 /* PolicyLocationKR.swift */; };
 		AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43262C2072E2005FC370 /* DropdownView.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
@@ -57,9 +57,16 @@
 		ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */; };
 		ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */; };
 		ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */; };
-		ACF2A2972C28691F00FE8D63 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* AppleSignInUseCase.swift */; };
-		ACF2A29B2C28698D00FE8D63 /* AppleSignInImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* AppleSignInImpl.swift */; };
+		ACF2A2972C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift */; };
+		ACF2A29B2C28698D00FE8D63 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* AppleSignInUseCase.swift */; };
 		ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */; };
+		ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */; };
+		ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */; };
+		ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */; };
+		ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AB2C2AB45400FE8D63 /* SignUpInterface.swift */; };
+		ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */; };
+		ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */; };
+		ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +102,7 @@
 		AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton++.swift"; sourceTree = "<group>"; };
 		AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC4B43202C1EE02C005FC370 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		AC4B43232C206839005FC370 /* LocationKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationKR.swift; sourceTree = "<group>"; };
+		AC4B43232C206839005FC370 /* PolicyLocationKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationKR.swift; sourceTree = "<group>"; };
 		AC4B43262C2072E2005FC370 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,9 +138,16 @@
 		ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInterface.swift; sourceTree = "<group>"; };
 		ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInput.swift; sourceTree = "<group>"; };
 		ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOutput.swift; sourceTree = "<group>"; };
-		ACF2A2962C28691F00FE8D63 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
-		ACF2A29A2C28698D00FE8D63 /* AppleSignInImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInImpl.swift; sourceTree = "<group>"; };
+		ACF2A2962C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCaseInterface.swift; sourceTree = "<group>"; };
+		ACF2A29A2C28698D00FE8D63 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
 		ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDescription.swift; sourceTree = "<group>"; };
+		ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationInterface.swift; sourceTree = "<group>"; };
+		ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
+		ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOutput.swift; sourceTree = "<group>"; };
+		ACF2A2AB2C2AB45400FE8D63 /* SignUpInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInterface.swift; sourceTree = "<group>"; };
+		ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCaseInterface.swift; sourceTree = "<group>"; };
+		ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +224,8 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A28B2C281F6200FE8D63 /* Singin */,
+				ACF2A2A62C2AAFFA00FE8D63 /* SignUp */,
+				ACF2A28B2C281F6200FE8D63 /* SignIn */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -228,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */,
+				ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */,
 				AC4B43202C1EE02C005FC370 /* SignUpView.swift */,
 			);
 			path = SignUp;
@@ -236,7 +252,8 @@
 		AC4B43222C2067A5005FC370 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				AC4B43232C206839005FC370 /* LocationKR.swift */,
+				ACF2A2A22C2AAF6200FE8D63 /* Interface */,
+				ACF2A2A32C2AAF6900FE8D63 /* Impl */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -399,14 +416,14 @@
 			path = DecorationView;
 			sourceTree = "<group>";
 		};
-		ACF2A28B2C281F6200FE8D63 /* Singin */ = {
+		ACF2A28B2C281F6200FE8D63 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
 				ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */,
 				ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */,
 				ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */,
 			);
-			path = Singin;
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		ACF2A2912C28404C00FE8D63 /* Presentation */ = {
@@ -460,7 +477,8 @@
 		ACF2A2982C28695100FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2962C28691F00FE8D63 /* AppleSignInUseCase.swift */,
+				ACF2A2962C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift */,
+				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -468,7 +486,8 @@
 		ACF2A2992C28695C00FE8D63 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A29A2C28698D00FE8D63 /* AppleSignInImpl.swift */,
+				ACF2A29A2C28698D00FE8D63 /* AppleSignInUseCase.swift */,
+				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -487,6 +506,32 @@
 				ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		ACF2A2A22C2AAF6200FE8D63 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		ACF2A2A32C2AAF6900FE8D63 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B43232C206839005FC370 /* PolicyLocationKR.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		ACF2A2A62C2AAFFA00FE8D63 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */,
+				ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */,
+				ACF2A2AB2C2AB45400FE8D63 /* SignUpInterface.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,26 +680,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
-				ACF2A29B2C28698D00FE8D63 /* AppleSignInImpl.swift in Sources */,
+				ACF2A29B2C28698D00FE8D63 /* AppleSignInUseCase.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
-				AC4B43242C206839005FC370 /* LocationKR.swift in Sources */,
+				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
+				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
+				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
-				ACF2A2972C28691F00FE8D63 /* AppleSignInUseCase.swift in Sources */,
+				ACF2A2972C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
+				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
+				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
 				ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */,
@@ -664,6 +713,7 @@
 				ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
+				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
@@ -671,6 +721,8 @@
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
+				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocationInterface.swift in Sources */,
+				ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */,
 				ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 				ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */,

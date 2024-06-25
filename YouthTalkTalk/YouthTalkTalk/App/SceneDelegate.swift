@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 스크롤 엣지가 닿았을 때 네이게이션 바 appearance settings
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         
-        let viewModel = SignInViewModel(appleSignInUseCase: AppleSignInImpl())
+        let viewModel = SignInViewModel(appleSignInUseCase: AppleSignInUseCase())
         let rootVC = SignInViewController(viewModel: viewModel)
         let testVC = HomeViewController()
         let naviVC = UINavigationController(rootViewController: rootVC)

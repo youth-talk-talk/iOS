@@ -12,11 +12,11 @@ import RxCocoa
 
 final class SignInViewModel: NSObject, SignInInterface {
     
+    private let disposeBag: DisposeBag = DisposeBag()
+    private var appleSignInUseCase: AppleSignInUseCaseInterface
+    
     var input: SignInInput { return self }
     var output: SignInOutput { return self }
-    
-    private let disposeBag: DisposeBag = DisposeBag()
-    private var appleSignInUseCase: AppleSignInUseCase
     
     // Inputs
     let appleSignInButtonClicked = PublishRelay<Void>()
@@ -28,7 +28,7 @@ final class SignInViewModel: NSObject, SignInInterface {
     private let signInSuccessAppleRelay = PublishRelay<String>()
     private let signInFailureAppleRelay = PublishRelay<ASAuthorizationError>()
     
-    init(appleSignInUseCase: AppleSignInUseCase) {
+    init(appleSignInUseCase: AppleSignInUseCaseInterface) {
         
         signInSuccessApple = signInSuccessAppleRelay.asDriver(onErrorJustReturn: "성공")
         signInFailureApple = signInFailureAppleRelay.asDriver(onErrorJustReturn: .init(.unknown))

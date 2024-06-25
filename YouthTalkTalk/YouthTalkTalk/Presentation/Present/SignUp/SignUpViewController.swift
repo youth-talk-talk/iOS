@@ -10,6 +10,18 @@ import RxCocoa
 
 final class SignUpViewController: BaseViewController<SignUpView> {
     
+    var viewModel: SignUpInterface
+    
+    init(viewModel: SignUpInterface) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -17,7 +29,6 @@ final class SignUpViewController: BaseViewController<SignUpView> {
     override func bind() {
         
         layoutView.pullDownTableView.delegate = self
-        layoutView.pullDownTableView.dataSource = self
         layoutView.pullDownTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         guard let gesture = layoutView.regionDropDownView.gestureRecognizers?.first else { return }
@@ -46,36 +57,37 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                 sceneDelegate.window?.makeKeyAndVisible()
                 
             }.disposed(by: disposeBag)
+    
+        // MARK: Inputs
+        layoutView.pullDownTableView.rx.itemSelected
+            .bind(to: viewModel.itemSelectedEvent)
+            .disposed(by: disposeBag)
+        
+        
+        // MARK: Ouputs
+        // Configure Cell
+        viewModel.output.policyLocations
+            .drive(layoutView.pullDownTableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { _, location, cell in
+                
+                print("12345")
+                cell.textLabel?.designed(text: location.displayName, fontType: .p16Regular16, textColor: .gray40)
+                
+            }.disposed(by: disposeBag)
+        
+        // Selected Item
+        viewModel.output.selectedLocation
+            .drive(with: self) { owner, policyLocation in
+                
+                owner.layoutView.updateLocation(policyLocation)
+                
+            }.disposed(by: disposeBag)
     }
 }
 
-extension SignUpViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return LocationKR.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        if let location = LocationKR(rawValue: indexPath.row) {
-            
-            cell.textLabel?.text = location.korean
-            cell.textLabel?.font = FontManager.font(.p16Regular16)
-            cell.textLabel?.textColor = .gray40
-        }
-            
-        return cell
-    }
+extension SignUpViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 36
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let location = LocationKR(rawValue: indexPath.row) { layoutView.updateLocation(location) }
     }
 }

@@ -21,7 +21,9 @@ final class TermsViewController: BaseViewController<TermsView> {
         layoutView.confirmButton.rx.tap
             .bind(with: self) { owner, _ in
                 
-                let nextVC = SignUpViewController()
+                let policyLoactionUseCase = PolicyLocationUseCase()
+                let signUpViewModel = SignUpViewModel(policyLocationUseCase: policyLoactionUseCase)
+                let nextVC = SignUpViewController(viewModel: signUpViewModel)
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             }.disposed(by: disposeBag)

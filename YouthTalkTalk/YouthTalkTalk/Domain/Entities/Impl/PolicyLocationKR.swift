@@ -1,5 +1,5 @@
 //
-//  LocationKR.swift
+//  PolicyLocationKR.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/17/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LocationKR: Int, CaseIterable {
+enum PolicyLocationKR: Int, CaseIterable, PolicyLocationInterface {
     
     case seoul
     case gyeonggi
@@ -27,7 +27,7 @@ enum LocationKR: Int, CaseIterable {
     case jeollaSouth
     case jeju
     
-    var korean: String {
+    var displayName: String {
         
         switch self {
         case .seoul:
@@ -65,5 +65,15 @@ enum LocationKR: Int, CaseIterable {
         case .jeju:
             "제주특별자치도"
         }
+    }
+    
+    static var allCase: [PolicyLocationInterface] {
+        
+        return self.allCases
+    }
+    
+    static func fetchLocation(_ row: Int) -> PolicyLocationInterface {
+        
+        return PolicyLocationKR(rawValue: row) ?? .seoul
     }
 }

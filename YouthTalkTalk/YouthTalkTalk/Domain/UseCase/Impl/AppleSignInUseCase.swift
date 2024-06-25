@@ -1,5 +1,5 @@
 //
-//  AppleSignInImpl.swift
+//  AppleSignInUseCase.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/23/24.
@@ -9,7 +9,7 @@ import Foundation
 import AuthenticationServices
 import RxSwift
 
-final class AppleSignInImpl: AppleSignInUseCase {
+final class AppleSignInUseCase: AppleSignInUseCaseInterface {
     
     func loginWithApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<String, ASAuthorizationError>> {
         

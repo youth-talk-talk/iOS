@@ -117,8 +117,8 @@ final class SignUpView: BaseView {
         pullDownTableView.pin.height(finalTableViewHeight)
     }
     
-    func updateLocation(_ location: LocationKR) {
-        regionDropDownView.regionDropdownLabel.designed(text: location.korean,
+    func updateLocation(_ location: PolicyLocationInterface) {
+        regionDropDownView.regionDropdownLabel.designed(text: location.displayName,
                                                         fontType: .p16Regular16)
 
         toggleTableViewHidden()
@@ -126,6 +126,8 @@ final class SignUpView: BaseView {
     
     func toggleTableViewHidden() {
         
+        print(pullDownTableView.isHidden)
         pullDownTableView.isHidden = !pullDownTableView.isHidden
+        print(pullDownTableView.isHidden)
     }
 }
