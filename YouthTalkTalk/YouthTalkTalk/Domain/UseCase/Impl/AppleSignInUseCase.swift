@@ -14,6 +14,9 @@ final class AppleSignInUseCase: AppleSignInUseCaseInterface {
     func loginWithApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<String, ASAuthorizationError>> {
         
         let userIdentifier = credentials.user
+        print(credentials.identityToken?.base64EncodedString())
+        print(userIdentifier)
+        print(credentials.email)
         
         // userIdentifier로 서버 통신 진행
         

@@ -47,6 +47,11 @@ final class SignInViewController: BaseViewController<SignInView> {
             .bind(to: viewModel.input.appleSignInButtonClicked)
             .disposed(by: disposeBag)
         
+        // kakao 로그인 버튼 클릭 이벤트 전달
+        layoutView.kakaoSignInButton.rx.tap
+            .bind(to: viewModel.input.kakaoSignInButtonClicked)
+            .disposed(by: disposeBag)
+        
         // Outputs
         // apple 로그인 성공
         viewModel.output.signInSuccessApple

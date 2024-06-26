@@ -9,6 +9,10 @@ import Foundation
 import AuthenticationServices
 import RxSwift
 import RxCocoa
+// import RxKakaoSDKAuth
+import KakaoSDKAuth
+import RxKakaoSDKUser
+import KakaoSDKUser
 
 final class SignInViewModel: NSObject, SignInInterface {
     
@@ -20,11 +24,13 @@ final class SignInViewModel: NSObject, SignInInterface {
     
     // Inputs
     let appleSignInButtonClicked = PublishRelay<Void>()
+    let kakaoSignInButtonClicked = PublishRelay<Void>()
     
     // Ouputs
     var signInSuccessApple: Driver<String>
     var signInFailureApple: Driver<ASAuthorizationError>
     
+    // APPLE LOGIN
     private let signInSuccessAppleRelay = PublishRelay<String>()
     private let signInFailureAppleRelay = PublishRelay<ASAuthorizationError>()
     
@@ -37,10 +43,45 @@ final class SignInViewModel: NSObject, SignInInterface {
         
         super.init()
         
+        // print("✏️판별",AuthApi.hasToken())
+        // UserApi.shared.rx.accessTokenInfo()
+        //         .subscribe(onSuccess:{ (_) in
+        //             print("✏️ 토큰 유효")
+        //             //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+        //         }, onFailure: {error in
+        //             print("✏️ 토큰 비유효")
+        //             // if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
+        //             //     //로그인 필요
+        //             // }
+        //             // else {
+        //             //     //기타 에러
+        //             // }
+        //         })
+        //         .disposed(by: disposeBag)
+        
+        // 애플 로그인 버튼 클릭
         appleSignInButtonClicked
             .bind(with: self) { owner, _ in
                 
                 owner.requestSignInApple()
+            }.disposed(by: disposeBag)
+        
+        // 카카오 로그인 버튼 클릭
+        kakaoSignInButtonClicked
+            .bind(with: self) { owner, _ in
+                
+                // 카카오 앱 설치 여부 확인
+                if (UserApi.isKakaoTalkLoginAvailable()) {
+                    print("✏️설치 확인")
+                    // 카카오 앱으로 로그인 요청
+                    owner.kakaoAppLoginRequest()
+                    
+                } else {
+                    
+                    // 카카오 계정으로 로그인 요청
+                    owner.kakaoAccountLoginRequest()
+                }
+                
             }.disposed(by: disposeBag)
     }
     
@@ -53,6 +94,49 @@ final class SignInViewModel: NSObject, SignInInterface {
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.performRequests()
+    }
+    
+    private func kakaoAppLoginRequest() {
+        
+        UserApi.shared.rx.loginWithKakaoTalk()
+            .subscribe(with: self) { owner, oauthToken in
+                print("loginWithKakaoTalk() success.")
+                _ = oauthToken
+                
+                // 카카오 유저 정보 요청
+                owner.kakaoUserInfoRequest()
+                
+            } onError: {owner, error  in
+                print(error)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func kakaoAccountLoginRequest() {
+        
+        UserApi.shared.rx.loginWithKakaoAccount()
+            .subscribe(with: self) { owner, oauthToken in
+                print("loginWithKakaoAccount() success.")
+
+                _ = oauthToken
+            } onError: {owner, error in
+                print(error)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func kakaoUserInfoRequest() {
+        
+        UserApi.shared.rx.me()
+            .subscribe (onSuccess:{ user in
+                print("me() success.")
+                
+                dump(user)
+                _ = user
+            }, onFailure: {error in
+                print(error)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
