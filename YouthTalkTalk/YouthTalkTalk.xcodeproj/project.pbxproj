@@ -148,6 +148,7 @@
 		ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCaseInterface.swift; sourceTree = "<group>"; };
 		ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +270,7 @@
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
+				ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */,
 				AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */,
 				AC5A7C072BF0FDB700A13991 /* YouthTalkTalkTests */,
 				AC5A7C112BF0FDB700A13991 /* YouthTalkTalkUITests */,
@@ -775,6 +777,7 @@
 /* Begin XCBuildConfiguration section */
 		AC5A7C162BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -838,6 +841,7 @@
 		};
 		AC5A7C172BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -894,6 +898,7 @@
 		};
 		AC5A7C192BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -922,6 +927,7 @@
 		};
 		AC5A7C1A2BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -950,6 +956,7 @@
 		};
 		AC5A7C1C2BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -970,6 +977,7 @@
 		};
 		AC5A7C1D2BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -990,6 +998,7 @@
 		};
 		AC5A7C1F2BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1008,6 +1017,7 @@
 		};
 		AC5A7C202BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
