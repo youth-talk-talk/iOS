@@ -71,6 +71,9 @@
 		ACF2A2B82C2C184D00FE8D63 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ACF2A2B72C2C184D00FE8D63 /* RxKakaoSDKUser */; };
 		ACF2A2BB2C2C1D3700FE8D63 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ACF2A2BA2C2C1D3700FE8D63 /* KakaoSDKAuth */; };
 		ACF2A2BD2C2C1D3700FE8D63 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ACF2A2BC2C2C1D3700FE8D63 /* KakaoSDKUser */; };
+		ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2C12C2D453C00FE8D63 /* UserDefaults.swift */; };
+		ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */; };
+		ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2C62C2D58AF00FE8D63 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +156,9 @@
 		ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCaseInterface.swift; sourceTree = "<group>"; };
 		ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCase.swift; sourceTree = "<group>"; };
 		ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
+		ACF2A2C12C2D453C00FE8D63 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		ACF2A2C62C2D58AF00FE8D63 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +351,7 @@
 				AC4B431D2C1EE016005FC370 /* SignUp */,
 				AC4B43142C1D702B005FC370 /* Terms */,
 				AC4B42FC2C196FEB005FC370 /* SignIn */,
+				ACF2A2C32C2D587300FE8D63 /* Splash */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -461,6 +468,7 @@
 		ACF2A2932C2840DD00FE8D63 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A2BE2C2D43CB00FE8D63 /* Local */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -542,6 +550,23 @@
 				ACF2A2AB2C2AB45400FE8D63 /* SignUpInterface.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		ACF2A2BE2C2D43CB00FE8D63 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2C12C2D453C00FE8D63 /* UserDefaults.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		ACF2A2C32C2D587300FE8D63 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */,
+				ACF2A2C62C2D58AF00FE8D63 /* SplashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -697,6 +722,7 @@
 			files = (
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
 				ACF2A29B2C28698D00FE8D63 /* AppleSignInUseCase.swift in Sources */,
+				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
@@ -704,6 +730,7 @@
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
+				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
@@ -716,6 +743,7 @@
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
+				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
@@ -842,7 +870,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -900,7 +928,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -917,6 +945,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YouthTalkTalk/YouthTalkTalk.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
@@ -924,8 +953,8 @@
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -933,9 +962,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -946,6 +980,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YouthTalkTalk/YouthTalkTalk.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
@@ -953,8 +988,8 @@
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -962,9 +997,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
