@@ -49,9 +49,11 @@ class SplashViewController: BaseViewController<SplashView> {
                     sceneDelegate.window?.rootViewController = tabVC
                 } else {
                     
-                    let repository = KeyChainRepositoryImpl()
-                    let useCase = AppleSignInUseCase(keyChainRepository: repository)
-                    let viewModel = SignInViewModel(appleSignInUseCase: useCase)
+                    let keyChainRepository = KeyChainRepositoryImpl()
+                    let userDefaultsRepository = UserDefaultsRepositoryImpl()
+                    let useCase = SignInUseCase(keyChainRepository: keyChainRepository,
+                                                userDefaultsRepository: userDefaultsRepository)
+                    let viewModel = SignInViewModel(signInUseCase: useCase)
                     let newRootVC = SignInViewController(viewModel: viewModel)
                     
                     let naviVC = UINavigationController(rootViewController: newRootVC)

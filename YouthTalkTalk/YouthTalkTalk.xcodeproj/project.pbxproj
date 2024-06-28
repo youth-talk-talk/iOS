@@ -57,8 +57,8 @@
 		ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */; };
 		ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */; };
 		ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */; };
-		ACF2A2972C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift */; };
-		ACF2A29B2C28698D00FE8D63 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* AppleSignInUseCase.swift */; };
+		ACF2A2972C28691F00FE8D63 /* SignInUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* SignInUseCaseInterface.swift */; };
+		ACF2A29B2C28698D00FE8D63 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* SignInUseCase.swift */; };
 		ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */; };
 		ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */; };
 		ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */; };
@@ -156,8 +156,8 @@
 		ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInterface.swift; sourceTree = "<group>"; };
 		ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInput.swift; sourceTree = "<group>"; };
 		ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOutput.swift; sourceTree = "<group>"; };
-		ACF2A2962C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCaseInterface.swift; sourceTree = "<group>"; };
-		ACF2A29A2C28698D00FE8D63 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2962C28691F00FE8D63 /* SignInUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseInterface.swift; sourceTree = "<group>"; };
+		ACF2A29A2C28698D00FE8D63 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
 		ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDescription.swift; sourceTree = "<group>"; };
 		ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationInterface.swift; sourceTree = "<group>"; };
 		ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
@@ -519,7 +519,7 @@
 		ACF2A2982C28695100FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2962C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift */,
+				ACF2A2962C28691F00FE8D63 /* SignInUseCaseInterface.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */,
 				ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift */,
 			);
@@ -529,7 +529,7 @@
 		ACF2A2992C28695C00FE8D63 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A29A2C28698D00FE8D63 /* AppleSignInUseCase.swift */,
+				ACF2A29A2C28698D00FE8D63 /* SignInUseCase.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */,
 				ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCase.swift */,
 			);
@@ -786,7 +786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
-				ACF2A29B2C28698D00FE8D63 /* AppleSignInUseCase.swift in Sources */,
+				ACF2A29B2C28698D00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
@@ -811,7 +811,7 @@
 				ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCase.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
-				ACF2A2972C28691F00FE8D63 /* AppleSignInUseCaseInterface.swift in Sources */,
+				ACF2A2972C28691F00FE8D63 /* SignInUseCaseInterface.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,

@@ -16,6 +16,14 @@ enum SignInType: String {
     case none
 }
 
+enum SignUpType: String {
+    
+    static let key: String = "signUpType"
+    
+    case apple
+    case kakao
+}
+
 extension UserDefaults {
     
     var isSignIn: SignInType {
@@ -27,6 +35,18 @@ extension UserDefaults {
             return signInType
         } set {
             set(newValue.rawValue, forKey: SignInType.key)
+        }
+    }
+    
+    var signUpType: SignUpType {
+        get {
+            guard let signUpTypeString = string(forKey: SignInType.key),
+                  let signUpType = SignUpType(rawValue: signUpTypeString) else {
+                return .apple
+            }
+            return signUpType
+        } set {
+            set(newValue.rawValue, forKey: SignUpType.key)
         }
     }
 }

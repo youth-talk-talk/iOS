@@ -11,4 +11,7 @@ protocol UserDefaultsRepository {
     
     func saveSignedInState(signedInType: SignInType)
     func isSignedIn() -> SignInType
+    
+    func saveSignUpType(signUpType: SignUpType)
+    func signUpType() -> SignUpType
 }

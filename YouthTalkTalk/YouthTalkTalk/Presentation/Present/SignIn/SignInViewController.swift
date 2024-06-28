@@ -55,20 +55,39 @@ final class SignInViewController: BaseViewController<SignInView> {
         // Outputs
         // apple 로그인 성공
         viewModel.output.signInSuccessApple
-            .drive(with: self) { owner, controller in
+            .drive(with: self) { owner, isSuccess in
                 
-                let nextVC = TermsViewController()
-                
-                owner.navigationController?.pushViewController(nextVC, animated: true)
+                owner.changeViewController(isSuccessToSignIn: isSuccess)
                 
             }.disposed(by: disposeBag)
         
         // apple 로그인 실패
-        viewModel.output.signInFailureApple
-            .drive(with: self) { owner, error in
+        viewModel.output.signInSuccessKakao
+            .drive(with: self) { owner, isSuccess in
                 
-                dump(error.localizedDescription)
+                owner.changeViewController(isSuccessToSignIn: isSuccess)
                 
             }.disposed(by: disposeBag)
+    }
+    
+    private func changeViewController(isSuccessToSignIn: Bool) {
+        
+        if isSuccessToSignIn {
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
+            
+            let newRootVC = HomeViewController()
+            let naviVC = UINavigationController(rootViewController: newRootVC)
+            let tabVC = UITabBarController()
+            
+            tabVC.setViewControllers([naviVC], animated: true)
+            sceneDelegate.window?.rootViewController = tabVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        } else {
+            let nextVC = TermsViewController()
+            
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }

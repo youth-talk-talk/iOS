@@ -21,4 +21,15 @@ final class UserDefaultsRepositoryImpl: UserDefaultsRepository {
         
         return userDefaults.isSignIn
     }
+    
+    // MARK: SIGN UP TYPE
+    func saveSignUpType(signUpType: SignUpType) {
+        
+        userDefaults.signUpType = signUpType
+    }
+    
+    func signUpType() -> SignUpType {
+        
+        return userDefaults.signUpType
+    }
 }

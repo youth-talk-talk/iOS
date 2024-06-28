@@ -11,6 +11,6 @@ import AuthenticationServices
 
 protocol SignInOutput {
     
-    var signInSuccessApple: Driver<String> { get }
-    var signInFailureApple: Driver<ASAuthorizationError> { get }
+    var signInSuccessApple: Driver<Bool> { get }
+    var signInSuccessKakao: Driver<Bool> { get }
 }
