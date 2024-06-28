@@ -7,8 +7,9 @@
 
 import Foundation
 import RxCocoa
+import RxSwift
 
 protocol AutoSignInUseCaseInterface {
     
-    func autoSignIn() -> PublishRelay<Bool>
+    func autoSignIn() -> Single<Bool>
 }

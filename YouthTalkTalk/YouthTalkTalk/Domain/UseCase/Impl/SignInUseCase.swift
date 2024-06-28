@@ -75,8 +75,10 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
         UserApi.shared.rx.loginWithKakaoAccount()
             .subscribe(with: self) { owner, oauthToken in
                 print("loginWithKakaoAccount() success.")
-
                 _ = oauthToken
+                
+                // 카카오 유저 정보 요창
+                owner.kakaoUserInfoRequest()
             } onError: {owner, error in
                 print(error)
             }
@@ -87,16 +89,17 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
         
         UserApi.shared.rx.me()
             .flatMap { user in
-                
                 return self.requestSignInKakao(user: user)
             }.subscribe(with: self) { owner, result in
                 
+                owner.userDefaultsRepository.saveSignedInState(signedInType: .kakao)
                 owner.kakaoSignIn.accept(true)
+                
             } onFailure: { owner, error in
                 
                 owner.userDefaultsRepository.saveSignUpType(signUpType: .kakao)
-                
                 owner.kakaoSignIn.accept(false)
+                
             }.disposed(by: disposeBag)
 
     }
@@ -116,9 +119,9 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
             keyChainRepository.saveAppleUserID(saveData: identityToken, type: .appleIdentifierToken)
             keyChainRepository.saveAppleUserID(saveData: authorizationCode, type: .authorizationCode)
             
-            // userIdentifier로 서버 통신 진행
-            // API 통신 결과 Result<T, error>
-            if true {
+            // TODO: 서버에 애플로 가입한 회원 정보 요청 (user identifier)
+            // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
+            if false {
                 // 로그인 처리 -> 홈화면 이동
                 single(.success(.success("성공")))
             } else {
@@ -133,13 +136,11 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
     private func requestSignInKakao(user: User) -> Single<Result<String, Error>> {
         
         // Single<Result<String, ASAuthorizationError>> 그대로 반환
-        return Single<Result<String, Error>>.create { [weak self] single in
+        return Single<Result<String, Error>>.create { single in
             
-            guard let self else { return Disposables.create() }
-            
-            // userID로 서버 통신 진행
-            // API 통신 결과 Result<T, error>
-            if true {
+            // TODO: 서버에 카카오로 가입한 회원 정보 요청 (user identifier)
+            // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
+            if false {
                 // 로그인 처리 -> 홈화면 이동
                 single(.success(.success("성공")))
             } else {
@@ -163,17 +164,17 @@ extension SignInUseCase: ASAuthorizationControllerDelegate {
                 
                 switch result {
                 case .success(let userData):
+                    
                     // 로그인 처리 -> 홈화면 이동
+                    owner.userDefaultsRepository.saveSignedInState(signedInType: .apple)
                     owner.appleSignIn.accept(true)
                     
                     break
                     
                 case .failure(let error):
                     
-                    // 회원가입 타입 (애플 / 카카오) 저장
-                    owner.userDefaultsRepository.saveSignUpType(signUpType: .apple)
-                    
                     // 회원가입 -> 약관 동의 페이지 이동
+                    owner.userDefaultsRepository.saveSignUpType(signUpType: .apple)
                     owner.appleSignIn.accept(false)
                     
                     break

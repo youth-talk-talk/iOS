@@ -40,7 +40,7 @@ extension UserDefaults {
     
     var signUpType: SignUpType {
         get {
-            guard let signUpTypeString = string(forKey: SignInType.key),
+            guard let signUpTypeString = string(forKey: SignUpType.key),
                   let signUpType = SignUpType(rawValue: signUpTypeString) else {
                 return .apple
             }

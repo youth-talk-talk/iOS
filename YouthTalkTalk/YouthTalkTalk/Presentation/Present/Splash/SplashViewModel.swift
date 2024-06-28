@@ -8,12 +8,6 @@
 import Foundation
 import RxCocoa
 import RxSwift
-import AuthenticationServices
-import KakaoSDKAuth
-import RxKakaoSDKAuth
-import KakaoSDKUser
-import RxKakaoSDKUser
-import KakaoSDKCommon
 
 final class SplashViewModel: SplashInterface {
     
@@ -36,12 +30,11 @@ final class SplashViewModel: SplashInterface {
         let autoSignIn = PublishRelay<Bool>()
         isAutoSignIn = autoSignIn.asDriver(onErrorJustReturn: false)
         
-        checkSignedIn.flatMap { _ in
+        checkSignedIn
+            .flatMap { _ in
             return autoSignInUseCase.autoSignIn()
         }.subscribe(with: self) { owner, isSuccess in
-            
             autoSignIn.accept(isSuccess)
         }.disposed(by: disposeBag)
-        
     }
 }

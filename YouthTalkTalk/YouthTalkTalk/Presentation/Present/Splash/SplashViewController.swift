@@ -11,7 +11,7 @@ import RxCocoa
 class SplashViewController: BaseViewController<SplashView> {
     
     var viewModel: SplashInterface
-
+    
     init(viewModel: SplashInterface) {
         self.viewModel = viewModel
         
@@ -29,39 +29,52 @@ class SplashViewController: BaseViewController<SplashView> {
     
     override func bind() {
         
-        // inputs
-        viewModel.input.checkSignedIn.accept(())
-        
         // outputs
         viewModel.output.isAutoSignIn
             .drive(with: self) { owner, isSuccess in
                 
-                guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
-                guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
-                
                 if isSuccess {
-                    
-                    let newRootVC = HomeViewController()
-                    let naviVC = UINavigationController(rootViewController: newRootVC)
-                    let tabVC = UITabBarController()
-                    
-                    tabVC.setViewControllers([naviVC], animated: true)
-                    sceneDelegate.window?.rootViewController = tabVC
+                    owner.navigateToHome()
                 } else {
-                    
-                    let keyChainRepository = KeyChainRepositoryImpl()
-                    let userDefaultsRepository = UserDefaultsRepositoryImpl()
-                    let useCase = SignInUseCase(keyChainRepository: keyChainRepository,
-                                                userDefaultsRepository: userDefaultsRepository)
-                    let viewModel = SignInViewModel(signInUseCase: useCase)
-                    let newRootVC = SignInViewController(viewModel: viewModel)
-                    
-                    let naviVC = UINavigationController(rootViewController: newRootVC)
-                    sceneDelegate.window?.rootViewController = naviVC
+                    owner.navigateToSignIn()
                 }
-                
-                sceneDelegate.window?.makeKeyAndVisible()
-                
-            }.disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
+        
+        // inputs
+        viewModel.input.checkSignedIn.accept(())
+    }
+    
+    private func navigateToHome() {
+        let newRootVC = HomeViewController()
+        let naviVC = UINavigationController(rootViewController: newRootVC)
+        let tabVC = UITabBarController()
+        tabVC.setViewControllers([naviVC], animated: true)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                fatalError("Failed to get SceneDelegate")
+            }
+            sceneDelegate.window?.rootViewController = tabVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
+    }
+    
+    private func navigateToSignIn() {
+        let keyChainRepository = KeyChainRepositoryImpl()
+        let userDefaultsRepository = UserDefaultsRepositoryImpl()
+        let useCase = SignInUseCase(keyChainRepository: keyChainRepository,
+                                    userDefaultsRepository: userDefaultsRepository)
+        let viewModel = SignInViewModel(signInUseCase: useCase)
+        let newRootVC = SignInViewController(viewModel: viewModel)
+        let naviVC = UINavigationController(rootViewController: newRootVC)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                fatalError("Failed to get SceneDelegate")
+            }
+            sceneDelegate.window?.rootViewController = naviVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
 }
