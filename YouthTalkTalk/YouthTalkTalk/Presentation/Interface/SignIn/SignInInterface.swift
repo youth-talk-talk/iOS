@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import AuthenticationServices
-import RxSwift
 
 protocol SignInInterface: SignInInput, SignInOutput {
     

@@ -18,20 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nativeAppKey: String = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] as? String ?? ""
         RxKakaoSDK.initSDK(appKey: nativeAppKey)
         
-        // let appleIDProvider = ASAuthorizationAppleIDProvider()
-        // appleIDProvider.getCredentialState(forUserID: "000671.1be2acb55be547ee958844fe27c65ee1.1521") { (credentialState, error) in
-        //     switch credentialState {
-        //     case .authorized:
-        //         print("✏️ 애플 로그인 유효합니다")
-        //         break // The Apple ID credential is valid.
-        //     case .revoked, .notFound:
-        //         // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
-        //         break
-        //     default:
-        //         break
-        //     }
-        // }
-        
         return true
     }
     

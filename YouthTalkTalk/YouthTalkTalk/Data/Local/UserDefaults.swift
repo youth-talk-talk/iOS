@@ -7,26 +7,26 @@
 
 import Foundation
 
+enum SignInType: String {
+    
+    static let key: String = "signInType"
+    
+    case apple
+    case kakao
+    case none
+}
+
 extension UserDefaults {
     
-    enum SignInType: String {
-        
-        static let key: String = "signInType"
-        
-        case apple
-        case kakao
-        case none
-    }
-    
-    static var isSignIn: SignInType {
+    var isSignIn: SignInType {
         get {
-            guard let signInTypeString = standard.string(forKey: SignInType.key),
+            guard let signInTypeString = string(forKey: SignInType.key),
                   let signInType = SignInType(rawValue: signInTypeString) else {
                 return .none // 기본값 설정
             }
             return signInType
         } set {
-            standard.set(newValue.rawValue, forKey: SignInType.key)
+            set(newValue.rawValue, forKey: SignInType.key)
         }
     }
 }

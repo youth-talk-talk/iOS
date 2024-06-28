@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import AuthenticationServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -15,27 +16,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        configureNavigationAppearance()
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
         
-        // MARK: Navigation bar appearance
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = .clear
-        navigationBarAppearance.shadowColor = .clear
-        
-        // 일반 네이게이션 바 appearance settings
-        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        // 랜드스케이프 되었을 때 네이게이션 바 appearance settings
-        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-        // 스크롤 엣지가 닿았을 때 네이게이션 바 appearance settings
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        
-        let viewModel = SignInViewModel(appleSignInUseCase: AppleSignInUseCase())
-        let rootVC = SignInViewController(viewModel: viewModel)
-        let testVC = HomeViewController()
+        let useCase = AutoSignInUseCase(userDefaultsRepository: UserDefaultsRepositoryImpl(),
+                                        keyChainRepository: KeyChainRepositoryImpl())
+        let viewModel = SplashViewModel(autoSignInUseCase: useCase)
+        let rootVC = SplashViewController(viewModel: viewModel)
         let naviVC = UINavigationController(rootViewController: rootVC)
+        
+        // let useCase = AppleSignInUseCase()
+        // let viewModel = SignInViewModel(appleSignInUseCase: useCase)
+        // let rootVC = SignInViewController(viewModel: viewModel)
+        // let naviVC = UINavigationController(rootViewController: rootVC)
         
         self.window = window
         
@@ -81,6 +77,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
-    
+    // MARK: Navigation bar appearance
+    private func configureNavigationAppearance() {
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .clear
+        navigationBarAppearance.shadowColor = .clear
+        
+        // 일반 네이게이션 바 appearance settings
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        // 랜드스케이프 되었을 때 네이게이션 바 appearance settings
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+        // 스크롤 엣지가 닿았을 때 네이게이션 바 appearance settings
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+    }
 }
 

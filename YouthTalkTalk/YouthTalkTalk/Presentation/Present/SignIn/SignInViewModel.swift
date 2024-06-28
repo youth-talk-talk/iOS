@@ -43,22 +43,6 @@ final class SignInViewModel: NSObject, SignInInterface {
         
         super.init()
         
-        // print("✏️판별",AuthApi.hasToken())
-        // UserApi.shared.rx.accessTokenInfo()
-        //         .subscribe(onSuccess:{ (_) in
-        //             print("✏️ 토큰 유효")
-        //             //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-        //         }, onFailure: {error in
-        //             print("✏️ 토큰 비유효")
-        //             // if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
-        //             //     //로그인 필요
-        //             // }
-        //             // else {
-        //             //     //기타 에러
-        //             // }
-        //         })
-        //         .disposed(by: disposeBag)
-        
         // 애플 로그인 버튼 클릭
         appleSignInButtonClicked
             .bind(with: self) { owner, _ in
