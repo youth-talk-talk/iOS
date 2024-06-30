@@ -51,7 +51,9 @@ final class HomeView: BaseView {
             .top(topInset)
             .marginBottom(topInset)
         
-        flexView.pin.all()
+        flexView.pin.top()
+            .horizontally()
+            .bottom(self.pin.safeArea.bottom)
         flexView.flex.layout()
     }
 }

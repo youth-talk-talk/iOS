@@ -7,6 +7,7 @@
 
 import UIKit
 import PinLayout
+import RxCocoa
 
 final class HomeViewController: BaseViewController<HomeView> {
     
@@ -122,6 +123,22 @@ final class HomeViewController: BaseViewController<HomeView> {
         let customView = UIBarButtonItem(customView: customLabel)
         
         self.navigationItem.leftBarButtonItem = customView
+        
+        #if DEBUG
+        let commandButton = UIButton()
+        commandButton.designed(title: "DEBUG", bgColor: .clear, fontType: .g14Bold)
+        let commandItem = UIBarButtonItem(customView: commandButton)
+        self.navigationItem.rightBarButtonItem = commandItem
+        
+        commandButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                
+                owner.modalPresentationStyle = .formSheet
+                owner.present(DebugViewController(), animated: true)
+                
+            }.disposed(by: disposeBag)
+        
+        #endif
     }
     
     func update() {
