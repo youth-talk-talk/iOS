@@ -70,6 +70,7 @@ final class SignUpViewController: BaseViewController<SignUpView> {
             .drive(layoutView.pullDownTableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { _, location, cell in
                 
                 cell.textLabel?.designed(text: location.displayName, fontType: .p16Regular16, textColor: .gray40)
+                cell.backgroundColor = .clear
                 
             }.disposed(by: disposeBag)
         
