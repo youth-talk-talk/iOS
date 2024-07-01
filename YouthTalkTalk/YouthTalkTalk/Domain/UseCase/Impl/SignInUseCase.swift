@@ -107,8 +107,8 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
     private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<String, ASAuthorizationError>> {
         
         let userIdentifier = credentials.user
-        let identityToken = credentials.identityToken?.base64EncodedString()
-        let authorizationCode = credentials.authorizationCode?.base64EncodedString()
+        let identityToken = tokenToString(data: credentials.identityToken)
+        let authorizationCode = tokenToString(data: credentials.authorizationCode)
         
         // Single<Result<String, ASAuthorizationError>> 그대로 반환
         return Single<Result<String, ASAuthorizationError>>.create { [weak self] single in
@@ -138,6 +138,8 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
         // Single<Result<String, ASAuthorizationError>> 그대로 반환
         return Single<Result<String, Error>>.create { single in
             
+            print(user.id)
+            
             // TODO: 서버에 카카오로 가입한 회원 정보 요청 (user identifier)
             // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
             if false {
@@ -150,6 +152,14 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
             
             return Disposables.create()
         }
+    }
+    
+    private func tokenToString(data: Data?) -> String {
+        
+        guard let data,
+              let convertedData = String(data: data, encoding: .utf8) else { return "" }
+        
+        return convertedData
     }
 }
 
