@@ -91,6 +91,8 @@
 		ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2EA2C315F3E00FE8D63 /* APIInterface.swift */; };
 		ACF2A2EE2C3160E200FE8D63 /* RouterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2ED2C3160E200FE8D63 /* RouterInterface.swift */; };
 		ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */; };
+		ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */; };
+		ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,8 @@
 		ACF2A2EA2C315F3E00FE8D63 /* APIInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterface.swift; sourceTree = "<group>"; };
 		ACF2A2ED2C3160E200FE8D63 /* RouterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterInterface.swift; sourceTree = "<group>"; };
 		ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
+		ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +387,7 @@
 				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C232BF102B800A13991 /* Base */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
+				ACF2A2F32C32CC5600FE8D63 /* Search */,
 				ACF2A25F2C215A2700FE8D63 /* Home */,
 				AC4B431D2C1EE016005FC370 /* SignUp */,
 				AC4B43142C1D702B005FC370 /* Terms */,
@@ -692,6 +697,15 @@
 			path = Impl;
 			sourceTree = "<group>";
 		};
+		ACF2A2F32C32CC5600FE8D63 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */,
+				ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -856,6 +870,7 @@
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
+				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
@@ -897,6 +912,7 @@
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				ACF2A2EE2C3160E200FE8D63 /* RouterInterface.swift in Sources */,
+				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,

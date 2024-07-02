@@ -72,6 +72,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
             // guard let self else { return }
+            supplementaryView.searchBar.delegate = self
         }
         
         
@@ -151,5 +152,16 @@ final class HomeViewController: BaseViewController<HomeView> {
         snapshot.appendItems(["a", "b", "c", "d", "e", "f"], toSection: .recent)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        
+        let nextVC = SearchViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        return true
     }
 }
