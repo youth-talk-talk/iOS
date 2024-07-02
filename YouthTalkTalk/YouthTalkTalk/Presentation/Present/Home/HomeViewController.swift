@@ -69,10 +69,16 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func headerRegistration() {
         
         // 카테고리 Header Registration
-        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
-            // guard let self else { return }
-            supplementaryView.searchBar.delegate = self
+            guard let self else { return }
+            
+            supplementaryView.searchBar.rx.textDidBeginEditing
+                .subscribe(with: self) { owner, _ in
+                    
+                    let nextVC = SearchViewController(searchViewType: .policy)
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }.disposed(by: self.disposeBag)
         }
         
         
@@ -152,16 +158,5 @@ final class HomeViewController: BaseViewController<HomeView> {
         snapshot.appendItems(["a", "b", "c", "d", "e", "f"], toSection: .recent)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
-    }
-}
-
-extension HomeViewController: UISearchBarDelegate {
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        let nextVC = SearchViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-        return true
     }
 }
