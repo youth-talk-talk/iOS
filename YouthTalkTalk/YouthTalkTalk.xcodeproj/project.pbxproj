@@ -97,6 +97,13 @@
 		ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */; };
 		ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */; };
 		ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */; };
+		ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3082C35215700FE8D63 /* APIKey.swift */; };
+		ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */; };
+		ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */; };
+		ACF2A3102C3532A700FE8D63 /* SignInRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */; };
+		ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3122C35337200FE8D63 /* SignInDTO.swift */; };
+		ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3152C3558A400FE8D63 /* Mapper.swift */; };
+		ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3192C35594000FE8D63 /* SignInEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +212,13 @@
 		ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewController.swift; sourceTree = "<group>"; };
 		ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewController.swift; sourceTree = "<group>"; };
 		ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchView.swift; sourceTree = "<group>"; };
+		ACF2A3082C35215700FE8D63 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInBody.swift; sourceTree = "<group>"; };
+		ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRepository.swift; sourceTree = "<group>"; };
+		ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRepositoryImpl.swift; sourceTree = "<group>"; };
+		ACF2A3122C35337200FE8D63 /* SignInDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInDTO.swift; sourceTree = "<group>"; };
+		ACF2A3152C3558A400FE8D63 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
+		ACF2A3192C35594000FE8D63 /* SignInEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +345,7 @@
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
+				ACF2A3082C35215700FE8D63 /* APIKey.swift */,
 				ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */,
 				AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */,
 				AC5A7C072BF0FDB700A13991 /* YouthTalkTalkTests */,
@@ -529,6 +544,7 @@
 		ACF2A2942C28423000FE8D63 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A3142C3545BF00FE8D63 /* Mapper */,
 				ACF2A29C2C2869F300FE8D63 /* Error */,
 				ACF2A2952C2844C300FE8D63 /* UseCase */,
 				AC4B43222C2067A5005FC370 /* Entities */,
@@ -593,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				AC4B43232C206839005FC370 /* PolicyLocationKR.swift */,
+				ACF2A3192C35594000FE8D63 /* SignInEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -650,6 +667,7 @@
 			children = (
 				ACF2A2D02C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift */,
 				ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */,
+				ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -659,6 +677,7 @@
 			children = (
 				ACF2A2CE2C2D920500FE8D63 /* UserDefaultsRepository.swift */,
 				ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */,
+				ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -675,6 +694,7 @@
 		ACF2A2E72C315CF600FE8D63 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A3112C35335500FE8D63 /* DTO */,
 				ACF2A2EC2C3160CF00FE8D63 /* Router */,
 				ACF2A2EA2C315F3E00FE8D63 /* APIInterface.swift */,
 				ACF2A2E82C315E7000FE8D63 /* APIManager.swift */,
@@ -685,6 +705,7 @@
 		ACF2A2EC2C3160CF00FE8D63 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A30A2C352EF500FE8D63 /* BodyData */,
 				ACF2A2EF2C31610200FE8D63 /* Interface */,
 				ACF2A2F02C31610B00FE8D63 /* Impl */,
 			);
@@ -732,6 +753,30 @@
 				ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */,
 			);
 			path = ResultSearch;
+			sourceTree = "<group>";
+		};
+		ACF2A30A2C352EF500FE8D63 /* BodyData */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */,
+			);
+			path = BodyData;
+			sourceTree = "<group>";
+		};
+		ACF2A3112C35335500FE8D63 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A3122C35337200FE8D63 /* SignInDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		ACF2A3142C3545BF00FE8D63 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A3152C3558A400FE8D63 /* Mapper.swift */,
+			);
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -916,8 +961,10 @@
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCase.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
+				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCaseInterface.swift in Sources */,
+				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
@@ -941,19 +988,24 @@
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
+				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				ACF2A2EE2C3160E200FE8D63 /* RouterInterface.swift in Sources */,
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
+				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
+				ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
 				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocationInterface.swift in Sources */,
+				ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */,
 				ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */,
+				ACF2A3102C3532A700FE8D63 /* SignInRepositoryImpl.swift in Sources */,
 				ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 				ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */,

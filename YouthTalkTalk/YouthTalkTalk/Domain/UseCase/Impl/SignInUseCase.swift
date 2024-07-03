@@ -18,13 +18,15 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
     private let disposeBag = DisposeBag()
     private let keyChainRepository: KeyChainRepository
     private let userDefaultsRepository: UserDefaultsRepository
+    private let signInRepository: SignInRepository
     
     private let appleSignIn = PublishRelay<Bool>()
     private let kakaoSignIn = PublishRelay<Bool>()
     
-    init(keyChainRepository: KeyChainRepository, userDefaultsRepository: UserDefaultsRepository) {
+    init(keyChainRepository: KeyChainRepository, userDefaultsRepository: UserDefaultsRepository, signInRepository: SignInRepository = SignInRepositoryImpl() ) {
         self.keyChainRepository = keyChainRepository
         self.userDefaultsRepository = userDefaultsRepository
+        self.signInRepository = signInRepository
     }
     
     func loginWithApple() -> PublishRelay<Bool> {
@@ -92,16 +94,19 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
                 return self.requestSignInKakao(user: user)
             }.subscribe(with: self) { owner, result in
                 
-                owner.userDefaultsRepository.saveSignedInState(signedInType: .kakao)
-                owner.kakaoSignIn.accept(true)
-                
-            } onFailure: { owner, error in
-                
-                owner.userDefaultsRepository.saveSignUpType(signUpType: .kakao)
-                owner.kakaoSignIn.accept(false)
+                switch result {
+                case .success(let signInEntity):
+                    
+                    owner.userDefaultsRepository.saveSignedInState(signedInType: .kakao)
+                    owner.kakaoSignIn.accept(true)
+                    
+                case .failure(let error):
+                    
+                    owner.kakaoSignIn.accept(false)
+                }
                 
             }.disposed(by: disposeBag)
-
+        
     }
     
     private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<String, ASAuthorizationError>> {
@@ -133,25 +138,28 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
         }
     }
     
-    private func requestSignInKakao(user: User) -> Single<Result<String, Error>> {
+    private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, Error>> {
         
-        // Single<Result<String, ASAuthorizationError>> 그대로 반환
-        return Single<Result<String, Error>>.create { single in
-            
-            print(user.id)
-            
-            // TODO: 서버에 카카오로 가입한 회원 정보 요청 (user identifier)
-            // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
-            if false {
-                // 로그인 처리 -> 홈화면 이동
-                single(.success(.success("성공")))
-            } else {
-                // 회원가입 -> 약관 동의 페이지 이동
-                single(.success(.failure(ASAuthorizationError(.unknown))))
+        var identifier = getKakaoUserIdentifier(user: user)
+        
+        #if DEBUG
+        // identifier = "67890"
+        #endif
+        
+        return signInRepository.requestKakaoSignIn(userIdentifier: identifier)
+            .map { result in
+                
+                switch result {
+                    
+                case .success(let signInDTO):
+                    let signInEntity = Mapper.mapSingIn(dto: signInDTO)
+                    
+                    return .success(signInEntity)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
             }
-            
-            return Disposables.create()
-        }
     }
     
     private func tokenToString(data: Data?) -> String {
@@ -160,6 +168,16 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
               let convertedData = String(data: data, encoding: .utf8) else { return "" }
         
         return convertedData
+    }
+}
+
+extension SignInUseCase {
+    
+    private func getKakaoUserIdentifier(user: User) -> String {
+        
+        guard let id = user.id else { return "" }
+        
+        return String(id)
     }
 }
 

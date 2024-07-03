@@ -8,17 +8,51 @@
 import Foundation
 import Alamofire
 
-// enum SignInRouter: RouterInterface {
-//     
-//     case requestAppleSignIn
+enum SignInRouter: RouterInterface {
     
-    // var baseURL: String
-    // 
-    // var path: String
-    // 
-    // var method: HTTPMethod
-    // 
-    // var parameters: Parameters?
-    // 
-    // var headers: HTTPHeaders?
-// }
+    case requestAppleSignIn(signIn: SignInBody)
+    
+    var baseURL: String {
+        return APIKey.baseURL.rawValue
+    }
+    
+    var path: String {
+        switch self {
+        case .requestAppleSignIn:
+            return "/login"
+        }
+    }
+    
+    var method: HTTPMethod {
+        switch self {
+        case .requestAppleSignIn:
+            return .post
+        }
+    }
+    
+    var parameters: Parameters? {
+        switch self {
+        case .requestAppleSignIn:
+            return nil
+        }
+    }
+    
+    var headers: HTTPHeaders? {
+        switch self {
+        case .requestAppleSignIn:
+            return ["Content-Type": "application/json"]
+        }
+    }
+    
+    var body: Data? {
+        
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .useDefaultKeys
+        
+        switch self {
+        case .requestAppleSignIn(let signInBody):
+            return try? encoder.encode(signInBody)
+        }
+    }
+    
+}

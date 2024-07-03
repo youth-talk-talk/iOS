@@ -36,8 +36,14 @@ final class APIManager: APIInterface {
                     switch response.result {
                         
                     case .success(let success):
+                        
                         single(.success(.success(success)))
+                        
+                        print("❗️", response.response?.allHeaderFields["Authorization"])
+                        print("❗️", response.response?.allHeaderFields["Authorization-refresh"])
+                        
                     case .failure(let error):
+                        print("❗️", "failure")
                         single(.success(.failure(TestError.invaildURL)))
                     }
                 }
