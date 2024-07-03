@@ -15,12 +15,14 @@ final class AutoSignInUseCaseImpl: AutoSignInUseCase {
     
     private let userDefaultsRepository: UserDefaultsRepository
     private let keyChainRepository: KeyChainRepository
+    private let signInRepository: SignInRepository
     
     private let disposeBag = DisposeBag()
     
-    init(userDefaultsRepository: UserDefaultsRepository, keyChainRepository: KeyChainRepository) {
+    init(userDefaultsRepository: UserDefaultsRepository, keyChainRepository: KeyChainRepository, signInRepository: SignInRepository = SignInRepositoryImpl()) {
         self.userDefaultsRepository = userDefaultsRepository
         self.keyChainRepository = keyChainRepository
+        self.signInRepository = signInRepository
     }
     
     func autoSignIn() -> Single<Bool> {
@@ -63,22 +65,30 @@ final class AutoSignInUseCaseImpl: AutoSignInUseCase {
                 
                 // 카카오 토큰 유효성 검사 진행 (Kakao SDK가 들고 있음)
                 UserApi.shared.rx.me()
-                    .subscribe (onSuccess:{ user in
+                    .flatMap { user in
+                        let identifier = self.getKakaoUserIdentifier(user: user)
                         
-                        // 서버로 카카오 로그인 요청 -> 홈화면 이동
-                        print("❗️ 카카오 토큰이 유효하여 서버로 카카오 로그인 요청을 시도합니다.")
-                        let userID = user.id
+                        print("❗️ 자동 로그인 - 서버로 카카오 로그인 요청을 시도합니다.")
+                        return self.signInRepository.requestKakaoSignIn(userIdentifier: identifier)
+                    }.subscribe(with: self) { owner, result in
                         
-                        single(.success(true))
+                        switch result {
+                            
+                        case .success(let signInDTO):
+                            
+                            print("❗️ 등록된 아이디 - \(signInDTO.data.memberId)로 홈화면으로 이동합니다.")
+                            single(.success(true))
+                            
+                        case .failure(let error):
+                            
+                            print("❗️ 동록되지 않은 아이디 - 로그인/회원가입 화면으로 이동합니다.")
+                            single(.success(false))
+                        }
+                    } onFailure: { owner, error in
                         
-                    }, onFailure: {error in
-                        
-                        // 로그인/회원가입 화면 이동
-                        print("❗️ 카카오 토큰이 유효하지 않아 로그인/회원가입 화면으로 이동합니다.")
-                        
+                        print("❗️ 유효하지 않은 토큰 - 로그인/회원가입 화면으로 이동합니다.")
                         single(.success(false))
-                        
-                    })
+                    }
                     .disposed(by: disposeBag)
                 
                 break
@@ -92,5 +102,15 @@ final class AutoSignInUseCaseImpl: AutoSignInUseCase {
             
             return Disposables.create()
         }
+    }
+}
+
+extension AutoSignInUseCaseImpl {
+    
+    private func getKakaoUserIdentifier(user: User) -> String {
+        
+        guard let id = user.id else { return "" }
+        
+        return String(id)
     }
 }
