@@ -117,7 +117,7 @@ final class SignUpView: BaseView {
         pullDownTableView.pin.height(finalTableViewHeight)
     }
     
-    func updateLocation(_ location: PolicyLocationInterface) {
+    func updateLocation(_ location: PolicyLocation) {
         regionDropDownView.regionDropdownLabel.designed(text: location.displayName,
                                                         fontType: .p16Regular16)
 

@@ -24,7 +24,7 @@ final class APIManager: APIInterface {
         self.session = session
     }
     
-    func request<T: Decodable>(router: RouterInterface, type: T.Type) -> Single<Result<T, TestError>> {
+    func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, TestError>> {
         
         return Single.create { [weak self] single in
             

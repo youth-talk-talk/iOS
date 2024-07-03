@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-enum SignInRouter: RouterInterface {
+enum SignInRouter: Router {
     
     case requestAppleSignIn(signIn: SignInBody)
     

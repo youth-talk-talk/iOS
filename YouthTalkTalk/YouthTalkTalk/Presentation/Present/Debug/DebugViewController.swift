@@ -58,7 +58,7 @@ extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
             
             let keyChainRepository = KeyChainRepositoryImpl()
             let userDefaultsRepository = UserDefaultsRepositoryImpl()
-            let useCase = SignInUseCase(keyChainRepository: keyChainRepository,
+            let useCase = SignInUseCaseImpl(keyChainRepository: keyChainRepository,
                                         userDefaultsRepository: userDefaultsRepository)
             let viewModel = SignInViewModel(signInUseCase: useCase)
             let newRootVC = SignInViewController(viewModel: viewModel)

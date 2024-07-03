@@ -57,16 +57,16 @@
 		ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */; };
 		ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */; };
 		ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */; };
-		ACF2A2972C28691F00FE8D63 /* SignInUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* SignInUseCaseInterface.swift */; };
-		ACF2A29B2C28698D00FE8D63 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* SignInUseCase.swift */; };
+		ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */; };
+		ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */; };
 		ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */; };
-		ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */; };
+		ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocation.swift */; };
 		ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */; };
 		ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */; };
 		ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AB2C2AB45400FE8D63 /* SignUpInterface.swift */; };
 		ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */; };
-		ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */; };
-		ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */; };
+		ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */; };
+		ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */; };
 		ACF2A2B62C2C184D00FE8D63 /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ACF2A2B52C2C184D00FE8D63 /* RxKakaoSDKAuth */; };
 		ACF2A2B82C2C184D00FE8D63 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ACF2A2B72C2C184D00FE8D63 /* RxKakaoSDKUser */; };
 		ACF2A2BB2C2C1D3700FE8D63 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ACF2A2BA2C2C1D3700FE8D63 /* KakaoSDKAuth */; };
@@ -80,8 +80,8 @@
 		ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */; };
 		ACF2A2D52C2E710B00FE8D63 /* KeyChainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */; };
 		ACF2A2D72C2E713900FE8D63 /* KeyChainRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */; };
-		ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift */; };
-		ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCase.swift */; };
+		ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCase.swift */; };
+		ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift */; };
 		ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DC2C2E903600FE8D63 /* SplashInput.swift */; };
 		ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DE2C2E921900FE8D63 /* SplashOutput.swift */; };
 		ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2E02C2E929900FE8D63 /* SplashInterface.swift */; };
@@ -89,7 +89,7 @@
 		ACF2A2E62C31432200FE8D63 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2E52C31432200FE8D63 /* DebugViewController.swift */; };
 		ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2E82C315E7000FE8D63 /* APIManager.swift */; };
 		ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2EA2C315F3E00FE8D63 /* APIInterface.swift */; };
-		ACF2A2EE2C3160E200FE8D63 /* RouterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2ED2C3160E200FE8D63 /* RouterInterface.swift */; };
+		ACF2A2EE2C3160E200FE8D63 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2ED2C3160E200FE8D63 /* Router.swift */; };
 		ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */; };
 		ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */; };
 		ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */; };
@@ -175,16 +175,16 @@
 		ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInterface.swift; sourceTree = "<group>"; };
 		ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInput.swift; sourceTree = "<group>"; };
 		ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOutput.swift; sourceTree = "<group>"; };
-		ACF2A2962C28691F00FE8D63 /* SignInUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseInterface.swift; sourceTree = "<group>"; };
-		ACF2A29A2C28698D00FE8D63 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
+		ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseImpl.swift; sourceTree = "<group>"; };
 		ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDescription.swift; sourceTree = "<group>"; };
-		ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationInterface.swift; sourceTree = "<group>"; };
+		ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocation.swift; sourceTree = "<group>"; };
 		ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
 		ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOutput.swift; sourceTree = "<group>"; };
 		ACF2A2AB2C2AB45400FE8D63 /* SignUpInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInterface.swift; sourceTree = "<group>"; };
 		ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCaseInterface.swift; sourceTree = "<group>"; };
-		ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCaseImpl.swift; sourceTree = "<group>"; };
 		ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 		ACF2A2C12C2D453C00FE8D63 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -195,8 +195,8 @@
 		ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainRepository.swift; sourceTree = "<group>"; };
 		ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainRepositoryImpl.swift; sourceTree = "<group>"; };
-		ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInUseCaseInterface.swift; sourceTree = "<group>"; };
-		ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInUseCase.swift; sourceTree = "<group>"; };
+		ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInUseCaseImpl.swift; sourceTree = "<group>"; };
 		ACF2A2DC2C2E903600FE8D63 /* SplashInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInput.swift; sourceTree = "<group>"; };
 		ACF2A2DE2C2E921900FE8D63 /* SplashOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashOutput.swift; sourceTree = "<group>"; };
 		ACF2A2E02C2E929900FE8D63 /* SplashInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInterface.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 		ACF2A2E52C31432200FE8D63 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		ACF2A2E82C315E7000FE8D63 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		ACF2A2EA2C315F3E00FE8D63 /* APIInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterface.swift; sourceTree = "<group>"; };
-		ACF2A2ED2C3160E200FE8D63 /* RouterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterInterface.swift; sourceTree = "<group>"; };
+		ACF2A2ED2C3160E200FE8D63 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
 		ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -564,9 +564,9 @@
 		ACF2A2982C28695100FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2962C28691F00FE8D63 /* SignInUseCaseInterface.swift */,
-				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift */,
-				ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift */,
+				ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */,
+				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
+				ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -574,9 +574,9 @@
 		ACF2A2992C28695C00FE8D63 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A29A2C28698D00FE8D63 /* SignInUseCase.swift */,
-				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCase.swift */,
-				ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCase.swift */,
+				ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */,
+				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
+				ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -600,7 +600,7 @@
 		ACF2A2A22C2AAF6200FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocationInterface.swift */,
+				ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocation.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -715,7 +715,7 @@
 		ACF2A2EF2C31610200FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2ED2C3160E200FE8D63 /* RouterInterface.swift */,
+				ACF2A2ED2C3160E200FE8D63 /* Router.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -933,7 +933,7 @@
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
-				ACF2A29B2C28698D00FE8D63 /* SignInUseCase.swift in Sources */,
+				ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */,
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
@@ -947,23 +947,23 @@
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
-				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
+				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				ACF2A2D72C2E713900FE8D63 /* KeyChainRepositoryImpl.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
-				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCaseInterface.swift in Sources */,
+				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				ACF2A2D52C2E710B00FE8D63 /* KeyChainRepository.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
-				ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCase.swift in Sources */,
+				ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
-				ACF2A2972C28691F00FE8D63 /* SignInUseCaseInterface.swift in Sources */,
+				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
@@ -986,12 +986,12 @@
 				ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
-				ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCaseInterface.swift in Sources */,
+				ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCase.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
-				ACF2A2EE2C3160E200FE8D63 /* RouterInterface.swift in Sources */,
+				ACF2A2EE2C3160E200FE8D63 /* Router.swift in Sources */,
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
@@ -1002,7 +1002,7 @@
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
-				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocationInterface.swift in Sources */,
+				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */,
 				ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */,
 				ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */,
 				ACF2A3102C3532A700FE8D63 /* SignInRepositoryImpl.swift in Sources */,

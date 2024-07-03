@@ -1,5 +1,5 @@
 //
-//  AutoSignInUseCase.swift
+//  AutoSignInUseCaseImpl.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/28/24.
@@ -11,7 +11,7 @@ import KakaoSDKUser
 import RxSwift
 import RxCocoa
 
-final class AutoSignInUseCase: AutoSignInUseCaseInterface {
+final class AutoSignInUseCaseImpl: AutoSignInUseCase {
     
     private let userDefaultsRepository: UserDefaultsRepository
     private let keyChainRepository: KeyChainRepository

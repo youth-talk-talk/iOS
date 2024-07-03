@@ -13,7 +13,7 @@ import RxCocoa
 final class SignInViewModel: SignInInterface {
     
     private let disposeBag: DisposeBag = DisposeBag()
-    private var signInUseCase: SignInUseCaseInterface
+    private var signInUseCase: SignInUseCase
     
     var input: SignInInput { return self }
     var output: SignInOutput { return self }
@@ -30,7 +30,7 @@ final class SignInViewModel: SignInInterface {
     private let signInSuccessAppleRelay = PublishRelay<Bool>()
     private let signInSuccessKakaoRelay = PublishRelay<Bool>()
     
-    init(signInUseCase: SignInUseCaseInterface) {
+    init(signInUseCase: SignInUseCase) {
         
         signInSuccessApple = signInSuccessAppleRelay.asDriver(onErrorJustReturn: false)
         signInSuccessKakao = signInSuccessKakaoRelay.asDriver(onErrorJustReturn: false)

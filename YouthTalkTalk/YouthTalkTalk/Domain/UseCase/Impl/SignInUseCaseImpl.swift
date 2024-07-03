@@ -1,5 +1,5 @@
 //
-//  SignInUseCase.swift
+//  SignInUseCaseImpl.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/23/24.
@@ -13,7 +13,7 @@ import KakaoSDKAuth
 import RxKakaoSDKUser
 import KakaoSDKUser
 
-final class SignInUseCase: NSObject, SignInUseCaseInterface {
+final class SignInUseCaseImpl: NSObject, SignInUseCase {
     
     private let disposeBag = DisposeBag()
     private let keyChainRepository: KeyChainRepository
@@ -171,7 +171,7 @@ final class SignInUseCase: NSObject, SignInUseCaseInterface {
     }
 }
 
-extension SignInUseCase {
+extension SignInUseCaseImpl {
     
     private func getKakaoUserIdentifier(user: User) -> String {
         
@@ -181,7 +181,7 @@ extension SignInUseCase {
     }
 }
 
-extension SignInUseCase: ASAuthorizationControllerDelegate {
+extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         

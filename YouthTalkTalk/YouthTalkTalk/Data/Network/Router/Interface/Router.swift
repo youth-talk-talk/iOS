@@ -1,5 +1,5 @@
 //
-//  RouterInterface.swift
+//  Router.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/30/24.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-protocol RouterInterface: URLRequestConvertible {
+protocol Router: URLRequestConvertible {
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
@@ -17,7 +17,7 @@ protocol RouterInterface: URLRequestConvertible {
     var body: Data? { get }
 }
 
-extension RouterInterface {
+extension Router {
     
     func asURLRequest() throws -> URLRequest {
         let url = try baseURL.asURL()

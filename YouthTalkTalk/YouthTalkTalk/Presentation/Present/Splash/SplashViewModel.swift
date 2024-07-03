@@ -11,7 +11,7 @@ import RxSwift
 
 final class SplashViewModel: SplashInterface {
     
-    private var autoSignInUseCase: AutoSignInUseCaseInterface
+    private var autoSignInUseCase: AutoSignInUseCase
     private let disposeBag = DisposeBag()
     
     var input: SplashInput { return self }
@@ -23,7 +23,7 @@ final class SplashViewModel: SplashInterface {
     //outputs
     var isAutoSignIn: Driver<Bool>
     
-    init(autoSignInUseCase: AutoSignInUseCaseInterface) {
+    init(autoSignInUseCase: AutoSignInUseCase) {
         
         self.autoSignInUseCase = autoSignInUseCase
         

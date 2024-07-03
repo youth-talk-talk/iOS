@@ -10,6 +10,6 @@ import RxCocoa
 
 protocol SignUpOutput {
     
-    var policyLocations: Driver<[PolicyLocationInterface]> { get }
-    var selectedLocation: Driver<PolicyLocationInterface> { get }
+    var policyLocations: Driver<[PolicyLocation]> { get }
+    var selectedLocation: Driver<PolicyLocation> { get }
 }

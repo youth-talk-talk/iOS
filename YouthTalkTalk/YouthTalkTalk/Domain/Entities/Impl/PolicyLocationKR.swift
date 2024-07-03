@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PolicyLocationKR: Int, CaseIterable, PolicyLocationInterface {
+enum PolicyLocationKR: Int, CaseIterable, PolicyLocation {
     
     case seoul
     case gyeonggi
@@ -67,12 +67,12 @@ enum PolicyLocationKR: Int, CaseIterable, PolicyLocationInterface {
         }
     }
     
-    static var allCase: [PolicyLocationInterface] {
+    static var allCase: [PolicyLocation] {
         
         return self.allCases
     }
     
-    static func fetchLocation(_ row: Int) -> PolicyLocationInterface {
+    static func fetchLocation(_ row: Int) -> PolicyLocation {
         
         return PolicyLocationKR(rawValue: row) ?? .seoul
     }
