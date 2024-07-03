@@ -93,6 +93,10 @@
 		ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */; };
 		ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */; };
 		ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */; };
+		ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2FE2C3416FD00FE8D63 /* RecentSearchView.swift */; };
+		ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */; };
+		ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */; };
+		ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +201,10 @@
 		ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
 		ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		ACF2A2FE2C3416FD00FE8D63 /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
+		ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewController.swift; sourceTree = "<group>"; };
+		ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewController.swift; sourceTree = "<group>"; };
+		ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +395,8 @@
 				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C232BF102B800A13991 /* Base */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
+				ACF2A2FD2C3416E400FE8D63 /* ResultSearch */,
+				ACF2A2FC2C3416D700FE8D63 /* RecentSearch */,
 				ACF2A2F32C32CC5600FE8D63 /* Search */,
 				ACF2A25F2C215A2700FE8D63 /* Home */,
 				AC4B431D2C1EE016005FC370 /* SignUp */,
@@ -706,6 +716,24 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		ACF2A2FC2C3416D700FE8D63 /* RecentSearch */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */,
+				ACF2A2FE2C3416FD00FE8D63 /* RecentSearchView.swift */,
+			);
+			path = RecentSearch;
+			sourceTree = "<group>";
+		};
+		ACF2A2FD2C3416E400FE8D63 /* ResultSearch */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */,
+				ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */,
+			);
+			path = ResultSearch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -858,18 +886,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
+				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
 				ACF2A29B2C28698D00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
+				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
+				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
@@ -894,6 +925,7 @@
 				ACF2A2CF2C2D920500FE8D63 /* UserDefaultsRepository.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
 				ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */,
+				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
 				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
 				ACF2A2E62C31432200FE8D63 /* DebugViewController.swift in Sources */,
 				ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */,

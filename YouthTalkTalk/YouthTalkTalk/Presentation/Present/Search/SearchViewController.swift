@@ -6,25 +6,32 @@
 //
 
 import UIKit
-import PinLayout
-import FlexLayout
+import RxSwift
+import RxCocoa
+
+enum SearchViewType {
+    
+    case policy
+    case review
+}
 
 class SearchViewController: BaseViewController<SearchView> {
     
-    override func configureNavigation() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: makeSearchBar())
-    }
-}
-
-extension SearchViewController {
+    var searchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
     
-    private func makeSearchBar() -> UISearchBar {
+    var searchViewType: SearchViewType
+    
+    init(searchViewType: SearchViewType) {
+        self.searchViewType = searchViewType
         
-        let bounds = UIScreen.main.bounds
-        let width = bounds.size.width
-        
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: width, height: 0))
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureNavigation() {
         
         let placeHolder = "검색"
         
@@ -37,8 +44,14 @@ extension SearchViewController {
         searchBar.backgroundColor = .gray10
         searchBar.layer.cornerRadius = 10
         
-        searchBar.becomeFirstResponder()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
+    }
+    
+    override func bind() {
         
-        return searchBar
+        searchBar.rx.text
+            .bind(with: self) { owner, text in
+                print(text)
+            }.disposed(by: disposeBag)
     }
 }
