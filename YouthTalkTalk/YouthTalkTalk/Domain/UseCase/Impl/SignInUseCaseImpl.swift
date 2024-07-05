@@ -143,7 +143,7 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
         var identifier = getKakaoUserIdentifier(user: user)
         
         #if DEBUG
-        // identifier = "67890"
+        identifier = "67890"
         #endif
         
         return signInRepository.requestKakaoSignIn(userIdentifier: identifier)

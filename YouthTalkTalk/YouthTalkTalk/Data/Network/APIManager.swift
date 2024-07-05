@@ -44,6 +44,7 @@ final class APIManager: APIInterface {
                         
                     case .failure(let error):
                         print("❗️", "failure")
+                        print("❗️", response.response?.statusCode)
                         single(.success(.failure(TestError.invaildURL)))
                     }
                 }

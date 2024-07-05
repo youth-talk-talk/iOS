@@ -29,7 +29,7 @@ final class SignInRepositoryImpl: SignInRepository {
         let bodyData = SignInBody(username: userIdentifier,
                                   authorizationCode: "",
                                   signInType: .kakao)
-        let router = SignInRouter.requestAppleSignIn(signIn: bodyData)
+        let router = SignInRouter.requestKakaoSignIn(signIn: bodyData)
         
         return apiManager.request(router: router, type: SignInDTO.self)
     }
