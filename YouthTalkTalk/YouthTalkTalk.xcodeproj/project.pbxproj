@@ -105,6 +105,8 @@
 		ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3152C3558A400FE8D63 /* Mapper.swift */; };
 		ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3192C35594000FE8D63 /* SignInEntity.swift */; };
 		ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */; };
+		ACF2A31E2C37D21C00FE8D63 /* SignUpBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A31D2C37D21C00FE8D63 /* SignUpBody.swift */; };
+		ACF2A3202C37D27700FE8D63 /* SignUpDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A31F2C37D27700FE8D63 /* SignUpDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +223,8 @@
 		ACF2A3152C3558A400FE8D63 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		ACF2A3192C35594000FE8D63 /* SignInEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEntity.swift; sourceTree = "<group>"; };
 		ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
+		ACF2A31D2C37D21C00FE8D63 /* SignUpBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpBody.swift; sourceTree = "<group>"; };
+		ACF2A31F2C37D27700FE8D63 /* SignUpDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -762,6 +766,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */,
+				ACF2A31D2C37D21C00FE8D63 /* SignUpBody.swift */,
 			);
 			path = BodyData;
 			sourceTree = "<group>";
@@ -770,6 +775,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A3122C35337200FE8D63 /* SignInDTO.swift */,
+				ACF2A31F2C37D27700FE8D63 /* SignUpDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -982,6 +988,7 @@
 				ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */,
+				ACF2A3202C37D27700FE8D63 /* SignUpDTO.swift in Sources */,
 				ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
@@ -996,6 +1003,7 @@
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				ACF2A2EE2C3160E200FE8D63 /* Router.swift in Sources */,
+				ACF2A31E2C37D21C00FE8D63 /* SignUpBody.swift in Sources */,
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,

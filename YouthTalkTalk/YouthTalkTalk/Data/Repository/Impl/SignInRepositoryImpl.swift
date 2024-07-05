@@ -14,10 +14,11 @@ final class SignInRepositoryImpl: SignInRepository {
     private let disposeBag = DisposeBag()
     private let apiManager = APIManager()
     
-    func requestAppleSignIn(userIdentifier: String, authorizationCode: String) -> Single<Result<SignInDTO, TestError>> {
+    func requestAppleSignIn(userIdentifier: String, authorizationCode: String, identityToken: String) -> Single<Result<SignInDTO, TestError>> {
         
         let bodyData = SignInBody(username: userIdentifier,
-                                  authorizationCode: authorizationCode,
+                                  authorizationCode: authorizationCode, 
+                                  identityToken: identityToken,
                                   signInType: .apple)
         let router = SignInRouter.requestAppleSignIn(signIn: bodyData)
         
@@ -27,7 +28,8 @@ final class SignInRepositoryImpl: SignInRepository {
     func requestKakaoSignIn(userIdentifier: String) -> Single<Result<SignInDTO, TestError>> {
         
         let bodyData = SignInBody(username: userIdentifier,
-                                  authorizationCode: "",
+                                  authorizationCode: "", 
+                                  identityToken: "",
                                   signInType: .kakao)
         let router = SignInRouter.requestKakaoSignIn(signIn: bodyData)
         

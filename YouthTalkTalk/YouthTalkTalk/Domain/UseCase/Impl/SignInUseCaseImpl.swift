@@ -43,13 +43,24 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
         return kakaoSignIn
     }
     
+    private func tokenToString(data: Data?) -> String {
+        
+        guard let data,
+              let convertedData = String(data: data, encoding: .utf8) else { return "" }
+        
+        return convertedData
+    }
+}
+
+extension SignInUseCaseImpl {
+    
+    // 카카오 SDK 로그인 요청 - 앱으로 시도
     private func kakaoAppLoginRequest() {
         
         UserApi.shared.rx.loginWithKakaoTalk()
             .subscribe(with: self) { owner, oauthToken in
-                print("loginWithKakaoTalk() success.")
-                _ = oauthToken
                 
+                print("loginWithKakaoTalk() success.")
                 // 카카오 유저 정보 요청
                 owner.kakaoUserInfoRequest()
                 
@@ -59,13 +70,13 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
             .disposed(by: disposeBag)
     }
     
+    // 카카오 SDK 로그인 요청 - 웹으로 시도
     private func kakaoAccountLoginRequest() {
         
         UserApi.shared.rx.loginWithKakaoAccount()
             .subscribe(with: self) { owner, oauthToken in
-                print("loginWithKakaoAccount() success.")
-                _ = oauthToken
                 
+                print("loginWithKakaoAccount() success.")
                 // 카카오 유저 정보 요창
                 owner.kakaoUserInfoRequest()
             } onError: {owner, error in
@@ -74,6 +85,28 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
             .disposed(by: disposeBag)
     }
     
+    // 서버 로그인 요청 (카카오)
+    private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, Error>> {
+        
+        var identifier = getKakaoUserIdentifier(user: user)
+        
+        return signInRepository.requestKakaoSignIn(userIdentifier: identifier)
+            .map { result in
+                
+                switch result {
+                    
+                case .success(let signInDTO):
+                    let signInEntity = Mapper.mapSingIn(dto: signInDTO)
+                    
+                    return .success(signInEntity)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    // 카카오 SDK 유저 정보 요청
     private func kakaoUserInfoRequest() {
         
         UserApi.shared.rx.me()
@@ -96,40 +129,9 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
             }.disposed(by: disposeBag)
         
     }
-    
-    private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, Error>> {
-        
-        var identifier = getKakaoUserIdentifier(user: user)
-        
-#if DEBUG
-        identifier = "67890"
-#endif
-        
-        return signInRepository.requestKakaoSignIn(userIdentifier: identifier)
-            .map { result in
-                
-                switch result {
-                    
-                case .success(let signInDTO):
-                    let signInEntity = Mapper.mapSingIn(dto: signInDTO)
-                    
-                    return .success(signInEntity)
-                    
-                case .failure(let error):
-                    return .failure(error)
-                }
-            }
-    }
-    
-    private func tokenToString(data: Data?) -> String {
-        
-        guard let data,
-              let convertedData = String(data: data, encoding: .utf8) else { return "" }
-        
-        return convertedData
-    }
 }
 
+// MARK: 카카오 관련 로직
 extension SignInUseCaseImpl {
     
     private func getKakaoUserIdentifier(user: User) -> String {
@@ -140,6 +142,7 @@ extension SignInUseCaseImpl {
     }
 }
 
+// MARK: 애플 관련 로직
 extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
     
     // 애플로 로그인 요청 설정 및 요청
@@ -196,10 +199,14 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         let identityToken = tokenToString(data: credentials.identityToken)
         let authorizationCode = tokenToString(data: credentials.authorizationCode)
         
-        // TODO: 서버에 애플로 가입한 회원 정보 요청 (user identifier)
-        // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
+        // MARK: 키체인 / 유저 Identifier / 유저 토큰 / 인증 코드 저장
+        keyChainRepository.saveAppleUserID(saveData: userIdentifier, type: .appleIdentifier)
+        keyChainRepository.saveAppleUserID(saveData: identityToken, type: .appleIdentifierToken)
+        keyChainRepository.saveAppleUserID(saveData: authorizationCode, type: .authorizationCode)
+        
         return signInRepository.requestAppleSignIn(userIdentifier: userIdentifier,
-                                                   authorizationCode: authorizationCode)
+                                                   authorizationCode: authorizationCode,
+                                                   identityToken: identityToken)
         .map { result in
             
             switch result {

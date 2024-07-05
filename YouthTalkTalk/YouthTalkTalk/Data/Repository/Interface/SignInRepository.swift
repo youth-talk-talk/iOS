@@ -10,6 +10,6 @@ import RxSwift
 
 protocol SignInRepository {
     
-    func requestAppleSignIn(userIdentifier: String, authorizationCode: String) -> Single<Result<SignInDTO, TestError>>
+    func requestAppleSignIn(userIdentifier: String, authorizationCode: String, identityToken: String) -> Single<Result<SignInDTO, TestError>>
     func requestKakaoSignIn(userIdentifier: String) -> Single<Result<SignInDTO, TestError>>
 }

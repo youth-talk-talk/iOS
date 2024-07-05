@@ -7,10 +7,12 @@
 
 import UIKit
 import RxCocoa
+import RxSwift
 
 final class SignUpViewController: BaseViewController<SignUpView> {
     
     var viewModel: SignUpInterface
+    let apiManager = APIManager()
     
     init(viewModel: SignUpInterface) {
         self.viewModel = viewModel
@@ -24,7 +26,40 @@ final class SignUpViewController: BaseViewController<SignUpView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // layoutView.signUpButton.addTarget(self, action: #selector(buttonTest), for: .touchUpInside)
     }
+    
+    // @objc
+    // func buttonTest() {
+    //     
+    //     let region = layoutView.regionDropDownView.regionDropdownLabel.text!
+    //     let identifier = KeyChainHelper().loadAppleInfo(type: .appleIdentifier)!
+    //     let token = KeyChainHelper().loadAppleInfo(type: .appleIdentifierToken)!
+    //     let nickname = layoutView.nicknameTextField.text!
+    //     
+    //     let body = SignUpBody(username: "3597174752",
+    //                           nickname: "카카오이중엽",
+    //                           region: "서울",
+    //                           idToken: "",
+    //                           signInType: .kakao)
+    //     let router = SignUpRouter.requestKakaoSignUp(signUp: body)
+    //     
+    //     dump(router)
+    //     
+    //     
+    //     apiManager.request(router: router, type: SignUpDTO.self)
+    //         .subscribe(with: self) { owner, result in
+    //             
+    //             switch result {
+    //             case .success(let success):
+    //                 print(success)
+    //             case .failure(let error):
+    //                 dump(error)
+    //             }
+    //         }
+    //         .disposed(by: disposeBag)
+    // }
     
     override func bind() {
         
@@ -56,8 +91,10 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                 sceneDelegate.window?.rootViewController = tabVC
                 sceneDelegate.window?.makeKeyAndVisible()
                 
+                
+                
             }.disposed(by: disposeBag)
-    
+        
         // MARK: Inputs
         layoutView.pullDownTableView.rx.itemSelected
             .bind(to: viewModel.itemSelectedEvent)

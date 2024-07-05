@@ -11,9 +11,11 @@ struct SignInBody: Encodable {
     
     let username: String // userIdentifier
     let authorizationCode: String? // apple만
+    let identityToken: String? // apple만
     
-    init(username: String, authorizationCode: String?, signInType: SignInType) {
+    init(username: String, authorizationCode: String?, identityToken: String?, signInType: SignInType) {
         self.username = signInType.rawValue + username
         self.authorizationCode = authorizationCode
+        self.identityToken = identityToken
     }
 }

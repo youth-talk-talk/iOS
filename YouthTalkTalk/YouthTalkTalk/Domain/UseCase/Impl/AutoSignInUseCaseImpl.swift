@@ -36,39 +36,47 @@ final class AutoSignInUseCaseImpl: AutoSignInUseCase {
             switch signInType {
             case .apple:
                 
-                let appleUserIdentifier = keyChainRepository.loadAppleUserID(type: .appleIdentifier)
+                let identifier = keyChainRepository.loadAppleUserID(type: .appleIdentifier)
+                let authorizationCode = keyChainRepository.loadAppleUserID(type: .authorizationCode)
+                let identityToken = keyChainRepository.loadAppleUserID(type: .appleIdentifierToken)
                 
-                // 애플 토큰 유효성 검사 진행 (User ID 필요)
-                let appleIDProvider = ASAuthorizationAppleIDProvider()
-                appleIDProvider.getCredentialState(forUserID: appleUserIdentifier) { (credentialState, error) in
-                    switch credentialState {
-                    case .authorized:
+                print("❗️ 자동 로그인 - 서버로 애플 로그인 요청을 시도합니다.")
+                
+                signInRepository.requestAppleSignIn(userIdentifier: identifier,
+                                                         authorizationCode: authorizationCode,
+                                                         identityToken: identityToken)
+                .subscribe(with: self) { owner, result in
+                    
+                    switch result {
+                    case .success(let signInDTO):
                         
-                        // 서버로 애플 로그인 요청 -> 홈화면 이동
-                        print("❗️ 애플 ID가 유효하여 서버로 애플 로그인 요청을 시도합니다.")
+                        print("❗️ 등록된 아이디 - \(signInDTO.data.memberId)로 홈화면으로 이동합니다.")
+                        owner.userDefaultsRepository.saveSignedInState(signedInType: .apple)
                         single(.success(true))
+                        
                         break
                         
-                    case .revoked, .notFound:
+                    case .failure(let error):
                         
-                        // 로그인/회원가입 화면 이동
-                        print("❗️ 애플 ID가 유효하지 않아 로그인/회원가입 화면으로 이동합니다.")
+                        print("❗️ 동록되지 않은 아이디 - 로그인/회원가입 화면으로 이동합니다.")
+                        owner.userDefaultsRepository.saveSignUpType(signUpType: .apple)
                         single(.success(false))
-                        break
                         
-                    default:
                         break
                     }
-                }
+                    
+                }.disposed(by: disposeBag)
                 
             case .kakao:
                 
                 // 카카오 토큰 유효성 검사 진행 (Kakao SDK가 들고 있음)
                 UserApi.shared.rx.me()
                     .flatMap { user in
-                        let identifier = self.getKakaoUserIdentifier(user: user)
                         
+                        let identifier = self.getKakaoUserIdentifier(user: user)
+                        print("❗️", identifier)
                         print("❗️ 자동 로그인 - 서버로 카카오 로그인 요청을 시도합니다.")
+                        
                         return self.signInRepository.requestKakaoSignIn(userIdentifier: identifier)
                     }.subscribe(with: self) { owner, result in
                         
