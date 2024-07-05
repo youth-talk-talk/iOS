@@ -1,14 +1,14 @@
 //
-//  SignInRouter.swift
+//  SignUpRouter.swift
 //  YouthTalkTalk
 //
-//  Created by 이중엽 on 6/30/24.
+//  Created by 이중엽 on 7/5/24.
 //
 
 import Foundation
 import Alamofire
 
-enum SignInRouter: Router {
+enum SignUpRouter: Router {
     
     case requestAppleSignIn(signIn: SignInBody)
     case requestKakaoSignIn(signIn: SignInBody)

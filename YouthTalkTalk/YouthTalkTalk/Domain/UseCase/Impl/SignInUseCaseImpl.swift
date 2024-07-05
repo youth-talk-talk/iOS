@@ -29,19 +29,6 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
         self.signInRepository = signInRepository
     }
     
-    func loginWithApple() -> PublishRelay<Bool> {
-        
-        let appleProvider = ASAuthorizationAppleIDProvider()
-        let request = appleProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.performRequests()
-        
-        return appleSignIn
-    }
-    
     func loginWithKakao() -> PublishRelay<Bool> {
         
         // 카카오 앱 설치 여부 확인
@@ -102,6 +89,7 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
                     
                 case .failure(let error):
                     
+                    owner.userDefaultsRepository.saveSignUpType(signUpType: .kakao)
                     owner.kakaoSignIn.accept(false)
                 }
                 
@@ -109,42 +97,13 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
         
     }
     
-    private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<String, ASAuthorizationError>> {
-        
-        let userIdentifier = credentials.user
-        let identityToken = tokenToString(data: credentials.identityToken)
-        let authorizationCode = tokenToString(data: credentials.authorizationCode)
-        
-        // Single<Result<String, ASAuthorizationError>> 그대로 반환
-        return Single<Result<String, ASAuthorizationError>>.create { [weak self] single in
-            
-            guard let self else { return Disposables.create() }
-            
-            keyChainRepository.saveAppleUserID(saveData: userIdentifier, type: .appleIdentifier)
-            keyChainRepository.saveAppleUserID(saveData: identityToken, type: .appleIdentifierToken)
-            keyChainRepository.saveAppleUserID(saveData: authorizationCode, type: .authorizationCode)
-            
-            // TODO: 서버에 애플로 가입한 회원 정보 요청 (user identifier)
-            // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
-            if false {
-                // 로그인 처리 -> 홈화면 이동
-                single(.success(.success("성공")))
-            } else {
-                // 회원가입 -> 약관 동의 페이지 이동
-                single(.success(.failure(ASAuthorizationError(.unknown))))
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
     private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, Error>> {
         
         var identifier = getKakaoUserIdentifier(user: user)
         
-        #if DEBUG
+#if DEBUG
         identifier = "67890"
-        #endif
+#endif
         
         return signInRepository.requestKakaoSignIn(userIdentifier: identifier)
             .map { result in
@@ -183,6 +142,21 @@ extension SignInUseCaseImpl {
 
 extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
     
+    // 애플로 로그인 요청 설정 및 요청
+    func loginWithApple() -> PublishRelay<Bool> {
+        
+        let appleProvider = ASAuthorizationAppleIDProvider()
+        let request = appleProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.performRequests()
+        
+        return appleSignIn
+    }
+    
+    // 애플에게 정보 받기
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
@@ -214,5 +188,31 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         
         // 에러
         print("error / 취소")
+    }
+    
+    private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<SignInEntity, Error>> {
+        
+        let userIdentifier = credentials.user
+        let identityToken = tokenToString(data: credentials.identityToken)
+        let authorizationCode = tokenToString(data: credentials.authorizationCode)
+        
+        // TODO: 서버에 애플로 가입한 회원 정보 요청 (user identifier)
+        // TODO: 해당 결과에 따라 홈화면 / 약관 동의 페이지 분기 처리 한번 더 진행
+        return signInRepository.requestAppleSignIn(userIdentifier: userIdentifier,
+                                                   authorizationCode: authorizationCode)
+        .map { result in
+            
+            switch result {
+                
+            case .success(let signInDTO):
+                let signInEntity = Mapper.mapSingIn(dto: signInDTO)
+                
+                return .success(signInEntity)
+                
+            case .failure(let error):
+                
+                return .failure(error)
+            }
+        }
     }
 }

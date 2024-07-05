@@ -43,8 +43,8 @@ final class APIManager: APIInterface {
                         print("❗️", response.response?.allHeaderFields["Authorization-refresh"])
                         
                     case .failure(let error):
+                        dump(error)
                         print("❗️", "failure")
-                        print("❗️", response.response?.statusCode)
                         single(.success(.failure(TestError.invaildURL)))
                     }
                 }

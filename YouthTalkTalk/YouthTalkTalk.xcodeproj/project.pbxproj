@@ -104,6 +104,7 @@
 		ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3122C35337200FE8D63 /* SignInDTO.swift */; };
 		ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3152C3558A400FE8D63 /* Mapper.swift */; };
 		ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3192C35594000FE8D63 /* SignInEntity.swift */; };
+		ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +220,7 @@
 		ACF2A3122C35337200FE8D63 /* SignInDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInDTO.swift; sourceTree = "<group>"; };
 		ACF2A3152C3558A400FE8D63 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		ACF2A3192C35594000FE8D63 /* SignInEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEntity.swift; sourceTree = "<group>"; };
+		ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -724,6 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */,
+				ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				ACF2A2D52C2E710B00FE8D63 /* KeyChainRepository.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
+				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift in Sources */,
