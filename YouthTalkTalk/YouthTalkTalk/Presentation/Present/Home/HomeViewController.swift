@@ -76,7 +76,9 @@ final class HomeViewController: BaseViewController<HomeView> {
             supplementaryView.searchBar.rx.textDidBeginEditing
                 .subscribe(with: self) { owner, _ in
                     
-                    let nextVC = SearchViewController(searchViewType: .policy)
+                    let viewModel = SearchViewModel()
+                    
+                    let nextVC = SearchViewController(viewModel: viewModel)
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }.disposed(by: self.disposeBag)
         }

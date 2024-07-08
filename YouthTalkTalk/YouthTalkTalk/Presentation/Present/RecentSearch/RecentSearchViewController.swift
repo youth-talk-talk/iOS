@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecentSearchViewController: BaseViewController<RecentSearchView> {
+final class RecentSearchViewController: BaseViewController<RecentSearchView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

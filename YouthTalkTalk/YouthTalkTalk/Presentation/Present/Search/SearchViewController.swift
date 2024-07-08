@@ -11,18 +11,18 @@ import RxCocoa
 
 enum SearchViewType {
     
-    case policy
-    case review
+    case recent
+    case result
 }
 
-class SearchViewController: BaseViewController<SearchView> {
+final class SearchViewController: BaseViewController<SearchView> {
     
-    var searchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0))
+    var viewModel: SearchInterface
     
-    var searchViewType: SearchViewType
+    let clearSearchView = ClearSearchView(frame: .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
     
-    init(searchViewType: SearchViewType) {
-        self.searchViewType = searchViewType
+    init(viewModel: SearchInterface) {
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,25 +33,59 @@ class SearchViewController: BaseViewController<SearchView> {
     
     override func configureNavigation() {
         
-        let placeHolder = "검색"
-        
-        searchBar.layer.masksToBounds = true
-        searchBar.searchBarStyle = .default
-        searchBar.searchTextField.leftView?.tintColor = .black
-        searchBar.searchTextField.backgroundColor = .clear
-        searchBar.searchTextField.placeholder = placeHolder
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [.font: FontManager.font(.p16Regular24), .foregroundColor: UIColor.gray50])
-        searchBar.backgroundColor = .gray10
-        searchBar.layer.cornerRadius = 10
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: clearSearchView)
     }
     
     override func bind() {
         
-        searchBar.rx.text
-            .bind(with: self) { owner, text in
-                print(text)
+        // MARK: Inputs
+        // 검색
+        clearSearchView.textField.rx.text.orEmpty
+            .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance) // 입력 후 0.3초
+            .distinctUntilChanged() // 값이 변경된 경우에만 이벤트 전달
+            .bind(to: viewModel.input.searchButtonClicked)
+            .disposed(by: disposeBag)
+        
+        // 검색 내용 삭제
+        clearSearchView.cancelButton.rx.tap
+            .bind(with: self) { owner, _ in
+                
+                owner.clearSearchView.textField.text = nil
+                owner.viewModel.input.cancelButtonClicked.accept(())
+            }
+            .disposed(by: disposeBag)
+        
+        // MARK: Outputs
+        // 화면 타입
+        viewModel.output.searchTypeEvent
+            .bind(with: self) { owner, viewType in
+                
+                print(viewType)
+                
+                switch viewType {
+                case .recent:
+                    
+                    let childVC = RecentSearchViewController()
+                    
+                    self.addChild(childVC)
+                    owner.layoutView.flexView.addSubview(childVC.layoutView)
+                    
+                    childVC.layoutView.frame = owner.layoutView.flexView.bounds
+                    childVC.layoutView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    childVC.didMove(toParent: self)
+                    
+                case .result:
+                    
+                    let childVC = ResultSearchViewController()
+                    
+                    self.addChild(childVC)
+                    owner.layoutView.flexView.addSubview(childVC.layoutView)
+                    
+                    childVC.layoutView.frame = owner.layoutView.flexView.bounds
+                    childVC.layoutView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    childVC.didMove(toParent: self)
+                }
+                
             }.disposed(by: disposeBag)
     }
 }

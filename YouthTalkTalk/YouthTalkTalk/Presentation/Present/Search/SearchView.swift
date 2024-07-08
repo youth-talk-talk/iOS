@@ -9,11 +9,6 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class SearchView: BaseView {
+final class SearchView: BaseView {
     
-    let testButton = UIButton()
-    
-    override func configureView() {
-        
-    }
 }
