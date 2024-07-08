@@ -26,7 +26,7 @@ final class APIManager: APIInterface {
     
     func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, TestError>> {
         
-        dump(router)
+        // dump(router)
         
         return Single.create { [weak self] single in
             
@@ -41,12 +41,13 @@ final class APIManager: APIInterface {
                         
                         single(.success(.success(success)))
                         
-                        print("❗️", response.response?.allHeaderFields["Authorization"])
-                        print("❗️", response.response?.allHeaderFields["Authorization-refresh"])
+                        // print("❗️", response.response?.allHeaderFields["Authorization"])
+                        // print("❗️", response.response?.allHeaderFields["Authorization-refresh"])
                         
                     case .failure(let error):
                         
-                        print(response.response?.statusCode)
+                        dump(error)
+                        print(response.response!.statusCode)
                         print("❗️", "failure")
                         single(.success(.failure(TestError.invaildURL)))
                     }

@@ -223,3 +223,24 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         }
     }
 }
+
+// MARK: 자동 로그인 부분
+extension SignInUseCaseImpl {
+    
+    func loginWithAuto() -> PublishRelay<Bool> {
+        
+        let signInType = userDefaultsRepository.isSignedIn()
+        
+        switch signInType {
+        case .apple:
+            
+            return loginWithApple()
+        case .kakao:
+            
+            return loginWithKakao()
+        case .none:
+            
+            return PublishRelay<Bool>()
+        }
+    }
+}

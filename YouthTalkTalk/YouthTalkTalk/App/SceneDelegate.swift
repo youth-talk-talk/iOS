@@ -22,9 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let useCase = AutoSignInUseCaseImpl(userDefaultsRepository: UserDefaultsRepositoryImpl(),
-                                        keyChainRepository: KeyChainRepositoryImpl())
-        let viewModel = SplashViewModel(autoSignInUseCase: useCase)
+        let useCase = SignInUseCaseImpl(keyChainRepository: KeyChainRepositoryImpl(),
+                                        userDefaultsRepository: UserDefaultsRepositoryImpl())
+        let viewModel = SplashViewModel(signInUseCase: useCase)
         let rootVC = SplashViewController(viewModel: viewModel)
         let naviVC = UINavigationController(rootViewController: rootVC)
         

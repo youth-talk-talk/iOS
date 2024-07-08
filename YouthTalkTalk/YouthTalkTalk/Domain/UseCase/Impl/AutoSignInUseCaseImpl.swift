@@ -11,11 +11,13 @@ import KakaoSDKUser
 import RxSwift
 import RxCocoa
 
-final class AutoSignInUseCaseImpl: AutoSignInUseCase {
+final class AutoSignInUseCaseImpl: NSObject, AutoSignInUseCase {
     
     private let userDefaultsRepository: UserDefaultsRepository
     private let keyChainRepository: KeyChainRepository
     private let signInRepository: SignInRepository
+    
+    private let appleSignIn = PublishRelay<Bool>()
     
     private let disposeBag = DisposeBag()
     
@@ -120,5 +122,22 @@ extension AutoSignInUseCaseImpl {
         guard let id = user.id else { return "" }
         
         return String(id)
+    }
+}
+
+extension AutoSignInUseCaseImpl: ASAuthorizationControllerDelegate {
+    
+    // 애플로 로그인 요청 설정 및 요청
+    private func loginWithApple() -> PublishRelay<Bool> {
+        
+        let appleProvider = ASAuthorizationAppleIDProvider()
+        let request = appleProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.performRequests()
+        
+        return appleSignIn
     }
 }

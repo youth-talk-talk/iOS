@@ -11,7 +11,7 @@ import RxSwift
 
 final class SplashViewModel: SplashInterface {
     
-    private var autoSignInUseCase: AutoSignInUseCase
+    private var signInUseCase: SignInUseCase
     private let disposeBag = DisposeBag()
     
     var input: SplashInput { return self }
@@ -23,18 +23,19 @@ final class SplashViewModel: SplashInterface {
     //outputs
     var isAutoSignIn: Driver<Bool>
     
-    init(autoSignInUseCase: AutoSignInUseCase) {
+    init(signInUseCase: SignInUseCase) {
         
-        self.autoSignInUseCase = autoSignInUseCase
+        self.signInUseCase = signInUseCase
         
         let autoSignIn = PublishRelay<Bool>()
         isAutoSignIn = autoSignIn.asDriver(onErrorJustReturn: false)
         
         checkSignedIn
-            .flatMap { _ in
-            return autoSignInUseCase.autoSignIn()
-        }.subscribe(with: self) { owner, isSuccess in
-            autoSignIn.accept(isSuccess)
+            // .flatMap { _ in
+            //     return signInUseCase.loginWithAuto()
+            // }
+        .subscribe(with: self) { owner, _ in
+            autoSignIn.accept(true)
         }.disposed(by: disposeBag)
     }
 }
