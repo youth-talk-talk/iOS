@@ -32,6 +32,8 @@
 		AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B2D2C3BE13B00D1C9FC /* SearchInterface.swift */; };
 		AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B2F2C3BE19E00D1C9FC /* SearchViewModel.swift */; };
 		AC579B322C3C14FA00D1C9FC /* ClearSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */; };
+		AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */; };
+		AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -154,6 +156,8 @@
 		AC579B2D2C3BE13B00D1C9FC /* SearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInterface.swift; sourceTree = "<group>"; };
 		AC579B2F2C3BE19E00D1C9FC /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearSearchView.swift; sourceTree = "<group>"; };
+		AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchLayout.swift; sourceTree = "<group>"; };
+		AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -370,6 +374,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		AC579B352C3D72AA00D1C9FC /* RecentSection */ = {
+			isa = PBXGroup;
+			children = (
+				AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */,
+			);
+			path = RecentSection;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */,
+				AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -772,6 +785,7 @@
 			children = (
 				ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */,
 				ACF2A2FE2C3416FD00FE8D63 /* RecentSearchView.swift */,
+				AC579B352C3D72AA00D1C9FC /* RecentSection */,
 			);
 			path = RecentSearch;
 			sourceTree = "<group>";
@@ -973,9 +987,11 @@
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
+				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
+				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,

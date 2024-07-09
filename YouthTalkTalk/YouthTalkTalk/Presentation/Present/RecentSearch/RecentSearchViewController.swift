@@ -8,22 +8,54 @@
 import UIKit
 
 final class RecentSearchViewController: BaseViewController<RecentSearchView> {
+    
+    var dataSource: UICollectionViewDiffableDataSource<RecentSearchLayout, AnyHashable>!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func configureCollectionView() {
+        
+        cellRegistration()
+        headerRegistration()
+        update()
+    }    
 
-        // Do any additional setup after loading the view.
+    private func cellRegistration() {
+        
+        // 최근검색 Section
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentSearchCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
+            
+            guard let section = RecentSearchLayout(rawValue: indexPath.section) else { return nil }
+            
+            if section == .recent {
+                print("recent - \(indexPath.item)")
+                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
+                
+                cell.backgroundColor = .lime60
+                
+                return cell
+            }
+            
+            return nil
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func headerRegistration() {
+        
     }
-    */
 
+    func update() {
+        
+        var snapshot = NSDiffableDataSourceSnapshot<RecentSearchLayout, AnyHashable>()
+        
+        snapshot.appendSections([.recent])
+        
+        snapshot.appendItems(["1", "2", "3", "4", "5", "6"], toSection: .recent)
+        // snapshot.appendItems(["a", "b", "c", "d", "e", "f"], toSection: .search)
+        
+        self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
 }

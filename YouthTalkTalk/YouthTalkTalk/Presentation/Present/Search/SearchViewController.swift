@@ -19,6 +19,7 @@ final class SearchViewController: BaseViewController<SearchView> {
     
     var viewModel: SearchInterface
     
+    var currentChildVC: UIViewController?
     let clearSearchView = ClearSearchView(frame: .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
     
     init(viewModel: SearchInterface) {
@@ -58,34 +59,62 @@ final class SearchViewController: BaseViewController<SearchView> {
         // MARK: Outputs
         // 화면 타입
         viewModel.output.searchTypeEvent
-            .bind(with: self) { owner, viewType in
-                
-                print(viewType)
-                
-                switch viewType {
-                case .recent:
-                    
-                    let childVC = RecentSearchViewController()
-                    
-                    self.addChild(childVC)
-                    owner.layoutView.flexView.addSubview(childVC.layoutView)
-                    
-                    childVC.layoutView.frame = owner.layoutView.flexView.bounds
-                    childVC.layoutView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    childVC.didMove(toParent: self)
-                    
-                case .result:
-                    
-                    let childVC = ResultSearchViewController()
-                    
-                    self.addChild(childVC)
-                    owner.layoutView.flexView.addSubview(childVC.layoutView)
-                    
-                    childVC.layoutView.frame = owner.layoutView.flexView.bounds
-                    childVC.layoutView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    childVC.didMove(toParent: self)
-                }
-                
-            }.disposed(by: disposeBag)
+                    .bind(with: self) { owner, viewType in
+                        switch viewType {
+                        case .recent:
+                            owner.showRecentSearchViewController()
+                        case .result:
+                            owner.showResultSearchViewController()
+                        }
+                    }
+                    .disposed(by: disposeBag)
     }
+    
+    func showRecentSearchViewController() {
+           // 기존 child view controller가 RecentSearchViewController가 아닌 경우에만 새로운 child view controller를 추가
+           if !(currentChildVC is RecentSearchViewController) {
+               // 기존 child view controller 제거
+               removeCurrentChildViewController()
+               
+               // 새로운 child view controller 추가
+               let childVC = RecentSearchViewController()
+               addChild(childVC)
+               layoutView.flexView.addSubview(childVC.layoutView)
+               childVC.layoutView.frame = layoutView.flexView.bounds
+               childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+               childVC.didMove(toParent: self)
+               
+               // 현재 child view controller 업데이트
+               currentChildVC = childVC
+           }
+       }
+       
+       func showResultSearchViewController() {
+           // 기존 child view controller가 ResultSearchViewController가 아닌 경우에만 새로운 child view controller를 추가
+           if !(currentChildVC is ResultSearchViewController) {
+               // 기존 child view controller 제거
+               removeCurrentChildViewController()
+               
+               // 새로운 child view controller 추가
+               let childVC = ResultSearchViewController()
+               addChild(childVC)
+               layoutView.flexView.addSubview(childVC.layoutView)
+               childVC.layoutView.frame = layoutView.flexView.bounds
+               childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+               childVC.didMove(toParent: self)
+               
+               // 현재 child view controller 업데이트
+               currentChildVC = childVC
+           }
+       }
+       
+       func removeCurrentChildViewController() {
+           // 현재 child view controller 제거
+           if let childVC = currentChildVC {
+               childVC.willMove(toParent: nil)
+               childVC.view.removeFromSuperview()
+               childVC.removeFromParent()
+               currentChildVC = nil
+           }
+       }
 }
