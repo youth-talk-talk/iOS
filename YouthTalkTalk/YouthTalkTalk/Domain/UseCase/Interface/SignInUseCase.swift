@@ -14,5 +14,5 @@ protocol SignInUseCase {
     
     func loginWithApple() -> PublishRelay<Bool>
     func loginWithKakao() -> PublishRelay<Bool>
-    func loginWithAuto() -> PublishRelay<Bool>
+    func loginWithAuto() -> Bool
 }

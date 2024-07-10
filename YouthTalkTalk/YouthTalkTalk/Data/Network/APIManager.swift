@@ -19,14 +19,13 @@ enum TestError: Error {
 final class APIManager: APIInterface {
     
     private let session: Session
+    private let keyChainHelper = KeyChainHelper()
     
     init(session: Session = Session.default) {
         self.session = session
     }
     
     func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, TestError>> {
-        
-        // dump(router)
         
         return Single.create { [weak self] single in
             
@@ -41,14 +40,22 @@ final class APIManager: APIInterface {
                         
                         single(.success(.success(success)))
                         
-                        // print("❗️", response.response?.allHeaderFields["Authorization"])
-                        // print("❗️", response.response?.allHeaderFields["Authorization-refresh"])
+                        // HTTP 헤더 (Access Token, Refresh Token)
+                        guard let httpResponse = response.response else { return }
+                        
+                        if let accessToken = httpResponse.value(forHTTPHeaderField: "Authorization") {
+                            
+                            self.keyChainHelper.saveTokenInfo(saveData: accessToken, type: .accessToken)
+                        }
+                        
+                        if let refreshToken = httpResponse.value(forHTTPHeaderField: "Authorization-refresh") {
+                            
+                            self.keyChainHelper.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
+                        }
                         
                     case .failure(let error):
                         
-                        dump(error)
-                        print(response.response!.statusCode)
-                        print("❗️", "failure")
+                        print("❗️", "failure \(error)")
                         single(.success(.failure(TestError.invaildURL)))
                     }
                 }

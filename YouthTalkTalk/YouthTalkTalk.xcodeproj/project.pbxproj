@@ -87,8 +87,6 @@
 		ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */; };
 		ACF2A2D52C2E710B00FE8D63 /* KeyChainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */; };
 		ACF2A2D72C2E713900FE8D63 /* KeyChainRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */; };
-		ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCase.swift */; };
-		ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift */; };
 		ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DC2C2E903600FE8D63 /* SplashInput.swift */; };
 		ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DE2C2E921900FE8D63 /* SplashOutput.swift */; };
 		ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2E02C2E929900FE8D63 /* SplashInterface.swift */; };
@@ -212,8 +210,6 @@
 		ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainRepository.swift; sourceTree = "<group>"; };
 		ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainRepositoryImpl.swift; sourceTree = "<group>"; };
-		ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInUseCase.swift; sourceTree = "<group>"; };
-		ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInUseCaseImpl.swift; sourceTree = "<group>"; };
 		ACF2A2DC2C2E903600FE8D63 /* SplashInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInput.swift; sourceTree = "<group>"; };
 		ACF2A2DE2C2E921900FE8D63 /* SplashOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashOutput.swift; sourceTree = "<group>"; };
 		ACF2A2E02C2E929900FE8D63 /* SplashInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInterface.swift; sourceTree = "<group>"; };
@@ -607,7 +603,6 @@
 			children = (
 				ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
-				ACF2A2D82C2E728700FE8D63 /* AutoSignInUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -617,7 +612,6 @@
 			children = (
 				ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
-				ACF2A2DA2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1011,7 +1005,6 @@
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
-				ACF2A2DB2C2E729B00FE8D63 /* AutoSignInUseCaseImpl.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
@@ -1039,7 +1032,6 @@
 				ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
-				ACF2A2D92C2E728700FE8D63 /* AutoSignInUseCase.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,

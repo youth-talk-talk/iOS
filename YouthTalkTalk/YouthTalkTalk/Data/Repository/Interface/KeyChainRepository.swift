@@ -9,6 +9,7 @@ import Foundation
 
 protocol KeyChainRepository {
     
-    func saveAppleUserID(saveData: String?, type: keyChainIdentifierType)
-    func loadAppleUserID(type: keyChainIdentifierType) -> String
+    func saveAppleUserID(saveData: String?, type: AppleKeyChainIdentifierType)
+    func loadAppleUserID(type: AppleKeyChainIdentifierType) -> String
+    func isLogined() -> Bool
 }

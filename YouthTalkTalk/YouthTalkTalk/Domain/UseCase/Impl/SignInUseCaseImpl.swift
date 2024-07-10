@@ -88,7 +88,7 @@ extension SignInUseCaseImpl {
     // 서버 로그인 요청 (카카오)
     private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, Error>> {
         
-        var identifier = getKakaoUserIdentifier(user: user)
+        let identifier = getKakaoUserIdentifier(user: user)
         
         return signInRepository.requestKakaoSignIn(userIdentifier: identifier)
             .map { result in
@@ -227,20 +227,8 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
 // MARK: 자동 로그인 부분
 extension SignInUseCaseImpl {
     
-    func loginWithAuto() -> PublishRelay<Bool> {
+    func loginWithAuto() -> Bool {
         
-        let signInType = userDefaultsRepository.isSignedIn()
-        
-        switch signInType {
-        case .apple:
-            
-            return loginWithApple()
-        case .kakao:
-            
-            return loginWithKakao()
-        case .none:
-            
-            return PublishRelay<Bool>()
-        }
+        return keyChainRepository.isLogined()
     }
 }

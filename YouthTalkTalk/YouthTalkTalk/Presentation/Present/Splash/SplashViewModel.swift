@@ -31,11 +31,11 @@ final class SplashViewModel: SplashInterface {
         isAutoSignIn = autoSignIn.asDriver(onErrorJustReturn: false)
         
         checkSignedIn
-            // .flatMap { _ in
-            //     return signInUseCase.loginWithAuto()
-            // }
-        .subscribe(with: self) { owner, _ in
-            autoSignIn.accept(true)
+            .map { _ in
+                return signInUseCase.loginWithAuto()
+            }
+        .subscribe(with: self) { owner, isLogined in
+            autoSignIn.accept(isLogined)
         }.disposed(by: disposeBag)
     }
 }

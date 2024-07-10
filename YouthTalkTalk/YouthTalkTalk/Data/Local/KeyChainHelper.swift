@@ -8,16 +8,22 @@
 import Foundation
 import Security
 
-enum keyChainIdentifierType: String {
+enum AppleKeyChainIdentifierType: String {
     
     case appleIdentifier
     case appleIdentifierToken
     case authorizationCode
 }
 
+enum TokenKeyChainIdentifierType: String {
+    
+    case accessToken
+    case refreshToken
+}
+
 final class KeyChainHelper {
     
-    func saveAppleInfo(saveData: String?, type: keyChainIdentifierType) {
+    func saveAppleInfo(saveData: String?, type: AppleKeyChainIdentifierType) {
         let keychainIdentifier = type.rawValue
 
         // Keychain에 저장할 데이터 준비
@@ -40,7 +46,7 @@ final class KeyChainHelper {
         }
     }
     
-    func loadAppleInfo(type: keyChainIdentifierType) -> String? {
+    func loadAppleInfo(type: AppleKeyChainIdentifierType) -> String? {
         let keychainIdentifier = type.rawValue
 
         // Keychain Query 설정
@@ -59,5 +65,49 @@ final class KeyChainHelper {
         }
 
         return String(data: data, encoding: .utf8)
+    }
+    
+    func saveTokenInfo(saveData: String, type: TokenKeyChainIdentifierType) {
+        let keychainIdentifier = type.rawValue
+    
+        // Keychain에 저장할 데이터 준비
+        guard let data = saveData.data(using: .utf8) else { return }
+        
+        // Keychain Query 설정
+        let query: NSDictionary = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keychainIdentifier,
+            kSecValueData: data,
+            kSecAttrAccessible: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
+        ]
+    
+        // 기존 데이터가 있는 경우 업데이트, 없는 경우 추가
+        let status = SecItemUpdate(query as CFDictionary, [kSecValueData as String: data] as CFDictionary)
+    
+        if status != errSecSuccess {
+            // 추가 또는 업데이트 실패 시, 새로운 아이템 추가 시도
+            SecItemAdd(query, nil)
+        }
+    }
+    
+    func loadTokenInfo(type: TokenKeyChainIdentifierType) -> String {
+        let keychainIdentifier = type.rawValue
+    
+        // Keychain Query 설정
+        let query: NSDictionary = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keychainIdentifier,
+            kSecReturnData: true,
+            kSecMatchLimit: kSecMatchLimitOne
+        ]
+    
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+    
+        guard status == errSecSuccess, let data = item as? Data else {
+            return ""
+        }
+        
+        return String(data: data, encoding: .utf8) ?? ""
     }
 }
