@@ -55,7 +55,25 @@ final class APIManager: APIInterface {
                         
                     case .failure(let error):
                         
-                        print("❗️", "failure \(error)")
+                        if let data = response.data {
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                                if let errorDict = json as? [String: Any] {
+                                    if let status = errorDict["status"] as? Int {
+                                        print("에러 상태 코드: \(status)")
+                                    }
+                                    if let message = errorDict["message"] as? String {
+                                        print("에러 메시지: \(message)")
+                                    }
+                                    if let code = errorDict["code"] as? String {
+                                        print("에러 코드: \(code)")
+                                    }
+                                }
+                            } catch {
+                                print("JSON 파싱 오류: \(error)")
+                            }
+                        }
+                                        
                         single(.success(.failure(TestError.invaildURL)))
                     }
                 }
