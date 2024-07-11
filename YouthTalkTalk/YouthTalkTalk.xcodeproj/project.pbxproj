@@ -34,6 +34,8 @@
 		AC579B322C3C14FA00D1C9FC /* ClearSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */; };
 		AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */; };
 		AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */; };
+		AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */; };
+		AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -156,6 +158,8 @@
 		AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearSearchView.swift; sourceTree = "<group>"; };
 		AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchLayout.swift; sourceTree = "<group>"; };
 		AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRouter.swift; sourceTree = "<group>"; };
+		AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeDTO.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -760,6 +764,7 @@
 			children = (
 				ACF2A2F12C31613200FE8D63 /* SignInRouter.swift */,
 				ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */,
+				AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -807,6 +812,7 @@
 			children = (
 				ACF2A3122C35337200FE8D63 /* SignInDTO.swift */,
 				ACF2A31F2C37D27700FE8D63 /* SignUpDTO.swift */,
+				AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -981,6 +987,7 @@
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
+				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
@@ -1004,6 +1011,7 @@
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
+				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
