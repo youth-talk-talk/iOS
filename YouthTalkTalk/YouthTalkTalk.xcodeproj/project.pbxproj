@@ -36,6 +36,10 @@
 		AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */; };
 		AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */; };
 		AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */; };
+		AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B3E2C40156100D1C9FC /* SignUpUseCaseImpl.swift */; };
+		AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B402C4015A000D1C9FC /* SignUpUseCase.swift */; };
+		AC579B432C40160F00D1C9FC /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B422C40160F00D1C9FC /* SignUpRepository.swift */; };
+		AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -160,6 +164,10 @@
 		AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRouter.swift; sourceTree = "<group>"; };
 		AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeDTO.swift; sourceTree = "<group>"; };
+		AC579B3E2C40156100D1C9FC /* SignUpUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCaseImpl.swift; sourceTree = "<group>"; };
+		AC579B402C4015A000D1C9FC /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
+		AC579B422C40160F00D1C9FC /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepositoryImpl.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -606,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */,
+				AC579B402C4015A000D1C9FC /* SignUpUseCase.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
 			);
 			path = Interface;
@@ -615,6 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */,
+				AC579B3E2C40156100D1C9FC /* SignUpUseCaseImpl.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
 			);
 			path = Impl;
@@ -707,6 +717,7 @@
 				ACF2A2D02C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift */,
 				ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */,
 				ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */,
+				AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -717,6 +728,7 @@
 				ACF2A2CE2C2D920500FE8D63 /* UserDefaultsRepository.swift */,
 				ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */,
 				ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */,
+				AC579B422C40160F00D1C9FC /* SignUpRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -977,6 +989,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
+				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
@@ -1012,9 +1025,11 @@
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
+				AC579B432C40160F00D1C9FC /* SignUpRepository.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
+				AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
@@ -1048,6 +1063,7 @@
 				ACF2A31E2C37D21C00FE8D63 /* SignUpBody.swift in Sources */,
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */,
+				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,

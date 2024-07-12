@@ -15,8 +15,19 @@ final class PolicyLocationUseCaseImpl: PolicyLocationUseCase {
         return entity.allCase
     }
     
-    func fetchLocation(_ row: Int, entity: PolicyLocationKR.Type) -> PolicyLocation {
+    func fetchLocation(_ row: Int, entity: PolicyLocation.Type) -> PolicyLocation {
         
         return entity.fetchLocation(row)
+    }
+    
+    func fetchLocationByDisplayName(displayName: String, entity: PolicyLocation.Type) -> PolicyLocation {
+        
+        guard let selectedLocation = entity.allCase.filter({ location in
+            location.displayName == displayName
+        }).first else {
+            return entity.fetchLocation(0)
+        }
+        
+        return selectedLocation
     }
 }

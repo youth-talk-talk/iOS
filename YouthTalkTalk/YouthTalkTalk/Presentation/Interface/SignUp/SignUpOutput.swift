@@ -12,4 +12,5 @@ protocol SignUpOutput {
     
     var policyLocations: Driver<[PolicyLocation]> { get }
     var selectedLocation: Driver<PolicyLocation> { get }
+    var signUp: Driver<Bool> { get }
 }

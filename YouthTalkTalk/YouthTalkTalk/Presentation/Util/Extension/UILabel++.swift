@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 extension UILabel {
     
@@ -32,5 +34,19 @@ extension UILabel {
                                                 attributes: attributes)
             self.attributedText = attrString
         }
+    }
+}
+
+extension Reactive where Base: UILabel {
+    
+    var textChanged: ControlEvent<String?> {
+        let source = self.methodInvoked(#selector(setter: UILabel.text))
+            .map { _ in
+                return self.base.text
+            }
+            .startWith(self.base.text) // 초기 값 방출
+            .distinctUntilChanged() // 값이 변경된 경우에만 방출
+            
+        return ControlEvent(events: source)
     }
 }

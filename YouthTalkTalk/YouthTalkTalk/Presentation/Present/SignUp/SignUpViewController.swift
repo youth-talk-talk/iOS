@@ -24,43 +24,6 @@ final class SignUpViewController: BaseViewController<SignUpView> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // layoutView.signUpButton.addTarget(self, action: #selector(buttonTest), for: .touchUpInside)
-    }
-    
-    // @objc
-    // func buttonTest() {
-    //     
-    //     let region = layoutView.regionDropDownView.regionDropdownLabel.text!
-    //     let identifier = KeyChainHelper().loadAppleInfo(type: .appleIdentifier)!
-    //     let token = KeyChainHelper().loadAppleInfo(type: .appleIdentifierToken)!
-    //     let nickname = layoutView.nicknameTextField.text!
-    //     
-    //     let body = SignUpBody(username: "3597174752",
-    //                           nickname: "카카오이중엽",
-    //                           region: "서울",
-    //                           idToken: "",
-    //                           signInType: .kakao)
-    //     let router = SignUpRouter.requestKakaoSignUp(signUp: body)
-    //     
-    //     dump(router)
-    //     
-    //     
-    //     apiManager.request(router: router, type: SignUpDTO.self)
-    //         .subscribe(with: self) { owner, result in
-    //             
-    //             switch result {
-    //             case .success(let success):
-    //                 print(success)
-    //             case .failure(let error):
-    //                 dump(error)
-    //             }
-    //         }
-    //         .disposed(by: disposeBag)
-    // }
-    
     override func bind() {
         
         layoutView.pullDownTableView.delegate = self
@@ -75,31 +38,33 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                 owner.layoutView.toggleTableViewHidden()
                 
             }.disposed(by: disposeBag)
-        
-        layoutView.signUpButton.rx.tap
-            .bind(with: self) { owner, _ in
-                
-                guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
-                guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
-                
-                let newRootVC = HomeViewController()
-                let naviVC = UINavigationController(rootViewController: newRootVC)
-                let tabVC = UITabBarController()
-                
-                tabVC.setViewControllers([naviVC], animated: true)
-                
-                sceneDelegate.window?.rootViewController = tabVC
-                sceneDelegate.window?.makeKeyAndVisible()
-                
-                
-                
-            }.disposed(by: disposeBag)
+
         
         // MARK: Inputs
         layoutView.pullDownTableView.rx.itemSelected
             .bind(to: viewModel.itemSelectedEvent)
             .disposed(by: disposeBag)
         
+        Observable.combineLatest(layoutView.regionDropDownView.regionDropdownLabel.rx.textChanged.asObservable(),
+                       layoutView.nicknameTextField.rx.text.asObservable(),
+                       layoutView.signUpButton.rx.tap.asObservable())
+        .subscribe(with: self) { owner, data in
+            
+            let (region, nickname, _) = data
+            
+            guard let region, let nickname else { return }
+            
+            if region == "" || nickname == "" {
+                
+                owner.viewModel.input.signUpButtonInvalid.accept(())
+                return
+            }
+            
+            let userData = (region, nickname)
+            
+            owner.viewModel.input.signUpButtonClicked.accept(userData)
+            
+        }.disposed(by: disposeBag)
         
         // MARK: Ouputs
         // Configure Cell
@@ -117,6 +82,26 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                 
                 owner.layoutView.updateLocation(policyLocation)
                 
+            }.disposed(by: disposeBag)
+        
+        viewModel.output.signUp
+            .drive(with: self) { owner, isSignUp in
+                
+                if isSignUp {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
+                    guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
+                    
+                    let newRootVC = HomeViewController()
+                    let naviVC = UINavigationController(rootViewController: newRootVC)
+                    let tabVC = UITabBarController()
+                    
+                    tabVC.setViewControllers([naviVC], animated: true)
+                    
+                    sceneDelegate.window?.rootViewController = tabVC
+                    sceneDelegate.window?.makeKeyAndVisible()
+                } else {
+                    print("실패")
+                }
             }.disposed(by: disposeBag)
         
         // 이벤트 전달

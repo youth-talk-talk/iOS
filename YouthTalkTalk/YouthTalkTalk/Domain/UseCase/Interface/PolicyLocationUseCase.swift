@@ -12,5 +12,7 @@ protocol PolicyLocationUseCase {
     
     func fetchAllCase(entity: PolicyLocation.Type) -> [PolicyLocation]
     
-    func fetchLocation(_ row: Int, entity: PolicyLocationKR.Type) -> PolicyLocation
+    func fetchLocation(_ row: Int, entity: PolicyLocation.Type) -> PolicyLocation
+    
+    func fetchLocationByDisplayName(displayName: String, entity: PolicyLocation.Type) -> PolicyLocation
 }

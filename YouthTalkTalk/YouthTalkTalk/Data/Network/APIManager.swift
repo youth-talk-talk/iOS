@@ -39,46 +39,53 @@ final class APIManager: APIInterface {
                     case .success(let success):
                         
                         single(.success(.success(success)))
-                        
-                        // HTTP 헤더 (Access Token, Refresh Token)
-                        guard let httpResponse = response.response else { return }
-                        
-                        if let accessToken = httpResponse.value(forHTTPHeaderField: "Authorization") {
-                            
-                            self.keyChainHelper.saveTokenInfo(saveData: accessToken, type: .accessToken)
-                        }
-                        
-                        if let refreshToken = httpResponse.value(forHTTPHeaderField: "Authorization-refresh") {
-                            
-                            self.keyChainHelper.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
-                        }
+                        self.handleResponseHeaders(response.response)
                         
                     case .failure(let error):
                         
-                        if let data = response.data {
-                            do {
-                                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                                if let errorDict = json as? [String: Any] {
-                                    if let status = errorDict["status"] as? Int {
-                                        print("에러 상태 코드: \(status)")
-                                    }
-                                    if let message = errorDict["message"] as? String {
-                                        print("에러 메시지: \(message)")
-                                    }
-                                    if let code = errorDict["code"] as? String {
-                                        print("에러 코드: \(code)")
-                                    }
-                                }
-                            } catch {
-                                print("JSON 파싱 오류: \(error)")
-                            }
-                        }
-                                        
                         single(.success(.failure(TestError.invaildURL)))
+                        self.handleErrorResponse(response.data)
                     }
                 }
             
             return Disposables.create()
         }
     }
+}
+
+extension APIManager {
+    
+    private func handleResponseHeaders(_ response: HTTPURLResponse?) {
+        
+        guard let httpResponse = response else { return }
+        
+        if let accessToken = httpResponse.value(forHTTPHeaderField: "Authorization") {
+            self.keyChainHelper.saveTokenInfo(saveData: accessToken, type: .accessToken)
+        }
+        
+        if let refreshToken = httpResponse.value(forHTTPHeaderField: "Authorization-refresh") {
+            self.keyChainHelper.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
+        }
+    }
+    
+    private func handleErrorResponse(_ data: Data?) {
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let errorDict = json as? [String: Any] {
+                        if let status = errorDict["status"] as? Int {
+                            print("에러 상태 코드: \(status)")
+                        }
+                        if let message = errorDict["message"] as? String {
+                            print("에러 메시지: \(message)")
+                        }
+                        if let code = errorDict["code"] as? String {
+                            print("에러 코드: \(code)")
+                        }
+                    }
+                } catch {
+                    print("JSON 파싱 오류: \(error)")
+                }
+            }
+        }
 }

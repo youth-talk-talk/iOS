@@ -67,6 +67,46 @@ enum PolicyLocationKR: Int, CaseIterable, PolicyLocation {
         }
     }
     
+    var networkName: String {
+        
+        switch self {
+        case .seoul:
+            "서울"
+        case .gyeonggi:
+            "경기"
+        case .incheon:
+            "인천"
+        case .sejong:
+            "세종"
+        case .daejeon:
+            "대전"
+        case .chungcheongNorth:
+            "충북"
+        case .chungcheongSouth:
+            "충남"
+        case .gangwon:
+            "강원"
+        case .gyeongsangNorth:
+            "경북"
+        case .gyeongsangSouth:
+            "경남"
+        case .daegu:
+            "대구"
+        case .ulsan:
+            "울산"
+        case .busan:
+            "부산"
+        case .gwangju:
+            "광주"
+        case .jeollaNorth:
+            "전북"
+        case .jeollaSouth:
+            "전남"
+        case .jeju:
+            "제주"
+        }
+    }
+    
     static var allCase: [PolicyLocation] {
         
         return self.allCases

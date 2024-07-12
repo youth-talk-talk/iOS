@@ -10,6 +10,7 @@ import Foundation
 protocol PolicyLocation {
     
     var displayName: String { get }
+    var networkName: String { get }
     
     static var allCase: [PolicyLocation] { get }
     

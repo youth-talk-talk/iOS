@@ -23,7 +23,9 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
     private let appleSignIn = PublishRelay<Bool>()
     private let kakaoSignIn = PublishRelay<Bool>()
     
-    init(keyChainRepository: KeyChainRepository, userDefaultsRepository: UserDefaultsRepository, signInRepository: SignInRepository = SignInRepositoryImpl() ) {
+    init(keyChainRepository: KeyChainRepository = KeyChainRepositoryImpl(),
+         userDefaultsRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl(),
+         signInRepository: SignInRepository = SignInRepositoryImpl() ) {
         self.keyChainRepository = keyChainRepository
         self.userDefaultsRepository = userDefaultsRepository
         self.signInRepository = signInRepository

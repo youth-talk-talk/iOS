@@ -22,7 +22,9 @@ final class TermsViewController: BaseViewController<TermsView> {
             .bind(with: self) { owner, _ in
                 
                 let policyLoactionUseCase = PolicyLocationUseCaseImpl()
-                let signUpViewModel = SignUpViewModel(policyLocationUseCase: policyLoactionUseCase)
+                let signUpUseCase = SignUpUseCaseImpl()
+                let signUpViewModel = SignUpViewModel(policyLocationUseCase: policyLoactionUseCase,
+                                                      signUpUseCase: signUpUseCase)
                 let nextVC = SignUpViewController(viewModel: signUpViewModel)
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
