@@ -17,9 +17,19 @@ final class KeyChainRepositoryImpl: KeyChainRepository {
         keyChainHelper.saveAppleInfo(saveData: saveData, type: type)
     }
     
+    func saveTokenInfo(saveData: String, type: TokenKeyChainIdentifierType) {
+        
+        keyChainHelper.saveTokenInfo(saveData: saveData, type: type)
+    }
+    
     func loadAppleUserID(type: AppleKeyChainIdentifierType) -> String {
     
         keyChainHelper.loadAppleInfo(type: type) ?? ""
+    }
+    
+    func loadTokenInfo(type: TokenKeyChainIdentifierType) -> String {
+        
+        return keyChainHelper.loadTokenInfo(type: type)
     }
     
     func isLogined() -> Bool {
@@ -32,4 +42,6 @@ final class KeyChainRepositoryImpl: KeyChainRepository {
         
         return true
     }
+    
+    
 }
