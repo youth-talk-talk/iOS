@@ -11,8 +11,8 @@ import RxSwift
 
 final class SplashViewModel: SplashInterface {
     
-    private var signInUseCase: SignInUseCase
     private let disposeBag = DisposeBag()
+    private var signInUseCase: SignInUseCase
     
     var input: SplashInput { return self }
     var output: SplashOutput { return self }
@@ -30,6 +30,7 @@ final class SplashViewModel: SplashInterface {
         let autoSignIn = PublishRelay<Bool>()
         isAutoSignIn = autoSignIn.asDriver(onErrorJustReturn: false)
         
+        // 로그인 여부 체크
         checkSignedIn
             .map { _ in
                 return signInUseCase.loginWithAuto()

@@ -72,7 +72,7 @@
 		ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */; };
 		ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */; };
 		ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */; };
-		ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */; };
+		ACF2A29F2C286A9400FE8D63 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A29E2C286A9400FE8D63 /* NetworkError.swift */; };
 		ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocation.swift */; };
 		ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */; };
 		ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */; };
@@ -204,7 +204,7 @@
 		ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOutput.swift; sourceTree = "<group>"; };
 		ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
 		ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseImpl.swift; sourceTree = "<group>"; };
-		ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDescription.swift; sourceTree = "<group>"; };
+		ACF2A29E2C286A9400FE8D63 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		ACF2A2A42C2AAF7B00FE8D63 /* PolicyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocation.swift; sourceTree = "<group>"; };
 		ACF2A2A72C2AB01800FE8D63 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
 		ACF2A2A92C2AB02000FE8D63 /* SignUpOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOutput.swift; sourceTree = "<group>"; };
@@ -594,7 +594,6 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A3142C3545BF00FE8D63 /* Mapper */,
-				ACF2A29C2C2869F300FE8D63 /* Error */,
 				ACF2A2952C2844C300FE8D63 /* UseCase */,
 				AC4B43222C2067A5005FC370 /* Entities */,
 			);
@@ -641,7 +640,7 @@
 		ACF2A29D2C286A6600FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A29E2C286A9400FE8D63 /* ErrorDescription.swift */,
+				ACF2A29E2C286A9400FE8D63 /* NetworkError.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -756,6 +755,7 @@
 		ACF2A2EC2C3160CF00FE8D63 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A29C2C2869F300FE8D63 /* Error */,
 				ACF2A30A2C352EF500FE8D63 /* BodyData */,
 				ACF2A2EF2C31610200FE8D63 /* Interface */,
 				ACF2A2F02C31610B00FE8D63 /* Impl */,
@@ -1047,7 +1047,7 @@
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */,
 				ACF2A3202C37D27700FE8D63 /* SignUpDTO.swift in Sources */,
-				ACF2A29F2C286A9400FE8D63 /* ErrorDescription.swift in Sources */,
+				ACF2A29F2C286A9400FE8D63 /* NetworkError.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,

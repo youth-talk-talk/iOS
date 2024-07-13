@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ErrorDescription {
+protocol NetworkError: Error {
     
     var description: String { get }
 }

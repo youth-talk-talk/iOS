@@ -25,7 +25,7 @@ enum MeRouter: Router {
     var path: String {
         switch self {
         case .requestMe:
-            return "/me"
+            return "/members/me"
         }
     }
     
