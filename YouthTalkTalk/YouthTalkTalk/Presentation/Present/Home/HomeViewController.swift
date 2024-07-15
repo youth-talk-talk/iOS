@@ -11,13 +11,30 @@ import RxCocoa
 
 final class HomeViewController: BaseViewController<HomeView> {
     
+    let viewModel: HomeInterface
+    
     var dataSource: UICollectionViewDiffableDataSource<HomeLayout, AnyHashable>!
+    
+    init(viewModel: HomeInterface) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func configureCollectionView() {
         
         cellRegistration()
         headerRegistration()
         update()
+    }
+    
+    override func bind() {
+        
+        viewModel.input.fetchPolicies.accept(())
     }
     
     //MARK: Cell Registration

@@ -46,7 +46,11 @@ class SplashViewController: BaseViewController<SplashView> {
     }
     
     private func navigateToHome() {
-        let newRootVC = HomeViewController()
+        
+        let repository = PolicyRepositoryImpl()
+        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
+        let viewModel = HomeViewModel(policyUseCase: policyUseCase)
+        let newRootVC = HomeViewController(viewModel: viewModel)
         let naviVC = UINavigationController(rootViewController: newRootVC)
         let tabVC = UITabBarController()
         tabVC.setViewControllers([naviVC], animated: true)

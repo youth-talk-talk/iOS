@@ -91,7 +91,10 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                     guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
                     guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
                     
-                    let newRootVC = HomeViewController()
+                    let repository = PolicyRepositoryImpl()
+                    let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
+                    let viewModel = HomeViewModel(policyUseCase: policyUseCase)
+                    let newRootVC = HomeViewController(viewModel: viewModel)
                     let naviVC = UINavigationController(rootViewController: newRootVC)
                     let tabVC = UITabBarController()
                     
