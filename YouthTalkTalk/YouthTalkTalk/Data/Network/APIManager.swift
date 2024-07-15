@@ -26,7 +26,7 @@ final class APIManager: APIInterface {
         self.keyChainRepository = keyChainRepository
     }
     
-    func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, TestError>> {
+    func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, APIError>> {
         
         return Single.create { [weak self] single in
             
@@ -44,8 +44,10 @@ final class APIManager: APIInterface {
                         
                     case .failure(let error):
                         
-                        single(.success(.failure(TestError.invaildURL)))
-                        self.handleErrorResponse(response.data)
+                        let error: APIError = self.handleErrorResponse(response.data)
+                        
+                        single(.success(.failure(error)))
+                        
                     }
                 }
             
@@ -69,24 +71,30 @@ extension APIManager {
         }
     }
     
-    private func handleErrorResponse(_ data: Data?) {
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let errorDict = json as? [String: Any] {
-                        if let status = errorDict["status"] as? Int {
-                            print("에러 상태 코드: \(status)")
-                        }
-                        if let message = errorDict["message"] as? String {
-                            print("에러 메시지: \(message)")
-                        }
-                        if let code = errorDict["code"] as? String {
-                            print("에러 코드: \(code)")
-                        }
+    private func handleErrorResponse(_ data: Data?) -> APIError {
+        
+        var error = APIError(code: "알수없음")
+        
+        if let data = data {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let errorDict = json as? [String: Any] {
+                    if let status = errorDict["status"] as? Int {
+                        print("에러 상태 코드: \(status)")
                     }
-                } catch {
-                    print("JSON 파싱 오류: \(error)")
+                    if let message = errorDict["message"] as? String {
+                        print("에러 메시지: \(message)")
+                    }
+                    if let code = errorDict["code"] as? String {
+                        print("에러 코드: \(code)")
+                        error = .init(code: code)
+                    }
                 }
+            } catch {
+                print("JSON 파싱 오류: \(error)")
             }
         }
+        
+        return error
+    }
 }

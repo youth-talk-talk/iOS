@@ -14,7 +14,7 @@ final class SignUpRepositoryImpl: SignUpRepository {
     private let disposeBag = DisposeBag()
     private let apiManager = APIManager()
     
-    func requestAppleSignUp(userIdentifier: String, nickname: String, region: String, Token: String) -> Observable<Result<SignUpDTO, TestError>> {
+    func requestAppleSignUp(userIdentifier: String, nickname: String, region: String, Token: String) -> Observable<Result<SignUpDTO, APIError>> {
         
         let bodyData = SignUpBody(username: userIdentifier,
                                   nickname: nickname,
@@ -27,7 +27,7 @@ final class SignUpRepositoryImpl: SignUpRepository {
             .asObservable()
     }
     
-    func requestKakaoSignUp(userIdentifier: String, nickname: String, region: String) -> Observable<Result<SignUpDTO, TestError>> {
+    func requestKakaoSignUp(userIdentifier: String, nickname: String, region: String) -> Observable<Result<SignUpDTO, APIError>> {
         
         let bodyData = SignUpBody(username: userIdentifier,
                                   nickname: nickname,

@@ -10,6 +10,6 @@ import RxSwift
 
 protocol SignUpRepository {
     
-    func requestAppleSignUp(userIdentifier: String, nickname: String, region: String, Token: String) -> Observable<Result<SignUpDTO, TestError>>
-    func requestKakaoSignUp(userIdentifier: String, nickname: String, region: String) -> Observable<Result<SignUpDTO, TestError>>
+    func requestAppleSignUp(userIdentifier: String, nickname: String, region: String, Token: String) -> Observable<Result<SignUpDTO, APIError>>
+    func requestKakaoSignUp(userIdentifier: String, nickname: String, region: String) -> Observable<Result<SignUpDTO, APIError>>
 }

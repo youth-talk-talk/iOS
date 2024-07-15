@@ -10,5 +10,5 @@ import RxSwift
 
 protocol APIInterface {
     
-    func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, TestError>>
+    func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, APIError>>
 }
