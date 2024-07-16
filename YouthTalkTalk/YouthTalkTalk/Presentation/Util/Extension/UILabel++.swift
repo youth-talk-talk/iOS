@@ -16,7 +16,6 @@ extension UILabel {
         self.text = text
         self.textColor = textColor.value
         self.font = FontManager.font(fontType)
-        self.lineBreakMode = .byTruncatingTail
         self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(fontType))
     }
     
@@ -36,6 +35,18 @@ extension UILabel {
             self.attributedText = attrString
         }
     }
+    
+    func calculateWidth(for height: CGFloat) -> CGFloat {
+        guard let text = self.text else { return 0 }
+        
+        let maxSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
+        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
+        let attributes = [NSAttributedString.Key.font: self.font]
+        
+        let boundingRect = text.boundingRect(with: maxSize, options: options, attributes: attributes, context: nil)
+        
+        return ceil(boundingRect.width)
+    }
 }
 
 extension Reactive where Base: UILabel {
@@ -47,7 +58,7 @@ extension Reactive where Base: UILabel {
             }
             .startWith(self.base.text) // 초기 값 방출
             .distinctUntilChanged() // 값이 변경된 경우에만 방출
-            
+        
         return ControlEvent(events: source)
     }
 }

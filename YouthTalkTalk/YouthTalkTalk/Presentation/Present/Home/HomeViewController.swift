@@ -77,6 +77,8 @@ final class HomeViewController: BaseViewController<HomeView> {
         let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
+            
+            cell.configure(data: itemIdentifier.data)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in

@@ -73,7 +73,6 @@ enum PolicyRouter: Router {
         params["page"] = body.page
         params["size"] = body.size
         
-        dump(params)
         return params
     }
 }

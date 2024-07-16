@@ -535,7 +535,7 @@
 				ACF2A2782C25842300FE8D63 /* DecorationView */,
 				ACF2A2702C229D8500FE8D63 /* CategorySection */,
 				ACF2A26F2C229D7900FE8D63 /* PopularSection */,
-				ACF2A2712C229D9700FE8D63 /* recentSection */,
+				ACF2A2712C229D9700FE8D63 /* RecentSection */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -566,13 +566,13 @@
 			path = CategorySection;
 			sourceTree = "<group>";
 		};
-		ACF2A2712C229D9700FE8D63 /* recentSection */ = {
+		ACF2A2712C229D9700FE8D63 /* RecentSection */ = {
 			isa = PBXGroup;
 			children = (
 				ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */,
 				ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */,
 			);
-			path = recentSection;
+			path = RecentSection;
 			sourceTree = "<group>";
 		};
 		ACF2A2782C25842300FE8D63 /* DecorationView */ = {

@@ -16,6 +16,14 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
     let categoryLabel = UILabel()
     let bookmarkButton = UIButton()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        regionLabel.designed(text: "", fontType: .p12Regular, textColor: .gray60)
+        policyTitleLabel.designed(text: "", fontType: .p18Bold, textColor: .black)
+        categoryLabel.designed(text: "", fontType: .p12Bold, textColor: .gray40)
+    }
+    
     override func configureLayout() {
         
         [policyTitleLabel, categoryLabel, bookmarkButton].forEach { flexView.addSubview($0) }
@@ -34,7 +42,7 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
                 .grow(1)
             
             flex.addItem().define { flex in
-            
+                
                 flex.addItem(categoryLabel)
                 flex.addItem(bookmarkButton)
                     .height(24)
@@ -44,17 +52,11 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
             .marginBottom(15)
             .marginHorizontal(11)
             .justifyContent(.spaceBetween)
-            
-            
         }
+        .direction(.column)
     }
     
     override func configureView() {
-     
-        regionLabel.designed(text: "지역", fontType: .p12Regular, textColor: .gray60)
-        policyTitleLabel.designed(text: "정책명", fontType: .p18Bold, textColor: .black)
-        categoryLabel.designed(text: "카테고리", fontType: .p12Bold, textColor: .gray40)
-        bookmarkButton.designedByImage(.bookmark)
         
         regionLabel.lineBreakMode = .byTruncatingTail
         policyTitleLabel.numberOfLines = 3
@@ -65,10 +67,31 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         
         guard let data else { return }
         
-        regionLabel.text = data.hostDep
-        policyTitleLabel.text = data.title
-        
         let policyCategory = PolicyCategory(rawValue: data.category) ?? .life
-        categoryLabel.text = policyCategory.name
+        
+        regionLabel.designed(text: data.hostDep, fontType: .p12Regular, textColor: .gray60)
+        policyTitleLabel.designed(text: data.title, fontType: .p18Bold, textColor: .black)
+        categoryLabel.designed(text: policyCategory.name, fontType: .p12Bold, textColor: .gray40)
+        bookmarkButton.designedByImage(.bookmark)
+        
+        if policyTitleLabel.frame.height != 0 {
+            updatePolicyLabelHeight()
+        }
+        
+    }
+    
+    private func updatePolicyLabelHeight() {
+        
+        let textWidth = policyTitleLabel.calculateWidth(for: policyTitleLabel.frame.height)
+        let labelWidth = policyTitleLabel.frame.width
+        let line = textWidth / labelWidth
+        
+        if line < 1 {
+            policyTitleLabel.flex.height(24)
+        } else if line >= 1, line < 2 {
+            policyTitleLabel.flex.height(48)
+        } else if line >= 2 {
+            policyTitleLabel.flex.height(72)
+        }
     }
 }

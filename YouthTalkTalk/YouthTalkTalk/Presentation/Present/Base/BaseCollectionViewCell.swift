@@ -16,7 +16,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(flexView)
+        contentView.addSubview(flexView)
         
         configureLayout()
         configureView()
