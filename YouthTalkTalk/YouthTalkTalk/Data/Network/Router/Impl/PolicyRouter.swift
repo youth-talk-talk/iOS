@@ -65,13 +65,15 @@ enum PolicyRouter: Router {
         
         body.categories.forEach { category in
             if params["categories"] == nil {
-                params["categories"] = category.name
+                params["categories"] = category.rawValue
             } else {
-                params["categories"] = params["categories"] as! String + ",\(category.name)"
+                params["categories"] = params["categories"] as! String + ",\(category.rawValue)"
             }
         }
         params["page"] = body.page
         params["size"] = body.size
+        
+        dump(params)
         return params
     }
 }

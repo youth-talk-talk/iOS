@@ -8,24 +8,24 @@
 import Foundation
 
 
-enum PolicyCategory: CaseIterable, Encodable {
+enum PolicyCategory: String, CaseIterable, Encodable {
     
-    case job
-    case education
-    case life
-    case participation
+    case job = "JOB"
+    case education = "EDUCATION"
+    case life = "LIFE"
+    case participation = "PARTICIPATION"
     
     var name: String {
         
         switch self {
         case .job:
-            return "JOB"
+            return "일자리"
         case .education:
-            return "EDUCATION"
+            return "교육"
         case .life:
-            return "LIFE"
+            return "생활지원"
         case .participation:
-            return "PARTICIPATION"
+            return "참여"
         }
     }
 }

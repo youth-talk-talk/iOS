@@ -48,12 +48,12 @@ enum HomeLayout: Int, CaseIterable {
         
         let insets = UIScreen.main.bounds.width * 0.05
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(141),
-                                              heightDimension: .absolute(152))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(140),
+                                              heightDimension: .absolute(150))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(300),
-                                               heightDimension: .absolute(152))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(140),
+                                               heightDimension: .absolute(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

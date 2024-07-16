@@ -16,6 +16,7 @@ extension UILabel {
         self.text = text
         self.textColor = textColor.value
         self.font = FontManager.font(fontType)
+        self.lineBreakMode = .byTruncatingTail
         self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(fontType))
     }
     

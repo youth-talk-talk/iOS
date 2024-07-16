@@ -17,7 +17,13 @@ final class HomeViewModel: HomeInterface {
     var input: HomeInput { return self }
     var output: HomeOutput { return self }
     
+    // Inputs
     var fetchPolicies = PublishRelay<Void>()
+    
+    // Outputs
+    var topFivePolicies: [HomeSectionItems] = []
+    var allPolicies: [HomeSectionItems] = []
+    var fetchPoliciesSuccess: PublishRelay<Void> = PublishRelay<Void>()
     
     init(policyUseCase: PolicyUseCase) {
         self.policyUseCase = policyUseCase
@@ -31,7 +37,11 @@ final class HomeViewModel: HomeInterface {
                 switch result {
                 case .success(let homePolicyEntity):
                     
-                    dump(homePolicyEntity)
+                    owner.topFivePolicies = homePolicyEntity.topFivePolicies.map { HomeSectionItems.topFive($0) }
+                    
+                    owner.allPolicies = homePolicyEntity.allPolicies.map { HomeSectionItems.all($0)}
+                    
+                    owner.fetchPoliciesSuccess.accept(())
                     
                 case .failure(let error):
                     

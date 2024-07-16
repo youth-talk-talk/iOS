@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import PinLayout
+import FlexLayout
 
 class BaseCollectionViewCell: UICollectionViewCell {
     
+    let flexView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        addSubview(flexView)
         
         configureLayout()
         configureView()
@@ -23,4 +29,10 @@ class BaseCollectionViewCell: UICollectionViewCell {
     func configureLayout() { }
     
     func configureView() { }
+    
+    override func layoutSubviews() {
+        
+        flexView.pin.all()
+        flexView.flex.layout()
+    }
 }

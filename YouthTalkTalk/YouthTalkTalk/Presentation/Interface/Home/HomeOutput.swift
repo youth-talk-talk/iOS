@@ -7,7 +7,11 @@
 
 import Foundation
 import RxCocoa
+import RxSwift
 
 protocol HomeOutput {
     
+    var topFivePolicies: [HomeSectionItems] { get }
+    var allPolicies: [HomeSectionItems] { get }
+    var fetchPoliciesSuccess: PublishRelay<Void> { get }
 }

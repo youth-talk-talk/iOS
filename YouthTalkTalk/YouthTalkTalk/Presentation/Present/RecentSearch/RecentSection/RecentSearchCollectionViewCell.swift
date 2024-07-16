@@ -11,8 +11,6 @@ import PinLayout
 
 class RecentSearchCollectionViewCell: BaseCollectionViewCell {
     
-    let flexView = UIView()
-    
     override func configureView() {
         
         flexView.backgroundColor = .black

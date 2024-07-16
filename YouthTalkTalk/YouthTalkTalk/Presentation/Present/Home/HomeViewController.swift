@@ -9,11 +9,29 @@ import UIKit
 import PinLayout
 import RxCocoa
 
+enum HomeSectionItems: Hashable {
+    
+    case category
+    case topFive(PolicyEntity)
+    case all(PolicyEntity)
+    
+    var data: PolicyEntity? {
+        switch self {
+        case .category:
+            return nil
+        case .topFive(let policyEntity):
+            return policyEntity
+        case .all(let policyEntity):
+            return policyEntity
+        }
+    }
+}
+
 final class HomeViewController: BaseViewController<HomeView> {
     
     let viewModel: HomeInterface
     
-    var dataSource: UICollectionViewDiffableDataSource<HomeLayout, AnyHashable>!
+    var dataSource: UICollectionViewDiffableDataSource<HomeLayout, HomeSectionItems>!
     
     init(viewModel: HomeInterface) {
         self.viewModel = viewModel
@@ -34,6 +52,13 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     override func bind() {
         
+        viewModel.output.fetchPoliciesSuccess
+            .bind(with: self) { owner, _ in
+                
+                owner.update()
+                
+            }.disposed(by: disposeBag)
+        
         viewModel.input.fetchPolicies.accept(())
     }
     
@@ -41,13 +66,15 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
+            
+            cell.configure(data: itemIdentifier.data)
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
         }
@@ -169,12 +196,15 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     func update() {
         
-        var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, AnyHashable>()
+        let topFivePolicies = viewModel.output.topFivePolicies
+        let allPolicies = viewModel.output.allPolicies
+        
+        var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, HomeSectionItems>()
         
         snapshot.appendSections([.category, .popular, .recent])
         
-        snapshot.appendItems(["1", "2", "3", "4", "5", "6"], toSection: .popular)
-        snapshot.appendItems(["a", "b", "c", "d", "e", "f"], toSection: .recent)
+        snapshot.appendItems(topFivePolicies, toSection: .popular)
+        snapshot.appendItems(allPolicies, toSection: .recent)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
