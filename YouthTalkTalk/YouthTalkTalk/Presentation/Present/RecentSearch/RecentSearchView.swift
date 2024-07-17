@@ -29,7 +29,7 @@ final class RecentSearchView: BaseView {
 
     override func configureView() {
         
-        backgroundColor = .brown
+        collectionView.backgroundColor = .clear
     }
 
 }

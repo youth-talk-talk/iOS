@@ -53,6 +53,7 @@
 		AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */; };
 		AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */; };
 		AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */; };
+		AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -193,6 +194,7 @@
 		AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepositoryImpl.swift; sourceTree = "<group>"; };
 		AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePolicyEntity.swift; sourceTree = "<group>"; };
 		AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCaseImpl.swift; sourceTree = "<group>"; };
+		AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */,
+				AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */,
 			);
 			path = RecentSection;
 			sourceTree = "<group>";
@@ -1063,6 +1066,7 @@
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
+				AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */,
 				ACF2A2D72C2E713900FE8D63 /* KeyChainRepositoryImpl.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,

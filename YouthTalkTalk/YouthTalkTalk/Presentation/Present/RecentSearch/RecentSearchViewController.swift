@@ -10,14 +10,14 @@ import UIKit
 final class RecentSearchViewController: BaseViewController<RecentSearchView> {
     
     var dataSource: UICollectionViewDiffableDataSource<RecentSearchLayout, AnyHashable>!
-
+    
     override func configureCollectionView() {
         
         cellRegistration()
         headerRegistration()
         update()
-    }    
-
+    }
+    
     private func cellRegistration() {
         
         // 최근검색 Section
@@ -31,10 +31,10 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
             guard let section = RecentSearchLayout(rawValue: indexPath.section) else { return nil }
             
             if section == .recent {
-                print("recent - \(indexPath.item)")
+                
                 let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
                 
-                cell.backgroundColor = .lime60
+                cell.flexView.backgroundColor = .lime40
                 
                 return cell
             }
@@ -45,8 +45,28 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
     
     private func headerRegistration() {
         
+        // 최근업데이트 Header Registration
+        let recentSearchHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentSearchCollectionReusableView>(elementKind: RecentSearchCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+            
+            // guard let self else { return }
+        }
+        
+        // Header 등록
+        dataSource.supplementaryViewProvider = { [weak self] (view, kind, index) in
+            
+            guard let self else { return nil }
+            
+            switch kind {
+            case RecentSearchCollectionReusableView.identifier:
+                return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: recentSearchHeaderRegistration,
+                    for: index)
+                
+            default: return nil
+            }
+        }
     }
-
+    
     func update() {
         
         var snapshot = NSDiffableDataSourceSnapshot<RecentSearchLayout, AnyHashable>()

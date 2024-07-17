@@ -26,7 +26,7 @@ enum RecentSearchLayout: Int, CaseIterable {
             }
         }
         
-        layout.register(PopularDecoReusableView.self, forDecorationViewOfKind: PopularDecoReusableView.identifier)
+        layout.register(RecentSearchCollectionReusableView.self, forDecorationViewOfKind: RecentSearchCollectionReusableView.identifier)
         layout.register(RecentDecoReusableView.self, forDecorationViewOfKind: RecentDecoReusableView.identifier)
         
         return layout
@@ -50,7 +50,7 @@ enum RecentSearchLayout: Int, CaseIterable {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         
         // 헤더 추가
-        // section.boundarySupplementaryItems = [createHeader(PopularHeaderReusableView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(RecentSearchCollectionReusableView.identifier)]
         
         return section
     }
