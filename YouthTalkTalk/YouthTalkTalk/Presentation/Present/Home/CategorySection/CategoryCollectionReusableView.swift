@@ -14,6 +14,7 @@ final class CategoryCollectionReusableView: BaseCollectionReusableView {
     let gradientView = UIView()
     
     let searchBar = UISearchBar()
+    let transparentView = UIView()
     
     let jobCategoryButton = UIButton()
     let educationCategoryButton = UIButton()
@@ -24,6 +25,7 @@ final class CategoryCollectionReusableView: BaseCollectionReusableView {
         
         flexView.addSubview(gradientView)
         flexView.addSubview(searchBar)
+        flexView.addSubview(transparentView)
         
         flexView.flex.define { flex in
             
@@ -39,6 +41,13 @@ final class CategoryCollectionReusableView: BaseCollectionReusableView {
                 .marginTop(16)
                 .border(1, .gray20)
                 .width(90%)
+            
+            flex.addItem(transparentView)
+                .position(.absolute)
+                .top(searchBar.frame.minY)
+                .height(searchBar.frame.height)
+                .width(searchBar.frame.width)
+                .backgroundColor(.brown)
             
             // 카테고리
             flex.addItem().define { flex in
@@ -84,6 +93,9 @@ final class CategoryCollectionReusableView: BaseCollectionReusableView {
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = .white.withAlphaComponent(0.95)
         searchBar.searchTextField.leftView?.tintColor = .lime40
+        searchBar.isUserInteractionEnabled = false
+        
+        transparentView.isUserInteractionEnabled = true
         
         jobCategoryButton.designedCategoryLayout(title: "일자리", image: .job)
         educationCategoryButton.designedCategoryLayout(title: "교육", image: .education)
@@ -93,6 +105,17 @@ final class CategoryCollectionReusableView: BaseCollectionReusableView {
         if let textfieldBackgroundView = searchBar.searchTextField.subviews.first {
             textfieldBackgroundView.isHidden = true
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        transparentView.flex
+            .position(.absolute)
+            .top(searchBar.frame.minY)
+            .height(searchBar.frame.height)
+            .width(searchBar.frame.width)
+            .backgroundColor(.clear)
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {

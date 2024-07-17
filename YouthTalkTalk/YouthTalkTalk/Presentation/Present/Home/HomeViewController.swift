@@ -119,7 +119,10 @@ final class HomeViewController: BaseViewController<HomeView> {
             
             guard let self else { return }
             
-            supplementaryView.searchBar.rx.textDidBeginEditing
+            let tapGesture = UITapGestureRecognizer()
+            supplementaryView.transparentView.addGestureRecognizer(tapGesture)
+            
+            tapGesture.rx.event
                 .subscribe(with: self) { owner, _ in
                     
                     let viewModel = SearchViewModel()
