@@ -29,8 +29,12 @@ enum HomeLayout: Int, CaseIterable {
             }
         }
         
-        layout.register(PopularDecoReusableView.self, forDecorationViewOfKind: PopularDecoReusableView.identifier)
-        layout.register(RecentDecoReusableView.self, forDecorationViewOfKind: RecentDecoReusableView.identifier)
+        layout.register(CategoryCollectionReusableView.self,
+                        forDecorationViewOfKind: CategoryCollectionReusableView.identifier)
+        layout.register(PopularDecoReusableView.self,
+                        forDecorationViewOfKind: PopularDecoReusableView.identifier)
+        layout.register(RecentDecoReusableView.self,
+                        forDecorationViewOfKind: RecentDecoReusableView.identifier)
         
         return layout
     }

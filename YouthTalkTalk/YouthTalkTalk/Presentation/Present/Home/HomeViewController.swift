@@ -81,8 +81,9 @@ final class HomeViewController: BaseViewController<HomeView> {
             cell.configure(data: itemIdentifier.data)
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) {  [weak self] collectionView, indexPath, itemIdentifier in
             
+            guard let self else { return nil }
             guard let section = HomeLayout(rawValue: indexPath.section) else { return nil }
             
             if section == .category { return nil }
@@ -123,13 +124,13 @@ final class HomeViewController: BaseViewController<HomeView> {
             supplementaryView.transparentView.addGestureRecognizer(tapGesture)
             
             tapGesture.rx.event
-                .subscribe(with: self) { owner, _ in
+                .bind(with: self) { owner, _ in
                     
                     let viewModel = SearchViewModel()
                     
                     let nextVC = SearchViewController(viewModel: viewModel)
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-                }.disposed(by: self.disposeBag)
+                    owner.navigationController?.pushViewController(nextVC, animated: true)
+                }.disposed(by: disposeBag)
         }
         
         
@@ -152,19 +153,19 @@ final class HomeViewController: BaseViewController<HomeView> {
             
             switch kind {
             case CategoryCollectionReusableView.identifier:
-                return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: categoryHeaderRegistration,
                     for: index)
                 
             case PopularHeaderReusableView.identifier:
                 
-                return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: popularHeaderRegistration,
                     for: index)
                 
             case RecentHeaderReusableView.identifier:
                 
-                return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: recentHeaderRegistration,
                     for: index)
                 

@@ -29,9 +29,10 @@ final class HomeViewModel: HomeInterface {
         self.policyUseCase = policyUseCase
         
         fetchPolicies
-            .flatMap { _ in
+            .withUnretained(self)
+            .flatMap { owner, _ in
                 
-                return policyUseCase.fetchHomePolicies(categories: [.job, .life], page: 1, size: 10)
+                return owner.policyUseCase.fetchHomePolicies(categories: [.job, .life], page: 1, size: 10)
             }.subscribe(with: self) { owner, result in
                 
                 switch result {
