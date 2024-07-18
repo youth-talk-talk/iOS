@@ -10,8 +10,8 @@ import Alamofire
 
 enum PolicyRouter: Router {
     
-    var keyChainRepository: KeyChainRepository {
-        return KeyChainRepositoryImpl()
+    var keyChainHelper: KeyChainHelper {
+        return KeyChainHelper()
     }
     
     case fetchHomePolicy(homePolicy: HomePolicyBody)
@@ -45,7 +45,7 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy(_):
             return ["Content-Type": "application/json",
-                    "Authorization": "Bearer \(keyChainRepository.loadTokenInfo(type: .accessToken))"]
+                    "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
     }
     

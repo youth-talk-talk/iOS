@@ -19,11 +19,12 @@ enum TestError: Error {
 final class APIManager: APIInterface {
     
     private let session: Session
-    private let keyChainRepository: KeyChainRepository
     
-    init(session: Session = Session.default, keyChainRepository: KeyChainRepository = KeyChainRepositoryImpl()) {
+    private let keyChainHelper: KeyChainHelper = KeyChainHelper()
+    private let interceptor: APIInterceptor = APIInterceptor()
+    
+    init(session: Session = Session.default) {
         self.session = session
-        self.keyChainRepository = keyChainRepository
     }
     
     func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, APIError>> {
@@ -54,6 +55,10 @@ final class APIManager: APIInterface {
             return Disposables.create()
         }
     }
+    
+    deinit {
+        print("APIManager Deinit")
+    }
 }
 
 extension APIManager {
@@ -63,11 +68,11 @@ extension APIManager {
         guard let httpResponse = response else { return }
         
         if let accessToken = httpResponse.value(forHTTPHeaderField: "Authorization") {
-            self.keyChainRepository.saveTokenInfo(saveData: accessToken, type: .accessToken)
+            self.keyChainHelper.saveTokenInfo(saveData: accessToken, type: .accessToken)
         }
         
         if let refreshToken = httpResponse.value(forHTTPHeaderField: "Authorization-refresh") {
-            self.keyChainRepository.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
+            self.keyChainHelper.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
         }
     }
     

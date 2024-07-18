@@ -12,8 +12,8 @@ import Alamofire
 
 enum MeRouter: Router {
     
-    var keyChainRepository: KeyChainRepository {
-        return KeyChainRepositoryImpl()
+    var keyChainHelper: KeyChainHelper {
+        return KeyChainHelper()
     }
     
     case requestMe
@@ -47,7 +47,7 @@ enum MeRouter: Router {
         switch self {
         case .requestMe:
             return ["Content-Type": "application/json",
-                    "Authorization": "Bearer \(keyChainRepository.loadTokenInfo(type: .accessToken))"]
+                    "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
     }
     

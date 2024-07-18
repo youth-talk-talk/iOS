@@ -13,24 +13,20 @@ import KakaoSDKUser
 final class SignUpUseCaseImpl: SignUpUseCase {
     
     private let disposeBag = DisposeBag()
-    private let keyChainRepository: KeyChainRepository
-    private let userDefaultsRepository: UserDefaultsRepository
+    private let keyChainHelper: KeyChainHelper = KeyChainHelper()
+    private let userDefaults: UserDefaults = UserDefaults.standard
     private let signUpRepository: SignUpRepository
     
     private let appleSignUp = PublishRelay<Bool>()
     private let kakaoSignUp = PublishRelay<Bool>()
     
-    init(keyChainRepository: KeyChainRepository = KeyChainRepositoryImpl(),
-         userDefaultsRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl(),
-         signUpRepository: SignUpRepository = SignUpRepositoryImpl()) {
-        self.keyChainRepository = keyChainRepository
-        self.userDefaultsRepository = userDefaultsRepository
+    init(signUpRepository: SignUpRepository = SignUpRepositoryImpl()) {
         self.signUpRepository = signUpRepository
     }
     
     func signUp(region: String, nickname: String) -> Observable<Result<Void, Error>> {
         
-        let signUpType = userDefaultsRepository.signUpType()
+        let signUpType = userDefaults.signUpType
         
         switch signUpType {
         case .apple:
@@ -44,8 +40,8 @@ final class SignUpUseCaseImpl: SignUpUseCase {
     
     private func signUpWithApple(region: String, nickname: String) -> Observable<Result<Void, Error>> {
         
-        let identifier = KeyChainHelper().loadAppleInfo(type: .appleIdentifier) ?? ""
-        let token = KeyChainHelper().loadAppleInfo(type: .appleIdentifierToken) ?? ""
+        let identifier = keyChainHelper.loadAppleInfo(type: .appleIdentifier)
+        let token = keyChainHelper.loadAppleInfo(type: .appleIdentifierToken)
         
         return signUpRepository.requestAppleSignUp(userIdentifier: identifier,
                                                    nickname: nickname,

@@ -182,7 +182,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         self.navigationItem.leftBarButtonItem = customView
         
-        #if DEBUG
+        // #if DEBUG
         let commandButton = UIButton()
         commandButton.designed(title: "DEBUG", bgColor: .clear, fontType: .g14Bold)
         let commandItem = UIBarButtonItem(customView: commandButton)
@@ -196,7 +196,7 @@ final class HomeViewController: BaseViewController<HomeView> {
                 
             }.disposed(by: disposeBag)
         
-        #endif
+        // #endif
     }
     
     func update() {
@@ -212,5 +212,9 @@ final class HomeViewController: BaseViewController<HomeView> {
         snapshot.appendItems(allPolicies, toSection: .recent)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    deinit {
+        print("HomeViewController Deinit")
     }
 }

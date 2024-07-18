@@ -16,18 +16,14 @@ import KakaoSDKUser
 final class SignInUseCaseImpl: NSObject, SignInUseCase {
     
     private let disposeBag = DisposeBag()
-    private let keyChainRepository: KeyChainRepository
-    private let userDefaultsRepository: UserDefaultsRepository
+    private let keyChainHelper: KeyChainHelper = KeyChainHelper()
+    private let userDefaults: UserDefaults = UserDefaults.standard
     private let signInRepository: SignInRepository
     
     private let appleSignIn = PublishRelay<Bool>()
     private let kakaoSignIn = PublishRelay<Bool>()
     
-    init(keyChainRepository: KeyChainRepository = KeyChainRepositoryImpl(),
-         userDefaultsRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl(),
-         signInRepository: SignInRepository = SignInRepositoryImpl() ) {
-        self.keyChainRepository = keyChainRepository
-        self.userDefaultsRepository = userDefaultsRepository
+    init(signInRepository: SignInRepository = SignInRepositoryImpl() ) {
         self.signInRepository = signInRepository
     }
     
@@ -119,12 +115,12 @@ extension SignInUseCaseImpl {
                 switch result {
                 case .success(let signInEntity):
                     
-                    owner.userDefaultsRepository.saveSignedInState(signedInType: .kakao)
+                    owner.userDefaults.saveSignedInState(signedInType: .kakao)
                     owner.kakaoSignIn.accept(true)
                     
                 case .failure(let error):
                     
-                    owner.userDefaultsRepository.saveSignUpType(signUpType: .kakao)
+                    owner.userDefaults.saveSignUpType(signUpType: .kakao)
                     owner.kakaoSignIn.accept(false)
                 }
                 
@@ -173,7 +169,7 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
                 case .success(let userData):
                     
                     // 로그인 처리 -> 홈화면 이동
-                    owner.userDefaultsRepository.saveSignedInState(signedInType: .apple)
+                    owner.userDefaults.saveSignedInState(signedInType: .apple)
                     owner.appleSignIn.accept(true)
                     
                     break
@@ -181,7 +177,7 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
                 case .failure(let error):
                     
                     // 회원가입 -> 약관 동의 페이지 이동
-                    owner.userDefaultsRepository.saveSignUpType(signUpType: .apple)
+                    owner.userDefaults.saveSignUpType(signUpType: .apple)
                     owner.appleSignIn.accept(false)
                     
                     break
@@ -202,9 +198,9 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         let authorizationCode = tokenToString(data: credentials.authorizationCode)
         
         // MARK: 키체인 / 유저 Identifier / 유저 토큰 / 인증 코드 저장
-        keyChainRepository.saveAppleUserID(saveData: userIdentifier, type: .appleIdentifier)
-        keyChainRepository.saveAppleUserID(saveData: identityToken, type: .appleIdentifierToken)
-        keyChainRepository.saveAppleUserID(saveData: authorizationCode, type: .authorizationCode)
+        keyChainHelper.saveAppleInfo(saveData: userIdentifier, type: .appleIdentifier)
+        keyChainHelper.saveAppleInfo(saveData: identityToken, type: .appleIdentifierToken)
+        keyChainHelper.saveAppleInfo(saveData: authorizationCode, type: .authorizationCode)
         
         return signInRepository.requestAppleSignIn(userIdentifier: userIdentifier,
                                                    authorizationCode: authorizationCode,
@@ -231,6 +227,6 @@ extension SignInUseCaseImpl {
     
     func loginWithAuto() -> Bool {
         
-        return keyChainRepository.isLogined()
+        return keyChainHelper.isLogined()
     }
 }

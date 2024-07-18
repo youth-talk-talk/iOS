@@ -29,6 +29,9 @@ class DebugViewController: BaseViewController<DebugView> {
         layoutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DebugCell")
     }
     
+    deinit {
+        print("DebugViewController Deinit")
+    }
 }
 
 extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,10 +59,7 @@ extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
         switch item {
         case .signInPage:
             
-            let keyChainRepository = KeyChainRepositoryImpl()
-            let userDefaultsRepository = UserDefaultsRepositoryImpl()
-            let useCase = SignInUseCaseImpl(keyChainRepository: keyChainRepository,
-                                        userDefaultsRepository: userDefaultsRepository)
+            let useCase = SignInUseCaseImpl()
             let viewModel = SignInViewModel(signInUseCase: useCase)
             let newRootVC = SignInViewController(viewModel: viewModel)
             let naviVC = UINavigationController(rootViewController: newRootVC)

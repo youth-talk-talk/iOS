@@ -50,3 +50,18 @@ extension UserDefaults {
         }
     }
 }
+
+extension UserDefaults {
+    
+    // MARK: SIGN IN STATE
+    func saveSignedInState(signedInType: SignInType) {
+        print("❗️ 마지막 로그인 기록을 \(signedInType.rawValue)로 저장합니다.")
+        isSignIn = signedInType
+    }
+    
+    // MARK: SIGN UP TYPE
+    func saveSignUpType(signUpType: SignUpType) {
+        print("❗️ 마지막 소셜 로그인 기록을 \(signUpType.rawValue)로 저장합니다.")
+        self.signUpType = signUpType
+    }
+}

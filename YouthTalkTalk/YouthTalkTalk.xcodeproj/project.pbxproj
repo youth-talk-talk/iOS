@@ -54,6 +54,7 @@
 		AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */; };
 		AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */; };
 		AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */; };
+		AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B652C49169D00D1C9FC /* APIInterceptor.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -101,11 +102,7 @@
 		ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */; };
 		ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2C62C2D58AF00FE8D63 /* SplashView.swift */; };
 		ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2C92C2D8B2400FE8D63 /* SplashViewModel.swift */; };
-		ACF2A2CF2C2D920500FE8D63 /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2CE2C2D920500FE8D63 /* UserDefaultsRepository.swift */; };
-		ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D02C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift */; };
 		ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */; };
-		ACF2A2D52C2E710B00FE8D63 /* KeyChainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */; };
-		ACF2A2D72C2E713900FE8D63 /* KeyChainRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */; };
 		ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DC2C2E903600FE8D63 /* SplashInput.swift */; };
 		ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2DE2C2E921900FE8D63 /* SplashOutput.swift */; };
 		ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2E02C2E929900FE8D63 /* SplashInterface.swift */; };
@@ -195,6 +192,7 @@
 		AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePolicyEntity.swift; sourceTree = "<group>"; };
 		AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCaseImpl.swift; sourceTree = "<group>"; };
 		AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionReusableView.swift; sourceTree = "<group>"; };
+		AC579B652C49169D00D1C9FC /* APIInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptor.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -243,11 +241,7 @@
 		ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		ACF2A2C62C2D58AF00FE8D63 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		ACF2A2C92C2D8B2400FE8D63 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
-		ACF2A2CE2C2D920500FE8D63 /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
-		ACF2A2D02C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepositoryImpl.swift; sourceTree = "<group>"; };
 		ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
-		ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainRepository.swift; sourceTree = "<group>"; };
-		ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainRepositoryImpl.swift; sourceTree = "<group>"; };
 		ACF2A2DC2C2E903600FE8D63 /* SplashInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInput.swift; sourceTree = "<group>"; };
 		ACF2A2DE2C2E921900FE8D63 /* SplashOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashOutput.swift; sourceTree = "<group>"; };
 		ACF2A2E02C2E929900FE8D63 /* SplashInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInterface.swift; sourceTree = "<group>"; };
@@ -755,8 +749,6 @@
 		ACF2A2CC2C2D91E400FE8D63 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2D02C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift */,
-				ACF2A2D62C2E713900FE8D63 /* KeyChainRepositoryImpl.swift */,
 				ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */,
 				AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */,
 				AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */,
@@ -767,8 +759,6 @@
 		ACF2A2CD2C2D91EB00FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2CE2C2D920500FE8D63 /* UserDefaultsRepository.swift */,
-				ACF2A2D42C2E710B00FE8D63 /* KeyChainRepository.swift */,
 				ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */,
 				AC579B422C40160F00D1C9FC /* SignUpRepository.swift */,
 				AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */,
@@ -792,6 +782,7 @@
 				ACF2A2EC2C3160CF00FE8D63 /* Router */,
 				ACF2A2EA2C315F3E00FE8D63 /* APIInterface.swift */,
 				ACF2A2E82C315E7000FE8D63 /* APIManager.swift */,
+				AC579B652C49169D00D1C9FC /* APIInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1059,6 +1050,7 @@
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
+				AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */,
@@ -1067,12 +1059,10 @@
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */,
-				ACF2A2D72C2E713900FE8D63 /* KeyChainRepositoryImpl.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
-				ACF2A2D52C2E710B00FE8D63 /* KeyChainRepository.swift in Sources */,
 				AC579B2C2C3BE10A00D1C9FC /* SearchOutput.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
 				AC579B4C2C451C6B00D1C9FC /* HomeInput.swift in Sources */,
@@ -1093,7 +1083,6 @@
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
-				ACF2A2CF2C2D920500FE8D63 /* UserDefaultsRepository.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
 				ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */,
 				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
@@ -1120,7 +1109,6 @@
 				AC579B542C4522CE00D1C9FC /* PolicyRepository.swift in Sources */,
 				ACF2A31E2C37D21C00FE8D63 /* SignUpBody.swift in Sources */,
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
-				ACF2A2D12C2D92A800FE8D63 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				AC579B5A2C4528B500D1C9FC /* PolicyRouter.swift in Sources */,
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,

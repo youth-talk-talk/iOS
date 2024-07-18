@@ -46,7 +46,7 @@ final class KeyChainHelper {
         }
     }
     
-    func loadAppleInfo(type: AppleKeyChainIdentifierType) -> String? {
+    func loadAppleInfo(type: AppleKeyChainIdentifierType) -> String {
         let keychainIdentifier = type.rawValue
 
         // Keychain Query 설정
@@ -61,10 +61,10 @@ final class KeyChainHelper {
         let status = SecItemCopyMatching(query as CFDictionary, &item)
 
         guard status == errSecSuccess, let data = item as? Data else {
-            return nil
+            return ""
         }
 
-        return String(data: data, encoding: .utf8)
+        return String(data: data, encoding: .utf8) ?? ""
     }
     
     func saveTokenInfo(saveData: String, type: TokenKeyChainIdentifierType) {
@@ -109,5 +109,16 @@ final class KeyChainHelper {
         }
         
         return String(data: data, encoding: .utf8) ?? ""
+    }
+    
+    func isLogined() -> Bool {
+        
+        let accessToken = loadTokenInfo(type: .accessToken)
+        
+        if accessToken == "" {
+            return false
+        }
+        
+        return true
     }
 }

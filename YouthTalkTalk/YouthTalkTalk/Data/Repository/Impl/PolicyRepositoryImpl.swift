@@ -22,4 +22,8 @@ final class PolicyRepositoryImpl: PolicyRepository {
         
         return apiManager.request(router: router, type: HomePolicyDTO.self).asObservable()
     }
+    
+    deinit {
+        print("PolicyRepositoryImpl Deinit")
+    }
 }

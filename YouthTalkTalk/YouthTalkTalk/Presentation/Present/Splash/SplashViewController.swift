@@ -65,10 +65,7 @@ class SplashViewController: BaseViewController<SplashView> {
     }
     
     private func navigateToSignIn() {
-        let keyChainRepository = KeyChainRepositoryImpl()
-        let userDefaultsRepository = UserDefaultsRepositoryImpl()
-        let useCase = SignInUseCaseImpl(keyChainRepository: keyChainRepository,
-                                    userDefaultsRepository: userDefaultsRepository)
+        let useCase = SignInUseCaseImpl()
         let viewModel = SignInViewModel(signInUseCase: useCase)
         let newRootVC = SignInViewController(viewModel: viewModel)
         let naviVC = UINavigationController(rootViewController: newRootVC)

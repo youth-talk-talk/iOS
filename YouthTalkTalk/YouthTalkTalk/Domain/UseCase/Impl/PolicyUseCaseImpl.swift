@@ -23,7 +23,8 @@ final class PolicyUseCaseImpl: PolicyUseCase {
     func fetchHomePolicies(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<HomePolicyEntity, APIError>> {
         
         return policyRepository.fetchHomePolicies(categories: categories, page: page, size: size)
-            .map { result in
+            .withUnretained(self)
+            .map { owner, result in
                 
                 switch result {
                 case .success(let homePolicyDTO):
@@ -48,5 +49,9 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                     return .failure(failure)
                 }
             }
+    }
+    
+    deinit {
+        print("PolicyUseCaseImpl Deinit")
     }
 }
