@@ -23,4 +23,9 @@ struct PolicyEntity: Hashable {
     let deadlineStatus: String
     let hostDep: String
     let scrap: Bool
+    
+    static func mockupData() -> PolicyEntity {
+        
+        return PolicyEntity(policyId: "", category: "", title: "더미 데이터", deadlineStatus: "", hostDep: "", scrap: false)
+    }
 }
