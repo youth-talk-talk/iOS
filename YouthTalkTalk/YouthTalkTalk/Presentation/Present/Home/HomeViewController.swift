@@ -46,6 +46,8 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     override func configureCollectionView() {
         
+        layoutView.collectionView.prefetchDataSource = self
+        
         cellRegistration()
         headerRegistration()
     }
@@ -218,5 +220,26 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     deinit {
         print("HomeViewController Deinit")
+    }
+}
+
+extension HomeViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        // 아이템 총 갯수 - 셀 위치 < 5보다 작으면
+        // 아이템 총 갯수 / 10 + 1로 다음 페이지로 늘림
+        // 페이지가 올라가면 fetch
+        
+        let total = viewModel.allPoliciesCount()
+    
+        indexPaths.forEach { indexPath in
+            
+            let currentPosition = indexPath.item
+            let nextPage: Int = (total / 10) + 1
+            
+            if total - currentPosition < 7 {
+                viewModel.input.updateRecentPolicies.accept(nextPage)
+            }
+        }
     }
 }

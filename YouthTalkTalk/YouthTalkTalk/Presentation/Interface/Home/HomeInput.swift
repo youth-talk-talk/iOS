@@ -11,4 +11,5 @@ import RxCocoa
 protocol HomeInput {
     
     var fetchPolicies: PublishRelay<Void> { get }
+    var updateRecentPolicies: PublishRelay<Int> { get }
 }

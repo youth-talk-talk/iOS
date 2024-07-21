@@ -13,4 +13,6 @@ protocol HomeOutput {
     
     var topFivePoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
     var allPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
+    
+    func allPoliciesCount() -> Int
 }

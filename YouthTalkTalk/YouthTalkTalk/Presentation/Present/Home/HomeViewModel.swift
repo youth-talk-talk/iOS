@@ -19,6 +19,7 @@ final class HomeViewModel: HomeInterface {
     
     // Inputs
     var fetchPolicies = PublishRelay<Void>()
+    var updateRecentPolicies = PublishRelay<Int>()
     
     // Outputs
     var topFivePoliciesRelay = PublishRelay<[HomeSectionItems]>()
@@ -54,6 +55,36 @@ final class HomeViewModel: HomeInterface {
                     print("실패")
                 }
             }.disposed(by: disposeBag)
+        
+        updateRecentPolicies
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .flatMap { owner, page in
+                
+                return owner.policyUseCase.fetchHomePolicies(categories: [.job, .education, .life, .participation], page: page, size: 10)
+            }.subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let homePolicyEntity):
+                    
+                    let allPolicies = homePolicyEntity.allPolicies.map { HomeSectionItems.all($0)}
+                    
+                    allPolicies.forEach { newPolicies in
+                        owner.allPolicies.append(newPolicies)
+                    }
+                    
+                    owner.allPoliciesRelay.accept(allPolicies)
+                    
+                case .failure(let error):
+                    
+                    print("실패")
+                }
+            }.disposed(by: disposeBag)
+    }
+    
+    func allPoliciesCount() -> Int {
+        
+        return allPolicies.count
     }
     
     deinit {
