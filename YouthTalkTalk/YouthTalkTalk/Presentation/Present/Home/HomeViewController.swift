@@ -32,6 +32,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     let viewModel: HomeInterface
     
     var dataSource: UICollectionViewDiffableDataSource<HomeLayout, HomeSectionItems>!
+    var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, HomeSectionItems>()
     
     init(viewModel: HomeInterface) {
         self.viewModel = viewModel
@@ -47,15 +48,23 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         cellRegistration()
         headerRegistration()
-        update()
     }
     
     override func bind() {
         
-        viewModel.output.fetchPoliciesSuccess
-            .bind(with: self) { owner, _ in
+        snapshot.appendSections([.category, .popular, .recent])
+        
+        viewModel.output.topFivePoliciesRelay
+            .bind(with: self) { owner, topFivePolicies in
                 
-                owner.update()
+                owner.update(section: .popular, items: topFivePolicies)
+                
+            }.disposed(by: disposeBag)
+        
+        viewModel.output.allPoliciesRelay
+            .bind(with: self) { owner, allPolicies in
+                
+                owner.update(section: .recent, items: allPolicies)
                 
             }.disposed(by: disposeBag)
         
@@ -200,17 +209,9 @@ final class HomeViewController: BaseViewController<HomeView> {
         // #endif
     }
     
-    func update() {
+    func update(section: HomeLayout, items: [HomeSectionItems]) {
         
-        let topFivePolicies = viewModel.output.topFivePolicies
-        let allPolicies = viewModel.output.allPolicies
-        
-        var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, HomeSectionItems>()
-        
-        snapshot.appendSections([.category, .popular, .recent])
-        
-        snapshot.appendItems(topFivePolicies, toSection: .popular)
-        snapshot.appendItems(allPolicies, toSection: .recent)
+        snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
