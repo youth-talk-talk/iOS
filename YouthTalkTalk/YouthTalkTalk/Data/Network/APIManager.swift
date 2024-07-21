@@ -33,7 +33,7 @@ final class APIManager: APIInterface {
             
             guard let self else { return Disposables.create() }
             
-            session.request(router)
+            session.request(router, interceptor: interceptor)
                 .responseDecodable(of: type.self) { response in
                     
                     switch response.result {
