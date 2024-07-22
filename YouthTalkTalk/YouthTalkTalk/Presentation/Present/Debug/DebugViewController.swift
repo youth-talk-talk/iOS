@@ -21,6 +21,8 @@ enum DebugItem: Int, CaseIterable {
 }
 
 class DebugViewController: BaseViewController<DebugView> {
+    
+    private let keyChainHelper = KeyChainHelper()
 
     override func configureTableView() {
         
@@ -64,6 +66,8 @@ extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
             let newRootVC = SignInViewController(viewModel: viewModel)
             let naviVC = UINavigationController(rootViewController: newRootVC)
             
+            resetSignInInfo()
+            
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
                     fatalError("Failed to get SceneDelegate")
@@ -72,5 +76,11 @@ extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
                 sceneDelegate.window?.makeKeyAndVisible()
             }
         }
+    }
+    
+    private func resetSignInInfo() {
+        
+        keyChainHelper.deleteTokenInfo(type: .accessToken)
+        keyChainHelper.deleteTokenInfo(type: .refreshToken)
     }
 }

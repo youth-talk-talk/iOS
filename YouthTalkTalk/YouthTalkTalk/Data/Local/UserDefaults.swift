@@ -26,18 +26,6 @@ enum SignUpType: String {
 
 extension UserDefaults {
     
-    var isSignIn: SignInType {
-        get {
-            guard let signInTypeString = string(forKey: SignInType.key),
-                  let signInType = SignInType(rawValue: signInTypeString) else {
-                return .none // 기본값 설정
-            }
-            return signInType
-        } set {
-            set(newValue.rawValue, forKey: SignInType.key)
-        }
-    }
-    
     var signUpType: SignUpType {
         get {
             guard let signUpTypeString = string(forKey: SignUpType.key),
@@ -52,12 +40,6 @@ extension UserDefaults {
 }
 
 extension UserDefaults {
-    
-    // MARK: SIGN IN STATE
-    func saveSignedInState(signedInType: SignInType) {
-        print("❗️ 마지막 로그인 기록을 \(signedInType.rawValue)로 저장합니다.")
-        isSignIn = signedInType
-    }
     
     // MARK: SIGN UP TYPE
     func saveSignUpType(signUpType: SignUpType) {

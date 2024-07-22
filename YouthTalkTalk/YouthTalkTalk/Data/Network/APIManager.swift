@@ -67,13 +67,7 @@ extension APIManager {
         
         guard let httpResponse = response else { return }
         
-        if let accessToken = httpResponse.value(forHTTPHeaderField: "Authorization") {
-            self.keyChainHelper.saveTokenInfo(saveData: accessToken, type: .accessToken)
-        }
-        
-        if let refreshToken = httpResponse.value(forHTTPHeaderField: "Authorization-refresh") {
-            self.keyChainHelper.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
-        }
+        self.keyChainHelper.saveTokenInfoFromHttpResponse(response: httpResponse)
     }
     
     private func handleErrorResponse(_ data: Data?) -> APIError {

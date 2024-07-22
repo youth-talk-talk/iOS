@@ -23,6 +23,7 @@ enum TokenKeyChainIdentifierType: String {
 
 final class KeyChainHelper {
     
+    /// 저장 - 애플 정보 저장
     func saveAppleInfo(saveData: String?, type: AppleKeyChainIdentifierType) {
         let keychainIdentifier = type.rawValue
 
@@ -46,6 +47,7 @@ final class KeyChainHelper {
         }
     }
     
+    /// 불러오기 - 애플 토큰 정보 불러오기
     func loadAppleInfo(type: AppleKeyChainIdentifierType) -> String {
         let keychainIdentifier = type.rawValue
 
@@ -67,6 +69,7 @@ final class KeyChainHelper {
         return String(data: data, encoding: .utf8) ?? ""
     }
     
+    /// 저장 - 엑세스 토큰, 리프레쉬 토큰 중 저장
     func saveTokenInfo(saveData: String, type: TokenKeyChainIdentifierType) {
         let keychainIdentifier = type.rawValue
     
@@ -90,6 +93,7 @@ final class KeyChainHelper {
         }
     }
     
+    /// 불러오기 - 엑세스 토큰, 리프레쉬 토큰 불러오기
     func loadTokenInfo(type: TokenKeyChainIdentifierType) -> String {
         let keychainIdentifier = type.rawValue
     
@@ -110,6 +114,38 @@ final class KeyChainHelper {
         
         return String(data: data, encoding: .utf8) ?? ""
     }
+    
+    /// 저장 - 엑세스 토큰, 리프레쉬 토큰 한번에 저장
+    func saveTokenInfoFromHttpResponse(response: HTTPURLResponse) {
+     
+        if let accessToken = response.value(forHTTPHeaderField: "Authorization") {
+            self.saveTokenInfo(saveData: accessToken, type: .accessToken)
+        }
+        
+        if let refreshToken = response.value(forHTTPHeaderField: "Authorization-refresh") {
+            self.saveTokenInfo(saveData: refreshToken, type: .refreshToken)
+        }
+    }
+    
+    /// 삭제 - 엑세스 토큰, 리프레쉬 토큰 삭제
+    func deleteTokenInfo(type: TokenKeyChainIdentifierType) {
+            let keychainIdentifier = type.rawValue
+            
+            // Keychain Query 설정
+            let query: NSDictionary = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrAccount: keychainIdentifier
+            ]
+            
+            // 키체인에서 아이템 삭제 시도
+            let status = SecItemDelete(query)
+            
+            if status == errSecSuccess {
+                print("\(type.rawValue) 삭제 성공")
+            } else {
+                print("\(type.rawValue) 삭제 실패, 상태 코드: \(status)")
+            }
+        }
     
     func isLogined() -> Bool {
         

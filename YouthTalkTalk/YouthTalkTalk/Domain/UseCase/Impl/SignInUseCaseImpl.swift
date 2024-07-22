@@ -115,7 +115,7 @@ extension SignInUseCaseImpl {
                 switch result {
                 case .success(let signInEntity):
                     
-                    owner.userDefaults.saveSignedInState(signedInType: .kakao)
+                    // owner.userDefaults.saveSignedInState(signedInType: .kakao)
                     owner.kakaoSignIn.accept(true)
                     
                 case .failure(let error):
@@ -169,7 +169,7 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
                 case .success(let userData):
                     
                     // 로그인 처리 -> 홈화면 이동
-                    owner.userDefaults.saveSignedInState(signedInType: .apple)
+                    // owner.userDefaults.saveSignedInState(signedInType: .apple)
                     owner.appleSignIn.accept(true)
                     
                     break
