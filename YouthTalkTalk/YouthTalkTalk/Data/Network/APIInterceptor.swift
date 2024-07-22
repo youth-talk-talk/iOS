@@ -39,7 +39,7 @@ class APIInterceptor: RequestInterceptor {
             return
         }
         
-        newRequest.setValue("Bearer  \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
+        newRequest.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
         newRequest.setValue(nil, forHTTPHeaderField: "Authorization")
         
         session.request(newRequest).validate(statusCode: 200 ... 400).response { response in
