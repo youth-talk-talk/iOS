@@ -12,4 +12,5 @@ protocol HomeInput {
     
     var fetchPolicies: PublishRelay<Void> { get }
     var updateRecentPolicies: PublishRelay<Int> { get }
+    var policyCategorySeleted: PublishRelay<PolicyCategory> { get }
 }

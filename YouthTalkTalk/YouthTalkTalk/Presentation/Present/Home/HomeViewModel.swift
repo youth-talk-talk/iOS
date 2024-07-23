@@ -14,12 +14,16 @@ final class HomeViewModel: HomeInterface {
     private let disposeBag: DisposeBag = DisposeBag()
     private let policyUseCase: PolicyUseCase
     
+    // 선택된 정책 카테고리
+    var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
+    
     var input: HomeInput { return self }
     var output: HomeOutput { return self }
     
     // Inputs
     var fetchPolicies = PublishRelay<Void>()
     var updateRecentPolicies = PublishRelay<Int>()
+    var policyCategorySeleted = PublishRelay<PolicyCategory>()
     
     // Outputs
     var topFivePoliciesRelay = PublishRelay<[HomeSectionItems]>()
@@ -31,11 +35,12 @@ final class HomeViewModel: HomeInterface {
     init(policyUseCase: PolicyUseCase) {
         self.policyUseCase = policyUseCase
         
+        // 기본 10개 정책 호출
         fetchPolicies
             .withUnretained(self)
             .flatMap { owner, _ in
                 
-                return owner.policyUseCase.fetchHomePolicies(categories: [.job, .life], page: 1, size: 10)
+                return owner.policyUseCase.fetchHomePolicies(categories: owner.selectedPolicyCategory, page: 1, size: 10)
             }.subscribe(with: self) { owner, result in
                 
                 switch result {
@@ -56,12 +61,13 @@ final class HomeViewModel: HomeInterface {
                 }
             }.disposed(by: disposeBag)
         
+        // 스크롤(페이지 변경)을 통한 정책 호출
         updateRecentPolicies
             .distinctUntilChanged()
             .withUnretained(self)
             .flatMap { owner, page in
                 
-                return owner.policyUseCase.fetchHomePolicies(categories: [.job, .education, .life, .participation], page: page, size: 10)
+                return owner.policyUseCase.fetchHomePolicies(categories: owner.selectedPolicyCategory, page: page, size: 10)
             }.subscribe(with: self) { owner, result in
                 
                 switch result {
@@ -79,6 +85,22 @@ final class HomeViewModel: HomeInterface {
                     
                     print("실패")
                 }
+            }.disposed(by: disposeBag)
+        
+        // 카테고리 변경
+        policyCategorySeleted
+            .subscribe(with: self) { owner, category in
+                
+                if let index = owner.selectedPolicyCategory.firstIndex(of: category) {
+                    // 카테고리가 이미 선택되어 있으면 삭제
+                    owner.selectedPolicyCategory.remove(at: index)
+                } else {
+                    // 카테고리가 선택되어 있지 않으면 추가
+                    owner.selectedPolicyCategory.append(category)
+                }
+                
+                owner.fetchPolicies.accept(())
+                
             }.disposed(by: disposeBag)
     }
     

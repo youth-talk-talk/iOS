@@ -8,6 +8,7 @@
 import UIKit
 import PinLayout
 import RxCocoa
+import RxSwift
 
 enum HomeSectionItems: Hashable {
     
@@ -29,8 +30,7 @@ enum HomeSectionItems: Hashable {
 
 final class HomeViewController: BaseViewController<HomeView> {
     
-    let viewModel: HomeInterface
-    
+    var viewModel: HomeInterface
     var dataSource: UICollectionViewDiffableDataSource<HomeLayout, HomeSectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, HomeSectionItems>()
     
@@ -129,6 +129,8 @@ final class HomeViewController: BaseViewController<HomeView> {
         // 카테고리 Header Registration
         let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
+            supplementaryView.prepareForReuse()
+            
             guard let self else { return }
             
             let tapGesture = UITapGestureRecognizer()
@@ -144,7 +146,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 }.disposed(by: disposeBag)
         }
         
-        
         // 인기정책 Header Registration
         let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
@@ -152,9 +153,55 @@ final class HomeViewController: BaseViewController<HomeView> {
         }
         
         // 최근업데이트 Header Registration
-        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentHeaderReusableView>(elementKind: RecentHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentHeaderReusableView>(elementKind: RecentHeaderReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
-            // guard let self else { return }
+            guard let self else { return }
+            
+            let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
+            let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
+            let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()
+            let participationButtonTap = supplementaryView.participationCheckBoxButton.rx.tap.map { PolicyCategory.participation }.asObservable()
+            
+            Observable.merge(jobButtonTap, educationButtonTap, lifeButtonTap, participationButtonTap)
+                .bind(with: self) { owner, category in
+                    
+                    // 선택 시 'seleted' 활성화/비활성화
+                    switch category {
+                    case .job:
+                        supplementaryView.jobCheckBoxButton.isSelected.toggle()
+                    case .education:
+                        supplementaryView.educationCheckBoxButton.isSelected.toggle()
+                    case .life:
+                        supplementaryView.lifeCheckBoxButton.isSelected.toggle()
+                    case .participation:
+                        supplementaryView.participationCheckBoxButton.isSelected.toggle()
+                    }
+                    
+                    // 선택된 버튼만 필터링
+                    let selectedButtons = [
+                        supplementaryView.jobCheckBoxButton,
+                        supplementaryView.educationCheckBoxButton,
+                        supplementaryView.lifeCheckBoxButton,
+                        supplementaryView.participationCheckBoxButton
+                    ].filter { $0.isSelected }
+                    
+                    // 선택된 버튼이 없으면, 마지막으로 클릭한 버튼 'selected'
+                    if selectedButtons.isEmpty {
+                        switch category {
+                        case .job:
+                            supplementaryView.jobCheckBoxButton.isSelected = true
+                        case .education:
+                            supplementaryView.educationCheckBoxButton.isSelected = true
+                        case .life:
+                            supplementaryView.lifeCheckBoxButton.isSelected = true
+                        case .participation:
+                            supplementaryView.participationCheckBoxButton.isSelected = true
+                        }
+                    } else {
+                        
+                        owner.viewModel.input.policyCategorySeleted.accept(category)
+                    }
+                }.disposed(by: supplementaryView.disposeBag)
         }
         
         // Header 등록
@@ -164,6 +211,7 @@ final class HomeViewController: BaseViewController<HomeView> {
             
             switch kind {
             case CategoryCollectionReusableView.identifier:
+                
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: categoryHeaderRegistration,
                     for: index)
@@ -213,6 +261,14 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     func update(section: HomeLayout, items: [HomeSectionItems]) {
         
+        let count = viewModel.allPoliciesCount()
+        
+        // 카테고리 변경 시에는 기존 데이터 모두 삭제 후 새로 등록
+        // 변경 필요
+        if count == 10 {
+            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: section))
+        }
+            
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
@@ -226,19 +282,15 @@ final class HomeViewController: BaseViewController<HomeView> {
 extension HomeViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
-        // 아이템 총 갯수 - 셀 위치 < 5보다 작으면
-        // 아이템 총 갯수 / 10 + 1로 다음 페이지로 늘림
-        // 페이지가 올라가면 fetch
-        
         let total = viewModel.allPoliciesCount()
-    
+        let currentPage = (total / 10) + 1
+        
         indexPaths.forEach { indexPath in
-            
             let currentPosition = indexPath.item
-            let nextPage: Int = (total / 10) + 1
             
-            if total - currentPosition < 7 {
-                viewModel.input.updateRecentPolicies.accept(nextPage)
+            // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
+            if currentPosition >= total - 5 {
+                viewModel.input.updateRecentPolicies.accept(currentPage)
             }
         }
     }

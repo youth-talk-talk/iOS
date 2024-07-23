@@ -10,7 +10,7 @@ import UIKit
 final class PopularDecoReusableView: BaseCollectionReusableView {
  
     override func configureView() {
-        backgroundColor = .gray20
+        backgroundColor = .gray10
         
         layer.cornerRadius = 20
         layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)

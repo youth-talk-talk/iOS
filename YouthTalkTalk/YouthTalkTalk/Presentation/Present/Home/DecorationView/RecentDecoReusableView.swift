@@ -11,6 +11,6 @@ final class RecentDecoReusableView: BaseCollectionReusableView {
         
     override func configureView() {
         
-        backgroundColor = .gray20
+        backgroundColor = .gray10
     }
 }
