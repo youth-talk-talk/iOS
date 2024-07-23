@@ -13,9 +13,12 @@ extension UIButton {
     func designedByImage(_ image: UIImage) {
         
         var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.background.image = image
+        buttonConfiguration.image = image
+        buttonConfiguration.imagePadding = 0 // 이미지와 텍스트 사이의 패딩을 0으로 설정
+        buttonConfiguration.imagePlacement = .all
         
         self.configuration = buttonConfiguration
+        
         updateHandler(bgColor: .clear)
     }
     

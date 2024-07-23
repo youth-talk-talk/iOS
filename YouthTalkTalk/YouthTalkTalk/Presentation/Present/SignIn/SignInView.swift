@@ -76,6 +76,15 @@ final class SignInView: BaseView {
         
         appleSignInButton.layer.masksToBounds = true
         appleSignInButton.designedByImage(.appleLogin)
+        kakaoSignInButton.layer.masksToBounds = true
         kakaoSignInButton.designedByImage(.kakaoLogin)
+        
+        var configuration = UIButton.Configuration.plain()
+        
+        configuration.background.image = .appleLogin
+        appleSignInButton.configuration = configuration
+        
+        configuration.background.image = .kakaoLogin
+        kakaoSignInButton.configuration = configuration
     }
 }
