@@ -44,6 +44,7 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
             flex.addItem().define { flex in
                 
                 flex.addItem(categoryLabel)
+                    .grow(1)
                 flex.addItem(bookmarkButton)
                     .height(24)
                     .width(24)

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import PinLayout
+import FlexLayout
 
 final class RecentCollectionViewCell: BaseCollectionViewCell {
 
@@ -51,6 +53,7 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
             flex.addItem().define { flex in
             
                 flex.addItem(categoryLabel)
+                    .grow(1)
                 flex.addItem(bookmarkButton)
                     .height(24)
                     .width(24)
