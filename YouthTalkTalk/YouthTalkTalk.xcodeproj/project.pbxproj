@@ -55,6 +55,8 @@
 		AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */; };
 		AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */; };
 		AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B652C49169D00D1C9FC /* APIInterceptor.swift */; };
+		AC579B692C51349A00D1C9FC /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B682C51349A00D1C9FC /* PolicyViewController.swift */; };
+		AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B6A2C5134A200D1C9FC /* PolicyView.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -193,6 +195,8 @@
 		AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCaseImpl.swift; sourceTree = "<group>"; };
 		AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		AC579B652C49169D00D1C9FC /* APIInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptor.swift; sourceTree = "<group>"; };
+		AC579B682C51349A00D1C9FC /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
+		AC579B6A2C5134A200D1C9FC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -422,6 +426,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		AC579B672C51341D00D1C9FC /* Policy */ = {
+			isa = PBXGroup;
+			children = (
+				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
+				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
+			);
+			path = Policy;
+			sourceTree = "<group>";
+		};
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +500,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC579B672C51341D00D1C9FC /* Policy */,
 				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C232BF102B800A13991 /* Base */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
@@ -1030,6 +1044,7 @@
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
+				AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */,
 				AC579B4E2C451CA500D1C9FC /* HomeOutput.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
@@ -1088,6 +1103,7 @@
 				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
 				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
 				ACF2A2E62C31432200FE8D63 /* DebugViewController.swift in Sources */,
+				AC579B692C51349A00D1C9FC /* PolicyViewController.swift in Sources */,
 				ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */,

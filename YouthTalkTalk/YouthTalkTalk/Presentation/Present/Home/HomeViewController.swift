@@ -71,6 +71,28 @@ final class HomeViewController: BaseViewController<HomeView> {
             }.disposed(by: disposeBag)
         
         viewModel.input.fetchPolicies.accept(())
+        
+        
+        layoutView.collectionView.rx.itemSelected
+            .bind(with: self) { owner, indexPath in
+                
+                let homeLayout = HomeLayout(rawValue: indexPath.section) ?? .category
+                let items = owner.dataSource.snapshot().itemIdentifiers(inSection: homeLayout)
+                
+                guard let item = items[indexPath.item].data else { return }
+                
+                switch homeLayout {
+                case .popular, .recent:
+                    
+                    let nextVC = PolicyViewController(testData: item)
+                    
+                    owner.navigationController?.pushViewController(nextVC, animated: true)
+                    
+                default:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     //MARK: Cell Registration
