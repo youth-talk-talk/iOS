@@ -23,6 +23,7 @@ class PolicyView: BaseView {
                 .width(90%)
                 .alignSelf(.center)
                 .backgroundColor(.lime20)
+                .markDirty()
             
             flex.addItem(commentTextfield)
                 .height(50)

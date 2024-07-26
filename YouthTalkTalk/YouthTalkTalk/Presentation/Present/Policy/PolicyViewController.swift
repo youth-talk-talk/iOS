@@ -7,12 +7,41 @@
 
 import UIKit
 
+enum PolicySection: Int, CaseIterable {
+    
+    case summary
+    case target
+    case method
+    case detail
+    case comments  // 댓글 섹션
+    
+    var title: String {
+        switch self {
+        case .summary: return "한눈에 보는 정책 요약!"
+        case .target: return "누구를 위한 정책인가요?"
+        case .method: return "신청방법이 궁금해요"
+        case .detail: return "더 자세한 정보를 알려주세요"
+        case .comments: return "댓글"
+        }
+    }
+    
+    var image: UIImage? {
+        switch self {
+        case .summary: return .right
+        case .target: return .person
+        case .method: return .questionMark
+        case .detail: return .plus
+        case .comments: return nil
+        }
+    }
+}
+
 class PolicyViewController: BaseViewController<PolicyView> {
     
-    let testData: PolicyEntity
+    let viewModel: DetailPolicyInterface
     
-    init(testData: PolicyEntity) {
-        self.testData = testData
+    init(viewModel: DetailPolicyInterface) {
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,10 +50,9 @@ class PolicyViewController: BaseViewController<PolicyView> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        dump(testData)
+    override func configureTableView() {
+        
+        
     }
-
+    
 }

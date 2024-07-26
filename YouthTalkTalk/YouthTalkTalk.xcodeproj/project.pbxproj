@@ -57,6 +57,12 @@
 		AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B652C49169D00D1C9FC /* APIInterceptor.swift */; };
 		AC579B692C51349A00D1C9FC /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B682C51349A00D1C9FC /* PolicyViewController.swift */; };
 		AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B6A2C5134A200D1C9FC /* PolicyView.swift */; };
+		AC579B6D2C539DD200D1C9FC /* DetailPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */; };
+		AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */; };
+		AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B712C53B27E00D1C9FC /* DetailPolicyInput.swift */; };
+		AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B732C53B29800D1C9FC /* DetailPolicyOutput.swift */; };
+		AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B752C53B2B100D1C9FC /* DetailPolicyInterface.swift */; };
+		AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -197,6 +203,12 @@
 		AC579B652C49169D00D1C9FC /* APIInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptor.swift; sourceTree = "<group>"; };
 		AC579B682C51349A00D1C9FC /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		AC579B6A2C5134A200D1C9FC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
+		AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailPolicyDTO.swift; path = ../../../../../../DetailPolicyDTO.swift; sourceTree = "<group>"; };
+		AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyEntity.swift; sourceTree = "<group>"; };
+		AC579B712C53B27E00D1C9FC /* DetailPolicyInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyInput.swift; sourceTree = "<group>"; };
+		AC579B732C53B29800D1C9FC /* DetailPolicyOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyOutput.swift; sourceTree = "<group>"; };
+		AC579B752C53B2B100D1C9FC /* DetailPolicyInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyInterface.swift; sourceTree = "<group>"; };
+		AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewModel.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -351,6 +363,7 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				AC579B702C53B24C00D1C9FC /* DetailPolciy */,
 				AC579B4A2C451C5E00D1C9FC /* Home */,
 				AC579B282C3BE0EA00D1C9FC /* Search */,
 				ACF2A2A62C2AAFFA00FE8D63 /* SignUp */,
@@ -431,8 +444,19 @@
 			children = (
 				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
 				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
+				AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */,
 			);
 			path = Policy;
+			sourceTree = "<group>";
+		};
+		AC579B702C53B24C00D1C9FC /* DetailPolciy */ = {
+			isa = PBXGroup;
+			children = (
+				AC579B712C53B27E00D1C9FC /* DetailPolicyInput.swift */,
+				AC579B732C53B29800D1C9FC /* DetailPolicyOutput.swift */,
+				AC579B752C53B2B100D1C9FC /* DetailPolicyInterface.swift */,
+			);
+			path = DetailPolciy;
 			sourceTree = "<group>";
 		};
 		AC5A7BE52BF0FDB500A13991 = {
@@ -708,6 +732,7 @@
 				AC4B43232C206839005FC370 /* PolicyLocationKR.swift */,
 				ACF2A3192C35594000FE8D63 /* SignInEntity.swift */,
 				AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */,
+				AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -877,6 +902,7 @@
 				ACF2A31F2C37D27700FE8D63 /* SignUpDTO.swift */,
 				AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */,
 				AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */,
+				AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1052,6 +1078,7 @@
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				AC579B472C44FC9900D1C9FC /* APIError.swift in Sources */,
+				AC579B6D2C539DD200D1C9FC /* DetailPolicyDTO.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
@@ -1059,6 +1086,7 @@
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
+				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
 				AC579B582C45284A00D1C9FC /* HomePolicyBody.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
@@ -1066,10 +1094,14 @@
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
 				AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */,
+				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
+				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
+				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */,
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
+				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,

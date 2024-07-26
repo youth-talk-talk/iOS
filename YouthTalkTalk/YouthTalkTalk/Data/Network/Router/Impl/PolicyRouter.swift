@@ -15,6 +15,7 @@ enum PolicyRouter: Router {
     }
     
     case fetchHomePolicy(homePolicy: HomePolicyBody)
+    case fetchPolicyDetail(id: String)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -24,12 +25,14 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy:
             return "/policies"
+        case .fetchPolicyDetail(let id):
+            return "/policies/\(id)"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchHomePolicy:
+        case .fetchHomePolicy, .fetchPolicyDetail:
             return .get
         }
     }
@@ -38,12 +41,14 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy(let body):
             return convertToParameters(body)
+        case .fetchPolicyDetail:
+            return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy(_):
+        case .fetchHomePolicy, .fetchPolicyDetail:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -55,7 +60,7 @@ enum PolicyRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchHomePolicy(_):
+        case .fetchHomePolicy, .fetchPolicyDetail:
             return nil
         }
     }

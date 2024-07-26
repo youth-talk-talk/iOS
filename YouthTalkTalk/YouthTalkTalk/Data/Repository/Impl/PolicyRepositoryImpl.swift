@@ -23,6 +23,13 @@ final class PolicyRepositoryImpl: PolicyRepository {
         return apiManager.request(router: router, type: HomePolicyDTO.self).asObservable()
     }
     
+    func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyDTO, APIError>> {
+        
+        let router = PolicyRouter.fetchPolicyDetail(id: id)
+        
+        return apiManager.request(router: router, type: DetailPolicyDTO.self).asObservable()
+    }
+    
     deinit {
         print("PolicyRepositoryImpl Deinit")
     }
