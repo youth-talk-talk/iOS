@@ -84,7 +84,9 @@ final class HomeViewController: BaseViewController<HomeView> {
                 switch homeLayout {
                 case .popular, .recent:
                     
-                    let viewModel = PolicyViewModel(policyID: item.policyId)
+                    let repository = PolicyRepositoryImpl()
+                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
+                    let viewModel = PolicyViewModel(policyID: item.policyId, policyUseCase: useCase)
                     let nextVC = PolicyViewController(viewModel: viewModel)
                     
                     owner.navigationController?.pushViewController(nextVC, animated: true)

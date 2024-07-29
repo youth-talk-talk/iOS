@@ -12,4 +12,6 @@ import RxCocoa
 protocol PolicyUseCase {
     
     func fetchHomePolicies(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<HomePolicyEntity, APIError>>
+    
+    func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>>
 }

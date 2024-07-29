@@ -50,6 +50,11 @@ class PolicyViewController: BaseViewController<PolicyView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func bind() {
+        
+        viewModel.fetchPolicyDetail.accept(viewModel.policyID)
+    }
+    
     override func configureTableView() {
         
         

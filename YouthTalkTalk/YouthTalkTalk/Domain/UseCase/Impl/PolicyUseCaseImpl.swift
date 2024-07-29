@@ -51,6 +51,28 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
+    func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>> {
+        
+        return policyRepository.fetchPolicyDetail(id: id)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let detailPolicyDTO):
+                
+                    let detailPolicyEntity = detailPolicyDTO.data.translateDetailPolicyEntity()
+                    
+                    return .success(detailPolicyEntity)
+                case .failure(let failure):
+                    
+                    return .failure(failure)
+                    
+                }
+            }
+        
+    }
+    
     deinit {
         print("PolicyUseCaseImpl Deinit")
     }

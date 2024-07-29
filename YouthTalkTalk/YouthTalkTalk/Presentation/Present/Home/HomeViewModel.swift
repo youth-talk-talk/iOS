@@ -39,7 +39,7 @@ final class HomeViewModel: HomeInterface {
         fetchPolicies
             .withUnretained(self)
             .flatMap { owner, _ in
-                print("호출")
+                
                 return owner.policyUseCase.fetchHomePolicies(categories: owner.selectedPolicyCategory, page: 1, size: 10)
             }.subscribe(with: self) { owner, result in
                 
