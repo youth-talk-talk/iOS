@@ -26,7 +26,7 @@ class APIInterceptor: RequestInterceptor {
     
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
         
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 403  else {
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401  else {
             completion(.doNotRetryWithError(error))
             return
         }
@@ -43,8 +43,9 @@ class APIInterceptor: RequestInterceptor {
         newRequest.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
         newRequest.setValue(nil, forHTTPHeaderField: "Authorization")
         
+        // 리프레쉬 토큰으로 엑세스 토큰 재발급 요청
         session.request(newRequest).validate(statusCode: 200 ... 400).response { response in
-            print("❗️ 엑세스 토큰 재발급")
+            print("❗️ 엑세스 토큰 재발급 요청")
             
             switch response.result {
             case .success(let success):
@@ -57,8 +58,11 @@ class APIInterceptor: RequestInterceptor {
             case .failure(let error):
                 
                 if response.response?.statusCode == 401 {
+                    
+                    print("❗️ 엑세스 토큰 재발급 실패 - 리프레쉬 토큰 만료")
+                    
                     self.handleRefreshTokenExpired()
-                    completion(.doNotRetryWithError(error))
+                    completion(.doNotRetry)
                 }
                 
                 completion(.doNotRetryWithError(error))
@@ -68,6 +72,7 @@ class APIInterceptor: RequestInterceptor {
 }
 
 extension APIInterceptor {
+    
     private func handleResponseHeaders(_ response: HTTPURLResponse?) {
         
         guard let httpResponse = response else { return }
