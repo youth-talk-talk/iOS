@@ -63,6 +63,11 @@
 		AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B732C53B29800D1C9FC /* DetailPolicyOutput.swift */; };
 		AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B752C53B2B100D1C9FC /* DetailPolicyInterface.swift */; };
 		AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */; };
+		AC579B992C5CB90B00D1C9FC /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B982C5CB90B00D1C9FC /* BaseTableViewCell.swift */; };
+		AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B9A2C5CB9C000D1C9FC /* SummaryTableViewCell.swift */; };
+		AC579B9D2C5CB9DF00D1C9FC /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B9C2C5CB9DF00D1C9FC /* DetailTableViewCell.swift */; };
+		AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */; };
+		AC579BA12C5CBA0A00D1C9FC /* TargetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579BA02C5CBA0A00D1C9FC /* TargetTableViewCell.swift */; };
 		AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */; };
 		AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */; };
 		AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */; };
@@ -209,6 +214,11 @@
 		AC579B732C53B29800D1C9FC /* DetailPolicyOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyOutput.swift; sourceTree = "<group>"; };
 		AC579B752C53B2B100D1C9FC /* DetailPolicyInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyInterface.swift; sourceTree = "<group>"; };
 		AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewModel.swift; sourceTree = "<group>"; };
+		AC579B982C5CB90B00D1C9FC /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		AC579B9A2C5CB9C000D1C9FC /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
+		AC579B9C2C5CB9DF00D1C9FC /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodTableViewCell.swift; sourceTree = "<group>"; };
+		AC579BA02C5CBA0A00D1C9FC /* TargetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetTableViewCell.swift; sourceTree = "<group>"; };
 		AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouthTalkTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5A7BF12BF0FDB500A13991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC5A7BF32BF0FDB500A13991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -442,6 +452,7 @@
 		AC579B672C51341D00D1C9FC /* Policy */ = {
 			isa = PBXGroup;
 			children = (
+				AC579B972C5CB8CE00D1C9FC /* Sections */,
 				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
 				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
 				AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */,
@@ -457,6 +468,17 @@
 				AC579B752C53B2B100D1C9FC /* DetailPolicyInterface.swift */,
 			);
 			path = DetailPolciy;
+			sourceTree = "<group>";
+		};
+		AC579B972C5CB8CE00D1C9FC /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				AC579B9A2C5CB9C000D1C9FC /* SummaryTableViewCell.swift */,
+				AC579B9C2C5CB9DF00D1C9FC /* DetailTableViewCell.swift */,
+				AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */,
+				AC579BA02C5CBA0A00D1C9FC /* TargetTableViewCell.swift */,
+			);
+			path = Sections;
 			sourceTree = "<group>";
 		};
 		AC5A7BE52BF0FDB500A13991 = {
@@ -547,6 +569,7 @@
 				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
 				ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */,
 				ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */,
+				AC579B982C5CB90B00D1C9FC /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1070,11 +1093,14 @@
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
+				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
 				AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */,
+				AC579B992C5CB90B00D1C9FC /* BaseTableViewCell.swift in Sources */,
 				AC579B4E2C451CA500D1C9FC /* HomeOutput.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
 				ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */,
+				AC579BA12C5CBA0A00D1C9FC /* TargetTableViewCell.swift in Sources */,
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				AC579B472C44FC9900D1C9FC /* APIError.swift in Sources */,
@@ -1105,6 +1131,7 @@
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
+				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
 				AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
@@ -1117,6 +1144,7 @@
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
+				AC579B9D2C5CB9DF00D1C9FC /* DetailTableViewCell.swift in Sources */,
 				AC579B432C40160F00D1C9FC /* SignUpRepository.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,

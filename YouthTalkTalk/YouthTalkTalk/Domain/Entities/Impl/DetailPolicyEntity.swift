@@ -9,7 +9,7 @@ import Foundation
 
 struct DetailPolicyEntity {
     
-    struct PolicySummary {
+    struct PolicySummary: Hashable {
         let title: String?
         let introduction: String?
         let supportDetail: String?
@@ -17,7 +17,7 @@ struct DetailPolicyEntity {
         let operationTerm: String?
     }
 
-    struct PolicyTarget {
+    struct PolicyTarget: Hashable {
         let age: String?
         let addrIncome: String?
         let education: String?
@@ -28,14 +28,14 @@ struct DetailPolicyEntity {
         let addition: String?
     }
 
-    struct PolicyMethod {
+    struct PolicyMethod: Hashable {
         let applStep: String?
         let evaluation: String?
         let applUrl: String?
         let submitDoc: String?
     }
 
-    struct PolicyDetail {
+    struct PolicyDetail: Hashable {
         let etc: String?
         let hostDep: String?
         let operatingOrg: String?

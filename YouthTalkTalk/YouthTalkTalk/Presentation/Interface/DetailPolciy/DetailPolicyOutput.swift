@@ -10,4 +10,8 @@ import RxCocoa
 
 protocol DetailPolicyOutput {
     
+    var summarySectionRelay: PublishRelay<[PolicySectionItems]> { get }
+    var detailSectionRelay: PublishRelay<[PolicySectionItems]> { get }
+    var methodSectionRelay: PublishRelay<[PolicySectionItems]> { get }
+    var targetSectionRelay: PublishRelay<[PolicySectionItems]> { get }
 }

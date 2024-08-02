@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 enum PolicySection: Int, CaseIterable {
     
@@ -36,8 +38,32 @@ enum PolicySection: Int, CaseIterable {
     }
 }
 
+enum PolicySectionItems: Hashable {
+    
+    case summary(DetailPolicyEntity.PolicySummary)
+    case detail(DetailPolicyEntity.PolicyDetail)
+    case method(DetailPolicyEntity.PolicyMethod)
+    case target(DetailPolicyEntity.PolicyTarget)
+    
+    var identifier: String {
+        
+        switch self {
+        case .summary(let policySummary):
+            return SummaryTableViewCell.identifier
+        case .detail(let policyDetail):
+            return DetailTableViewCell.identifier
+        case .method(let policyMethod):
+            return MethodTableViewCell.identifier
+        case .target(let policyTarget):
+            return TargetTableViewCell.identifier
+        }
+    }
+}
+
 class PolicyViewController: BaseViewController<PolicyView> {
     
+    var dataSource: UITableViewDiffableDataSource<PolicySection, PolicySectionItems>!
+    var snapshot = NSDiffableDataSourceSnapshot<PolicySection, PolicySectionItems>()
     let viewModel: DetailPolicyInterface
     
     init(viewModel: DetailPolicyInterface) {
@@ -52,12 +78,90 @@ class PolicyViewController: BaseViewController<PolicyView> {
     
     override func bind() {
         
-        viewModel.fetchPolicyDetail.accept(viewModel.policyID)
+        snapshot.appendSections(PolicySection.allCases)
+        
+        viewModel.input.fetchPolicyDetail.accept(viewModel.policyID)
+        
+        viewModel.output.summarySectionRelay
+            .bind(with: self) { owner, sectionItems in
+                
+                owner.update(section: .summary, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.detailSectionRelay
+            .bind(with: self) { owner, sectionItems in
+                
+                owner.update(section: .detail, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.methodSectionRelay
+            .bind(with: self) { owner, sectionItems in
+                
+                owner.update(section: .method, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.targetSectionRelay
+            .bind(with: self) { owner, sectionItems in
+                
+                owner.update(section: .target, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureTableView() {
         
+        layoutView.tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
+        layoutView.tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
+        layoutView.tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
+        layoutView.tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
         
+        cellRegistration()
+    }
+    
+    //MARK: Cell Registration
+    private func cellRegistration() {
+        
+        dataSource = UITableViewDiffableDataSource<PolicySection, PolicySectionItems>(tableView: layoutView.tableview) { tableView, indexPath, item in
+            let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
+            
+            switch item {
+            case .summary(let summary):
+                
+                guard let cell = cell as? SummaryTableViewCell else { return UITableViewCell() }
+                
+                cell.test(summary)
+                
+                return cell
+                
+            case .detail(let detail):
+                
+                guard let cell = cell as? DetailTableViewCell else { return UITableViewCell() }
+                
+                return cell
+                
+            case .method(let method):
+                
+                guard let cell = cell as? MethodTableViewCell else { return UITableViewCell() }
+                
+                return cell
+                
+            case .target(let target):
+                
+                guard let cell = cell as? TargetTableViewCell else { return UITableViewCell() }
+                
+                return cell
+            }
+        }
+    }
+    
+    func update(section: PolicySection, items: [PolicySectionItems]) {
+            
+        snapshot.appendItems(items, toSection: section)
+        
+        self.dataSource.apply(snapshot, animatingDifferences: true)
     }
     
 }

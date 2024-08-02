@@ -19,7 +19,14 @@ final class PolicyViewModel: DetailPolicyInterface {
     var input: DetailPolicyInput { return self }
     var output: DetailPolicyOutput { return self }
     
+    // MARK: INPUT
     var fetchPolicyDetail = PublishRelay<String>()
+    
+    // MARK: OUTPUT
+    var summarySectionRelay = PublishRelay<[PolicySectionItems]>()
+    var detailSectionRelay = PublishRelay<[PolicySectionItems]>()
+    var methodSectionRelay = PublishRelay<[PolicySectionItems]>()
+    var targetSectionRelay = PublishRelay<[PolicySectionItems]>()
     
     init(policyID: String, policyUseCase: PolicyUseCase) {
         self.policyID = policyID
@@ -37,7 +44,16 @@ final class PolicyViewModel: DetailPolicyInterface {
                     
                 case .success(let policyDetailEntity):
                     
-                    dump(policyDetailEntity)
+                    let summary = [policyDetailEntity.summary].map { PolicySectionItems.summary($0) }
+                    let detail = [policyDetailEntity.detail].map { PolicySectionItems.detail($0) }
+                    let method = [policyDetailEntity.method].map { PolicySectionItems.method($0) }
+                    let target = [policyDetailEntity.target].map { PolicySectionItems.target($0) }
+                    let isScrap = policyDetailEntity.isScrap
+                    
+                    owner.summarySectionRelay.accept(summary)
+                    owner.detailSectionRelay.accept(detail)
+                    owner.methodSectionRelay.accept(method)
+                    owner.targetSectionRelay.accept(target)
                     
                 case .failure(let error):
                     
