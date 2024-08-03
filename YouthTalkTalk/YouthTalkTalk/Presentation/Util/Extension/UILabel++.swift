@@ -11,12 +11,15 @@ import RxCocoa
 
 extension UILabel {
     
-    func designed(text: String, fontType: FontType, textColor: FontColor = .gray60) {
+    func designed(text: String, fontType: FontType, textColor: FontColor = .gray60, applyLineHeight: Bool = true) {
         
         self.text = text
         self.textColor = textColor.value
         self.font = FontManager.font(fontType)
-        self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(fontType))
+        
+        if applyLineHeight {
+            self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(fontType))
+        }
     }
     
     func setTextWithLineHeight(text: String?, lineHeight: CGFloat){

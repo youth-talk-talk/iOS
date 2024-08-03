@@ -10,7 +10,8 @@ import Foundation
 struct DetailPolicyEntity {
     
     struct PolicySummary: Hashable {
-        let title: String?
+        let hostDep: String?
+        let title: String
         let introduction: String?
         let supportDetail: String?
         let applyTerm: String?
@@ -18,7 +19,7 @@ struct DetailPolicyEntity {
     }
 
     struct PolicyTarget: Hashable {
-        let age: String?
+        let age: String
         let addrIncome: String?
         let education: String?
         let major: String?
@@ -48,5 +49,5 @@ struct DetailPolicyEntity {
     let target: PolicyTarget
     let method: PolicyMethod
     let detail: PolicyDetail
-    let isScrap: Bool?
+    let isScrap: Bool
 }
