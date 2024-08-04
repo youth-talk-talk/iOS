@@ -48,13 +48,13 @@ enum PolicySectionItems: Hashable {
     var identifier: String {
         
         switch self {
-        case .summary(let policySummary):
+        case .summary:
             return SummaryTableViewCell.identifier
-        case .detail(let policyDetail):
+        case .detail:
             return DetailTableViewCell.identifier
-        case .method(let policyMethod):
+        case .method:
             return MethodTableViewCell.identifier
-        case .target(let policyTarget):
+        case .target:
             return TargetTableViewCell.identifier
         }
     }
@@ -113,6 +113,11 @@ class PolicyViewController: BaseViewController<PolicyView> {
     
     override func configureTableView() {
         
+        layoutView.tableview.rowHeight = UITableView.automaticDimension
+        layoutView.tableview.sectionHeaderTopPadding = 0
+        layoutView.tableview.sectionHeaderHeight = 0
+        layoutView.tableview.sectionFooterHeight = 0
+        
         layoutView.tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
         layoutView.tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
         layoutView.tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
@@ -125,6 +130,7 @@ class PolicyViewController: BaseViewController<PolicyView> {
     private func cellRegistration() {
         
         dataSource = UITableViewDiffableDataSource<PolicySection, PolicySectionItems>(tableView: layoutView.tableview) { tableView, indexPath, item in
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
             
             switch item {
@@ -132,13 +138,15 @@ class PolicyViewController: BaseViewController<PolicyView> {
                 
                 guard let cell = cell as? SummaryTableViewCell else { return UITableViewCell() }
                 
-                cell.test(summary)
+                cell.configure(summary)
                 
                 return cell
                 
-            case .detail(let detail):
+            case .target(let target):
                 
-                guard let cell = cell as? DetailTableViewCell else { return UITableViewCell() }
+                guard let cell = cell as? TargetTableViewCell else { return UITableViewCell() }
+                
+                cell.configure(target)
                 
                 return cell
                 
@@ -148,9 +156,9 @@ class PolicyViewController: BaseViewController<PolicyView> {
                 
                 return cell
                 
-            case .target(let target):
+            case .detail(let detail):
                 
-                guard let cell = cell as? TargetTableViewCell else { return UITableViewCell() }
+                guard let cell = cell as? DetailTableViewCell else { return UITableViewCell() }
                 
                 return cell
             }
@@ -158,7 +166,7 @@ class PolicyViewController: BaseViewController<PolicyView> {
     }
     
     func update(section: PolicySection, items: [PolicySectionItems]) {
-            
+        
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)

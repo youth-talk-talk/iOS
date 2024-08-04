@@ -474,9 +474,9 @@
 			isa = PBXGroup;
 			children = (
 				AC579B9A2C5CB9C000D1C9FC /* SummaryTableViewCell.swift */,
-				AC579B9C2C5CB9DF00D1C9FC /* DetailTableViewCell.swift */,
-				AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */,
 				AC579BA02C5CBA0A00D1C9FC /* TargetTableViewCell.swift */,
+				AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */,
+				AC579B9C2C5CB9DF00D1C9FC /* DetailTableViewCell.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";

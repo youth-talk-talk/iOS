@@ -32,5 +32,10 @@ class PolicyView: BaseView {
                 .backgroundColor(.gray10)
         }
     }
-
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        flexView.flex.layout()
+    }
 }
