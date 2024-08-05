@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         configureNavigationAppearance()
+        configureTabBarAppearance()
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
@@ -85,6 +86,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         // 스크롤 엣지가 닿았을 때 네이게이션 바 appearance settings
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+    }
+    
+    private func configureTabBarAppearance() {
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .clear
+        tabBarAppearance.shadowColor = .clear
+        // 스크롤 엣지가 닿았을 때 탭바 appearance settings
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        // 일반 탭바 appearance settings
+        UITabBar.appearance().standardAppearance = tabBarAppearance
     }
 }
 
