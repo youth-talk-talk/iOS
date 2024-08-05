@@ -169,46 +169,46 @@ class TargetTableViewCell: BaseTableViewCell {
     
     func configure(_ data: DetailPolicyEntity.PolicyTarget) {
         
-        ageLabel.designed(text: data.age, fontType: .p14Bold, textColor: .black)
+        ageLabel.designed(text: data.age, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         
         if let addrIncome = data.addrIncome, addrIncome != "null" {
-            addrIncomeLabel.designed(text: addrIncome, fontType: .p14Bold, textColor: .black)
+            addrIncomeLabel.designed(text: addrIncome, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             addrIncomeFlexView.flex.display(.none)
         }
         
         if let education = data.education, education != "null" {
-            educationLabel.designed(text: education, fontType: .p14Bold, textColor: .black)
+            educationLabel.designed(text: education, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             educationFlexView.flex.display(.none)
         }
         
         if let major = data.major, major != "null" {
-            majorLabel.designed(text: major, fontType: .p14Bold, textColor: .black)
+            majorLabel.designed(text: major, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             majorFlexView.flex.display(.none)
         }
         
         if let employment = data.employment, employment != "null"  {
-            employmentLabel.designed(text: employment, fontType: .p14Bold, textColor: .black)
+            employmentLabel.designed(text: employment, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             employmentFlexView.flex.display(.none)
         }
         
         if let specialization = data.specialization, specialization != "null" {
-            specializationLabel.designed(text: specialization, fontType: .p14Bold, textColor: .black)
+            specializationLabel.designed(text: specialization, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             specializationFlexView.flex.display(.none)
         }
         
         if let applLimit = data.applLimit, applLimit != "null" {
-            applLimitLabel.designed(text: applLimit, fontType: .p14Bold, textColor: .black)
+            applLimitLabel.designed(text: applLimit, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             applLimitFlexView.flex.display(.none)
         }
         
         if let addition = data.addition, addition != "null" {
-            additionLabel.designed(text: addition, fontType: .p14Bold, textColor: .black)
+            additionLabel.designed(text: addition, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             additionFlexView.flex.display(.none)
         }

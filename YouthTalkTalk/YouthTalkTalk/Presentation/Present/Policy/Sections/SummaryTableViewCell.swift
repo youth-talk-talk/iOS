@@ -101,22 +101,22 @@ class SummaryTableViewCell: BaseTableViewCell {
         titleLabel.designed(text: data.title, fontType: .p24Bold, textColor: .black, applyLineHeight: false)
         titleLabel.numberOfLines = 0
         
-        introduceLabel.designed(text: data.introduction ?? "-", fontType: .p14Bold, textColor: .gray50, applyLineHeight: false)
+        introduceLabel.designed(text: data.introduction ?? "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         introduceLabel.numberOfLines = 0
         
         supportDetailLabel
-            .designed(text: data.supportDetail ?? "-", fontType: .p14Bold, textColor: .black, applyLineHeight: false)
+            .designed(text: data.supportDetail ?? "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         supportDetailLabel.numberOfLines = 0
         
         applyTermLabel
-            .designed(text: data.applyTerm ?? "-", fontType: .p14Bold, textColor: .black, applyLineHeight: false)
+            .designed(text: data.applyTerm ?? "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         
         if let operationTerm = data.operationTerm, operationTerm != "null" {
             operationTermLabel
-                .designed(text: operationTerm, fontType: .p14Bold, textColor: .black, applyLineHeight: false)
+                .designed(text: operationTerm, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             operationTermLabel
-                .designed(text: "-", fontType: .p14Bold, textColor: .black, applyLineHeight: false)
+                .designed(text: "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         }
     }
     

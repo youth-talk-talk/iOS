@@ -162,6 +162,8 @@ class PolicyViewController: BaseViewController<PolicyView> {
                 
                 guard let cell = cell as? DetailTableViewCell else { return UITableViewCell() }
                 
+                cell.configure(detail)
+                
                 return cell
             }
         }

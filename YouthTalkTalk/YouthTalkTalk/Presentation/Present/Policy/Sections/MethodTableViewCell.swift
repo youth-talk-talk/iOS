@@ -79,25 +79,25 @@ class MethodTableViewCell: BaseTableViewCell {
     func configure(_ data: DetailPolicyEntity.PolicyMethod) {
         
         if let applStep = data.applStep, applStep != "null" {
-            applStepLabel.designed(text: applStep, fontType: .p14Bold, textColor: .black)
+            applStepLabel.designed(text: applStep, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             applStepFlexView.flex.display(.none)
         }
         
         if let evaluation = data.evaluation, evaluation != "null" {
-            evaluationLabel.designed(text: evaluation, fontType: .p14Bold, textColor: .black)
+            evaluationLabel.designed(text: evaluation, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             evaluationFlexView.flex.display(.none)
         }
         
         if let applUrl = data.applUrl, applUrl != "null" {
-            applUrlLabel.designed(text: applUrl, fontType: .p14Bold, textColor: .black)
+            applUrlLabel.designed(text: applUrl, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             applUrlFlexView.flex.display(.none)
         }
         
         if let submitDoc = data.submitDoc, submitDoc != "null" {
-            submitDocLabel.designed(text: submitDoc, fontType: .p14Bold, textColor: .black)
+            submitDocLabel.designed(text: submitDoc, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             submitDocFlexView.flex.display(.none)
         }

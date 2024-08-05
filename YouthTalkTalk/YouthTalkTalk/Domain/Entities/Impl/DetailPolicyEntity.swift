@@ -43,6 +43,7 @@ struct DetailPolicyEntity {
         let refUrl1: String?
         let refUrl2: String?
         let formattedApplUrl: String?
+        let applUrlv: String?
     }
 
     let summary: PolicySummary
