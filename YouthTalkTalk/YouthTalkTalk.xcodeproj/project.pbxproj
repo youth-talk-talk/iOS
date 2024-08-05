@@ -453,8 +453,8 @@
 			isa = PBXGroup;
 			children = (
 				AC579B972C5CB8CE00D1C9FC /* Sections */,
-				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
 				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
+				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
 				AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */,
 			);
 			path = Policy;

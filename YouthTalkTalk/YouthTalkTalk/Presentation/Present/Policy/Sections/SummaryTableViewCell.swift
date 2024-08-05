@@ -52,7 +52,7 @@ class SummaryTableViewCell: BaseTableViewCell {
                 
             }
             .direction(.row)
-            .marginTop(12)
+            .marginTop(24)
             
             flex.addItem().define { flex in
                 
@@ -118,8 +118,6 @@ class SummaryTableViewCell: BaseTableViewCell {
             operationTermLabel
                 .designed(text: "-", fontType: .p14Bold, textColor: .black, applyLineHeight: false)
         }
-        
-        layout()
     }
     
     override func layoutSubviews() {

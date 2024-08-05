@@ -154,6 +154,8 @@ class PolicyViewController: BaseViewController<PolicyView> {
                 
                 guard let cell = cell as? MethodTableViewCell else { return UITableViewCell() }
                 
+                cell.configure(method)
+                
                 return cell
                 
             case .detail(let detail):
@@ -165,11 +167,11 @@ class PolicyViewController: BaseViewController<PolicyView> {
         }
     }
     
-    func update(section: PolicySection, items: [PolicySectionItems]) {
+    func update(section: PolicySection, items: [PolicySectionItems], animating: Bool = false) {
         
         snapshot.appendItems(items, toSection: section)
         
-        self.dataSource.apply(snapshot, animatingDifferences: true)
+        self.dataSource.apply(snapshot, animatingDifferences: animating)
     }
     
 }

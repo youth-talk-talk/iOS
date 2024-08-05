@@ -81,8 +81,6 @@ class TargetTableViewCell: BaseTableViewCell {
     
     override func configureLayout() {
         
-        let width = UIScreen.main.bounds.width
-        
         flexView.flex.define { flex in
             
             flex.addItem().define { flex in
@@ -95,6 +93,7 @@ class TargetTableViewCell: BaseTableViewCell {
                     .marginLeft(4)
             }
             .direction(.row)
+            .marginTop(24)
             
             // 연령
             addItemLine(flex: flex, flexView: ageFlexView, titleLabel: ageTitleLabel, contentLabel: ageLabel)
@@ -127,7 +126,6 @@ class TargetTableViewCell: BaseTableViewCell {
             addItemLine(flex: flex, flexView: additionFlexView, titleLabel: additionTitleLabel, contentLabel: additionLabel)
                 .marginTop(4)
         }
-        .marginTop(24)
     }
     
     @discardableResult
