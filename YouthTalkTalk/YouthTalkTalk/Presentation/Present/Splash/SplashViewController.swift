@@ -47,15 +47,7 @@ class SplashViewController: BaseViewController<SplashView> {
     
     private func navigateToHome() {
         
-        let tabVC = makeHomeTabBarController()
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
-                fatalError("Failed to get SceneDelegate")
-            }
-            sceneDelegate.window?.rootViewController = tabVC
-            sceneDelegate.window?.makeKeyAndVisible()
-        }
+        SceneDelegate.makeRootVC()
     }
     
     private func navigateToSignIn() {
@@ -71,23 +63,5 @@ class SplashViewController: BaseViewController<SplashView> {
             sceneDelegate.window?.rootViewController = naviVC
             sceneDelegate.window?.makeKeyAndVisible()
         }
-    }
-    
-    private func makeHomeTabBarController() -> UITabBarController {
-        
-        // MARK: Home VC
-        let repository = PolicyRepositoryImpl()
-        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
-        let viewModel = HomeViewModel(policyUseCase: policyUseCase)
-        let newRootVC = HomeViewController(viewModel: viewModel)
-        let naviVC = UINavigationController(rootViewController: newRootVC)
-        let tabVC = UITabBarController()
-        
-        tabVC.setViewControllers([naviVC], animated: true)
-        
-        tabVC.tabBar.items?[0].image = UIImage(systemName: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[0].selectedImage = UIImage(systemName: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        
-        return tabVC
     }
 }

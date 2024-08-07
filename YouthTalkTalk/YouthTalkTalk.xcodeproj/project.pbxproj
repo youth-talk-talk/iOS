@@ -208,7 +208,7 @@
 		AC579B652C49169D00D1C9FC /* APIInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptor.swift; sourceTree = "<group>"; };
 		AC579B682C51349A00D1C9FC /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		AC579B6A2C5134A200D1C9FC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
-		AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailPolicyDTO.swift; path = ../../../../../../DetailPolicyDTO.swift; sourceTree = "<group>"; };
+		AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyDTO.swift; sourceTree = "<group>"; };
 		AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyEntity.swift; sourceTree = "<group>"; };
 		AC579B712C53B27E00D1C9FC /* DetailPolicyInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyInput.swift; sourceTree = "<group>"; };
 		AC579B732C53B29800D1C9FC /* DetailPolicyOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPolicyOutput.swift; sourceTree = "<group>"; };
