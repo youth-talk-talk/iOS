@@ -80,6 +80,12 @@
 		AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C292BF108AF00A13991 /* Coordinator.swift */; };
 		AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */; };
 		AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */; };
+		AC604BCE2C6395D300804950 /* CommunityReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BCD2C6395D300804950 /* CommunityReviewViewController.swift */; };
+		AC604BD02C6395E900804950 /* CommunityReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BCF2C6395E900804950 /* CommunityReviewView.swift */; };
+		AC604BD32C63967600804950 /* CommunityForumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BD22C63967600804950 /* CommunityForumView.swift */; };
+		AC604BD52C63967F00804950 /* CommunityForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BD42C63967F00804950 /* CommunityForumViewController.swift */; };
+		AC604BD82C6396CD00804950 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = AC604BD72C6396CD00804950 /* Tabman */; };
+		AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDA2C63970600804950 /* CommunityTabViewController.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -235,6 +241,11 @@
 		AC5A7C292BF108AF00A13991 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		AC604BCD2C6395D300804950 /* CommunityReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityReviewViewController.swift; sourceTree = "<group>"; };
+		AC604BCF2C6395E900804950 /* CommunityReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityReviewView.swift; sourceTree = "<group>"; };
+		AC604BD22C63967600804950 /* CommunityForumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityForumView.swift; sourceTree = "<group>"; };
+		AC604BD42C63967F00804950 /* CommunityForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityForumViewController.swift; sourceTree = "<group>"; };
+		AC604BDA2C63970600804950 /* CommunityTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabViewController.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +316,7 @@
 				AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */,
 				AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */,
 				ACF2A2BD2C2C1D3700FE8D63 /* KakaoSDKUser in Frameworks */,
+				AC604BD82C6396CD00804950 /* Tabman in Frameworks */,
 				AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */,
 				ACF2A2B62C2C184D00FE8D63 /* RxKakaoSDKAuth in Frameworks */,
 				AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */,
@@ -546,6 +558,9 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC604BD92C6396F400804950 /* CommunityTab */,
+				AC604BD12C63962D00804950 /* CommunityForum */,
+				AC604BCC2C63955000804950 /* CommunityReview */,
 				AC579B672C51341D00D1C9FC /* Policy */,
 				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C232BF102B800A13991 /* Base */,
@@ -582,6 +597,32 @@
 				AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AC604BCC2C63955000804950 /* CommunityReview */ = {
+			isa = PBXGroup;
+			children = (
+				AC604BCD2C6395D300804950 /* CommunityReviewViewController.swift */,
+				AC604BCF2C6395E900804950 /* CommunityReviewView.swift */,
+			);
+			path = CommunityReview;
+			sourceTree = "<group>";
+		};
+		AC604BD12C63962D00804950 /* CommunityForum */ = {
+			isa = PBXGroup;
+			children = (
+				AC604BD42C63967F00804950 /* CommunityForumViewController.swift */,
+				AC604BD22C63967600804950 /* CommunityForumView.swift */,
+			);
+			path = CommunityForum;
+			sourceTree = "<group>";
+		};
+		AC604BD92C6396F400804950 /* CommunityTab */ = {
+			isa = PBXGroup;
+			children = (
+				AC604BDA2C63970600804950 /* CommunityTabViewController.swift */,
+			);
+			path = CommunityTab;
 			sourceTree = "<group>";
 		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
@@ -963,6 +1004,7 @@
 				ACF2A2B72C2C184D00FE8D63 /* RxKakaoSDKUser */,
 				ACF2A2BA2C2C1D3700FE8D63 /* KakaoSDKAuth */,
 				ACF2A2BC2C2C1D3700FE8D63 /* KakaoSDKUser */,
+				AC604BD72C6396CD00804950 /* Tabman */,
 			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
@@ -1042,6 +1084,7 @@
 				AC4B43072C1B147F005FC370 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				ACF2A2B42C2C184C00FE8D63 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
 				ACF2A2B92C2C1D3700FE8D63 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				AC604BD62C6396CD00804950 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
@@ -1091,6 +1134,7 @@
 			files = (
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
+				AC604BD52C63967F00804950 /* CommunityForumViewController.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
@@ -1129,6 +1173,7 @@
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
+				AC604BD02C6395E900804950 /* CommunityReviewView.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
@@ -1156,6 +1201,7 @@
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
+				AC604BD32C63967600804950 /* CommunityForumView.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
@@ -1174,6 +1220,7 @@
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
 				ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
+				AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
@@ -1181,6 +1228,7 @@
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC579B522C45227400D1C9FC /* PolicyUseCase.swift in Sources */,
+				AC604BCE2C6395D300804950 /* CommunityReviewViewController.swift in Sources */,
 				ACF2A2EE2C3160E200FE8D63 /* Router.swift in Sources */,
 				AC579B542C4522CE00D1C9FC /* PolicyRepository.swift in Sources */,
 				ACF2A31E2C37D21C00FE8D63 /* SignUpBody.swift in Sources */,
@@ -1590,6 +1638,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		AC604BD62C6396CD00804950 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 		ACF2A2B42C2C184C00FE8D63 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk-rx";
@@ -1628,6 +1684,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AC4B43072C1B147F005FC370 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		AC604BD72C6396CD00804950 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC604BD62C6396CD00804950 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 		ACF2A2B52C2C184D00FE8D63 /* RxKakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;

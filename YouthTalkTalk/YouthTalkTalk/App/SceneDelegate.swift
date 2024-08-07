@@ -102,17 +102,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     static func makeRootVC() {
         
-        let repository = PolicyRepositoryImpl()
-        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
-        let viewModel = HomeViewModel(policyUseCase: policyUseCase)
-        let newRootVC = HomeViewController(viewModel: viewModel)
-        let naviVC = UINavigationController(rootViewController: newRootVC)
         let tabVC = UITabBarController()
         
-        tabVC.setViewControllers([naviVC], animated: true)
+        // HOME TAB
+        let repository = PolicyRepositoryImpl()
+        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
+        let homeViewModel = HomeViewModel(policyUseCase: policyUseCase)
+        let homeVC = HomeViewController(viewModel: homeViewModel)
+        let homeNaviVC = UINavigationController(rootViewController: homeVC)
         
-        tabVC.tabBar.items?[0].image = UIImage(systemName: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[0].selectedImage = UIImage(systemName: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        // COMMUNITY TAB
+        let communityVC = CommunityTabViewController()
+        let communityNaviVC = UINavigationController(rootViewController: communityVC)
+        
+        tabVC.setViewControllers([communityVC, homeNaviVC], animated: true)
+        tabVC.selectedIndex = 1
+        
+        tabVC.tabBar.items?[0].image = UIImage(named: "community")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
+        tabVC.tabBar.items?[0].selectedImage = UIImage(named: "community")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        
+        tabVC.tabBar.items?[1].image = UIImage(named: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
+        tabVC.tabBar.items?[1].selectedImage = UIImage(named: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
