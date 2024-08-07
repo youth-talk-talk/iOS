@@ -15,5 +15,7 @@ final class PopularDecoReusableView: BaseCollectionReusableView {
         layer.cornerRadius = 20
         layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
         layer.masksToBounds = true
+        
+        print("popular deco")
     }
 }

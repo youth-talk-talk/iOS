@@ -80,12 +80,12 @@
 		AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C292BF108AF00A13991 /* Coordinator.swift */; };
 		AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */; };
 		AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */; };
-		AC604BCE2C6395D300804950 /* CommunityReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BCD2C6395D300804950 /* CommunityReviewViewController.swift */; };
-		AC604BD02C6395E900804950 /* CommunityReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BCF2C6395E900804950 /* CommunityReviewView.swift */; };
-		AC604BD32C63967600804950 /* CommunityForumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BD22C63967600804950 /* CommunityForumView.swift */; };
-		AC604BD52C63967F00804950 /* CommunityForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BD42C63967F00804950 /* CommunityForumViewController.swift */; };
+		AC604BD32C63967600804950 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BD22C63967600804950 /* CommunityView.swift */; };
+		AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BD42C63967F00804950 /* CommunityViewController.swift */; };
 		AC604BD82C6396CD00804950 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = AC604BD72C6396CD00804950 /* Tabman */; };
 		AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDA2C63970600804950 /* CommunityTabViewController.swift */; };
+		AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDE2C63A7F800804950 /* CommunityLayout.swift */; };
+		AC604BE22C63A9EB00804950 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -241,11 +241,11 @@
 		AC5A7C292BF108AF00A13991 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AC5A7C2B2BF1093B00A13991 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		AC5A7C2D2BF10BEE00A13991 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		AC604BCD2C6395D300804950 /* CommunityReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityReviewViewController.swift; sourceTree = "<group>"; };
-		AC604BCF2C6395E900804950 /* CommunityReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityReviewView.swift; sourceTree = "<group>"; };
-		AC604BD22C63967600804950 /* CommunityForumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityForumView.swift; sourceTree = "<group>"; };
-		AC604BD42C63967F00804950 /* CommunityForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityForumViewController.swift; sourceTree = "<group>"; };
+		AC604BD22C63967600804950 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		AC604BD42C63967F00804950 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		AC604BDA2C63970600804950 /* CommunityTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabViewController.swift; sourceTree = "<group>"; };
+		AC604BDE2C63A7F800804950 /* CommunityLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityLayout.swift; sourceTree = "<group>"; };
+		AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -559,8 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				AC604BD92C6396F400804950 /* CommunityTab */,
-				AC604BD12C63962D00804950 /* CommunityForum */,
-				AC604BCC2C63955000804950 /* CommunityReview */,
+				AC604BD12C63962D00804950 /* Community */,
 				AC579B672C51341D00D1C9FC /* Policy */,
 				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C232BF102B800A13991 /* Base */,
@@ -599,22 +598,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		AC604BCC2C63955000804950 /* CommunityReview */ = {
+		AC604BD12C63962D00804950 /* Community */ = {
 			isa = PBXGroup;
 			children = (
-				AC604BCD2C6395D300804950 /* CommunityReviewViewController.swift */,
-				AC604BCF2C6395E900804950 /* CommunityReviewView.swift */,
+				AC604BD42C63967F00804950 /* CommunityViewController.swift */,
+				AC604BD22C63967600804950 /* CommunityView.swift */,
+				AC604BE02C63A99B00804950 /* SearchSection */,
 			);
-			path = CommunityReview;
-			sourceTree = "<group>";
-		};
-		AC604BD12C63962D00804950 /* CommunityForum */ = {
-			isa = PBXGroup;
-			children = (
-				AC604BD42C63967F00804950 /* CommunityForumViewController.swift */,
-				AC604BD22C63967600804950 /* CommunityForumView.swift */,
-			);
-			path = CommunityForum;
+			path = Community;
 			sourceTree = "<group>";
 		};
 		AC604BD92C6396F400804950 /* CommunityTab */ = {
@@ -623,6 +614,14 @@
 				AC604BDA2C63970600804950 /* CommunityTabViewController.swift */,
 			);
 			path = CommunityTab;
+			sourceTree = "<group>";
+		};
+		AC604BE02C63A99B00804950 /* SearchSection */ = {
+			isa = PBXGroup;
+			children = (
+				AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */,
+			);
+			path = SearchSection;
 			sourceTree = "<group>";
 		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
@@ -644,6 +643,7 @@
 			children = (
 				ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */,
 				AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */,
+				AC604BDE2C63A7F800804950 /* CommunityLayout.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -1134,7 +1134,7 @@
 			files = (
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
-				AC604BD52C63967F00804950 /* CommunityForumViewController.swift in Sources */,
+				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
@@ -1157,6 +1157,7 @@
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
 				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
+				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
 				AC579B582C45284A00D1C9FC /* HomePolicyBody.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
@@ -1173,7 +1174,6 @@
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
-				AC604BD02C6395E900804950 /* CommunityReviewView.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
@@ -1201,10 +1201,11 @@
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
-				AC604BD32C63967600804950 /* CommunityForumView.swift in Sources */,
+				AC604BD32C63967600804950 /* CommunityView.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
+				AC604BE22C63A9EB00804950 /* SearchCollectionReusableView.swift in Sources */,
 				ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */,
 				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
 				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
@@ -1228,7 +1229,6 @@
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC579B522C45227400D1C9FC /* PolicyUseCase.swift in Sources */,
-				AC604BCE2C6395D300804950 /* CommunityReviewViewController.swift in Sources */,
 				ACF2A2EE2C3160E200FE8D63 /* Router.swift in Sources */,
 				AC579B542C4522CE00D1C9FC /* PolicyRepository.swift in Sources */,
 				ACF2A31E2C37D21C00FE8D63 /* SignUpBody.swift in Sources */,
