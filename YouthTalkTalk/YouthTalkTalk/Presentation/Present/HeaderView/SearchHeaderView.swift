@@ -1,5 +1,5 @@
 //
-//  SearchCollectionReusableView.swift
+//  SearchHeaderView.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 8/7/24.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class SearchCollectionReusableView: BaseCollectionReusableView {
+class SearchHeaderView: BaseCollectionReusableView {
         
     let testView = UIView()
     

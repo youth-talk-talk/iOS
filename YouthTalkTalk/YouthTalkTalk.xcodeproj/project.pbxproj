@@ -53,7 +53,6 @@
 		AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */; };
 		AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */; };
 		AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */; };
-		AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */; };
 		AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B652C49169D00D1C9FC /* APIInterceptor.swift */; };
 		AC579B692C51349A00D1C9FC /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B682C51349A00D1C9FC /* PolicyViewController.swift */; };
 		AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B6A2C5134A200D1C9FC /* PolicyView.swift */; };
@@ -85,22 +84,22 @@
 		AC604BD82C6396CD00804950 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = AC604BD72C6396CD00804950 /* Tabman */; };
 		AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDA2C63970600804950 /* CommunityTabViewController.swift */; };
 		AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDE2C63A7F800804950 /* CommunityLayout.swift */; };
-		AC604BE22C63A9EB00804950 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */; };
+		AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
 		ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */; };
 		ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */; };
-		ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */; };
+		ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2692C21B24E00FE8D63 /* TitleHeaderView.swift */; };
 		ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */; };
-		ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */; };
+		ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2722C229DBB00FE8D63 /* CategoryButtonHeaderView.swift */; };
 		ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */; };
 		ACF2A2772C2451DD00FE8D63 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */; };
-		ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */; };
-		ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */; };
+		ACF2A27A2C25845900FE8D63 /* TopRadiusDecoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2792C25845900FE8D63 /* TopRadiusDecoView.swift */; };
+		ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27B2C25859E00FE8D63 /* DefaultDecoView.swift */; };
 		ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */; };
 		ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */; };
-		ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */; };
+		ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2812C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift */; };
 		ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */; };
 		ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */; };
 		ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */; };
@@ -210,7 +209,6 @@
 		AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepositoryImpl.swift; sourceTree = "<group>"; };
 		AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePolicyEntity.swift; sourceTree = "<group>"; };
 		AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCaseImpl.swift; sourceTree = "<group>"; };
-		AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		AC579B652C49169D00D1C9FC /* APIInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterceptor.swift; sourceTree = "<group>"; };
 		AC579B682C51349A00D1C9FC /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		AC579B6A2C5134A200D1C9FC /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
@@ -245,22 +243,22 @@
 		AC604BD42C63967F00804950 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		AC604BDA2C63970600804950 /* CommunityTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabViewController.swift; sourceTree = "<group>"; };
 		AC604BDE2C63A7F800804950 /* CommunityLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityLayout.swift; sourceTree = "<group>"; };
-		AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
+		AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLayout.swift; sourceTree = "<group>"; };
 		ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCollectionViewCell.swift; sourceTree = "<group>"; };
-		ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularHeaderReusableView.swift; sourceTree = "<group>"; };
+		ACF2A2692C21B24E00FE8D63 /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject++.swift"; sourceTree = "<group>"; };
-		ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionReusableView.swift; sourceTree = "<group>"; };
+		ACF2A2722C229DBB00FE8D63 /* CategoryButtonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonHeaderView.swift; sourceTree = "<group>"; };
 		ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
-		ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularDecoReusableView.swift; sourceTree = "<group>"; };
-		ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDecoReusableView.swift; sourceTree = "<group>"; };
+		ACF2A2792C25845900FE8D63 /* TopRadiusDecoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRadiusDecoView.swift; sourceTree = "<group>"; };
+		ACF2A27B2C25859E00FE8D63 /* DefaultDecoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDecoView.swift; sourceTree = "<group>"; };
 		ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
-		ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeaderReusableView.swift; sourceTree = "<group>"; };
+		ACF2A2812C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithCategoryHeaderView.swift; sourceTree = "<group>"; };
 		ACF2A2892C281E4800FE8D63 /* SignInInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInterface.swift; sourceTree = "<group>"; };
 		ACF2A28C2C2822E400FE8D63 /* SignInInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInput.swift; sourceTree = "<group>"; };
 		ACF2A28E2C28234000FE8D63 /* SignInOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOutput.swift; sourceTree = "<group>"; };
@@ -611,11 +609,10 @@
 		AC604BE52C64B2B400804950 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */,
-				ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */,
-				ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */,
-				AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */,
-				AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */,
+				ACF2A2722C229DBB00FE8D63 /* CategoryButtonHeaderView.swift */,
+				ACF2A2692C21B24E00FE8D63 /* TitleHeaderView.swift */,
+				ACF2A2812C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift */,
+				AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -623,8 +620,8 @@
 		AC604BE62C64B2C500804950 /* DecoView */ = {
 			isa = PBXGroup;
 			children = (
-				ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */,
-				ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */,
+				ACF2A2792C25845900FE8D63 /* TopRadiusDecoView.swift */,
+				ACF2A27B2C25859E00FE8D63 /* DefaultDecoView.swift */,
 			);
 			path = DecoView;
 			sourceTree = "<group>";
@@ -1139,7 +1136,7 @@
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
-				ACF2A2732C229DBB00FE8D63 /* CategoryCollectionReusableView.swift in Sources */,
+				ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */,
 				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
 				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
 				AC579B582C45284A00D1C9FC /* HomePolicyBody.swift in Sources */,
@@ -1159,10 +1156,9 @@
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
-				ACF2A27C2C25859E00FE8D63 /* RecentDecoReusableView.swift in Sources */,
+				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
-				AC579B642C47920000D1C9FC /* RecentSearchCollectionReusableView.swift in Sources */,
-				ACF2A2822C2589A100FE8D63 /* RecentHeaderReusableView.swift in Sources */,
+				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
@@ -1189,7 +1185,7 @@
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
-				AC604BE22C63A9EB00804950 /* SearchCollectionReusableView.swift in Sources */,
+				AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */,
 				ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */,
 				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
 				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
@@ -1203,7 +1199,7 @@
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
-				ACF2A26A2C21B24E00FE8D63 /* PopularHeaderReusableView.swift in Sources */,
+				ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
@@ -1237,7 +1233,7 @@
 				ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 				ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */,
-				ACF2A27A2C25845900FE8D63 /* PopularDecoReusableView.swift in Sources */,
+				ACF2A27A2C25845900FE8D63 /* TopRadiusDecoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  RecentHeaderReusableView.swift
+//  TitleWithCategoryHeaderView.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/21/24.
@@ -10,7 +10,7 @@ import FlexLayout
 import PinLayout
 import RxSwift
 
-final class RecentHeaderReusableView: BaseCollectionReusableView {
+final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
     
     var disposeBag = DisposeBag()
     

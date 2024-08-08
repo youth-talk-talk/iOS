@@ -1,5 +1,5 @@
 //
-//  CategoryCollectionReusableView.swift
+//  CategoryButtonHeaderView.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 6/19/24.
@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-final class CategoryCollectionReusableView: BaseCollectionReusableView {
+final class CategoryButtonHeaderView: BaseCollectionReusableView {
     
     let gradientView = UIView()
     

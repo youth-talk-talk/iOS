@@ -46,7 +46,7 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
     private func headerRegistration() {
         
         // 최근업데이트 Header Registration
-        let recentSearchHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentSearchCollectionReusableView>(elementKind: RecentSearchCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let recentSearchHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
             // guard let self else { return }
         }
@@ -57,7 +57,7 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
             guard let self else { return nil }
             
             switch kind {
-            case RecentSearchCollectionReusableView.identifier:
+            case TitleHeaderView.identifier:
                 return layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: recentSearchHeaderRegistration,
                     for: index)

@@ -152,7 +152,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func headerRegistration() {
         
         // 카테고리 Header Registration
-        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryButtonHeaderView>(elementKind: CategoryButtonHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
             supplementaryView.prepareForReuse()
             
@@ -172,13 +172,13 @@ final class HomeViewController: BaseViewController<HomeView> {
         }
         
         // 인기정책 Header Registration
-        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
             // guard let section = HomeLayout(rawValue: indexPath.section) else { return }
         }
         
         // 최근업데이트 Header Registration
-        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentHeaderReusableView>(elementKind: RecentHeaderReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleWithCategoryHeaderView>(elementKind: TitleWithCategoryHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
             guard let self else { return }
             
@@ -235,19 +235,19 @@ final class HomeViewController: BaseViewController<HomeView> {
             guard let self else { return nil }
             
             switch kind {
-            case CategoryCollectionReusableView.identifier:
+            case CategoryButtonHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: categoryHeaderRegistration,
                     for: index)
                 
-            case PopularHeaderReusableView.identifier:
+            case TitleHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: popularHeaderRegistration,
                     for: index)
                 
-            case RecentHeaderReusableView.identifier:
+            case TitleWithCategoryHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: recentHeaderRegistration,

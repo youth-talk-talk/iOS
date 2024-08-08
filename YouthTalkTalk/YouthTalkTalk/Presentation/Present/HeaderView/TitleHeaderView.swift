@@ -1,16 +1,16 @@
 //
-//  RecentSearchCollectionReusableView.swift
+//  TitleHeaderView.swift
 //  YouthTalkTalk
 //
-//  Created by 이중엽 on 7/17/24.
+//  Created by 이중엽 on 6/18/24.
 //
 
 import UIKit
 import FlexLayout
 import PinLayout
 
-class RecentSearchCollectionReusableView: BaseCollectionReusableView {
- 
+final class TitleHeaderView: BaseCollectionReusableView {
+        
     let titleLabel = UILabel()
     
     override func configureLayout() {
@@ -18,13 +18,13 @@ class RecentSearchCollectionReusableView: BaseCollectionReusableView {
         flexView.flex.define { flex in
             
             flex.addItem(titleLabel)
-                .marginTop(12)
-                .marginBottom(8)
+                .marginTop(15)
+                .marginBottom(12)
         }
     }
     
     override func configureView() {
         
-        titleLabel.designed(text: "최근검색", fontType: .p14Bold, textColor: .gray60)
+        titleLabel.designed(text: "인기정책", fontType: .g14Bold, textColor: .gray60)
     }
 }

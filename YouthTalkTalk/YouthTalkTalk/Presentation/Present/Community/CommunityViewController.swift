@@ -107,12 +107,12 @@ class CommunityForumViewController: BaseViewController<CommunityForumView> {
     private func headerRegistration() {
         
         // 카테고리 Header Registration
-        let searchHeaderRegistration = UICollectionView.SupplementaryRegistration<SearchCollectionReusableView>(elementKind: SearchCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let searchHeaderRegistration = UICollectionView.SupplementaryRegistration<SearchHeaderView>(elementKind: SearchHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
         }
         
         // 인기정책 Header Registration
-        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
             let section = indexPath.section
             let layout = CommunityLayout(rawValue: section)
@@ -137,13 +137,13 @@ class CommunityForumViewController: BaseViewController<CommunityForumView> {
             guard let self else { return nil }
             
             switch kind {
-            case SearchCollectionReusableView.identifier:
+            case SearchHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: searchHeaderRegistration,
                     for: index)
                 
-            case PopularHeaderReusableView.identifier:
+            case TitleHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: popularHeaderRegistration,
