@@ -45,10 +45,10 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
     
     private func headerRegistration() {
         
-        // 최근업데이트 Header Registration
+        // 최근 검색 Header Registration
         let recentSearchHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
-            // guard let self else { return }
+            supplementaryView.setTitle("최근 검색")
         }
         
         // Header 등록

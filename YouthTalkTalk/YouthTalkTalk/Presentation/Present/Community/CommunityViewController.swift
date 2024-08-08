@@ -120,11 +120,11 @@ class CommunityForumViewController: BaseViewController<CommunityForumView> {
             switch layout {
             case .popular:
                 
-                supplementaryView.titleLabel.designed(text: "인기 게시물", fontType: .g14Bold, textColor: .gray60)
+                supplementaryView.setTitle("인기 게시물")
                 
             case .recent:
                 
-                supplementaryView.titleLabel.designed(text: "최근 게시물", fontType: .g14Bold, textColor: .gray60)
+                supplementaryView.setTitle("최근 게시물")
                 
             default: return
             }

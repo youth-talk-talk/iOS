@@ -23,8 +23,8 @@ final class TitleHeaderView: BaseCollectionReusableView {
         }
     }
     
-    override func configureView() {
+    func setTitle(_ title: String) {
         
-        titleLabel.designed(text: "인기정책", fontType: .g14Bold, textColor: .gray60)
+        titleLabel.designed(text: title, fontType: .g14Bold, textColor: .gray60)
     }
 }

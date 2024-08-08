@@ -174,7 +174,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         // 인기정책 Header Registration
         let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
-            // guard let section = HomeLayout(rawValue: indexPath.section) else { return }
+            supplementaryView.setTitle("인기 정책")
         }
         
         // 최근업데이트 Header Registration
