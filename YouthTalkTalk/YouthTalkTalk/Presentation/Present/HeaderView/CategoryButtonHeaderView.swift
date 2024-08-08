@@ -8,24 +8,31 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 final class CategoryButtonHeaderView: BaseCollectionReusableView {
     
+    final var disposeBag = DisposeBag()
+    
     let gradientView = UIView()
     
-    let searchBar = UISearchBar()
-    let transparentView = UIView()
+    let searchButton = UIButton()
     
     let jobCategoryButton = UIButton()
     let educationCategoryButton = UIButton()
     let cultureCategoryButton = UIButton()
     let collaborateCategoryButton = UIButton()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+    }
+    
     override func configureLayout() {
         
         flexView.addSubview(gradientView)
-        flexView.addSubview(searchBar)
-        flexView.addSubview(transparentView)
+        flexView.addSubview(searchButton)
         
         flexView.flex.define { flex in
             
@@ -33,21 +40,14 @@ final class CategoryButtonHeaderView: BaseCollectionReusableView {
                 .position(.absolute)
                 .top(0)
                 .horizontally(0)
+                .width(100%)
                 .backgroundColor(.customGreen)
             
-            flex.addItem(searchBar)
-                .defaultCornerRadius()
-                .defaultHeight()
+            flex.addItem(searchButton)
+                .defaultButton()
                 .marginTop(16)
                 .border(1, .gray20)
                 .width(90%)
-            
-            flex.addItem(transparentView)
-                .position(.absolute)
-                .top(searchBar.frame.minY)
-                .height(searchBar.frame.height)
-                .width(searchBar.frame.width)
-                .backgroundColor(.brown)
             
             // 카테고리
             flex.addItem().define { flex in
@@ -89,38 +89,30 @@ final class CategoryButtonHeaderView: BaseCollectionReusableView {
         gradientView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
         gradientView.layer.masksToBounds = true
         
-        searchBar.layer.masksToBounds = true
-        searchBar.searchBarStyle = .minimal
-        searchBar.backgroundColor = .white.withAlphaComponent(0.95)
-        searchBar.searchTextField.leftView?.tintColor = .lime40
-        searchBar.isUserInteractionEnabled = false
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.image = UIImage.magnifyingglass.withTintColor(.lime40, renderingMode: .alwaysOriginal)
+        buttonConfiguration.background.backgroundColor = .white.withAlphaComponent(0.95)
+        buttonConfiguration.titleAlignment = .leading
+        buttonConfiguration.imagePlacement = .leading
+        buttonConfiguration.title = " "
         
-        transparentView.isUserInteractionEnabled = true
+        searchButton.configuration = buttonConfiguration
         
         jobCategoryButton.designedCategoryLayout(title: "일자리", image: .job)
         educationCategoryButton.designedCategoryLayout(title: "교육", image: .education)
         cultureCategoryButton.designedCategoryLayout(title: "생활지원", image: .culture)
         collaborateCategoryButton.designedCategoryLayout(title: "참여", image: .collaborate)
-        
-        if let textfieldBackgroundView = searchBar.searchTextField.subviews.first {
-            textfieldBackgroundView.isHidden = true
-        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        transparentView.flex
-            .position(.absolute)
-            .top(searchBar.frame.minY)
-            .height(searchBar.frame.height)
-            .width(searchBar.frame.width)
-            .backgroundColor(.clear)
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         
-        let height = searchBar.frame.maxY - (Flex.defaultHeight / 2)
+        searchButton.configuration?.imagePadding = searchButton.bounds.size.width - (UIScreen.main.bounds.width * 0.15)
+        
+        let height = searchButton.frame.maxY - (Flex.defaultHeight / 2)
         
         gradientView.flex.height(height)
         

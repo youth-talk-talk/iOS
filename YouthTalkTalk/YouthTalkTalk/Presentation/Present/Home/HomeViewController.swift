@@ -154,21 +154,17 @@ final class HomeViewController: BaseViewController<HomeView> {
         // 카테고리 Header Registration
         let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryButtonHeaderView>(elementKind: CategoryButtonHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
-            supplementaryView.prepareForReuse()
-            
             guard let self else { return }
             
-            let tapGesture = UITapGestureRecognizer()
-            supplementaryView.transparentView.addGestureRecognizer(tapGesture)
-            
-            tapGesture.rx.event
+            supplementaryView.searchButton.rx.tap
                 .bind(with: self) { owner, _ in
                     
                     let viewModel = SearchViewModel()
                     
                     let nextVC = SearchViewController(viewModel: viewModel)
                     owner.navigationController?.pushViewController(nextVC, animated: true)
-                }.disposed(by: disposeBag)
+                }
+                .disposed(by: supplementaryView.disposeBag)
         }
         
         // 인기정책 Header Registration
@@ -293,7 +289,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         if count == 10 {
             snapshot.deleteItems(snapshot.itemIdentifiers(inSection: section))
         }
-            
+        
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
