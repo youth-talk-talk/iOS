@@ -442,15 +442,6 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		AC579B352C3D72AA00D1C9FC /* RecentSection */ = {
-			isa = PBXGroup;
-			children = (
-				AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */,
-				AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */,
-			);
-			path = RecentSection;
-			sourceTree = "<group>";
-		};
 		AC579B4A2C451C5E00D1C9FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,7 +455,7 @@
 		AC579B672C51341D00D1C9FC /* Policy */ = {
 			isa = PBXGroup;
 			children = (
-				AC579B972C5CB8CE00D1C9FC /* Sections */,
+				AC579B972C5CB8CE00D1C9FC /* Cell */,
 				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
 				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
 				AC579B772C53B2EE00D1C9FC /* PolicyViewModel.swift */,
@@ -482,7 +473,7 @@
 			path = DetailPolciy;
 			sourceTree = "<group>";
 		};
-		AC579B972C5CB8CE00D1C9FC /* Sections */ = {
+		AC579B972C5CB8CE00D1C9FC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				AC579B9A2C5CB9C000D1C9FC /* SummaryTableViewCell.swift */,
@@ -490,7 +481,7 @@
 				AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */,
 				AC579B9C2C5CB9DF00D1C9FC /* DetailTableViewCell.swift */,
 			);
-			path = Sections;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		AC5A7BE52BF0FDB500A13991 = {
@@ -558,12 +549,13 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC5A7C232BF102B800A13991 /* Base */,
+				AC4B43252C2072BE005FC370 /* CustomView */,
+				AC604BE62C64B2C500804950 /* DecoView */,
+				AC604BE52C64B2B400804950 /* HeaderView */,
 				AC604BD92C6396F400804950 /* CommunityTab */,
 				AC604BD12C63962D00804950 /* Community */,
 				AC579B672C51341D00D1C9FC /* Policy */,
-				ACF2A2E22C3142EE00FE8D63 /* Debug */,
-				AC5A7C232BF102B800A13991 /* Base */,
-				AC4B43252C2072BE005FC370 /* CustomView */,
 				ACF2A2FD2C3416E400FE8D63 /* ResultSearch */,
 				ACF2A2FC2C3416D700FE8D63 /* RecentSearch */,
 				ACF2A2F32C32CC5600FE8D63 /* Search */,
@@ -579,6 +571,7 @@
 		AC5A7C232BF102B800A13991 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C262BF102E900A13991 /* BaseView.swift */,
 				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
 				ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */,
@@ -603,7 +596,6 @@
 			children = (
 				AC604BD42C63967F00804950 /* CommunityViewController.swift */,
 				AC604BD22C63967600804950 /* CommunityView.swift */,
-				AC604BE02C63A99B00804950 /* SearchSection */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -616,24 +608,51 @@
 			path = CommunityTab;
 			sourceTree = "<group>";
 		};
-		AC604BE02C63A99B00804950 /* SearchSection */ = {
+		AC604BE52C64B2B400804950 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
+				ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */,
+				ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */,
+				ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */,
+				AC579B632C47920000D1C9FC /* RecentSearchCollectionReusableView.swift */,
 				AC604BE12C63A9EB00804950 /* SearchCollectionReusableView.swift */,
 			);
-			path = SearchSection;
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		AC604BE62C64B2C500804950 /* DecoView */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */,
+				ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */,
+			);
+			path = DecoView;
+			sourceTree = "<group>";
+		};
+		AC604BE72C64B32300804950 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */,
+				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		AC604BE82C64B35000804950 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AC604BE72C64B32300804950 /* Cell */,
 				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
 				AC579B482C451C4B00D1C9FC /* HomeViewModel.swift */,
 				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
-				ACF2A2782C25842300FE8D63 /* DecorationView */,
-				ACF2A2702C229D8500FE8D63 /* CategorySection */,
-				ACF2A26F2C229D7900FE8D63 /* PopularSection */,
-				ACF2A2712C229D9700FE8D63 /* RecentSection */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -646,41 +665,6 @@
 				AC604BDE2C63A7F800804950 /* CommunityLayout.swift */,
 			);
 			path = CompositionalLayout;
-			sourceTree = "<group>";
-		};
-		ACF2A26F2C229D7900FE8D63 /* PopularSection */ = {
-			isa = PBXGroup;
-			children = (
-				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
-				ACF2A2692C21B24E00FE8D63 /* PopularHeaderReusableView.swift */,
-			);
-			path = PopularSection;
-			sourceTree = "<group>";
-		};
-		ACF2A2702C229D8500FE8D63 /* CategorySection */ = {
-			isa = PBXGroup;
-			children = (
-				ACF2A2722C229DBB00FE8D63 /* CategoryCollectionReusableView.swift */,
-			);
-			path = CategorySection;
-			sourceTree = "<group>";
-		};
-		ACF2A2712C229D9700FE8D63 /* RecentSection */ = {
-			isa = PBXGroup;
-			children = (
-				ACF2A27D2C25884300FE8D63 /* RecentCollectionViewCell.swift */,
-				ACF2A2812C2589A100FE8D63 /* RecentHeaderReusableView.swift */,
-			);
-			path = RecentSection;
-			sourceTree = "<group>";
-		};
-		ACF2A2782C25842300FE8D63 /* DecorationView */ = {
-			isa = PBXGroup;
-			children = (
-				ACF2A2792C25845900FE8D63 /* PopularDecoReusableView.swift */,
-				ACF2A27B2C25859E00FE8D63 /* RecentDecoReusableView.swift */,
-			);
-			path = DecorationView;
 			sourceTree = "<group>";
 		};
 		ACF2A28B2C281F6200FE8D63 /* SignIn */ = {
@@ -933,9 +917,9 @@
 		ACF2A2FC2C3416D700FE8D63 /* RecentSearch */ = {
 			isa = PBXGroup;
 			children = (
+				AC604BE82C64B35000804950 /* Cell */,
 				ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */,
 				ACF2A2FE2C3416FD00FE8D63 /* RecentSearchView.swift */,
-				AC579B352C3D72AA00D1C9FC /* RecentSection */,
 			);
 			path = RecentSearch;
 			sourceTree = "<group>";

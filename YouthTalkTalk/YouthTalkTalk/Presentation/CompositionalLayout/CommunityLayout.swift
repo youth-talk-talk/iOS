@@ -92,7 +92,7 @@ enum CommunityLayout: Int, CaseIterable {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         
         // 헤더 추가
-        section.boundarySupplementaryItems = [createHeader(RecentHeaderReusableView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(PopularHeaderReusableView.identifier)]
         
         // 데코뷰 추가
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: RecentDecoReusableView.identifier)

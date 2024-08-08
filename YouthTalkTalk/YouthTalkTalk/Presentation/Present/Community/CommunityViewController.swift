@@ -114,10 +114,20 @@ class CommunityForumViewController: BaseViewController<CommunityForumView> {
         // 인기정책 Header Registration
         let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
-        }
-        
-        // 최근업데이트 Header Registration
-        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentHeaderReusableView>(elementKind: RecentHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
+            let section = indexPath.section
+            let layout = CommunityLayout(rawValue: section)
+            
+            switch layout {
+            case .popular:
+                
+                supplementaryView.titleLabel.designed(text: "인기 게시물", fontType: .g14Bold, textColor: .gray60)
+                
+            case .recent:
+                
+                supplementaryView.titleLabel.designed(text: "최근 게시물", fontType: .g14Bold, textColor: .gray60)
+                
+            default: return
+            }
             
         }
         
@@ -137,12 +147,6 @@ class CommunityForumViewController: BaseViewController<CommunityForumView> {
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: popularHeaderRegistration,
-                    for: index)
-                
-            case RecentHeaderReusableView.identifier:
-                
-                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: recentHeaderRegistration,
                     for: index)
                 
             default: return nil
