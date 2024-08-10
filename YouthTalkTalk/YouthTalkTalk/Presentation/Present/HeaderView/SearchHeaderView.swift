@@ -56,7 +56,7 @@ class SearchHeaderView: BaseCollectionReusableView {
             flex.addItem(searchButton)
                 .defaultButton()
                 .marginTop(24)
-                .marginBottom(12)
+                .marginBottom(24)
                 .border(1, .gray20)
                 .width(90%)
                 .alignSelf(.center)
@@ -124,7 +124,8 @@ class SearchHeaderView: BaseCollectionReusableView {
             .direction(.row)
             .marginLeft(5%)
             .marginBottom(24)
-            .marginRight(5%)
+            .marginTop(-12)
+            .width(90%)
             .justifyContent(.spaceBetween)
         }
     }
