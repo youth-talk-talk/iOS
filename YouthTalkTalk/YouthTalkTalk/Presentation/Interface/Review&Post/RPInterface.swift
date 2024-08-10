@@ -7,9 +7,18 @@
 
 import Foundation
 
-enum RPType {
+enum RPType: Int {
     case review
     case post
+    
+    var title: String {
+        switch self {
+        case .review:
+            return "후기게시판"
+        case .post:
+            return "자유게시판"
+        }
+    }
 }
 
 protocol RPInterface: RPInput, RPOutput {

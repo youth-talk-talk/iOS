@@ -133,6 +133,8 @@ class CommunityViewController: BaseViewController<CommunityView> {
             
             guard let self else { return }
             
+            self.viewModel.type == .review ? supplementaryView.configureWithCategory() : supplementaryView.configureWithOutCategory()
+            
             let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
             let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
             let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()

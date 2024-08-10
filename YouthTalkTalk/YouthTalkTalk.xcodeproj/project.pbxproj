@@ -89,7 +89,7 @@
 		AC604BF12C675BC800804950 /* RPOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BF02C675BC800804950 /* RPOutput.swift */; };
 		AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BF22C675BCD00804950 /* RPInterface.swift */; };
 		AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BFC2C675DC400804950 /* ReviewViewModel.swift */; };
-		AC604BFF2C67600700804950 /* RPUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BFE2C67600700804950 /* RPUseCase.swift */; };
+		AC604BFF2C67600700804950 /* ReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BFE2C67600700804950 /* ReviewUseCase.swift */; };
 		AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C002C67604E00804950 /* ReviewRepository.swift */; };
 		AC604C032C6760D300804950 /* CommunityRPDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C022C6760D300804950 /* CommunityRPDTO.swift */; };
 		AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */; };
@@ -98,6 +98,12 @@
 		AC604C0B2C6764C900804950 /* ReviewBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C0A2C6764C900804950 /* ReviewBody.swift */; };
 		AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */; };
 		AC604C0F2C676DD700804950 /* RPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C0E2C676DD700804950 /* RPEntity.swift */; };
+		AC604C112C67820300804950 /* PostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C102C67820300804950 /* PostUseCase.swift */; };
+		AC604C132C67823300804950 /* PostUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C122C67823300804950 /* PostUseCaseImpl.swift */; };
+		AC604C152C67826F00804950 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C142C67826F00804950 /* PostRouter.swift */; };
+		AC604C172C67831000804950 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C162C67831000804950 /* PostRepository.swift */; };
+		AC604C192C67832400804950 /* PostRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C182C67832400804950 /* PostRepositoryImpl.swift */; };
+		AC604C1B2C6783CD00804950 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C1A2C6783CD00804950 /* PostViewModel.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -261,7 +267,7 @@
 		AC604BF02C675BC800804950 /* RPOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPOutput.swift; sourceTree = "<group>"; };
 		AC604BF22C675BCD00804950 /* RPInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPInterface.swift; sourceTree = "<group>"; };
 		AC604BFC2C675DC400804950 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
-		AC604BFE2C67600700804950 /* RPUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPUseCase.swift; sourceTree = "<group>"; };
+		AC604BFE2C67600700804950 /* ReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCase.swift; sourceTree = "<group>"; };
 		AC604C002C67604E00804950 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
 		AC604C022C6760D300804950 /* CommunityRPDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRPDTO.swift; sourceTree = "<group>"; };
 		AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -270,6 +276,12 @@
 		AC604C0A2C6764C900804950 /* ReviewBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewBody.swift; sourceTree = "<group>"; };
 		AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCaseImpl.swift; sourceTree = "<group>"; };
 		AC604C0E2C676DD700804950 /* RPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPEntity.swift; sourceTree = "<group>"; };
+		AC604C102C67820300804950 /* PostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUseCase.swift; sourceTree = "<group>"; };
+		AC604C122C67823300804950 /* PostUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUseCaseImpl.swift; sourceTree = "<group>"; };
+		AC604C142C67826F00804950 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
+		AC604C162C67831000804950 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		AC604C182C67832400804950 /* PostRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepositoryImpl.swift; sourceTree = "<group>"; };
+		AC604C1A2C6783CD00804950 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -621,6 +633,7 @@
 			children = (
 				AC604BD42C63967F00804950 /* CommunityViewController.swift */,
 				AC604BFC2C675DC400804950 /* ReviewViewModel.swift */,
+				AC604C1A2C6783CD00804950 /* PostViewModel.swift */,
 				AC604BD22C63967600804950 /* CommunityView.swift */,
 			);
 			path = Community;
@@ -769,7 +782,8 @@
 				ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */,
 				AC579B402C4015A000D1C9FC /* SignUpUseCase.swift */,
 				AC579B512C45227400D1C9FC /* PolicyUseCase.swift */,
-				AC604BFE2C67600700804950 /* RPUseCase.swift */,
+				AC604BFE2C67600700804950 /* ReviewUseCase.swift */,
+				AC604C102C67820300804950 /* PostUseCase.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
 			);
 			path = Interface;
@@ -782,6 +796,7 @@
 				AC579B3E2C40156100D1C9FC /* SignUpUseCaseImpl.swift */,
 				AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */,
 				AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */,
+				AC604C122C67823300804950 /* PostUseCaseImpl.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
 			);
 			path = Impl;
@@ -878,6 +893,7 @@
 				AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */,
 				AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */,
 				AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */,
+				AC604C182C67832400804950 /* PostRepositoryImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -889,6 +905,7 @@
 				AC579B422C40160F00D1C9FC /* SignUpRepository.swift */,
 				AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */,
 				AC604C002C67604E00804950 /* ReviewRepository.swift */,
+				AC604C162C67831000804950 /* PostRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -941,6 +958,7 @@
 				AC579B592C4528B500D1C9FC /* PolicyRouter.swift */,
 				AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */,
 				AC604C062C6762A000804950 /* ReviewRouter.swift */,
+				AC604C142C67826F00804950 /* PostRouter.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1161,6 +1179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC604C0F2C676DD700804950 /* RPEntity.swift in Sources */,
+				AC604C172C67831000804950 /* PostRepository.swift in Sources */,
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
@@ -1209,12 +1228,14 @@
 				AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
+				AC604C132C67823300804950 /* PostUseCaseImpl.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				AC579B2C2C3BE10A00D1C9FC /* SearchOutput.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
+				AC604C112C67820300804950 /* PostUseCase.swift in Sources */,
 				AC579B4C2C451C6B00D1C9FC /* HomeInput.swift in Sources */,
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
@@ -1222,12 +1243,14 @@
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
 				AC579B9D2C5CB9DF00D1C9FC /* DetailTableViewCell.swift in Sources */,
 				AC579B432C40160F00D1C9FC /* SignUpRepository.swift in Sources */,
+				AC604C192C67832400804950 /* PostRepositoryImpl.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
+				AC604C152C67826F00804950 /* PostRouter.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
@@ -1275,6 +1298,7 @@
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
 				ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */,
+				AC604C1B2C6783CD00804950 /* PostViewModel.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC604C032C6760D300804950 /* CommunityRPDTO.swift in Sources */,
 				AC579B322C3C14FA00D1C9FC /* ClearSearchView.swift in Sources */,
@@ -1291,7 +1315,7 @@
 				AC604C072C6762A000804950 /* ReviewRouter.swift in Sources */,
 				AC604BF12C675BC800804950 /* RPOutput.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
-				AC604BFF2C67600700804950 /* RPUseCase.swift in Sources */,
+				AC604BFF2C67600700804950 /* ReviewUseCase.swift in Sources */,
 				ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */,
 				ACF2A27A2C25845900FE8D63 /* TopRadiusDecoView.swift in Sources */,
 			);

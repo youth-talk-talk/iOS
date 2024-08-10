@@ -1,5 +1,5 @@
 //
-//  CommunityViewModel.swift
+//  PostViewModel.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 8/10/24.
@@ -9,19 +9,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ReviewViewModel: RPInterface {
+final class PostViewModel: RPInterface {
     
     private let disposeBag: DisposeBag = DisposeBag()
-    private let useCase: ReviewUseCase
+    private let useCase: PostUseCase
     
-    var type: RPType = .review
-    
-    // 선택된 정책 카테고리
-    var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
+    var type: RPType = .post
     
     var fetchRPs = PublishRelay<Void>()
     var updateRecentRPs = PublishRelay<Int>()
-    var policyCategorySeleted: PublishRelay<PolicyCategory>? = PublishRelay<PolicyCategory>()
     
     var popularRPsRelay = PublishRelay<[CommunitySectionItems]>()
     var recentRPsRelay = PublishRelay<[CommunitySectionItems]>()
@@ -29,14 +25,14 @@ final class ReviewViewModel: RPInterface {
     var input: RPInput { return self }
     var output: RPOutput { return self }
     
-    init(rpUseCase: ReviewUseCase) {
+    init(rpUseCase: PostUseCase) {
         self.useCase = rpUseCase
         
         fetchRPs
             .withUnretained(self)
             .flatMap { owner, _ in
                 
-                return owner.useCase.fetchReviews(categories: owner.selectedPolicyCategory, page: 1, size: 10)
+                return owner.useCase.fetchPosts(page: 1, size: 10)
             }
             .subscribe(with: self) { owner, result in
                 

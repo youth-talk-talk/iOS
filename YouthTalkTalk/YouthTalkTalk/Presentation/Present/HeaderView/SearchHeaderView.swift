@@ -13,8 +13,10 @@ import RxSwift
 class SearchHeaderView: BaseCollectionReusableView {
     
     var disposeBag = DisposeBag()
-        
+    
     let searchButton = UIButton()
+    
+    let categoryView = UIView()
     
     let jobCheckBoxButton = UIButton()
     let jobLiteralLabel = UILabel()
@@ -28,7 +30,25 @@ class SearchHeaderView: BaseCollectionReusableView {
     let participationCheckBoxButton = UIButton()
     let participationLiteralLabel = UILabel()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        jobCheckBoxButton.configuration?.image = nil
+        educationCheckBoxButton.configuration?.image = nil
+        lifeCheckBoxButton.configuration?.image = nil
+        participationCheckBoxButton.configuration?.image = nil
+        
+        jobLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
+        educationLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
+        lifeLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
+        participationLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
+    }
+    
     override func configureLayout() {
+        
+        flexView.addSubview(categoryView)
+        
+        [jobLiteralLabel, jobCheckBoxButton, educationLiteralLabel, educationCheckBoxButton, lifeLiteralLabel, lifeCheckBoxButton, participationLiteralLabel, participationCheckBoxButton].forEach { flexView.addSubview($0) }
         
         flexView.flex.define { flex in
             
@@ -36,21 +56,24 @@ class SearchHeaderView: BaseCollectionReusableView {
             flex.addItem(searchButton)
                 .defaultButton()
                 .marginTop(24)
+                .marginBottom(12)
                 .border(1, .gray20)
                 .width(90%)
                 .alignSelf(.center)
             
             // MARK: 카테고리
-            flex.addItem().define { flex in
+            flex.addItem(categoryView).define { flex in
                 
                 // 일자리
                 flex.addItem().define { flex in
                     flex.addItem(jobCheckBoxButton)
                         .width(15)
                         .height(15)
+                        .markDirty()
                     
                     flex.addItem(jobLiteralLabel)
                         .marginLeft(7)
+                        .markDirty()
                 }
                 .alignItems(.center)
                 .direction(.row)
@@ -60,9 +83,11 @@ class SearchHeaderView: BaseCollectionReusableView {
                     flex.addItem(educationCheckBoxButton)
                         .width(15)
                         .height(15)
+                        .markDirty()
                     
                     flex.addItem(educationLiteralLabel)
                         .marginLeft(7)
+                        .markDirty()
                 }
                 .alignItems(.center)
                 .direction(.row)
@@ -72,9 +97,11 @@ class SearchHeaderView: BaseCollectionReusableView {
                     flex.addItem(lifeCheckBoxButton)
                         .width(15)
                         .height(15)
+                        .markDirty()
                     
                     flex.addItem(lifeLiteralLabel)
                         .marginLeft(7)
+                        .markDirty()
                 }
                 .alignItems(.center)
                 .direction(.row)
@@ -84,15 +111,17 @@ class SearchHeaderView: BaseCollectionReusableView {
                     flex.addItem(participationCheckBoxButton)
                         .width(15)
                         .height(15)
+                        .markDirty()
                     
                     flex.addItem(participationLiteralLabel)
                         .marginLeft(7)
+                        .markDirty()
                 }
                 .alignItems(.center)
                 .direction(.row)
+                .markDirty()
             }
             .direction(.row)
-            .marginTop(12)
             .marginLeft(5%)
             .marginBottom(24)
             .marginRight(5%)
@@ -110,6 +139,9 @@ class SearchHeaderView: BaseCollectionReusableView {
         buttonConfiguration.title = " "
         
         searchButton.configuration = buttonConfiguration
+    }
+    
+    func configureWithCategory() {
         
         let checkmarkImage = UIImage.emptyCheckbox.withTintColor(.gray30, renderingMode: .alwaysOriginal)
         
@@ -147,6 +179,22 @@ class SearchHeaderView: BaseCollectionReusableView {
         educationLiteralLabel.designed(text: "교육", fontType: .p14Bold, textColor: .gray60)
         lifeLiteralLabel.designed(text: "생활지원", fontType: .p14Bold, textColor: .gray60)
         participationLiteralLabel.designed(text: "참여", fontType: .p14Bold, textColor: .gray60)
+    }
+    
+    func configureWithOutCategory() {
+        jobCheckBoxButton.flex.display(.none)
+        educationCheckBoxButton.flex.display(.none)
+        lifeCheckBoxButton.flex.display(.none)
+        participationCheckBoxButton.flex.display(.none)
+        
+        jobLiteralLabel.flex.display(.none)
+        educationLiteralLabel.flex.display(.none)
+        lifeLiteralLabel.flex.display(.none)
+        participationLiteralLabel.flex.display(.none)
+        
+        self.categoryView.flex.display(.none)
+        
+        self.flexView.flex.layout()
     }
     
     override func layoutSubviews() {

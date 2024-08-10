@@ -16,10 +16,10 @@ struct CommunityRPEntity {
 struct RPEntity: Hashable {
     
     let uuid = UUID()
-    let postID: Int
+    let postID: Int?
     let title: String
     let content: String
-    let writerID: Int
+    let writerID: Int?
     let scraps: Int
     let scrap: Bool
     let comments: Int

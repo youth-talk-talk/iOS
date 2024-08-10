@@ -12,16 +12,23 @@ import FlexLayout
 
 class CommunityTabViewController: TabmanViewController {
     
+    var types: [RPType] = []
+    
     private var viewControllers: [UIViewController] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rpUseCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
-        let viewModel = ReviewViewModel(rpUseCase: rpUseCase)
-        let reviewController = CommunityViewController(viewModel: viewModel)
+        let reviewUseCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
+        let reviewViewModel = ReviewViewModel(rpUseCase: reviewUseCase)
+        let reviewController = CommunityViewController(viewModel: reviewViewModel)
         
-        viewControllers.append(reviewController)
+        let postUseCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+        let postViewModel = PostViewModel(rpUseCase: postUseCase)
+        let postController = CommunityViewController(viewModel: postViewModel)
+        
+        viewControllers = [reviewController, postController]
+        types = [reviewViewModel.type, postViewModel.type]
         
         self.dataSource = self
         self.isScrollEnabled = false
@@ -69,7 +76,7 @@ extension CommunityTabViewController: PageboyViewControllerDataSource, TMBarData
     }
     
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        let title = "Page \(index)"
+        let title = types[index].title
         return TMBarItem(title: title)
     }
 }
