@@ -14,7 +14,7 @@ enum PolicyRouter: Router {
         return KeyChainHelper()
     }
     
-    case fetchHomePolicy(homePolicy: HomePolicyBody)
+    case fetchHomePolicy(policy: PolicyQuery)
     case fetchPolicyDetail(id: String)
     
     var baseURL: String {
@@ -65,7 +65,7 @@ enum PolicyRouter: Router {
         }
     }
     
-    private func convertToParameters(_ body: HomePolicyBody) -> [String: Any] {
+    private func convertToParameters(_ body: PolicyQuery) -> [String: Any] {
         var params: [String: Any] = [:]
         
         body.categories.forEach { category in

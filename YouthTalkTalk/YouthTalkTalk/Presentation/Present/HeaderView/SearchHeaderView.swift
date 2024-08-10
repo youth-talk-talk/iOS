@@ -8,8 +8,11 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 class SearchHeaderView: BaseCollectionReusableView {
+    
+    var disposeBag = DisposeBag()
         
     let searchButton = UIButton()
     

@@ -48,7 +48,7 @@
 		AC579B522C45227400D1C9FC /* PolicyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B512C45227400D1C9FC /* PolicyUseCase.swift */; };
 		AC579B542C4522CE00D1C9FC /* PolicyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */; };
 		AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */; };
-		AC579B582C45284A00D1C9FC /* HomePolicyBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B572C45284A00D1C9FC /* HomePolicyBody.swift */; };
+		AC579B582C45284A00D1C9FC /* PolicyQeury.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B572C45284A00D1C9FC /* PolicyQeury.swift */; };
 		AC579B5A2C4528B500D1C9FC /* PolicyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B592C4528B500D1C9FC /* PolicyRouter.swift */; };
 		AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */; };
 		AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */; };
@@ -85,6 +85,19 @@
 		AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDA2C63970600804950 /* CommunityTabViewController.swift */; };
 		AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BDE2C63A7F800804950 /* CommunityLayout.swift */; };
 		AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */; };
+		AC604BEF2C675BC000804950 /* RPInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BEE2C675BC000804950 /* RPInput.swift */; };
+		AC604BF12C675BC800804950 /* RPOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BF02C675BC800804950 /* RPOutput.swift */; };
+		AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BF22C675BCD00804950 /* RPInterface.swift */; };
+		AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BFC2C675DC400804950 /* ReviewViewModel.swift */; };
+		AC604BFF2C67600700804950 /* RPUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604BFE2C67600700804950 /* RPUseCase.swift */; };
+		AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C002C67604E00804950 /* ReviewRepository.swift */; };
+		AC604C032C6760D300804950 /* CommunityRPDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C022C6760D300804950 /* CommunityRPDTO.swift */; };
+		AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */; };
+		AC604C072C6762A000804950 /* ReviewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C062C6762A000804950 /* ReviewRouter.swift */; };
+		AC604C092C6764A900804950 /* RPQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C082C6764A900804950 /* RPQuery.swift */; };
+		AC604C0B2C6764C900804950 /* ReviewBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C0A2C6764C900804950 /* ReviewBody.swift */; };
+		AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */; };
+		AC604C0F2C676DD700804950 /* RPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C0E2C676DD700804950 /* RPEntity.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -204,7 +217,7 @@
 		AC579B512C45227400D1C9FC /* PolicyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCase.swift; sourceTree = "<group>"; };
 		AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepository.swift; sourceTree = "<group>"; };
 		AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePolicyDTO.swift; sourceTree = "<group>"; };
-		AC579B572C45284A00D1C9FC /* HomePolicyBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePolicyBody.swift; sourceTree = "<group>"; };
+		AC579B572C45284A00D1C9FC /* PolicyQeury.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyQeury.swift; sourceTree = "<group>"; };
 		AC579B592C4528B500D1C9FC /* PolicyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRouter.swift; sourceTree = "<group>"; };
 		AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepositoryImpl.swift; sourceTree = "<group>"; };
 		AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePolicyEntity.swift; sourceTree = "<group>"; };
@@ -244,6 +257,19 @@
 		AC604BDA2C63970600804950 /* CommunityTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabViewController.swift; sourceTree = "<group>"; };
 		AC604BDE2C63A7F800804950 /* CommunityLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityLayout.swift; sourceTree = "<group>"; };
 		AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
+		AC604BEE2C675BC000804950 /* RPInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPInput.swift; sourceTree = "<group>"; };
+		AC604BF02C675BC800804950 /* RPOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPOutput.swift; sourceTree = "<group>"; };
+		AC604BF22C675BCD00804950 /* RPInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPInterface.swift; sourceTree = "<group>"; };
+		AC604BFC2C675DC400804950 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		AC604BFE2C67600700804950 /* RPUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPUseCase.swift; sourceTree = "<group>"; };
+		AC604C002C67604E00804950 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		AC604C022C6760D300804950 /* CommunityRPDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRPDTO.swift; sourceTree = "<group>"; };
+		AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepositoryImpl.swift; sourceTree = "<group>"; };
+		AC604C062C6762A000804950 /* ReviewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRouter.swift; sourceTree = "<group>"; };
+		AC604C082C6764A900804950 /* RPQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPQuery.swift; sourceTree = "<group>"; };
+		AC604C0A2C6764C900804950 /* ReviewBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewBody.swift; sourceTree = "<group>"; };
+		AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCaseImpl.swift; sourceTree = "<group>"; };
+		AC604C0E2C676DD700804950 /* RPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPEntity.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -383,6 +409,7 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				AC604BED2C675BA500804950 /* Review&Post */,
 				AC579B702C53B24C00D1C9FC /* DetailPolciy */,
 				AC579B4A2C451C5E00D1C9FC /* Home */,
 				AC579B282C3BE0EA00D1C9FC /* Search */,
@@ -593,6 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				AC604BD42C63967F00804950 /* CommunityViewController.swift */,
+				AC604BFC2C675DC400804950 /* ReviewViewModel.swift */,
 				AC604BD22C63967600804950 /* CommunityView.swift */,
 			);
 			path = Community;
@@ -641,6 +669,16 @@
 				AC579B382C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		AC604BED2C675BA500804950 /* Review&Post */ = {
+			isa = PBXGroup;
+			children = (
+				AC604BEE2C675BC000804950 /* RPInput.swift */,
+				AC604BF02C675BC800804950 /* RPOutput.swift */,
+				AC604BF22C675BCD00804950 /* RPInterface.swift */,
+			);
+			path = "Review&Post";
 			sourceTree = "<group>";
 		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
@@ -731,6 +769,7 @@
 				ACF2A2962C28691F00FE8D63 /* SignInUseCase.swift */,
 				AC579B402C4015A000D1C9FC /* SignUpUseCase.swift */,
 				AC579B512C45227400D1C9FC /* PolicyUseCase.swift */,
+				AC604BFE2C67600700804950 /* RPUseCase.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
 			);
 			path = Interface;
@@ -742,6 +781,7 @@
 				ACF2A29A2C28698D00FE8D63 /* SignInUseCaseImpl.swift */,
 				AC579B3E2C40156100D1C9FC /* SignUpUseCaseImpl.swift */,
 				AC579B5F2C45428500D1C9FC /* PolicyUseCaseImpl.swift */,
+				AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
 			);
 			path = Impl;
@@ -778,6 +818,7 @@
 				ACF2A3192C35594000FE8D63 /* SignInEntity.swift */,
 				AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */,
 				AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */,
+				AC604C0E2C676DD700804950 /* RPEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -836,6 +877,7 @@
 				ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */,
 				AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */,
 				AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */,
+				AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -846,6 +888,7 @@
 				ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */,
 				AC579B422C40160F00D1C9FC /* SignUpRepository.swift */,
 				AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */,
+				AC604C002C67604E00804950 /* ReviewRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -897,6 +940,7 @@
 				ACF2A31B2C37CCC700FE8D63 /* SignUpRouter.swift */,
 				AC579B592C4528B500D1C9FC /* PolicyRouter.swift */,
 				AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */,
+				AC604C062C6762A000804950 /* ReviewRouter.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -935,7 +979,9 @@
 			children = (
 				ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */,
 				ACF2A31D2C37D21C00FE8D63 /* SignUpBody.swift */,
-				AC579B572C45284A00D1C9FC /* HomePolicyBody.swift */,
+				AC604C0A2C6764C900804950 /* ReviewBody.swift */,
+				AC579B572C45284A00D1C9FC /* PolicyQeury.swift */,
+				AC604C082C6764A900804950 /* RPQuery.swift */,
 			);
 			path = BodyData;
 			sourceTree = "<group>";
@@ -948,6 +994,7 @@
 				AC579B3C2C3E7E9B00D1C9FC /* MeDTO.swift */,
 				AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */,
 				AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */,
+				AC604C022C6760D300804950 /* CommunityRPDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1113,8 +1160,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC604C0F2C676DD700804950 /* RPEntity.swift in Sources */,
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
+				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
 				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
@@ -1139,7 +1188,7 @@
 				ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */,
 				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
 				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
-				AC579B582C45284A00D1C9FC /* HomePolicyBody.swift in Sources */,
+				AC579B582C45284A00D1C9FC /* PolicyQeury.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
@@ -1149,6 +1198,7 @@
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
 				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
 				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,
+				AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */,
@@ -1156,6 +1206,7 @@
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
+				AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
@@ -1181,6 +1232,7 @@
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
+				AC604BEF2C675BC000804950 /* RPInput.swift in Sources */,
 				AC604BD32C63967600804950 /* CommunityView.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
@@ -1199,14 +1251,17 @@
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
+				AC604C092C6764A900804950 /* RPQuery.swift in Sources */,
 				ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
+				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
+				AC604C0B2C6764C900804950 /* ReviewBody.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
 				AC579B522C45227400D1C9FC /* PolicyUseCase.swift in Sources */,
 				ACF2A2EE2C3160E200FE8D63 /* Router.swift in Sources */,
@@ -1221,17 +1276,22 @@
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
 				ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
+				AC604C032C6760D300804950 /* CommunityRPDTO.swift in Sources */,
 				AC579B322C3C14FA00D1C9FC /* ClearSearchView.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
 				AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */,
 				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */,
+				AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */,
 				ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */,
 				ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */,
 				ACF2A3102C3532A700FE8D63 /* SignInRepositoryImpl.swift in Sources */,
 				ACF2A27E2C25884300FE8D63 /* RecentCollectionViewCell.swift in Sources */,
+				AC604C072C6762A000804950 /* ReviewRouter.swift in Sources */,
+				AC604BF12C675BC800804950 /* RPOutput.swift in Sources */,
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
+				AC604BFF2C67600700804950 /* RPUseCase.swift in Sources */,
 				ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */,
 				ACF2A27A2C25845900FE8D63 /* TopRadiusDecoView.swift in Sources */,
 			);

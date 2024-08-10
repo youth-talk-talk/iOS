@@ -30,7 +30,7 @@ enum PolicyCategory: String, CaseIterable, Encodable {
     }
 }
 
-struct HomePolicyBody: Encodable {
+struct PolicyQuery: Encodable {
     
     let categories: [PolicyCategory]
     let page: Int

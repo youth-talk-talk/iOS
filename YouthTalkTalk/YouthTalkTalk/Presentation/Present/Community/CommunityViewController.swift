@@ -6,49 +6,71 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 enum CommunitySectionItems: Hashable {
     
     case search
-    case popular(PolicyEntity)
-    case recent(PolicyEntity)
+    case popular(RPEntity)
+    case recent(RPEntity)
     
-    var data: PolicyEntity? {
+    var data: RPEntity? {
         switch self {
         case .search:
             return nil
-        case .popular(let policyEntity):
-            return policyEntity
-        case .recent(let policyEntity):
-            return policyEntity
+        case .popular(let rpEntity):
+            return rpEntity
+        case .recent(let rpEntity):
+            return rpEntity
         }
     }
 }
 
 class CommunityViewController: BaseViewController<CommunityView> {
     
+    let viewModel: RPInterface
+    
     var dataSource: UICollectionViewDiffableDataSource<CommunityLayout, CommunitySectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<CommunityLayout, CommunitySectionItems>()
 
+    init(viewModel: RPInterface) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         cellRegistration()
         headerRegistration()
-        
-        let entity = [PolicyEntity.mockupData()]
-        let entities = entity.map { CommunitySectionItems.popular($0) }
-        
-        let newentity = [PolicyEntity.mockupData()]
-        let newentities = newentity.map { CommunitySectionItems.popular($0) }
-        
-        update(section: .popular, items: entities)
-        update(section: .recent, items: newentities)
     }
     
     override func bind() {
         
         snapshot.appendSections([.search, .popular, .recent])
+        
+        viewModel.output.popularRPsRelay
+            .bind(with: self) { owner, sectionItems in
+                
+                owner.update(section: .popular, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.recentRPsRelay
+            .bind(with: self) { owner, sectionItems in
+                
+                owner.update(section: .recent, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.input.fetchRPs.accept(())
     }
     
     //MARK: Cell Registration
@@ -107,7 +129,55 @@ class CommunityViewController: BaseViewController<CommunityView> {
     private func headerRegistration() {
         
         // 카테고리 Header Registration
-        let searchHeaderRegistration = UICollectionView.SupplementaryRegistration<SearchHeaderView>(elementKind: SearchHeaderView.identifier) { supplementaryView, elementKind, indexPath in
+        let searchHeaderRegistration = UICollectionView.SupplementaryRegistration<SearchHeaderView>(elementKind: SearchHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+            
+            guard let self else { return }
+            
+            let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
+            let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
+            let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()
+            let participationButtonTap = supplementaryView.participationCheckBoxButton.rx.tap.map { PolicyCategory.participation }.asObservable()
+            
+            Observable.merge(jobButtonTap, educationButtonTap, lifeButtonTap, participationButtonTap)
+                .bind(with: self) { owner, category in
+                    
+                    // 선택 시 'seleted' 활성화/비활성화
+                    switch category {
+                    case .job:
+                        supplementaryView.jobCheckBoxButton.isSelected.toggle()
+                    case .education:
+                        supplementaryView.educationCheckBoxButton.isSelected.toggle()
+                    case .life:
+                        supplementaryView.lifeCheckBoxButton.isSelected.toggle()
+                    case .participation:
+                        supplementaryView.participationCheckBoxButton.isSelected.toggle()
+                    }
+                    
+                    // 선택된 버튼만 필터링
+                    let selectedButtons = [
+                        supplementaryView.jobCheckBoxButton,
+                        supplementaryView.educationCheckBoxButton,
+                        supplementaryView.lifeCheckBoxButton,
+                        supplementaryView.participationCheckBoxButton
+                    ].filter { $0.isSelected }
+                    
+                    // 선택된 버튼이 없으면, 마지막으로 클릭한 버튼 'selected'
+                    if selectedButtons.isEmpty {
+                        switch category {
+                        case .job:
+                            supplementaryView.jobCheckBoxButton.isSelected = true
+                        case .education:
+                            supplementaryView.educationCheckBoxButton.isSelected = true
+                        case .life:
+                            supplementaryView.lifeCheckBoxButton.isSelected = true
+                        case .participation:
+                            supplementaryView.participationCheckBoxButton.isSelected = true
+                        }
+                    } else {
+                        
+                        // owner.viewModel.input.policyCategorySeleted.accept(category)
+                    }
+                }.disposed(by: supplementaryView.disposeBag)
             
         }
         

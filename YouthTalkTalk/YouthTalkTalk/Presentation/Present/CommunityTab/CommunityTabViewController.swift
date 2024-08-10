@@ -12,10 +12,16 @@ import FlexLayout
 
 class CommunityTabViewController: TabmanViewController {
     
-    private var viewControllers = [CommunityViewController(), CommunityViewController()]
+    private var viewControllers: [UIViewController] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let rpUseCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
+        let viewModel = ReviewViewModel(rpUseCase: rpUseCase)
+        let reviewController = CommunityViewController(viewModel: viewModel)
+        
+        viewControllers.append(reviewController)
         
         self.dataSource = self
         self.isScrollEnabled = false
