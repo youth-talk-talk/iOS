@@ -1,5 +1,5 @@
 //
-//  CommunityForumView.swift
+//  CommunityView.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 8/7/24.
@@ -9,7 +9,7 @@ import UIKit
 import PinLayout
 import FlexLayout
 
-class CommunityForumView: BaseView {
+class CommunityView: BaseView {
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CommunityLayout.layout())
     

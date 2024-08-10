@@ -1,5 +1,5 @@
 //
-//  CommunityForumViewController.swift
+//  CommunityViewController.swift
 //  YouthTalkTalk
 //
 //  Created by 이중엽 on 8/7/24.
@@ -25,7 +25,7 @@ enum CommunitySectionItems: Hashable {
     }
 }
 
-class CommunityForumViewController: BaseViewController<CommunityForumView> {
+class CommunityViewController: BaseViewController<CommunityView> {
     
     var dataSource: UICollectionViewDiffableDataSource<CommunityLayout, CommunitySectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<CommunityLayout, CommunitySectionItems>()

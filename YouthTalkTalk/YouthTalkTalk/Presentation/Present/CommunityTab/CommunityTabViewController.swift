@@ -12,7 +12,7 @@ import FlexLayout
 
 class CommunityTabViewController: TabmanViewController {
     
-    private var viewControllers = [CommunityForumViewController(), CommunityForumViewController()]
+    private var viewControllers = [CommunityViewController(), CommunityViewController()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
