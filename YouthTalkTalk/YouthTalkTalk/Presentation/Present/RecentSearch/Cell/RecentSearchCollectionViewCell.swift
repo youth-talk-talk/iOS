@@ -8,18 +8,60 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 class RecentSearchCollectionViewCell: BaseCollectionViewCell {
     
-    override func configureView() {
+    var disposeBag = DisposeBag()
+    
+    let removeButton = UIButton()
+    let titleLabel = UILabel()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-        flexView.backgroundColor = .black
+        titleLabel.designed(text: "", fontType: .p14Bold, textColor: .black)
+        
+        disposeBag = DisposeBag()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func configureLayout() {
         
-        flexView.pin.all()
-        flexView.flex.layout()
+        flexView.flex.define { flex in
+            
+            flex.addItem(removeButton)
+                .height(16)
+                .width(16)
+                .marginLeft(13)
+                .alignSelf(.center)
+            
+            flex.addItem(titleLabel)
+                .marginLeft(8)
+                .marginRight(13)
+                .grow(1)
+            
+        }
+        .direction(.row)
+        .border(1, .lime40)
+        .defaultCornerRadius()
+    }
+    
+    override func configureView() {
+        
+        removeButton.designedByImage(.littleXmark)
+        
+        titleLabel.designed(text: "", fontType: .p14Bold, textColor: .black)
+    }
+    
+    func configure(title: String) {
+        
+        titleLabel.designed(text: title, fontType: .p14Bold, textColor: .black)
+        
+        flexView.flex.layout(mode: .adjustWidth)
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        
+        return flexView.frame.size
     }
 }

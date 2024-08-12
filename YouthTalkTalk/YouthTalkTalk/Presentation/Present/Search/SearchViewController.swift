@@ -41,9 +41,8 @@ final class SearchViewController: BaseViewController<SearchView> {
         
         // MARK: Inputs
         // 검색
-        clearSearchView.textField.rx.text.orEmpty
-            .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance) // 입력 후 0.3초
-            .distinctUntilChanged() // 값이 변경된 경우에만 이벤트 전달
+        clearSearchView.textField.rx.controlEvent(.editingDidEndOnExit)
+            .withLatestFrom(clearSearchView.textField.rx.text.orEmpty)
             .bind(to: viewModel.input.searchButtonClicked)
             .disposed(by: disposeBag)
         
@@ -86,7 +85,8 @@ final class SearchViewController: BaseViewController<SearchView> {
                removeCurrentChildViewController()
                
                // 새로운 child view controller 추가
-               let childVC = RecentSearchViewController()
+               let viewModel = RecentSearchViewModel(type: viewModel.type)
+               let childVC = RecentSearchViewController(viewModel: viewModel)
                addChild(childVC)
                layoutView.flexView.addSubview(childVC.layoutView)
                childVC.layoutView.frame = layoutView.flexView.bounds

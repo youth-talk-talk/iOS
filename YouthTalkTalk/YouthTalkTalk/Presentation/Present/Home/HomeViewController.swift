@@ -159,7 +159,7 @@ final class HomeViewController: BaseViewController<HomeView> {
             supplementaryView.searchButton.rx.tap
                 .bind(with: self) { owner, _ in
                     
-                    let viewModel = SearchViewModel()
+                    let viewModel = SearchViewModel(type: .policy)
                     
                     let nextVC = SearchViewController(viewModel: viewModel)
                     owner.navigationController?.pushViewController(nextVC, animated: true)

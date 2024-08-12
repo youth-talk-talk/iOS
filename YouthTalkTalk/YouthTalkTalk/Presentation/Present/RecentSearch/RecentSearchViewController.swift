@@ -6,40 +6,64 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class RecentSearchViewController: BaseViewController<RecentSearchView> {
     
-    var dataSource: UICollectionViewDiffableDataSource<RecentSearchLayout, AnyHashable>!
+    var dataSource: UICollectionViewDiffableDataSource<RecentSearchLayout, String>!
+    var viewModel: RecentSearchInterface
+    
+    init(viewModel: RecentSearchInterface) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func configureCollectionView() {
         
         cellRegistration()
         headerRegistration()
-        update()
+    }
+    
+    override func bind() {
+        
+        viewModel.output.recentSearchListRelay
+            .bind(with: self) { owner, recentSearchList in
+                
+                owner.update(recentSearchList)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.input.fetchRecentSearchList.accept(())
     }
     
     private func cellRegistration() {
         
         // 최근검색 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentSearchCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentSearchCollectionViewCell, String> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
             
-            guard let section = RecentSearchLayout(rawValue: indexPath.section) else { return nil }
+            let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
             
-            if section == .recent {
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                cell.flexView.backgroundColor = .lime40
-                
-                return cell
-            }
+            cell.configure(title: itemIdentifier)
             
-            return nil
+            cell.removeButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    
+                    owner.viewModel.input.removeRecentSearchList.accept(itemIdentifier)
+                }
+                .disposed(by: cell.disposeBag)
+            
+            return cell
         }
     }
     
@@ -67,14 +91,13 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
         }
     }
     
-    func update() {
+    func update(_ recentSearchList: [String]) {
         
-        var snapshot = NSDiffableDataSourceSnapshot<RecentSearchLayout, AnyHashable>()
+        var snapshot = NSDiffableDataSourceSnapshot<RecentSearchLayout, String>()
         
         snapshot.appendSections([.recent])
         
-        snapshot.appendItems(["1", "2", "3", "4", "5", "6"], toSection: .recent)
-        // snapshot.appendItems(["a", "b", "c", "d", "e", "f"], toSection: .search)
+        snapshot.appendItems(recentSearchList, toSection: .recent)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }

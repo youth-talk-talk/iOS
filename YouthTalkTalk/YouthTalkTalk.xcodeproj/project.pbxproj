@@ -104,6 +104,10 @@
 		AC604C172C67831000804950 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C162C67831000804950 /* PostRepository.swift */; };
 		AC604C192C67832400804950 /* PostRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C182C67832400804950 /* PostRepositoryImpl.swift */; };
 		AC604C1B2C6783CD00804950 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C1A2C6783CD00804950 /* PostViewModel.swift */; };
+		AC604C1E2C69FEF300804950 /* RecentSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C1D2C69FEF300804950 /* RecentSearchViewModel.swift */; };
+		AC604C222C69FF7500804950 /* RecentSearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C212C69FF7500804950 /* RecentSearchInput.swift */; };
+		AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C232C69FFD100804950 /* RecentSearchOutput.swift */; };
+		AC604C262C6A002100804950 /* RecentSearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C252C6A002100804950 /* RecentSearchInterface.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -282,6 +286,10 @@
 		AC604C162C67831000804950 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		AC604C182C67832400804950 /* PostRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepositoryImpl.swift; sourceTree = "<group>"; };
 		AC604C1A2C6783CD00804950 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		AC604C1D2C69FEF300804950 /* RecentSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewModel.swift; sourceTree = "<group>"; };
+		AC604C212C69FF7500804950 /* RecentSearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchInput.swift; sourceTree = "<group>"; };
+		AC604C232C69FFD100804950 /* RecentSearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchOutput.swift; sourceTree = "<group>"; };
+		AC604C252C6A002100804950 /* RecentSearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchInterface.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -421,10 +429,12 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				AC604C1F2C69FF3400804950 /* New Group */,
 				AC604BED2C675BA500804950 /* Review&Post */,
 				AC579B702C53B24C00D1C9FC /* DetailPolciy */,
 				AC579B4A2C451C5E00D1C9FC /* Home */,
 				AC579B282C3BE0EA00D1C9FC /* Search */,
+				AC604C202C69FF6400804950 /* RecentSearch */,
 				ACF2A2A62C2AAFFA00FE8D63 /* SignUp */,
 				ACF2A28B2C281F6200FE8D63 /* SignIn */,
 				ACF2A2C82C2D8ADD00FE8D63 /* Splash */,
@@ -694,6 +704,30 @@
 			path = "Review&Post";
 			sourceTree = "<group>";
 		};
+		AC604C1F2C69FF3400804950 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		AC604C202C69FF6400804950 /* RecentSearch */ = {
+			isa = PBXGroup;
+			children = (
+				AC604C212C69FF7500804950 /* RecentSearchInput.swift */,
+				AC604C232C69FFD100804950 /* RecentSearchOutput.swift */,
+				AC604C252C6A002100804950 /* RecentSearchInterface.swift */,
+			);
+			path = RecentSearch;
+			sourceTree = "<group>";
+		};
+		AC604C272C6A1EEA00804950 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,6 +885,7 @@
 		ACF2A2BE2C2D43CB00FE8D63 /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				AC604C272C6A1EEA00804950 /* DTO */,
 				ACF2A2C12C2D453C00FE8D63 /* UserDefaults.swift */,
 				ACF2A2D22C2D967100FE8D63 /* KeyChainHelper.swift */,
 			);
@@ -978,6 +1013,7 @@
 			children = (
 				AC604BE82C64B35000804950 /* Cell */,
 				ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */,
+				AC604C1D2C69FEF300804950 /* RecentSearchViewModel.swift */,
 				ACF2A2FE2C3416FD00FE8D63 /* RecentSearchView.swift */,
 			);
 			path = RecentSearch;
@@ -1209,6 +1245,7 @@
 				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
 				AC579B582C45284A00D1C9FC /* PolicyQeury.swift in Sources */,
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
+				AC604C222C69FF7500804950 /* RecentSearchInput.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
@@ -1253,6 +1290,7 @@
 				AC604C152C67826F00804950 /* PostRouter.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
+				AC604C1E2C69FEF300804950 /* RecentSearchViewModel.swift in Sources */,
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC604BEF2C675BC000804950 /* RPInput.swift in Sources */,
@@ -1270,6 +1308,7 @@
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */,
 				ACF2A3202C37D27700FE8D63 /* SignUpDTO.swift in Sources */,
+				AC604C262C6A002100804950 /* RecentSearchInterface.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
@@ -1294,6 +1333,7 @@
 				AC579B5A2C4528B500D1C9FC /* PolicyRouter.swift in Sources */,
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
+				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
