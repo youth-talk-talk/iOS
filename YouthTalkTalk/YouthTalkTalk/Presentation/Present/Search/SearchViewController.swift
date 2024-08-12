@@ -56,6 +56,15 @@ final class SearchViewController: BaseViewController<SearchView> {
             }
             .disposed(by: disposeBag)
         
+        // 키보드 내리기
+        let viewTap = UITapGestureRecognizer()
+        layoutView.addGestureRecognizer(viewTap)
+        viewTap.rx.event
+            .bind(with: self) { owner, _ in
+                owner.clearSearchView.textField.resignFirstResponder()
+            }
+            .disposed(by: disposeBag)
+        
         // MARK: Outputs
         // 화면 타입
         viewModel.output.searchTypeEvent
