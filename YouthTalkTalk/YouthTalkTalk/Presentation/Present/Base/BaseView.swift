@@ -37,4 +37,8 @@ class BaseView: UIView {
     
     func configureLayout() {}
     func configureView() {}
+    
+    // deinit {
+    //     print(String(describing: type(of: self)))
+    // }
 }

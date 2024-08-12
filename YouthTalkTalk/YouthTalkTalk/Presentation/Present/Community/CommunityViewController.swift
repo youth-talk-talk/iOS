@@ -81,7 +81,6 @@ class CommunityViewController: BaseViewController<CommunityView> {
             
             guard let self else { return }
             
-            print("popularSectionRegistration")
             cell.configure(data: itemIdentifier.data)
         }
         
@@ -89,8 +88,6 @@ class CommunityViewController: BaseViewController<CommunityView> {
         let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
-            
-            print("recentSectionRegistration")
             
             cell.configure(data: itemIdentifier.data)
         }
