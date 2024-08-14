@@ -56,6 +56,15 @@ class CommunityViewController: BaseViewController<CommunityView> {
         
         snapshot.appendSections([.search, .popular, .recent])
         
+        layoutView.createButton.rx.tap
+            .bind(with: self) { owner, _ in
+                
+                let nextVC = NewPostViewController()
+                
+                owner.tabmanParent?.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.output.popularRPsRelay
             .bind(with: self) { owner, sectionItems in
                 
@@ -172,9 +181,6 @@ class CommunityViewController: BaseViewController<CommunityView> {
                         case .participation:
                             supplementaryView.participationCheckBoxButton.isSelected = true
                         }
-                    } else {
-                        
-                        // owner.viewModel.input.policyCategorySeleted.accept(category)
                     }
                 }.disposed(by: supplementaryView.disposeBag)
             

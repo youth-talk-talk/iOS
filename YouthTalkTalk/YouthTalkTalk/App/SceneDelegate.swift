@@ -115,7 +115,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let communityVC = CommunityTabViewController()
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
-        tabVC.setViewControllers([communityVC, homeNaviVC], animated: true)
+        tabVC.setViewControllers([communityNaviVC, homeNaviVC], animated: true)
         tabVC.selectedIndex = 1
         
         tabVC.tabBar.items?[0].image = UIImage(named: "community")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)

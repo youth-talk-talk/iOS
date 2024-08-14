@@ -108,6 +108,9 @@
 		AC604C222C69FF7500804950 /* RecentSearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C212C69FF7500804950 /* RecentSearchInput.swift */; };
 		AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C232C69FFD100804950 /* RecentSearchOutput.swift */; };
 		AC604C262C6A002100804950 /* RecentSearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C252C6A002100804950 /* RecentSearchInterface.swift */; };
+		AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */; };
+		AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2E2C6A3C0D00804950 /* NewPostView.swift */; };
+		AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -290,6 +293,9 @@
 		AC604C212C69FF7500804950 /* RecentSearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchInput.swift; sourceTree = "<group>"; };
 		AC604C232C69FFD100804950 /* RecentSearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchOutput.swift; sourceTree = "<group>"; };
 		AC604C252C6A002100804950 /* RecentSearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchInterface.swift; sourceTree = "<group>"; };
+		AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		AC604C2E2C6A3C0D00804950 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
+		AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageSpacingView.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -475,6 +481,7 @@
 			children = (
 				AC4B43262C2072E2005FC370 /* DropdownView.swift */,
 				AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */,
+				AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -600,6 +607,7 @@
 				AC4B43252C2072BE005FC370 /* CustomView */,
 				AC604BE62C64B2C500804950 /* DecoView */,
 				AC604BE52C64B2B400804950 /* HeaderView */,
+				AC604C2B2C6A3BC600804950 /* NewPostView */,
 				AC604BD92C6396F400804950 /* CommunityTab */,
 				AC604BD12C63962D00804950 /* Community */,
 				AC579B672C51341D00D1C9FC /* Policy */,
@@ -726,6 +734,15 @@
 			children = (
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		AC604C2B2C6A3BC600804950 /* NewPostView */ = {
+			isa = PBXGroup;
+			children = (
+				AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */,
+				AC604C2E2C6A3C0D00804950 /* NewPostView.swift */,
+			);
+			path = NewPostView;
 			sourceTree = "<group>";
 		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
@@ -1299,6 +1316,7 @@
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
 				AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */,
+				AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */,
 				ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */,
 				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
 				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
@@ -1313,6 +1331,7 @@
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
+				AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */,
 				AC604C092C6764A900804950 /* RPQuery.swift in Sources */,
 				ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
@@ -1342,6 +1361,7 @@
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC604C032C6760D300804950 /* CommunityRPDTO.swift in Sources */,
 				AC579B322C3C14FA00D1C9FC /* ClearSearchView.swift in Sources */,
+				AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,

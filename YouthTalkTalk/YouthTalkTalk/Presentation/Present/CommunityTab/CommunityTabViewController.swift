@@ -16,8 +16,24 @@ class CommunityTabViewController: TabmanViewController {
     
     private var viewControllers: [UIViewController] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+        backButton.tintColor = .black
+        self.navigationItem.backBarButtonItem = backButton
         
         let reviewUseCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
         let reviewViewModel = ReviewViewModel(rpUseCase: reviewUseCase)
@@ -31,10 +47,10 @@ class CommunityTabViewController: TabmanViewController {
         types = [reviewViewModel.type, postViewModel.type]
         
         self.dataSource = self
-        self.isScrollEnabled = false
+        self.isScrollEnabled = true
         
         // Create bar
-        let bar = TMBar.ButtonBar()
+        let bar = TMHidingBar.ButtonBar()
         
         bar.layout.transitionStyle = .snap
         bar.layout.alignment = .centerDistributed
@@ -68,11 +84,14 @@ extension CommunityTabViewController: PageboyViewControllerDataSource, TMBarData
     
     func viewController(for pageboyViewController: PageboyViewController,
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
+        
+        pageboyViewController.view.backgroundColor = .white
+        
         return viewControllers[index]
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return nil
+        return .first
     }
     
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
