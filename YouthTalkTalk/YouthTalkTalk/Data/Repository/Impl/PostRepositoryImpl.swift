@@ -14,7 +14,7 @@ final class PostRepositoryImpl: PostRepository {
     
     func fetchPosts(page: Int, size: Int) -> Observable<Result<CommunityRPDTO, APIError>> {
         
-        let rpQuery = RPQuery(page: page, size: size)
+        let rpQuery = RPQuery(categories: [], page: page, size: size)
         
         let router = PostRouter.fetchPost(query: rpQuery)
         

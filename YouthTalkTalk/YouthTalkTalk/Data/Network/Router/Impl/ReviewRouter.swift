@@ -14,7 +14,7 @@ enum ReviewRouter: Router {
         return KeyChainHelper()
     }
     
-    case fetchReview(query: RPQuery, body: ReviewBody)
+    case fetchReview(query: RPQuery)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -30,13 +30,13 @@ enum ReviewRouter: Router {
     var method: HTTPMethod {
         switch self {
         case .fetchReview:
-            return .post
+            return .get
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .fetchReview(let query, _):
+        case .fetchReview(let query):
             return convertToParameters(query)
         }
     }
@@ -55,14 +55,21 @@ enum ReviewRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchReview(_, let body):
-            return try? encoder.encode(body)
+        case .fetchReview:
+            return nil
         }
     }
     
     private func convertToParameters(_ query: RPQuery) -> [String: Any] {
         var params: [String: Any] = [:]
         
+        query.categories.forEach { category in
+            if params["categories"] == nil {
+                params["categories"] = category.rawValue
+            } else {
+                params["categories"] = params["categories"] as! String + ",\(category.rawValue)"
+            }
+        }
         params["page"] = query.page
         params["size"] = query.size
         

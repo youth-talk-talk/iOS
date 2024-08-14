@@ -65,18 +65,18 @@ enum PolicyRouter: Router {
         }
     }
     
-    private func convertToParameters(_ body: PolicyQuery) -> [String: Any] {
+    private func convertToParameters(_ query: PolicyQuery) -> [String: Any] {
         var params: [String: Any] = [:]
         
-        body.categories.forEach { category in
+        query.categories.forEach { category in
             if params["categories"] == nil {
                 params["categories"] = category.rawValue
             } else {
                 params["categories"] = params["categories"] as! String + ",\(category.rawValue)"
             }
         }
-        params["page"] = body.page
-        params["size"] = body.size
+        params["page"] = query.page
+        params["size"] = query.size
         
         return params
     }

@@ -9,10 +9,12 @@ import Foundation
 
 struct RPQuery: Encodable {
     
+    let categories: [PolicyCategory]
     let page: Int
     let size: Int
     
-    init(page: Int, size: Int) {
+    init(categories: [PolicyCategory], page: Int, size: Int) {
+        self.categories = categories
         self.page = page
         self.size = size
     }

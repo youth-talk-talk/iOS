@@ -16,10 +16,9 @@ final class ReviewRepositoryImpl: ReviewRepository {
         
         let categoriesData = categories.map { $0.rawValue }
         
-        let rpQuery = RPQuery(page: page, size: size)
-        let reviewBody = ReviewBody(categories: categoriesData)
+        let rpQuery = RPQuery(categories: categories, page: page, size: size)
         
-        let router = ReviewRouter.fetchReview(query: rpQuery, body: reviewBody)
+        let router = ReviewRouter.fetchReview(query: rpQuery)
         
         return apiManager.request(router: router, type: CommunityRPDTO.self).asObservable()
     }
