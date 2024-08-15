@@ -14,7 +14,7 @@ final class PostViewModel: RPInterface {
     private let disposeBag: DisposeBag = DisposeBag()
     private let useCase: PostUseCase
     
-    var type: RPType = .post
+    var type: MainContentsType = .post
     
     var fetchRPs = PublishRelay<Void>()
     var updateRecentRPs = PublishRelay<Int>()

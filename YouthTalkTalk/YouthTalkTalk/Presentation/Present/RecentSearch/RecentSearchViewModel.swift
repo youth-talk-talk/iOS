@@ -14,7 +14,7 @@ final class RecentSearchViewModel: RecentSearchInterface {
     private let disposeBag = DisposeBag()
     private let userDefualts = UserDefaults.standard
     
-    var type: RecentSearchType
+    var type: MainContentsType
     
     // Input
     var fetchRecentSearchList = PublishRelay<Void>()
@@ -26,7 +26,7 @@ final class RecentSearchViewModel: RecentSearchInterface {
     var input: RecentSearchInput { return self }
     var output: RecentSearchOutput { return self }
     
-    init(type: RecentSearchType) {
+    init(type: MainContentsType) {
         self.type = type
         
         fetchRecentSearchList

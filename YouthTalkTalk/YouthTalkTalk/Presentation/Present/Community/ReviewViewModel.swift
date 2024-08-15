@@ -14,7 +14,7 @@ final class ReviewViewModel: RPInterface {
     private let disposeBag: DisposeBag = DisposeBag()
     private let useCase: ReviewUseCase
     
-    var type: RPType = .review
+    var type: MainContentsType = .review
     
     // 선택된 정책 카테고리
     var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases

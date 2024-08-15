@@ -24,7 +24,7 @@ enum SignUpType: String {
     case kakao
 }
 
-enum RecentSearchType {
+enum MainContentsType {
     
     case policy
     case review
@@ -38,6 +38,17 @@ enum RecentSearchType {
             return "review"
         case .post:
             return "post"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .policy:
+            return ""
+        case .review:
+            return "후기게시판"
+        case .post:
+            return "자유게시판"
         }
     }
 }
@@ -65,7 +76,7 @@ extension UserDefaults {
         self.signUpType = signUpType
     }
     
-    func saveRecentSearch(searchText: String, type: RecentSearchType) {
+    func saveRecentSearch(searchText: String, type: MainContentsType) {
         
         var list: [String] = self.array(forKey: type.key) as? [String] ?? [String]()
         
@@ -82,7 +93,7 @@ extension UserDefaults {
         set(list, forKey: type.key)
     }
     
-    func removeRecentSearch(searchText: String, type: RecentSearchType) {
+    func removeRecentSearch(searchText: String, type: MainContentsType) {
         
         var list: [String] = self.array(forKey: type.key) as? [String] ?? [String]()
         
@@ -93,7 +104,7 @@ extension UserDefaults {
         set(list, forKey: type.key)
     }
     
-    func fetchRecentSearchList(type: RecentSearchType) -> [String] {
+    func fetchRecentSearchList(type: MainContentsType) -> [String] {
         
         return self.array(forKey: type.key) as? [String] ?? [String]()
     }

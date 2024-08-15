@@ -33,6 +33,8 @@ class SearchHeaderView: BaseCollectionReusableView {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        disposeBag = DisposeBag()
+        
         jobCheckBoxButton.configuration?.image = nil
         educationCheckBoxButton.configuration?.image = nil
         lifeCheckBoxButton.configuration?.image = nil

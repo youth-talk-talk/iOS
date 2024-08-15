@@ -9,7 +9,7 @@ import Foundation
 
 protocol RecentSearchInterface: RecentSearchInput, RecentSearchOutput {
     
-    var type: RecentSearchType { get }
+    var type: MainContentsType { get }
 
     var input: RecentSearchInput { get }
     var output: RecentSearchOutput { get }

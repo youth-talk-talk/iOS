@@ -139,7 +139,24 @@ class CommunityViewController: BaseViewController<CommunityView> {
             
             guard let self else { return }
             
-            self.viewModel.type == .review ? supplementaryView.configureWithCategory() : supplementaryView.configureWithOutCategory()
+            let type = self.viewModel.type
+            
+            supplementaryView.searchButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    
+                    let viewModel = SearchViewModel(type: type)
+                    
+                    let nextVC = SearchViewController(viewModel: viewModel)
+                    owner.navigationController?.pushViewController(nextVC, animated: true)
+                }
+                .disposed(by: supplementaryView.disposeBag)
+            
+            if type == .review {
+                supplementaryView.configureWithCategory()
+            } else if type == .post {
+                supplementaryView.configureWithOutCategory()
+            }
+            
             
             let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
             let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()

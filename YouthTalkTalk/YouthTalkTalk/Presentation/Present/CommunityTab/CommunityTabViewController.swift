@@ -12,7 +12,7 @@ import FlexLayout
 
 class CommunityTabViewController: TabmanViewController {
     
-    var types: [RPType] = []
+    var types: [MainContentsType] = []
     
     private var viewControllers: [UIViewController] = []
     
