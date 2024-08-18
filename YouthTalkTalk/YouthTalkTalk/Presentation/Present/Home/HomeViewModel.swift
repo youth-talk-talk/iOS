@@ -28,9 +28,7 @@ final class HomeViewModel: HomeInterface {
     // Outputs
     var topFivePoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var allPoliciesRelay = PublishRelay<[HomeSectionItems]>()
-    
-    var topFivePolicies: [HomeSectionItems] = []
-    var allPolicies: [HomeSectionItems] = []
+    var resetSectionItems = PublishRelay<Void>()
     
     init(policyUseCase: PolicyUseCase) {
         self.policyUseCase = policyUseCase
@@ -49,10 +47,7 @@ final class HomeViewModel: HomeInterface {
                     let topFivePolicies = homePolicyEntity.topFivePolicies.map { HomeSectionItems.topFive($0) }
                     let allPolicies = homePolicyEntity.allPolicies.map { HomeSectionItems.all($0)}
                     
-                    owner.topFivePolicies = topFivePolicies
                     owner.topFivePoliciesRelay.accept(topFivePolicies)
-                    
-                    owner.allPolicies = allPolicies
                     owner.allPoliciesRelay.accept(allPolicies)
                     
                 case .failure(let error):
@@ -75,10 +70,6 @@ final class HomeViewModel: HomeInterface {
                     
                     let allPolicies = homePolicyEntity.allPolicies.map { HomeSectionItems.all($0)}
                     
-                    allPolicies.forEach { newPolicies in
-                        owner.allPolicies.append(newPolicies)
-                    }
-                    
                     owner.allPoliciesRelay.accept(allPolicies)
                     
                 case .failure(let error):
@@ -99,14 +90,13 @@ final class HomeViewModel: HomeInterface {
                     owner.selectedPolicyCategory.append(category)
                 }
                 
+                // 기존 데이터는 모두 삭제
+                owner.resetSectionItems.accept(())
+                
+                // 새로운 데이터 호출
                 owner.fetchPolicies.accept(())
                 
             }.disposed(by: disposeBag)
-    }
-    
-    func allPoliciesCount() -> Int {
-        
-        return allPolicies.count
     }
     
     deinit {

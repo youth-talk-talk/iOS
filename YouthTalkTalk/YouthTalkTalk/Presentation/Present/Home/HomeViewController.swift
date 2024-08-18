@@ -72,6 +72,15 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         viewModel.input.fetchPolicies.accept(())
         
+        viewModel.output.resetSectionItems
+            .bind(with: self) { owner, _ in
+                
+                owner.snapshot.deleteItems(owner.snapshot.itemIdentifiers(inSection: .recent))
+                
+                owner.dataSource.apply(owner.snapshot, animatingDifferences: true)
+            }
+            .disposed(by: disposeBag)
+        
         
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
@@ -282,14 +291,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     func update(section: HomeLayout, items: [HomeSectionItems]) {
         
-        let count = viewModel.allPoliciesCount()
-        
-        // 카테고리 변경 시에는 기존 데이터 모두 삭제 후 새로 등록
-        // 변경 필요
-        if count == 10 {
-            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: section))
-        }
-        
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
@@ -303,16 +304,12 @@ final class HomeViewController: BaseViewController<HomeView> {
 extension HomeViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
-        let total = viewModel.allPoliciesCount()
+        let total = self.snapshot.itemIdentifiers(inSection: .recent).count
         let currentPage = (total / 10) + 1
         
-        indexPaths.forEach { indexPath in
-            let currentPosition = indexPath.item
-            
-            // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
-            if currentPosition >= total - 5 {
-                viewModel.input.updateRecentPolicies.accept(currentPage)
-            }
+        // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
+        if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
+            viewModel.input.updateRecentPolicies.accept(currentPage)
         }
     }
 }
