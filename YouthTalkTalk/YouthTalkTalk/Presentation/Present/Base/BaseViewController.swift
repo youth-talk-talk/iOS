@@ -61,4 +61,8 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         backButton.tintColor = .black
         self.navigationItem.backBarButtonItem = backButton
     }
+    
+    // deinit {
+    //     print(String(describing: type(of: self)))
+    // }
 }

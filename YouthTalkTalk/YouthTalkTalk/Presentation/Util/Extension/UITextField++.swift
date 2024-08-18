@@ -17,9 +17,9 @@ extension UITextField {
         self.leftViewMode = .always
     }
     
-    func designedPlaceholder(placeholder: String, textColor: UIColor = .gray40) {
+    func designedPlaceholder(placeholder: String, textColor: UIColor = .gray40, font: FontType = .p16Bold) {
         
         self.placeholder = placeholder
-        self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.font: FontManager.font(.p16Bold), .foregroundColor: textColor])
+        self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.font: FontManager.font(font), .foregroundColor: textColor])
     }
 }

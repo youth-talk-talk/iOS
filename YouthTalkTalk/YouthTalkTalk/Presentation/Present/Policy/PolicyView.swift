@@ -22,7 +22,8 @@ class PolicyView: BaseView {
                 .grow(1)
                 .width(90%)
                 .alignSelf(.center)
-                .backgroundColor(.lime20)
+                .markDirty()
+                .backgroundColor(.clear)
             
             flex.addItem(commentTextfield)
                 .height(50)
@@ -31,5 +32,10 @@ class PolicyView: BaseView {
                 .backgroundColor(.gray10)
         }
     }
-
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        flexView.flex.layout()
+    }
 }

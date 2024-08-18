@@ -57,7 +57,7 @@ final class HomeViewModel: HomeInterface {
                     
                 case .failure(let error):
                     
-                    print("실패")
+                    print("기본 10개 정책 호출 실패")
                 }
             }.disposed(by: disposeBag)
         
@@ -83,7 +83,7 @@ final class HomeViewModel: HomeInterface {
                     
                 case .failure(let error):
                     
-                    print("실패")
+                    print("스크롤(페이지 변경)을 통한 정책 호출 실패")
                 }
             }.disposed(by: disposeBag)
         

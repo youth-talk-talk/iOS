@@ -63,6 +63,7 @@ final class ClearSearchView: BaseView {
         let placeHolder = "검색"
         textField.placeholder = placeHolder
         textField.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [.font: FontManager.font(.p16Regular24), .foregroundColor: UIColor.gray50])
+        textField.textColor = .black
     }
     
     override func layoutSubviews() {

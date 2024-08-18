@@ -47,21 +47,7 @@ class SplashViewController: BaseViewController<SplashView> {
     
     private func navigateToHome() {
         
-        let repository = PolicyRepositoryImpl()
-        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
-        let viewModel = HomeViewModel(policyUseCase: policyUseCase)
-        let newRootVC = HomeViewController(viewModel: viewModel)
-        let naviVC = UINavigationController(rootViewController: newRootVC)
-        let tabVC = UITabBarController()
-        tabVC.setViewControllers([naviVC], animated: true)
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
-                fatalError("Failed to get SceneDelegate")
-            }
-            sceneDelegate.window?.rootViewController = tabVC
-            sceneDelegate.window?.makeKeyAndVisible()
-        }
+        SceneDelegate.makeRootVC()
     }
     
     private func navigateToSignIn() {

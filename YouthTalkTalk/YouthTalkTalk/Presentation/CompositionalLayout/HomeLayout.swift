@@ -29,12 +29,10 @@ enum HomeLayout: Int, CaseIterable {
             }
         }
         
-        layout.register(CategoryCollectionReusableView.self,
-                        forDecorationViewOfKind: CategoryCollectionReusableView.identifier)
-        layout.register(PopularDecoReusableView.self,
-                        forDecorationViewOfKind: PopularDecoReusableView.identifier)
-        layout.register(RecentDecoReusableView.self,
-                        forDecorationViewOfKind: RecentDecoReusableView.identifier)
+        layout.register(TopRadiusDecoView.self,
+                        forDecorationViewOfKind: TopRadiusDecoView.identifier)
+        layout.register(DefaultDecoView.self,
+                        forDecorationViewOfKind: DefaultDecoView.identifier)
         
         return layout
     }
@@ -43,7 +41,7 @@ enum HomeLayout: Int, CaseIterable {
         
         let section = NSCollectionLayoutSection(group: createEmptyGroup())
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.boundarySupplementaryItems = [createHeader(CategoryCollectionReusableView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(CategoryButtonHeaderView.identifier)]
         
         return section
     }
@@ -66,10 +64,10 @@ enum HomeLayout: Int, CaseIterable {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         
         // 헤더 추가
-        section.boundarySupplementaryItems = [createHeader(PopularHeaderReusableView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(TitleHeaderView.identifier)]
         
         // 데코뷰 추가
-        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: PopularDecoReusableView.identifier)
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: TopRadiusDecoView.identifier)
         sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         section.decorationItems = [sectionBackgroundDecoration]
         
@@ -93,10 +91,10 @@ enum HomeLayout: Int, CaseIterable {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         
         // 헤더 추가
-        section.boundarySupplementaryItems = [createHeader(RecentHeaderReusableView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(TitleWithCategoryHeaderView.identifier)]
         
         // 데코뷰 추가
-        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: RecentDecoReusableView.identifier)
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: DefaultDecoView.identifier)
         sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         section.decorationItems = [sectionBackgroundDecoration]
         

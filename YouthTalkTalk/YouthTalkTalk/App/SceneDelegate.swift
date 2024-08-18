@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         configureNavigationAppearance()
+        configureTabBarAppearance()
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
@@ -85,6 +86,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         // 스크롤 엣지가 닿았을 때 네이게이션 바 appearance settings
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+    }
+    
+    private func configureTabBarAppearance() {
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .clear
+        tabBarAppearance.shadowColor = .clear
+        // 스크롤 엣지가 닿았을 때 탭바 appearance settings
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        // 일반 탭바 appearance settings
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+    }
+    
+    static func makeRootVC() {
+        
+        let tabVC = UITabBarController()
+        
+        // HOME TAB
+        let repository = PolicyRepositoryImpl()
+        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
+        let homeViewModel = HomeViewModel(policyUseCase: policyUseCase)
+        let homeVC = HomeViewController(viewModel: homeViewModel)
+        let homeNaviVC = UINavigationController(rootViewController: homeVC)
+        
+        // COMMUNITY TAB
+        let communityVC = CommunityTabViewController()
+        let communityNaviVC = UINavigationController(rootViewController: communityVC)
+        
+        tabVC.setViewControllers([communityNaviVC, homeNaviVC], animated: true)
+        tabVC.selectedIndex = 1
+        
+        tabVC.tabBar.items?[0].image = UIImage(named: "community")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
+        tabVC.tabBar.items?[0].selectedImage = UIImage(named: "community")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        
+        tabVC.tabBar.items?[1].image = UIImage(named: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
+        tabVC.tabBar.items?[1].selectedImage = UIImage(named: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                fatalError("Failed to get SceneDelegate")
+            }
+            sceneDelegate.window?.rootViewController = tabVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
 }
 

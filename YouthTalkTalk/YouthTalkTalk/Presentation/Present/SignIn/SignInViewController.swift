@@ -74,19 +74,7 @@ final class SignInViewController: BaseViewController<SignInView> {
         
         if isSuccessToSignIn {
             
-            guard let windowScene = UIApplication.shared.connectedScenes.first else { return }
-            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
-            
-            let repository = PolicyRepositoryImpl()
-            let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
-            let viewModel = HomeViewModel(policyUseCase: policyUseCase)
-            let newRootVC = HomeViewController(viewModel: viewModel)
-            let naviVC = UINavigationController(rootViewController: newRootVC)
-            let tabVC = UITabBarController()
-            
-            tabVC.setViewControllers([naviVC], animated: true)
-            sceneDelegate.window?.rootViewController = tabVC
-            sceneDelegate.window?.makeKeyAndVisible()
+            SceneDelegate.makeRootVC()
         } else {
             let nextVC = TermsViewController()
             

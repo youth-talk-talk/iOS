@@ -12,6 +12,9 @@ import RxCocoa
 final class SearchViewModel: SearchInterface {
     
     private let disposeBag: DisposeBag = DisposeBag()
+    private let userDefaults = UserDefaults.standard
+    
+    var type: MainContentsType
     
     var input: SearchInput { return self }
     var output: SearchOutput { return self }
@@ -23,12 +26,16 @@ final class SearchViewModel: SearchInterface {
     // Outputs
     var searchTypeEvent = BehaviorRelay<SearchViewType>(value: .recent)
     
-    init() {
+    init(type: MainContentsType) {
+        self.type = type
         
         // 검색
         searchButtonClicked
             .subscribe(with: self) { owner, text in
                 
+                if text.isEmpty { return }
+                
+                owner.userDefaults.saveRecentSearch(searchText: text, type: type)
                 // 결과창 화면으로 변경
                 owner.searchTypeEvent.accept(text.isEmpty ? .recent : .result)
                 

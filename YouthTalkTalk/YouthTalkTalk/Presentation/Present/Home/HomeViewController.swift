@@ -84,7 +84,10 @@ final class HomeViewController: BaseViewController<HomeView> {
                 switch homeLayout {
                 case .popular, .recent:
                     
-                    let nextVC = PolicyViewController(testData: item)
+                    let repository = PolicyRepositoryImpl()
+                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
+                    let viewModel = PolicyViewModel(policyID: item.policyId, policyUseCase: useCase)
+                    let nextVC = PolicyViewController(viewModel: viewModel)
                     
                     owner.navigationController?.pushViewController(nextVC, animated: true)
                     
@@ -149,33 +152,29 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func headerRegistration() {
         
         // 카테고리 Header Registration
-        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryCollectionReusableView>(elementKind: CategoryCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
-            
-            supplementaryView.prepareForReuse()
+        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryButtonHeaderView>(elementKind: CategoryButtonHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
             guard let self else { return }
             
-            let tapGesture = UITapGestureRecognizer()
-            supplementaryView.transparentView.addGestureRecognizer(tapGesture)
-            
-            tapGesture.rx.event
+            supplementaryView.searchButton.rx.tap
                 .bind(with: self) { owner, _ in
                     
-                    let viewModel = SearchViewModel()
+                    let viewModel = SearchViewModel(type: .policy)
                     
                     let nextVC = SearchViewController(viewModel: viewModel)
                     owner.navigationController?.pushViewController(nextVC, animated: true)
-                }.disposed(by: disposeBag)
+                }
+                .disposed(by: supplementaryView.disposeBag)
         }
         
         // 인기정책 Header Registration
-        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<PopularHeaderReusableView>(elementKind: PopularHeaderReusableView.identifier) { supplementaryView, elementKind, indexPath in
+        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
             
-            // guard let section = HomeLayout(rawValue: indexPath.section) else { return }
+            supplementaryView.setTitle("인기 정책")
         }
         
         // 최근업데이트 Header Registration
-        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<RecentHeaderReusableView>(elementKind: RecentHeaderReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleWithCategoryHeaderView>(elementKind: TitleWithCategoryHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
             guard let self else { return }
             
@@ -232,19 +231,19 @@ final class HomeViewController: BaseViewController<HomeView> {
             guard let self else { return nil }
             
             switch kind {
-            case CategoryCollectionReusableView.identifier:
+            case CategoryButtonHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: categoryHeaderRegistration,
                     for: index)
                 
-            case PopularHeaderReusableView.identifier:
+            case TitleHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: popularHeaderRegistration,
                     for: index)
                 
-            case RecentHeaderReusableView.identifier:
+            case TitleWithCategoryHeaderView.identifier:
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: recentHeaderRegistration,
@@ -290,7 +289,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         if count == 10 {
             snapshot.deleteItems(snapshot.itemIdentifiers(inSection: section))
         }
-            
+        
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
