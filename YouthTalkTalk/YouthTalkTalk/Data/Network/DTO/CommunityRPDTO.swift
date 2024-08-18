@@ -16,12 +16,12 @@ struct CommunityRPDTO: Decodable {
 }
 
 struct CommunityRPDTOData: Decodable {
-    let top5Posts: [RPDTO]
-    let otherPosts: [RPDTO]
+    let popularPosts: [RPDTO]
+    let recentPosts: [RPDTO]
     
     enum CodingKeys: String, CodingKey {
-        case top5Posts = "top5_posts"
-        case otherPosts = "other_posts"
+        case popularPosts = "top5_posts"
+        case recentPosts = "other_posts"
     }
 }
 

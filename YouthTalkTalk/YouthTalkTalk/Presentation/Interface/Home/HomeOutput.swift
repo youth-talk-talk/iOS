@@ -11,7 +11,7 @@ import RxSwift
 
 protocol HomeOutput {
     
-    var topFivePoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
-    var allPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
+    var popularPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
+    var recentPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
     var resetSectionItems: PublishRelay<Void> { get }
 }

@@ -18,12 +18,12 @@ struct HomePolicyDTO: Decodable {
 
 struct HomePolicyDataDTO: Decodable {
     
-    let topFivePolicies: [PolicyDTO]
-    let allPolicies: [PolicyDTO]
+    let popularPolicies: [PolicyDTO]
+    let recentPolicies: [PolicyDTO]
     
     enum CodingKeys: String, CodingKey {
-        case topFivePolicies = "top5Policies"
-        case allPolicies
+        case popularPolicies = "top5Policies"
+        case recentPolicies = "allPolicies"
     }
 }
 

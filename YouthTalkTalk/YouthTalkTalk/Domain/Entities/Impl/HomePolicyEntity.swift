@@ -9,8 +9,8 @@ import Foundation
 
 struct HomePolicyEntity {
     
-    let topFivePolicies: [PolicyEntity]
-    let allPolicies: [PolicyEntity]
+    let popularPolicies: [PolicyEntity]
+    let recentPolicies: [PolicyEntity]
 }
 
 struct PolicyEntity: Hashable {

@@ -16,18 +16,20 @@ final class HomeViewModel: HomeInterface {
     
     // 선택된 정책 카테고리
     var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
+    var currentPage = 1
+    var fetchRecentPolicies = PublishRelay<Void>()
     
     var input: HomeInput { return self }
     var output: HomeOutput { return self }
     
     // Inputs
     var fetchPolicies = PublishRelay<Void>()
-    var updateRecentPolicies = PublishRelay<Int>()
+    var pageUpdate = PublishRelay<Int>()
     var policyCategorySeleted = PublishRelay<PolicyCategory>()
     
     // Outputs
-    var topFivePoliciesRelay = PublishRelay<[HomeSectionItems]>()
-    var allPoliciesRelay = PublishRelay<[HomeSectionItems]>()
+    var popularPoliciesRelay = PublishRelay<[HomeSectionItems]>()
+    var recentPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var resetSectionItems = PublishRelay<Void>()
     
     init(policyUseCase: PolicyUseCase) {
@@ -44,38 +46,27 @@ final class HomeViewModel: HomeInterface {
                 switch result {
                 case .success(let homePolicyEntity):
                     
-                    let topFivePolicies = homePolicyEntity.topFivePolicies.map { HomeSectionItems.topFive($0) }
-                    let allPolicies = homePolicyEntity.allPolicies.map { HomeSectionItems.all($0)}
+                    let popularPolicies = homePolicyEntity.popularPolicies.map { HomeSectionItems.popular($0) }
+                    let recentPolicies = homePolicyEntity.recentPolicies.map { HomeSectionItems.recent($0)}
                     
-                    owner.topFivePoliciesRelay.accept(topFivePolicies)
-                    owner.allPoliciesRelay.accept(allPolicies)
+                    owner.popularPoliciesRelay.accept(popularPolicies)
+                    owner.recentPoliciesRelay.accept(recentPolicies)
                     
                 case .failure(let error):
                     
-                    print("기본 10개 정책 호출 실패")
+                    print("기본 10개 정책 호출 실패 - \(error.localizedDescription)")
                 }
             }.disposed(by: disposeBag)
         
         // 스크롤(페이지 변경)을 통한 정책 호출
-        updateRecentPolicies
+        pageUpdate
             .distinctUntilChanged()
-            .withUnretained(self)
-            .flatMap { owner, page in
+            .subscribe(with: self) { owner, page in
                 
-                return owner.policyUseCase.fetchHomePolicies(categories: owner.selectedPolicyCategory, page: page, size: 10)
-            }.subscribe(with: self) { owner, result in
+                owner.currentPage = page
                 
-                switch result {
-                case .success(let homePolicyEntity):
-                    
-                    let allPolicies = homePolicyEntity.allPolicies.map { HomeSectionItems.all($0)}
-                    
-                    owner.allPoliciesRelay.accept(allPolicies)
-                    
-                case .failure(let error):
-                    
-                    print("스크롤(페이지 변경)을 통한 정책 호출 실패")
-                }
+                owner.fetchRecentPolicies.accept(())
+                
             }.disposed(by: disposeBag)
         
         // 카테고리 변경
@@ -93,10 +84,34 @@ final class HomeViewModel: HomeInterface {
                 // 기존 데이터는 모두 삭제
                 owner.resetSectionItems.accept(())
                 
+                // 페이지 리셋
+                owner.currentPage = 1
+                
                 // 새로운 데이터 호출
-                owner.fetchPolicies.accept(())
+                owner.fetchRecentPolicies.accept(())
                 
             }.disposed(by: disposeBag)
+        
+        // 스크롤 또는 카테고리 변경 시 최근 정책 업데이트
+        fetchRecentPolicies
+                .withUnretained(self)
+                .flatMap { owner, _ in
+                    
+                    return owner.policyUseCase.fetchHomePolicies(categories: owner.selectedPolicyCategory, page: owner.currentPage, size: 10)
+                }
+                .subscribe(with: self) { owner, result in
+                    
+                    switch result {
+                    case .success(let homePolicyEntity):
+                        let recentPolicies = homePolicyEntity.recentPolicies.map { HomeSectionItems.recent($0)}
+                        
+                        owner.recentPoliciesRelay.accept(recentPolicies)
+                        
+                    case .failure(let error):
+                        print("모든 정책 호출 실패 - \(error.localizedDescription)")
+                    }
+                }
+                .disposed(by: disposeBag)
     }
     
     deinit {

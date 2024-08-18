@@ -13,16 +13,16 @@ import RxSwift
 enum HomeSectionItems: Hashable {
     
     case category
-    case topFive(PolicyEntity)
-    case all(PolicyEntity)
+    case popular(PolicyEntity)
+    case recent(PolicyEntity)
     
     var data: PolicyEntity? {
         switch self {
         case .category:
             return nil
-        case .topFive(let policyEntity):
+        case .popular(let policyEntity):
             return policyEntity
-        case .all(let policyEntity):
+        case .recent(let policyEntity):
             return policyEntity
         }
     }
@@ -56,17 +56,17 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         snapshot.appendSections([.category, .popular, .recent])
         
-        viewModel.output.topFivePoliciesRelay
-            .bind(with: self) { owner, topFivePolicies in
+        viewModel.output.popularPoliciesRelay
+            .bind(with: self) { owner, popularPolicies in
                 
-                owner.update(section: .popular, items: topFivePolicies)
+                owner.update(section: .popular, items: popularPolicies)
                 
             }.disposed(by: disposeBag)
         
-        viewModel.output.allPoliciesRelay
-            .bind(with: self) { owner, allPolicies in
+        viewModel.output.recentPoliciesRelay
+            .bind(with: self) { owner, recentPolicies in
                 
-                owner.update(section: .recent, items: allPolicies)
+                owner.update(section: .recent, items: recentPolicies)
                 
             }.disposed(by: disposeBag)
         
@@ -80,7 +80,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 owner.dataSource.apply(owner.snapshot, animatingDifferences: true)
             }
             .disposed(by: disposeBag)
-        
         
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
@@ -111,34 +110,28 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { cell, indexPath, itemIdentifier in
             
-            guard let self else { return }
-            
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
             cell.configure(data: itemIdentifier.data)
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { cell, indexPath, itemIdentifier in
             
-            guard let self else { return }
-            
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
             cell.configure(data: itemIdentifier.data)
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) {  [weak self] collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
             
-            guard let self else { return nil }
             guard let section = HomeLayout(rawValue: indexPath.section) else { return nil }
-            
-            if section == .category { return nil }
             
             if section == .popular {
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: popularSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                cell.layer.cornerRadius = 10
-                cell.layer.masksToBounds = true
                 
                 return cell
             }
@@ -146,9 +139,6 @@ final class HomeViewController: BaseViewController<HomeView> {
             if section == .recent {
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                cell.layer.cornerRadius = 10
-                cell.layer.masksToBounds = true
                 
                 return cell
             }
@@ -309,7 +299,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         
         // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
         if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
-            viewModel.input.updateRecentPolicies.accept(currentPage)
+            viewModel.input.pageUpdate.accept(currentPage)
         }
     }
 }

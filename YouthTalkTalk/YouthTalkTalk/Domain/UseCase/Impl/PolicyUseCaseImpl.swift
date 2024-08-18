@@ -29,18 +29,18 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                 switch result {
                 case .success(let homePolicyDTO):
                     
-                    let topFivePolicies = homePolicyDTO.data.topFivePolicies
+                    let popularPolicies = homePolicyDTO.data.popularPolicies
                         .map { dto in
                             return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
                         }
                     
-                    let allPolicies = homePolicyDTO.data.allPolicies
+                    let recentPolicies = homePolicyDTO.data.recentPolicies
                         .map { dto in
                             return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
                         }
                     
-                    let homePolicy = HomePolicyEntity(topFivePolicies: topFivePolicies,
-                                                      allPolicies: allPolicies)
+                    let homePolicy = HomePolicyEntity(popularPolicies: popularPolicies,
+                                                      recentPolicies: recentPolicies)
                     
                     return .success(homePolicy)
                     

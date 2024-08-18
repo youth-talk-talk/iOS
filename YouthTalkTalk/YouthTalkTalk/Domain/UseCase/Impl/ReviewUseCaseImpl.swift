@@ -27,8 +27,8 @@ final class ReviewUseCaseImpl: ReviewUseCase {
                 switch result {
                 case .success(let communityRPDTO):
                     
-                    let popular = communityRPDTO.data.top5Posts.map { $0.translateEntity() }
-                    let recent = communityRPDTO.data.otherPosts.map { $0.translateEntity() }
+                    let popular = communityRPDTO.data.popularPosts.map { $0.translateEntity() }
+                    let recent = communityRPDTO.data.recentPosts.map { $0.translateEntity() }
                     
                     return .success(CommunityRPEntity(popularRP: popular, recentRP: recent))
                     
