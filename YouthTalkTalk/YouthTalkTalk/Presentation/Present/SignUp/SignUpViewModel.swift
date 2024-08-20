@@ -72,7 +72,12 @@ final class SignUpViewModel: SignUpInterface {
                 case .success():
                     
                     signUpResult.accept(true)
-                case .failure(_):
+                case .failure(let error):
+                    
+                    // TODO: 에러 처리 필요
+                    if error == .alreadyRegisteredUser {
+                        print("이미 가입한 유저 처리 추가 필요")
+                    }
                     
                     signUpResult.accept(false)
                 }

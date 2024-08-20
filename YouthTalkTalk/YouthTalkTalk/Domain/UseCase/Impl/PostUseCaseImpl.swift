@@ -32,9 +32,9 @@ final class PostUseCaseImpl: PostUseCase {
                     
                     return .success(CommunityRPEntity(popularRP: popular, recentRP: recent))
                     
-                case .failure(let failure):
+                case .failure(let error):
                     
-                    return .failure(failure)
+                    return .failure(error)
                 }
             }
     }

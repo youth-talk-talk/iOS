@@ -40,17 +40,19 @@ final class APIManager: APIInterface {
                         
                     case .success(let success):
                         
-                        single(.success(.success(success)))
                         self.handleResponseHeaders(response.response)
+                        single(.success(.success(success)))
                         
-                    case .failure(let error):
+                    case .failure:
                         
-                        let error: APIError = self.handleErrorResponse(response.data)
-                        
+                        let error = self.handleResponseError(response.response)
                         single(.success(.failure(error)))
                         
                     }
                 }
+            
+            single(.success(.failure(APIError.unknown)))
+            print(APIError.unknown.msg)
             
             return Disposables.create()
         }
@@ -63,6 +65,7 @@ final class APIManager: APIInterface {
 
 extension APIManager {
     
+    /// 토큰 정보 저장
     private func handleResponseHeaders(_ response: HTTPURLResponse?) {
         
         guard let httpResponse = response else { return }
@@ -70,29 +73,14 @@ extension APIManager {
         self.keyChainHelper.saveTokenInfoFromHttpResponse(response: httpResponse)
     }
     
-    private func handleErrorResponse(_ data: Data?) -> APIError {
+    /// 에러 타입 반환 및 오류메시지 프린트
+    private func handleResponseError(_ response: HTTPURLResponse?) -> APIError {
         
-        var error = APIError(code: "알수없음")
+        guard let httpResponse = response else { return APIError.unknown }
         
-        if let data = data {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                if let errorDict = json as? [String: Any] {
-                    if let status = errorDict["status"] as? Int {
-                        print("에러 상태 코드: \(status)")
-                    }
-                    if let message = errorDict["message"] as? String {
-                        print("에러 메시지: \(message)")
-                    }
-                    if let code = errorDict["code"] as? String {
-                        print("에러 코드: \(code)")
-                        error = .init(code: code)
-                    }
-                }
-            } catch {
-                print("JSON 파싱 오류: \(error)")
-            }
-        }
+        let error = APIError.init(code: String(httpResponse.statusCode))
+        
+        print(error.isSuccess ? "\(error.msg) - DTO 타입 전환 에러입니다": error.msg)
         
         return error
     }

@@ -24,7 +24,7 @@ final class SignUpUseCaseImpl: SignUpUseCase {
         self.signUpRepository = signUpRepository
     }
     
-    func signUp(region: String, nickname: String) -> Observable<Result<Void, Error>> {
+    func signUp(region: String, nickname: String) -> Observable<Result<Void, APIError>> {
         
         let signUpType = userDefaults.signUpType
         
@@ -38,7 +38,7 @@ final class SignUpUseCaseImpl: SignUpUseCase {
         }
     }
     
-    private func signUpWithApple(region: String, nickname: String) -> Observable<Result<Void, Error>> {
+    private func signUpWithApple(region: String, nickname: String) -> Observable<Result<Void, APIError>> {
         
         let identifier = keyChainHelper.loadAppleInfo(type: .appleIdentifier)
         let token = keyChainHelper.loadAppleInfo(type: .appleIdentifierToken)
@@ -47,39 +47,39 @@ final class SignUpUseCaseImpl: SignUpUseCase {
                                                    nickname: nickname,
                                                    region: region,
                                                    Token: token)
-        .map { result -> Result<Void, Error> in
+        .map { result -> Result<Void, APIError> in
             switch result {
             case .success(_):
                 
                 return .success(())
-            case .failure(let failure):
+            case .failure(let error):
                 
-                return .failure(failure)
+                return .failure(error)
             }
         }
     }
     
-    private func signUpWithKakao(region: String, nickname: String) -> Observable<Result<Void, Error>> {
+    private func signUpWithKakao(region: String, nickname: String) -> Observable<Result<Void, APIError>> {
         
         return UserApi.shared.rx.me()
             .asObservable()
             .withUnretained(self)
-            .flatMap { owner, user -> Observable<Result<Void, Error>> in
+            .flatMap { owner, user -> Observable<Result<Void, APIError>> in
                 
                 let userIdentifier = kakaoIdentifier(user: user)
                 
                 return owner.signUpRepository.requestKakaoSignUp(userIdentifier: userIdentifier,
                                                                  nickname: nickname,
                                                                  region: region)
-                .map { result -> Result<Void, Error> in
+                .map { result -> Result<Void, APIError> in
                     
                     switch result {
                     case .success(_):
                         
                         return .success(())
-                    case .failure(let failure):
+                    case .failure(let error):
                         
-                        return .failure(failure)
+                        return .failure(error)
                     }
                 }
             }

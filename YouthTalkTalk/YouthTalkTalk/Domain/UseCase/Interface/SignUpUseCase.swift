@@ -11,5 +11,5 @@ import RxCocoa
 
 protocol SignUpUseCase {
     
-    func signUp(region: String, nickname: String) -> Observable<Result<Void, Error>>
+    func signUp(region: String, nickname: String) -> Observable<Result<Void, APIError>>
 }

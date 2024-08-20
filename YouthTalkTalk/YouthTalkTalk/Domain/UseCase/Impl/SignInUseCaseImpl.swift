@@ -63,7 +63,7 @@ extension SignInUseCaseImpl {
                 owner.kakaoUserInfoRequest()
                 
             } onError: {owner, error  in
-                print(error)
+                print(error.localizedDescription)
             }
             .disposed(by: disposeBag)
     }
@@ -78,13 +78,13 @@ extension SignInUseCaseImpl {
                 // 카카오 유저 정보 요창
                 owner.kakaoUserInfoRequest()
             } onError: {owner, error in
-                print(error)
+                print(error.localizedDescription)
             }
             .disposed(by: disposeBag)
     }
     
     // 서버 로그인 요청 (카카오)
-    private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, Error>> {
+    private func requestSignInKakao(user: User) -> Single<Result<SignInEntity, APIError>> {
         
         let identifier = getKakaoUserIdentifier(user: user)
         
@@ -115,7 +115,6 @@ extension SignInUseCaseImpl {
                 switch result {
                 case .success(let signInEntity):
                     
-                    // owner.userDefaults.saveSignedInState(signedInType: .kakao)
                     owner.kakaoSignIn.accept(true)
                     
                 case .failure(let error):
@@ -169,18 +168,12 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
                 case .success(let userData):
                     
                     // 로그인 처리 -> 홈화면 이동
-                    // owner.userDefaults.saveSignedInState(signedInType: .apple)
                     owner.appleSignIn.accept(true)
-                    
-                    break
-                    
                 case .failure(let error):
                     
                     // 회원가입 -> 약관 동의 페이지 이동
                     owner.userDefaults.saveSignUpType(signUpType: .apple)
                     owner.appleSignIn.accept(false)
-                    
-                    break
                 }
             }.disposed(by: disposeBag)
     }
@@ -191,7 +184,7 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         print("error / 취소")
     }
     
-    private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<SignInEntity, Error>> {
+    private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<SignInEntity, APIError>> {
         
         let userIdentifier = credentials.user
         let identityToken = tokenToString(data: credentials.identityToken)

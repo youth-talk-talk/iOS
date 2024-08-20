@@ -49,9 +49,9 @@ final class ReviewViewModel: RPInterface {
                     owner.popularRPsRelay.accept(popular)
                     owner.recentRPsRelay.accept(recent)
                     
-                case .failure(let failure):
+                case .failure(let error):
                     
-                    print(failure.localizedDescription)
+                    print(error)
                 }
             }
             .disposed(by: disposeBag)

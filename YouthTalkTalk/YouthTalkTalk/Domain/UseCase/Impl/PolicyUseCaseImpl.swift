@@ -44,9 +44,9 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                     
                     return .success(homePolicy)
                     
-                case .failure(let failure):
+                case .failure(let error):
                     
-                    return .failure(failure)
+                    return .failure(error)
                 }
             }
     }
@@ -64,9 +64,9 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                     let detailPolicyEntity = detailPolicyDTO.data.translateDetailPolicyEntity()
                     
                     return .success(detailPolicyEntity)
-                case .failure(let failure):
+                case .failure(let error):
                     
-                    return .failure(failure)
+                    return .failure(error)
                     
                 }
             }

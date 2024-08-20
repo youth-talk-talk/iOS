@@ -53,8 +53,7 @@ final class HomeViewModel: HomeInterface {
                     owner.recentPoliciesRelay.accept(recentPolicies)
                     
                 case .failure(let error):
-                    
-                    print("기본 10개 정책 호출 실패 - \(error.localizedDescription)")
+                    print("\(error.msg) - 기본 10개 정책 호출 실패")
                 }
             }.disposed(by: disposeBag)
         
@@ -108,7 +107,7 @@ final class HomeViewModel: HomeInterface {
                         owner.recentPoliciesRelay.accept(recentPolicies)
                         
                     case .failure(let error):
-                        print("모든 정책 호출 실패 - \(error.localizedDescription)")
+                        print(error.msg)
                     }
                 }
                 .disposed(by: disposeBag)
