@@ -111,6 +111,7 @@
 		AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */; };
 		AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2E2C6A3C0D00804950 /* NewPostView.swift */; };
 		AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */; };
+		AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3A2C74A5A300804950 /* ScrapDTO.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -296,6 +297,7 @@
 		AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		AC604C2E2C6A3C0D00804950 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageSpacingView.swift; sourceTree = "<group>"; };
+		AC604C3A2C74A5A300804950 /* ScrapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapDTO.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -1066,6 +1068,7 @@
 				AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */,
 				AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */,
 				AC604C022C6760D300804950 /* CommunityRPDTO.swift */,
+				AC604C3A2C74A5A300804950 /* ScrapDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1280,6 +1283,7 @@
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */,
+				AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
 				AC604C132C67823300804950 /* PostUseCaseImpl.swift in Sources */,

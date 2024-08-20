@@ -8,8 +8,11 @@
 import UIKit
 import PinLayout
 import FlexLayout
+import RxSwift
 
 final class RecentCollectionViewCell: BaseCollectionViewCell {
+    
+    var disposeBag = DisposeBag()
 
     let subTitleLabel = UILabel()
     let deadlineLabel = UILabel()
@@ -22,6 +25,8 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
         
         subTitleLabel.text = ""
         deadlineLabel.text = ""

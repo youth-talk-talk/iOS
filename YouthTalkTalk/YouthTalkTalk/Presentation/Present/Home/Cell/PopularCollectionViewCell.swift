@@ -8,16 +8,21 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 final class PopularCollectionViewCell: BaseCollectionViewCell {
+    
+    var disposeBag = DisposeBag()
     
     let regionLabel = UILabel()
     let policyTitleLabel = UILabel()
     let categoryLabel = UILabel()
-    let bookmarkButton = UIButton()
+    let scrapButton = UIButton()
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
         
         regionLabel.designed(text: "", fontType: .p12Regular, textColor: .gray60)
         policyTitleLabel.designed(text: "", fontType: .p18Bold, textColor: .black)
@@ -26,7 +31,7 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
     
     override func configureLayout() {
         
-        [policyTitleLabel, categoryLabel, bookmarkButton].forEach { flexView.addSubview($0) }
+        [policyTitleLabel, categoryLabel, scrapButton].forEach { flexView.addSubview($0) }
         
         flexView.flex.define { flex in
             
@@ -45,7 +50,7 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
                 
                 flex.addItem(categoryLabel)
                     .grow(1)
-                flex.addItem(bookmarkButton)
+                flex.addItem(scrapButton)
                     .height(24)
                     .width(24)
             }
@@ -73,7 +78,9 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         regionLabel.designed(text: data.hostDep, fontType: .p12Regular, textColor: .gray60)
         policyTitleLabel.designed(text: data.title, fontType: .p18Bold, textColor: .black)
         categoryLabel.designed(text: policyCategory.name, fontType: .p12Bold, textColor: .gray40)
-        bookmarkButton.designedByImage(.bookmark)
+        scrapButton.designedByImage(.bookmark)
+        
+        scrapButton.configuration?.baseForegroundColor = data.scrap ? .customGreen : .clear
         
         if policyTitleLabel.frame.height != 0 {
             updatePolicyLabelHeight()

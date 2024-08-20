@@ -30,6 +30,13 @@ final class PolicyRepositoryImpl: PolicyRepository {
         return apiManager.request(router: router, type: DetailPolicyDTO.self).asObservable()
     }
     
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
+        
+        let router = PolicyRouter.updatePolicyScrap(id: id)
+        
+        return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
+    }
+    
     deinit {
         print("PolicyRepositoryImpl Deinit")
     }

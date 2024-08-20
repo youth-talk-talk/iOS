@@ -20,10 +20,10 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         
         self.view = LayoutView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureView()
         configureTableView()
         configureCollectionView()
@@ -65,4 +65,23 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     // deinit {
     //     print(String(describing: type(of: self)))
     // }
+}
+
+extension BaseViewController {
+    
+    func errorHandler(_ error: APIError) {
+        
+        switch error {
+        case .policyNotFound:
+            showAlert(error)
+        default:
+            break
+        }
+    }
+    
+    private func showAlert(_ error: APIError) {
+        let alertController = UIAlertController(title: "죄송합니다", message: error.msg, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

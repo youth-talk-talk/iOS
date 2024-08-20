@@ -81,6 +81,12 @@ final class HomeViewController: BaseViewController<HomeView> {
             }
             .disposed(by: disposeBag)
         
+        viewModel.output.errorHandler
+            .bind(with: self) { owner, error in
+                owner.errorHandler(error)
+            }
+            .disposed(by: disposeBag)
+        
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
                 
@@ -110,19 +116,51 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { cell, indexPath, itemIdentifier in
+        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self,
+                  let data = itemIdentifier.data else { return }
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
-            cell.configure(data: itemIdentifier.data)
+            cell.configure(data: data)
+            
+            self.viewModel.output.updatePolicyScrapRelay
+                .bind(with: self) { owner, isScrap in
+                    
+                    cell.scrapButton.configuration?.baseForegroundColor = isScrap ? .customGreen : .clear
+                }
+                .disposed(by: disposeBag)
+            
+            cell.scrapButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self,
+                  let data = itemIdentifier.data else { return }
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
-            cell.configure(data: itemIdentifier.data)
+            cell.configure(data: data)
+            
+            self.viewModel.output.updatePolicyScrapRelay
+                .bind(with: self) { owner, isScrap in
+                    
+                    cell.scrapButton.configuration?.baseForegroundColor = isScrap ? .customGreen : .clear
+                }
+                .disposed(by: disposeBag)
+            
+            cell.scrapButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in

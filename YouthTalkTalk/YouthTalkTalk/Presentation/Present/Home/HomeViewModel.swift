@@ -26,11 +26,14 @@ final class HomeViewModel: HomeInterface {
     var fetchPolicies = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var policyCategorySeleted = PublishRelay<PolicyCategory>()
+    var updatePolicyScrap = PublishRelay<String>()
     
     // Outputs
     var popularPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var recentPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var resetSectionItems = PublishRelay<Void>()
+    var updatePolicyScrapRelay = PublishRelay<Bool>()
+    var errorHandler = PublishRelay<APIError>()
     
     init(policyUseCase: PolicyUseCase) {
         self.policyUseCase = policyUseCase
@@ -111,6 +114,24 @@ final class HomeViewModel: HomeInterface {
                     }
                 }
                 .disposed(by: disposeBag)
+        
+        // 스크랩
+        updatePolicyScrap
+            .withUnretained(self)
+            .flatMap { owner, policyID in
+                
+                return owner.policyUseCase.updatePolicyScrap(id: policyID)
+            }
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let isScrap):
+                    owner.updatePolicyScrapRelay.accept(isScrap)
+                case .failure(let error):
+                    owner.errorHandler.accept(error)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     deinit {

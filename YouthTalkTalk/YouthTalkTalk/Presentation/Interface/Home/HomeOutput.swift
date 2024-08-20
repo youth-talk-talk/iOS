@@ -14,4 +14,7 @@ protocol HomeOutput {
     var popularPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
     var recentPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }
     var resetSectionItems: PublishRelay<Void> { get }
+    var updatePolicyScrapRelay: PublishRelay<Bool> { get }
+    
+    var errorHandler: PublishRelay<APIError> { get }
 }
