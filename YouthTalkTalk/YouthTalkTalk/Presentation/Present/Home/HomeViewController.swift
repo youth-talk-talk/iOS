@@ -70,8 +70,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 
             }.disposed(by: disposeBag)
         
-        viewModel.input.fetchPolicies.accept(())
-        
         viewModel.output.resetSectionItems
             .bind(with: self) { owner, _ in
                 
@@ -86,6 +84,8 @@ final class HomeViewController: BaseViewController<HomeView> {
                 owner.errorHandler(error)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.input.fetchPolicies.accept(())
         
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
@@ -125,15 +125,23 @@ final class HomeViewController: BaseViewController<HomeView> {
             cell.layer.masksToBounds = true
             cell.configure(data: data)
             
-            self.viewModel.output.updatePolicyScrapRelay
-                .bind(with: self) { owner, isScrap in
-                    
-                    cell.scrapButton.configuration?.baseForegroundColor = isScrap ? .customGreen : .clear
+            // cell에 적용(스크롤시에도 유지)
+            if let scrap = viewModel.output.scrapStatus[data.policyId] {
+                cell.updateScrapStatus(scrap)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let scrap = scrapStatus[data.policyId] {
+                        cell.updateScrapStatus(scrap)
+                    }
                 }
-                .disposed(by: disposeBag)
+                .disposed(by: self.disposeBag)
             
             cell.scrapButton.rx.tap
                 .bind(with: self) { owner, _ in
+                    
                     owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
                 }
                 .disposed(by: cell.disposeBag)
@@ -149,12 +157,19 @@ final class HomeViewController: BaseViewController<HomeView> {
             cell.layer.masksToBounds = true
             cell.configure(data: data)
             
-            self.viewModel.output.updatePolicyScrapRelay
-                .bind(with: self) { owner, isScrap in
-                    
-                    cell.scrapButton.configuration?.baseForegroundColor = isScrap ? .customGreen : .clear
+            // cell에 적용(스크롤시에도 유지)
+            if let scrap = viewModel.output.scrapStatus[data.policyId] {
+                cell.updateScrapStatus(scrap)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let scrap = scrapStatus[data.policyId] {
+                        cell.updateScrapStatus(scrap)
+                    }
                 }
-                .disposed(by: disposeBag)
+                .disposed(by: self.disposeBag)
             
             cell.scrapButton.rx.tap
                 .bind(with: self) { owner, _ in

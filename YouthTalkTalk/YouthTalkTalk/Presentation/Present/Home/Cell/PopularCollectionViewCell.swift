@@ -27,6 +27,8 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         regionLabel.designed(text: "", fontType: .p12Regular, textColor: .gray60)
         policyTitleLabel.designed(text: "", fontType: .p18Bold, textColor: .black)
         categoryLabel.designed(text: "", fontType: .p12Bold, textColor: .gray40)
+        
+        scrapButton.configuration?.image = nil
     }
     
     override func configureLayout() {
@@ -78,9 +80,7 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         regionLabel.designed(text: data.hostDep, fontType: .p12Regular, textColor: .gray60)
         policyTitleLabel.designed(text: data.title, fontType: .p18Bold, textColor: .black)
         categoryLabel.designed(text: policyCategory.name, fontType: .p12Bold, textColor: .gray40)
-        scrapButton.designedByImage(.bookmark)
-        
-        scrapButton.configuration?.baseForegroundColor = data.scrap ? .customGreen : .clear
+        scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
         
         if policyTitleLabel.frame.height != 0 {
             updatePolicyLabelHeight()
@@ -101,5 +101,9 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         } else if line >= 2 {
             policyTitleLabel.flex.height(72)
         }
+    }
+    
+    func updateScrapStatus(_ isScrap: Bool) {
+        scrapButton.designedByImage(isScrap ? .bookmarkFill : .bookmark)
     }
 }

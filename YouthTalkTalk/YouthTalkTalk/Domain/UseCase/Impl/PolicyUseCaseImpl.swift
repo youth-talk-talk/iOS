@@ -73,7 +73,7 @@ final class PolicyUseCaseImpl: PolicyUseCase {
         
     }
     
-    func updatePolicyScrap(id: String) -> Observable<Result<Bool, APIError>> {
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
         
         policyRepository.updatePolicyScrap(id: id)
             .withUnretained(self)
@@ -81,7 +81,10 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                 
                 switch result {
                 case .success(let scrapDTO):
-                    return .success(scrapDTO.message == "스크랩에 성공하였습니다.")
+                    
+                    let scrapEntity = ScrapEntity(isScrap: scrapDTO.message == "스크랩에 성공하였습니다.", id: id)
+                    
+                    return .success(scrapEntity)
                 case .failure(let error):
                     return .failure(error)
                 }

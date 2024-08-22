@@ -32,8 +32,9 @@ final class HomeViewModel: HomeInterface {
     var popularPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var recentPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var resetSectionItems = PublishRelay<Void>()
-    var updatePolicyScrapRelay = PublishRelay<Bool>()
     var errorHandler = PublishRelay<APIError>()
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
     init(policyUseCase: PolicyUseCase) {
         self.policyUseCase = policyUseCase
@@ -56,7 +57,8 @@ final class HomeViewModel: HomeInterface {
                     owner.recentPoliciesRelay.accept(recentPolicies)
                     
                 case .failure(let error):
-                    print("\(error.msg) - 기본 10개 정책 호출 실패")
+                    
+                    owner.errorHandler.accept(error)
                 }
             }.disposed(by: disposeBag)
         
@@ -110,7 +112,7 @@ final class HomeViewModel: HomeInterface {
                         owner.recentPoliciesRelay.accept(recentPolicies)
                         
                     case .failure(let error):
-                        print(error.msg)
+                        owner.errorHandler.accept(error)
                     }
                 }
                 .disposed(by: disposeBag)
@@ -125,8 +127,11 @@ final class HomeViewModel: HomeInterface {
             .subscribe(with: self) { owner, result in
                 
                 switch result {
-                case .success(let isScrap):
-                    owner.updatePolicyScrapRelay.accept(isScrap)
+                case .success(let scrapEntity):
+                    
+                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatusRelay.accept(owner.scrapStatus)
+                    
                 case .failure(let error):
                     owner.errorHandler.accept(error)
                 }

@@ -16,13 +16,12 @@ struct HomePolicyEntity {
 struct PolicyEntity: Hashable {
     
     let uuid = UUID()
-    
     let policyId: String
     let category: String
     let title: String
     let deadlineStatus: String
     let hostDep: String
-    let scrap: Bool
+    var scrap: Bool
     
     static func mockupData() -> PolicyEntity {
         

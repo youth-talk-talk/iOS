@@ -13,5 +13,5 @@ protocol PolicyUseCase {
     
     func fetchHomePolicies(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<HomePolicyEntity, APIError>>
     func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>>
-    func updatePolicyScrap(id: String) -> Observable<Result<Bool, APIError>>
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
 }
