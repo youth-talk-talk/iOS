@@ -70,8 +70,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 
             }.disposed(by: disposeBag)
         
-        viewModel.input.fetchPolicies.accept(())
-        
         viewModel.output.resetSectionItems
             .bind(with: self) { owner, _ in
                 
@@ -80,6 +78,14 @@ final class HomeViewController: BaseViewController<HomeView> {
                 owner.dataSource.apply(owner.snapshot, animatingDifferences: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.output.errorHandler
+            .bind(with: self) { owner, error in
+                owner.errorHandler(error)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.input.fetchPolicies.accept(())
         
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
@@ -110,19 +116,66 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { cell, indexPath, itemIdentifier in
+        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self,
+                  let data = itemIdentifier.data else { return }
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
-            cell.configure(data: itemIdentifier.data)
+            cell.configure(data: data)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let scrap = viewModel.output.scrapStatus[data.policyId] {
+                cell.updateScrapStatus(scrap)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let scrap = scrapStatus[data.policyId] {
+                        cell.updateScrapStatus(scrap)
+                    }
+                }
+                .disposed(by: self.disposeBag)
+            
+            cell.scrapButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    
+                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self,
+                  let data = itemIdentifier.data else { return }
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
-            cell.configure(data: itemIdentifier.data)
+            cell.configure(data: data)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let scrap = viewModel.output.scrapStatus[data.policyId] {
+                cell.updateScrapStatus(scrap)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let scrap = scrapStatus[data.policyId] {
+                        cell.updateScrapStatus(scrap)
+                    }
+                }
+                .disposed(by: self.disposeBag)
+            
+            cell.scrapButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in

@@ -8,8 +8,11 @@
 import UIKit
 import PinLayout
 import FlexLayout
+import RxSwift
 
 final class RecentCollectionViewCell: BaseCollectionViewCell {
+    
+    var disposeBag = DisposeBag()
 
     let subTitleLabel = UILabel()
     let deadlineLabel = UILabel()
@@ -23,12 +26,16 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        disposeBag = DisposeBag()
+        
         subTitleLabel.text = ""
         deadlineLabel.text = ""
         titleLabel.text = ""
         categoryLabel.text = ""
         scrapLabel.text = ""
         commentsLabel.text = ""
+        
+        scrapButton.configuration?.image = nil
     }
     
     override func configureLayout() {
@@ -98,7 +105,6 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         deadlineLabel.designed(text: "", fontType: .p16SemiBold, textColor: .gray40)
         titleLabel.designed(text: "정책명", fontType: .p18Bold, textColor: .black)
         categoryLabel.designed(text: "카테고리", fontType: .p12Bold, textColor: .gray40)
-        scrapButton.designedByImage(.bookmark)
         commentsButton.designedByImage(.comments)
         
         subTitleLabel.lineBreakMode = .byTruncatingTail
@@ -116,6 +122,8 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         subTitleLabel.text = data.hostDep
         titleLabel.text = data.title
         deadlineLabel.text = data.deadlineStatus
+        
+        scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
         
         let policyCategory = PolicyCategory(rawValue: data.category) ?? .life
         categoryLabel.text = policyCategory.name
@@ -140,5 +148,9 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         categoryLabel.text = ""
         deadlineLabel.flex.display(.none)
         categoryLabel.flex.display(.none)
+    }
+    
+    func updateScrapStatus(_ isScrap: Bool) {
+        scrapButton.designedByImage(isScrap ? .bookmarkFill : .bookmark)
     }
 }

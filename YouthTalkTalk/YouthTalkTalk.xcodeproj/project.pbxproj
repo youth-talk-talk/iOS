@@ -111,6 +111,8 @@
 		AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */; };
 		AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2E2C6A3C0D00804950 /* NewPostView.swift */; };
 		AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */; };
+		AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3A2C74A5A300804950 /* ScrapDTO.swift */; };
+		AC604C3D2C774CB400804950 /* ScrapEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3C2C774CB400804950 /* ScrapEntity.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -296,6 +298,8 @@
 		AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		AC604C2E2C6A3C0D00804950 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageSpacingView.swift; sourceTree = "<group>"; };
+		AC604C3A2C74A5A300804950 /* ScrapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapDTO.swift; sourceTree = "<group>"; };
+		AC604C3C2C774CB400804950 /* ScrapEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapEntity.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -435,7 +439,6 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				AC604C1F2C69FF3400804950 /* New Group */,
 				AC604BED2C675BA500804950 /* Review&Post */,
 				AC579B702C53B24C00D1C9FC /* DetailPolciy */,
 				AC579B4A2C451C5E00D1C9FC /* Home */,
@@ -712,13 +715,6 @@
 			path = "Review&Post";
 			sourceTree = "<group>";
 		};
-		AC604C1F2C69FF3400804950 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		AC604C202C69FF6400804950 /* RecentSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +881,7 @@
 				AC579B5D2C45423F00D1C9FC /* HomePolicyEntity.swift */,
 				AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */,
 				AC604C0E2C676DD700804950 /* RPEntity.swift */,
+				AC604C3C2C774CB400804950 /* ScrapEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1066,6 +1063,7 @@
 				AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */,
 				AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */,
 				AC604C022C6760D300804950 /* CommunityRPDTO.swift */,
+				AC604C3A2C74A5A300804950 /* ScrapDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1280,6 +1278,7 @@
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */,
+				AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
 				AC604C132C67823300804950 /* PostUseCaseImpl.swift in Sources */,
@@ -1377,6 +1376,7 @@
 				AC5A7BF42BF0FDB500A13991 /* SceneDelegate.swift in Sources */,
 				AC604BFF2C67600700804950 /* ReviewUseCase.swift in Sources */,
 				ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */,
+				AC604C3D2C774CB400804950 /* ScrapEntity.swift in Sources */,
 				ACF2A27A2C25845900FE8D63 /* TopRadiusDecoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

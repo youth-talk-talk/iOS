@@ -43,28 +43,20 @@ class APIInterceptor: RequestInterceptor {
         newRequest.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization-refresh")
         newRequest.setValue(nil, forHTTPHeaderField: "Authorization")
         
-        // 리프레쉬 토큰으로 엑세스 토큰 재발급 요청
+        // 리프레쉬 토큰 추가하여 엑세스 토큰 재발급 요청
         session.request(newRequest).validate(statusCode: 200 ... 400).response { response in
-            print("❗️ 엑세스 토큰 재발급 요청")
             
             switch response.result {
-            case .success(let success):
+            case .success:
                 
                 print("❗️ 엑세스 토큰 재발급 성공")
                 self.handleResponseHeaders(response.response)
                 // 새로 발급 받은 엑세스 토큰과 리프레쉬 토큰을 저장해서 다시 시도
                 completion(.retry)
                 
-            case .failure(let error):
+            case .failure:
                 
-                if response.response?.statusCode == 401 {
-                    
-                    print("❗️ 엑세스 토큰 재발급 실패 - 리프레쉬 토큰 만료")
-                    
-                    self.handleRefreshTokenExpired()
-                    completion(.doNotRetry)
-                }
-                
+                print("❗️ 엑세스 토큰 재발급 실패")
                 completion(.doNotRetryWithError(error))
             }
         }
@@ -78,49 +70,5 @@ extension APIInterceptor {
         guard let httpResponse = response else { return }
         
         self.keyChainHelper.saveTokenInfoFromHttpResponse(response: httpResponse)
-    }
-    
-    // 리프레시 토큰 만료 처리
-    private func handleRefreshTokenExpired() {
-        
-        moveToSignInVC()
-    }
-    
-    private func moveToSignInVC() {
-        // 여기서 사용자에게 알림을 제공하거나 로그인 화면으로 이동하는 로직을 구현
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "세션 만료", message: "다시 로그인해주세요.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
-                
-                guard let self else { return }
-                
-                let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                let useCase = SignInUseCaseImpl()
-                let viewModel = SignInViewModel(signInUseCase: useCase)
-                let newRootVC = SignInViewController(viewModel: viewModel)
-                let naviVC = UINavigationController(rootViewController: newRootVC)
-                
-                resetSignInInfo()
-                
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                    guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
-                        fatalError("Failed to get SceneDelegate")
-                    }
-                    
-                    sceneDelegate.window?.rootViewController = naviVC
-                    sceneDelegate.window?.makeKeyAndVisible()
-                }
-            }))
-            
-            if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                rootViewController.present(alert, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    private func resetSignInInfo() {
-        
-        keyChainHelper.deleteTokenInfo(type: .accessToken)
-        keyChainHelper.deleteTokenInfo(type: .refreshToken)
     }
 }

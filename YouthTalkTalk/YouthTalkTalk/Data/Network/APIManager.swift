@@ -33,7 +33,7 @@ final class APIManager: APIInterface {
             
             guard let self else { return Disposables.create() }
             
-            session.request(router, interceptor: interceptor)
+            session.request(router, interceptor: interceptor).validate(statusCode: 200 ... 299)
                 .responseDecodable(of: type.self) { response in
                     
                     switch response.result {
@@ -45,14 +45,10 @@ final class APIManager: APIInterface {
                         
                     case .failure:
                         
-                        let error = self.handleResponseError(response.response)
+                        let error = self.handleResponseError(from: response.data)
                         single(.success(.failure(error)))
-                        
                     }
                 }
-            
-            single(.success(.failure(APIError.unknown)))
-            print(APIError.unknown.msg)
             
             return Disposables.create()
         }
@@ -73,15 +69,31 @@ extension APIManager {
         self.keyChainHelper.saveTokenInfoFromHttpResponse(response: httpResponse)
     }
     
-    /// 에러 타입 반환 및 오류메시지 프린트
-    private func handleResponseError(_ response: HTTPURLResponse?) -> APIError {
+    /// response.data에서 code와 msg를 추출하는 함수
+    private func handleResponseError(from data: Data?) -> APIError {
+        guard let data = data else { return .unknown }
         
-        guard let httpResponse = response else { return APIError.unknown }
+        do {
+            if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                if let code = jsonObject["code"] as? String {
+                    print(code)
+                    let error = APIError(code: code)
+                    print(error.isSuccess ? "\(error.msg) - DTO 타입 전환 에러입니다": error.msg)
+                    
+                    return error
+                }
+                
+                if let msg = jsonObject["message"] as? String {
+                    
+                    print(msg)
+                    
+                    return APIError.userNotFound
+                }
+            }
+        } catch {
+            print("Failed to parse JSON: \(error)")
+        }
         
-        let error = APIError.init(code: String(httpResponse.statusCode))
-        
-        print(error.isSuccess ? "\(error.msg) - DTO 타입 전환 에러입니다": error.msg)
-        
-        return error
+        return .unknown
     }
 }

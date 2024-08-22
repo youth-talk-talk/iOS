@@ -26,11 +26,15 @@ final class HomeViewModel: HomeInterface {
     var fetchPolicies = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var policyCategorySeleted = PublishRelay<PolicyCategory>()
+    var updatePolicyScrap = PublishRelay<String>()
     
     // Outputs
     var popularPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var recentPoliciesRelay = PublishRelay<[HomeSectionItems]>()
     var resetSectionItems = PublishRelay<Void>()
+    var errorHandler = PublishRelay<APIError>()
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
     init(policyUseCase: PolicyUseCase) {
         self.policyUseCase = policyUseCase
@@ -53,7 +57,8 @@ final class HomeViewModel: HomeInterface {
                     owner.recentPoliciesRelay.accept(recentPolicies)
                     
                 case .failure(let error):
-                    print("\(error.msg) - 기본 10개 정책 호출 실패")
+                    
+                    owner.errorHandler.accept(error)
                 }
             }.disposed(by: disposeBag)
         
@@ -107,10 +112,31 @@ final class HomeViewModel: HomeInterface {
                         owner.recentPoliciesRelay.accept(recentPolicies)
                         
                     case .failure(let error):
-                        print(error.msg)
+                        owner.errorHandler.accept(error)
                     }
                 }
                 .disposed(by: disposeBag)
+        
+        // 스크랩
+        updatePolicyScrap
+            .withUnretained(self)
+            .flatMap { owner, policyID in
+                
+                return owner.policyUseCase.updatePolicyScrap(id: policyID)
+            }
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let scrapEntity):
+                    
+                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatusRelay.accept(owner.scrapStatus)
+                    
+                case .failure(let error):
+                    owner.errorHandler.accept(error)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     deinit {

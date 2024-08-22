@@ -12,4 +12,5 @@ protocol PolicyRepository {
     
     func fetchHomePolicies(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<HomePolicyDTO, APIError>>
     func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyDTO, APIError>>
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>>
 }

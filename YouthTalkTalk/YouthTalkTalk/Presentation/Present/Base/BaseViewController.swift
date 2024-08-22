@@ -20,10 +20,10 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         
         self.view = LayoutView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureView()
         configureTableView()
         configureCollectionView()
@@ -65,4 +65,46 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     // deinit {
     //     print(String(describing: type(of: self)))
     // }
+}
+
+extension BaseViewController {
+    
+    func errorHandler(_ error: APIError) {
+        
+        switch error {
+        case .policyNotFound:
+            showAlert(error)
+        case .userNotFound:
+            showAlert(error) { [weak self] _ in
+                
+                guard let self else { return }
+                
+                self.changeRootViewToSignIn()
+            }
+        default:
+            showAlert(error)
+        }
+    }
+    
+    private func showAlert(_ error: APIError,_ handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: "죄송합니다", message: error.msg, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: handler))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func changeRootViewToSignIn() {
+        
+        let useCase = SignInUseCaseImpl()
+        let viewModel = SignInViewModel(signInUseCase: useCase)
+        let newRootVC = SignInViewController(viewModel: viewModel)
+        let naviVC = UINavigationController(rootViewController: newRootVC)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                fatalError("Failed to get SceneDelegate")
+            }
+            sceneDelegate.window?.rootViewController = naviVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
+    }
 }
