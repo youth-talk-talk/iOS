@@ -113,6 +113,7 @@
 		AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */; };
 		AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3A2C74A5A300804950 /* ScrapDTO.swift */; };
 		AC604C3D2C774CB400804950 /* ScrapEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3C2C774CB400804950 /* ScrapEntity.swift */; };
+		AC604C652C79F83500804950 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC604C642C79F83500804950 /* GmarketSansMedium.otf */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -300,6 +301,7 @@
 		AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageSpacingView.swift; sourceTree = "<group>"; };
 		AC604C3A2C74A5A300804950 /* ScrapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapDTO.swift; sourceTree = "<group>"; };
 		AC604C3C2C774CB400804950 /* ScrapEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapEntity.swift; sourceTree = "<group>"; };
+		AC604C642C79F83500804950 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */,
 				AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */,
 				ACF2A2762C2451DD00FE8D63 /* GmarketSansBold.otf */,
+				AC604C642C79F83500804950 /* GmarketSansMedium.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -1204,6 +1207,7 @@
 				AC5A7BFE2BF0FDB600A13991 /* Base in Resources */,
 				AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */,
 				AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */,
+				AC604C652C79F83500804950 /* GmarketSansMedium.otf in Resources */,
 				AC4B42F92C18904F005FC370 /* Pretendard-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

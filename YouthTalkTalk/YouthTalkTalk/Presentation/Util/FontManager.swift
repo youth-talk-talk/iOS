@@ -29,6 +29,8 @@ enum FontType {
     
     case g20Bold
     case g14Bold
+    
+    case g18Medium
 }
 
 enum FontColor {
@@ -153,6 +155,11 @@ final class FontManager {
             fontWeight = "Bold"
             fontSize = 14
             
+        case .g18Medium:
+            
+            familyName = "GmarketSans"
+            fontWeight = "Medium"
+            fontSize = 18
         }
         
         return UIFont(name: "\(familyName)\(fontWeight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
@@ -189,6 +196,8 @@ final class FontManager {
         case .g20Bold:
             lineHeight = 24
         case .g14Bold:
+            lineHeight = 24
+        case .g18Medium:
             lineHeight = 24
         }
         
