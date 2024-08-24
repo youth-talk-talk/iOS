@@ -82,13 +82,6 @@ extension APIManager {
                     
                     return error
                 }
-                
-                if let msg = jsonObject["message"] as? String {
-                    
-                    print(msg)
-                    
-                    return APIError.userNotFound
-                }
             }
         } catch {
             print("Failed to parse JSON: \(error)")

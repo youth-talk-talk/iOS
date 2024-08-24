@@ -74,7 +74,7 @@ extension BaseViewController {
         switch error {
         case .policyNotFound:
             showAlert(error)
-        case .userNotFound:
+        case .invalidAccessToken, .invalidRefreshToken:
             showAlert(error) { [weak self] _ in
                 
                 guard let self else { return }
