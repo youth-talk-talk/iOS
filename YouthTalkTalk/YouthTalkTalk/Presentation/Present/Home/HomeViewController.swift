@@ -217,6 +217,33 @@ final class HomeViewController: BaseViewController<HomeView> {
                     owner.navigationController?.pushViewController(nextVC, animated: true)
                 }
                 .disposed(by: supplementaryView.disposeBag)
+            
+            // 버튼의 tap 이벤트에 식별자 추가
+            let jobTap = supplementaryView.jobCategoryButton.rx.tap
+                .map { PolicyCategory.job }
+
+            let educationTap = supplementaryView.educationCategoryButton.rx.tap
+                .map { PolicyCategory.education }
+            
+            let lifeTap = supplementaryView.cultureCategoryButton.rx.tap
+                .map { PolicyCategory.life }
+
+            let participationTap = supplementaryView.collaborateCategoryButton.rx.tap
+                .map { PolicyCategory.participation }
+
+            Observable.merge(jobTap, educationTap, lifeTap, participationTap)
+            .bind(with: self) { owner, category in
+                
+                let resultSearchVC = ResultSearchViewController()
+                let titleLabelView = UILabel()
+                titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
+                let leftTitleView = UIBarButtonItem(customView: titleLabelView)
+                resultSearchVC.navigationItem.leftBarButtonItem = leftTitleView
+                resultSearchVC.navigationItem.leftItemsSupplementBackButton = true
+                
+                owner.navigationController?.pushViewController(resultSearchVC, animated: true)
+            }
+            .disposed(by: supplementaryView.disposeBag)
         }
         
         // 인기정책 Header Registration

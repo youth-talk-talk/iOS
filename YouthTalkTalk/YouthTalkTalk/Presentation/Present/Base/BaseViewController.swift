@@ -57,7 +57,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     
     private func updateNavigationBackButtonTitle(title: String) {
         
-        let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+        let backButton = UIBarButtonItem(title: title, style: .done, target: nil, action: nil)
         backButton.tintColor = .black
         self.navigationItem.backBarButtonItem = backButton
     }
