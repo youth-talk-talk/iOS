@@ -104,13 +104,17 @@ final class SearchViewController: BaseViewController<SearchView> {
                // 기존 child view controller 제거
                removeCurrentChildViewController()
                
-               var viewModel: ResultSearchInterface = ResultReviewViewModel()
+               let keyword = self.viewModel.fetchKeyword()
+               
+               var viewModel: ResultSearchInterface
                switch self.viewModel.type {
+               case .policy:
+                   let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+                   viewModel = ResultPolicyViewModel(keyword: keyword, type: PolicyCategory.allCases, policyUseCase: useCase)
                case .review:
-                   viewModel = ResultReviewViewModel()
+                   viewModel = ResultReviewViewModel(keyword)
                case .post:
-                   viewModel = ResultPostViewModel()
-               default: break
+                   viewModel = ResultPostViewModel(keyword)
                }
                
                // 새로운 child view controller 추가

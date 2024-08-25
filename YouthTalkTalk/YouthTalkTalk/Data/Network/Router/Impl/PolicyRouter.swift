@@ -15,6 +15,7 @@ enum PolicyRouter: Router {
     }
     
     case fetchHomePolicy(policy: PolicyQuery)
+    case fetchConditionPolicy(page: Int, body: PolicyConditionBody)
     case fetchPolicyDetail(id: String)
     case updatePolicyScrap(id: String)
     
@@ -26,6 +27,8 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy:
             return "/policies"
+        case .fetchConditionPolicy:
+            return "/policies/search"
         case .fetchPolicyDetail(let id):
             return "/policies/\(id)"
         case .updatePolicyScrap(let id):
@@ -37,15 +40,17 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy, .fetchPolicyDetail:
             return .get
-        case .updatePolicyScrap:
+        case .fetchConditionPolicy, .updatePolicyScrap:
             return .post
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .fetchHomePolicy(let body):
-            return convertToParameters(body)
+        case .fetchHomePolicy(let query):
+            return convertToParameters(query)
+        case .fetchConditionPolicy(let page, _):
+            return convertToParameters(page)
         case .fetchPolicyDetail, .updatePolicyScrap:
             return nil
         }
@@ -53,7 +58,7 @@ enum PolicyRouter: Router {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -65,6 +70,8 @@ enum PolicyRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
+        case .fetchConditionPolicy(_, let body):
+            return try? encoder.encode(body)
         case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap:
             return nil
         }
@@ -82,6 +89,15 @@ enum PolicyRouter: Router {
         }
         params["page"] = query.page
         params["size"] = query.size
+        
+        return params
+    }
+    
+    private func convertToParameters(_ page: Int) -> [String: Any] {
+        var params: [String: Any] = [:]
+        
+        params["page"] = page
+        params["size"] = 10
         
         return params
     }

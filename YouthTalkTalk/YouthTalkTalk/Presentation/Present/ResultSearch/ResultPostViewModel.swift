@@ -12,6 +12,7 @@ import RxCocoa
 final class ResultPostViewModel: ResultSearchInterface {
     
     // Input
+    var keyword: String
     var fetchSearchList = PublishRelay<Void>()
     
     // Output
@@ -21,7 +22,7 @@ final class ResultPostViewModel: ResultSearchInterface {
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }
     
-    init() {
-        
+    init(_ keyword: String) {
+        self.keyword = keyword
     }
 }

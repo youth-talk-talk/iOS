@@ -15,7 +15,11 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     private var type: [PolicyCategory] = PolicyCategory.allCases
     private let policyUseCase: PolicyUseCase
     
+    private var page = 0
+    private var body = PolicyConditionBody(categories: [], age: nil, employmentCodeList: [], isFinished: nil, keyword: "")
+    
     // Input
+    var keyword: String
     var fetchSearchList = PublishRelay<Void>()
     
     // Output
@@ -25,7 +29,8 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }
     
-    init(type: [PolicyCategory], policyUseCase: PolicyUseCase) {
+    init(keyword: String = "", type: [PolicyCategory], policyUseCase: PolicyUseCase) {
+        self.keyword = keyword
         self.type = type
         self.policyUseCase = policyUseCase
         
@@ -33,13 +38,16 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             .withUnretained(self)
             .flatMap { owner, _ in
                 
-                return owner.policyUseCase.fetchHomePolicies(categories: owner.type, page: 1, size: 10)
+                owner.body.categories = type.map { $0.rawValue }
+                owner.body.keyword = owner.keyword
+                
+                return owner.policyUseCase.fetchConditionPolicies(page: owner.page, body: owner.body)
             }.subscribe(with: self) { owner, result in
                 
                 switch result {
-                case .success(let homePolicyEntity):
+                case .success(let policyEntity):
                     
-                    let recentPolicies = homePolicyEntity.recentPolicies.map { ResultSearchSectionItems.resultPolicy($0) }
+                    let recentPolicies = policyEntity.map { ResultSearchSectionItems.resultPolicy($0) }
                     
                     owner.searchListRelay.accept(recentPolicies)
                     

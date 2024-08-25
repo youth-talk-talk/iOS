@@ -10,5 +10,6 @@ import RxCocoa
 
 protocol ResultSearchInput {
     
+    var keyword: String { get }
     var fetchSearchList: PublishRelay<Void> { get }
 }

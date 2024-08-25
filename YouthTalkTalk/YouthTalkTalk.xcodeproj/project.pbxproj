@@ -121,6 +121,8 @@
 		AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C6F2C7A24BB00804950 /* ResultSearchInput.swift */; };
 		AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C712C7A24C400804950 /* ResultSearchOutput.swift */; };
 		AC604C742C7A24CE00804950 /* ResultSearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */; };
+		AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C752C7B1B1C00804950 /* PolicyConditionBody.swift */; };
+		AC604C782C7B1CD000804950 /* ConditionPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -316,6 +318,8 @@
 		AC604C6F2C7A24BB00804950 /* ResultSearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchInput.swift; sourceTree = "<group>"; };
 		AC604C712C7A24C400804950 /* ResultSearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchOutput.swift; sourceTree = "<group>"; };
 		AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchInterface.swift; sourceTree = "<group>"; };
+		AC604C752C7B1B1C00804950 /* PolicyConditionBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyConditionBody.swift; sourceTree = "<group>"; };
+		AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionPolicyDTO.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -1080,6 +1084,7 @@
 				ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */,
 				ACF2A31D2C37D21C00FE8D63 /* SignUpBody.swift */,
 				AC604C0A2C6764C900804950 /* ReviewBody.swift */,
+				AC604C752C7B1B1C00804950 /* PolicyConditionBody.swift */,
 				AC579B572C45284A00D1C9FC /* PolicyQeury.swift */,
 				AC604C082C6764A900804950 /* RPQuery.swift */,
 			);
@@ -1095,6 +1100,7 @@
 				AC579B552C45266200D1C9FC /* HomePolicyDTO.swift */,
 				AC579B6C2C539DD200D1C9FC /* DetailPolicyDTO.swift */,
 				AC604C022C6760D300804950 /* CommunityRPDTO.swift */,
+				AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */,
 				AC604C3A2C74A5A300804950 /* ScrapDTO.swift */,
 			);
 			path = DTO;
@@ -1300,6 +1306,7 @@
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
+				AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
 				AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */,
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
@@ -1314,6 +1321,7 @@
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
+				AC604C782C7B1CD000804950 /* ConditionPolicyDTO.swift in Sources */,
 				AC604C672C7A01F300804950 /* ResultSearchLayout.swift in Sources */,
 				AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */,
 				AC604C6D2C7A23FA00804950 /* ResultPostViewModel.swift in Sources */,

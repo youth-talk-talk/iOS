@@ -51,6 +51,28 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
+    func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<[PolicyEntity], APIError>> {
+        
+        return policyRepository.fetchConditionPolicies(page: page, body: body)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let conditionPolicyDTO):
+                    
+                    let policies = conditionPolicyDTO.data.map { dto in
+                        return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
+                    }
+                    
+                    return .success(policies)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
     func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>> {
         
         return policyRepository.fetchPolicyDetail(id: id)
