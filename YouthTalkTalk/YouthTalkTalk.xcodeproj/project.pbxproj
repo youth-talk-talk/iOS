@@ -114,6 +114,13 @@
 		AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3A2C74A5A300804950 /* ScrapDTO.swift */; };
 		AC604C3D2C774CB400804950 /* ScrapEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3C2C774CB400804950 /* ScrapEntity.swift */; };
 		AC604C652C79F83500804950 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC604C642C79F83500804950 /* GmarketSansMedium.otf */; };
+		AC604C672C7A01F300804950 /* ResultSearchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C662C7A01F300804950 /* ResultSearchLayout.swift */; };
+		AC604C692C7A23E400804950 /* ResultPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C682C7A23E400804950 /* ResultPolicyViewModel.swift */; };
+		AC604C6B2C7A23EF00804950 /* ResultReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C6A2C7A23EF00804950 /* ResultReviewViewModel.swift */; };
+		AC604C6D2C7A23FA00804950 /* ResultPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C6C2C7A23FA00804950 /* ResultPostViewModel.swift */; };
+		AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C6F2C7A24BB00804950 /* ResultSearchInput.swift */; };
+		AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C712C7A24C400804950 /* ResultSearchOutput.swift */; };
+		AC604C742C7A24CE00804950 /* ResultSearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -302,6 +309,13 @@
 		AC604C3A2C74A5A300804950 /* ScrapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapDTO.swift; sourceTree = "<group>"; };
 		AC604C3C2C774CB400804950 /* ScrapEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapEntity.swift; sourceTree = "<group>"; };
 		AC604C642C79F83500804950 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
+		AC604C662C7A01F300804950 /* ResultSearchLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchLayout.swift; sourceTree = "<group>"; };
+		AC604C682C7A23E400804950 /* ResultPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPolicyViewModel.swift; sourceTree = "<group>"; };
+		AC604C6A2C7A23EF00804950 /* ResultReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultReviewViewModel.swift; sourceTree = "<group>"; };
+		AC604C6C2C7A23FA00804950 /* ResultPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPostViewModel.swift; sourceTree = "<group>"; };
+		AC604C6F2C7A24BB00804950 /* ResultSearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchInput.swift; sourceTree = "<group>"; };
+		AC604C712C7A24C400804950 /* ResultSearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchOutput.swift; sourceTree = "<group>"; };
+		AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchInterface.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -447,6 +461,7 @@
 				AC579B4A2C451C5E00D1C9FC /* Home */,
 				AC579B282C3BE0EA00D1C9FC /* Search */,
 				AC604C202C69FF6400804950 /* RecentSearch */,
+				AC604C6E2C7A247300804950 /* ResultSearch */,
 				ACF2A2A62C2AAFFA00FE8D63 /* SignUp */,
 				ACF2A28B2C281F6200FE8D63 /* SignIn */,
 				ACF2A2C82C2D8ADD00FE8D63 /* Splash */,
@@ -744,6 +759,16 @@
 			path = NewPostView;
 			sourceTree = "<group>";
 		};
+		AC604C6E2C7A247300804950 /* ResultSearch */ = {
+			isa = PBXGroup;
+			children = (
+				AC604C6F2C7A24BB00804950 /* ResultSearchInput.swift */,
+				AC604C712C7A24C400804950 /* ResultSearchOutput.swift */,
+				AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */,
+			);
+			path = ResultSearch;
+			sourceTree = "<group>";
+		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +785,7 @@
 			children = (
 				ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */,
 				AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */,
+				AC604C662C7A01F300804950 /* ResultSearchLayout.swift */,
 				AC604BDE2C63A7F800804950 /* CommunityLayout.swift */,
 			);
 			path = CompositionalLayout;
@@ -1041,6 +1067,9 @@
 			children = (
 				ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */,
 				ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */,
+				AC604C682C7A23E400804950 /* ResultPolicyViewModel.swift */,
+				AC604C6A2C7A23EF00804950 /* ResultReviewViewModel.swift */,
+				AC604C6C2C7A23FA00804950 /* ResultPostViewModel.swift */,
 			);
 			path = ResultSearch;
 			sourceTree = "<group>";
@@ -1238,12 +1267,14 @@
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
+				AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */,
 				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
 				AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */,
 				AC579B992C5CB90B00D1C9FC /* BaseTableViewCell.swift in Sources */,
+				AC604C742C7A24CE00804950 /* ResultSearchInterface.swift in Sources */,
 				AC579B4E2C451CA500D1C9FC /* HomeOutput.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
@@ -1253,6 +1284,7 @@
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				AC579B472C44FC9900D1C9FC /* APIError.swift in Sources */,
 				AC579B6D2C539DD200D1C9FC /* DetailPolicyDTO.swift in Sources */,
+				AC604C692C7A23E400804950 /* ResultPolicyViewModel.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
@@ -1272,6 +1304,7 @@
 				AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */,
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
 				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
+				AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */,
 				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,
 				AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
@@ -1281,7 +1314,9 @@
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
+				AC604C672C7A01F300804950 /* ResultSearchLayout.swift in Sources */,
 				AC604BFD2C675DC400804950 /* ReviewViewModel.swift in Sources */,
+				AC604C6D2C7A23FA00804950 /* ResultPostViewModel.swift in Sources */,
 				AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
@@ -1314,6 +1349,7 @@
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC604BEF2C675BC000804950 /* RPInput.swift in Sources */,
+				AC604C6B2C7A23EF00804950 /* ResultReviewViewModel.swift in Sources */,
 				AC604BD32C63967600804950 /* CommunityView.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,

@@ -234,7 +234,10 @@ final class HomeViewController: BaseViewController<HomeView> {
             Observable.merge(jobTap, educationTap, lifeTap, participationTap)
             .bind(with: self) { owner, category in
                 
-                let resultSearchVC = ResultSearchViewController()
+                let policyUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+                let viewModel = ResultPolicyViewModel(type: [category], policyUseCase: policyUseCase)
+                let resultSearchVC = ResultSearchViewController(viewModel: viewModel)
+                
                 let titleLabelView = UILabel()
                 titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
                 let leftTitleView = UIBarButtonItem(customView: titleLabelView)

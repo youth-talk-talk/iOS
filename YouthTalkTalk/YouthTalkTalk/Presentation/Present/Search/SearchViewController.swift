@@ -104,8 +104,17 @@ final class SearchViewController: BaseViewController<SearchView> {
                // 기존 child view controller 제거
                removeCurrentChildViewController()
                
+               var viewModel: ResultSearchInterface = ResultReviewViewModel()
+               switch self.viewModel.type {
+               case .review:
+                   viewModel = ResultReviewViewModel()
+               case .post:
+                   viewModel = ResultPostViewModel()
+               default: break
+               }
+               
                // 새로운 child view controller 추가
-               let childVC = ResultSearchViewController()
+               let childVC = ResultSearchViewController(viewModel: viewModel)
                addChild(childVC)
                layoutView.flexView.addSubview(childVC.layoutView)
                childVC.layoutView.frame = layoutView.flexView.bounds
