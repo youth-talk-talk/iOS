@@ -12,5 +12,11 @@ struct ConditionPolicyDTO: Decodable {
     let status: Int
     let message: String
     let code: String
-    let data: [PolicyDTO]
+    let data: ConditionPolicyDetailDTO
+}
+
+struct ConditionPolicyDetailDTO: Decodable {
+    
+    let totalCount: Int
+    let policyList: [PolicyDTO]
 }

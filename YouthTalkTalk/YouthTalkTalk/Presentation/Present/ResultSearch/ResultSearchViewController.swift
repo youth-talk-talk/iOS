@@ -72,9 +72,7 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self else { return }
+        let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { cell, indexPath, itemIdentifier in
             
             if let policy = itemIdentifier.policy {
                 cell.configure(data: policy)
@@ -106,16 +104,27 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
         // TODO: Header View 바꿔라 중엽아
         
         // 조건선택 Header Registration
-        let conditionHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+        let conditionHeaderRegistration = UICollectionView.SupplementaryRegistration<DetailConditionHeaderView>(elementKind: DetailConditionHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
             guard let self else { return }
             
+            supplementaryView.tapGesture.rx.event
+                .bind(with: self) { owner, _ in
+                    
+                }
+                .disposed(by: disposeBag)
         }
         
         // 검색결과 Header Registration
-        let resultHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
+        let resultHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
-            supplementaryView.setTitle("-")
+            guard let self else { return }
+            
+            self.viewModel.output.totalCountRelay
+                .bind(with: self) { owner, totalCount in
+                    supplementaryView.setTitle("총 \(totalCount)건의 정책이 있어요")
+                }
+                .disposed(by: supplementaryView.disposeBag)
         }
         
         // Header 등록
@@ -124,7 +133,12 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
             guard let self else { return nil }
             
             switch kind {
-            
+                
+            case DetailConditionHeaderView.identifier:
+                
+                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: conditionHeaderRegistration,
+                    for: index)
                 
             case TitleHeaderView.identifier:
                 

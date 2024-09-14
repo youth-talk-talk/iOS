@@ -24,6 +24,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
+    var totalCountRelay = PublishRelay<Int>()
     var errorHandler = PublishRelay<APIError>()
     
     var input: ResultSearchInput { return self }
@@ -45,11 +46,14 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             }.subscribe(with: self) { owner, result in
                 
                 switch result {
-                case .success(let policyEntity):
+                case .success(let data):
+                    
+                    let (policyEntity, totalCount) = data
                     
                     let recentPolicies = policyEntity.map { ResultSearchSectionItems.resultPolicy($0) }
                     
                     owner.searchListRelay.accept(recentPolicies)
+                    owner.totalCountRelay.accept(totalCount)
                     
                 case .failure(let error):
                     

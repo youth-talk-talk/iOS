@@ -11,5 +11,6 @@ import RxCocoa
 protocol ResultSearchOutput {
     
     var searchListRelay: PublishRelay<[ResultSearchSectionItems]> { get }
+    var totalCountRelay: PublishRelay<Int> { get }
     var errorHandler: PublishRelay<APIError> { get }
 }

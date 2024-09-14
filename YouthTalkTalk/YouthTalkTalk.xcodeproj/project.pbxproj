@@ -27,6 +27,7 @@
 		AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43202C1EE02C005FC370 /* SignUpView.swift */; };
 		AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43232C206839005FC370 /* PolicyLocationKR.swift */; };
 		AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43262C2072E2005FC370 /* DropdownView.swift */; };
+		AC51E8302C9567F700550148 /* DetailConditionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */; };
 		AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B292C3BE10500D1C9FC /* SearchInput.swift */; };
 		AC579B2C2C3BE10A00D1C9FC /* SearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B2B2C3BE10A00D1C9FC /* SearchOutput.swift */; };
 		AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B2D2C3BE13B00D1C9FC /* SearchInterface.swift */; };
@@ -221,6 +222,7 @@
 		AC4B43202C1EE02C005FC370 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AC4B43232C206839005FC370 /* PolicyLocationKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationKR.swift; sourceTree = "<group>"; };
 		AC4B43262C2072E2005FC370 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
+		AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionHeaderView.swift; sourceTree = "<group>"; };
 		AC579B292C3BE10500D1C9FC /* SearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInput.swift; sourceTree = "<group>"; };
 		AC579B2B2C3BE10A00D1C9FC /* SearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOutput.swift; sourceTree = "<group>"; };
 		AC579B2D2C3BE13B00D1C9FC /* SearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInterface.swift; sourceTree = "<group>"; };
@@ -697,6 +699,7 @@
 				ACF2A2692C21B24E00FE8D63 /* TitleHeaderView.swift */,
 				ACF2A2812C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift */,
 				AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */,
+				AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				AC604C152C67826F00804950 /* PostRouter.swift in Sources */,
+				AC51E8302C9567F700550148 /* DetailConditionHeaderView.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
 				ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */,
 				AC604C1E2C69FEF300804950 /* RecentSearchViewModel.swift in Sources */,

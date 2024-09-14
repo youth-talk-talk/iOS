@@ -51,7 +51,7 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
-    func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<[PolicyEntity], APIError>> {
+    func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<([PolicyEntity], Int), APIError>> {
         
         return policyRepository.fetchConditionPolicies(page: page, body: body)
             .withUnretained(self)
@@ -61,11 +61,11 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                     
                 case .success(let conditionPolicyDTO):
                     
-                    let policies = conditionPolicyDTO.data.map { dto in
+                    let policies = conditionPolicyDTO.data.policyList.map { dto in
                         return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
                     }
                     
-                    return .success(policies)
+                    return .success((policies, conditionPolicyDTO.data.totalCount))
                     
                 case .failure(let error):
                     return .failure(error)

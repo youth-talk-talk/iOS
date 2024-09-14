@@ -36,7 +36,7 @@ enum ResultSearchLayout: Int, CaseIterable {
         
         let section = NSCollectionLayoutSection(group: createEmptyGroup())
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.boundarySupplementaryItems = [createHeader(TitleHeaderView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(DetailConditionHeaderView.identifier)]
         
         return section
     }

@@ -8,9 +8,11 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import RxSwift
 
 final class TitleHeaderView: BaseCollectionReusableView {
         
+    let disposeBag = DisposeBag()
     let titleLabel = UILabel()
     
     override func configureLayout() {
@@ -21,6 +23,11 @@ final class TitleHeaderView: BaseCollectionReusableView {
                 .marginTop(15)
                 .marginBottom(12)
         }
+    }
+    
+    override func configureView() {
+        
+        titleLabel.designed(text: "-", fontType: .g14Bold)
     }
     
     func setTitle(_ title: String) {

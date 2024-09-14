@@ -17,6 +17,7 @@ final class ResultPostViewModel: ResultSearchInterface {
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
+    var totalCountRelay = PublishRelay<Int>()
     var errorHandler = PublishRelay<APIError>()
     
     var input: ResultSearchInput { return self }
