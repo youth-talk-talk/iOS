@@ -15,6 +15,7 @@ final class ResultReviewViewModel: ResultSearchInterface {
     var keyword: String
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
+    var searchType: ResultSearchType = .review
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()

@@ -15,6 +15,7 @@ final class ResultPostViewModel: ResultSearchInterface {
     var keyword: String
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
+    var searchType: ResultSearchType = .post
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()

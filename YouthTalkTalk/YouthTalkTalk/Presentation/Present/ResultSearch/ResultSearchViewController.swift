@@ -149,9 +149,17 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 
             case DetailConditionHeaderView.identifier:
                 
-                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                let view = self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: conditionHeaderRegistration,
                     for: index)
+                
+                let type = viewModel.searchType
+                
+                if type != .policy {
+                    view.hidden()
+                }
+                
+                return view
                 
             case TitleHeaderView.identifier:
                 

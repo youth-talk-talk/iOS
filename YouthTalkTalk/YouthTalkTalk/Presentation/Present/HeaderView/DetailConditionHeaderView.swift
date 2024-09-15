@@ -57,6 +57,7 @@ class DetailConditionHeaderView: BaseCollectionReusableView {
             .alignSelf(.center)
             .border(1, .gray30)
             .defaultCornerRadius()
+            .markDirty()
         }
     }
     
@@ -67,5 +68,10 @@ class DetailConditionHeaderView: BaseCollectionReusableView {
         conditionImageView.image = .detailCondition
         
         containerView.isUserInteractionEnabled = true
+    }
+    
+    func hidden() {
+        flexView.isHidden = true
+        flexView.flex.height(10)
     }
 }

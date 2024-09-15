@@ -22,6 +22,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var keyword: String
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
+    var searchType: ResultSearchType = .policy
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
