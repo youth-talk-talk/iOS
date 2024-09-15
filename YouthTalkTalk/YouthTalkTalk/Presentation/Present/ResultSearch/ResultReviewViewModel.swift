@@ -14,6 +14,7 @@ final class ResultReviewViewModel: ResultSearchInterface {
     // Input
     var keyword: String
     var fetchSearchList = PublishRelay<Void>()
+    var pageUpdate = PublishRelay<Int>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
@@ -25,5 +26,11 @@ final class ResultReviewViewModel: ResultSearchInterface {
     
     init(_ keyword: String) {
         self.keyword = keyword
+    }
+    
+    func updateData(age: Int?, employment: [String], isFinished: Bool?) { }
+    
+    func fetchPage() -> Int {
+        return 0
     }
 }

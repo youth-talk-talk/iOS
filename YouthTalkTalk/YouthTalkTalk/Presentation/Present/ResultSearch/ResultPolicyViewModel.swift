@@ -21,6 +21,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     // Input
     var keyword: String
     var fetchSearchList = PublishRelay<Void>()
+    var pageUpdate = PublishRelay<Int>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
@@ -60,5 +61,26 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                     owner.errorHandler.accept(error)
                 }
             }.disposed(by: disposeBag)
+        
+        pageUpdate
+            .distinctUntilChanged()
+            .subscribe(with: self) { owner, newPage in
+                
+                owner.page = newPage
+                owner.fetchSearchList.accept(())
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func updateData(age: Int?, employment: [String], isFinished: Bool?) {
+        body.age = age
+        body.employmentCodeList = employment
+        body.isFinished = isFinished
+        
+        pageUpdate.accept(0)
+    }
+    
+    func fetchPage() -> Int {
+        return page
     }
 }

@@ -12,4 +12,7 @@ protocol ResultSearchInput {
     
     var keyword: String { get }
     var fetchSearchList: PublishRelay<Void> { get }
+    var pageUpdate: PublishRelay<Int> { get }
+    
+    func updateData(age: Int?, employment: [String], isFinished: Bool?)
 }

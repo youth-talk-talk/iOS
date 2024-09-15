@@ -28,6 +28,13 @@
 		AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43232C206839005FC370 /* PolicyLocationKR.swift */; };
 		AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43262C2072E2005FC370 /* DropdownView.swift */; };
 		AC51E8302C9567F700550148 /* DetailConditionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */; };
+		AC51E8332C956F1400550148 /* DetailConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E8322C956F1400550148 /* DetailConditionViewController.swift */; };
+		AC51E8352C956F2F00550148 /* DetailConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E8342C956F2F00550148 /* DetailConditionView.swift */; };
+		AC51E8372C9587D300550148 /* DetailConditionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E8362C9587D300550148 /* DetailConditionLayout.swift */; };
+		AC51E8392C967D2B00550148 /* TitleWithImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E8382C967D2B00550148 /* TitleWithImageHeaderView.swift */; };
+		AC51E83C2C96874000550148 /* AgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E83B2C96874000550148 /* AgeCollectionViewCell.swift */; };
+		AC51E83E2C968B3800550148 /* ChoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E83D2C968B3800550148 /* ChoiceCollectionViewCell.swift */; };
+		AC51E8402C969EF600550148 /* DetailConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51E83F2C969EF600550148 /* DetailConditionViewModel.swift */; };
 		AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B292C3BE10500D1C9FC /* SearchInput.swift */; };
 		AC579B2C2C3BE10A00D1C9FC /* SearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B2B2C3BE10A00D1C9FC /* SearchOutput.swift */; };
 		AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC579B2D2C3BE13B00D1C9FC /* SearchInterface.swift */; };
@@ -223,6 +230,13 @@
 		AC4B43232C206839005FC370 /* PolicyLocationKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationKR.swift; sourceTree = "<group>"; };
 		AC4B43262C2072E2005FC370 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 		AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionHeaderView.swift; sourceTree = "<group>"; };
+		AC51E8322C956F1400550148 /* DetailConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionViewController.swift; sourceTree = "<group>"; };
+		AC51E8342C956F2F00550148 /* DetailConditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionView.swift; sourceTree = "<group>"; };
+		AC51E8362C9587D300550148 /* DetailConditionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionLayout.swift; sourceTree = "<group>"; };
+		AC51E8382C967D2B00550148 /* TitleWithImageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithImageHeaderView.swift; sourceTree = "<group>"; };
+		AC51E83B2C96874000550148 /* AgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeCollectionViewCell.swift; sourceTree = "<group>"; };
+		AC51E83D2C968B3800550148 /* ChoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		AC51E83F2C969EF600550148 /* DetailConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionViewModel.swift; sourceTree = "<group>"; };
 		AC579B292C3BE10500D1C9FC /* SearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInput.swift; sourceTree = "<group>"; };
 		AC579B2B2C3BE10A00D1C9FC /* SearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOutput.swift; sourceTree = "<group>"; };
 		AC579B2D2C3BE13B00D1C9FC /* SearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInterface.swift; sourceTree = "<group>"; };
@@ -513,6 +527,26 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
+		AC51E8312C956ED500550148 /* DetailCondition */ = {
+			isa = PBXGroup;
+			children = (
+				AC51E83A2C96872700550148 /* Cell */,
+				AC51E8322C956F1400550148 /* DetailConditionViewController.swift */,
+				AC51E8342C956F2F00550148 /* DetailConditionView.swift */,
+				AC51E83F2C969EF600550148 /* DetailConditionViewModel.swift */,
+			);
+			path = DetailCondition;
+			sourceTree = "<group>";
+		};
+		AC51E83A2C96872700550148 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AC51E83B2C96874000550148 /* AgeCollectionViewCell.swift */,
+				AC51E83D2C968B3800550148 /* ChoiceCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		AC579B282C3BE0EA00D1C9FC /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,6 +672,7 @@
 				AC604BD92C6396F400804950 /* CommunityTab */,
 				AC604BD12C63962D00804950 /* Community */,
 				AC579B672C51341D00D1C9FC /* Policy */,
+				AC51E8312C956ED500550148 /* DetailCondition */,
 				ACF2A2FD2C3416E400FE8D63 /* ResultSearch */,
 				ACF2A2FC2C3416D700FE8D63 /* RecentSearch */,
 				ACF2A2F32C32CC5600FE8D63 /* Search */,
@@ -700,6 +735,7 @@
 				ACF2A2812C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift */,
 				AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */,
 				AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */,
+				AC51E8382C967D2B00550148 /* TitleWithImageHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -794,6 +830,7 @@
 				AC579B332C3D707200D1C9FC /* RecentSearchLayout.swift */,
 				AC604C662C7A01F300804950 /* ResultSearchLayout.swift */,
 				AC604BDE2C63A7F800804950 /* CommunityLayout.swift */,
+				AC51E8362C9587D300550148 /* DetailConditionLayout.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -1276,6 +1313,7 @@
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
+				AC51E8402C969EF600550148 /* DetailConditionViewModel.swift in Sources */,
 				AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */,
 				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
@@ -1297,6 +1335,7 @@
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
+				AC51E8392C967D2B00550148 /* TitleWithImageHeaderView.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
@@ -1307,19 +1346,23 @@
 				ACF2A2E42C31431200FE8D63 /* DebugView.swift in Sources */,
 				AC604C222C69FF7500804950 /* RecentSearchInput.swift in Sources */,
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
+				AC51E8372C9587D300550148 /* DetailConditionLayout.swift in Sources */,
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
 				AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */,
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
+				AC51E8352C956F2F00550148 /* DetailConditionView.swift in Sources */,
 				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
 				AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */,
 				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,
 				AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
+				AC51E8332C956F1400550148 /* DetailConditionViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */,
+				AC51E83E2C968B3800550148 /* ChoiceCollectionViewCell.swift in Sources */,
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
@@ -1369,6 +1412,7 @@
 				AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */,
 				AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */,
 				ACF2A2E12C2E929900FE8D63 /* SplashInterface.swift in Sources */,
+				AC51E83C2C96874000550148 /* AgeCollectionViewCell.swift in Sources */,
 				ACF2A2FF2C3416FD00FE8D63 /* RecentSearchView.swift in Sources */,
 				ACF2A2AE2C2AB4A300FE8D63 /* SignUpViewModel.swift in Sources */,
 				ACF2A2E62C31432200FE8D63 /* DebugViewController.swift in Sources */,

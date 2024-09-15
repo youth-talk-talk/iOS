@@ -51,6 +51,8 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        layoutView.collectionView.prefetchDataSource = self
+        
         cellRegistration()
         headerRegistration()
     }
@@ -101,8 +103,6 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     //MARK: Header Registration
     private func headerRegistration() {
         
-        // TODO: Header View 바꿔라 중엽아
-        
         // 조건선택 Header Registration
         let conditionHeaderRegistration = UICollectionView.SupplementaryRegistration<DetailConditionHeaderView>(elementKind: DetailConditionHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
@@ -111,6 +111,19 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
             supplementaryView.tapGesture.rx.event
                 .bind(with: self) { owner, _ in
                     
+                    let nextVC = DetailConditionViewController()
+                    
+                    nextVC.viewModel.result = { age, codeList, isFinished in
+                        
+                        let items = owner.snapshot.itemIdentifiers(inSection: .result)
+                        owner.snapshot.deleteItems(items)
+                        
+                        owner.viewModel.updateData(age: age, employment: codeList, isFinished: isFinished)
+                    }
+                    
+                    let navigationController = UINavigationController(rootViewController: nextVC)
+                    
+                    owner.present(navigationController, animated: true)
                 }
                 .disposed(by: disposeBag)
         }
@@ -156,5 +169,18 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension ResultSearchViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        let total = self.snapshot.itemIdentifiers(inSection: .result).count
+        let currentPage = (total / 10)
+        
+        // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
+        if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
+            viewModel.input.pageUpdate.accept(currentPage)
+        }
     }
 }
