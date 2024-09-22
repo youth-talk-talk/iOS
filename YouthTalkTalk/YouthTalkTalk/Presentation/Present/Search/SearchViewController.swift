@@ -88,7 +88,7 @@ final class SearchViewController: BaseViewController<SearchView> {
                let viewModel = RecentSearchViewModel(type: viewModel.type)
                let childVC = RecentSearchViewController(viewModel: viewModel)
                addChild(childVC)
-               layoutView.flexView.addSubview(childVC.layoutView)
+               layoutView.flexView.insertSubview(childVC.layoutView, at: 0)
                childVC.layoutView.frame = layoutView.flexView.bounds
                childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                childVC.didMove(toParent: self)

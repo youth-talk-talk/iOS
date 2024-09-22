@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import FlexLayout
 
 enum ResultSearchSectionItems: Hashable {
     
@@ -74,7 +75,77 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { cell, indexPath, itemIdentifier in
+        let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
+            
+            // 셀 클릭
+            cell.tapGesture.rx.event
+                .bind(with: self) { owner, _ in
+                    
+                    switch itemIdentifier {
+                        
+                    case .resultPolicy(let policyEntity):
+                        
+                        let repository = PolicyRepositoryImpl()
+                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
+                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
+                        let nextVC = PolicyViewController(viewModel: viewModel)
+                        
+                        owner.navigationController?.pushViewController(nextVC, animated: true)
+                        
+                    case .resultRP(let rpEntity):
+                        
+                        break
+                        
+                    default:
+                        break
+                    }
+                }
+                .disposed(by: cell.disposeBag)
+            
+            // 스크랩
+            cell.scrapButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    
+                    switch itemIdentifier {
+                        
+                    case .resultPolicy(let policyEntity):
+                        
+                        owner.viewModel.input.updatePolicyScrap.accept(policyEntity.policyId)
+                        
+                    case .resultRP(let rpEntity):
+                        
+                        break
+                        
+                    default:
+                        break
+                    }
+                }
+                .disposed(by: cell.disposeBag)
+            
+            switch itemIdentifier {
+                
+            case .resultPolicy(let policyEntity):
+                
+                // cell에 적용(스크롤시에도 유지)
+                if let scrap = viewModel.output.scrapStatus[policyEntity.policyId] {
+                    cell.updateScrapStatus(scrap)
+                }
+                
+                // cell에 즉시 적용
+                viewModel.output.scrapStatusRelay
+                    .bind(with: self) { owner, scrapStatus in
+                        if let scrap = scrapStatus[policyEntity.policyId] {
+                            cell.updateScrapStatus(scrap)
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
+                
+            default:
+                break
+            }
+            
             
             if let policy = itemIdentifier.policy {
                 cell.configure(data: policy)

@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/layoutBox/FlexLayout.git",
       "state" : {
-        "revision" : "e71c04fa45360c161f57850769e44a6139b329aa",
-        "version" : "2.0.9"
+        "revision" : "9b46c098c0471b847e6feee49692ae239633bae3",
+        "version" : "2.0.10"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/kakao/kakao-ios-sdk",
       "state" : {
         "branch" : "master",
-        "revision" : "e9e649d3ba823c3673867d3d09010fc77005a940"
+        "revision" : "5fcd519edd8ecfa134017fff90cf0d30e0a90919"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/kakao/kakao-ios-sdk-rx",
       "state" : {
         "branch" : "master",
-        "revision" : "37ac7e289fea5f62b3b1f62d06290a18a202a5b0"
+        "revision" : "837fadb84fba9cd769d9cc2a511b555e1852faa1"
       }
     },
     {

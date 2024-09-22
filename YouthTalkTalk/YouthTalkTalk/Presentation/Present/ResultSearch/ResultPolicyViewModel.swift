@@ -23,11 +23,14 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var searchType: ResultSearchType = .policy
+    var updatePolicyScrap = PublishRelay<String>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
     var totalCountRelay = PublishRelay<Int>()
     var errorHandler = PublishRelay<APIError>()
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }
@@ -69,6 +72,27 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                 
                 owner.page = newPage
                 owner.fetchSearchList.accept(())
+            }
+            .disposed(by: disposeBag)
+        
+        // 스크랩
+        updatePolicyScrap
+            .withUnretained(self)
+            .flatMap { owner, policyID in
+                
+                return owner.policyUseCase.updatePolicyScrap(id: policyID)
+            }
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let scrapEntity):
+                    
+                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatusRelay.accept(owner.scrapStatus)
+                    
+                case .failure(let error):
+                    owner.errorHandler.accept(error)
+                }
             }
             .disposed(by: disposeBag)
     }

@@ -13,6 +13,8 @@ protocol ResultSearchOutput {
     var searchListRelay: PublishRelay<[ResultSearchSectionItems]> { get }
     var totalCountRelay: PublishRelay<Int> { get }
     var errorHandler: PublishRelay<APIError> { get }
+    var scrapStatus: [String: Bool] { get }
+    var scrapStatusRelay: BehaviorRelay<[String: Bool]> { get }
     
     func fetchPage() -> Int
 }

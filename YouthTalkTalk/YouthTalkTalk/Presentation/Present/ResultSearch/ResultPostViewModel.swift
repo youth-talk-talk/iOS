@@ -16,11 +16,14 @@ final class ResultPostViewModel: ResultSearchInterface {
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var searchType: ResultSearchType = .post
+    var updatePolicyScrap = PublishRelay<String>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
     var totalCountRelay = PublishRelay<Int>()
     var errorHandler = PublishRelay<APIError>()
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }

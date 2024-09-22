@@ -21,6 +21,7 @@ protocol ResultSearchInput {
     var fetchSearchList: PublishRelay<Void> { get }
     var pageUpdate: PublishRelay<Int> { get }
     var searchType: ResultSearchType { get }
+    var updatePolicyScrap: PublishRelay<String> { get }
     
     func updateData(age: Int?, employment: [String], isFinished: Bool?)
 }
