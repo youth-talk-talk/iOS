@@ -92,6 +92,13 @@ final class SearchViewController: BaseViewController<SearchView> {
                childVC.layoutView.frame = layoutView.flexView.bounds
                childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                childVC.didMove(toParent: self)
+               viewModel.clickRecentKeywordEvent = { [weak self] text in
+                   
+                   guard let self else { return }
+                   
+                   self.clearSearchView.textField.text = text
+                   self.clearSearchView.textField.sendActions(for: .editingDidEndOnExit)
+               }
                
                // 현재 child view controller 업데이트
                currentChildVC = childVC
@@ -99,9 +106,6 @@ final class SearchViewController: BaseViewController<SearchView> {
        }
        
        func showResultSearchViewController() {
-           // 기존 child view controller가 ResultSearchViewController가 아닌 경우에만 새로운 child view controller를 추가
-           if !(currentChildVC is ResultSearchViewController) {
-               // 기존 child view controller 제거
                removeCurrentChildViewController()
                
                let keyword = self.viewModel.fetchKeyword()
@@ -127,7 +131,6 @@ final class SearchViewController: BaseViewController<SearchView> {
                
                // 현재 child view controller 업데이트
                currentChildVC = childVC
-           }
        }
        
        func removeCurrentChildViewController() {

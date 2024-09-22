@@ -10,6 +10,9 @@ import RxCocoa
 
 protocol RecentSearchInput {
     
+    var clickRecentKeywordEvent: ((String) -> Void)? { get }
+    
+    var clickRecentKeyword: PublishRelay<String> { get }
     var fetchRecentSearchList: PublishRelay<Void> { get }
     var removeRecentSearchList: PublishRelay<String> { get }
 }

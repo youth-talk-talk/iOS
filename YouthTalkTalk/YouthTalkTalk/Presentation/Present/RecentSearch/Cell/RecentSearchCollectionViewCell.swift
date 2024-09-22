@@ -14,6 +14,7 @@ class RecentSearchCollectionViewCell: BaseCollectionViewCell {
     
     var disposeBag = DisposeBag()
     
+    let tapGesture = UITapGestureRecognizer()
     let removeButton = UIButton()
     let titleLabel = UILabel()
     
@@ -51,6 +52,8 @@ class RecentSearchCollectionViewCell: BaseCollectionViewCell {
         removeButton.designedByImage(.littleXmark)
         
         titleLabel.designed(text: "", fontType: .p14Bold, textColor: .black)
+        
+        self.addGestureRecognizer(tapGesture)
     }
     
     func configure(title: String) {
