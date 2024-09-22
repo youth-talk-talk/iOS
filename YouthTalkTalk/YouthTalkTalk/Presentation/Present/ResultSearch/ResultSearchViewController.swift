@@ -94,6 +94,7 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         
                         owner.navigationController?.pushViewController(nextVC, animated: true)
                         
+                        // TODO: 해라
                     case .resultRP(let rpEntity):
                         
                         break
@@ -116,7 +117,9 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         
                     case .resultRP(let rpEntity):
                         
-                        break
+                        guard let postId = rpEntity.postId else { return }
+                        
+                        owner.viewModel.input.updatePolicyScrap.accept(String(postId))
                         
                     default:
                         break
@@ -141,6 +144,24 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         }
                     }
                     .disposed(by: self.disposeBag)
+                
+            case .resultRP(let rpEntity):
+                
+                guard let id = rpEntity.postId else { return }
+                
+                if let scrap = viewModel.output.scrapStatus[String(id)] {
+                    cell.updateScrapStatus(scrap)
+                }
+                
+                viewModel.output.scrapStatusRelay
+                    .bind(with: self) { owner, scrapStatus in
+                        
+                        if let scrap = scrapStatus[String(id)] {
+                            cell.updateScrapStatus(scrap)
+                        }
+                    }
+                    .disposed(by: disposeBag)
+                break
                 
             default:
                 break
@@ -211,6 +232,11 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 .disposed(by: supplementaryView.disposeBag)
         }
         
+        let resultFooterRegistration = UICollectionView.SupplementaryRegistration<DefaultFooterView>(elementKind: DefaultFooterView.identifier) { supplementaryView, elementKind, indexPath in
+            
+            
+        }
+        
         // Header 등록
         dataSource.supplementaryViewProvider = { [weak self] (view, kind, index) in
             
@@ -236,6 +262,12 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 
                 return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
                     using: resultHeaderRegistration,
+                    for: index)
+                
+            case DefaultFooterView.identifier:
+                
+                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: resultFooterRegistration,
                     for: index)
                 
             default: return nil

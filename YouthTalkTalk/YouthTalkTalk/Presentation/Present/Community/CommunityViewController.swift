@@ -29,7 +29,7 @@ enum CommunitySectionItems: Hashable {
 
 class CommunityViewController: BaseViewController<CommunityView> {
     
-    let viewModel: RPInterface
+    var viewModel: RPInterface
     
     var dataSource: UICollectionViewDiffableDataSource<CommunityLayout, CommunitySectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<CommunityLayout, CommunitySectionItems>()
@@ -45,8 +45,9 @@ class CommunityViewController: BaseViewController<CommunityView> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func configureCollectionView() {
+        
+        layoutView.collectionView.prefetchDataSource = self
         
         cellRegistration()
         headerRegistration()
@@ -76,6 +77,16 @@ class CommunityViewController: BaseViewController<CommunityView> {
             .bind(with: self) { owner, sectionItems in
                 
                 owner.update(section: .recent, items: sectionItems)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.resetSectionItems
+            .bind(with: self) { owner, _ in
+                
+                owner.snapshot.deleteItems(owner.snapshot.itemIdentifiers(inSection: .popular))
+                owner.snapshot.deleteItems(owner.snapshot.itemIdentifiers(inSection: .recent))
+                
+                owner.dataSource.apply(owner.snapshot, animatingDifferences: false)
             }
             .disposed(by: disposeBag)
         
@@ -157,6 +168,18 @@ class CommunityViewController: BaseViewController<CommunityView> {
                 supplementaryView.configureWithOutCategory()
             }
             
+            viewModel.selectedPolicyCategory.forEach {
+                switch $0 {
+                case .job:
+                    supplementaryView.jobCheckBoxButton.isSelected = true
+                case .education:
+                    supplementaryView.educationCheckBoxButton.isSelected = true
+                case .life:
+                    supplementaryView.lifeCheckBoxButton.isSelected = true
+                case .participation:
+                    supplementaryView.participationCheckBoxButton.isSelected = true
+                }
+            }
             
             let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
             let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
@@ -198,7 +221,10 @@ class CommunityViewController: BaseViewController<CommunityView> {
                         case .participation:
                             supplementaryView.participationCheckBoxButton.isSelected = true
                         }
+                    } else {
+                        owner.viewModel.input.policyCategorySeleted.accept(category)
                     }
+                    
                 }.disposed(by: supplementaryView.disposeBag)
             
         }
@@ -251,5 +277,18 @@ class CommunityViewController: BaseViewController<CommunityView> {
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension CommunityViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        let total = self.snapshot.itemIdentifiers(inSection: .recent).count
+        let currentPage = (total / 10) + 1
+        
+        // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
+        if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
+            viewModel.input.pageUpdate.accept(currentPage)
+        }
     }
 }

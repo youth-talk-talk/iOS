@@ -15,6 +15,8 @@ enum PostRouter: Router {
     }
     
     case fetchPost(query: RPQuery)
+    case fetchConditionPost(query: ConditionRPQuery)
+    case updatePostScrap(id: String)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -24,13 +26,19 @@ enum PostRouter: Router {
         switch self {
         case .fetchPost:
             return "/posts/post"
+        case .fetchConditionPost:
+            return "/posts/keyword"
+        case .updatePostScrap(let id):
+            return "/posts/\(id)/scrap"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchPost:
+        case .fetchPost, .fetchConditionPost:
             return .get
+        case .updatePostScrap:
+            return .post
         }
     }
     
@@ -38,12 +46,16 @@ enum PostRouter: Router {
         switch self {
         case .fetchPost(let query):
             return convertToParameters(query)
+        case .fetchConditionPost(let query):
+            return convertToParameters(conditionQuery: query)
+        default:
+            return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchPost:
+        case .fetchPost, .fetchConditionPost, .updatePostScrap:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -55,7 +67,7 @@ enum PostRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchPost:
+        case .fetchPost, .fetchConditionPost, .updatePostScrap:
             return nil
         }
     }
@@ -65,6 +77,17 @@ enum PostRouter: Router {
         
         params["page"] = query.page
         params["size"] = query.size
+        
+        return params
+    }
+    
+    private func convertToParameters(conditionQuery: ConditionRPQuery) -> [String: Any] {
+        var params: [String: Any] = [:]
+        
+        params["type"] = conditionQuery.type.key
+        params["keyword"] = conditionQuery.keyword
+        params["page"] = conditionQuery.page
+        params["size"] = conditionQuery.size
         
         return params
     }

@@ -20,4 +20,18 @@ final class PostRepositoryImpl: PostRepository {
         
         return apiManager.request(router: router, type: CommunityRPDTO.self).asObservable()
     }
+    
+    func fetchConditionPosts(conditionRPQuery: ConditionRPQuery) -> Observable<Result<ConditionReviewDTO, APIError>> {
+        
+        let router = PostRouter.fetchConditionPost(query: conditionRPQuery)
+        
+        return apiManager.request(router: router, type: ConditionReviewDTO.self).asObservable()
+    }
+    
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
+        
+        let router = PostRouter.updatePostScrap(id: id)
+        
+        return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
+    }
 }

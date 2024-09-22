@@ -116,9 +116,11 @@ final class SearchViewController: BaseViewController<SearchView> {
                    let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
                    viewModel = ResultPolicyViewModel(keyword: keyword, type: PolicyCategory.allCases, policyUseCase: useCase)
                case .review:
-                   viewModel = ResultReviewViewModel(keyword)
+                   let useCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
+                   viewModel = ResultReviewViewModel(keyword, useCase: useCase)
                case .post:
-                   viewModel = ResultPostViewModel(keyword)
+                   let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                   viewModel = ResultPostViewModel(keyword, useCase: useCase)
                }
                
                // 새로운 child view controller 추가

@@ -13,5 +13,6 @@ protocol RPOutput {
     
     var popularRPsRelay: PublishRelay<[CommunitySectionItems]> { get }
     var recentRPsRelay: PublishRelay<[CommunitySectionItems]> { get }
+    var resetSectionItems: PublishRelay<Void> { get }
 }
 

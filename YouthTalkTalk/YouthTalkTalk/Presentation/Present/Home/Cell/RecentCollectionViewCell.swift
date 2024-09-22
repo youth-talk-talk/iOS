@@ -152,6 +152,7 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         
         subTitleLabel.text = data.policyTitle
         titleLabel.text = data.title
+        scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
         scrapLabel.designed(text: String(data.scraps), fontType: .p14Regular)
         commentsLabel.designed(text: String(data.comments), fontType: .p14Regular)
         

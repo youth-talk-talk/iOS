@@ -11,5 +11,6 @@ import RxSwift
 protocol ReviewRepository {
     
     func fetchReviews(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<CommunityRPDTO, APIError>>
-    // func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyDTO, APIError>>
+    func fetchConditionReviews(conditionRPQuery: ConditionRPQuery) -> Observable<Result<ConditionReviewDTO, APIError>>
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>>
 }

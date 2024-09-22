@@ -131,6 +131,9 @@
 		AC604C742C7A24CE00804950 /* ResultSearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */; };
 		AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C752C7B1B1C00804950 /* PolicyConditionBody.swift */; };
 		AC604C782C7B1CD000804950 /* ConditionPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */; };
+		AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC93893B2CA0340E0021479B /* ConditionRPQuery.swift */; };
+		AC93893E2CA036150021479B /* ConditionReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC93893D2CA036150021479B /* ConditionReviewDTO.swift */; };
+		AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC93893F2CA0503E0021479B /* DefaultFooterView.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -336,6 +339,9 @@
 		AC604C732C7A24CE00804950 /* ResultSearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchInterface.swift; sourceTree = "<group>"; };
 		AC604C752C7B1B1C00804950 /* PolicyConditionBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyConditionBody.swift; sourceTree = "<group>"; };
 		AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionPolicyDTO.swift; sourceTree = "<group>"; };
+		AC93893B2CA0340E0021479B /* ConditionRPQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRPQuery.swift; sourceTree = "<group>"; };
+		AC93893D2CA036150021479B /* ConditionReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionReviewDTO.swift; sourceTree = "<group>"; };
+		AC93893F2CA0503E0021479B /* DefaultFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFooterView.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -736,6 +742,7 @@
 				AC604BE12C63A9EB00804950 /* SearchHeaderView.swift */,
 				AC51E82F2C9567F700550148 /* DetailConditionHeaderView.swift */,
 				AC51E8382C967D2B00550148 /* TitleWithImageHeaderView.swift */,
+				AC93893F2CA0503E0021479B /* DefaultFooterView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -1127,6 +1134,7 @@
 				AC604C752C7B1B1C00804950 /* PolicyConditionBody.swift */,
 				AC579B572C45284A00D1C9FC /* PolicyQeury.swift */,
 				AC604C082C6764A900804950 /* RPQuery.swift */,
+				AC93893B2CA0340E0021479B /* ConditionRPQuery.swift */,
 			);
 			path = BodyData;
 			sourceTree = "<group>";
@@ -1142,6 +1150,7 @@
 				AC604C022C6760D300804950 /* CommunityRPDTO.swift */,
 				AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */,
 				AC604C3A2C74A5A300804950 /* ScrapDTO.swift */,
+				AC93893D2CA036150021479B /* ConditionReviewDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1335,6 +1344,7 @@
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
+				AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */,
 				AC51E8392C967D2B00550148 /* TitleWithImageHeaderView.swift in Sources */,
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
@@ -1383,6 +1393,7 @@
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
 				AC604C112C67820300804950 /* PostUseCase.swift in Sources */,
 				AC579B4C2C451C6B00D1C9FC /* HomeInput.swift in Sources */,
+				AC93893E2CA036150021479B /* ConditionReviewDTO.swift in Sources */,
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
@@ -1461,6 +1472,7 @@
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
 				AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */,
+				AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */,
 				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */,
 				AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */,
 				ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */,

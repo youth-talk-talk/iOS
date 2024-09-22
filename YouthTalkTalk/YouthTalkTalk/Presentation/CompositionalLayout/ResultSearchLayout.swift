@@ -58,7 +58,7 @@ enum ResultSearchLayout: Int, CaseIterable {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: insets, bottom: 0, trailing: insets)
         
         // 헤더 추가
-        section.boundarySupplementaryItems = [createHeader(TitleHeaderView.identifier)]
+        section.boundarySupplementaryItems = [createHeader(TitleHeaderView.identifier), createFooter(DefaultFooterView.identifier)]
         
         // 데코뷰 추가
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: TopRadiusDecoView.identifier)
@@ -75,6 +75,15 @@ enum ResultSearchLayout: Int, CaseIterable {
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: elementKind, alignment: .top)
         
         return header
+    }
+    
+    // 푸터 생성
+    private static func createFooter(_ elementKind: String) -> NSCollectionLayoutBoundarySupplementaryItem {
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(30))
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: elementKind, alignment: .bottom)
+        
+        return footer
     }
     
     private static func createEmptyGroup() -> NSCollectionLayoutGroup {
