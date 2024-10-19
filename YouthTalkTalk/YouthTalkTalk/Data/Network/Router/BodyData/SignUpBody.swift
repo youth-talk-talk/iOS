@@ -9,13 +9,22 @@ import Foundation
 
 struct SignUpBody: Encodable {
     
-    let username: String // userIdentifier
+    let socialType: String // kakao / apple
+    let socialId: String // userIdentifier
     let nickname: String
     let region: String
     let idToken: String?
     
-    init(username: String, nickname: String, region: String, idToken: String?, signInType: SignInType) {
-        self.username = signInType.rawValue + username
+    // init(username: String, nickname: String, region: String, idToken: String?, signInType: SignInType) {
+    //     self.username = signInType.rawValue + username
+    //     self.nickname = nickname
+    //     self.region = region
+    //     self.idToken = idToken
+    // }
+    
+    init(socialType: SignInType, socialId: String, nickname: String, region: String, idToken: String?) {
+        self.socialType = socialType.rawValue
+        self.socialId = socialId
         self.nickname = nickname
         self.region = region
         self.idToken = idToken

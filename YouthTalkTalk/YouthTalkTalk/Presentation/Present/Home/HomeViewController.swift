@@ -176,6 +176,23 @@ final class HomeViewController: BaseViewController<HomeView> {
                     owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            switch itemIdentifier {
+            case .recent(let policyEntity):
+                
+                cell.tapGesture.rx.event
+                    .bind(with: self) { owner, _ in
+                        let repository = PolicyRepositoryImpl()
+                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
+                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
+                        let nextVC = PolicyViewController(viewModel: viewModel)
+                        
+                        self.navigationController?.pushViewController(nextVC, animated: true)
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+            default: break
+            }
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
