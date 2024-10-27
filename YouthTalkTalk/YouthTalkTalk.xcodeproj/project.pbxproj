@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */; };
+		AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* ResultDetailView.swift */; };
+		AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */; };
+		AC0AA59E2CC5084700DB032E /* ResultDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */; };
+		AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */; };
+		AC0AA5A22CC509A800DB032E /* DetailRPDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */; };
+		AC0AA5A62CC50D2900DB032E /* DetailRPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */; };
+		AC0AA5A82CC511CB00DB032E /* DetailContentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */; };
+		AC0AA5AA2CCDFA6000DB032E /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A92CCDFA6000DB032E /* ImageManager.swift */; };
+		AC0AA5AD2CCE015500DB032E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AC0AA5AC2CCE015500DB032E /* Kingfisher */; };
 		AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DC2C183AF4005FC370 /* PinLayout */; };
 		AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DF2C183B05005FC370 /* FlexLayout */; };
 		AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E52C183F8F005FC370 /* UILabel++.swift */; };
@@ -215,6 +225,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
+		AC0AA5992CC374D100DB032E /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
+		AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
+		AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailInterface.swift; sourceTree = "<group>"; };
+		AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewModel.swift; sourceTree = "<group>"; };
+		AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRPDTO.swift; sourceTree = "<group>"; };
+		AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRPEntity.swift; sourceTree = "<group>"; };
+		AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentEntity.swift; sourceTree = "<group>"; };
+		AC0AA5A92CCDFA6000DB032E /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		AC4B42E52C183F8F005FC370 /* UILabel++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel++.swift"; sourceTree = "<group>"; };
 		AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -411,6 +430,7 @@
 				ACF2A2B82C2C184D00FE8D63 /* RxKakaoSDKUser in Frameworks */,
 				AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */,
 				AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */,
+				AC0AA5AD2CCE015500DB032E /* Kingfisher in Frameworks */,
 				ACF2A2BD2C2C1D3700FE8D63 /* KakaoSDKUser in Frameworks */,
 				AC604BD82C6396CD00804950 /* Tabman in Frameworks */,
 				AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */,
@@ -436,11 +456,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC0AA5962CC3744800DB032E /* ResultDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */,
+				AC0AA5992CC374D100DB032E /* ResultDetailView.swift */,
+				AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */,
+			);
+			path = ResultDetail;
+			sourceTree = "<group>";
+		};
 		AC4B42E12C183B1F005FC370 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				AC4B42E42C183F81005FC370 /* Extension */,
 				AC4B43192C1EB6E6005FC370 /* FontManager.swift */,
+				AC0AA5A92CCDFA6000DB032E /* ImageManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -491,6 +522,7 @@
 				ACF2A2A62C2AAFFA00FE8D63 /* SignUp */,
 				ACF2A28B2C281F6200FE8D63 /* SignIn */,
 				ACF2A2C82C2D8ADD00FE8D63 /* Splash */,
+				AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -529,6 +561,7 @@
 				AC4B43262C2072E2005FC370 /* DropdownView.swift */,
 				AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */,
 				AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */,
+				AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -679,6 +712,7 @@
 				AC604BD12C63962D00804950 /* Community */,
 				AC579B672C51341D00D1C9FC /* Policy */,
 				AC51E8312C956ED500550148 /* DetailCondition */,
+				AC0AA5962CC3744800DB032E /* ResultDetail */,
 				ACF2A2FD2C3416E400FE8D63 /* ResultSearch */,
 				ACF2A2FC2C3416D700FE8D63 /* RecentSearch */,
 				ACF2A2F32C32CC5600FE8D63 /* Search */,
@@ -962,6 +996,8 @@
 				AC579B6E2C53A09400D1C9FC /* DetailPolicyEntity.swift */,
 				AC604C0E2C676DD700804950 /* RPEntity.swift */,
 				AC604C3C2C774CB400804950 /* ScrapEntity.swift */,
+				AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */,
+				AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1151,6 +1187,7 @@
 				AC604C772C7B1CD000804950 /* ConditionPolicyDTO.swift */,
 				AC604C3A2C74A5A300804950 /* ScrapDTO.swift */,
 				AC93893D2CA036150021479B /* ConditionReviewDTO.swift */,
+				AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1189,6 +1226,7 @@
 				ACF2A2BA2C2C1D3700FE8D63 /* KakaoSDKAuth */,
 				ACF2A2BC2C2C1D3700FE8D63 /* KakaoSDKUser */,
 				AC604BD72C6396CD00804950 /* Tabman */,
+				AC0AA5AC2CCE015500DB032E /* Kingfisher */,
 			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
@@ -1269,6 +1307,7 @@
 				ACF2A2B42C2C184C00FE8D63 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
 				ACF2A2B92C2C1D3700FE8D63 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				AC604BD62C6396CD00804950 /* XCRemoteSwiftPackageReference "Tabman" */,
+				AC0AA5AB2CCE015500DB032E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
@@ -1319,6 +1358,7 @@
 			files = (
 				AC604C0F2C676DD700804950 /* RPEntity.swift in Sources */,
 				AC604C172C67831000804950 /* PostRepository.swift in Sources */,
+				AC0AA59E2CC5084700DB032E /* ResultDetailInterface.swift in Sources */,
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
@@ -1342,6 +1382,7 @@
 				AC579B6D2C539DD200D1C9FC /* DetailPolicyDTO.swift in Sources */,
 				AC604C692C7A23E400804950 /* ResultPolicyViewModel.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
+				AC0AA5A82CC511CB00DB032E /* DetailContentEntity.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
 				AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */,
@@ -1358,6 +1399,7 @@
 				ACF2A26C2C21B27200FE8D63 /* NSObject++.swift in Sources */,
 				AC51E8372C9587D300550148 /* DetailConditionLayout.swift in Sources */,
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
+				AC0AA5A22CC509A800DB032E /* DetailRPDTO.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
@@ -1365,6 +1407,7 @@
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
 				AC51E8352C956F2F00550148 /* DetailConditionView.swift in Sources */,
 				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
+				AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */,
 				AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */,
 				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,
 				AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */,
@@ -1388,6 +1431,7 @@
 				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
+				AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				AC579B2C2C3BE10A00D1C9FC /* SearchOutput.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
@@ -1407,6 +1451,7 @@
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
+				AC0AA5AA2CCDFA6000DB032E /* ImageManager.swift in Sources */,
 				AC604C152C67826F00804950 /* PostRouter.swift in Sources */,
 				AC51E8302C9567F700550148 /* DetailConditionHeaderView.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
@@ -1442,6 +1487,7 @@
 				ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */,
+				AC0AA5A62CC50D2900DB032E /* DetailRPEntity.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
@@ -1457,7 +1503,9 @@
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				AC579B5A2C4528B500D1C9FC /* PolicyRouter.swift in Sources */,
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
+				AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
+				AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
@@ -1846,6 +1894,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AC0AA5AB2CCE015500DB032E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
 		AC4B42DB2C183AF4005FC370 /* XCRemoteSwiftPackageReference "PinLayout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/layoutBox/PinLayout.git";
@@ -1897,6 +1953,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AC0AA5AC2CCE015500DB032E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC0AA5AB2CCE015500DB032E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		AC4B42DC2C183AF4005FC370 /* PinLayout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AC4B42DB2C183AF4005FC370 /* XCRemoteSwiftPackageReference "PinLayout" */;

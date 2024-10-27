@@ -32,6 +32,11 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
+    func fetchType() {
+        
+        dump(type)
+    }
+    
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }
     

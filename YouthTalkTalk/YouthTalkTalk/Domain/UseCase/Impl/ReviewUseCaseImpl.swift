@@ -81,4 +81,23 @@ final class ReviewUseCaseImpl: ReviewUseCase {
                 }
             }
     }
+    
+    func fetchReviewDetail(id: Int) -> Observable<Result<DetailRPEntity, APIError>> {
+        
+        reviewRepository.fetchReviewDetailInfo(id: id)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let detailRPDTO):
+                    
+                    let entity = detailRPDTO.data.translate()
+                    
+                    return .success(entity)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

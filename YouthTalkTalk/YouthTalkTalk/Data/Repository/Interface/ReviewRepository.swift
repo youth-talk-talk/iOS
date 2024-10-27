@@ -13,4 +13,5 @@ protocol ReviewRepository {
     func fetchReviews(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<CommunityRPDTO, APIError>>
     func fetchConditionReviews(conditionRPQuery: ConditionRPQuery) -> Observable<Result<ConditionReviewDTO, APIError>>
     func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>>
+    func fetchReviewDetailInfo(id: Int) -> Observable<Result<DetailRPDTO, APIError>>
 }

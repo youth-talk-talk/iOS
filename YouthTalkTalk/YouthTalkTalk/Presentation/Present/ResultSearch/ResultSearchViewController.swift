@@ -39,8 +39,11 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     var dataSource: UICollectionViewDiffableDataSource<ResultSearchLayout, ResultSearchSectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<ResultSearchLayout, ResultSearchSectionItems>()
     
-    init(viewModel: ResultSearchInterface) {
+    let type: PolicyCategory?
+    
+    init(viewModel: ResultSearchInterface, type: PolicyCategory? = nil) {
         self.viewModel = viewModel
+        self.type = type
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,6 +59,11 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
         
         cellRegistration()
         headerRegistration()
+    }
+    
+    override func configureNavigation() {
+        
+        if let type { self.updateNavigationBackButtonTitle(title: type.name) }
     }
     
     override func bind() {
@@ -78,6 +86,9 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
         let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
+            
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
             
             // 셀 클릭
             cell.tapGesture.rx.event

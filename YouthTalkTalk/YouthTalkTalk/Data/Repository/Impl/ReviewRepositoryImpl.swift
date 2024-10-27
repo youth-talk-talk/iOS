@@ -36,4 +36,11 @@ final class ReviewRepositoryImpl: ReviewRepository {
         
         return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
     }
+    
+    func fetchReviewDetailInfo(id: Int) -> Observable<Result<DetailRPDTO, APIError>> {
+        
+        let router = ReviewRouter.fetchReviewDetilInfo(id: id)
+        
+        return apiManager.request(router: router, type: DetailRPDTO.self).asObservable()
+    }
 }

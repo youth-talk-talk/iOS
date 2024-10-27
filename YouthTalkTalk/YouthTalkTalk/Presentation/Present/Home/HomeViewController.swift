@@ -253,13 +253,13 @@ final class HomeViewController: BaseViewController<HomeView> {
                 
                 let policyUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
                 let viewModel = ResultPolicyViewModel(type: [category], policyUseCase: policyUseCase)
-                let resultSearchVC = ResultSearchViewController(viewModel: viewModel)
+                let resultSearchVC = ResultSearchViewController(viewModel: viewModel, type: category)
                 
-                let titleLabelView = UILabel()
-                titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
-                let leftTitleView = UIBarButtonItem(customView: titleLabelView)
-                resultSearchVC.navigationItem.leftBarButtonItem = leftTitleView
-                resultSearchVC.navigationItem.leftItemsSupplementBackButton = true
+                // let titleLabelView = UILabel()
+                // titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
+                // let leftTitleView = UIBarButtonItem(customView: titleLabelView)
+                // resultSearchVC.navigationItem.leftBarButtonItem = leftTitleView
+                // resultSearchVC.navigationItem.leftItemsSupplementBackButton = true
                 
                 owner.navigationController?.pushViewController(resultSearchVC, animated: true)
             }

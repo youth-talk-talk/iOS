@@ -102,6 +102,21 @@ class CommunityViewController: BaseViewController<CommunityView> {
             guard let self else { return }
             
             cell.configure(data: itemIdentifier.data)
+            
+            // 셀 선택
+            cell.tapGesture.rx.event
+                .bind(with: self) { owner, _ in
+                    
+                    guard let item = itemIdentifier.data else { return }
+                    
+                    let repository = ReviewRepositoryImpl()
+                    let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase)
+                    let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
+                    
+                    owner.navigationController?.pushViewController(resultDetailVC, animated: true)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         // 최근 업데이트 Section
@@ -110,6 +125,21 @@ class CommunityViewController: BaseViewController<CommunityView> {
             guard let self else { return }
             
             cell.configure(data: itemIdentifier.data)
+            
+            // 셀 선택
+            cell.tapGesture.rx.event
+                .bind(with: self) { owner, _ in
+                    
+                    guard let item = itemIdentifier.data else { return }
+                    
+                    let repository = ReviewRepositoryImpl()
+                    let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase)
+                    let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
+                    
+                    owner.navigationController?.pushViewController(resultDetailVC, animated: true)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
