@@ -25,12 +25,6 @@ class ResultDetailViewController: BaseViewController<ResultDetailView> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
-    
     override func bind() {
         
         // 입력 버튼 클릭
@@ -40,10 +34,14 @@ class ResultDetailViewController: BaseViewController<ResultDetailView> {
             }
             .disposed(by: disposeBag)
         
-        viewModel.output.detailInfo
-            .bind(with: self) { owner, detailRPEntity in
+        Observable.zip(viewModel.output.detailInfo, viewModel.output.commentsInfo)
+            .bind(with: self) { owner, combined in
                 
-                owner.layoutView.configure(data: detailRPEntity)
+                let (detailRPEntity, comments) = combined
+                
+                owner.layoutView.configure(data: detailRPEntity) {
+                    owner.layoutView.comment(data: comments)
+                }
             }
             .disposed(by: disposeBag)
     }

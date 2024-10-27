@@ -22,6 +22,8 @@ class ResultDetailView: BaseView {
     
     let commentTextFieldView = CommentTextFieldView()
     
+    var data: [CommentDetailEntity] = []
+    
     override func configureView() {
         
         flexView.backgroundColor = .clear
@@ -30,6 +32,7 @@ class ResultDetailView: BaseView {
         titleLabel.designed(text: "제목", fontType: .p18Bold, textColor: .black)
         policyLiteralLabel.designed(text: "정책명", fontType: .p16Bold)
         policyLabel.designed(text: "정책명 --", fontType: .p12Regular)
+        commentTitleLabel.designed(text: "댓글", fontType: .p14Bold)
     }
     
     override func configureLayout() {
@@ -90,18 +93,19 @@ class ResultDetailView: BaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        // contentView의 높이를 다시 계산하고 적용
         contentView.flex.layout(mode: .adjustHeight)
         
+        // scrollView의 contentSize를 contentView의 프레임 크기로 설정
         scrollView.contentSize = contentView.frame.size
         
+        // commentTextFieldView와 flexView의 높이 계산
         let commentHeight = commentTextFieldView.frame.height
-        let height = flexView.frame.height - commentHeight - 1
-        scrollView.flex.height(height)
-        
-        flexView.flex.layout(mode: .adjustHeight)
+        let availableHeight = flexView.frame.height - commentHeight - 1
+        scrollView.flex.height(availableHeight)
     }
     
-    func configure(data: DetailRPEntity) {
+    func configure(data: DetailRPEntity, complete: @escaping () -> Void) {
         
         let nickname = data.nickname ?? "익명"
         let policyTitle = data.policyTitle ?? "-"
@@ -110,14 +114,17 @@ class ResultDetailView: BaseView {
         titleLabel.designed(text: data.title, fontType: .p18Bold, textColor: .black)
         policyLiteralLabel.designed(text: "정책명", fontType: .p16Bold)
         policyLabel.designed(text: policyTitle, fontType: .p12Regular)
-        policyLabel.numberOfLines = 0
-        
-        policyLabel.flex.layout(mode: .adjustHeight)
+        policyLabel.numberOfLines = 1
+        policyLabel.lineBreakMode = .byTruncatingTail
         
         if data.contentList.isEmpty {
+            
             contentLabel.designed(text: data.content, fontType: .p14Regular)
             contentLabel.numberOfLines = 0
             contentLabel.flex.layout(mode: .adjustHeight)
+            flexView.flex.layout()
+            
+            complete()
         } else {
             FontManager.imageWithText(contentList: data.contentList, fontType: .p14Regular, textColor: .black) { [weak self] attributeString in
                 
@@ -126,12 +133,14 @@ class ResultDetailView: BaseView {
                 contentLabel.attributedText = attributeString
                 contentLabel.numberOfLines = 0
                 contentLabel.flex.layout(mode: .adjustHeight)
+                flexView.flex.layout()
+                
+                complete()
             }
         }
     }
     
-    func createAttributedText(contentList: [DetailContentEntity], fontType: FontType, textColor: UIColor, completion: @escaping (NSAttributedString) -> Void) {
-        
+    func comment(data: [CommentDetailEntity]) {
         
     }
 }

@@ -17,6 +17,7 @@ protocol ResultDetailInput {
 protocol ResultDetailOutput {
     
     var detailInfo: PublishRelay<DetailRPEntity> { get }
+    var commentsInfo: PublishRelay<[CommentDetailEntity]> { get }
 }
 
 protocol ResultDetailInterface: ResultDetailInput, ResultDetailOutput {

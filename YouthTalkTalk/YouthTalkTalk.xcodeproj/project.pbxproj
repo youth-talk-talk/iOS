@@ -17,6 +17,14 @@
 		AC0AA5A82CC511CB00DB032E /* DetailContentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */; };
 		AC0AA5AA2CCDFA6000DB032E /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A92CCDFA6000DB032E /* ImageManager.swift */; };
 		AC0AA5AD2CCE015500DB032E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AC0AA5AC2CCE015500DB032E /* Kingfisher */; };
+		AC0AA5B12CCE186000DB032E /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5B02CCE186000DB032E /* CommentDTO.swift */; };
+		AC0AA5B32CCE18D800DB032E /* CommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5B22CCE18D800DB032E /* CommentEntity.swift */; };
+		AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5B42CCE19AC00DB032E /* CommentTableViewCell.swift */; };
+		AC0AA5B72CCE21D500DB032E /* CommentRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5B62CCE21D500DB032E /* CommentRepositoryImpl.swift */; };
+		AC0AA5B92CCE21F100DB032E /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5B82CCE21F100DB032E /* CommentRepository.swift */; };
+		AC0AA5BB2CCE227200DB032E /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5BA2CCE227200DB032E /* CommentRouter.swift */; };
+		AC0AA5BD2CCE23B300DB032E /* CommentUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5BC2CCE23B300DB032E /* CommentUseCaseImpl.swift */; };
+		AC0AA5BF2CCE23C100DB032E /* CommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5BE2CCE23C100DB032E /* CommentUseCase.swift */; };
 		AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DC2C183AF4005FC370 /* PinLayout */; };
 		AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DF2C183B05005FC370 /* FlexLayout */; };
 		AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E52C183F8F005FC370 /* UILabel++.swift */; };
@@ -234,6 +242,14 @@
 		AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRPEntity.swift; sourceTree = "<group>"; };
 		AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentEntity.swift; sourceTree = "<group>"; };
 		AC0AA5A92CCDFA6000DB032E /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		AC0AA5B02CCE186000DB032E /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
+		AC0AA5B22CCE18D800DB032E /* CommentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEntity.swift; sourceTree = "<group>"; };
+		AC0AA5B42CCE19AC00DB032E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		AC0AA5B62CCE21D500DB032E /* CommentRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepositoryImpl.swift; sourceTree = "<group>"; };
+		AC0AA5B82CCE21F100DB032E /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
+		AC0AA5BA2CCE227200DB032E /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
+		AC0AA5BC2CCE23B300DB032E /* CommentUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUseCaseImpl.swift; sourceTree = "<group>"; };
+		AC0AA5BE2CCE23C100DB032E /* CommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUseCase.swift; sourceTree = "<group>"; };
 		AC4B42E52C183F8F005FC370 /* UILabel++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel++.swift"; sourceTree = "<group>"; };
 		AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -562,6 +578,7 @@
 				AC579B312C3C14FA00D1C9FC /* ClearSearchView.swift */,
 				AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */,
 				AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */,
+				AC0AA5B42CCE19AC00DB032E /* CommentTableViewCell.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -946,6 +963,7 @@
 				AC604BFE2C67600700804950 /* ReviewUseCase.swift */,
 				AC604C102C67820300804950 /* PostUseCase.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
+				AC0AA5BE2CCE23C100DB032E /* CommentUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -959,6 +977,7 @@
 				AC604C0C2C676D1800804950 /* ReviewUseCaseImpl.swift */,
 				AC604C122C67823300804950 /* PostUseCaseImpl.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
+				AC0AA5BC2CCE23B300DB032E /* CommentUseCaseImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -998,6 +1017,7 @@
 				AC604C3C2C774CB400804950 /* ScrapEntity.swift */,
 				AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */,
 				AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */,
+				AC0AA5B22CCE18D800DB032E /* CommentEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1059,6 +1079,7 @@
 				AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */,
 				AC604C042C67624E00804950 /* ReviewRepositoryImpl.swift */,
 				AC604C182C67832400804950 /* PostRepositoryImpl.swift */,
+				AC0AA5B62CCE21D500DB032E /* CommentRepositoryImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1071,6 +1092,7 @@
 				AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */,
 				AC604C002C67604E00804950 /* ReviewRepository.swift */,
 				AC604C162C67831000804950 /* PostRepository.swift */,
+				AC0AA5B82CCE21F100DB032E /* CommentRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -1124,6 +1146,7 @@
 				AC579B3A2C3E7D1E00D1C9FC /* MeRouter.swift */,
 				AC604C062C6762A000804950 /* ReviewRouter.swift */,
 				AC604C142C67826F00804950 /* PostRouter.swift */,
+				AC0AA5BA2CCE227200DB032E /* CommentRouter.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1188,6 +1211,7 @@
 				AC604C3A2C74A5A300804950 /* ScrapDTO.swift */,
 				AC93893D2CA036150021479B /* ConditionReviewDTO.swift */,
 				AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */,
+				AC0AA5B02CCE186000DB032E /* CommentDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1363,7 +1387,9 @@
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
 				AC51E8402C969EF600550148 /* DetailConditionViewModel.swift in Sources */,
+				AC0AA5BD2CCE23B300DB032E /* CommentUseCaseImpl.swift in Sources */,
 				AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */,
+				AC0AA5B32CCE18D800DB032E /* CommentEntity.swift in Sources */,
 				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
@@ -1379,6 +1405,7 @@
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				AC579B472C44FC9900D1C9FC /* APIError.swift in Sources */,
+				AC0AA5BB2CCE227200DB032E /* CommentRouter.swift in Sources */,
 				AC579B6D2C539DD200D1C9FC /* DetailPolicyDTO.swift in Sources */,
 				AC604C692C7A23E400804950 /* ResultPolicyViewModel.swift in Sources */,
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
@@ -1416,6 +1443,7 @@
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
 				AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */,
 				AC51E83E2C968B3800550148 /* ChoiceCollectionViewCell.swift in Sources */,
+				AC0AA5B92CCE21F100DB032E /* CommentRepository.swift in Sources */,
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
@@ -1491,8 +1519,10 @@
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
+				AC0AA5B72CCE21D500DB032E /* CommentRepositoryImpl.swift in Sources */,
 				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
+				AC0AA5BF2CCE23C100DB032E /* CommentUseCase.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC604C0B2C6764C900804950 /* ReviewBody.swift in Sources */,
 				AC5A7BF22BF0FDB500A13991 /* AppDelegate.swift in Sources */,
@@ -1506,8 +1536,10 @@
 				AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
 				AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */,
+				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
+				AC0AA5B12CCE186000DB032E /* CommentDTO.swift in Sources */,
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
 				ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */,

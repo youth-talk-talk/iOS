@@ -110,8 +110,10 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     guard let item = itemIdentifier.data else { return }
                     
                     let repository = ReviewRepositoryImpl()
+                    let commentRepository = CommentRepositoryImpl()
                     let useCase = ReviewUseCaseImpl(reviewRepository: repository)
-                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase)
+                    let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
                     
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
@@ -133,8 +135,10 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     guard let item = itemIdentifier.data else { return }
                     
                     let repository = ReviewRepositoryImpl()
+                    let commentRepository = CommentRepositoryImpl()
                     let useCase = ReviewUseCaseImpl(reviewRepository: repository)
-                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase)
+                    let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
                     
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
