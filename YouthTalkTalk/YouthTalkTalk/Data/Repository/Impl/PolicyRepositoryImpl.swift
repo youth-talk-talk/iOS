@@ -44,6 +44,13 @@ final class PolicyRepositoryImpl: PolicyRepository {
         return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
     }
     
+    func fetchUpComingDeadline() -> Observable<Result<UpcomingScrapDTO, APIError>> {
+        
+        let router = PolicyRouter.fetchUpComingDeadlineScrap
+        
+        return apiManager.request(router: router, type: UpcomingScrapDTO.self).asObservable()
+    }
+    
     deinit {
         print("PolicyRepositoryImpl Deinit")
     }

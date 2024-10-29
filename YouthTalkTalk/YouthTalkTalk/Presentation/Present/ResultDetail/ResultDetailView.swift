@@ -32,7 +32,6 @@ class ResultDetailView: BaseView {
         titleLabel.designed(text: "제목", fontType: .p18Bold, textColor: .black)
         policyLiteralLabel.designed(text: "정책명", fontType: .p16Bold)
         policyLabel.designed(text: "정책명 --", fontType: .p12Regular)
-        commentTitleLabel.designed(text: "댓글", fontType: .p14Bold)
     }
     
     override func configureLayout() {

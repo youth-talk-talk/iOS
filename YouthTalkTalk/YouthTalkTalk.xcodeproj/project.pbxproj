@@ -25,6 +25,8 @@
 		AC0AA5BB2CCE227200DB032E /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5BA2CCE227200DB032E /* CommentRouter.swift */; };
 		AC0AA5BD2CCE23B300DB032E /* CommentUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5BC2CCE23B300DB032E /* CommentUseCaseImpl.swift */; };
 		AC0AA5BF2CCE23C100DB032E /* CommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5BE2CCE23C100DB032E /* CommentUseCase.swift */; };
+		AC0AA5CA2CCFF07100DB032E /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5C92CCFF07100DB032E /* MyPageViewController.swift */; };
+		AC0AA5CC2CCFF09D00DB032E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5CB2CCFF09D00DB032E /* RootViewController.swift */; };
 		AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DC2C183AF4005FC370 /* PinLayout */; };
 		AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B42DF2C183B05005FC370 /* FlexLayout */; };
 		AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42E52C183F8F005FC370 /* UILabel++.swift */; };
@@ -152,6 +154,13 @@
 		AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC93893B2CA0340E0021479B /* ConditionRPQuery.swift */; };
 		AC93893E2CA036150021479B /* ConditionReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC93893D2CA036150021479B /* ConditionReviewDTO.swift */; };
 		AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC93893F2CA0503E0021479B /* DefaultFooterView.swift */; };
+		ACC46C972CD12D1E0004ED5C /* RadiusCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46C962CD12D1E0004ED5C /* RadiusCollectionReusableView.swift */; };
+		ACC46C9A2CD12EB60004ED5C /* UpcomingScrapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46C992CD12EB60004ED5C /* UpcomingScrapDTO.swift */; };
+		ACC46C9C2CD130CE0004ED5C /* UpcomingScrapEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46C9B2CD130CE0004ED5C /* UpcomingScrapEntity.swift */; };
+		ACC46C9E2CD1318B0004ED5C /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46C9D2CD1318B0004ED5C /* MyPageViewModel.swift */; };
+		ACC46CA12CD131C10004ED5C /* MyPageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA02CD131C10004ED5C /* MyPageInterface.swift */; };
+		ACC46CA32CD136FD0004ED5C /* MyPageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA22CD136FD0004ED5C /* MyPageLayout.swift */; };
+		ACC46CA52CD138B00004ED5C /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA42CD138B00004ED5C /* FavoriteCollectionViewCell.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -250,6 +259,8 @@
 		AC0AA5BA2CCE227200DB032E /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
 		AC0AA5BC2CCE23B300DB032E /* CommentUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUseCaseImpl.swift; sourceTree = "<group>"; };
 		AC0AA5BE2CCE23C100DB032E /* CommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUseCase.swift; sourceTree = "<group>"; };
+		AC0AA5C92CCFF07100DB032E /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		AC0AA5CB2CCFF09D00DB032E /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		AC4B42E52C183F8F005FC370 /* UILabel++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel++.swift"; sourceTree = "<group>"; };
 		AC4B42EB2C18904E005FC370 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -377,6 +388,13 @@
 		AC93893B2CA0340E0021479B /* ConditionRPQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRPQuery.swift; sourceTree = "<group>"; };
 		AC93893D2CA036150021479B /* ConditionReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionReviewDTO.swift; sourceTree = "<group>"; };
 		AC93893F2CA0503E0021479B /* DefaultFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFooterView.swift; sourceTree = "<group>"; };
+		ACC46C962CD12D1E0004ED5C /* RadiusCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusCollectionReusableView.swift; sourceTree = "<group>"; };
+		ACC46C992CD12EB60004ED5C /* UpcomingScrapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScrapDTO.swift; sourceTree = "<group>"; };
+		ACC46C9B2CD130CE0004ED5C /* UpcomingScrapEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScrapEntity.swift; sourceTree = "<group>"; };
+		ACC46C9D2CD1318B0004ED5C /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		ACC46CA02CD131C10004ED5C /* MyPageInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInterface.swift; sourceTree = "<group>"; };
+		ACC46CA22CD136FD0004ED5C /* MyPageLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageLayout.swift; sourceTree = "<group>"; };
+		ACC46CA42CD138B00004ED5C /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -482,6 +500,15 @@
 			path = ResultDetail;
 			sourceTree = "<group>";
 		};
+		AC0AA5C82CCFF04E00DB032E /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				AC0AA5C92CCFF07100DB032E /* MyPageViewController.swift */,
+				ACC46C9D2CD1318B0004ED5C /* MyPageViewModel.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		AC4B42E12C183B1F005FC370 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +556,7 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46C9F2CD131AB0004ED5C /* MyPage */,
 				AC604BED2C675BA500804950 /* Review&Post */,
 				AC579B702C53B24C00D1C9FC /* DetailPolciy */,
 				AC579B4A2C451C5E00D1C9FC /* Home */,
@@ -579,6 +607,7 @@
 				AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */,
 				AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */,
 				AC0AA5B42CCE19AC00DB032E /* CommentTableViewCell.swift */,
+				ACC46CA42CD138B00004ED5C /* FavoriteCollectionViewCell.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -720,6 +749,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				AC0AA5C82CCFF04E00DB032E /* MyPage */,
 				AC5A7C232BF102B800A13991 /* Base */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
 				AC604BE62C64B2C500804950 /* DecoView */,
@@ -747,6 +777,7 @@
 			children = (
 				ACF2A2E22C3142EE00FE8D63 /* Debug */,
 				AC5A7C262BF102E900A13991 /* BaseView.swift */,
+				AC0AA5CB2CCFF09D00DB032E /* RootViewController.swift */,
 				AC5A7C242BF102D600A13991 /* BaseViewController.swift */,
 				ACF2A27F2C25886600FE8D63 /* BaseCollectionViewCell.swift */,
 				ACF2A2742C229DCF00FE8D63 /* BaseCollectionReusableView.swift */,
@@ -802,6 +833,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF2A2792C25845900FE8D63 /* TopRadiusDecoView.swift */,
+				ACC46C962CD12D1E0004ED5C /* RadiusCollectionReusableView.swift */,
 				ACF2A27B2C25859E00FE8D63 /* DefaultDecoView.swift */,
 			);
 			path = DecoView;
@@ -870,6 +902,14 @@
 			path = ResultSearch;
 			sourceTree = "<group>";
 		};
+		ACC46C9F2CD131AB0004ED5C /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				ACC46CA02CD131C10004ED5C /* MyPageInterface.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -889,6 +929,7 @@
 				AC604C662C7A01F300804950 /* ResultSearchLayout.swift */,
 				AC604BDE2C63A7F800804950 /* CommunityLayout.swift */,
 				AC51E8362C9587D300550148 /* DetailConditionLayout.swift */,
+				ACC46CA22CD136FD0004ED5C /* MyPageLayout.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -1018,6 +1059,7 @@
 				AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */,
 				AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */,
 				AC0AA5B22CCE18D800DB032E /* CommentEntity.swift */,
+				ACC46C9B2CD130CE0004ED5C /* UpcomingScrapEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1212,6 +1254,7 @@
 				AC93893D2CA036150021479B /* ConditionReviewDTO.swift */,
 				AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */,
 				AC0AA5B02CCE186000DB032E /* CommentDTO.swift */,
+				ACC46C992CD12EB60004ED5C /* UpcomingScrapDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1399,6 +1442,7 @@
 				AC604C742C7A24CE00804950 /* ResultSearchInterface.swift in Sources */,
 				AC579B4E2C451CA500D1C9FC /* HomeOutput.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
+				ACC46C972CD12D1E0004ED5C /* RadiusCollectionReusableView.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
 				ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */,
 				AC579BA12C5CBA0A00D1C9FC /* TargetTableViewCell.swift in Sources */,
@@ -1418,6 +1462,7 @@
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */,
+				AC0AA5CC2CCFF09D00DB032E /* RootViewController.swift in Sources */,
 				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
 				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
 				AC579B582C45284A00D1C9FC /* PolicyQeury.swift in Sources */,
@@ -1441,6 +1486,7 @@
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				AC51E8332C956F1400550148 /* DetailConditionViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
+				AC0AA5CA2CCFF07100DB032E /* MyPageViewController.swift in Sources */,
 				AC579B302C3BE19E00D1C9FC /* SearchViewModel.swift in Sources */,
 				AC51E83E2C968B3800550148 /* ChoiceCollectionViewCell.swift in Sources */,
 				AC0AA5B92CCE21F100DB032E /* CommentRepository.swift in Sources */,
@@ -1458,6 +1504,7 @@
 				AC604C132C67823300804950 /* PostUseCaseImpl.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
+				ACC46C9C2CD130CE0004ED5C /* UpcomingScrapEntity.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
@@ -1490,6 +1537,7 @@
 				AC604BEF2C675BC000804950 /* RPInput.swift in Sources */,
 				AC604C6B2C7A23EF00804950 /* ResultReviewViewModel.swift in Sources */,
 				AC604BD32C63967600804950 /* CommunityView.swift in Sources */,
+				ACC46CA32CD136FD0004ED5C /* MyPageLayout.swift in Sources */,
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
@@ -1518,6 +1566,7 @@
 				AC0AA5A62CC50D2900DB032E /* DetailRPEntity.swift in Sources */,
 				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
+				ACC46C9A2CD12EB60004ED5C /* UpcomingScrapDTO.swift in Sources */,
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
 				AC0AA5B72CCE21D500DB032E /* CommentRepositoryImpl.swift in Sources */,
 				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
@@ -1543,11 +1592,13 @@
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
 				ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */,
+				ACC46CA52CD138B00004ED5C /* FavoriteCollectionViewCell.swift in Sources */,
 				AC604C1B2C6783CD00804950 /* PostViewModel.swift in Sources */,
 				AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */,
 				AC604C032C6760D300804950 /* CommunityRPDTO.swift in Sources */,
 				AC579B322C3C14FA00D1C9FC /* ClearSearchView.swift in Sources */,
 				AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */,
+				ACC46CA12CD131C10004ED5C /* MyPageInterface.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
@@ -1566,6 +1617,7 @@
 				ACF2A2DD2C2E903600FE8D63 /* SplashInput.swift in Sources */,
 				AC604C3D2C774CB400804950 /* ScrapEntity.swift in Sources */,
 				ACF2A27A2C25845900FE8D63 /* TopRadiusDecoView.swift in Sources */,
+				ACC46C9E2CD1318B0004ED5C /* MyPageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

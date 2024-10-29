@@ -113,6 +113,29 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
+    func fetchUpComingDeadline() -> Observable<Result<[PolicyEntity], APIError>> {
+        
+        policyRepository.fetchUpComingDeadline()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let upcomingDTO):
+                    
+                    let entities = upcomingDTO.data.map {
+                        return PolicyEntity(policyId: $0.policyId,
+                                            category: $0.category, title: $0.title, deadlineStatus: $0.deadlineStatus,
+                                            hostDep: $0.hostDep, scrap: $0.scrap)
+                    }
+                    
+                    return .success(entities)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
     deinit {
         print("PolicyUseCaseImpl Deinit")
     }

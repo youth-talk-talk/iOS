@@ -18,6 +18,7 @@ enum PolicyRouter: Router {
     case fetchConditionPolicy(page: Int, body: PolicyConditionBody)
     case fetchPolicyDetail(id: String)
     case updatePolicyScrap(id: String)
+    case fetchUpComingDeadlineScrap
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -33,12 +34,14 @@ enum PolicyRouter: Router {
             return "/policies/\(id)"
         case .updatePolicyScrap(let id):
             return "/policies/\(id)/scrap"
+        case .fetchUpComingDeadlineScrap:
+            return "policies/scrapped/upcoming-deadline"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail:
+        case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap :
             return .get
         case .fetchConditionPolicy, .updatePolicyScrap:
             return .post
@@ -51,14 +54,14 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let page, _):
             return convertToParameters(page)
-        case .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -72,7 +75,7 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchConditionPolicy(_, let body):
             return try? encoder.encode(body)
-        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap:
             return nil
         }
     }
