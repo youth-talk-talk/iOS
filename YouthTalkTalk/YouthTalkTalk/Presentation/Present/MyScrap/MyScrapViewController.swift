@@ -57,7 +57,7 @@ class MyScrapViewController: RootViewController {
             cell.scrapButton.rx.tap
                 .bind(with: self) { owner, _ in
                     
-                    owner.viewModel.input.updatePolicyScrap.accept(data)
+                    owner.viewModel.input.updateScrap.accept(data)
                 }
                 .disposed(by: cell.disposeBag)
             
@@ -93,7 +93,7 @@ class MyScrapViewController: RootViewController {
     
     override func bind() {
         
-        viewModel.output.scrapPolicies
+        viewModel.output.scrap
             .bind(with: self) { owner, policyEntities in
                 owner.update(section: .scrap, items: policyEntities)
             }
@@ -110,7 +110,7 @@ class MyScrapViewController: RootViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.input.fetchScrapPoliciesEvent.accept(())
+        viewModel.input.fetchScrapEvent.accept(())
     }
 }
 

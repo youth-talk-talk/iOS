@@ -62,6 +62,26 @@ final class PostUseCaseImpl: PostUseCase {
             }
     }
     
+    func fetchScrapPosts(page: Int, size: Int) -> Observable<Result<[RPEntity], APIError>> {
+        
+        return postRepository.fetchScrapPosts(page: page, size: size)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let scrapPostDTO):
+                    
+                    let items = scrapPostDTO.data.map { $0.translateEntity() }
+                    
+                    return .success(items)
+                    
+                case .failure(let error):
+                    
+                    return .failure(error)
+                }
+            }
+    }
+    
     func updatePostScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
         
         postRepository.updatePolicyScrap(id: id)

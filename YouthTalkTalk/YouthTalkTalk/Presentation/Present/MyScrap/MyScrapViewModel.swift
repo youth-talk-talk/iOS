@@ -18,17 +18,17 @@ final class MyScrapViewModel: MyScrapInterface {
     var output: MyScrapOutput { return self }
     
     // Inputs
-    var fetchScrapPoliciesEvent = PublishRelay<Void>()
-    var updatePolicyScrap = PublishRelay<String>()
+    var fetchScrapEvent = PublishRelay<Void>()
+    var updateScrap = PublishRelay<String>()
     
     // Outputs
-    var scrapPolicies = PublishRelay<[PolicyEntity]>()
+    var scrap = PublishRelay<[PolicyEntity]>()
     var canceledScrapEntity = PublishRelay<ScrapEntity>()
     
     init(useCase: PolicyUseCase) {
         self.useCase = useCase
         
-        fetchScrapPoliciesEvent
+        fetchScrapEvent
             .flatMap { _ in
                 
                 return useCase.fetchScrapPolicy()
@@ -36,7 +36,7 @@ final class MyScrapViewModel: MyScrapInterface {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let policyEntities):
-                    owner.scrapPolicies.accept(policyEntities)
+                    owner.scrap.accept(policyEntities)
                 case .failure(let error):
                     print(error)
                 }
@@ -44,7 +44,7 @@ final class MyScrapViewModel: MyScrapInterface {
             .disposed(by: disposeBag)
         
         // 스크랩
-        updatePolicyScrap
+        updateScrap
             .withUnretained(self)
             .flatMap { owner, policyID in
                 return owner.useCase.updatePolicyScrap(id: policyID)

@@ -13,7 +13,7 @@ import RxCocoa
 
 class MyPageViewController: RootViewController {
     
-    enum FavoriteList: String, CaseIterable {
+    enum FavoriteList: String, CaseIterable, Hashable {
         case scrapPolicy = "스크랩한 정책"
         case scrapPost = "스크랩한 게시물"
         case myPost = "작성한 게시물"
@@ -23,7 +23,7 @@ class MyPageViewController: RootViewController {
     
     enum MyPageItemType: Hashable {
         case policy(PolicyEntity)
-        case favorite(String)
+        case favorite(FavoriteList)
     }
     
     private var viewModel: MyPageInterface
@@ -124,8 +124,8 @@ class MyPageViewController: RootViewController {
             switch itemIdentifier {
             case .policy(let policyEntity):
                 return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: policyEntity)
-            case .favorite(let title):
-                return collectionView.dequeueConfiguredReusableCell(using: favoriteCellRegistration, for: indexPath, item: title)
+            case .favorite(let favorite):
+                return collectionView.dequeueConfiguredReusableCell(using: favoriteCellRegistration, for: indexPath, item: favorite.rawValue)
             }
         }
         
@@ -161,8 +161,7 @@ class MyPageViewController: RootViewController {
     
     override func bind() {
         
-        let items = FavoriteList.allCases.map { MyPageItemType.favorite($0.rawValue) }
-        
+        let items = FavoriteList.allCases.map { MyPageItemType.favorite($0) }
         update(section: .favorite, items: items)
         
         collectionView.rx.itemSelected
@@ -173,15 +172,32 @@ class MyPageViewController: RootViewController {
                 let item = items[indexPath.item]
                 
                 switch item {
-                case .policy(let policyEntity):
-                    print(policyEntity)
-                case .favorite(let title):
+                case .favorite(let favorite):
                     
-                    let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-                    let viewModel = MyScrapViewModel(useCase: useCase)
-                    let vc = MyScrapViewController(viewModel: viewModel)
+                    switch favorite {
+                        
+                    case .scrapPolicy:
+                        let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+                        let viewModel = MyScrapViewModel(useCase: useCase)
+                        let vc = MyScrapViewController(viewModel: viewModel)
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                    case .scrapPost:
+                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                        let viewModel = MyScrapRPViewModel(useCase: useCase)
+                        let vc = MyScrapRPViewController(viewModel: viewModel)
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                        
+                    case .myPost:
+                        break
+                    case .myComment:
+                        break
+                    case .likeComment:
+                        break
+                    }
                     
-                    owner.navigationController?.pushViewController(vc, animated: true)
+                default: break
                 }
             }
             .disposed(by: disposeBag)

@@ -166,6 +166,10 @@
 		ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */; };
 		ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */; };
 		ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */; };
+		ACC46CB42CD287000004ED5C /* MyScrapRPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB32CD287000004ED5C /* MyScrapRPViewController.swift */; };
+		ACC46CB62CD287ED0004ED5C /* MyScrapRPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */; };
+		ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */; };
+		ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -405,6 +409,10 @@
 		ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapViewModel.swift; sourceTree = "<group>"; };
 		ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapInterface.swift; sourceTree = "<group>"; };
 		ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPolicyDTO.swift; sourceTree = "<group>"; };
+		ACC46CB32CD287000004ED5C /* MyScrapRPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapRPViewController.swift; sourceTree = "<group>"; };
+		ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapRPViewModel.swift; sourceTree = "<group>"; };
+		ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostDTO.swift; sourceTree = "<group>"; };
+		ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRPScrapInterface.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -566,6 +574,7 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CB92CD28AB10004ED5C /* MyRPScrap */,
 				ACC46CAD2CD2804C0004ED5C /* MyScrap */,
 				ACC46C9F2CD131AB0004ED5C /* MyPage */,
 				AC604BED2C675BA500804950 /* Review&Post */,
@@ -760,6 +769,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CB22CD286DF0004ED5C /* MyScrapRP */,
 				ACC46CA62CD27DA40004ED5C /* MyScrap */,
 				AC0AA5C82CCFF04E00DB032E /* MyPage */,
 				AC5A7C232BF102B800A13991 /* Base */,
@@ -937,6 +947,23 @@
 				ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */,
 			);
 			path = MyScrap;
+			sourceTree = "<group>";
+		};
+		ACC46CB22CD286DF0004ED5C /* MyScrapRP */ = {
+			isa = PBXGroup;
+			children = (
+				ACC46CB32CD287000004ED5C /* MyScrapRPViewController.swift */,
+				ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */,
+			);
+			path = MyScrapRP;
+			sourceTree = "<group>";
+		};
+		ACC46CB92CD28AB10004ED5C /* MyRPScrap */ = {
+			isa = PBXGroup;
+			children = (
+				ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */,
+			);
+			path = MyRPScrap;
 			sourceTree = "<group>";
 		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
@@ -1286,6 +1313,7 @@
 				AC0AA5B02CCE186000DB032E /* CommentDTO.swift */,
 				ACC46C992CD12EB60004ED5C /* UpcomingScrapDTO.swift */,
 				ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */,
+				ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1487,6 +1515,7 @@
 				ACF2A2752C229DCF00FE8D63 /* BaseCollectionReusableView.swift in Sources */,
 				AC0AA5A82CC511CB00DB032E /* DetailContentEntity.swift in Sources */,
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
+				ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
 				AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */,
 				AC51E8392C967D2B00550148 /* TitleWithImageHeaderView.swift in Sources */,
@@ -1526,6 +1555,7 @@
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
+				ACC46CB62CD287ED0004ED5C /* MyScrapRPViewModel.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				AC604C782C7B1CD000804950 /* ConditionPolicyDTO.swift in Sources */,
 				AC604C672C7A01F300804950 /* ResultSearchLayout.swift in Sources */,
@@ -1559,6 +1589,7 @@
 				AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */,
+				ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				AC0AA5AA2CCDFA6000DB032E /* ImageManager.swift in Sources */,
 				AC604C152C67826F00804950 /* PostRouter.swift in Sources */,
@@ -1618,6 +1649,7 @@
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
 				AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
+				ACC46CB42CD287000004ED5C /* MyScrapRPViewController.swift in Sources */,
 				AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,

@@ -34,4 +34,12 @@ final class PostRepositoryImpl: PostRepository {
         
         return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
     }
+    
+    func fetchScrapPosts(page: Int, size: Int) -> Observable<Result<ScrapPostDTO, APIError>> {
+        
+        let rpQuery = RPQuery(categories: [], page: page, size: size)
+        let router = PostRouter.fetchScrapPost(query: rpQuery)
+        
+        return apiManager.request(router: router, type: ScrapPostDTO.self).asObservable()
+    }
 }
