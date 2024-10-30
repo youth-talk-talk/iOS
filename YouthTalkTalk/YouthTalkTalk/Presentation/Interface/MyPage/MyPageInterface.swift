@@ -11,11 +11,13 @@ import RxCocoa
 protocol MyPageInput {
     
     var fetchUpcomingScrapEvent: PublishRelay<Void> { get }
+    var updatePolicyScrap: PublishRelay<String> { get }
 }
 
 protocol MyPageOutput {
     
     var upcomingScrapPolicies: PublishRelay<[PolicyEntity]> { get }
+    var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
     
 }
 

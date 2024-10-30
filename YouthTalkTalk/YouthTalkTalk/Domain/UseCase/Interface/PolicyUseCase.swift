@@ -16,4 +16,5 @@ protocol PolicyUseCase {
     func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>>
     func updatePolicyScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
     func fetchUpComingDeadline() -> Observable<Result<[PolicyEntity], APIError>>
+    func fetchScrapPolicy() -> Observable<Result<[PolicyEntity], APIError>>
 }

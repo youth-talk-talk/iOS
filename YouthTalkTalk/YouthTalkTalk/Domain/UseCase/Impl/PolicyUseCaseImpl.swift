@@ -136,6 +136,30 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
+    func fetchScrapPolicy() -> Observable<Result<[PolicyEntity], APIError>> {
+        
+        policyRepository.fetchScrapPolicy()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let scrapDTO):
+                    
+                    let entities = scrapDTO.data.map {
+                        return PolicyEntity(policyId: $0.policyId,
+                                            category: $0.category, title: $0.title, deadlineStatus: $0.deadlineStatus,
+                                            hostDep: $0.hostDep, scrap: $0.scrap)
+                    }
+                    
+                    return .success(entities)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
     deinit {
         print("PolicyUseCaseImpl Deinit")
     }

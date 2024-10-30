@@ -19,6 +19,7 @@ enum PolicyRouter: Router {
     case fetchPolicyDetail(id: String)
     case updatePolicyScrap(id: String)
     case fetchUpComingDeadlineScrap
+    case fetchScrapPolicy
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -36,12 +37,14 @@ enum PolicyRouter: Router {
             return "/policies/\(id)/scrap"
         case .fetchUpComingDeadlineScrap:
             return "policies/scrapped/upcoming-deadline"
+        case .fetchScrapPolicy:
+            return "policies/scrap"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap :
+        case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy :
             return .get
         case .fetchConditionPolicy, .updatePolicyScrap:
             return .post
@@ -54,14 +57,14 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let page, _):
             return convertToParameters(page)
-        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -75,7 +78,7 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchConditionPolicy(_, let body):
             return try? encoder.encode(body)
-        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap:
+        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }
     }

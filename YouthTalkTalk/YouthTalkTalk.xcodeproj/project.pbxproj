@@ -161,6 +161,11 @@
 		ACC46CA12CD131C10004ED5C /* MyPageInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA02CD131C10004ED5C /* MyPageInterface.swift */; };
 		ACC46CA32CD136FD0004ED5C /* MyPageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA22CD136FD0004ED5C /* MyPageLayout.swift */; };
 		ACC46CA52CD138B00004ED5C /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA42CD138B00004ED5C /* FavoriteCollectionViewCell.swift */; };
+		ACC46CA82CD27DC10004ED5C /* MyScrapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA72CD27DC10004ED5C /* MyScrapViewController.swift */; };
+		ACC46CAA2CD27E110004ED5C /* ScrapLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CA92CD27E110004ED5C /* ScrapLayout.swift */; };
+		ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */; };
+		ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */; };
+		ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -395,6 +400,11 @@
 		ACC46CA02CD131C10004ED5C /* MyPageInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInterface.swift; sourceTree = "<group>"; };
 		ACC46CA22CD136FD0004ED5C /* MyPageLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageLayout.swift; sourceTree = "<group>"; };
 		ACC46CA42CD138B00004ED5C /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACC46CA72CD27DC10004ED5C /* MyScrapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapViewController.swift; sourceTree = "<group>"; };
+		ACC46CA92CD27E110004ED5C /* ScrapLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapLayout.swift; sourceTree = "<group>"; };
+		ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapViewModel.swift; sourceTree = "<group>"; };
+		ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapInterface.swift; sourceTree = "<group>"; };
+		ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPolicyDTO.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -556,6 +566,7 @@
 		AC4B43042C1B125C005FC370 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CAD2CD2804C0004ED5C /* MyScrap */,
 				ACC46C9F2CD131AB0004ED5C /* MyPage */,
 				AC604BED2C675BA500804950 /* Review&Post */,
 				AC579B702C53B24C00D1C9FC /* DetailPolciy */,
@@ -749,6 +760,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CA62CD27DA40004ED5C /* MyScrap */,
 				AC0AA5C82CCFF04E00DB032E /* MyPage */,
 				AC5A7C232BF102B800A13991 /* Base */,
 				AC4B43252C2072BE005FC370 /* CustomView */,
@@ -910,6 +922,23 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		ACC46CA62CD27DA40004ED5C /* MyScrap */ = {
+			isa = PBXGroup;
+			children = (
+				ACC46CA72CD27DC10004ED5C /* MyScrapViewController.swift */,
+				ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */,
+			);
+			path = MyScrap;
+			sourceTree = "<group>";
+		};
+		ACC46CAD2CD2804C0004ED5C /* MyScrap */ = {
+			isa = PBXGroup;
+			children = (
+				ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */,
+			);
+			path = MyScrap;
+			sourceTree = "<group>";
+		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -930,6 +959,7 @@
 				AC604BDE2C63A7F800804950 /* CommunityLayout.swift */,
 				AC51E8362C9587D300550148 /* DetailConditionLayout.swift */,
 				ACC46CA22CD136FD0004ED5C /* MyPageLayout.swift */,
+				ACC46CA92CD27E110004ED5C /* ScrapLayout.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -1255,6 +1285,7 @@
 				AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */,
 				AC0AA5B02CCE186000DB032E /* CommentDTO.swift */,
 				ACC46C992CD12EB60004ED5C /* UpcomingScrapDTO.swift */,
+				ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1434,6 +1465,7 @@
 				AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */,
 				AC0AA5B32CCE18D800DB032E /* CommentEntity.swift in Sources */,
 				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
+				ACC46CAA2CD27E110004ED5C /* ScrapLayout.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
@@ -1462,6 +1494,7 @@
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */,
+				ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */,
 				AC0AA5CC2CCFF09D00DB032E /* RootViewController.swift in Sources */,
 				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
 				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
@@ -1507,6 +1540,7 @@
 				ACC46C9C2CD130CE0004ED5C /* UpcomingScrapEntity.swift in Sources */,
 				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
 				AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */,
+				ACC46CA82CD27DC10004ED5C /* MyScrapViewController.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,
 				AC579B2C2C3BE10A00D1C9FC /* SearchOutput.swift in Sources */,
 				ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */,
@@ -1587,6 +1621,7 @@
 				AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
+				ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
 				AC0AA5B12CCE186000DB032E /* CommentDTO.swift in Sources */,
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
@@ -1605,6 +1640,7 @@
 				AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */,
 				AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */,
 				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */,
+				ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */,
 				AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */,
 				ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */,
 				ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */,

@@ -46,6 +46,40 @@ class RootViewController: UIViewController {
     
     func configureNavigation() { }
     
+    func updateNavigationTitle(title: String) {
+        
+        let titleLabel = UILabel()
+        titleLabel.designed(text: title, fontType: .p18Bold)
+        self.navigationItem.titleView = titleLabel
+    }
+    
+    func updateNavigationBackButtonTitle(title: String = "") {
+        
+        self.navigationItem.hidesBackButton = true
+        
+        let customBackView = UIImageView()
+        customBackView.image = .back.withRenderingMode(.alwaysOriginal)
+        let backButtonItem = UIBarButtonItem(customView: customBackView)
+        
+        let titleLabel = UILabel()
+        titleLabel.designed(text: title, fontType: .p18Regular)
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        
+        self.navigationItem.leftBarButtonItems = [backButtonItem, titleItem]
+        
+        // 뒤로 가기 동작 추가
+        let tapGesture = UITapGestureRecognizer()
+        customBackView.addGestureRecognizer(tapGesture)
+        customBackView.isUserInteractionEnabled = true
+        
+        tapGesture.rx.event
+            .bind(with: self) { owner, _ in
+                
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

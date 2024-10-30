@@ -45,6 +45,21 @@ class MyPageViewController: RootViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if !snapshot.itemIdentifiers(inSection: .policy).isEmpty {
+         
+            let items = snapshot.itemIdentifiers(inSection: .policy)
+            self.snapshot.deleteItems(items)
+            self.dataSource.apply(snapshot)
+        }
+        
+        viewModel.input.fetchUpcomingScrapEvent.accept(())
+    }
+    
     override func configureView() {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -67,6 +82,27 @@ class MyPageViewController: RootViewController {
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
             cell.configure(data: itemIdentifier)
+            
+            let data = itemIdentifier.policyId
+            
+            cell.scrapButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    
+                    owner.viewModel.input.updatePolicyScrap.accept(data)
+                }
+                .disposed(by: cell.disposeBag)
+            
+            cell.tapGesture.rx.event
+                .bind(with: self) { owner, _ in
+                    
+                    let repository = PolicyRepositoryImpl()
+                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
+                    let viewModel = PolicyViewModel(policyID: itemIdentifier.policyId, policyUseCase: useCase)
+                    let nextVC = PolicyViewController(viewModel: viewModel)
+                    
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+                .disposed(by: cell.disposeBag)
         }
         
         let favoriteCellRegistration = UICollectionView.CellRegistration<FavoriteCollectionViewCell, String> { cell, indexPath, itemIdentifier in
@@ -129,6 +165,28 @@ class MyPageViewController: RootViewController {
         
         update(section: .favorite, items: items)
         
+        collectionView.rx.itemSelected
+            .bind(with: self) { owner, indexPath in
+                
+                let sectionType = MyPageSection(rawValue: indexPath.section) ?? .policy
+                let items = owner.snapshot.itemIdentifiers(inSection: sectionType)
+                let item = items[indexPath.item]
+                
+                switch item {
+                case .policy(let policyEntity):
+                    print(policyEntity)
+                case .favorite(let title):
+                    
+                    let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+                    let viewModel = MyScrapViewModel(useCase: useCase)
+                    let vc = MyScrapViewController(viewModel: viewModel)
+                    
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        // 마감일 임박 리스트 호출
         viewModel.output.upcomingScrapPolicies
             .bind(with: self) { owner, upcomingEntities in
                 
@@ -138,7 +196,28 @@ class MyPageViewController: RootViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.input.fetchUpcomingScrapEvent.accept(())
+        // 스크랩 취소
+        viewModel.output.canceledScrapEntity
+            .bind(with: self) { owner, scrapEntity in
+                
+                let policyItems = owner.snapshot.itemIdentifiers(inSection: .policy)
+                    .compactMap { item in
+                        switch item {
+                        case .policy(let policyEntity):
+                            return policyEntity
+                        case .favorite:
+                            return nil
+                        }
+                    }
+                
+                guard let item = policyItems.filter({ $0.policyId == scrapEntity.id }).first else { return }
+                
+                let pageItemType = MyPageItemType.policy(item)
+                
+                owner.delete(item: pageItemType)
+                
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -150,5 +229,12 @@ extension MyPageViewController {
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func delete(item: MyPageItemType) {
+        
+        snapshot.deleteItems([item])
+        
+        self.dataSource.apply(snapshot)
     }
 }

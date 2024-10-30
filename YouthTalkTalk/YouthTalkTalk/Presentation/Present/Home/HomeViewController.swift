@@ -44,6 +44,12 @@ final class HomeViewController: BaseViewController<HomeView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.input.fetchPolicies.accept(())
+    }
+    
     override func configureCollectionView() {
         
         layoutView.collectionView.prefetchDataSource = self
@@ -84,8 +90,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 owner.errorHandler(error)
             }
             .disposed(by: disposeBag)
-        
-        viewModel.input.fetchPolicies.accept(())
         
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
