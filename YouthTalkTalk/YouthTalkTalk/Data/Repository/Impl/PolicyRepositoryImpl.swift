@@ -23,6 +23,13 @@ final class PolicyRepositoryImpl: PolicyRepository {
         return apiManager.request(router: router, type: HomePolicyDTO.self).asObservable()
     }
     
+    func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<ConditionPolicyDTO, APIError>> {
+        
+        let router = PolicyRouter.fetchConditionPolicy(page: page, body: body)
+        
+        return apiManager.request(router: router, type: ConditionPolicyDTO.self).asObservable()
+    }
+    
     func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyDTO, APIError>> {
         
         let router = PolicyRouter.fetchPolicyDetail(id: id)
@@ -35,6 +42,20 @@ final class PolicyRepositoryImpl: PolicyRepository {
         let router = PolicyRouter.updatePolicyScrap(id: id)
         
         return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
+    }
+    
+    func fetchUpComingDeadline() -> Observable<Result<UpcomingScrapDTO, APIError>> {
+        
+        let router = PolicyRouter.fetchUpComingDeadlineScrap
+        
+        return apiManager.request(router: router, type: UpcomingScrapDTO.self).asObservable()
+    }
+    
+    func fetchScrapPolicy() -> Observable<Result<ScrapPolicyDTO, APIError>> {
+        
+        let router = PolicyRouter.fetchScrapPolicy
+        
+        return apiManager.request(router: router, type: ScrapPolicyDTO.self).asObservable()
     }
     
     deinit {

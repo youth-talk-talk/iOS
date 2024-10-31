@@ -15,12 +15,15 @@ final class PostViewModel: RPInterface {
     private let useCase: PostUseCase
     
     var type: MainContentsType = .post
+    var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
     
     var fetchRPs = PublishRelay<Void>()
     var updateRecentRPs = PublishRelay<Int>()
+    var pageUpdate = PublishRelay<Int>()
     
     var popularRPsRelay = PublishRelay<[CommunitySectionItems]>()
     var recentRPsRelay = PublishRelay<[CommunitySectionItems]>()
+    var resetSectionItems = PublishRelay<Void>()
     
     var input: RPInput { return self }
     var output: RPOutput { return self }

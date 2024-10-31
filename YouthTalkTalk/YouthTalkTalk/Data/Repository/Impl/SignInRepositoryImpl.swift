@@ -16,10 +16,11 @@ final class SignInRepositoryImpl: SignInRepository {
     
     func requestAppleSignIn(userIdentifier: String, authorizationCode: String, identityToken: String) -> Single<Result<SignInDTO, APIError>> {
         
-        let bodyData = SignInBody(username: userIdentifier,
-                                  authorizationCode: authorizationCode, 
-                                  identityToken: identityToken,
-                                  signInType: .apple)
+        let bodyData = SignInBody(socialType: .apple,
+                                  socialId: userIdentifier,
+                                  authorizationCode: authorizationCode,
+                                  identityToken: identityToken)
+        
         let router = SignInRouter.requestAppleSignIn(signIn: bodyData)
         
         return apiManager.request(router: router, type: SignInDTO.self)
@@ -27,10 +28,11 @@ final class SignInRepositoryImpl: SignInRepository {
     
     func requestKakaoSignIn(userIdentifier: String) -> Single<Result<SignInDTO, APIError>> {
         
-        let bodyData = SignInBody(username: userIdentifier,
-                                  authorizationCode: "", 
-                                  identityToken: "",
-                                  signInType: .kakao)
+        let bodyData = SignInBody(socialType: .kakao,
+                                  socialId: userIdentifier,
+                                  authorizationCode: "",
+                                  identityToken: "")
+        
         let router = SignInRouter.requestKakaoSignIn(signIn: bodyData)
         
         return apiManager.request(router: router, type: SignInDTO.self)

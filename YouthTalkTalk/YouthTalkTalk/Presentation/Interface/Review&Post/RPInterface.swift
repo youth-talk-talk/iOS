@@ -13,5 +13,7 @@ protocol RPInterface: RPInput, RPOutput {
     var output: RPOutput { get }
     
     var type: MainContentsType { get }
+    
+    var selectedPolicyCategory: [PolicyCategory] { get }
 }
 

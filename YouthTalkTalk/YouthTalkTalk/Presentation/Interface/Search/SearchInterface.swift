@@ -13,4 +13,6 @@ protocol SearchInterface: SearchInput, SearchOutput {
     
     var input: SearchInput { get }
     var output: SearchOutput { get }
+    
+    func fetchKeyword() -> String
 }

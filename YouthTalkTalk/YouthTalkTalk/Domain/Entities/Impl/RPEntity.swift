@@ -16,7 +16,7 @@ struct CommunityRPEntity {
 struct RPEntity: Hashable {
     
     let uuid = UUID()
-    let postID: Int?
+    let postId: Int?
     let title: String
     let content: String
     let writerID: Int?
@@ -28,6 +28,6 @@ struct RPEntity: Hashable {
     
     static func mockupData() -> RPEntity {
         
-        return RPEntity(postID: 0, title: "mockUp", content: "mockUp", writerID: 0, scraps: 0, scrap: false, comments: 0, policyId: nil, policyTitle: nil)
+        return RPEntity(postId: 0, title: "mockUp", content: "mockUp", writerID: 0, scraps: 0, scrap: false, comments: 0, policyId: nil, policyTitle: nil)
     }
 }

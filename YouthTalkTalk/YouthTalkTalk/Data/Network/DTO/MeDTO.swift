@@ -12,10 +12,10 @@ struct MeDTO: Decodable {
     let status: Int
     let message: String
     let code: String
-    let data: MeData
+    let data: MeDataDTO
 }
 
-struct MeData: Decodable {
+struct MeDataDTO: Decodable {
     
     let nickname: String
     let email: String?

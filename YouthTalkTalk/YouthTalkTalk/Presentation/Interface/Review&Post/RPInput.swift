@@ -12,12 +12,13 @@ protocol RPInput {
     
     var fetchRPs: PublishRelay<Void> { get }
     var updateRecentRPs: PublishRelay<Int> { get }
+    var pageUpdate: PublishRelay<Int> { get }
     
-    var policyCategorySeleted: PublishRelay<PolicyCategory>? { get }
+    var policyCategorySeleted: PublishRelay<PolicyCategory> { get }
 }
 
 extension RPInput {
-    var policyCategorySeleted: PublishRelay<PolicyCategory>? {
-        return nil // 기본적으로 nil 반환
+    var policyCategorySeleted: PublishRelay<PolicyCategory> {
+        return .init() // 기본적으로 nil 반환
     }
 }

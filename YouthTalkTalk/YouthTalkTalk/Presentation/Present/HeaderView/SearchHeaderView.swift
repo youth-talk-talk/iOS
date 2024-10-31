@@ -168,10 +168,10 @@ class SearchHeaderView: BaseCollectionReusableView {
             }
         }
         
-        jobCheckBoxButton.isSelected = true
-        educationCheckBoxButton.isSelected = true
-        lifeCheckBoxButton.isSelected = true
-        participationCheckBoxButton.isSelected = true
+        jobCheckBoxButton.isSelected = false
+        educationCheckBoxButton.isSelected = false
+        lifeCheckBoxButton.isSelected = false
+        participationCheckBoxButton.isSelected = false
         
         jobCheckBoxButton.configurationUpdateHandler = updateHandler
         educationCheckBoxButton.configurationUpdateHandler = updateHandler

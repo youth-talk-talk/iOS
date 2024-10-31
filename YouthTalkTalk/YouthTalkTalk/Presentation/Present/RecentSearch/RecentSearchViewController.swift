@@ -14,6 +14,8 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
     var dataSource: UICollectionViewDiffableDataSource<RecentSearchLayout, String>!
     var viewModel: RecentSearchInterface
     
+    var clickRecentText: ((String) -> Void)?
+    
     init(viewModel: RecentSearchInterface) {
         self.viewModel = viewModel
         
@@ -60,6 +62,13 @@ final class RecentSearchViewController: BaseViewController<RecentSearchView> {
                 .bind(with: self) { owner, _ in
                     
                     owner.viewModel.input.removeRecentSearchList.accept(itemIdentifier)
+                }
+                .disposed(by: cell.disposeBag)
+            
+            cell.tapGesture.rx.event
+                .bind(with: self) { owner, _ in
+                 
+                    owner.viewModel.input.clickRecentKeyword.accept(itemIdentifier)
                 }
                 .disposed(by: cell.disposeBag)
             

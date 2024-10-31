@@ -22,4 +22,25 @@ final class ReviewRepositoryImpl: ReviewRepository {
         
         return apiManager.request(router: router, type: CommunityRPDTO.self).asObservable()
     }
+    
+    func fetchConditionReviews(conditionRPQuery: ConditionRPQuery) -> Observable<Result<ConditionReviewDTO, APIError>> {
+        
+        let router = ReviewRouter.fetchConditionReview(query: conditionRPQuery)
+        
+        return apiManager.request(router: router, type: ConditionReviewDTO.self).asObservable()
+    }
+    
+    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
+        
+        let router = ReviewRouter.updateReviewScrap(id: id)
+        
+        return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
+    }
+    
+    func fetchReviewDetailInfo(id: Int) -> Observable<Result<DetailRPDTO, APIError>> {
+        
+        let router = ReviewRouter.fetchReviewDetilInfo(id: id)
+        
+        return apiManager.request(router: router, type: DetailRPDTO.self).asObservable()
+    }
 }

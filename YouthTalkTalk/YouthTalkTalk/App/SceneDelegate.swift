@@ -115,7 +115,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let communityVC = CommunityTabViewController()
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
-        tabVC.setViewControllers([communityNaviVC, homeNaviVC], animated: true)
+        // MYPAGE TAB
+        let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+        let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
+        let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
+        let myPageVC = MyPageViewController(viewModel: myPageViewModel)
+        let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
+        
+        tabVC.setViewControllers([communityNaviVC, homeNaviVC, myPageNaviVC], animated: true)
         tabVC.selectedIndex = 1
         
         tabVC.tabBar.items?[0].image = UIImage(named: "community")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
@@ -123,6 +130,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabVC.tabBar.items?[1].image = UIImage(named: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
         tabVC.tabBar.items?[1].selectedImage = UIImage(named: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        
+        tabVC.tabBar.items?[2].image = UIImage(named: "profile")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
+        tabVC.tabBar.items?[2].selectedImage = UIImage(named: "profile")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {

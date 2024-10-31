@@ -17,6 +17,9 @@ final class RecentSearchViewModel: RecentSearchInterface {
     var type: MainContentsType
     
     // Input
+    var clickRecentKeywordEvent: ((String) -> Void)?
+    
+    var clickRecentKeyword = PublishRelay<String>()
     var fetchRecentSearchList = PublishRelay<Void>()
     var removeRecentSearchList = PublishRelay<String>()
     
@@ -45,6 +48,13 @@ final class RecentSearchViewModel: RecentSearchInterface {
                 
                 owner.userDefualts.removeRecentSearch(searchText: idx, type: type)
                 owner.fetchRecentSearchList.accept(())
+            }
+            .disposed(by: disposeBag)
+        
+        clickRecentKeyword
+            .subscribe(with: self) { owner, keyword in
+                
+                owner.clickRecentKeywordEvent?(keyword)
             }
             .disposed(by: disposeBag)
     }

@@ -88,10 +88,17 @@ final class SearchViewController: BaseViewController<SearchView> {
                let viewModel = RecentSearchViewModel(type: viewModel.type)
                let childVC = RecentSearchViewController(viewModel: viewModel)
                addChild(childVC)
-               layoutView.flexView.addSubview(childVC.layoutView)
+               layoutView.flexView.insertSubview(childVC.layoutView, at: 0)
                childVC.layoutView.frame = layoutView.flexView.bounds
                childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                childVC.didMove(toParent: self)
+               viewModel.clickRecentKeywordEvent = { [weak self] text in
+                   
+                   guard let self else { return }
+                   
+                   self.clearSearchView.textField.text = text
+                   self.clearSearchView.textField.sendActions(for: .editingDidEndOnExit)
+               }
                
                // 현재 child view controller 업데이트
                currentChildVC = childVC
@@ -99,13 +106,25 @@ final class SearchViewController: BaseViewController<SearchView> {
        }
        
        func showResultSearchViewController() {
-           // 기존 child view controller가 ResultSearchViewController가 아닌 경우에만 새로운 child view controller를 추가
-           if !(currentChildVC is ResultSearchViewController) {
-               // 기존 child view controller 제거
                removeCurrentChildViewController()
                
+               let keyword = self.viewModel.fetchKeyword()
+               
+               var viewModel: ResultSearchInterface
+               switch self.viewModel.type {
+               case .policy:
+                   let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+                   viewModel = ResultPolicyViewModel(keyword: keyword, type: PolicyCategory.allCases, policyUseCase: useCase)
+               case .review:
+                   let useCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
+                   viewModel = ResultReviewViewModel(keyword, useCase: useCase)
+               case .post:
+                   let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                   viewModel = ResultPostViewModel(keyword, useCase: useCase)
+               }
+               
                // 새로운 child view controller 추가
-               let childVC = ResultSearchViewController()
+               let childVC = ResultSearchViewController(viewModel: viewModel)
                addChild(childVC)
                layoutView.flexView.addSubview(childVC.layoutView)
                childVC.layoutView.frame = layoutView.flexView.bounds
@@ -114,7 +133,6 @@ final class SearchViewController: BaseViewController<SearchView> {
                
                // 현재 child view controller 업데이트
                currentChildVC = childVC
-           }
        }
        
        func removeCurrentChildViewController() {

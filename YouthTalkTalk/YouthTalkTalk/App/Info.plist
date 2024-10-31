@@ -27,6 +27,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>GmarketSansMedium.otf</string>
 		<string>GmarketSansBold.otf</string>
 		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-Regular.otf</string>

@@ -9,12 +9,14 @@ import Foundation
 
 struct SignInBody: Encodable {
     
-    let username: String // userIdentifier
+    let socialType: String // apple / kakao
+    let socialId: String // userIdentifier
     let authorizationCode: String? // apple만
     let identityToken: String? // apple만
     
-    init(username: String, authorizationCode: String?, identityToken: String?, signInType: SignInType) {
-        self.username = signInType.rawValue + username
+    init(socialType: SignInType, socialId: String, authorizationCode: String?, identityToken: String?) {
+        self.socialType = socialType.rawValue
+        self.socialId = socialId
         self.authorizationCode = authorizationCode
         self.identityToken = identityToken
     }

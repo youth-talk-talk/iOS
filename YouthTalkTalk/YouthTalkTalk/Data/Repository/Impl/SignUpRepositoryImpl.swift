@@ -6,36 +6,42 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class SignUpRepositoryImpl: SignUpRepository {
-    
+
     private let disposeBag = DisposeBag()
     private let apiManager = APIManager()
-    
-    func requestAppleSignUp(userIdentifier: String, nickname: String, region: String, Token: String) -> Observable<Result<SignUpDTO, APIError>> {
-        
-        let bodyData = SignUpBody(username: userIdentifier,
-                                  nickname: nickname,
-                                  region: region,
-                                  idToken: Token,
-                                  signInType: .apple)
+
+    func requestAppleSignUp(
+        userIdentifier: String, nickname: String, region: String, Token: String
+    ) -> Observable<Result<SignUpDTO, APIError>> {
+
+        let bodyData = SignUpBody(
+            socialType: .apple,
+            socialId: userIdentifier,
+            nickname: nickname,
+            region: region,
+            idToken: Token)
         let router = SignUpRouter.requestAppleSignUp(signUp: bodyData)
-        
+
         return apiManager.request(router: router, type: SignUpDTO.self)
             .asObservable()
     }
-    
-    func requestKakaoSignUp(userIdentifier: String, nickname: String, region: String) -> Observable<Result<SignUpDTO, APIError>> {
-        
-        let bodyData = SignUpBody(username: userIdentifier,
-                                  nickname: nickname,
-                                  region: region,
-                                  idToken: "",
-                                  signInType: .kakao)
+
+    func requestKakaoSignUp(
+        userIdentifier: String, nickname: String, region: String
+    ) -> Observable<Result<SignUpDTO, APIError>> {
+
+        let bodyData = SignUpBody(
+            socialType: .kakao,
+            socialId: userIdentifier,
+            nickname: nickname,
+            region: region,
+            idToken: "")
         let router = SignUpRouter.requestKakaoSignUp(signUp: bodyData)
-        
+
         return apiManager.request(router: router, type: SignUpDTO.self)
             .asObservable()
     }

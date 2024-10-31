@@ -24,7 +24,7 @@ enum SignUpType: String {
     case kakao
 }
 
-enum MainContentsType {
+enum MainContentsType: Encodable {
     
     case policy
     case review

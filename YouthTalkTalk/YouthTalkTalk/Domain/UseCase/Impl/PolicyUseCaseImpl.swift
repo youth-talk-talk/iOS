@@ -51,6 +51,28 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
+    func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<([PolicyEntity], Int), APIError>> {
+        
+        return policyRepository.fetchConditionPolicies(page: page, body: body)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let conditionPolicyDTO):
+                    
+                    let policies = conditionPolicyDTO.data.policyList.map { dto in
+                        return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
+                    }
+                    
+                    return .success((policies, conditionPolicyDTO.data.totalCount))
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
     func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>> {
         
         return policyRepository.fetchPolicyDetail(id: id)
@@ -85,6 +107,53 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                     let scrapEntity = ScrapEntity(isScrap: scrapDTO.message == "스크랩에 성공하였습니다.", id: id)
                     
                     return .success(scrapEntity)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchUpComingDeadline() -> Observable<Result<[PolicyEntity], APIError>> {
+        
+        policyRepository.fetchUpComingDeadline()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let upcomingDTO):
+                    
+                    let entities = upcomingDTO.data.map {
+                        return PolicyEntity(policyId: $0.policyId,
+                                            category: $0.category, title: $0.title, deadlineStatus: $0.deadlineStatus,
+                                            hostDep: $0.hostDep, scrap: $0.scrap)
+                    }
+                    
+                    return .success(entities)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchScrapPolicy() -> Observable<Result<[PolicyEntity], APIError>> {
+        
+        policyRepository.fetchScrapPolicy()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let scrapDTO):
+                    
+                    let entities = scrapDTO.data.map {
+                        return PolicyEntity(policyId: $0.policyId,
+                                            category: $0.category, title: $0.title, deadlineStatus: $0.deadlineStatus,
+                                            hostDep: $0.hostDep, scrap: $0.scrap)
+                    }
+                    
+                    return .success(entities)
+                    
                 case .failure(let error):
                     return .failure(error)
                 }

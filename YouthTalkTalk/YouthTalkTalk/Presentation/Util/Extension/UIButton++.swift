@@ -22,6 +22,26 @@ extension UIButton {
         updateHandler(bgColor: .clear)
     }
     
+    // 이미지 버튼
+    func designWithImage(title: String, image: UIImage, bgColor: UIColor, titleColor: UIColor, fontType: FontType) {
+        
+        var titleAttrribute = AttributedString.init(title)
+        titleAttrribute.font = FontManager.font(fontType)
+        
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.image = image
+        buttonConfiguration.imagePadding = 2 // 이미지와 텍스트 사이의 패딩을 0으로 설정
+        buttonConfiguration.imagePlacement = .leading
+        
+        buttonConfiguration.title = title
+        buttonConfiguration.attributedTitle = titleAttrribute
+        buttonConfiguration.baseBackgroundColor = bgColor
+        buttonConfiguration.baseForegroundColor = titleColor
+        buttonConfiguration.background.cornerRadius = 8
+        
+        self.configuration = buttonConfiguration
+    }
+    
     // 기본 버튼 디자인
     func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .p16Regular16, withAction: Bool = true) {
         

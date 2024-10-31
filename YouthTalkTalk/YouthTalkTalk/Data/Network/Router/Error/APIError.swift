@@ -40,6 +40,8 @@ enum APIError: Error {
     case appleAdditionalSignUpRequired // 애플 추가 회원가입이 필요합니다.
     case alreadyRegisteredUser       // 이미 가입한 회원입니다.
     case invalidAppleUserIdentifier  // 애플 USERIDENTIFIER가 유효하지 않습니다.
+    case invalidAccessToken          // 유효하지 않은 엑세스 토큰입니다.
+    case invalidRefreshToken         // 유효하지 않은 리프레시 토큰입니다.
     
     // Policy Cases
     case policyNotFound              // 해당 정책을 찾을 수 없습니다.
@@ -124,6 +126,11 @@ enum APIError: Error {
             self = .alreadyLikedComment
         case "C03":
             self = .likeInfoNotFound
+            
+        case "T01":
+            self = .invalidAccessToken
+        case "T02":
+            self = .invalidRefreshToken
 
         default:
             self = .unknown
@@ -161,6 +168,8 @@ enum APIError: Error {
         case .appleAdditionalSignUpRequired: return "애플 추가 회원가입이 필요합니다."
         case .alreadyRegisteredUser: return "이미 가입한 회원입니다."
         case .invalidAppleUserIdentifier: return "애플 USERIDENTIFIER가 유효하지 않습니다."
+        case .invalidAccessToken: return "유효하지 않은 엑세스 토큰입니다."
+        case .invalidRefreshToken: return "유효하지 않은 리프레시 토큰입니다."
             
         case .policyNotFound: return "해당 정책을 찾을 수 없습니다."
             

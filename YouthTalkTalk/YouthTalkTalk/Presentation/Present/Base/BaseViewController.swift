@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class BaseViewController<LayoutView: UIView>: UIViewController {
     
@@ -24,13 +25,14 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.hidesBackButton = true
+        self.updateNavigationBackButtonTitle()
+        
         configureView()
         configureTableView()
         configureCollectionView()
         configureNavigation()
         bind()
-        
-        updateNavigationBackButtonTitle(title: "")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -55,16 +57,32 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         self.navigationItem.titleView = titleLabel
     }
     
-    private func updateNavigationBackButtonTitle(title: String) {
+    func updateNavigationBackButtonTitle(title: String = "") {
         
-        let backButton = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
-        backButton.tintColor = .black
-        self.navigationItem.backBarButtonItem = backButton
+        self.navigationItem.hidesBackButton = true
+        
+        let customBackView = UIImageView()
+        customBackView.image = .back.withRenderingMode(.alwaysOriginal)
+        let backButtonItem = UIBarButtonItem(customView: customBackView)
+        
+        let titleLabel = UILabel()
+        titleLabel.designed(text: title, fontType: .p18Regular)
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        
+        self.navigationItem.leftBarButtonItems = [backButtonItem, titleItem]
+        
+        // 뒤로 가기 동작 추가
+        let tapGesture = UITapGestureRecognizer()
+        customBackView.addGestureRecognizer(tapGesture)
+        customBackView.isUserInteractionEnabled = true
+        
+        tapGesture.rx.event
+            .bind(with: self) { owner, _ in
+                
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
-    
-    // deinit {
-    //     print(String(describing: type(of: self)))
-    // }
 }
 
 extension BaseViewController {
@@ -74,7 +92,7 @@ extension BaseViewController {
         switch error {
         case .policyNotFound:
             showAlert(error)
-        case .userNotFound:
+        case .invalidAccessToken, .invalidRefreshToken:
             showAlert(error) { [weak self] _ in
                 
                 guard let self else { return }

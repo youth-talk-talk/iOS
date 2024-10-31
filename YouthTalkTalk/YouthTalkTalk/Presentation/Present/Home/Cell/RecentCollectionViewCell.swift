@@ -23,6 +23,8 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
     let commentsButton = UIButton()
     let commentsLabel = UILabel()
     
+    let tapGesture = UITapGestureRecognizer()   // itemSelected가 안먹힐때만 사용
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -36,6 +38,13 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         commentsLabel.text = ""
         
         scrapButton.configuration?.image = nil
+        
+        if gestureRecognizers?.isEmpty == false {
+            gestureRecognizers?.removeAll()
+            self.addGestureRecognizer(tapGesture)
+        } else {
+            self.addGestureRecognizer(tapGesture)
+        }
     }
     
     override func configureLayout() {
@@ -107,6 +116,8 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         categoryLabel.designed(text: "카테고리", fontType: .p12Bold, textColor: .gray40)
         commentsButton.designedByImage(.comments)
         
+        addGestureRecognizer(tapGesture)
+        
         subTitleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.lineBreakMode = .byTruncatingTail
         
@@ -141,6 +152,7 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         
         subTitleLabel.text = data.policyTitle
         titleLabel.text = data.title
+        scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
         scrapLabel.designed(text: String(data.scraps), fontType: .p14Regular)
         commentsLabel.designed(text: String(data.comments), fontType: .p14Regular)
         

@@ -9,10 +9,11 @@ import Foundation
 import UIKit.UIFont
 
 enum FontType {
- 
+    
     case p24Bold
     
     case p18Bold
+    case p18Regular
     
     case p16Bold
     case p16SemiBold
@@ -29,6 +30,8 @@ enum FontType {
     
     case g20Bold
     case g14Bold
+    
+    case g18Medium
 }
 
 enum FontColor {
@@ -96,6 +99,11 @@ final class FontManager {
             fontWeight = "Bold"
             fontSize = 18
             
+        case .p18Regular:
+            
+            fontWeight = "Regular"
+            fontSize = 18
+            
         case .p16Bold:
             
             fontWeight = "Bold"
@@ -153,6 +161,11 @@ final class FontManager {
             fontWeight = "Bold"
             fontSize = 14
             
+        case .g18Medium:
+            
+            familyName = "GmarketSans"
+            fontWeight = "Medium"
+            fontSize = 18
         }
         
         return UIFont(name: "\(familyName)\(fontWeight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
@@ -167,6 +180,8 @@ final class FontManager {
         case .p24Bold:
             lineHeight = 24
         case .p18Bold:
+            lineHeight = 24
+        case .p18Regular:
             lineHeight = 24
         case .p16Bold:
             lineHeight = 24
@@ -190,9 +205,69 @@ final class FontManager {
             lineHeight = 24
         case .g14Bold:
             lineHeight = 24
+        case .g18Medium:
+            lineHeight = 24
         }
         
         return lineHeight
+    }
+    
+    static func imageWithText(contentList: [DetailContentEntity], fontType: FontType, textColor: UIColor, completion: @escaping (NSAttributedString) -> Void) {
+        
+        var attributedStringArray = Array(repeating: NSMutableAttributedString(), count: contentList.count)
+        let font = FontManager.font(fontType)
+        let dispatchGroup = DispatchGroup()
+        
+        for (index, item) in contentList.enumerated() {
+            
+            if item.type == "IMAGE" {
+                
+                dispatchGroup.enter() // 비동기 작업 시작
+                loadImage(for: item.content) { imageString in
+                    attributedStringArray[index] = imageString  // 순서에 맞춰서 이미지 넣음
+                    dispatchGroup.leave() // 비동기 작업 종료
+                }
+                
+            } else {
+                
+                let text = NSAttributedString(
+                    string: item.content,
+                    attributes: [.font: font, .foregroundColor: textColor]
+                )
+                attributedStringArray[index] = NSMutableAttributedString(attributedString: text)
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            
+            // 모든 비동기 작업 완료 후 순서대로 attributedStringArray를 합침
+            let finalAttributedString = NSMutableAttributedString()
+            attributedStringArray.forEach { finalAttributedString.append($0) }
+            
+            // 완료 핸들러 호출
+            completion(finalAttributedString)
+        }
+    }
+}
+
+private extension FontManager {
+    
+    static func loadImage(for url: String, completion: @escaping (NSMutableAttributedString) -> Void) {
+        ImageManager.loadImage(from: url) { result in
+            let imageString: NSMutableAttributedString
+            
+            guard let image = result else { return imageString = NSMutableAttributedString() }
+            
+            let imageAttachment = NSTextAttachment()
+            let imageSize = image.size
+            imageAttachment.image = image
+            imageAttachment.bounds = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
+            
+            imageString = NSMutableAttributedString(attachment: imageAttachment)
+            imageString.append(NSAttributedString(string: "\n"))
+            
+            completion(imageString)
+        }
     }
 }
 

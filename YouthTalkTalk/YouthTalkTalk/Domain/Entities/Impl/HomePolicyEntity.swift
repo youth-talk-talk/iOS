@@ -15,7 +15,6 @@ struct HomePolicyEntity {
 
 struct PolicyEntity: Hashable {
     
-    let uuid = UUID()
     let policyId: String
     let category: String
     let title: String

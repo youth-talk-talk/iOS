@@ -44,6 +44,12 @@ final class HomeViewController: BaseViewController<HomeView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.input.fetchPolicies.accept(())
+    }
+    
     override func configureCollectionView() {
         
         layoutView.collectionView.prefetchDataSource = self
@@ -84,8 +90,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 owner.errorHandler(error)
             }
             .disposed(by: disposeBag)
-        
-        viewModel.input.fetchPolicies.accept(())
         
         layoutView.collectionView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
@@ -176,6 +180,23 @@ final class HomeViewController: BaseViewController<HomeView> {
                     owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            switch itemIdentifier {
+            case .recent(let policyEntity):
+                
+                cell.tapGesture.rx.event
+                    .bind(with: self) { owner, _ in
+                        let repository = PolicyRepositoryImpl()
+                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
+                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
+                        let nextVC = PolicyViewController(viewModel: viewModel)
+                        
+                        self.navigationController?.pushViewController(nextVC, animated: true)
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+            default: break
+            }
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
@@ -217,6 +238,36 @@ final class HomeViewController: BaseViewController<HomeView> {
                     owner.navigationController?.pushViewController(nextVC, animated: true)
                 }
                 .disposed(by: supplementaryView.disposeBag)
+            
+            // 버튼의 tap 이벤트에 식별자 추가
+            let jobTap = supplementaryView.jobCategoryButton.rx.tap
+                .map { PolicyCategory.job }
+
+            let educationTap = supplementaryView.educationCategoryButton.rx.tap
+                .map { PolicyCategory.education }
+            
+            let lifeTap = supplementaryView.cultureCategoryButton.rx.tap
+                .map { PolicyCategory.life }
+
+            let participationTap = supplementaryView.collaborateCategoryButton.rx.tap
+                .map { PolicyCategory.participation }
+
+            Observable.merge(jobTap, educationTap, lifeTap, participationTap)
+            .bind(with: self) { owner, category in
+                
+                let policyUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+                let viewModel = ResultPolicyViewModel(type: [category], policyUseCase: policyUseCase)
+                let resultSearchVC = ResultSearchViewController(viewModel: viewModel, type: category)
+                
+                // let titleLabelView = UILabel()
+                // titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
+                // let leftTitleView = UIBarButtonItem(customView: titleLabelView)
+                // resultSearchVC.navigationItem.leftBarButtonItem = leftTitleView
+                // resultSearchVC.navigationItem.leftItemsSupplementBackButton = true
+                
+                owner.navigationController?.pushViewController(resultSearchVC, animated: true)
+            }
+            .disposed(by: supplementaryView.disposeBag)
         }
         
         // 인기정책 Header Registration

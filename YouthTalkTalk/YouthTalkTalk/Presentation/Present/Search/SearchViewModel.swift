@@ -13,6 +13,7 @@ final class SearchViewModel: SearchInterface {
     
     private let disposeBag: DisposeBag = DisposeBag()
     private let userDefaults = UserDefaults.standard
+    private var keyword: String = ""
     
     var type: MainContentsType
     
@@ -36,6 +37,7 @@ final class SearchViewModel: SearchInterface {
                 if text.isEmpty { return }
                 
                 owner.userDefaults.saveRecentSearch(searchText: text, type: type)
+                owner.keyword = text
                 // 결과창 화면으로 변경
                 owner.searchTypeEvent.accept(text.isEmpty ? .recent : .result)
                 
@@ -48,5 +50,9 @@ final class SearchViewModel: SearchInterface {
                 // 최근검색창 화면으로 변경
                 owner.searchTypeEvent.accept(.recent)
             }.disposed(by: disposeBag)
+    }
+    
+    func fetchKeyword() -> String {
+        return keyword
     }
 }

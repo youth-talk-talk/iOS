@@ -15,8 +15,11 @@ enum PolicyRouter: Router {
     }
     
     case fetchHomePolicy(policy: PolicyQuery)
+    case fetchConditionPolicy(page: Int, body: PolicyConditionBody)
     case fetchPolicyDetail(id: String)
     case updatePolicyScrap(id: String)
+    case fetchUpComingDeadlineScrap
+    case fetchScrapPolicy
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -26,34 +29,42 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy:
             return "/policies"
+        case .fetchConditionPolicy:
+            return "/policies/search"
         case .fetchPolicyDetail(let id):
             return "/policies/\(id)"
         case .updatePolicyScrap(let id):
             return "/policies/\(id)/scrap"
+        case .fetchUpComingDeadlineScrap:
+            return "policies/scrapped/upcoming-deadline"
+        case .fetchScrapPolicy:
+            return "policies/scrap"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail:
+        case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy :
             return .get
-        case .updatePolicyScrap:
+        case .fetchConditionPolicy, .updatePolicyScrap:
             return .post
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .fetchHomePolicy(let body):
-            return convertToParameters(body)
-        case .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchHomePolicy(let query):
+            return convertToParameters(query)
+        case .fetchConditionPolicy(let page, _):
+            return convertToParameters(page)
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -65,7 +76,9 @@ enum PolicyRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap:
+        case .fetchConditionPolicy(_, let body):
+            return try? encoder.encode(body)
+        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }
     }
@@ -82,6 +95,15 @@ enum PolicyRouter: Router {
         }
         params["page"] = query.page
         params["size"] = query.size
+        
+        return params
+    }
+    
+    private func convertToParameters(_ page: Int) -> [String: Any] {
+        var params: [String: Any] = [:]
+        
+        params["page"] = page
+        params["size"] = 10
         
         return params
     }
