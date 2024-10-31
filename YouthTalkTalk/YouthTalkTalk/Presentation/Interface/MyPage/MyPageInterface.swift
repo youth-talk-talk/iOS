@@ -10,6 +10,7 @@ import RxCocoa
 
 protocol MyPageInput {
     
+    var fetchMe: PublishRelay<Void> { get }
     var fetchUpcomingScrapEvent: PublishRelay<Void> { get }
     var updatePolicyScrap: PublishRelay<String> { get }
 }
@@ -18,7 +19,7 @@ protocol MyPageOutput {
     
     var upcomingScrapPolicies: PublishRelay<[PolicyEntity]> { get }
     var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
-    
+    var meEntity: PublishRelay<MeEntity> { get }
 }
 
 protocol MyPageInterface: MyPageInput, MyPageOutput {

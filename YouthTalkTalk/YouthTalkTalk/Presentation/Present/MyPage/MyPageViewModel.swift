@@ -13,20 +13,38 @@ final class MyPageViewModel: MyPageInterface {
     
     private var disposeBag = DisposeBag()
     private var useCase: PolicyUseCase
+    private var memberUseCase: MemberUseCase
     
     var input: MyPageInput { return self }
     var output: MyPageOutput { return self }
     
     // Inputs
+    var fetchMe = PublishRelay<Void>()
     var fetchUpcomingScrapEvent = PublishRelay<Void>()
     var updatePolicyScrap = PublishRelay<String>()
     
     // Outputs
     var upcomingScrapPolicies = PublishRelay<[PolicyEntity]>()
     var canceledScrapEntity = PublishRelay<ScrapEntity>()
+    var meEntity = PublishRelay<MeEntity>()
     
-    init(useCase: PolicyUseCase) {
+    init(useCase: PolicyUseCase, memberUseCase: MemberUseCase) {
         self.useCase = useCase
+        self.memberUseCase = memberUseCase
+        
+        fetchMe
+            .flatMap { _ in
+                return memberUseCase.fetchMe()
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let meEntity):
+                    owner.meEntity.accept(meEntity)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
         
         fetchUpcomingScrapEvent
             .flatMap { _ in

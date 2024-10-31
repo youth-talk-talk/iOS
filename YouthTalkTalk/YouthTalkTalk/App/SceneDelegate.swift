@@ -117,7 +117,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // MYPAGE TAB
         let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-        let myPageViewModel = MyPageViewModel(useCase: myPageUseCase)
+        let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
+        let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
         let myPageVC = MyPageViewController(viewModel: myPageViewModel)
         let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
         

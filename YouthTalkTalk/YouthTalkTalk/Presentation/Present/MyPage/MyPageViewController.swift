@@ -142,6 +142,7 @@ class MyPageViewController: RootViewController {
                 
                 row.addItem(nicknameLabel)
                     .alignSelf(.center)
+                    .grow(1)
                 
                 row.addItem(settingButton)
                     .width(115)
@@ -234,6 +235,24 @@ class MyPageViewController: RootViewController {
                 
             }
             .disposed(by: disposeBag)
+        
+        // 내 정보
+        viewModel.output.meEntity
+            .bind(with: self) { owner, meEntity in
+                owner.nicknameLabel.designed(text: meEntity.nickname, fontType: .p18Bold, textColor: .black)
+            }
+            .disposed(by: disposeBag)
+        
+        settingButton.rx.tap
+            .withLatestFrom(viewModel.output.meEntity)
+            .bind(with: self) { owner, meEntity in
+                
+                let vc = SettingViewController(data: meEntity)
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.input.fetchMe.accept(())
     }
 }
 

@@ -170,6 +170,13 @@
 		ACC46CB62CD287ED0004ED5C /* MyScrapRPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */; };
 		ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */; };
 		ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */; };
+		ACC46CBD2CD290340004ED5C /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBC2CD290270004ED5C /* MemberRepository.swift */; };
+		ACC46CBF2CD290420004ED5C /* MemberRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBE2CD2903A0004ED5C /* MemberRepositoryImpl.swift */; };
+		ACC46CC12CD2913F0004ED5C /* MemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC02CD2913F0004ED5C /* MemberUseCase.swift */; };
+		ACC46CC32CD2916F0004ED5C /* MeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC22CD2916F0004ED5C /* MeEntity.swift */; };
+		ACC46CC52CD291A10004ED5C /* MemberUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC42CD291A10004ED5C /* MemberUseCaseImpl.swift */; };
+		ACC46CC82CD2949B0004ED5C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC72CD2949B0004ED5C /* SettingViewController.swift */; };
+		ACC46CCA2CD29CE60004ED5C /* TitleWithImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC92CD29CE60004ED5C /* TitleWithImageButtonView.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
 		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
@@ -413,6 +420,13 @@
 		ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapRPViewModel.swift; sourceTree = "<group>"; };
 		ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostDTO.swift; sourceTree = "<group>"; };
 		ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRPScrapInterface.swift; sourceTree = "<group>"; };
+		ACC46CBC2CD290270004ED5C /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
+		ACC46CBE2CD2903A0004ED5C /* MemberRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepositoryImpl.swift; sourceTree = "<group>"; };
+		ACC46CC02CD2913F0004ED5C /* MemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberUseCase.swift; sourceTree = "<group>"; };
+		ACC46CC22CD2916F0004ED5C /* MeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeEntity.swift; sourceTree = "<group>"; };
+		ACC46CC42CD291A10004ED5C /* MemberUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberUseCaseImpl.swift; sourceTree = "<group>"; };
+		ACC46CC72CD2949B0004ED5C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		ACC46CC92CD29CE60004ED5C /* TitleWithImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithImageButtonView.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
 		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -628,6 +642,7 @@
 				AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */,
 				AC0AA5B42CCE19AC00DB032E /* CommentTableViewCell.swift */,
 				ACC46CA42CD138B00004ED5C /* FavoriteCollectionViewCell.swift */,
+				ACC46CC92CD29CE60004ED5C /* TitleWithImageButtonView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -769,6 +784,7 @@
 		AC5A7C222BF1015800A13991 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CC62CD294870004ED5C /* Setting */,
 				ACC46CB22CD286DF0004ED5C /* MyScrapRP */,
 				ACC46CA62CD27DA40004ED5C /* MyScrap */,
 				AC0AA5C82CCFF04E00DB032E /* MyPage */,
@@ -966,6 +982,14 @@
 			path = MyRPScrap;
 			sourceTree = "<group>";
 		};
+		ACC46CC62CD294870004ED5C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				ACC46CC72CD2949B0004ED5C /* SettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1086,7 @@
 				AC604C102C67820300804950 /* PostUseCase.swift */,
 				ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */,
 				AC0AA5BE2CCE23C100DB032E /* CommentUseCase.swift */,
+				ACC46CC02CD2913F0004ED5C /* MemberUseCase.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -1076,6 +1101,7 @@
 				AC604C122C67823300804950 /* PostUseCaseImpl.swift */,
 				ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */,
 				AC0AA5BC2CCE23B300DB032E /* CommentUseCaseImpl.swift */,
+				ACC46CC42CD291A10004ED5C /* MemberUseCaseImpl.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1117,6 +1143,7 @@
 				AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */,
 				AC0AA5B22CCE18D800DB032E /* CommentEntity.swift */,
 				ACC46C9B2CD130CE0004ED5C /* UpcomingScrapEntity.swift */,
+				ACC46CC22CD2916F0004ED5C /* MeEntity.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -1173,6 +1200,7 @@
 		ACF2A2CC2C2D91E400FE8D63 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CBE2CD2903A0004ED5C /* MemberRepositoryImpl.swift */,
 				ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */,
 				AC579B442C4016AC00D1C9FC /* SignUpRepositoryImpl.swift */,
 				AC579B5B2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift */,
@@ -1186,6 +1214,7 @@
 		ACF2A2CD2C2D91EB00FE8D63 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ACC46CBC2CD290270004ED5C /* MemberRepository.swift */,
 				ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */,
 				AC579B422C40160F00D1C9FC /* SignUpRepository.swift */,
 				AC579B532C4522CE00D1C9FC /* PolicyRepository.swift */,
@@ -1487,6 +1516,7 @@
 				AC0AA59E2CC5084700DB032E /* ResultDetailInterface.swift in Sources */,
 				AC579B502C451CBD00D1C9FC /* HomeInterface.swift in Sources */,
 				ACF2A2E92C315E7000FE8D63 /* APIManager.swift in Sources */,
+				ACC46CC82CD2949B0004ED5C /* SettingViewController.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
 				AC51E8402C969EF600550148 /* DetailConditionViewModel.swift in Sources */,
 				AC0AA5BD2CCE23B300DB032E /* CommentUseCaseImpl.swift in Sources */,
@@ -1536,6 +1566,7 @@
 				AC0AA5A22CC509A800DB032E /* DetailRPDTO.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
 				AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */,
+				ACC46CCA2CD29CE60004ED5C /* TitleWithImageButtonView.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
 				AC579B662C49169D00D1C9FC /* APIInterceptor.swift in Sources */,
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
@@ -1543,8 +1574,10 @@
 				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
 				AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */,
 				AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */,
+				ACC46CBF2CD290420004ED5C /* MemberRepositoryImpl.swift in Sources */,
 				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,
 				AC604C052C67624E00804950 /* ReviewRepositoryImpl.swift in Sources */,
+				ACC46CBD2CD290340004ED5C /* MemberRepository.swift in Sources */,
 				ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */,
 				AC51E8332C956F1400550148 /* DetailConditionViewController.swift in Sources */,
 				ACF2A2F72C32CC7100FE8D63 /* SearchView.swift in Sources */,
@@ -1600,6 +1633,7 @@
 				AC5A7C252BF102D600A13991 /* BaseViewController.swift in Sources */,
 				ACF2A2C22C2D453C00FE8D63 /* UserDefaults.swift in Sources */,
 				AC604BEF2C675BC000804950 /* RPInput.swift in Sources */,
+				ACC46CC32CD2916F0004ED5C /* MeEntity.swift in Sources */,
 				AC604C6B2C7A23EF00804950 /* ResultReviewViewModel.swift in Sources */,
 				AC604BD32C63967600804950 /* CommunityView.swift in Sources */,
 				ACC46CA32CD136FD0004ED5C /* MyPageLayout.swift in Sources */,
@@ -1636,6 +1670,7 @@
 				AC0AA5B72CCE21D500DB032E /* CommentRepositoryImpl.swift in Sources */,
 				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
+				ACC46CC12CD2913F0004ED5C /* MemberUseCase.swift in Sources */,
 				AC0AA5BF2CCE23C100DB032E /* CommentUseCase.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
 				AC604C0B2C6764C900804950 /* ReviewBody.swift in Sources */,
@@ -1657,6 +1692,7 @@
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
 				AC0AA5B12CCE186000DB032E /* CommentDTO.swift in Sources */,
 				AC579B2E2C3BE13B00D1C9FC /* SearchInterface.swift in Sources */,
+				ACC46CC52CD291A10004ED5C /* MemberUseCaseImpl.swift in Sources */,
 				ACF2A2802C25886600FE8D63 /* BaseCollectionViewCell.swift in Sources */,
 				ACF2A31A2C35594000FE8D63 /* SignInEntity.swift in Sources */,
 				ACC46CA52CD138B00004ED5C /* FavoriteCollectionViewCell.swift in Sources */,
