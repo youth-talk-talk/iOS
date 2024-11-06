@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
 		AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */; };
 		AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* ResultDetailView.swift */; };
 		AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */; };
@@ -258,6 +259,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
 		AC0AA5992CC374D100DB032E /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
 		AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				AC4B43022C19C829005FC370 /* Flex++.swift */,
 				ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */,
 				ACF2A26B2C21B27200FE8D63 /* NSObject++.swift */,
+				6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1615,6 +1618,7 @@
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
 				AC579B9D2C5CB9DF00D1C9FC /* DetailTableViewCell.swift in Sources */,
+				6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */,
 				AC579B432C40160F00D1C9FC /* SignUpRepository.swift in Sources */,
 				AC604C192C67832400804950 /* PostRepositoryImpl.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
