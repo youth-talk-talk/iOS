@@ -17,6 +17,7 @@ enum MeRouter: Router {
     }
     
     case requestMe
+    case deleteAccount
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -24,7 +25,7 @@ enum MeRouter: Router {
     
     var path: String {
         switch self {
-        case .requestMe:
+        case .requestMe, .deleteAccount:
             return "/members/me"
         }
     }
@@ -33,19 +34,21 @@ enum MeRouter: Router {
         switch self {
         case .requestMe:
             return .get
+        case .deleteAccount:
+            return .post
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .requestMe:
+        case .requestMe, .deleteAccount:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .requestMe:
+        case .requestMe, .deleteAccount:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -58,6 +61,9 @@ enum MeRouter: Router {
         
         switch self {
         case .requestMe:
+            return nil
+        case .deleteAccount:
+            // TODO: 애플/ 카카오 로그인 유저 구분해서 바디 생성
             return nil
         }
     }

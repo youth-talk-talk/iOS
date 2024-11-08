@@ -10,6 +10,8 @@ import SnapKit
 import Then
 
 final class TwoButtonAlertView: UIView {
+    private let okAction: () -> Void
+    
     private lazy var shadowView = UIView().then {
         $0.backgroundColor = .black.withAlphaComponent(0.5)
     }
@@ -49,11 +51,13 @@ final class TwoButtonAlertView: UIView {
         $0.titleLabel?.textColor = FontColor.black.value
     }
     
-    init(title: String, okAction: () -> Void) {
+    init(title: String, okAction: @escaping () -> Void) {
+        self.okAction = okAction
+        
         super.init(frame: .zero)
         
         layout()
-        setTabEvents(okAction)
+        setTabEvents()
 
         titleLabel.text = title
     }
@@ -62,12 +66,15 @@ final class TwoButtonAlertView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setTabEvents(_ okAction: () -> ()) {
+    private func setTabEvents() {
         cancelButton.onTapped { [weak self] in
             self?.removeFromSuperview()
         }
         
-        
+        okButton.onTapped { [weak self] in
+            self?.okAction()
+            self?.removeFromSuperview()
+        }
     }
     
     private func layout() {

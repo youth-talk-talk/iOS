@@ -31,6 +31,11 @@ final class SettingViewController: RootViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.output.successDeleteAccount.bind { [weak self] _ in
+            self?.goSignInView()
+        }
+        .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -49,28 +54,13 @@ final class SettingViewController: RootViewController {
         regionButtonView.setTitle(data.region)
         regionButtonView.setImage(.setting)
         
-        logoutLabel.onTapped {
-            let useCase = SignInUseCaseImpl()
-            let viewModel = SignInViewModel(signInUseCase: useCase)
-            let newRootVC = SignInViewController(viewModel: viewModel)
-            let naviVC = UINavigationController(rootViewController: newRootVC)
-            
-            let keyChainHelper = KeyChainHelper()
-            keyChainHelper.deleteTokenInfo(type: .accessToken)
-            keyChainHelper.deleteTokenInfo(type: .refreshToken)
-            
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
-                    fatalError("Failed to get SceneDelegate")
-                }
-                sceneDelegate.window?.rootViewController = naviVC
-                sceneDelegate.window?.makeKeyAndVisible()
-            }
+        logoutLabel.onTapped { [weak self] in
+            self?.goSignInView()
         }
         
         withdrawLabel.onTapped { [weak self] in
             let alertView = TwoButtonAlertView(title: "정말로 탈퇴 하시겠습니까?") { [weak self] in
-                // TODO: 탈퇴 로직 구현
+                self?.viewModel.input.deleteAccount.accept(())
             }
             
             self?.view.addSubview(alertView)
@@ -82,6 +72,25 @@ final class SettingViewController: RootViewController {
         
         logoutLabel.designed(text: "로그아웃", fontType: .p16SemiBold, textColor: .gray60)
         withdrawLabel.designed(text: "회원탈퇴", fontType: .p16SemiBold, textColor: .gray60)
+    }
+    
+    private func goSignInView() {
+        let useCase = SignInUseCaseImpl()
+        let viewModel = SignInViewModel(signInUseCase: useCase)
+        let newRootVC = SignInViewController(viewModel: viewModel)
+        let naviVC = UINavigationController(rootViewController: newRootVC)
+        
+        let keyChainHelper = KeyChainHelper()
+        keyChainHelper.deleteTokenInfo(type: .accessToken)
+        keyChainHelper.deleteTokenInfo(type: .refreshToken)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                fatalError("Failed to get SceneDelegate")
+            }
+            sceneDelegate.window?.rootViewController = naviVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
     
     override func configureLayout() {

@@ -22,11 +22,13 @@ final class MyPageViewModel: MyPageInterface {
     var fetchMe = PublishRelay<Void>()
     var fetchUpcomingScrapEvent = PublishRelay<Void>()
     var updatePolicyScrap = PublishRelay<String>()
+    var deleteAccount = PublishRelay<Void>()
     
     // Outputs
     var upcomingScrapPolicies = PublishRelay<[PolicyEntity]>()
     var canceledScrapEntity = PublishRelay<ScrapEntity>()
     var meEntity = PublishRelay<MeEntity>()
+    var successDeleteAccount = PublishRelay<Void>()
     
     init(useCase: PolicyUseCase, memberUseCase: MemberUseCase) {
         self.useCase = useCase
@@ -42,6 +44,17 @@ final class MyPageViewModel: MyPageInterface {
                     owner.meEntity.accept(meEntity)
                 case .failure(let error):
                     print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        deleteAccount
+            .flatMap { _ in
+                memberUseCase.deleteAccount()
+            }
+            .bind(with: self) { [weak self] owner, isSuccess in
+                if isSuccess {
+                    self?.successDeleteAccount.accept(())
                 }
             }
             .disposed(by: disposeBag)
