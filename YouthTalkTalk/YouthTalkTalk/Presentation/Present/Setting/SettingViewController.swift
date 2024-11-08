@@ -46,6 +46,25 @@ class SettingViewController: RootViewController {
         regionButtonView.setTitle(data.region)
         regionButtonView.setImage(.setting)
         
+        logoutLabel.onTapped {
+            let useCase = SignInUseCaseImpl()
+            let viewModel = SignInViewModel(signInUseCase: useCase)
+            let newRootVC = SignInViewController(viewModel: viewModel)
+            let naviVC = UINavigationController(rootViewController: newRootVC)
+            
+            let keyChainHelper = KeyChainHelper()
+            keyChainHelper.deleteTokenInfo(type: .accessToken)
+            keyChainHelper.deleteTokenInfo(type: .refreshToken)
+            
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                    fatalError("Failed to get SceneDelegate")
+                }
+                sceneDelegate.window?.rootViewController = naviVC
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
+        }
+        
         logoutLabel.designed(text: "로그아웃", fontType: .p16SemiBold, textColor: .gray60)
         withdrawLabel.designed(text: "회원탈퇴", fontType: .p16SemiBold, textColor: .gray60)
     }

@@ -11,7 +11,7 @@ import AuthenticationServices
 
 final class SignInView: BaseView {
     
-    let logoImageView = UIImageView()
+    let logoImageView = UIImageView(image: UIImage(named: "App_logo"))
     let appTitleLabel = UILabel()
     let appSubTitleLabel = UILabel()
     let appleSignInButton = UIButton()
@@ -69,7 +69,6 @@ final class SignInView: BaseView {
     override func configureView() {
         
         backgroundColor = .white
-        logoImageView.backgroundColor = .black
         
         appTitleLabel.designed(text: "청년톡톡", fontType: .g20Bold)
         appSubTitleLabel.designed(text: "한눈에 보는 청년정책, 청년톡톡과 함께하세요!", fontType: .p14Regular)
