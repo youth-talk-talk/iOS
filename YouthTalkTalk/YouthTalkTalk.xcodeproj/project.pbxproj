@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
+		6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */; };
+		6AF137602CDE2177004E927B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF1375F2CDE2177004E927B /* Then */; };
+		6AFE80772CDE26D30039A01B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE80762CDE26D30039A01B /* SnapKit */; };
 		AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */; };
 		AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* ResultDetailView.swift */; };
 		AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */; };
@@ -260,6 +263,7 @@
 
 /* Begin PBXFileReference section */
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
 		AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
 		AC0AA5992CC374D100DB032E /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
 		AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
@@ -496,12 +500,14 @@
 			files = (
 				ACF2A2BB2C2C1D3700FE8D63 /* KakaoSDKAuth in Frameworks */,
 				ACF2A2B82C2C184D00FE8D63 /* RxKakaoSDKUser in Frameworks */,
+				6AF137602CDE2177004E927B /* Then in Frameworks */,
 				AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */,
 				AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */,
 				AC0AA5AD2CCE015500DB032E /* Kingfisher in Frameworks */,
 				ACF2A2BD2C2C1D3700FE8D63 /* KakaoSDKUser in Frameworks */,
 				AC604BD82C6396CD00804950 /* Tabman in Frameworks */,
 				AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */,
+				6AFE80772CDE26D30039A01B /* SnapKit in Frameworks */,
 				ACF2A2B62C2C184D00FE8D63 /* RxKakaoSDKAuth in Frameworks */,
 				AC4B42E02C183B05005FC370 /* FlexLayout in Frameworks */,
 			);
@@ -524,6 +530,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AC5EBE02CDE1EF5003EFD37 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		AC0AA5962CC3744800DB032E /* ResultDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1031,6 +1045,7 @@
 		ACF2A2912C28404C00FE8D63 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6AC5EBE02CDE1EF5003EFD37 /* Component */,
 				AC4B42E12C183B1F005FC370 /* Util */,
 				ACF2A2642C216C0D00FE8D63 /* CompositionalLayout */,
 				AC4B43042C1B125C005FC370 /* Interface */,
@@ -1385,6 +1400,8 @@
 				ACF2A2BC2C2C1D3700FE8D63 /* KakaoSDKUser */,
 				AC604BD72C6396CD00804950 /* Tabman */,
 				AC0AA5AC2CCE015500DB032E /* Kingfisher */,
+				6AF1375F2CDE2177004E927B /* Then */,
+				6AFE80762CDE26D30039A01B /* SnapKit */,
 			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
@@ -1466,6 +1483,8 @@
 				ACF2A2B92C2C1D3700FE8D63 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				AC604BD62C6396CD00804950 /* XCRemoteSwiftPackageReference "Tabman" */,
 				AC0AA5AB2CCE015500DB032E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				6AF1375E2CDE2177004E927B /* XCRemoteSwiftPackageReference "Then" */,
+				6AFE80752CDE26D30039A01B /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
@@ -1661,6 +1680,7 @@
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
+				6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */,
 				AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */,
 				AC604C092C6764A900804950 /* RPQuery.swift in Sources */,
 				ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */,
@@ -2086,6 +2106,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6AF1375E2CDE2177004E927B /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		6AFE80752CDE26D30039A01B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 		AC0AA5AB2CCE015500DB032E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -2145,6 +2181,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6AF1375F2CDE2177004E927B /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AF1375E2CDE2177004E927B /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		6AFE80762CDE26D30039A01B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AFE80752CDE26D30039A01B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		AC0AA5AC2CCE015500DB032E /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AC0AA5AB2CCE015500DB032E /* XCRemoteSwiftPackageReference "Kingfisher" */;

@@ -68,8 +68,16 @@ final class SettingViewController: RootViewController {
             }
         }
         
-        withdrawLabel.onTapped {
+        withdrawLabel.onTapped { [weak self] in
+            let alertView = TwoButtonAlertView(title: "정말로 탈퇴 하시겠습니까?") { [weak self] in
+                // TODO: 탈퇴 로직 구현
+            }
             
+            self?.view.addSubview(alertView)
+            
+            alertView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
         }
         
         logoutLabel.designed(text: "로그아웃", fontType: .p16SemiBold, textColor: .gray60)
