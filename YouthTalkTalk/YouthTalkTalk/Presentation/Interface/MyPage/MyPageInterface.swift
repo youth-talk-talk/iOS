@@ -23,7 +23,7 @@ protocol MyPageOutput {
 }
 
 protocol MyPageInterface: MyPageInput, MyPageOutput {
-    
+
     var input: MyPageInput { get }
     var output: MyPageOutput { get }
 }

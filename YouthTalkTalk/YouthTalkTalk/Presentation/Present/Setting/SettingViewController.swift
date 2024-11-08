@@ -11,7 +11,9 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-class SettingViewController: RootViewController {
+final class SettingViewController: RootViewController {
+    
+    private let viewModel: MyPageInterface
     
     let nicknameLabel = UILabel()
     let nicknameButtonView = TitleWithImageButtonView()
@@ -24,8 +26,9 @@ class SettingViewController: RootViewController {
     
     private let data: MeEntity
     
-    init(data: MeEntity) {
+    init(data: MeEntity, viewModel: MyPageInterface) {
         self.data = data
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,6 +66,10 @@ class SettingViewController: RootViewController {
                 sceneDelegate.window?.rootViewController = naviVC
                 sceneDelegate.window?.makeKeyAndVisible()
             }
+        }
+        
+        withdrawLabel.onTapped {
+            
         }
         
         logoutLabel.designed(text: "로그아웃", fontType: .p16SemiBold, textColor: .gray60)

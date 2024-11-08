@@ -245,9 +245,10 @@ class MyPageViewController: RootViewController {
         
         settingButton.rx.tap
             .withLatestFrom(viewModel.output.meEntity)
-            .bind(with: self) { owner, meEntity in
+            .bind(with: self) { [weak self] owner, meEntity in
+                guard let self else { return }
                 
-                let vc = SettingViewController(data: meEntity)
+                let vc = SettingViewController(data: meEntity, viewModel: viewModel)
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
