@@ -40,7 +40,6 @@ final class SignInViewController: BaseViewController<SignInView> {
     }
     
     override func bind() {
-        
         // Inputs
         // apple 로그인 버튼 클릭 이벤트 전달
         layoutView.appleSignInButton.rx.tap
@@ -61,7 +60,6 @@ final class SignInViewController: BaseViewController<SignInView> {
                 
             }.disposed(by: disposeBag)
         
-        // apple 로그인 실패
         viewModel.output.signInSuccessKakao
             .drive(with: self) { owner, isSuccess in
                 
@@ -76,9 +74,15 @@ final class SignInViewController: BaseViewController<SignInView> {
             
             SceneDelegate.makeRootVC()
         } else {
-            let nextVC = TermsViewController()
-            
-            navigationController?.pushViewController(nextVC, animated: true)
+            // MARK: 이용약관이 여러번 푸시되는 이슈 방어 로직
+            // TODO: ( 추후 수정 필요 )
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if let viewControllers = self.navigationController?.viewControllers,
+                   !viewControllers.contains(where: { $0 is TermsViewController }) {
+                    let nextVC = TermsViewController()
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
         }
     }
 }

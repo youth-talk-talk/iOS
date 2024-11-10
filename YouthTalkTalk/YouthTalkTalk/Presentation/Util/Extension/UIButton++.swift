@@ -43,7 +43,7 @@ extension UIButton {
     }
     
     // 기본 버튼 디자인
-    func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .p16Regular16, withAction: Bool = true) {
+    func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .p16Regular16, withAction: Bool = true, cornerRadius: CGFloat = 8) {
         
         var titleAttrribute = AttributedString.init(title)
         titleAttrribute.font = FontManager.font(fontType)
@@ -53,7 +53,7 @@ extension UIButton {
         buttonConfiguration.attributedTitle = titleAttrribute
         buttonConfiguration.baseBackgroundColor = bgColor
         buttonConfiguration.baseForegroundColor = titleColor
-        buttonConfiguration.background.cornerRadius = 8
+        buttonConfiguration.background.cornerRadius = cornerRadius
         
         self.configuration = buttonConfiguration
         
