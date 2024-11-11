@@ -76,13 +76,8 @@ class PolicyViewController: BaseViewController<PolicyView> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
     override func bind() {
+        tabBarController?.tabBar.isHidden = true
         
         snapshot.appendSections(PolicySection.allCases)
         

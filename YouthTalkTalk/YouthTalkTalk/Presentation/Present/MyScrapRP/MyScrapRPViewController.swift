@@ -18,7 +18,9 @@ class MyScrapRPViewController: RootViewController {
     private var dataSource: UICollectionViewDiffableDataSource<MyScrapSection, RPEntity>!
     private var snapshot = NSDiffableDataSourceSnapshot<MyScrapSection, RPEntity>()
     
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyScrapSection.layout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyScrapSection.layout()).then {
+        $0.backgroundColor = .clear
+    }
     
     init(viewModel: MyRPScrapInterface) {
         self.viewModel = viewModel

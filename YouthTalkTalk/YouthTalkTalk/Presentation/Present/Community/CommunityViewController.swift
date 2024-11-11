@@ -45,6 +45,10 @@ class CommunityViewController: BaseViewController<CommunityView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func configureCollectionView() {
         
         layoutView.collectionView.prefetchDataSource = self

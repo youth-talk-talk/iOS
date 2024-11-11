@@ -12,7 +12,9 @@ import PinLayout
 final class HomeView: BaseView {
     
     let colorView = UIView()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: HomeLayout.layout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: HomeLayout.layout()).then {
+        $0.backgroundColor = .clear
+    }
     
     override func configureLayout() {
         

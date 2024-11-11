@@ -13,7 +13,7 @@ class NewPostViewController: BaseViewController<NewPostView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        tabBarController?.tabBar.isHidden = true
     }
     
 }

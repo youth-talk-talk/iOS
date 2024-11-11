@@ -18,7 +18,9 @@ class MyScrapViewController: RootViewController {
     private var dataSource: UICollectionViewDiffableDataSource<MyScrapSection, PolicyEntity>!
     private var snapshot = NSDiffableDataSourceSnapshot<MyScrapSection, PolicyEntity>()
     
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyScrapSection.layout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyScrapSection.layout()).then {
+        $0.backgroundColor = .clear
+    }
     
     init(viewModel: MyScrapInterface) {
         self.viewModel = viewModel

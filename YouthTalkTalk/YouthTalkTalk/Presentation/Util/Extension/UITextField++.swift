@@ -18,7 +18,7 @@ extension UITextField {
     }
     
     func designedPlaceholder(placeholder: String, textColor: UIColor = .gray40, font: FontType = .p16Bold) {
-        
+        self.textColor = .black
         self.placeholder = placeholder
         self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.font: FontManager.font(font), .foregroundColor: textColor])
     }

@@ -11,7 +11,9 @@ import PinLayout
 
 final class ResultSearchView: BaseView {
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ResultSearchLayout.layout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ResultSearchLayout.layout()).then {
+        $0.backgroundColor = .clear
+    }
 
     override func configureLayout() {
         

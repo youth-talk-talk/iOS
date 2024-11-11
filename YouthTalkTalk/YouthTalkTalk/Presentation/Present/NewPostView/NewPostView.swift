@@ -19,7 +19,10 @@ class NewPostView: BaseView {
     let policySearchButton = TitleImageSpacingView()
     
     let contentsLabel = UILabel()
-    let contentsTextView = UITextView()
+    let contentsTextView = UITextView().then {
+        $0.backgroundColor = .clear
+        $0.textColor = .black
+    }
     
     let addImageButton = UIButton()
     let registrationButton = UIButton()

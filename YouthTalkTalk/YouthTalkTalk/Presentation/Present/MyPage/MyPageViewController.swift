@@ -33,7 +33,9 @@ class MyPageViewController: RootViewController {
     let nicknameLabel = UILabel()
     let settingButton = UIButton()
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyPageSection.layout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyPageSection.layout()).then {
+        $0.backgroundColor = .clear
+    }
     
     init(viewModel: MyPageInterface) {
         self.viewModel = viewModel

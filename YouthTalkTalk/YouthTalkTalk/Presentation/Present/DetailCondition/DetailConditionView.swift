@@ -11,7 +11,9 @@ import FlexLayout
 class DetailConditionView: BaseView {
     
     let infoLabel = UILabel()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: DetailConditionLayout.layout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: DetailConditionLayout.layout()).then {
+        $0.backgroundColor = .clear
+    }
     let bottomView = UIView()
     let resetButton = UIButton()
     let applyButton = UIButton()

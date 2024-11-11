@@ -47,6 +47,8 @@ final class HomeViewController: BaseViewController<HomeView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        tabBarController?.tabBar.isHidden = false
+
         viewModel.input.fetchPolicies.accept(())
     }
     
