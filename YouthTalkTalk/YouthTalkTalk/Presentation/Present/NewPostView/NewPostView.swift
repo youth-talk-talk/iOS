@@ -94,7 +94,6 @@ class NewPostView: BaseView {
     }
     
     override func configureView() {
-        
         titleLabel.designed(text: "제목", fontType: .p16SemiBold, textColor: .black)
         titleTextField.designedPlaceholder(placeholder: "제목을 작성해주세요", textColor: .gray50, font: .p16Regular16)
         titleTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: titleTextField.frame.height))
