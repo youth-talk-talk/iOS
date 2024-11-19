@@ -43,7 +43,7 @@ final class MyPageViewModel: MyPageInterface {
                 case .success(let meEntity):
                     owner.meEntity.accept(meEntity)
                 case .failure(let error):
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)
@@ -69,7 +69,7 @@ final class MyPageViewModel: MyPageInterface {
                 case .success(let upcomingPolicyEntities):
                     owner.upcomingScrapPolicies.accept(upcomingPolicyEntities)
                 case .failure(let error):
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)
@@ -86,7 +86,7 @@ final class MyPageViewModel: MyPageInterface {
                 case .success(let scrapEntity):
                     owner.canceledScrapEntity.accept(scrapEntity)
                 case .failure(let error):
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)

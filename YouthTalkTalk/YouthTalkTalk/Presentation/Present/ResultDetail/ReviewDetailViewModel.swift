@@ -60,7 +60,6 @@ final class ReviewDetailViewModel: ResultDetailInterface {
                     
                 case .failure(let error):
                     owner.commentsInfo.accept([])
-                    print(error)
                 }
             }
             .disposed(by: disposeBag)

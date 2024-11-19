@@ -57,8 +57,4 @@ final class PolicyRepositoryImpl: PolicyRepository {
         
         return apiManager.request(router: router, type: ScrapPolicyDTO.self).asObservable()
     }
-    
-    deinit {
-        print("PolicyRepositoryImpl Deinit")
-    }
 }

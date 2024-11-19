@@ -159,8 +159,4 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                 }
             }
     }
-    
-    deinit {
-        print("PolicyUseCaseImpl Deinit")
-    }
 }

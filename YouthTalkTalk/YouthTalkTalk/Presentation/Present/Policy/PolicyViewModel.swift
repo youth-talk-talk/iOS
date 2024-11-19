@@ -56,8 +56,7 @@ final class PolicyViewModel: DetailPolicyInterface {
                     owner.targetSectionRelay.accept(target)
                     
                 case .failure(let error):
-                    
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)

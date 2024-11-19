@@ -90,7 +90,6 @@ final class SignUpViewController: BaseViewController<SignUpView> {
                 if isSignUp {
                     SceneDelegate.makeRootVC()
                 } else {
-                    print("실패")
                 }
             }.disposed(by: disposeBag)
         

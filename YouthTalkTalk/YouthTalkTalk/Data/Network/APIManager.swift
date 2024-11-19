@@ -53,10 +53,6 @@ final class APIManager: APIInterface {
             return Disposables.create()
         }
     }
-    
-    deinit {
-        print("APIManager Deinit")
-    }
 }
 
 extension APIManager {
@@ -76,15 +72,11 @@ extension APIManager {
         do {
             if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 if let code = jsonObject["code"] as? String {
-                    print(code)
-                    let error = APIError(code: code)
-                    print(error.isSuccess ? "\(error.msg) - DTO 타입 전환 에러입니다": error.msg)
-                    
+                    let error = APIError(code: code)                    
                     return error
                 }
             }
         } catch {
-            print("Failed to parse JSON: \(error)")
         }
         
         return .unknown

@@ -58,12 +58,10 @@ extension SignInUseCaseImpl {
         UserApi.shared.rx.loginWithKakaoTalk()
             .subscribe(with: self) { owner, oauthToken in
                 
-                print("loginWithKakaoTalk() success.")
                 // 카카오 유저 정보 요청
                 owner.kakaoUserInfoRequest()
                 
             } onError: {owner, error  in
-                print(error.localizedDescription)
             }
             .disposed(by: disposeBag)
     }
@@ -74,11 +72,9 @@ extension SignInUseCaseImpl {
         UserApi.shared.rx.loginWithKakaoAccount()
             .subscribe(with: self) { owner, oauthToken in
                 
-                print("loginWithKakaoAccount() success.")
                 // 카카오 유저 정보 요청
                 owner.kakaoUserInfoRequest()
             } onError: {owner, error in
-                print(error.localizedDescription)
             }
             .disposed(by: disposeBag)
     }
@@ -180,8 +176,6 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         
-        // 에러
-        print("error / 취소")
     }
     
     private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<SignInEntity, APIError>> {

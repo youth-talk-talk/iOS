@@ -38,7 +38,7 @@ final class MyScrapRPViewModel: MyRPScrapInterface {
                 case .success(let rpEntities):
                     owner.scrap.accept(rpEntities)
                 case .failure(let error):
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)

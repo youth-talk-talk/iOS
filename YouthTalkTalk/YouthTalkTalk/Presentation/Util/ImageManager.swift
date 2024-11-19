@@ -21,7 +21,6 @@ final class ImageManager {
         URLSession.shared.dataTask(with: url) { data, response, error in
             // 에러나 데이터가 없는 경우 처리
             if let error = error {
-                print("Error loading image: \(error)")
                 completion(nil)
                 return
             }

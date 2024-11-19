@@ -30,10 +30,6 @@ class DebugViewController: BaseViewController<DebugView> {
         layoutView.tableView.dataSource = self
         layoutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DebugCell")
     }
-    
-    deinit {
-        print("DebugViewController Deinit")
-    }
 }
 
 extension DebugViewController: UITableViewDelegate, UITableViewDataSource {

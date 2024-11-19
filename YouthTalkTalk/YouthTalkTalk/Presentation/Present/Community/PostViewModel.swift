@@ -49,8 +49,7 @@ final class PostViewModel: RPInterface {
                     owner.recentRPsRelay.accept(recent)
                     
                 case .failure(let error):
-                    
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)

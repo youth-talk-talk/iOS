@@ -391,10 +391,6 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
-    
-    deinit {
-        print("HomeViewController Deinit")
-    }
 }
 
 extension HomeViewController: UICollectionViewDataSourcePrefetching {

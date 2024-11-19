@@ -54,7 +54,7 @@ final class ResultPostViewModel: ResultSearchInterface {
                     owner.totalCountRelay.accept(total)
                     
                 case .failure(let apiError):
-                    print(apiError.msg)
+                    break
                 }
                 
             }

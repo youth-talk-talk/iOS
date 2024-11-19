@@ -127,8 +127,4 @@ final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
         lifeLiteralLabel.designed(text: "생활지원", fontType: .p12Regular, textColor: .gray60)
         participationLiteralLabel.designed(text: "참여", fontType: .p12Regular, textColor: .gray60)
     }
-    
-    deinit {
-        print("RecentHeaderReusableView Deinit")
-    }
 }

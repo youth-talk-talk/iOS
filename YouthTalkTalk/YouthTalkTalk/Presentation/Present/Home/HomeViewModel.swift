@@ -138,8 +138,4 @@ final class HomeViewModel: HomeInterface {
             }
             .disposed(by: disposeBag)
     }
-    
-    deinit {
-        print("HomeViewModel Deinit")
-    }
 }
