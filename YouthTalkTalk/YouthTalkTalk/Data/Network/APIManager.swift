@@ -44,7 +44,7 @@ final class APIManager: APIInterface {
                         single(.success(.success(success)))
                         
                     case .failure:
-                        
+                        print("[⚠️ Request 실패] \(response.response?.url ?? URL(string: ""))")
                         let error = self.handleResponseError(from: response.data)
                         single(.success(.failure(error)))
                     }

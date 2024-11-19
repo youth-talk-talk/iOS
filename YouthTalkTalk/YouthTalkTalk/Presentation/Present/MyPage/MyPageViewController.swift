@@ -50,6 +50,8 @@ class MyPageViewController: RootViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        tabBarController?.tabBar.isHidden = false
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         if !snapshot.itemIdentifiers(inSection: .policy).isEmpty {
