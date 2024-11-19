@@ -75,7 +75,7 @@ extension SignInUseCaseImpl {
             .subscribe(with: self) { owner, oauthToken in
                 
                 print("loginWithKakaoAccount() success.")
-                // 카카오 유저 정보 요창
+                // 카카오 유저 정보 요청
                 owner.kakaoUserInfoRequest()
             } onError: {owner, error in
                 print(error.localizedDescription)

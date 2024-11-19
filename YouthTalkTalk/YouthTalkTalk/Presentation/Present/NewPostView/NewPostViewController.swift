@@ -51,14 +51,19 @@ class NewPostViewController: BaseViewController<NewPostView> {
         $0.textColor = .black
     }
     
+    private lazy var searchPolicyView = SearchPolicyView().then {
+        $0.isHidden = true
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBarController?.tabBar.isHidden = true
         
         // MARK: 정책명 검색 탭
-        layoutView.policySearchButton.titleLabel.onTapped {
-            
+        layoutView.policySearchButton.titleLabel.onTapped { [weak self] in
+            self?.searchPolicyView.isHidden = false
         }
         
         // MARK: 사진 추가 탭
@@ -71,6 +76,7 @@ class NewPostViewController: BaseViewController<NewPostView> {
         }
         
         view.addSubview(addPhotoView)
+        view.addSubview(searchPolicyView)
         addPhotoView.addSubview(buttonStackView)
         addPhotoView.addSubview(cancelLabel)
         
@@ -101,8 +107,10 @@ class NewPostViewController: BaseViewController<NewPostView> {
             $0.height.equalTo(50)
         }
         
+        searchPolicyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
-    
 }
 
 extension NewPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

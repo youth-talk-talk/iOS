@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
+		6A753C232CEC77F1009A4D40 /* SearchPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */; };
 		6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */; };
 		6AF137602CDE2177004E927B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF1375F2CDE2177004E927B /* Then */; };
 		6AFE80772CDE26D30039A01B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE80762CDE26D30039A01B /* SnapKit */; };
@@ -263,6 +264,7 @@
 
 /* Begin PBXFileReference section */
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPolicyView.swift; sourceTree = "<group>"; };
 		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
 		AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
 		AC0AA5992CC374D100DB032E /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
@@ -943,6 +945,7 @@
 			children = (
 				AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */,
 				AC604C2E2C6A3C0D00804950 /* NewPostView.swift */,
+				6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */,
 			);
 			path = NewPostView;
 			sourceTree = "<group>";
@@ -1574,6 +1577,7 @@
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
+				6A753C232CEC77F1009A4D40 /* SearchPolicyView.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */,
 				ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */,
 				AC0AA5CC2CCFF09D00DB032E /* RootViewController.swift in Sources */,
