@@ -368,21 +368,22 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         self.navigationItem.leftBarButtonItem = customView
         
-        // #if DEBUG
-        let commandButton = UIButton()
-        commandButton.designed(title: "DEBUG", bgColor: .clear, fontType: .g14Bold)
-        let commandItem = UIBarButtonItem(customView: commandButton)
-        self.navigationItem.rightBarButtonItem = commandItem
-        
-        commandButton.rx.tap
-            .subscribe(with: self) { owner, _ in
-                
-                owner.modalPresentationStyle = .formSheet
-                owner.present(DebugViewController(), animated: true)
-                
-            }.disposed(by: disposeBag)
-        
-        // #endif
+        // MARK: 디버그 시 사용
+//        // #if DEBUG
+//        let commandButton = UIButton()
+//        commandButton.designed(title: "DEBUG", bgColor: .clear, fontType: .g14Bold)
+//        let commandItem = UIBarButtonItem(customView: commandButton)
+//        self.navigationItem.rightBarButtonItem = commandItem
+//        
+//        commandButton.rx.tap
+//            .subscribe(with: self) { owner, _ in
+//                
+//                owner.modalPresentationStyle = .formSheet
+//                owner.present(DebugViewController(), animated: true)
+//                
+//            }.disposed(by: disposeBag)
+//        
+//        // #endif
     }
     
     func update(section: HomeLayout, items: [HomeSectionItems]) {

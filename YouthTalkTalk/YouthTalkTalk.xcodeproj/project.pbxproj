@@ -171,7 +171,7 @@
 		ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */; };
 		ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */; };
 		ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */; };
-		ACC46CB42CD287000004ED5C /* MyScrapRPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB32CD287000004ED5C /* MyScrapRPViewController.swift */; };
+		ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */; };
 		ACC46CB62CD287ED0004ED5C /* MyScrapRPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */; };
 		ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */; };
 		ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */; };
@@ -424,7 +424,7 @@
 		ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapViewModel.swift; sourceTree = "<group>"; };
 		ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapInterface.swift; sourceTree = "<group>"; };
 		ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPolicyDTO.swift; sourceTree = "<group>"; };
-		ACC46CB32CD287000004ED5C /* MyScrapRPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapRPViewController.swift; sourceTree = "<group>"; };
+		ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPolicyOrPostListViewController.swift; sourceTree = "<group>"; };
 		ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapRPViewModel.swift; sourceTree = "<group>"; };
 		ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostDTO.swift; sourceTree = "<group>"; };
 		ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRPScrapInterface.swift; sourceTree = "<group>"; };
@@ -988,7 +988,7 @@
 		ACC46CB22CD286DF0004ED5C /* MyScrapRP */ = {
 			isa = PBXGroup;
 			children = (
-				ACC46CB32CD287000004ED5C /* MyScrapRPViewController.swift */,
+				ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */,
 				ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */,
 			);
 			path = MyScrapRP;
@@ -1712,7 +1712,7 @@
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
 				AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
-				ACC46CB42CD287000004ED5C /* MyScrapRPViewController.swift in Sources */,
+				ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */,
 				AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,

@@ -190,12 +190,17 @@ class MyPageViewController: RootViewController {
                     case .scrapPost:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
                         let viewModel = MyScrapRPViewModel(useCase: useCase)
-                        let vc = MyScrapRPViewController(viewModel: viewModel)
+                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                         
                     case .myPost:
-                        break
+                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                        let viewModel = MyScrapRPViewModel(useCase: useCase)
+                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel)
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                        
                     case .myComment:
                         break
                     case .likeComment:

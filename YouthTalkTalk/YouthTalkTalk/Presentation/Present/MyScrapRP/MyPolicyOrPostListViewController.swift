@@ -11,7 +11,7 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-class MyScrapRPViewController: RootViewController {
+class MyPolicyOrPostListViewController: RootViewController {
     
     private let viewModel: MyRPScrapInterface
     
@@ -118,7 +118,7 @@ class MyScrapRPViewController: RootViewController {
     }
 }
 
-extension MyScrapRPViewController {
+extension MyPolicyOrPostListViewController {
     
     func update(section: MyScrapSection, items: [RPEntity]) {
         
