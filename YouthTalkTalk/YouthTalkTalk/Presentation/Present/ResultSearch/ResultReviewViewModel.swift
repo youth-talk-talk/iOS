@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class ResultReviewViewModel: ResultSearchInterface {
+    func setKeyword(_ keyword: String) { }
     
     private let disposeBag = DisposeBag()
     private let reviewUseCase: ReviewUseCase

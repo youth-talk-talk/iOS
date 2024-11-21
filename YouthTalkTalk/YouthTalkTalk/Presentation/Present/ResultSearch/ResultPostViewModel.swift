@@ -10,6 +10,8 @@ import RxSwift
 import RxCocoa
 
 final class ResultPostViewModel: ResultSearchInterface {
+    func setKeyword(_ keyword: String) { }
+    
     
     private let disposeBag = DisposeBag()
     private let postUseCase: PostUseCase

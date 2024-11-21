@@ -40,6 +40,10 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }
     
+    func setKeyword(_ keyword: String) {
+        self.keyword = keyword
+    }
+    
     init(keyword: String = "", type: [PolicyCategory], policyUseCase: PolicyUseCase) {
         self.keyword = keyword
         self.type = type
@@ -72,7 +76,6 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             }.disposed(by: disposeBag)
         
         pageUpdate
-            .distinctUntilChanged()
             .subscribe(with: self) { owner, newPage in
                 
                 owner.page = newPage

@@ -19,9 +19,16 @@ struct SearchPolicyItem: Hashable {
     let policyTitle: String
 }
 
+enum loadPurpose {
+    case search
+    case paging
+}
+
 final class SearchPolicyView: UIView, UITableViewDelegate {
     private lazy var disposeBag = DisposeBag()
-
+    
+    private lazy var loadPurpose: loadPurpose = .paging
+    
     private lazy var viewModel = ResultPolicyViewModel(type: PolicyCategory.allCases,
                                                        policyUseCase: PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl()))
     
@@ -47,6 +54,7 @@ final class SearchPolicyView: UIView, UITableViewDelegate {
     
     private lazy var policyTextField = UITextField().then {
         $0.designedPlaceholder(placeholder: "정책명을 검색해주세요", font: .p16Regular16)
+        $0.delegate = self
     }
     
     private lazy var searchIconImageView = UIImageView(image: UIImage(named: "magnifyingglass"))
@@ -98,13 +106,13 @@ final class SearchPolicyView: UIView, UITableViewDelegate {
             .subscribe(onNext: { [weak self] items in
                 guard let self else { return }
                 
-                let beforeItems = dataSource.snapshot().itemIdentifiers
+                let beforeItems = loadPurpose == .paging ? dataSource.snapshot().itemIdentifiers : []
                 let itemList: [SearchPolicyItem] = items.map { SearchPolicyItem(id: Int($0.policy?.policyId ?? "0") ?? 0, policyTitle: $0.policy?.title ?? "") }
                 var snapshot = NSDiffableDataSourceSnapshot<SearchPolicySection, SearchPolicyItem>()
                 
                 snapshot.appendSections([.mainSection])
                 snapshot.appendItems(beforeItems + itemList, toSection: .mainSection)
-
+                
                 dataSource.apply(snapshot, animatingDifferences: true)
             })
             .disposed(by: disposeBag)
@@ -189,9 +197,22 @@ extension SearchPolicyView: UITableViewDataSourcePrefetching {
         let total = self.dataSource.snapshot().itemIdentifiers(inSection: .mainSection).count
         let currentPage = (total / 10) + 1
         
+        loadPurpose = .paging
+        
         // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
         if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
             viewModel.input.pageUpdate.accept(currentPage)
         }
+    }
+}
+
+extension SearchPolicyView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loadPurpose = .search
+        
+        viewModel.output.setKeyword(textField.text ?? "")
+        viewModel.input.pageUpdate.accept(0)
+        
+        return true
     }
 }

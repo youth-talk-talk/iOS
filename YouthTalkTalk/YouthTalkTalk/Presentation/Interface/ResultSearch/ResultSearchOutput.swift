@@ -16,5 +16,6 @@ protocol ResultSearchOutput {
     var scrapStatus: [String: Bool] { get }
     var scrapStatusRelay: BehaviorRelay<[String: Bool]> { get }
     
+    func setKeyword(_ keyword: String)
     func fetchPage() -> Int
 }
