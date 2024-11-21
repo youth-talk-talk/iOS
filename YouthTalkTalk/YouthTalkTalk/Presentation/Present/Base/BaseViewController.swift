@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
 class BaseViewController<LayoutView: UIView>: UIViewController {
     
@@ -82,6 +83,15 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
                 owner.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func showAlertView(_ title: String, okAction: @escaping () -> Void) {
+        let alertView = TwoButtonAlertView(title: title, okAction: okAction)
+        view.addSubview(alertView)
+        
+        alertView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
 

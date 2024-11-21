@@ -1,5 +1,5 @@
 {
-  "originHash" : "4f1f975720f5197b9975e568b5e5ad4d5a7bda63766a0cbc2c7f784dbff5bbe8",
+  "originHash" : "df7cd8bf707466685db2d6673696fd2173ead63ed622d7acae5e928133bc88ac",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
         "version" : "5.9.1"
+      }
+    },
+    {
+      "identity" : "bsimagepicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mikaoj/BSImagePicker",
+      "state" : {
+        "revision" : "87c300fac63538dfb26e17d491eaa2293e83b5e8",
+        "version" : "3.3.3"
       }
     },
     {

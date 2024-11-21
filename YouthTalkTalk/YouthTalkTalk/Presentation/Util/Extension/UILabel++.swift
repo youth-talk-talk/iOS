@@ -50,6 +50,12 @@ extension UILabel {
         
         return ceil(boundingRect.width)
     }
+    
+    func isNotEmpty() -> Bool {
+        guard let text = self.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+        
+        return text != ""
+    }
 }
 
 extension Reactive where Base: UILabel {

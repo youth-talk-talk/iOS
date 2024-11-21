@@ -18,6 +18,12 @@ extension UIView {
 }
 
 extension UIView {
+    func addSubviews(_ views: [UIView]) {
+        for view in views {
+            addSubview(view)
+        }
+    }
+    
     typealias GestureHandler = (() -> Void)?
     
     private struct GestureAssociatedKey {

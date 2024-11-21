@@ -49,6 +49,7 @@ final class SearchPolicyView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        isHidden = true
         backgroundColor = .black.withAlphaComponent(0.5)
         
         layout()
