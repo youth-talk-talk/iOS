@@ -23,6 +23,8 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         self.view = LayoutView()
     }
     
+    let alertView = TwoButtonAlertView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,12 +88,15 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     }
     
     func showAlertView(_ title: String, okAction: @escaping () -> Void) {
-        let alertView = TwoButtonAlertView(title: title, okAction: okAction)
+        alertView.isHidden = false
+        
         view.addSubview(alertView)
         
         alertView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        alertView.setTitle(title, okAction: okAction)
     }
 }
 

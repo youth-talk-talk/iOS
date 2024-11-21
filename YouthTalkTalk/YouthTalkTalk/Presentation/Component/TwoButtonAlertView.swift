@@ -10,23 +10,28 @@ import SnapKit
 import Then
 
 final class TwoButtonAlertView: UIView {
-    private let okAction: () -> Void
+    private var okAction: (() -> Void)?
     
     private lazy var shadowView = UIView().then {
         $0.backgroundColor = .black.withAlphaComponent(0.5)
     }
     
-    private lazy var backView = UIView().then {
+    private lazy var containerStackView = UIStackView().then {
+        $0.axis = .vertical
         $0.layer.cornerRadius = 20
         $0.backgroundColor = .white
+        $0.alignment = .center
+        $0.layoutMargins = UIEdgeInsets(top: 36, left: 0, bottom: 17, right: 0)
+        $0.isLayoutMarginsRelativeArrangement = true
     }
     
     private lazy var noticeImageView = UIImageView(image: UIImage(named: "notice"))
     
     private lazy var titleLabel = UILabel().then {
         $0.font = FontManager.font(.p18Regular)
-        $0.textColor = FontColor.black.value
+        $0.textColor = .black
         $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     
     private lazy var buttonStackView = UIStackView(arrangedSubviews: [cancelButton, okButton]).then {
@@ -40,7 +45,7 @@ final class TwoButtonAlertView: UIView {
         $0.layer.cornerRadius = 25
         $0.setTitle("아니요", for: .normal)
         $0.titleLabel?.font = FontManager.font(.p16Regular16)
-        $0.titleLabel?.textColor = FontColor.black.value
+        $0.setTitleColor(.black, for: .normal)
     }
     
     private lazy var okButton = UIButton().then {
@@ -48,7 +53,7 @@ final class TwoButtonAlertView: UIView {
         $0.layer.cornerRadius = 25
         $0.setTitle("예", for: .normal)
         $0.titleLabel?.font = FontManager.font(.p16Regular16)
-        $0.titleLabel?.textColor = FontColor.black.value
+        $0.setTitleColor(.black, for: .normal)
     }
     
     init(title: String, okAction: @escaping () -> Void) {
@@ -62,8 +67,20 @@ final class TwoButtonAlertView: UIView {
         titleLabel.text = title
     }
     
-    required init?(coder: NSCoder) {
+    init() {
+        super.init(frame: .zero)
+    }
+    
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setTitle(_ title: String, okAction: @escaping () -> Void) {
+        titleLabel.text = title
+        self.okAction = okAction
+        
+        layout()
+        setTabEvents()
     }
     
     private func setTabEvents() {
@@ -72,45 +89,42 @@ final class TwoButtonAlertView: UIView {
         }
         
         okButton.onTapped { [weak self] in
-            self?.okAction()
+            self?.okAction?()
             self?.removeFromSuperview()
         }
     }
     
     private func layout() {
         addSubview(shadowView)
-        shadowView.addSubview(backView)
-        backView.addSubview(noticeImageView)
-        backView.addSubview(titleLabel)
-        backView.addSubview(buttonStackView)
+        shadowView.addSubview(containerStackView)
+        containerStackView.addArrangedSubview(noticeImageView)
+        containerStackView.addArrangedSubview(titleLabel)
+        containerStackView.addArrangedSubview(buttonStackView)
+        
+        containerStackView.setCustomSpacing(20, after: noticeImageView)
+        containerStackView.setCustomSpacing(29, after: titleLabel)
         
         shadowView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        backView.snp.makeConstraints {
+        containerStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(17)
-            $0.height.equalTo(240)
             $0.center.equalToSuperview()
         }
         
         noticeImageView.snp.makeConstraints {
             $0.size.equalTo(40)
-            $0.top.equalToSuperview().inset(36)
-            $0.centerX.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(noticeImageView.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         
         buttonStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(50)
-            $0.bottom.equalToSuperview().inset(17)
-            $0.centerX.equalToSuperview()
         }
     }
 }

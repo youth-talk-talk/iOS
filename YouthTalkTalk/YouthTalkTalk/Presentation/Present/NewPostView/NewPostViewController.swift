@@ -134,6 +134,10 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             
             if titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder {
                 // TODO: 게시글 작성 API 호출하기
+            } else {
+                showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
+                    self?.alertView.isHidden = true
+                })
             }
         }
     }
