@@ -123,11 +123,9 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                     case.success(let data):
                         uploadedImage.append(data)
                         
-                        // TODO: 이미지가 모두 서버에 업로드 된 경우 > 게시글 작성 API 호출
+                        // MARK: 이미지 업로드가 모두 완료되어 게시글 작성 API 호출
                         if images.count == uploadedImage.count {
-                            print("|| \(uploadedImage)")
-                        } else {
-                            print("|| 하나 업로드")
+                            
                         }
                         
                     case .failure(let error):
