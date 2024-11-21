@@ -140,6 +140,12 @@ final class NewPostViewController: BaseViewController<NewPostView> {
                 })
             }
         }
+        
+        setBackButtonTapped { [weak self] in
+            self?.showAlertView("글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다", okAction: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            })
+        }
     }
     
     private func layout() {

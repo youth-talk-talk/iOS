@@ -59,12 +59,13 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         titleLabel.designed(text: title, fontType: .p18Bold)
         self.navigationItem.titleView = titleLabel
     }
-    
+
+    let customBackView = UIImageView()
+
     func updateNavigationBackButtonTitle(title: String = "") {
         
         self.navigationItem.hidesBackButton = true
         
-        let customBackView = UIImageView()
         customBackView.image = .back.withRenderingMode(.alwaysOriginal)
         let backButtonItem = UIBarButtonItem(customView: customBackView)
         
@@ -85,6 +86,15 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
                 owner.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func setBackButtonTapped(_ action: @escaping () -> Void) {
+        // 기존 제스쳐 제거
+        customBackView.gestureRecognizers?.forEach(customBackView.removeGestureRecognizer)
+
+        customBackView.onTapped {
+            action()
+        }
     }
     
     func showAlertView(_ title: String, okAction: @escaping () -> Void) {
