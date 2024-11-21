@@ -11,6 +11,9 @@ import Photos
 
 final class NewPostViewController: BaseViewController<NewPostView> {
     
+    private lazy var viewModel = ResultPolicyViewModel(type: PolicyCategory.allCases,
+                                                       policyUseCase: PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl()))
+    
     private var imagePickerController: ImagePickerProtocol?
     
     private lazy var titleLabel = UILabel().then {
@@ -37,6 +40,7 @@ final class NewPostViewController: BaseViewController<NewPostView> {
     }
     
     private lazy var selectedPolicyLabel = UILabel().then {
+        $0.adjustsFontSizeToFitWidth = true
         $0.designed(text: "정책명", fontType: .p16Regular16, textColor: .gray50)
     }
     
@@ -94,7 +98,11 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         $0.clipsToBounds = true
     }
     
-    private lazy var searchPolicyView = SearchPolicyView()
+    private lazy var searchPolicyView = SearchPolicyView(onPolicyTapped: { [weak self] selectedPolicy in
+        self?.selectedPolicyLabel.text = selectedPolicy
+        self?.selectedPolicyLabel.textColor = .black
+    })
+    
     private lazy var addPhotoView = AddPhotoView()
     
     override func viewDidLoad() {
@@ -133,7 +141,8 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             guard let self else { return }
             
             if titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder {
-                // TODO: 게시글 작성 API 호출하기
+                guard let images = Array(contentStackView.arrangedSubviews.dropFirst()) as? [UIImageView] else { return }
+                viewModel.uploadPost(images: images.map{ $0.image?.pngData() })
             } else {
                 showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
                     self?.alertView.isHidden = true
@@ -192,7 +201,7 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         
         selectedPolicyLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(13)
-            $0.trailing.equalTo(searchIconImageView.snp.leading).offset(17)
+            $0.trailing.equalTo(searchIconImageView.snp.leading).offset(-17)
             $0.centerY.equalToSuperview()
         }
         
@@ -272,7 +281,7 @@ extension NewPostViewController: UIImagePickerControllerDelegate,
             assets?.forEach({ asset in
                 let imageView = PostImageView(image: getAssetThumbnail(asset: asset))
                 
-                imageView.onTapped { [weak self] in
+                imageView.deleteBackView.onTapped { [weak self] in
                     imageView.removeFromSuperview()
                     self?.contentStackView.removeArrangedSubview(imageView)
                 }

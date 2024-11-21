@@ -56,5 +56,10 @@ final class PolicyRepositoryImpl: PolicyRepository {
         let router = PolicyRouter.fetchScrapPolicy
         
         return apiManager.request(router: router, type: ScrapPolicyDTO.self).asObservable()
+    }  
+    
+    func uploadImage(_ image: Data) -> Observable<Result<String, APIError>> {
+        
+        return apiManager.postUploadImage(stringURL: "/posts/image", image: image).asObservable()
     }
 }

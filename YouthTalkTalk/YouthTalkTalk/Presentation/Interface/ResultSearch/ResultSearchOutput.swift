@@ -17,5 +17,6 @@ protocol ResultSearchOutput {
     var scrapStatusRelay: BehaviorRelay<[String: Bool]> { get }
     
     func setKeyword(_ keyword: String)
+    func uploadPost(images: [Data?])
     func fetchPage() -> Int
 }

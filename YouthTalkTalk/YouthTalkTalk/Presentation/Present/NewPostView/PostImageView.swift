@@ -6,20 +6,39 @@
 //
 
 import UIKit
- 
-final class PostImageView: UIImageView {
+
+final class PostImageView: UIView {
+    
+    private lazy var imageView = UIImageView()
+    
+    lazy var deleteBackView = UIView()
+    
     private lazy var deleteImageView = UIImageView(image: UIImage(named: "littleXmark"))
-    override init(image: UIImage?) {
-        super.init(image: image)
+    
+    init(image: UIImage) {
+        super.init(frame: .zero)
         
-        contentMode = .scaleAspectFill
-        clipsToBounds = true
+        imageView.image = image
         
-        addSubview(deleteImageView)
+        addSubview(imageView)
+        addSubview(deleteBackView)
+        deleteBackView.addSubview(deleteImageView)
+        
+        deleteBackView.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview()
+            $0.size.equalTo(30)
+        }
         
         deleteImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
             $0.size.equalTo(24)
-            $0.top.trailing.equalToSuperview()
+        }
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        imageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     

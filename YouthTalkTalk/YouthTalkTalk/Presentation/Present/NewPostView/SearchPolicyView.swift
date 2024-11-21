@@ -24,10 +24,12 @@ enum loadPurpose {
     case paging
 }
 
-final class SearchPolicyView: UIView, UITableViewDelegate {
+final class SearchPolicyView: UIView {
     private lazy var disposeBag = DisposeBag()
     
     private lazy var loadPurpose: loadPurpose = .paging
+    
+    private let onPolicyTapped: (String) -> Void
     
     private lazy var viewModel = ResultPolicyViewModel(type: PolicyCategory.allCases,
                                                        policyUseCase: PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl()))
@@ -63,6 +65,7 @@ final class SearchPolicyView: UIView, UITableViewDelegate {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "sampleIdentifier")
         $0.backgroundColor = .white
         $0.prefetchDataSource = self
+        $0.delegate = self
     }
     
     private lazy var addButton = UILabel().then {
@@ -75,8 +78,10 @@ final class SearchPolicyView: UIView, UITableViewDelegate {
         $0.font = FontManager.font(.p16Regular16)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(onPolicyTapped: @escaping (String) -> Void) {
+        self.onPolicyTapped = onPolicyTapped
+        
+        super.init(frame: .zero)
         
         isHidden = true
         backgroundColor = .black.withAlphaComponent(0.5)
@@ -126,6 +131,10 @@ final class SearchPolicyView: UIView, UITableViewDelegate {
     
     private func addTapEvents() {
         closeButton.onTapped { [weak self] in
+            self?.isHidden = true
+        }
+        
+        addButton.onTapped{ [weak self] in
             self?.isHidden = true
         }
     }
@@ -192,7 +201,7 @@ final class SearchPolicyView: UIView, UITableViewDelegate {
     }
 }
 
-extension SearchPolicyView: UITableViewDataSourcePrefetching {
+extension SearchPolicyView: UITableViewDataSourcePrefetching, UITableViewDelegate {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let total = self.dataSource.snapshot().itemIdentifiers(inSection: .mainSection).count
         let currentPage = (total / 10) + 1
@@ -203,6 +212,10 @@ extension SearchPolicyView: UITableViewDataSourcePrefetching {
         if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
             viewModel.input.pageUpdate.accept(currentPage)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        onPolicyTapped(dataSource.snapshot().itemIdentifiers[indexPath.item].policyTitle)
     }
 }
 

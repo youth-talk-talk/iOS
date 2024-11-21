@@ -20,6 +20,7 @@ enum PolicyRouter: Router {
     case updatePolicyScrap(id: String)
     case fetchUpComingDeadlineScrap
     case fetchScrapPolicy
+    case uploadImage(image: String)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -39,6 +40,8 @@ enum PolicyRouter: Router {
             return "policies/scrapped/upcoming-deadline"
         case .fetchScrapPolicy:
             return "policies/scrap"
+        case .uploadImage(image: let image):
+            return "/posts/image"
         }
     }
     
@@ -46,7 +49,7 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy :
             return .get
-        case .fetchConditionPolicy, .updatePolicyScrap:
+        case .fetchConditionPolicy, .updatePolicyScrap, .uploadImage:
             return .post
         }
     }
@@ -57,7 +60,7 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let page, _):
             return convertToParameters(page)
-        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage:
             return nil
         }
     }
@@ -66,6 +69,10 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return ["Content-Type": "application/json",
+                    "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
+            
+        case .uploadImage:
+            return ["Content-Type": "multipart/form-data",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
     }
@@ -78,6 +85,8 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchConditionPolicy(_, let body):
             return try? encoder.encode(body)
+        case .uploadImage(let image):
+            return try? encoder.encode(image)
         case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }

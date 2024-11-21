@@ -10,6 +10,8 @@ import RxSwift
 import RxCocoa
 
 final class ResultReviewViewModel: ResultSearchInterface {
+    func uploadPost(images: [Data?]) { }
+    
     func setKeyword(_ keyword: String) { }
     
     private let disposeBag = DisposeBag()

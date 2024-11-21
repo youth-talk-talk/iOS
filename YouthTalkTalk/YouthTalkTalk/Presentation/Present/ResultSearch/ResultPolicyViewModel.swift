@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
 final class ResultPolicyViewModel: ResultSearchInterface {
     
@@ -31,6 +32,8 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var errorHandler = PublishRelay<APIError>()
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
+    
+    private lazy var uploadedImage: [String] = []
     
     func fetchType() {
         
@@ -103,6 +106,36 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                 }
             }
             .disposed(by: disposeBag)
+        
+        
+    }
+    
+    func uploadPost(images: [Data?]) {
+        let images = images.compactMap({ $0 })
+        
+        images.forEach { data in
+            self.policyUseCase.uploadImage(data)
+                .subscribe(onNext: { [weak self] result in
+                    guard let self else { return }
+                    
+                    
+                    switch result {
+                    case.success(let data):
+                        uploadedImage.append(data)
+                        
+                        // TODO: 이미지가 모두 서버에 업로드 된 경우 > 게시글 작성 API 호출
+                        if images.count == uploadedImage.count {
+                            print("|| \(uploadedImage)")
+                        } else {
+                            print("|| 하나 업로드")
+                        }
+                        
+                    case .failure(let error):
+                        break
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
     }
     
     func updateData(age: Int?, employment: [String], isFinished: Bool?) {

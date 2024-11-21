@@ -53,6 +53,41 @@ final class APIManager: APIInterface {
             return Disposables.create()
         }
     }
+    
+    public func postUploadImage(stringURL: String, image: Data) -> Single<Result<String, APIError>> {
+        return Single.create { [weak self] single in
+            var defaultHeader: HTTPHeaders = ["Content-Type": "multipart/form-data",
+                                              "Authorization": "Bearer \(self!.keyChainHelper.loadTokenInfo(type: .accessToken))"]
+            
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(image, withName: "image", fileName: "image.png")
+                
+            }, to: "http://43.202.212.173\(stringURL)", method: .post, headers: defaultHeader)
+            .validate(statusCode: 200..<900)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let responseData = response.data {
+                         do {
+                             let decoder = JSONDecoder()
+                             let decodedResponse = try decoder.decode(UploadImageDTO.self, from: responseData)
+
+                             single(.success(.success(decodedResponse.data)))
+                         } catch {
+                             print("Error decoding response:", error)
+                             single(.success(.failure(APIError(code: "999"))))
+                         }
+                     }                
+                case .failure(let error):
+                    if let error = self?.handleResponseError(from: response.data) {
+                        single(.success(.failure(error)))
+                    }
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
 }
 
 extension APIManager {
