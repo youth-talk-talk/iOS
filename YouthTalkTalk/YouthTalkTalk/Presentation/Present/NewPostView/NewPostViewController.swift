@@ -8,6 +8,7 @@
 import UIKit
 import BSImagePicker
 import Photos
+import AVFoundation
 
 final class NewPostViewController: BaseViewController<NewPostView> {
     
@@ -90,6 +91,8 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         $0.designed(text: "사진추가하기", fontType: .p16Regular16)
     }
     
+    private lazy var cameraVC = UIImagePickerController()
+    
     private lazy var writePostLabel = UILabel().then {
         $0.backgroundColor = FontColor.gray20.value
         $0.layer.cornerRadius = 25
@@ -118,6 +121,27 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         
         layout()
         setTabEvents()
+        
+        cameraVC.delegate = self
+        
+        addPhotoView.moveToCameraLabel.onTapped { [weak self] in
+            AVCaptureDevice.requestAccess(for: .video) { isAuthorized in
+                guard isAuthorized else {
+                    self?.showAlertGoToSetting()
+                    
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let pickerController = UIImagePickerController()
+                    pickerController.sourceType = .camera
+                    pickerController.allowsEditing = false
+                    pickerController.mediaTypes = ["public.image"]
+                    pickerController.delegate = self
+                    self?.present(pickerController, animated: true)
+                }
+            }
+        }
     }
     
     private func setTabEvents() {
@@ -154,6 +178,15 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             self?.showAlertView("글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다", okAction: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             })
+        }
+    }
+    
+    private func showAlertGoToSetting() {
+        showAlertView("현재 카메라 사용에 대한 접근 권한이 없습니다.") {
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
+                UIApplication.shared.canOpenURL(settingURL)
+            else { return }
+            UIApplication.shared.open(settingURL, options: [:])
         }
     }
     
@@ -279,41 +312,44 @@ extension NewPostViewController: UIImagePickerControllerDelegate,
             contentStackView.addArrangedSubview(contentsTextView)
             
             assets?.forEach({ asset in
-                let imageView = PostImageView(image: getAssetThumbnail(asset: asset))
-                
-                imageView.deleteBackView.onTapped { [weak self] in
-                    imageView.removeFromSuperview()
-                    self?.contentStackView.removeArrangedSubview(imageView)
-                }
-                
-                imageView.snp.makeConstraints {
-                    $0.height.equalTo(215)
-                    $0.width.equalTo(341)
-                }
-                
-                contentStackView.addArrangedSubview(imageView)
+                createImageContent(getAssetThumbnail(asset: asset))
             })
         }
         
         addPhotoView.isHidden = true
     }
     
-    func getAssetThumbnail(asset: PHAsset) -> UIImage {
+    private func getAssetThumbnail(asset: PHAsset) -> UIImage {
         let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
         var thumbnail = UIImage()
         option.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+        manager.requestImage(for: asset, targetSize: CGSize(width: 641, height: 415), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
             thumbnail = result!
         })
         return thumbnail
     }
     
-    func checkPermission() {
+    private func createImageContent(_ image: UIImage) {
+        let imageView = PostImageView(image: image)
+        
+        imageView.deleteBackView.onTapped { [weak self] in
+            imageView.removeFromSuperview()
+            self?.contentStackView.removeArrangedSubview(imageView)
+        }
+        
+        imageView.snp.makeConstraints {
+            $0.height.equalTo(215)
+            $0.width.equalTo(341)
+        }
+        
+        contentStackView.addArrangedSubview(imageView)
+    }
+    
+    private func checkPermission() {
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .limited:
-            //PHPhotoLibrary.shared().register(self)
             let actionSheet = UIAlertController(title: "",
                                                 message: "더 많은 사진을 선택하거나 모든 사진에 대한 액세스를 허용하려면 설정으로 이동해주세요.",
                                                 preferredStyle: .actionSheet)
@@ -384,5 +420,20 @@ extension NewPostViewController: UITextViewDelegate {
             textView.text = textViewPlaceHolder
             textView.textColor = FontColor.gray40.value
         }
+    }
+}
+
+extension NewPostViewController {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            picker.dismiss(animated: true)
+            return
+        }
+        
+        createImageContent(image)
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        addPhotoView.isHidden = true
     }
 }

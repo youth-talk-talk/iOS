@@ -27,7 +27,7 @@ final class AddPhotoView: UIView {
         $0.backgroundColor = FontColor.gray30.value
     }
     
-    private lazy var moveToCameraLabel = UILabel().then {
+    lazy var moveToCameraLabel = UILabel().then {
         $0.text = "카메라로 이동"
         $0.font = FontManager.font(.p16Regular16)
         $0.textAlignment = .center

@@ -1944,10 +1944,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				DEVELOPMENT_TEAM = Q25U65UWAP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "청년톡톡";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라로 게시글에 추가할 사진 촬영";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범에서 게시글에 추가할 사진 선택";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1957,7 +1959,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yujinkim.YouthTalkTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1980,10 +1982,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 92Y6UC7Q5M;
+				DEVELOPMENT_TEAM = Q25U65UWAP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "청년톡톡";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라로 게시글에 추가할 사진 촬영";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범에서 게시글에 추가할 사진 선택";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1993,7 +1997,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.donotinto.YouthTalkTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yujinkim.YouthTalkTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
