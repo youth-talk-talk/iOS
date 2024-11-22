@@ -140,6 +140,12 @@ class DetailConditionViewController: BaseViewController<DetailConditionView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        layoutView.resetButton.onTapped { [weak self] in
+            self?.viewModel.selectedIndex.accept(.init(item: 0, section: 1))
+            self?.viewModel.selectedDeadlineIndex.accept(.init(item: 0, section: 2))
+            
+            self?.layoutView.collectionView.reloadData()
+        }
     }
     
     override func configureNavigation() {

@@ -13,7 +13,9 @@ import RxCocoa
 class AgeCollectionViewCell: BaseCollectionViewCell {
     
     let fullLabel = UILabel()
-    let ageTextField = UITextField()
+    let ageTextField = UITextField().then {
+        $0.keyboardType = .numberPad
+    }
     let ageLabel = UILabel()
     
     override func configureLayout() {
@@ -44,5 +46,6 @@ class AgeCollectionViewCell: BaseCollectionViewCell {
         ageLabel.designed(text: "세", fontType: .p16Regular16, textColor: .gray40)
         
         ageTextField.textAlignment = .center
+        ageTextField.textColor = .black
     }
 }
