@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol EventDelegate: AnyObject {
+    func eventDelegate(item: RPEntity)
+}
+
 enum CommunitySectionItems: Hashable {
     
     case search
@@ -65,6 +69,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
             .bind(with: self) { owner, _ in
                 
                 let nextVC = NewPostViewController()
+                nextVC.delegate = self
                 
                 owner.tabmanParent?.navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -328,5 +333,19 @@ extension CommunityViewController: UICollectionViewDataSourcePrefetching {
         if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
             viewModel.input.pageUpdate.accept(currentPage)
         }
+    }
+}
+
+extension CommunityViewController: EventDelegate {
+    // MARK: 게시글 작성 완료 후 게시글 상세로 이동
+    func eventDelegate(item: RPEntity) {
+        let repository = ReviewRepositoryImpl()
+        let commentRepository = CommentRepositoryImpl()
+        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+        let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+        let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
+        
+        navigationController?.pushViewController(resultDetailVC, animated: true)
     }
 }

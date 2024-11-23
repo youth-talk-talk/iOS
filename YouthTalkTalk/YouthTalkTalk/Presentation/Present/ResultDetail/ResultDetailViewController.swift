@@ -19,13 +19,6 @@ class ResultDetailViewController: BaseViewController<ResultDetailView> {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func bind() {
         
         // 입력 버튼 클릭
         layoutView.commentTextFieldView.commentTap.rx.event
@@ -45,4 +38,10 @@ class ResultDetailViewController: BaseViewController<ResultDetailView> {
             }
             .disposed(by: disposeBag)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func bind() { }
 }

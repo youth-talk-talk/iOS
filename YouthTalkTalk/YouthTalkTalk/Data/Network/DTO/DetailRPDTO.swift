@@ -15,6 +15,14 @@ struct DetailRPDTO: Decodable {
     let data: DetailRPDetailDTO
 }
 
+struct UploadPostDTO: Decodable {
+    
+    let status: Int
+    let message: String
+    let code: String
+    let data: DetailRPDetailDTO
+}
+
 struct DetailRPDetailDTO: Decodable {
     
     let postId: Int

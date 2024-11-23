@@ -9,7 +9,7 @@ import UIKit
 
 final class PostImageView: UIView {
     
-    private lazy var imageView = UIImageView()
+    lazy var imageView = UIImageView()
     
     lazy var deleteBackView = UIView()
     

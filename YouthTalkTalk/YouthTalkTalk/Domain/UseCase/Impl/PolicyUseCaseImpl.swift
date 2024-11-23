@@ -174,7 +174,7 @@ final class PolicyUseCaseImpl: PolicyUseCase {
     }
     
     
-    func uploadPost(_ body: UploadPostBody) -> Observable<Result<DetailRPDetailDTO, APIError>> {
+    func uploadPost(_ body: UploadPostBody) -> Observable<Result<UploadPostDTO, APIError>> {
         policyRepository.uploadPost(body)
             .withUnretained(self)
             .map { owner, result in

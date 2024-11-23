@@ -9,8 +9,13 @@ import UIKit
 import BSImagePicker
 import Photos
 import AVFoundation
+import Combine
 
 final class NewPostViewController: BaseViewController<NewPostView> {
+    
+    weak var delegate: EventDelegate?
+    
+    private lazy var cancelBag = Set<AnyCancellable>()
     
     private lazy var viewModel = ResultPolicyViewModel(type: PolicyCategory.allCases,
                                                        policyUseCase: PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl()))
@@ -127,6 +132,13 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         
         cameraVC.delegate = self
         
+        // MARK: 게시글 작성 API 호출 성공
+        viewModel.successUploadPost.sink { [weak self] item in
+            self?.navigationController?.popViewController(animated: true)
+            self?.delegate?.eventDelegate(item: item)
+        }
+        .store(in: &cancelBag)
+        
         addPhotoView.moveToCameraLabel.onTapped { [weak self] in
             AVCaptureDevice.requestAccess(for: .video) { isAuthorized in
                 guard isAuthorized else {
@@ -168,14 +180,18 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             guard let self else { return }
             
             if titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder {
-                guard let images = Array(contentStackView.arrangedSubviews.dropFirst()) as? [UIImageView] else { return }
+                
+                
+                guard let images = Array(contentStackView.arrangedSubviews.dropFirst()) as? [PostImageView] else { return
+                    print("|| \(contentStackView.arrangedSubviews.count), \(Array(contentStackView.arrangedSubviews.dropFirst()) as? [PostImageView])")
+                }
                 
                 
                 
-                viewModel.uploadImages(images.map{ $0.image?.pngData() }, body: .init(title: titleLabel.text ?? "",
+                viewModel.uploadImages(images.map{ $0.imageView.image?.pngData() }, body: .init(title: titleTextField.text ?? "",
                                                                                       postType: "review",
                                                                                       policyId: "\(selectedPolicyId)",
-                                                                                      contentList: [.init(content: contentsLabel.text ?? "", type: "TEXT")]))
+                                                                                      contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]))
             } else {
                 showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
                     self?.alertView.isHidden = true

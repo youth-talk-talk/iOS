@@ -33,7 +33,8 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
-    lazy var uploadedImage: [String] = []
+    lazy var successUploadPost = PassthroughSubject<RPEntity, Never>()
+    private lazy var uploadedImage: [String] = []
     
     func fetchType() {
         
@@ -132,9 +133,10 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                             // MARK: 이미지 업로드가 모두 완료되어 게시글 작성 API 호출
                             if images.count == uploadedImage.count {
                                 policyUseCase.uploadPost(bodyWithImage)
-                                    .subscribe { result in
+                                    .subscribe { [weak self] result in
                                         switch result {
                                         case .success(let data):
+                                            self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
                                             break
                                         case .failure:
                                             break
@@ -153,10 +155,10 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             // MARK: 이미지가 없을경우 바로 포스트 작성
         } else {
             policyUseCase.uploadPost(body)
-                .subscribe { result in
+                .subscribe { [weak self] result in
                     switch result {
                     case .success(let data):
-                        break
+                        self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
                     case .failure(let error):
                         break
                     }

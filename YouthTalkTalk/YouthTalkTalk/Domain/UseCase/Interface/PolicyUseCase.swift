@@ -18,5 +18,5 @@ protocol PolicyUseCase {
     func fetchUpComingDeadline() -> Observable<Result<[PolicyEntity], APIError>>
     func fetchScrapPolicy() -> Observable<Result<[PolicyEntity], APIError>>
     func uploadImage(_ image: Data) -> Observable<Result<String, APIError>>
-    func uploadPost(_ body: UploadPostBody) -> Observable<Result<DetailRPDetailDTO, APIError>>
+    func uploadPost(_ body: UploadPostBody) -> Observable<Result<UploadPostDTO, APIError>>
 }
