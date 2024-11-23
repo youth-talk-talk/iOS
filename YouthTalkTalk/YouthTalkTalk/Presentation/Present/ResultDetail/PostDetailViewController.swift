@@ -12,10 +12,10 @@ import RxSwift
 import RxCocoa
 import Combine
 
-class PostDetailViewController: BaseViewController<PostDetailView> {
+class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldDelegate {
     // TODO: 게시글 생성, 삭제 기능 추가
     private lazy var moreImageView = UIImageView(image: UIImage(named: "more"))
-    
+    private lazy var keyboardHeight: CGFloat = 0
     private lazy var moreContainerStackView = UIStackView(arrangedSubviews: [moreEditLabel,
                                                                              moreCenterLineView,
                                                                              moreDeleteLabel]).then {
@@ -48,6 +48,21 @@ class PostDetailViewController: BaseViewController<PostDetailView> {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardHideShow),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        
+        layoutView.commentTextFieldView.textField.delegate = self
         
         viewModel.output.successUploadComment.sink { [weak self] in
             // TODO: 이부분 내 정보 데이터에서 이름 가져와서 넣기
@@ -85,5 +100,59 @@ class PostDetailViewController: BaseViewController<PostDetailView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+              
+        //Looks for single or multiple taps.
+         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     override func bind() { }
+    
+    func animateTextField(textField: UITextField, up: Bool) {
+        let movementDistance: CGFloat = -keyboardHeight + view.safeAreaInsets.bottom
+        let movementDuration: Double = 0.3
+        
+        var movement:CGFloat = 0
+        if up {
+            movement = movementDistance
+        } else {
+            movement = -movementDistance
+        }
+        
+        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState]) {
+            self.layoutView.commentTextFieldView.frame = self.layoutView.commentTextFieldView.frame.offsetBy(dx: 0, dy: movement)
+        }
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            
+            animateTextField(textField: layoutView.commentTextFieldView.textField, up: true)
+
+        }
+    }    
+    
+    @objc func keyboardHideShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            
+            animateTextField(textField: layoutView.commentTextFieldView.textField, up: false)
+
+        }
+    }
+    
+    
 }
