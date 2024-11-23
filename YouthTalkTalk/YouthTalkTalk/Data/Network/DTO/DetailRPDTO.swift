@@ -57,3 +57,15 @@ struct DetailContentDTO: Codable {
         return DetailContentEntity(content: content, type: type)
     }
 }
+
+struct UploadPostCommentDTO: Decodable {
+      let status: Int
+      let message: String
+      let code: String
+      let data: CommentData
+    
+}
+
+struct CommentData: Decodable {
+    let commentId: Int
+}

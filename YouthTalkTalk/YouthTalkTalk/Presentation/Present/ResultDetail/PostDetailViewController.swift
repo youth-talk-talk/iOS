@@ -10,8 +10,9 @@ import FlexLayout
 import PinLayout
 import RxSwift
 import RxCocoa
+import Combine
 
-class PostDetailViewController: BaseViewController<ResultDetailView> {
+class PostDetailViewController: BaseViewController<PostDetailView> {
     // TODO: 게시글 생성, 삭제 기능 추가
     private lazy var moreImageView = UIImageView(image: UIImage(named: "more"))
     
@@ -41,15 +42,30 @@ class PostDetailViewController: BaseViewController<ResultDetailView> {
     
     private let viewModel: ResultDetailInterface
     
+    private lazy var cancelBag = Set<AnyCancellable>()
+    
     init(viewModel: ResultDetailInterface) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
         
-        // 입력 버튼 클릭
+        viewModel.output.successUploadComment.sink { [weak self] in
+            // TODO: 이부분 내 정보 데이터에서 이름 가져와서 넣기
+            let commentView = CommentView(userName: "", // viewModel.output.commentWriterName,
+                                          comment: viewModel.output.writtenCommentText)
+            
+            self?.layoutView.commentStackView.addArrangedSubview(commentView)
+        }
+        .store(in: &cancelBag)
+        
         layoutView.commentTextFieldView.commentTap.rx.event
-            .bind(with: self) { owner, _ in
+            .bind(with: self) { [weak self] owner, _ in
+                guard let text = self?.layoutView.commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
                 
+                if text != "", let postId = viewModel.output.rpEntity.postId {
+                    viewModel.output.uploadPostComment(.init(postId: postId,
+                                                             content: text))
+                }
             }
             .disposed(by: disposeBag)
         

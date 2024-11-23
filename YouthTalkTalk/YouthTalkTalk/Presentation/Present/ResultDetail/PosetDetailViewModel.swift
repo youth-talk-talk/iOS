@@ -8,10 +8,12 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
-final class ReviewDetailViewModel: ResultDetailInterface {
+final class PosetDetailViewModel: ResultDetailInterface {
     
     let rpEntity: RPEntity
+    var commentWriterName: String = ""
     
     private let disposeBag = DisposeBag()
     private let useCase: ReviewUseCase
@@ -28,6 +30,8 @@ final class ReviewDetailViewModel: ResultDetailInterface {
     var input: ResultDetailInput { return self }
     var output: ResultDetailOutput { return self }
     
+    var successUploadComment = PassthroughSubject<Void, Never>()
+    var writtenCommentText = ""
     
     init(data: RPEntity, useCase: ReviewUseCase, commnetUseCase: CommentUseCase) {
         
@@ -38,11 +42,11 @@ final class ReviewDetailViewModel: ResultDetailInterface {
         guard let postId = data.postId else { return }
         
         useCase.fetchReviewDetail(id: rpEntity.postId!)
-            .bind(with: self) { owner, result in
+            .bind(with: self) { [weak self] owner, result in
                 
                 switch result {
                 case .success(let detailEntity):
-                    
+                    self?.commentWriterName = detailEntity.nickname ?? ""
                     owner.detailInfo.accept(detailEntity)
                 case .failure(let error):
                     dump(error)
@@ -63,6 +67,19 @@ final class ReviewDetailViewModel: ResultDetailInterface {
                 }
             }
             .disposed(by: disposeBag)
-        
+    }
+    
+    func uploadPostComment(_ body: UploadPostCommentBody) {
+        useCase.uploadPostComment(body)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.writtenCommentText = body.content
+                    self?.successUploadComment.send(())
+                case .failure(let error):
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }

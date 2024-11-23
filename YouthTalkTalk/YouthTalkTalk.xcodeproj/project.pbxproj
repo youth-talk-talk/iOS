@@ -17,10 +17,10 @@
 		6AF137602CDE2177004E927B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF1375F2CDE2177004E927B /* Then */; };
 		6AFE80772CDE26D30039A01B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE80762CDE26D30039A01B /* SnapKit */; };
 		AC0AA5982CC374C600DB032E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */; };
-		AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* ResultDetailView.swift */; };
+		AC0AA59A2CC374D100DB032E /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* PostDetailView.swift */; };
 		AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */; };
 		AC0AA59E2CC5084700DB032E /* ResultDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */; };
-		AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */; };
+		AC0AA5A02CC508F300DB032E /* PosetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59F2CC508F300DB032E /* PosetDetailViewModel.swift */; };
 		AC0AA5A22CC509A800DB032E /* DetailRPDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */; };
 		AC0AA5A62CC50D2900DB032E /* DetailRPEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */; };
 		AC0AA5A82CC511CB00DB032E /* DetailContentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */; };
@@ -274,10 +274,10 @@
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
 		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
 		AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
-		AC0AA5992CC374D100DB032E /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
+		AC0AA5992CC374D100DB032E /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
 		AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailInterface.swift; sourceTree = "<group>"; };
-		AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewModel.swift; sourceTree = "<group>"; };
+		AC0AA59F2CC508F300DB032E /* PosetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosetDetailViewModel.swift; sourceTree = "<group>"; };
 		AC0AA5A12CC509A800DB032E /* DetailRPDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRPDTO.swift; sourceTree = "<group>"; };
 		AC0AA5A52CC50D2900DB032E /* DetailRPEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRPEntity.swift; sourceTree = "<group>"; };
 		AC0AA5A72CC511CB00DB032E /* DetailContentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentEntity.swift; sourceTree = "<group>"; };
@@ -553,8 +553,8 @@
 			isa = PBXGroup;
 			children = (
 				AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */,
-				AC0AA5992CC374D100DB032E /* ResultDetailView.swift */,
-				AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */,
+				AC0AA5992CC374D100DB032E /* PostDetailView.swift */,
+				AC0AA59F2CC508F300DB032E /* PosetDetailViewModel.swift */,
 			);
 			path = ResultDetail;
 			sourceTree = "<group>";
@@ -1724,10 +1724,10 @@
 				ACF2A2F52C32CC6A00FE8D63 /* SearchViewController.swift in Sources */,
 				AC579B5A2C4528B500D1C9FC /* PolicyRouter.swift in Sources */,
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
-				AC0AA5A02CC508F300DB032E /* ReviewDetailViewModel.swift in Sources */,
+				AC0AA5A02CC508F300DB032E /* PosetDetailViewModel.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
 				ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */,
-				AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */,
+				AC0AA59A2CC374D100DB032E /* PostDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
 				ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */,

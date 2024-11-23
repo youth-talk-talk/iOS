@@ -43,4 +43,10 @@ final class ReviewRepositoryImpl: ReviewRepository {
         
         return apiManager.request(router: router, type: DetailRPDTO.self).asObservable()
     }
+    
+    func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>> {
+        let router = ReviewRouter.uploadPostComment(body: body)
+        
+        return apiManager.request(router: router, type: UploadPostCommentDTO.self).asObservable()
+    }
 }

@@ -100,4 +100,20 @@ final class ReviewUseCaseImpl: ReviewUseCase {
                 }
             }
     }
+    
+    func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>> {
+        reviewRepository.uploadPostComment(body)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let detailRPDTO):
+                                        
+                    return .success(detailRPDTO)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

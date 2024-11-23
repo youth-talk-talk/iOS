@@ -9,7 +9,7 @@ import UIKit
 import FlexLayout
 import PinLayout
 
-class ResultDetailView: BaseView {
+class PostDetailView: BaseView {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -34,7 +34,7 @@ class ResultDetailView: BaseView {
         policyLabel.designed(text: "정책명 --", fontType: .p12Regular)
     }
     
-    private lazy var commentStackView = UIStackView().then {
+    lazy var commentStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 12
         $0.layoutMargins = UIEdgeInsets(top: 0, left: 17, bottom: 17, right: 17)
@@ -200,7 +200,7 @@ final class CommentView: UIView {
         backgroundColor = .white
         layer.shadowColor = FontColor.black.value.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 5)
-        layer.shadowOpacity = 0.3
+        layer.shadowOpacity = 0.1
         layer.shadowRadius = 5
         
         userNameLabel.text = userName

@@ -18,6 +18,7 @@ enum ReviewRouter: Router {
     case fetchConditionReview(query: ConditionRPQuery)
     case updateReviewScrap(id: String)
     case fetchReviewDetilInfo(id: Int)
+    case uploadPostComment(body: UploadPostCommentBody)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -33,6 +34,8 @@ enum ReviewRouter: Router {
             return "/posts/\(id)/scrap"
         case .fetchReviewDetilInfo(let id):
             return "/posts/\(id)"
+        case .uploadPostComment:
+            return "/posts/comments"
         }
     }
     
@@ -40,7 +43,7 @@ enum ReviewRouter: Router {
         switch self {
         case .fetchReview, .fetchConditionReview, .fetchReviewDetilInfo:
             return .get
-        case .updateReviewScrap:
+        case .updateReviewScrap, .uploadPostComment:
             return .post
         }
     }
@@ -51,6 +54,8 @@ enum ReviewRouter: Router {
             return convertToParameters(rpQuery: query)
         case .fetchConditionReview(let query):
             return convertToParameters(conditionQuery: query)
+        case .uploadPostComment:
+            return nil
         default:
             return nil
         }
@@ -58,7 +63,7 @@ enum ReviewRouter: Router {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchReview, .fetchConditionReview, .updateReviewScrap, .fetchReviewDetilInfo:
+        case .fetchReview, .fetchConditionReview, .updateReviewScrap, .fetchReviewDetilInfo, .uploadPostComment:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -72,6 +77,8 @@ enum ReviewRouter: Router {
         switch self {
         case .fetchReview, .fetchConditionReview, .updateReviewScrap, .fetchReviewDetilInfo:
             return nil
+        case .uploadPostComment(let body):
+            return try? encoder.encode(body)
         }
     }
     

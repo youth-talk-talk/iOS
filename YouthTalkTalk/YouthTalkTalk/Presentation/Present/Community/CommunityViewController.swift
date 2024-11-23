@@ -122,7 +122,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     let commentRepository = CommentRepositoryImpl()
                     let useCase = ReviewUseCaseImpl(reviewRepository: repository)
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = PostDetailViewController(viewModel: viewModel)
                     
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
@@ -147,7 +147,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     let commentRepository = CommentRepositoryImpl()
                     let useCase = ReviewUseCaseImpl(reviewRepository: repository)
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = PostDetailViewController(viewModel: viewModel)
                     
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
@@ -343,7 +343,7 @@ extension CommunityViewController: EventDelegate {
         let commentRepository = CommentRepositoryImpl()
         let useCase = ReviewUseCaseImpl(reviewRepository: repository)
         let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-        let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+        let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
         let resultDetailVC = PostDetailViewController(viewModel: viewModel)
         
         navigationController?.pushViewController(resultDetailVC, animated: true)
