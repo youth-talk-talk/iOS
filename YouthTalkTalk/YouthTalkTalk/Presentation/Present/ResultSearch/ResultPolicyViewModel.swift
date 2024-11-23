@@ -33,7 +33,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
-    private lazy var uploadedImage: [String] = []
+    lazy var uploadedImage: [String] = []
     
     func fetchType() {
         
@@ -110,28 +110,57 @@ final class ResultPolicyViewModel: ResultSearchInterface {
         
     }
     
-    func uploadPost(images: [Data?]) {
+    func uploadImages(_ images: [Data?], body: UploadPostBody) {
         let images = images.compactMap({ $0 })
         
-        images.forEach { data in
-            self.policyUseCase.uploadImage(data)
-                .subscribe(onNext: { [weak self] result in
-                    guard let self else { return }
-                    
-                    
-                    switch result {
-                    case.success(let data):
-                        uploadedImage.append(data)
+        if images.count > 0 {
+            // MARK: 이미지가 있을경우 이미지 API 먼저 호출
+            images.forEach { data in
+                self.policyUseCase.uploadImage(data)
+                    .subscribe(onNext: { [weak self] result in
+                        guard let self else { return }
                         
-                        // MARK: 이미지 업로드가 모두 완료되어 게시글 작성 API 호출
-                        if images.count == uploadedImage.count {
+                        switch result {
+                        case.success(let data):
+                            uploadedImage.append(data)
                             
+                            var bodyWithImage = body
+                            uploadedImage.forEach { imageUrl in
+                                bodyWithImage.contentList.append(.init(content: imageUrl, type: "IMAGE"))
+                            }
+                            
+                            // MARK: 이미지 업로드가 모두 완료되어 게시글 작성 API 호출
+                            if images.count == uploadedImage.count {
+                                policyUseCase.uploadPost(bodyWithImage)
+                                    .subscribe { result in
+                                        switch result {
+                                        case .success(let data):
+                                            break
+                                        case .failure:
+                                            break
+                                        }
+                                    }
+                                    .disposed(by: disposeBag)
+                            }
+                            
+                        case .failure(let error):
+                            break
                         }
-                        
+                    })
+                    .disposed(by: disposeBag)
+            }
+            
+            // MARK: 이미지가 없을경우 바로 포스트 작성
+        } else {
+            policyUseCase.uploadPost(body)
+                .subscribe { result in
+                    switch result {
+                    case .success(let data):
+                        break
                     case .failure(let error):
                         break
                     }
-                })
+                }
                 .disposed(by: disposeBag)
         }
     }

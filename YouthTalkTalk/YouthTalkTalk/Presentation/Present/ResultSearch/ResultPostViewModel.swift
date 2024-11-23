@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class ResultPostViewModel: ResultSearchInterface {
-    func uploadPost(images: [Data?]) { }
+    func uploadImages(_ images: [Data?], body: UploadPostBody) { }
     
     func setKeyword(_ keyword: String) { }
     

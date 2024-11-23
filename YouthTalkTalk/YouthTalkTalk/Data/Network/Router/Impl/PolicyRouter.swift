@@ -21,6 +21,7 @@ enum PolicyRouter: Router {
     case fetchUpComingDeadlineScrap
     case fetchScrapPolicy
     case uploadImage(image: String)
+    case uploadPost(body: UploadPostBody)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -40,8 +41,10 @@ enum PolicyRouter: Router {
             return "policies/scrapped/upcoming-deadline"
         case .fetchScrapPolicy:
             return "policies/scrap"
-        case .uploadImage(image: let image):
+        case .uploadImage:
             return "/posts/image"
+        case .uploadPost:
+            return "/posts/create"
         }
     }
     
@@ -49,7 +52,7 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy :
             return .get
-        case .fetchConditionPolicy, .updatePolicyScrap, .uploadImage:
+        case .fetchConditionPolicy, .updatePolicyScrap, .uploadImage, .uploadPost:
             return .post
         }
     }
@@ -60,14 +63,14 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let page, _):
             return convertToParameters(page)
-        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadPost:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
             
@@ -87,6 +90,8 @@ enum PolicyRouter: Router {
             return try? encoder.encode(body)
         case .uploadImage(let image):
             return try? encoder.encode(image)
+        case .uploadPost(let body):
+            return try? encoder.encode(body)
         case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }

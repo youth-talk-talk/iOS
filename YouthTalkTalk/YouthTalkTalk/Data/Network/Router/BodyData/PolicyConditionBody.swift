@@ -29,3 +29,10 @@ struct PolicyConditionBody: Encodable {
         self.keyword = keyword
     }
 }
+
+struct UploadPostBody: Encodable {
+    let title: String
+    let postType: String
+    let policyId: String?
+    var contentList: [DetailContentDTO]
+}

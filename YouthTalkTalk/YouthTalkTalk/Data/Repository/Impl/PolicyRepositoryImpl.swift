@@ -62,4 +62,12 @@ final class PolicyRepositoryImpl: PolicyRepository {
         
         return apiManager.postUploadImage(stringURL: "/posts/image", image: image).asObservable()
     }
+    
+    
+    func uploadPost(_ body: UploadPostBody) -> Observable<Result<DetailRPDetailDTO, APIError>> {
+        
+        let router = PolicyRouter.uploadPost(body: body)
+        
+        return apiManager.request(router: router, type: DetailRPDetailDTO.self).asObservable()
+    }
 }

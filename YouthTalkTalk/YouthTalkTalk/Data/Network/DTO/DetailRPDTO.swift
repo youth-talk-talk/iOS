@@ -40,7 +40,7 @@ struct DetailRPDetailDTO: Decodable {
     }
 }
 
-struct DetailContentDTO: Decodable {
+struct DetailContentDTO: Codable {
     
     let content: String
     let type: String

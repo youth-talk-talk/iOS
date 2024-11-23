@@ -15,7 +15,7 @@ enum SearchPolicySection {
 
 struct SearchPolicyItem: Hashable {
     let uuid = UUID()
-    let id: Int
+    let id: String
     let policyTitle: String
 }
 
@@ -29,7 +29,7 @@ final class SearchPolicyView: UIView {
     
     private lazy var loadPurpose: loadPurpose = .paging
     
-    private let onPolicyTapped: (String) -> Void
+    private let onPolicyTapped: (SearchPolicyItem) -> Void
     
     private lazy var viewModel = ResultPolicyViewModel(type: PolicyCategory.allCases,
                                                        policyUseCase: PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl()))
@@ -78,7 +78,7 @@ final class SearchPolicyView: UIView {
         $0.font = FontManager.font(.p16Regular16)
     }
     
-    init(onPolicyTapped: @escaping (String) -> Void) {
+    init(onPolicyTapped: @escaping (SearchPolicyItem) -> Void) {
         self.onPolicyTapped = onPolicyTapped
         
         super.init(frame: .zero)
@@ -112,7 +112,7 @@ final class SearchPolicyView: UIView {
                 guard let self else { return }
                 
                 let beforeItems = loadPurpose == .paging ? dataSource.snapshot().itemIdentifiers : []
-                let itemList: [SearchPolicyItem] = items.map { SearchPolicyItem(id: Int($0.policy?.policyId ?? "0") ?? 0, policyTitle: $0.policy?.title ?? "") }
+                let itemList: [SearchPolicyItem] = items.map { SearchPolicyItem(id: $0.policy?.policyId ?? "", policyTitle: $0.policy?.title ?? "") }
                 var snapshot = NSDiffableDataSourceSnapshot<SearchPolicySection, SearchPolicyItem>()
                 
                 snapshot.appendSections([.mainSection])
@@ -215,7 +215,7 @@ extension SearchPolicyView: UITableViewDataSourcePrefetching, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        onPolicyTapped(dataSource.snapshot().itemIdentifiers[indexPath.item].policyTitle)
+        onPolicyTapped(dataSource.snapshot().itemIdentifiers[indexPath.item])
     }
 }
 

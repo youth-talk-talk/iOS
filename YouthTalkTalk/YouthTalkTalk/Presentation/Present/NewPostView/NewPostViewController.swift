@@ -45,6 +45,8 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         $0.designed(text: "정책명", fontType: .p16Regular16, textColor: .gray50)
     }
     
+    private lazy var selectedPolicyId: String = ""
+    
     private lazy var searchIconImageView = UIImageView(image: UIImage(named: "magnifyingglass"))
     
     private lazy var contentsLabel = UILabel().then {
@@ -102,8 +104,9 @@ final class NewPostViewController: BaseViewController<NewPostView> {
     }
     
     private lazy var searchPolicyView = SearchPolicyView(onPolicyTapped: { [weak self] selectedPolicy in
-        self?.selectedPolicyLabel.text = selectedPolicy
+        self?.selectedPolicyLabel.text = selectedPolicy.policyTitle
         self?.selectedPolicyLabel.textColor = .black
+        self?.selectedPolicyId = selectedPolicy.id
     })
     
     private lazy var addPhotoView = AddPhotoView()
@@ -166,7 +169,13 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             
             if titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder {
                 guard let images = Array(contentStackView.arrangedSubviews.dropFirst()) as? [UIImageView] else { return }
-                viewModel.uploadPost(images: images.map{ $0.image?.pngData() })
+                
+                
+                
+                viewModel.uploadImages(images.map{ $0.image?.pngData() }, body: .init(title: titleLabel.text ?? "",
+                                                                                      postType: "review",
+                                                                                      policyId: "\(selectedPolicyId)",
+                                                                                      contentList: [.init(content: contentsLabel.text ?? "", type: "TEXT")]))
             } else {
                 showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
                     self?.alertView.isHidden = true
