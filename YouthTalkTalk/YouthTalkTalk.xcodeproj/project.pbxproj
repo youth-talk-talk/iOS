@@ -16,7 +16,7 @@
 		6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */; };
 		6AF137602CDE2177004E927B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF1375F2CDE2177004E927B /* Then */; };
 		6AFE80772CDE26D30039A01B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE80762CDE26D30039A01B /* SnapKit */; };
-		AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */; };
+		AC0AA5982CC374C600DB032E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */; };
 		AC0AA59A2CC374D100DB032E /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* ResultDetailView.swift */; };
 		AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */; };
 		AC0AA59E2CC5084700DB032E /* ResultDetailInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */; };
@@ -273,7 +273,7 @@
 		6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
 		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
-		AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
+		AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		AC0AA5992CC374D100DB032E /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
 		AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
 		AC0AA59D2CC5084700DB032E /* ResultDetailInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailInterface.swift; sourceTree = "<group>"; };
@@ -552,7 +552,7 @@
 		AC0AA5962CC3744800DB032E /* ResultDetail */ = {
 			isa = PBXGroup;
 			children = (
-				AC0AA5972CC374C600DB032E /* ResultDetailViewController.swift */,
+				AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */,
 				AC0AA5992CC374D100DB032E /* ResultDetailView.swift */,
 				AC0AA59F2CC508F300DB032E /* ReviewDetailViewModel.swift */,
 			);
@@ -1612,7 +1612,7 @@
 				AC579B782C53B2EE00D1C9FC /* PolicyViewModel.swift in Sources */,
 				AC51E8352C956F2F00550148 /* DetailConditionView.swift in Sources */,
 				AC579B6F2C53A09400D1C9FC /* DetailPolicyEntity.swift in Sources */,
-				AC0AA5982CC374C600DB032E /* ResultDetailViewController.swift in Sources */,
+				AC0AA5982CC374C600DB032E /* PostDetailViewController.swift in Sources */,
 				AC604C722C7A24C400804950 /* ResultSearchOutput.swift in Sources */,
 				ACC46CBF2CD290420004ED5C /* MemberRepositoryImpl.swift in Sources */,
 				AC579B722C53B27E00D1C9FC /* DetailPolicyInput.swift in Sources */,

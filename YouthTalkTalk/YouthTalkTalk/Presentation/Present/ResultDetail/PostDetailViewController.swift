@@ -11,7 +11,7 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-class ResultDetailViewController: BaseViewController<ResultDetailView> {
+class PostDetailViewController: BaseViewController<ResultDetailView> {
     // TODO: 게시글 생성, 삭제 기능 추가
     private lazy var moreImageView = UIImageView(image: UIImage(named: "more"))
     

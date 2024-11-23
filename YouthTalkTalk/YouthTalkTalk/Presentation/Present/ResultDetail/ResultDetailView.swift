@@ -34,10 +34,43 @@ class ResultDetailView: BaseView {
         policyLabel.designed(text: "정책명 --", fontType: .p12Regular)
     }
     
+    private lazy var commentStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 12
+        $0.layoutMargins = UIEdgeInsets(top: 0, left: 17, bottom: 17, right: 17)
+        $0.isLayoutMarginsRelativeArrangement = true
+    }
+    
+    private lazy var commentTitleLabel = UILabel().then {
+        $0.designed(text: "댓글", fontType: .g14Bold)
+    }
+    
+    private lazy var commentCountLabel = UILabel().then {
+        $0.designed(text: "0", fontType: .g14Bold, textColor: .gray40)
+    }
+    
     override func configureLayout() {
         
         flexView.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        scrollView.addSubview(commentTitleLabel)
+        scrollView.addSubview(commentCountLabel)
+        scrollView.addSubview(commentStackView)
+        
+        commentTitleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(17)
+            $0.top.equalTo(contentView.snp.bottom).offset(20)
+        }
+        
+        commentCountLabel.snp.makeConstraints {
+            $0.centerY.equalTo(commentTitleLabel)
+            $0.leading.equalTo(commentTitleLabel.snp.trailing).offset(4)
+        }
+        
+        commentStackView.snp.makeConstraints {
+            $0.width.centerX.equalToSuperview()
+            $0.top.equalTo(commentTitleLabel.snp.bottom).offset(12)
+        }
         
         flexView.flex.define { flex in
             
@@ -140,6 +173,55 @@ class ResultDetailView: BaseView {
     }
     
     func comment(data: [CommentDetailEntity]) {
+        commentCountLabel.text = "\(data.count)"
         
+        data.forEach { comment in
+            let commentView = CommentView(userName: comment.nickname, comment: comment.content)
+            
+            commentStackView.addArrangedSubview(commentView)
+        }
+    }
+}
+
+final class CommentView: UIView {
+    private lazy var userNameLabel = UILabel().then {
+        $0.font = FontManager.font(.p12Bold)
+    }
+    
+    private lazy var commentLabel = UILabel().then {
+        $0.font = FontManager.font(.p12Regular)
+        $0.numberOfLines = 0
+    }
+    
+    init(userName: String, comment: String) {
+        super.init(frame: .zero)
+        
+        layer.cornerRadius = 4
+        backgroundColor = .white
+        layer.shadowColor = FontColor.black.value.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 5)
+        layer.shadowOpacity = 0.3
+        layer.shadowRadius = 5
+        
+        userNameLabel.text = userName
+        commentLabel.text = comment
+        
+        addSubviews([userNameLabel, commentLabel])
+        
+        userNameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(10)
+            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(10)
+        }
+        
+        commentLabel.snp.makeConstraints {
+            $0.top.equalTo(userNameLabel.snp.bottom).offset(2)
+            $0.bottom.equalToSuperview().inset(10)
+            $0.leading.trailing.equalToSuperview().inset(10)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
