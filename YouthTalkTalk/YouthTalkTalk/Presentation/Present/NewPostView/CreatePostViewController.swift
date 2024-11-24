@@ -11,7 +11,9 @@ import Photos
 import AVFoundation
 import Combine
 
-final class NewPostViewController: BaseViewController<NewPostView> {
+final class CreatePostViewController: BaseViewController<NewPostView> {
+    
+    let postType: MainContentsType
     
     weak var delegate: EventDelegate?
     
@@ -116,10 +118,20 @@ final class NewPostViewController: BaseViewController<NewPostView> {
     
     private lazy var addPhotoView = AddPhotoView()
     
+    init(postType: MainContentsType) {
+        self.postType = postType
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateNavigationTitle(title: "후기글쓰기")
+        updateNavigationTitle(title: postType.title)
         
         tabBarController?.tabBar.isHidden = true
         
@@ -179,17 +191,14 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         writePostLabel.onTapped { [weak self] in
             guard let self else { return }
             
-            if titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder {
-                
-                
-                guard let images = Array(contentStackView.arrangedSubviews.dropFirst()) as? [PostImageView] else { return
-                    print("|| \(contentStackView.arrangedSubviews.count), \(Array(contentStackView.arrangedSubviews.dropFirst()) as? [PostImageView])")
-                }
-                
-                
+            let reviewPostCondition = titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder
+            let freePostCondition = titleLabel.isNotEmpty() && contentsTextView.text != textViewPlaceHolder
+            
+            if (postType == .review) ? reviewPostCondition : freePostCondition {
+                let images: [PostImageView] = Array(contentStackView.arrangedSubviews.dropFirst()) as? [PostImageView] ?? []
                 
                 viewModel.uploadImages(images.map{ $0.imageView.image?.pngData() }, body: .init(title: titleTextField.text ?? "",
-                                                                                      postType: "review",
+                                                                                                postType: postType.key,
                                                                                       policyId: "\(selectedPolicyId)",
                                                                                       contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]))
             } else {
@@ -218,8 +227,6 @@ final class NewPostViewController: BaseViewController<NewPostView> {
     private func layout() {
         view.addSubview(titleLabel)
         view.addSubview(titleTextField)
-        view.addSubview(policyLabel)
-        view.addSubview(policyView)
         view.addSubview(contentsLabel)
         view.addSubview(contentContainerView)
         view.addSubview(addPhotoContainerView)
@@ -228,13 +235,7 @@ final class NewPostViewController: BaseViewController<NewPostView> {
         contentScrollView.addSubview(contentStackView)
 
         contentContainerView.addSubview(contentScrollView)
-        
-        policyView.addSubview(selectedPolicyLabel)
-        policyView.addSubview(searchIconImageView)
-        
-        view.addSubview(searchPolicyView)
-        view.addSubview(addPhotoView)
-        
+                
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(17)
             $0.top.equalToSuperview().inset(131)
@@ -247,31 +248,49 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             $0.centerY.equalTo(titleLabel)
         }
         
-        policyLabel.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(38)
-        }
-        
-        policyView.snp.makeConstraints {
-            $0.leading.trailing.height.equalTo(titleTextField)
-            $0.centerY.equalTo(policyLabel)
-        }
-        
-        selectedPolicyLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(13)
-            $0.trailing.equalTo(searchIconImageView.snp.leading).offset(-17)
-            $0.centerY.equalToSuperview()
-        }
-        
-        searchIconImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(13)
-            $0.size.equalTo(24)
-            $0.centerY.equalToSuperview()
-        }
-        
-        contentsLabel.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel)
-            $0.top.equalTo(policyLabel.snp.bottom).offset(38)
+        // MARK: 후기 페이지일 경우에만 정책 선택뷰 표시
+        if postType == .review {
+            view.addSubview(policyLabel)
+            view.addSubview(policyView)
+            policyView.addSubview(selectedPolicyLabel)
+            policyView.addSubview(searchIconImageView)
+            view.addSubview(searchPolicyView)
+
+            policyLabel.snp.makeConstraints {
+                $0.leading.equalTo(titleLabel)
+                $0.top.equalTo(titleLabel.snp.bottom).offset(38)
+            }
+            
+            policyView.snp.makeConstraints {
+                $0.leading.trailing.height.equalTo(titleTextField)
+                $0.centerY.equalTo(policyLabel)
+            }
+            
+            selectedPolicyLabel.snp.makeConstraints {
+                $0.leading.equalToSuperview().inset(13)
+                $0.trailing.equalTo(searchIconImageView.snp.leading).offset(-17)
+                $0.centerY.equalToSuperview()
+            }
+            
+            searchIconImageView.snp.makeConstraints {
+                $0.trailing.equalToSuperview().inset(13)
+                $0.size.equalTo(24)
+                $0.centerY.equalToSuperview()
+            }
+            
+            searchPolicyView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+            
+            contentsLabel.snp.makeConstraints {
+                $0.leading.equalTo(titleLabel)
+                $0.top.equalTo(policyLabel.snp.bottom).offset(38)
+            }
+        } else {
+            contentsLabel.snp.makeConstraints {
+                $0.leading.equalTo(titleLabel)
+                $0.top.equalTo(titleLabel.snp.bottom).offset(38)
+            }
         }
         
         contentContainerView.snp.makeConstraints {
@@ -313,17 +332,14 @@ final class NewPostViewController: BaseViewController<NewPostView> {
             $0.centerX.equalToSuperview()
         }
         
+        view.addSubview(addPhotoView)
         addPhotoView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        searchPolicyView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
 }
 
-extension NewPostViewController: UIImagePickerControllerDelegate,
+extension CreatePostViewController: UIImagePickerControllerDelegate,
                                  UINavigationControllerDelegate,
                                  ImagePickerDelegate {
     func didSelect(assets: [PHAsset]?, deletedAssets: [PHAsset]?) {
@@ -432,7 +448,7 @@ extension NewPostViewController: UIImagePickerControllerDelegate,
     }
 }
 
-extension NewPostViewController: UITextViewDelegate {
+extension CreatePostViewController: UITextViewDelegate {
     public func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
@@ -448,7 +464,7 @@ extension NewPostViewController: UITextViewDelegate {
     }
 }
 
-extension NewPostViewController {
+extension CreatePostViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             picker.dismiss(animated: true)

@@ -145,7 +145,7 @@
 		AC604C222C69FF7500804950 /* RecentSearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C212C69FF7500804950 /* RecentSearchInput.swift */; };
 		AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C232C69FFD100804950 /* RecentSearchOutput.swift */; };
 		AC604C262C6A002100804950 /* RecentSearchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C252C6A002100804950 /* RecentSearchInterface.swift */; };
-		AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */; };
+		AC604C2D2C6A3C0300804950 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2C2C6A3C0300804950 /* CreatePostViewController.swift */; };
 		AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C2E2C6A3C0D00804950 /* NewPostView.swift */; };
 		AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */; };
 		AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC604C3A2C74A5A300804950 /* ScrapDTO.swift */; };
@@ -401,7 +401,7 @@
 		AC604C212C69FF7500804950 /* RecentSearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchInput.swift; sourceTree = "<group>"; };
 		AC604C232C69FFD100804950 /* RecentSearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchOutput.swift; sourceTree = "<group>"; };
 		AC604C252C6A002100804950 /* RecentSearchInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchInterface.swift; sourceTree = "<group>"; };
-		AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		AC604C2C2C6A3C0300804950 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		AC604C2E2C6A3C0D00804950 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
 		AC604C362C6B8BFE00804950 /* TitleImageSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageSpacingView.swift; sourceTree = "<group>"; };
 		AC604C3A2C74A5A300804950 /* ScrapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapDTO.swift; sourceTree = "<group>"; };
@@ -952,7 +952,7 @@
 		AC604C2B2C6A3BC600804950 /* NewPostView */ = {
 			isa = PBXGroup;
 			children = (
-				AC604C2C2C6A3C0300804950 /* NewPostViewController.swift */,
+				AC604C2C2C6A3C0300804950 /* CreatePostViewController.swift */,
 				AC604C2E2C6A3C0D00804950 /* NewPostView.swift */,
 				6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */,
 				6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */,
@@ -1699,7 +1699,7 @@
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
 				6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */,
-				AC604C2D2C6A3C0300804950 /* NewPostViewController.swift in Sources */,
+				AC604C2D2C6A3C0300804950 /* CreatePostViewController.swift in Sources */,
 				AC604C092C6764A900804950 /* RPQuery.swift in Sources */,
 				ACF2A26A2C21B24E00FE8D63 /* TitleHeaderView.swift in Sources */,
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,

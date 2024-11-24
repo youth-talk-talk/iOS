@@ -113,6 +113,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     
     func uploadImages(_ images: [Data?], body: UploadPostBody) {
         let images = images.compactMap({ $0 })
+        uploadedImage = []
         
         if images.count > 0 {
             // MARK: 이미지가 있을경우 이미지 API 먼저 호출
@@ -143,6 +144,8 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                                         }
                                     }
                                     .disposed(by: disposeBag)
+                            } else {
+                                print("달라..?")
                             }
                             
                         case .failure(let error):

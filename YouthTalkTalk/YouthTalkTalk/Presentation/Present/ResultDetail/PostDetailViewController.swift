@@ -153,6 +153,4 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
 
         }
     }
-    
-    
 }

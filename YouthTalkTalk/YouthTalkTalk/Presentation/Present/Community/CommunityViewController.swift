@@ -65,10 +65,10 @@ class CommunityViewController: BaseViewController<CommunityView> {
         
         snapshot.appendSections([.search, .popular, .recent])
         
+        // MARK: 글 쓰기 버튼 탭
         layoutView.createButton.rx.tap
             .bind(with: self) { owner, _ in
-                
-                let nextVC = NewPostViewController()
+                let nextVC = CreatePostViewController(postType: owner.viewModel.type)
                 nextVC.delegate = self
                 
                 owner.tabmanParent?.navigationController?.pushViewController(nextVC, animated: true)
@@ -204,7 +204,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     owner.navigationController?.pushViewController(nextVC, animated: true)
                 }
                 .disposed(by: supplementaryView.disposeBag)
-            
+
             if type == .review {
                 supplementaryView.configureWithCategory()
             } else if type == .post {
