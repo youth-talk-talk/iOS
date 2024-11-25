@@ -68,7 +68,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             // TODO: 이부분 내 정보 데이터에서 이름 가져와서 넣기
             let commentView = CommentView(userName: "", // viewModel.output.commentWriterName,
                                           comment: viewModel.output.writtenCommentText)
-            
+            self?.layoutView.commentTextFieldView.textField.resignFirstResponder()
+            self?.layoutView.commentTextFieldView.textField.text = ""
             self?.layoutView.commentStackView.addArrangedSubview(commentView)
         }
         .store(in: &cancelBag)

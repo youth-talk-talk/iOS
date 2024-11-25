@@ -231,7 +231,7 @@ final class FontManager {
             } else {
                 
                 let text = NSAttributedString(
-                    string: item.content,
+                    string: item.content + "\n",
                     attributes: [.font: font, .foregroundColor: textColor]
                 )
                 attributedStringArray[index] = NSMutableAttributedString(attributedString: text)
