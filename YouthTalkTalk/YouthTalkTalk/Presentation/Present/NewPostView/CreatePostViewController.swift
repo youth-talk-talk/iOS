@@ -73,11 +73,12 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         $0.spacing = 11
     }
     
-    private let textViewPlaceHolder = "*후기로 무얼 적어야 할 지 모르겠다면 아래 질문에 대한 답을 적어주세요!\n 1. 해당프로그램을 경험하면서 느낀 장점이나 단점이 있나요?\n 2. 주관부서에 남기고 싶은 피드백을 적어주세요!\n 3. 다음년도에 해당 프로그램을 신청할 청년들을 위한 tip!"
+    private let textViewPlaceHolder = "*후기로 무얼 적어야 할 지 모르겠다면 아래 질문에 대한 답을 적어주세요!\n 1. 해당프로그램을 경험하면서 느낀 장점이나 단점이 있나요?\n 2. 주관부서에 남기고 싶은 피드백을 적어주세요!\n 3. 다음년도에 해당 프로그램을 신청할 청년들을 위한 tip! \n\n부적절하거나 불쾌감을 줄 수 있는 컨텐츠는 제재를 받을 수 있습니다"
     
     private lazy var contentsTextView = UITextView().then {
         $0.backgroundColor = .clear
         $0.textColor = FontColor.gray40.value
+        $0.font = FontManager.font(.p14Regular)
         $0.delegate = self
         $0.text = textViewPlaceHolder
         $0.isScrollEnabled = false
