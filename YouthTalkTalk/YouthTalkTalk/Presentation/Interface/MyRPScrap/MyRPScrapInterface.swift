@@ -18,7 +18,7 @@ protocol MyRPScrapInput {
 protocol MyRPScrapOutput {
     
     var scrap: PublishRelay<[RPEntity]> { get }
-    // var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
+    var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
     
 }
 
@@ -26,4 +26,6 @@ protocol MyRPScrapInterface: MyRPScrapInput, MyRPScrapOutput {
     
     var input: MyRPScrapInput { get }
     var output: MyRPScrapOutput { get }
+    var scrapStatus: [String: Bool] { get }
+    var scrapStatusRelay: BehaviorRelay<[String: Bool]> { get }
 }

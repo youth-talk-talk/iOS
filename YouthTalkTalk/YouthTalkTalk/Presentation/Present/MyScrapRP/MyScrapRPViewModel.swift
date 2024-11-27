@@ -17,13 +17,16 @@ final class MyScrapRPViewModel: MyRPScrapInterface {
     var input: MyRPScrapInput { return self }
     var output: MyRPScrapOutput { return self }
     
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
+    
     // Inputs
     var fetchScrapEvent = PublishRelay<Void>()
     var updateScrap = PublishRelay<String>()
     
     // Outputs
     var scrap = PublishRelay<[RPEntity]>()
-    // var canceledScrapEntity = PublishRelay<ScrapEntity>()
+    var canceledScrapEntity = PublishRelay<ScrapEntity>()
     
     init(useCase: PostUseCase) {
         self.useCase = useCase
@@ -44,20 +47,23 @@ final class MyScrapRPViewModel: MyRPScrapInterface {
             .disposed(by: disposeBag)
         
         // 스크랩
-        // updateScrap
-        //     .withUnretained(self)
-        //     .flatMap { owner, policyID in
-        //         return owner.useCase.updatePolicyScrap(id: policyID)
-        //     }
-        //     .subscribe(with: self) { owner, result in
-        //         
-        //         switch result {
-        //         case .success(let scrapEntity):
-        //             owner.canceledScrapEntity.accept(scrapEntity)
-        //         case .failure(let error):
-        //             print(error)
-        //         }
-        //     }
-        //     .disposed(by: disposeBag)
+         updateScrap
+             .withUnretained(self)
+             .flatMap { owner, policyID in
+                 return owner.useCase.updatePostScrap(id: policyID)
+             }
+             .subscribe(with: self) { owner, result in
+                 
+                 switch result {
+                 case .success(let scrapEntity):
+                     owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                     owner.scrapStatusRelay.accept(owner.scrapStatus)
+                     owner.canceledScrapEntity.accept(scrapEntity)
+                 case .failure(let error):
+                     print(error)
+                 }
+             }
+             .disposed(by: disposeBag)
+        
     }
 }

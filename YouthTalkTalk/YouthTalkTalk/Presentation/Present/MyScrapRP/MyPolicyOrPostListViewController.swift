@@ -56,12 +56,10 @@ class MyPolicyOrPostListViewController: RootViewController {
             cell.layer.masksToBounds = true
             cell.configure(data: itemIdentifier)
             
-            // cell.scrapButton.rx.tap
-            //     .bind(with: self) { owner, _ in
-            //
-            //         owner.viewModel.input.updatePolicyScrap.accept(data)
-            //     }
-            //     .disposed(by: cell.disposeBag)
+            cell.scrapButton.onTapped { [weak self] in
+                let id = String(itemIdentifier.postId ?? 0)
+                self?.viewModel.input.updateScrap.accept(id)
+            }
             
             cell.tapGesture.rx.event
                 .bind(with: self) { owner, _ in
@@ -76,6 +74,23 @@ class MyPolicyOrPostListViewController: RootViewController {
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let postId = itemIdentifier.postId,
+               let scrap = self.viewModel.scrapStatus[String(postId)] {
+                
+                cell.updateScrapStatus(scrap, 0)
+            }
+            
+            // cell에 즉시 적용
+            self.viewModel.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let postId = itemIdentifier.postId,
+                       let scrap = scrapStatus[String(postId)] {
+                        cell.updateScrapStatus(scrap, 0)
+                    }
+                }
+                .disposed(by: self.disposeBag)
         }
         
         dataSource = UICollectionViewDiffableDataSource<MyScrapSection, RPEntity>(collectionView: collectionView) {
@@ -104,16 +119,16 @@ class MyPolicyOrPostListViewController: RootViewController {
             }
             .disposed(by: disposeBag)
         
-        // viewModel.output.canceledScrapEntity
-        //     .bind(with: self) { owner, scrapEntity in
-        //         
-        //         let policyItems = owner.snapshot.itemIdentifiers(inSection: .scrap)
-        //         
-        //         guard let item = policyItems.filter({ $0.policyId == scrapEntity.id }).first else { return }
-        //         
-        //         owner.delete(item: item)
-        //     }
-        //     .disposed(by: disposeBag)
+         viewModel.output.canceledScrapEntity
+             .bind(with: self) { owner, scrapEntity in
+                 
+                 let policyItems = owner.snapshot.itemIdentifiers(inSection: .scrap)
+                 
+                 guard let item = policyItems.filter({ ($0.policyId == scrapEntity.id) || ((String($0.postId ?? 0) == scrapEntity.id)) }).first else { return }
+                 
+                 owner.delete(item: item)
+             }
+             .disposed(by: disposeBag)
         
         viewModel.input.fetchScrapEvent.accept(())
     }
