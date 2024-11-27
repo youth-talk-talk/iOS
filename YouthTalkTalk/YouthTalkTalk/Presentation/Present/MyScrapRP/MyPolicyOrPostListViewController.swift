@@ -97,9 +97,10 @@ class MyPolicyOrPostListViewController: RootViewController {
     
     override func bind() {
         
+        
         viewModel.output.scrap
             .bind(with: self) { owner, rpEntities in
-                // owner.update(section: .scrap, items: rpEntities)
+                 owner.update(section: .scrap, items: rpEntities)
             }
             .disposed(by: disposeBag)
         
