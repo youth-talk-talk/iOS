@@ -20,7 +20,7 @@ struct RPEntity: Hashable {
     let title: String
     let content: String
     let writerID: Int?
-    let scraps: Int
+    var scraps: Int
     let scrap: Bool
     let comments: Int
     let policyId: String?

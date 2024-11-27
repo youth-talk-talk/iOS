@@ -154,7 +154,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self,
                   let data = itemIdentifier.data else { return }
@@ -165,14 +165,14 @@ final class HomeViewController: BaseViewController<HomeView> {
             
             // cell에 적용(스크롤시에도 유지)
             if let scrap = viewModel.output.scrapStatus[data.policyId] {
-                cell.updateScrapStatus(scrap)
+                cell.updateScrapStatus(scrap, 0)
             }
             
             // cell에 즉시 적용
             viewModel.output.scrapStatusRelay
                 .bind(with: self) { owner, scrapStatus in
                     if let scrap = scrapStatus[data.policyId] {
-                        cell.updateScrapStatus(scrap)
+                        cell.updateScrapStatus(scrap, 0)
                     }
                 }
                 .disposed(by: self.disposeBag)

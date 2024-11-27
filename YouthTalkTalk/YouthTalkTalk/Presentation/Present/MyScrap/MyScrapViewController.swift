@@ -50,7 +50,7 @@ class MyScrapViewController: RootViewController {
         
         snapshot.appendSections([.scrap])
         
-        let recentCellRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, PolicyEntity> { cell, indexPath, itemIdentifier in
+        let recentCellRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, PolicyEntity> { cell, indexPath, itemIdentifier in
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true

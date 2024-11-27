@@ -13,7 +13,7 @@ protocol ReviewUseCase {
     
     func fetchReviews(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<CommunityRPEntity, APIError>>
     func fetchConditionReviews(keyword: String, page: Int, size: Int) -> Observable<Result<([RPEntity], Int), APIError>>
-    func updateReviewScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
+    func updatePostScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
     func fetchReviewDetail(id: Int) -> Observable<Result<DetailRPEntity, APIError>>
     func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>>
 }

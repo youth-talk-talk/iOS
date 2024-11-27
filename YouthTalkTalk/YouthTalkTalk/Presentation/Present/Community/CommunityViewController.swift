@@ -106,11 +106,17 @@ class CommunityViewController: BaseViewController<CommunityView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let popularSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
             cell.configure(data: itemIdentifier.data)
+            
+            cell.scrapButton.onTapped { [weak self] in
+                guard let postId = itemIdentifier.data?.postId else { return }
+                
+                self?.viewModel.input.updatePostScrap.accept(String(postId))
+            }
             
             // 셀 선택
             cell.tapGesture.rx.event
@@ -128,14 +134,38 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let postId = itemIdentifier.data?.postId,
+               let scrapCount = itemIdentifier.data?.scraps,
+               let scrap = viewModel.output.scrapStatus[String(postId)] {
+                cell.updateScrapStatus(scrap, scrapCount)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let postId = itemIdentifier.data?.postId,
+                       let scrapCount = itemIdentifier.data?.scraps,
+                       let scrap = scrapStatus[String(postId)] {
+                        cell.updateScrapStatus(scrap, scrapCount)
+                    }
+                }
+                .disposed(by: self.disposeBag)
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
             cell.configure(data: itemIdentifier.data)
+            
+            cell.scrapButton.onTapped { [weak self] in
+                guard let postId = itemIdentifier.data?.postId else { return }
+                
+                self?.viewModel.input.updatePostScrap.accept(String(postId))
+            }
             
             // 셀 선택
             cell.tapGesture.rx.event
@@ -153,6 +183,25 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let postId = itemIdentifier.data?.postId,
+               let scrapCount = itemIdentifier.data?.scraps,
+               let scrap = viewModel.output.scrapStatus[String(postId)] {
+                
+                cell.updateScrapStatus(scrap, scrapCount)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let postId = itemIdentifier.data?.postId,
+                       let scrapCount = itemIdentifier.data?.scraps,
+                       let scrap = scrapStatus[String(postId)] {
+                        cell.updateScrapStatus(scrap, scrapCount)
+                    }
+                }
+                .disposed(by: self.disposeBag)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in

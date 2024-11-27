@@ -30,9 +30,9 @@ final class ReviewRepositoryImpl: ReviewRepository {
         return apiManager.request(router: router, type: ConditionReviewDTO.self).asObservable()
     }
     
-    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
+    func updatePostScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
         
-        let router = ReviewRouter.updateReviewScrap(id: id)
+        let router = ReviewRouter.updatePostScrap(id: id)
         
         return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
     }

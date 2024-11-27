@@ -10,7 +10,7 @@ import PinLayout
 import FlexLayout
 import RxSwift
 
-final class RecentCollectionViewCell: BaseCollectionViewCell {
+final class PostListCollectionViewCell: BaseCollectionViewCell {
     
     var disposeBag = DisposeBag()
 
@@ -19,7 +19,6 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
     let titleLabel = UILabel()
     let categoryLabel = UILabel()
     let scrapButton = UIButton()
-    let scrapLabel = UILabel()
     let commentsButton = UIButton()
     let commentsLabel = UILabel()
     
@@ -34,7 +33,6 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         deadlineLabel.text = ""
         titleLabel.text = ""
         categoryLabel.text = ""
-        scrapLabel.text = ""
         commentsLabel.text = ""
         
         scrapButton.configuration?.image = nil
@@ -45,6 +43,8 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         } else {
             self.addGestureRecognizer(tapGesture)
         }
+        
+        scrapButton.designedByImage(.bookmark)
     }
     
     override func configureLayout() {
@@ -87,9 +87,6 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
                     flex.addItem(scrapButton)
                         .height(24)
                         .width(24)
-                        .markDirty()
-                    flex.addItem(scrapLabel)
-                        .marginLeft(2)
                         .markDirty()
                     flex.addItem(commentsButton)
                         .height(24)
@@ -139,10 +136,8 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         let policyCategory = PolicyCategory(rawValue: data.category) ?? .life
         categoryLabel.text = policyCategory.name
         
-        scrapLabel.text = ""
         commentsLabel.text = ""
         commentsButton.configuration?.image = nil
-        scrapLabel.flex.display(.none)
         commentsButton.flex.display(.none)
         commentsLabel.flex.display(.none)
     }
@@ -153,7 +148,6 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         subTitleLabel.text = data.policyTitle
         titleLabel.text = data.title
         scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
-        scrapLabel.designed(text: String(data.scraps), fontType: .p14Regular)
         commentsLabel.designed(text: String(data.comments), fontType: .p14Regular)
         
         deadlineLabel.text = ""
@@ -162,7 +156,7 @@ final class RecentCollectionViewCell: BaseCollectionViewCell {
         categoryLabel.flex.display(.none)
     }
     
-    func updateScrapStatus(_ isScrap: Bool) {
+    func updateScrapStatus(_ isScrap: Bool, _ scrapCount: Int) {
         scrapButton.designedByImage(isScrap ? .bookmarkFill : .bookmark)
     }
 }

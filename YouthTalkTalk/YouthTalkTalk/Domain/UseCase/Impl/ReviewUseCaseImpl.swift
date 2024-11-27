@@ -64,9 +64,9 @@ final class ReviewUseCaseImpl: ReviewUseCase {
             }
     }
     
-    func updateReviewScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
+    func updatePostScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
         
-        reviewRepository.updatePolicyScrap(id: id)
+        reviewRepository.updatePostScrap(id: id)
             .withUnretained(self)
             .map { owner, result in
                 

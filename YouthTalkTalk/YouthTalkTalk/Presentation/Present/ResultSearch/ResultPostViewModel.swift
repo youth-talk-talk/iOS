@@ -22,7 +22,7 @@ final class ResultPostViewModel: ResultSearchInterface {
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var searchType: ResultSearchType = .post
-    var updatePolicyScrap = PublishRelay<String>()
+    var updatePostScrap = PublishRelay<String>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
@@ -64,7 +64,7 @@ final class ResultPostViewModel: ResultSearchInterface {
             .disposed(by: disposeBag)
         
         // 스크랩
-        updatePolicyScrap
+        updatePostScrap
             .withUnretained(self)
             .flatMap { owner, postID in
                 

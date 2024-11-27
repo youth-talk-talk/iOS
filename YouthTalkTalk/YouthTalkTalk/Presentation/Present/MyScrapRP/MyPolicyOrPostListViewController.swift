@@ -50,7 +50,7 @@ class MyPolicyOrPostListViewController: RootViewController {
         
         snapshot.appendSections([.scrap])
         
-        let recentCellRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, RPEntity> { cell, indexPath, itemIdentifier in
+        let recentCellRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, RPEntity> { cell, indexPath, itemIdentifier in
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true

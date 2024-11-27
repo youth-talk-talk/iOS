@@ -83,7 +83,7 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let resultSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
@@ -124,13 +124,13 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         
                     case .resultPolicy(let policyEntity):
                         
-                        owner.viewModel.input.updatePolicyScrap.accept(policyEntity.policyId)
+                        owner.viewModel.input.updatePostScrap.accept(policyEntity.policyId)
                         
                     case .resultRP(let rpEntity):
                         
                         guard let postId = rpEntity.postId else { return }
                         
-                        owner.viewModel.input.updatePolicyScrap.accept(String(postId))
+                        owner.viewModel.input.updatePostScrap.accept(String(postId))
                         
                     default:
                         break
@@ -144,14 +144,14 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 
                 // cell에 적용(스크롤시에도 유지)
                 if let scrap = viewModel.output.scrapStatus[policyEntity.policyId] {
-                    cell.updateScrapStatus(scrap)
+                    cell.updateScrapStatus(scrap, 0)
                 }
                 
                 // cell에 즉시 적용
                 viewModel.output.scrapStatusRelay
                     .bind(with: self) { owner, scrapStatus in
                         if let scrap = scrapStatus[policyEntity.policyId] {
-                            cell.updateScrapStatus(scrap)
+                            cell.updateScrapStatus(scrap, 0)
                         }
                     }
                     .disposed(by: self.disposeBag)
@@ -161,14 +161,14 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 guard let id = rpEntity.postId else { return }
                 
                 if let scrap = viewModel.output.scrapStatus[String(id)] {
-                    cell.updateScrapStatus(scrap)
+                    cell.updateScrapStatus(scrap, 0)
                 }
                 
                 viewModel.output.scrapStatusRelay
                     .bind(with: self) { owner, scrapStatus in
                         
                         if let scrap = scrapStatus[String(id)] {
-                            cell.updateScrapStatus(scrap)
+                            cell.updateScrapStatus(scrap, 0)
                         }
                     }
                     .disposed(by: disposeBag)
