@@ -43,7 +43,7 @@ class PostDetailView: BaseView {
         $0.designed(text: "댓글", fontType: .g14Bold)
     }
     
-    private lazy var commentCountLabel = UILabel().then {
+    lazy var commentCountLabel = UILabel().then {
         $0.designed(text: "0", fontType: .g14Bold, textColor: .gray40)
     }
     

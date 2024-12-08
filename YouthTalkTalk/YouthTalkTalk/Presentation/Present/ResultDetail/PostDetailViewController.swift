@@ -64,12 +64,16 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         
         layoutView.commentTextFieldView.textField.delegate = self
         
+        // MARK: 댓글 작성 성공 시 호출
         viewModel.output.successUploadComment.sink { [weak self] in
+            guard let self else { return }
+            
             let commentView = CommentView(userName: viewModel.output.userNickName,
                                           comment: viewModel.output.writtenCommentText)
-            self?.layoutView.commentTextFieldView.textField.resignFirstResponder()
-            self?.layoutView.commentTextFieldView.textField.text = ""
-            self?.layoutView.commentStackView.addArrangedSubview(commentView)
+            layoutView.commentTextFieldView.textField.resignFirstResponder()
+            layoutView.commentTextFieldView.textField.text = ""
+            layoutView.commentStackView.addArrangedSubview(commentView)
+            layoutView.commentCountLabel.text = "\(layoutView.commentStackView.arrangedSubviews.count)"
         }
         .store(in: &cancelBag)
         
