@@ -22,6 +22,7 @@ protocol ResultDetailOutput {
     var detailInfo: PublishRelay<DetailRPEntity> { get }
     var commentsInfo: PublishRelay<[CommentDetailEntity]> { get }
     var rpEntity: RPEntity { get }
+    var userNickName: String { get }
     
     func uploadPostComment(_ body: UploadPostCommentBody)
 }

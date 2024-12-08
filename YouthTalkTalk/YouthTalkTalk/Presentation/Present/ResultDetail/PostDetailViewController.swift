@@ -65,8 +65,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         layoutView.commentTextFieldView.textField.delegate = self
         
         viewModel.output.successUploadComment.sink { [weak self] in
-            // TODO: 이부분 내 정보 데이터에서 이름 가져와서 넣기
-            let commentView = CommentView(userName: "", // viewModel.output.commentWriterName,
+            let commentView = CommentView(userName: viewModel.output.userNickName,
                                           comment: viewModel.output.writtenCommentText)
             self?.layoutView.commentTextFieldView.textField.resignFirstResponder()
             self?.layoutView.commentTextFieldView.textField.text = ""

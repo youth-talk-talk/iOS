@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import FlexLayout
-import PinLayout
 
 class PostDetailView: BaseView {
     
@@ -52,14 +50,59 @@ class PostDetailView: BaseView {
     override func configureLayout() {
         
         flexView.addSubview(scrollView)
+        flexView.addSubview(commentTextFieldView)
         scrollView.addSubview(contentView)
-        scrollView.addSubview(commentTitleLabel)
-        scrollView.addSubview(commentCountLabel)
-        scrollView.addSubview(commentStackView)
+        contentView.addSubviews([
+            nicknameLabel,
+            titleLabel,
+            policyLiteralLabel,
+            policyLabel,
+            contentLabel,
+            commentTitleLabel,
+            commentCountLabel,
+            commentStackView
+        ])
+        
+        scrollView.snp.makeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalTo(commentTextFieldView.snp.top)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+        
+        nicknameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(17)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(5)
+            $0.leading.equalTo(nicknameLabel)
+        }
+        
+        policyLiteralLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.leading.equalTo(nicknameLabel)
+        }
+        
+        policyLabel.snp.makeConstraints {
+            $0.leading.equalTo(policyLiteralLabel.snp.trailing).offset(12)
+            $0.trailing.equalToSuperview().inset(17)
+            $0.centerY.equalTo(policyLiteralLabel)
+        }
+        
+        contentLabel.snp.makeConstraints {
+            $0.top.equalTo(policyLiteralLabel.snp.bottom).offset(12)
+            $0.leading.equalTo(nicknameLabel)
+            $0.trailing.equalToSuperview().inset(17)
+        }
         
         commentTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(17)
-            $0.top.equalTo(contentView.snp.bottom).offset(20)
+            $0.top.equalTo(contentLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(nicknameLabel)
         }
         
         commentCountLabel.snp.makeConstraints {
@@ -70,75 +113,16 @@ class PostDetailView: BaseView {
         commentStackView.snp.makeConstraints {
             $0.width.centerX.equalToSuperview()
             $0.top.equalTo(commentTitleLabel.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview().inset(20)
         }
         
-        flexView.flex.define { flex in
-            
-            flex.addItem(scrollView)
-                .width(100%)
-                .grow(1)
-            
-            flex.addItem(commentTextFieldView)
-                .width(100%)
-                .height(64)
+        commentTextFieldView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(64)
         }
-        
-        contentView.flex.define { flex in
-            
-            flex.addItem()
-                .height(15)
-            
-            flex.addItem(nicknameLabel)
-            
-            flex.addItem()
-                .height(3)
-            
-            flex.addItem(titleLabel)
-            
-            flex.addItem()
-                .height(12)
-            
-            flex.addItem().define { row in
-                
-                row.addItem(policyLiteralLabel)
-                
-                row.addItem()
-                    .width(12)
-                
-                row.addItem(policyLabel)
-                    .grow(1)
-                    .markDirty()
-            }
-            .direction(.row)
-            .alignItems(.center)
-            .width(100%)
-            
-            flex.addItem()
-                .height(12)
-            
-            flex.addItem(contentLabel)
-                .width(100%)
-        }
-        .marginHorizontal(17)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // contentView의 높이를 다시 계산하고 적용
-        contentView.flex.layout(mode: .adjustHeight)
-        
-        // scrollView의 contentSize를 contentView의 프레임 크기로 설정
-        scrollView.contentSize = contentView.frame.size
-        
-        // commentTextFieldView와 flexView의 높이 계산
-        let commentHeight = commentTextFieldView.frame.height
-        let availableHeight = flexView.frame.height - commentHeight - 1
-        scrollView.flex.height(availableHeight)
     }
     
     func configure(data: DetailRPEntity, complete: @escaping () -> Void) {
-        
         let nickname = data.nickname ?? "익명"
         let policyTitle = data.policyTitle ?? "-"
         
@@ -153,8 +137,6 @@ class PostDetailView: BaseView {
             
             contentLabel.designed(text: data.content, fontType: .p14Regular)
             contentLabel.numberOfLines = 0
-            contentLabel.flex.layout(mode: .adjustHeight)
-            flexView.flex.layout()
             
             complete()
         } else {
@@ -164,8 +146,6 @@ class PostDetailView: BaseView {
                 
                 contentLabel.attributedText = attributeString
                 contentLabel.numberOfLines = 0
-                contentLabel.flex.layout(mode: .adjustHeight)
-                flexView.flex.layout()
                 
                 complete()
             }
@@ -203,7 +183,7 @@ final class CommentView: UIView {
         layer.shadowOpacity = 0.1
         layer.shadowRadius = 5
         
-        userNameLabel.text = userName
+        userNameLabel.text = (userName == "null") ? "익명" : userName
         commentLabel.text = comment
         
         addSubviews([userNameLabel, commentLabel])

@@ -11,7 +11,6 @@ import RxCocoa
 import Combine
 
 final class PosetDetailViewModel: ResultDetailInterface {
-    
     let rpEntity: RPEntity
     var commentWriterName: String = ""
     
@@ -25,6 +24,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
     // Outputs
     var detailInfo = PublishRelay<DetailRPEntity>()
     var commentsInfo = PublishRelay<[CommentDetailEntity]>()
+    var userNickName: String = "" // 핸드폰 유저 닉네임
     
     // Interface
     var input: ResultDetailInput { return self }
@@ -33,20 +33,32 @@ final class PosetDetailViewModel: ResultDetailInterface {
     var successUploadComment = PassthroughSubject<Void, Never>()
     var writtenCommentText = ""
     
+    private lazy var memberUseCase: MemberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
+    
     init(data: RPEntity, useCase: ReviewUseCase, commnetUseCase: CommentUseCase) {
-        
         self.rpEntity = data
         self.useCase = useCase
         self.commentUseCase = commnetUseCase
         
         guard let postId = data.postId else { return }
         
+        memberUseCase.fetchMe()     
+            .bind(with: self) { owner, result in
+            switch result {
+            case .success(let meEntity):
+                owner.userNickName = meEntity.nickname
+            case .failure(let error):
+                break
+            }
+        }
+        .disposed(by: disposeBag)
+        
         useCase.fetchReviewDetail(id: rpEntity.postId!)
             .bind(with: self) { [weak self] owner, result in
                 
                 switch result {
                 case .success(let detailEntity):
-                    self?.commentWriterName = detailEntity.nickname ?? ""
+                    self?.commentWriterName = detailEntity.nickname ?? "익명"
                     owner.detailInfo.accept(detailEntity)
                 case .failure(let error):
                     dump(error)
