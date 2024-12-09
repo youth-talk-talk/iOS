@@ -49,6 +49,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         
         super.init(nibName: nil, bundle: nil)
         
+        setTabEvents()
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
@@ -64,7 +66,24 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         )
         
         layoutView.commentTextFieldView.textField.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    override func bind() {
         // MARK: 댓글 작성 성공 시 호출
         viewModel.output.successUploadComment.sink { [weak self] in
             guard let self else { return }
@@ -79,50 +98,31 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         }
         .store(in: &cancelBag)
         
-        layoutView.commentTextFieldView.commentTap.rx.event
-            .bind(with: self) { [weak self] owner, _ in
-                guard let text = self?.layoutView.commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-                
-                if text != "", let postId = viewModel.output.rpEntity.postId {
-                    viewModel.output.uploadPostComment(.init(postId: postId,
-                                                             content: text))
-                }
-            }
-            .disposed(by: disposeBag)
-        
+        // MARK: 초기 댓글 데이터 바인딩
         Observable.zip(viewModel.output.detailInfo, viewModel.output.commentsInfo)
             .bind(with: self) { owner, combined in
                 
                 let (detailRPEntity, comments) = combined
                 
                 owner.layoutView.configure(data: detailRPEntity) {
-                    owner.layoutView.comment(data: comments, userNickName: viewModel.output.userNickName)
+                    owner.layoutView.comment(data: comments, userNickName: owner.viewModel.output.userNickName)
                 }
             }
             .disposed(by: disposeBag)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func setTabEvents() {
+        layoutView.commentTextFieldView.commentTap.rx.event
+            .bind(with: self) { [weak self] owner, _ in
+                guard let text = self?.layoutView.commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+                
+                if text != "", let postId = owner.viewModel.output.rpEntity.postId {
+                    owner.viewModel.output.uploadPostComment(.init(postId: postId,
+                                                                   content: text))
+                }
+            }
+            .disposed(by: disposeBag)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //Looks for single or multiple taps.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    override func bind() { }
     
     func animateTextField(textField: UITextField, up: Bool) {
         let movementDistance: CGFloat = -keyboardHeight + view.safeAreaInsets.bottom
