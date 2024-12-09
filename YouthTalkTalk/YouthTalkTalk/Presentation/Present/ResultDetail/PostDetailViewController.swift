@@ -34,7 +34,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
     private lazy var moreCenterLineView = UIView().then {
         $0.backgroundColor = FontColor.gray30.value
     }
-        
+    
     private lazy var moreDeleteLabel = UILabel().then {
         $0.designed(text: "삭제", fontType: .p16Regular16)
         $0.textAlignment = .center
@@ -54,7 +54,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             selector: #selector(keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
-        )        
+        )
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardHideShow),
@@ -107,20 +108,20 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-              
+        
         //Looks for single or multiple taps.
-         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
-
+        
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-
+    
     override func bind() { }
     
     func animateTextField(textField: UITextField, up: Bool) {
@@ -145,9 +146,9 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             keyboardHeight = keyboardRectangle.height
             
             animateTextField(textField: layoutView.commentTextFieldView.textField, up: true)
-
+            
         }
-    }    
+    }
     
     @objc func keyboardHideShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -155,7 +156,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             keyboardHeight = keyboardRectangle.height
             
             animateTextField(textField: layoutView.commentTextFieldView.textField, up: false)
-
+            
         }
     }
 }
