@@ -16,7 +16,6 @@ struct CommentEntity {
 }
 
 struct CommentDetailEntity: Hashable {
-    
     let commentId: Int
     let nickname: String
     let content: String

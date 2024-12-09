@@ -152,11 +152,12 @@ class PostDetailView: BaseView {
         }
     }
     
-    func comment(data: [CommentDetailEntity]) {
+    func comment(data: [CommentDetailEntity], userNickName: String) {
         commentCountLabel.text = "\(data.count)"
         
         data.forEach { comment in
-            let commentView = CommentView(userName: comment.nickname, comment: comment.content)
+            let isItOwnComment = (comment.nickname == userNickName)
+            let commentView = CommentView(userName: comment.nickname, comment: comment.content, isItOwnComment: isItOwnComment)
             
             commentStackView.addArrangedSubview(commentView)
         }
@@ -166,14 +167,26 @@ class PostDetailView: BaseView {
 final class CommentView: UIView {
     private lazy var userNameLabel = UILabel().then {
         $0.font = FontManager.font(.p12Bold)
+        $0.textColor = .black
     }
     
     private lazy var commentLabel = UILabel().then {
         $0.font = FontManager.font(.p12Regular)
         $0.numberOfLines = 0
+        $0.textColor = .black
     }
     
-    init(userName: String, comment: String) {
+    lazy var editLabel = UILabel().then {
+        $0.designed(text: "수정", fontType: .p10Regular, textColor: .gray40)
+    }    
+    
+    lazy var deleteLabel = UILabel().then {
+        $0.designed(text: "삭제", fontType: .p10Regular, textColor: .gray40)
+    }
+    
+    lazy var likeImageView = UIImageView(image: UIImage(named: "like"))
+    
+    init(userName: String, comment: String, isItOwnComment: Bool) {
         super.init(frame: .zero)
         
         layer.cornerRadius = 4
@@ -198,6 +211,28 @@ final class CommentView: UIView {
             $0.top.equalTo(userNameLabel.snp.bottom).offset(2)
             $0.bottom.equalToSuperview().inset(10)
             $0.leading.trailing.equalToSuperview().inset(10)
+        }
+        
+        if isItOwnComment {
+            addSubviews([editLabel, deleteLabel])
+            
+            deleteLabel.snp.makeConstraints {
+                $0.trailing.equalToSuperview().inset(13)
+                $0.top.equalToSuperview().inset(10)
+            }
+            
+            editLabel.snp.makeConstraints {
+                $0.trailing.equalTo(deleteLabel.snp.leading).offset(-5)
+                $0.top.equalTo(deleteLabel)
+            }
+        } else {
+            addSubview(likeImageView)
+            
+            likeImageView.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.trailing.equalToSuperview().inset(13)
+                $0.size.equalTo(16)
+            }
         }
     }
     

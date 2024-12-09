@@ -69,7 +69,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             guard let self else { return }
             
             let commentView = CommentView(userName: viewModel.output.userNickName,
-                                          comment: viewModel.output.writtenCommentText)
+                                          comment: viewModel.output.writtenCommentText,
+                                          isItOwnComment: true)
             layoutView.commentTextFieldView.textField.resignFirstResponder()
             layoutView.commentTextFieldView.textField.text = ""
             layoutView.commentStackView.addArrangedSubview(commentView)
@@ -94,7 +95,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                 let (detailRPEntity, comments) = combined
                 
                 owner.layoutView.configure(data: detailRPEntity) {
-                    owner.layoutView.comment(data: comments)
+                    owner.layoutView.comment(data: comments, userNickName: viewModel.output.userNickName)
                 }
             }
             .disposed(by: disposeBag)
