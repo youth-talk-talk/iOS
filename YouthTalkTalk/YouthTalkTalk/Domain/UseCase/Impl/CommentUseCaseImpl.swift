@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 
 final class CommentUseCaseImpl: CommentUseCase {
-    
     private let disposeBag = DisposeBag()
     private let commentRepository: CommentRepository
     
@@ -30,6 +29,22 @@ final class CommentUseCaseImpl: CommentUseCase {
                     let comments = commentDTO.data.map { $0.translate() }
                     
                     return .success(comments)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func commentDelete(_ commentId: Int) -> Observable<Result<CommentDeleteDTO, APIError>> {
+        return commentRepository.commentDelete(commentId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let commentDeleteDTO):
+                    return .success(commentDeleteDTO)
                     
                 case .failure(let error):
                     return .failure(error)

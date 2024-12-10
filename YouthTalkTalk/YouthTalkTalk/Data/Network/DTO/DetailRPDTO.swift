@@ -63,7 +63,6 @@ struct UploadPostCommentDTO: Decodable {
       let message: String
       let code: String
       let data: CommentData
-    
 }
 
 struct CommentData: Decodable {

@@ -25,12 +25,13 @@ final class PosetDetailViewModel: ResultDetailInterface {
     var detailInfo = PublishRelay<DetailRPEntity>()
     var commentsInfo = PublishRelay<[CommentDetailEntity]>()
     var userNickName: String = "" // 핸드폰 유저 닉네임
+    var successDeleteComment = PassthroughSubject<Int, Never>()
     
     // Interface
     var input: ResultDetailInput { return self }
     var output: ResultDetailOutput { return self }
     
-    var successUploadComment = PassthroughSubject<Void, Never>()
+    var successUploadComment = PassthroughSubject<Int, Never>()
     var writtenCommentText = ""
     
     private lazy var memberUseCase: MemberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
@@ -87,11 +88,27 @@ final class PosetDetailViewModel: ResultDetailInterface {
                 switch result {
                 case .success(let data):
                     self?.writtenCommentText = body.content
-                    self?.successUploadComment.send(())
+                    
+                    self?.successUploadComment.send(data.data.commentId)
                 case .failure(let error):
                     break
                 }
             }
             .disposed(by: disposeBag)
     }
+    
+    // MARK: - Input
+    func commentDelete(_ commentId: Int) {
+        commentUseCase.commentDelete(commentId)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.successDeleteComment.send(commentId)
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
 }

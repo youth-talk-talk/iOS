@@ -15,6 +15,7 @@ enum CommentRouter: Router {
     }
     
     case fetchComment(postID: Int)
+    case deleteComment(_ commentId: Int)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -23,14 +24,18 @@ enum CommentRouter: Router {
     var path: String {
         switch self {
         case .fetchComment(let postID):
-            return "/posts/\(postID)/comments"
+            return "/posts/\(postID)/comments" 
+        case .deleteComment(let commentId):
+            return "comments/\(commentId)"
         }
     }
     
     var method: HTTPMethod {
         switch self {
         case .fetchComment:
-            return .get
+            return .get  
+        case .deleteComment:
+            return .delete
         }
     }
     
@@ -42,19 +47,18 @@ enum CommentRouter: Router {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchComment:
+        case .fetchComment, .deleteComment:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
     }
     
     var body: Data? {
-        
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchComment:
+        case .fetchComment, .deleteComment:
             return nil
         }
     }

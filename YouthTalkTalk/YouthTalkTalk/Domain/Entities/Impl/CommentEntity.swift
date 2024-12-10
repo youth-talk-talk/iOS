@@ -15,6 +15,13 @@ struct CommentEntity {
     let data: [CommentDetailDTO]
 }
 
+struct CommentDeleteDTO: Decodable {
+    let status: Int
+    let message: String
+    let code: String
+    let data: String?
+}
+
 struct CommentDetailEntity: Hashable {
     let commentId: Int
     let nickname: String

@@ -11,14 +11,16 @@ import RxCocoa
 import Combine
 
 protocol ResultDetailInput {
-    
     var fetchDetailInfo: PublishRelay<Void> { get }
+    
+    func commentDelete(_ commentId: Int)
 }
 
 protocol ResultDetailOutput {
     var writtenCommentText: String { get }
     var commentWriterName: String { get }
-    var successUploadComment: PassthroughSubject<Void, Never> { get }
+    var successUploadComment: PassthroughSubject<Int, Never> { get }
+    var successDeleteComment: PassthroughSubject<Int, Never> { get }
     var detailInfo: PublishRelay<DetailRPEntity> { get }
     var commentsInfo: PublishRelay<[CommentDetailEntity]> { get }
     var rpEntity: RPEntity { get }

@@ -85,12 +85,18 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
     
     override func bind() {
         // MARK: 댓글 작성 성공 시 호출
-        viewModel.output.successUploadComment.sink { [weak self] in
+        viewModel.output.successUploadComment.sink { [weak self] commentId in
             guard let self else { return }
             
             let commentView = CommentView(userName: viewModel.output.userNickName,
+                                          commentId: commentId,
                                           comment: viewModel.output.writtenCommentText,
                                           isItOwnComment: true)
+            // MARK: 댓글 삭제 버튼
+            commentView.deleteLabel.onTapped { [weak self] in
+                self?.viewModel.input.commentDelete(commentId)
+            }
+            
             layoutView.commentTextFieldView.textField.resignFirstResponder()
             layoutView.commentTextFieldView.textField.text = ""
             layoutView.commentStackView.addArrangedSubview(commentView)
@@ -105,10 +111,46 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                 let (detailRPEntity, comments) = combined
                 
                 owner.layoutView.configure(data: detailRPEntity) {
-                    owner.layoutView.comment(data: comments, userNickName: owner.viewModel.output.userNickName)
+                    owner.layoutView.commentCountLabel.text = "\(comments.count)"
+                    
+                    comments.forEach { comment in
+                        let isItOwnComment = (comment.nickname == owner.viewModel.output.userNickName)
+                        let commentView = CommentView(userName: comment.nickname,
+                                                      commentId: comment.commentId,
+                                                      comment: comment.content,
+                                                      isItOwnComment: isItOwnComment)
+                        
+                        // MARK: 댓글 삭제 버튼
+                        commentView.deleteLabel.onTapped { [weak self] in
+                            self?.viewModel.input.commentDelete(comment.commentId)
+                        }
+                        
+                        // MARK: 댓글 수정 버튼
+                        commentView.editLabel.onTapped {
+                            // TODO: 텍스트 필드에 댓글 내용 바인딩
+                            // TODO: 댓글 수정 후 등록 버튼 탭할 시 수정 API 호출
+                        }
+                        
+                        // MARK: 댓글 좋아요 버튼
+                        commentView.likeImageView.onTapped {
+//                            viewModel.input.commentLike(comment.commentId, isSetLiked)
+                        }
+                        
+                        owner.layoutView.commentStackView.addArrangedSubview(commentView)
+                    }
                 }
             }
             .disposed(by: disposeBag)
+        
+        // MARK: 댓글 삭제 API 완료
+        viewModel.output.successDeleteComment.sink { [weak self] deletedCommentId in
+            guard let commentViews = self?.layoutView.commentStackView.arrangedSubviews as? [CommentView],
+                  let deletedCommentView = commentViews.first(where: { $0.commentId == deletedCommentId }) else { return }
+            
+            deletedCommentView.removeFromSuperview()
+            self?.layoutView.commentStackView.removeArrangedSubview(deletedCommentView)
+            
+        }.store(in: &cancelBag)
     }
     
     private func setTabEvents() {

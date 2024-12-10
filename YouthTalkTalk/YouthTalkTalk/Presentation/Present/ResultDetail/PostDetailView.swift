@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostDetailView: BaseView {
+final class PostDetailView: BaseView {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -151,20 +151,11 @@ class PostDetailView: BaseView {
             }
         }
     }
-    
-    func comment(data: [CommentDetailEntity], userNickName: String) {
-        commentCountLabel.text = "\(data.count)"
-        
-        data.forEach { comment in
-            let isItOwnComment = (comment.nickname == userNickName)
-            let commentView = CommentView(userName: comment.nickname, comment: comment.content, isItOwnComment: isItOwnComment)
-            
-            commentStackView.addArrangedSubview(commentView)
-        }
-    }
 }
 
 final class CommentView: UIView {
+    let commentId: Int
+    
     private lazy var userNameLabel = UILabel().then {
         $0.font = FontManager.font(.p12Bold)
         $0.textColor = .black
@@ -178,7 +169,7 @@ final class CommentView: UIView {
     
     lazy var editLabel = UILabel().then {
         $0.designed(text: "수정", fontType: .p10Regular, textColor: .gray40)
-    }    
+    }
     
     lazy var deleteLabel = UILabel().then {
         $0.designed(text: "삭제", fontType: .p10Regular, textColor: .gray40)
@@ -186,7 +177,9 @@ final class CommentView: UIView {
     
     lazy var likeImageView = UIImageView(image: UIImage(named: "like"))
     
-    init(userName: String, comment: String, isItOwnComment: Bool) {
+    init(userName: String, commentId: Int,  comment: String, isItOwnComment: Bool) {
+        self.commentId = commentId
+        
         super.init(frame: .zero)
         
         layer.cornerRadius = 4
