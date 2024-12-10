@@ -155,13 +155,14 @@ final class PostDetailView: BaseView {
 
 final class CommentView: UIView {
     let commentId: Int
+    var isLiked: Bool
     
     private lazy var userNameLabel = UILabel().then {
         $0.font = FontManager.font(.p12Bold)
         $0.textColor = .black
     }
     
-    private lazy var commentLabel = UILabel().then {
+    lazy var commentLabel = UILabel().then {
         $0.font = FontManager.font(.p12Regular)
         $0.numberOfLines = 0
         $0.textColor = .black
@@ -177,8 +178,9 @@ final class CommentView: UIView {
     
     lazy var likeImageView = UIImageView(image: UIImage(named: "like"))
     
-    init(userName: String, commentId: Int,  comment: String, isItOwnComment: Bool) {
+    init(userName: String, commentId: Int,  comment: String, isItOwnComment: Bool, isLiked: Bool) {
         self.commentId = commentId
+        self.isLiked = isLiked
         
         super.init(frame: .zero)
         
@@ -191,6 +193,7 @@ final class CommentView: UIView {
         
         userNameLabel.text = (userName == "null") ? "익명" : userName
         commentLabel.text = comment
+        likeImageView.image = isLiked ? UIImage(named: "like_fill") : UIImage(named: "like")
         
         addSubviews([userNameLabel, commentLabel])
         

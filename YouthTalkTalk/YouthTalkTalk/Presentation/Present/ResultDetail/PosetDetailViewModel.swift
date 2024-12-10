@@ -24,8 +24,10 @@ final class PosetDetailViewModel: ResultDetailInterface {
     // Outputs
     var detailInfo = PublishRelay<DetailRPEntity>()
     var commentsInfo = PublishRelay<[CommentDetailEntity]>()
-    var userNickName: String = "" // 핸드폰 유저 닉네임
+    var userNickName: String = "" // MARK: 핸드폰 유저 닉네임
     var successDeleteComment = PassthroughSubject<Int, Never>()
+    var successEditComment = PassthroughSubject<(commentId: Int, newComment: String), Never>()
+    var successLikeComment = PassthroughSubject<(commentId: Int, isLiked: Bool), Never>()
     
     // Interface
     var input: ResultDetailInput { return self }
@@ -90,7 +92,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
                     self?.writtenCommentText = body.content
                     
                     self?.successUploadComment.send(data.data.commentId)
-                case .failure(let error):
+                case .failure:
                     break
                 }
             }
@@ -102,7 +104,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
         commentUseCase.commentDelete(commentId)
             .subscribe { [weak self] result in
                 switch result {
-                case .success(let data):
+                case .success:
                     self?.successDeleteComment.send(commentId)
                 case .failure:
                     break
@@ -111,4 +113,29 @@ final class PosetDetailViewModel: ResultDetailInterface {
             .disposed(by: disposeBag)
     }
     
+    func editComment(commentId: Int, newComment: String) {
+        commentUseCase.editComment(commentId, newComment)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    self?.successEditComment.send((commentId, newComment))
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func likeComment(_ commentId: Int, _ isSetLiked: Bool) {
+        commentUseCase.likeComment(commentId, isSetLiked)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    self?.successLikeComment.send((commentId, isSetLiked))
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+    }
 }

@@ -42,6 +42,9 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
     
     private let viewModel: ResultDetailInterface
     
+    private lazy var isCommentChanging: Bool = false
+    private lazy var idOfChangingComment: Int = 0
+    
     private lazy var cancelBag = Set<AnyCancellable>()
     
     init(viewModel: ResultDetailInterface) {
@@ -91,7 +94,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             let commentView = CommentView(userName: viewModel.output.userNickName,
                                           commentId: commentId,
                                           comment: viewModel.output.writtenCommentText,
-                                          isItOwnComment: true)
+                                          isItOwnComment: true,
+                                          isLiked: false)
             // MARK: 댓글 삭제 버튼
             commentView.deleteLabel.onTapped { [weak self] in
                 self?.viewModel.input.commentDelete(commentId)
@@ -118,7 +122,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                         let commentView = CommentView(userName: comment.nickname,
                                                       commentId: comment.commentId,
                                                       comment: comment.content,
-                                                      isItOwnComment: isItOwnComment)
+                                                      isItOwnComment: isItOwnComment,
+                                                      isLiked: comment.isLikedByMember)
                         
                         // MARK: 댓글 삭제 버튼
                         commentView.deleteLabel.onTapped { [weak self] in
@@ -126,14 +131,17 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                         }
                         
                         // MARK: 댓글 수정 버튼
-                        commentView.editLabel.onTapped {
-                            // TODO: 텍스트 필드에 댓글 내용 바인딩
-                            // TODO: 댓글 수정 후 등록 버튼 탭할 시 수정 API 호출
+                        commentView.editLabel.onTapped { [weak self] in
+                            self?.isCommentChanging = true
+                            self?.layoutView.commentTextFieldView.textField.becomeFirstResponder()
+                            self?.layoutView.commentTextFieldView.textField.text = comment.content
+                            self?.idOfChangingComment = comment.commentId
                         }
                         
                         // MARK: 댓글 좋아요 버튼
-                        commentView.likeImageView.onTapped {
-//                            viewModel.input.commentLike(comment.commentId, isSetLiked)
+                        commentView.likeImageView.onTapped { [weak self] in
+                            print("|| \(!commentView.isLiked)")
+                            self?.viewModel.input.likeComment(comment.commentId, !commentView.isLiked)
                         }
                         
                         owner.layoutView.commentStackView.addArrangedSubview(commentView)
@@ -151,16 +159,47 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             self?.layoutView.commentStackView.removeArrangedSubview(deletedCommentView)
             
         }.store(in: &cancelBag)
+        
+        // MARK: 댓글 수정 API 완료
+        viewModel.output.successEditComment.sink { [weak self] (commentId, commentContent) in
+            self?.isCommentChanging = false
+
+            guard let commentViews = self?.layoutView.commentStackView.arrangedSubviews as? [CommentView],
+                  let editedCommentView = commentViews.first(where: { $0.commentId == commentId }) else { return }
+            
+            self?.layoutView.commentTextFieldView.textField.resignFirstResponder()
+            self?.layoutView.commentTextFieldView.textField.text = ""
+            
+            editedCommentView.commentLabel.text = commentContent
+            
+        }.store(in: &cancelBag)
+        
+        // MARK: 댓글 좋아요 API 완료
+        viewModel.output.successLikeComment.sink { [weak self] (commentId, isLiked) in
+            guard let commentViews = self?.layoutView.commentStackView.arrangedSubviews as? [CommentView],
+                  let likedCommentView = commentViews.first(where: { $0.commentId == commentId }) else { return }
+            
+            likedCommentView.isLiked = !likedCommentView.isLiked
+            likedCommentView.likeImageView.image = isLiked ? UIImage(named: "like_fill") : UIImage(named: "like")
+            
+        }.store(in: &cancelBag)
     }
     
     private func setTabEvents() {
+        // MARK: 댓글 작성 버튼 탭
         layoutView.commentTextFieldView.commentTap.rx.event
             .bind(with: self) { [weak self] owner, _ in
-                guard let text = self?.layoutView.commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+                guard let self, let text = layoutView.commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
                 
                 if text != "", let postId = owner.viewModel.output.rpEntity.postId {
-                    owner.viewModel.output.uploadPostComment(.init(postId: postId,
-                                                                   content: text))
+                    
+                    if isCommentChanging { // MARK: 댓글 수정
+                        owner.viewModel.output.editComment(commentId: idOfChangingComment,
+                                                           newComment: text)
+                    } else { // MARK: 댓글 작성
+                        owner.viewModel.output.uploadPostComment(.init(postId: postId,
+                                                                       content: text))
+                    }
                 }
             }
             .disposed(by: disposeBag)
