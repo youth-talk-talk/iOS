@@ -15,6 +15,7 @@ protocol MyRPScrapInput {
     var updateScrap: PublishRelay<String> { get }
     
     var fetchLikedComment: PublishRelay<Void> { get }
+    var fetchMyComment: PublishRelay<Void> { get }
 }
 
 protocol MyRPScrapOutput {
@@ -23,7 +24,7 @@ protocol MyRPScrapOutput {
     var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
     
     var likedCommentList: PublishRelay<[LikedCommentData]> { get }
-    
+    var myCommentList: PublishRelay<[LikedCommentData]> { get }
 }
 
 protocol MyRPScrapInterface: MyRPScrapInput, MyRPScrapOutput {

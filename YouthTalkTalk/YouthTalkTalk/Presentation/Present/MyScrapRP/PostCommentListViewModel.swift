@@ -12,6 +12,7 @@ import RxCocoa
 enum ListType {
     case scrapPost
     case likedComment
+    case myWrittenComment
 }
 
 final class PostCommentListViewModel: MyRPScrapInterface {
@@ -29,11 +30,13 @@ final class PostCommentListViewModel: MyRPScrapInterface {
     var fetchScrapEvent = PublishRelay<Void>()
     var updateScrap = PublishRelay<String>()
     var fetchLikedComment = PublishRelay<Void>()
+    var fetchMyComment = PublishRelay<Void>()
     
     // Outputs
     var scrap = PublishRelay<[RPEntity]>()
     var canceledScrapEntity = PublishRelay<ScrapEntity>()
     var likedCommentList = PublishRelay<[LikedCommentData]>()
+    var myCommentList = PublishRelay<[LikedCommentData]>()
     
     init(useCase: PostUseCase, listType: ListType) {
         self.useCase = useCase
@@ -48,7 +51,7 @@ final class PostCommentListViewModel: MyRPScrapInterface {
                     switch result {
                     case .success(let rpEntities):
                         owner.scrap.accept(rpEntities)
-                    case .failure(let error):
+                    case .failure:
                         break
                     }
                 }
@@ -83,6 +86,22 @@ final class PostCommentListViewModel: MyRPScrapInterface {
                     switch result {
                     case .success(let scrapEntity):
                         owner.likedCommentList.accept(scrapEntity.data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                .disposed(by: disposeBag)
+            
+        } else if listType == .myWrittenComment {
+            fetchMyComment
+                .withUnretained(self)
+                .flatMap { _ in
+                    return useCase.fetchMyComment()
+                }
+                .subscribe(with: self) { owner, result in
+                    switch result {
+                    case .success(let scrapEntity):
+                        owner.myCommentList.accept(scrapEntity.data)
                     case .failure(let error):
                         print(error)
                     }

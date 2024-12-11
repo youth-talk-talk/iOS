@@ -23,8 +23,11 @@ class LikedCommentListViewController: RootViewController {
         $0.backgroundColor = .clear
     }
     
-    init(viewModel: MyRPScrapInterface) {
+    private let listType: ListType
+    
+    init(viewModel: MyRPScrapInterface, listType: ListType) {
         self.viewModel = viewModel
+        self.listType = listType
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,7 +46,7 @@ class LikedCommentListViewController: RootViewController {
     
     override func configureView() {
         
-        updateNavigationTitle(title: "좋아요한 댓글")
+        updateNavigationTitle(title: listType == .likedComment ? "좋아요한 댓글" : "작성한 댓글")
         updateNavigationBackButtonTitle()
         
         self.view.backgroundColor = .white
@@ -51,7 +54,8 @@ class LikedCommentListViewController: RootViewController {
         
         snapshot.appendSections([.scrap])
         
-        let recentCellRegistration = UICollectionView.CellRegistration<CommentCell, LikedCommentData> { cell, indexPath, data in
+        let recentCellRegistration = UICollectionView.CellRegistration<CommentCell, LikedCommentData> { [weak self] cell, indexPath, data in
+            guard let self else { return }
             
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
@@ -59,8 +63,8 @@ class LikedCommentListViewController: RootViewController {
             cell.bind(userName: data.nickname,
                       commentId: data.commentId,
                       comment: data.content,
-                      isItOwnComment: false,
-                      isLiked: true)
+                      isItOwnComment: (listType == .myWrittenComment),
+                      isLiked: (listType == .likedComment))
         }
         
         dataSource = UICollectionViewDiffableDataSource<MyScrapSection, LikedCommentData>(collectionView: collectionView) {
@@ -80,11 +84,20 @@ class LikedCommentListViewController: RootViewController {
     }
     
     override func bind() {
-        viewModel.output.likedCommentList.subscribe { [weak self] commentList in
-            self?.update(section: .scrap, items: commentList)
-        }.disposed(by: disposeBag)
-        
-        viewModel.input.fetchLikedComment.accept(())
+        if listType == .likedComment {
+            viewModel.output.likedCommentList.subscribe { [weak self] commentList in
+                self?.update(section: .scrap, items: commentList)
+            }.disposed(by: disposeBag)
+            
+            viewModel.input.fetchLikedComment.accept(())
+            
+        } else if listType == .myWrittenComment {
+            viewModel.output.myCommentList.subscribe { [weak self] commentList in
+                self?.update(section: .scrap, items: commentList)
+            }.disposed(by: disposeBag)
+            
+            viewModel.input.fetchMyComment.accept(())
+        }
     }
 }
 

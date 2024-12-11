@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class PostUseCaseImpl: PostUseCase {
-
     private let disposeBag = DisposeBag()
     private let postRepository: PostRepository
     
@@ -101,6 +100,21 @@ final class PostUseCaseImpl: PostUseCase {
     
     func fetchLikedComment() -> Observable<Result<LikedComment, APIError>> {
         postRepository.fetchLikedComment()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let likedComment):
+                                        
+                    return .success(likedComment)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchMyComment() -> RxSwift.Observable<Result<LikedComment, APIError>> {
+        postRepository.fetchMyComment()
             .withUnretained(self)
             .map { owner, result in
                 

@@ -14,6 +14,7 @@ protocol PostRepository {
     func fetchConditionPosts(conditionRPQuery: ConditionRPQuery) -> Observable<Result<ConditionReviewDTO, APIError>>
     func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>>
     func fetchLikedComment() -> Observable<Result<LikedComment, APIError>>
+    func fetchMyComment() -> Observable<Result<LikedComment, APIError>>
     // func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyDTO, APIError>>
     func fetchScrapPosts(page: Int, size: Int) -> Observable<Result<ScrapPostDTO, APIError>>
 }

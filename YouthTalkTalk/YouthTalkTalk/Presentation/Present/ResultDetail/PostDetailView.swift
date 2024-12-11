@@ -194,8 +194,15 @@ final class CommentView: UIView {
         userNameLabel.text = (userName == "null") ? "익명" : userName
         commentLabel.text = comment
         likeImageView.image = isLiked ? UIImage(named: "like_fill") : UIImage(named: "like")
+        editLabel.isHidden = !isItOwnComment
+        deleteLabel.isHidden = !isItOwnComment
+        likeImageView.isHidden = isItOwnComment
         
-        addSubviews([userNameLabel, commentLabel])
+        addSubviews([userNameLabel,
+                     commentLabel,
+                     editLabel,
+                     deleteLabel,
+                     likeImageView])
         
         userNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10)
@@ -206,29 +213,24 @@ final class CommentView: UIView {
         commentLabel.snp.makeConstraints {
             $0.top.equalTo(userNameLabel.snp.bottom).offset(2)
             $0.bottom.equalToSuperview().inset(10)
-            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.leading.equalToSuperview().inset(10)
+            $0.trailing.equalToSuperview().inset(20)
         }
         
-        if isItOwnComment {
-            addSubviews([editLabel, deleteLabel])
-            
-            deleteLabel.snp.makeConstraints {
-                $0.trailing.equalToSuperview().inset(13)
-                $0.top.equalToSuperview().inset(10)
-            }
-            
-            editLabel.snp.makeConstraints {
-                $0.trailing.equalTo(deleteLabel.snp.leading).offset(-5)
-                $0.top.equalTo(deleteLabel)
-            }
-        } else {
-            addSubview(likeImageView)
-            
-            likeImageView.snp.makeConstraints {
-                $0.centerY.equalToSuperview()
-                $0.trailing.equalToSuperview().inset(13)
-                $0.size.equalTo(16)
-            }
+        deleteLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(13)
+            $0.top.equalToSuperview().inset(10)
+        }
+        
+        editLabel.snp.makeConstraints {
+            $0.trailing.equalTo(deleteLabel.snp.leading).offset(-5)
+            $0.top.equalTo(deleteLabel)
+        }
+        
+        likeImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(13)
+            $0.size.equalTo(16)
         }
     }
     
@@ -236,6 +238,11 @@ final class CommentView: UIView {
         userNameLabel.text = (userName == "null") ? "익명" : userName
         commentLabel.text = comment
         likeImageView.image = isLiked ? UIImage(named: "like_fill") : UIImage(named: "like")
+        
+        
+        editLabel.isHidden = !isItOwnComment
+        deleteLabel.isHidden = !isItOwnComment
+        likeImageView.isHidden = isItOwnComment
     }
     
     required init?(coder: NSCoder) {

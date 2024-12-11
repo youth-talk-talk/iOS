@@ -17,7 +17,7 @@ class MyPageViewController: RootViewController {
         case scrapPolicy = "스크랩한 정책"
         case scrapPost = "스크랩한 게시물"
 //        case myPost = " " // "작성한 게시물"
-//        case myComment = "  " // "작성한 댓글"
+        case myComment = "작성한 댓글"
         case likeComment = "좋아요한 댓글"
     }
     
@@ -196,12 +196,17 @@ class MyPageViewController: RootViewController {
                         
 //                    case .myPost:
 //                        break
-//                    case .myComment:
-//                        break
+                    case .myComment:
+                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .myWrittenComment)
+                        let vc = LikedCommentListViewController(viewModel: viewModel, listType: .myWrittenComment)
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                        
                     case .likeComment:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
                         let viewModel = PostCommentListViewModel(useCase: useCase, listType: .likedComment)
-                        let vc = LikedCommentListViewController(viewModel: viewModel)
+                        let vc = LikedCommentListViewController(viewModel: viewModel, listType: .likedComment)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                     }
