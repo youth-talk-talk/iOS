@@ -140,7 +140,6 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                         
                         // MARK: 댓글 좋아요 버튼
                         commentView.likeImageView.onTapped { [weak self] in
-                            print("|| \(!commentView.isLiked)")
                             self?.viewModel.input.likeComment(comment.commentId, !commentView.isLiked)
                         }
                         

@@ -76,7 +76,6 @@ final class PostUseCaseImpl: PostUseCase {
                     return .success(items)
                     
                 case .failure(let error):
-                    print("|| \(error.msg)")
                     return .failure(error)
                 }
             }
