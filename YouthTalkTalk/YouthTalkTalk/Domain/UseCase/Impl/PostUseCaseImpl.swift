@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class PostUseCaseImpl: PostUseCase {
-    
+
     private let disposeBag = DisposeBag()
     private let postRepository: PostRepository
     
@@ -94,6 +94,21 @@ final class PostUseCaseImpl: PostUseCase {
                     let scrapEntity = ScrapEntity(isScrap: scrapDTO.message == "스크랩에 성공하였습니다.", id: id)
                     
                     return .success(scrapEntity)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchLikedComment() -> Observable<Result<LikedComment, APIError>> {
+        postRepository.fetchLikedComment()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let likedComment):
+                                        
+                    return .success(likedComment)
                 case .failure(let error):
                     return .failure(error)
                 }

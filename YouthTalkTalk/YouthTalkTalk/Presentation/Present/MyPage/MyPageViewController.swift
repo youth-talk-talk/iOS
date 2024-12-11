@@ -18,7 +18,7 @@ class MyPageViewController: RootViewController {
         case scrapPost = "스크랩한 게시물"
 //        case myPost = " " // "작성한 게시물"
 //        case myComment = "  " // "작성한 댓글"
-//        case likeComment = "   " // "좋아요한 댓글"
+        case likeComment = "좋아요한 댓글"
     }
     
     enum MyPageItemType: Hashable {
@@ -189,7 +189,7 @@ class MyPageViewController: RootViewController {
                         owner.navigationController?.pushViewController(vc, animated: true)
                     case .scrapPost:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                        let viewModel = MyScrapRPViewModel(useCase: useCase)
+                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .scrapPost)
                         let vc = MyPolicyOrPostListViewController(viewModel: viewModel)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
@@ -198,8 +198,12 @@ class MyPageViewController: RootViewController {
 //                        break
 //                    case .myComment:
 //                        break
-//                    case .likeComment:
-//                        break
+                    case .likeComment:
+                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .likedComment)
+                        let vc = LikedCommentListViewController(viewModel: viewModel)
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
                     }
                     
                 default: break

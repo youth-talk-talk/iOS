@@ -22,3 +22,16 @@ struct ScrapEntity {
         return self.id == id
     }
 }
+
+struct LikedComment: Decodable {
+    let status: Int
+    let message, code: String
+    let data: [LikedCommentData]
+}
+
+struct LikedCommentData: Decodable, Hashable {
+    let commentId: Int
+    let nickname, content: String
+    let policyId: String?
+    let postID: Int?
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A2B651D2D09084700989F82 /* LikedCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedCommentListViewController.swift */; };
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
 		6A753C232CEC77F1009A4D40 /* SearchPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */; };
 		6A90810B2CEDF3AD00B52C91 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6A90810A2CEDF3AD00B52C91 /* BSImagePicker */; };
@@ -15,6 +16,7 @@
 		6A9081112CEEAB6000B52C91 /* PostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9081102CEEAB6000B52C91 /* PostImageView.swift */; };
 		6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */; };
 		6AF137602CDE2177004E927B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF1375F2CDE2177004E927B /* Then */; };
+		6AF5FAEF2D09AD8100BD0CA8 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5FAEE2D09AD8100BD0CA8 /* CommentCell.swift */; };
 		6AFE80772CDE26D30039A01B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE80762CDE26D30039A01B /* SnapKit */; };
 		AC0AA5982CC374C600DB032E /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */; };
 		AC0AA59A2CC374D100DB032E /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AA5992CC374D100DB032E /* PostDetailView.swift */; };
@@ -176,7 +178,7 @@
 		ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */; };
 		ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */; };
 		ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */; };
-		ACC46CB62CD287ED0004ED5C /* MyScrapRPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */; };
+		ACC46CB62CD287ED0004ED5C /* PostCommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB52CD287ED0004ED5C /* PostCommentListViewModel.swift */; };
 		ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */; };
 		ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */; };
 		ACC46CBD2CD290340004ED5C /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBC2CD290270004ED5C /* MemberRepository.swift */; };
@@ -267,12 +269,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A2B651C2D09084700989F82 /* LikedCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedCommentListViewController.swift; sourceTree = "<group>"; };
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPolicyView.swift; sourceTree = "<group>"; };
 		6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
 		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
+		6AF5FAEE2D09AD8100BD0CA8 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		AC0AA5992CC374D100DB032E /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		AC0AA59B2CC37A4900DB032E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
@@ -432,7 +436,7 @@
 		ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapInterface.swift; sourceTree = "<group>"; };
 		ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPolicyDTO.swift; sourceTree = "<group>"; };
 		ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPolicyOrPostListViewController.swift; sourceTree = "<group>"; };
-		ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapRPViewModel.swift; sourceTree = "<group>"; };
+		ACC46CB52CD287ED0004ED5C /* PostCommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentListViewModel.swift; sourceTree = "<group>"; };
 		ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostDTO.swift; sourceTree = "<group>"; };
 		ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRPScrapInterface.swift; sourceTree = "<group>"; };
 		ACC46CBC2CD290270004ED5C /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
@@ -910,6 +914,7 @@
 			children = (
 				ACF2A27D2C25884300FE8D63 /* PostListCollectionViewCell.swift */,
 				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
+				6AF5FAEE2D09AD8100BD0CA8 /* CommentCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1000,7 +1005,8 @@
 			isa = PBXGroup;
 			children = (
 				ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */,
-				ACC46CB52CD287ED0004ED5C /* MyScrapRPViewModel.swift */,
+				ACC46CB52CD287ED0004ED5C /* PostCommentListViewModel.swift */,
+				6A2B651C2D09084700989F82 /* LikedCommentListViewController.swift */,
 			);
 			path = MyScrapRP;
 			sourceTree = "<group>";
@@ -1575,6 +1581,7 @@
 				ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */,
 				AC579BA12C5CBA0A00D1C9FC /* TargetTableViewCell.swift in Sources */,
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
+				6A2B651D2D09084700989F82 /* LikedCommentListViewController.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				AC579B472C44FC9900D1C9FC /* APIError.swift in Sources */,
 				AC0AA5BB2CCE227200DB032E /* CommentRouter.swift in Sources */,
@@ -1628,7 +1635,7 @@
 				ACF2A2B22C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift in Sources */,
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
-				ACC46CB62CD287ED0004ED5C /* MyScrapRPViewModel.swift in Sources */,
+				ACC46CB62CD287ED0004ED5C /* PostCommentListViewModel.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				AC604C782C7B1CD000804950 /* ConditionPolicyDTO.swift in Sources */,
 				AC604C672C7A01F300804950 /* ResultSearchLayout.swift in Sources */,
@@ -1694,6 +1701,7 @@
 				ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */,
 				ACF2A3202C37D27700FE8D63 /* SignUpDTO.swift in Sources */,
 				AC604C262C6A002100804950 /* RecentSearchInterface.swift in Sources */,
+				6AF5FAEF2D09AD8100BD0CA8 /* CommentCell.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,

@@ -14,6 +14,7 @@ protocol PostUseCase {
     func fetchPosts(page: Int, size: Int) -> Observable<Result<CommunityRPEntity, APIError>>
     func fetchConditionPosts(keyword: String, page: Int, size: Int) -> Observable<Result<([RPEntity], Int), APIError>>
     func updatePostScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
+    func fetchLikedComment() -> Observable<Result<LikedComment, APIError>>
     // func fetchReviewDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>>
     func fetchScrapPosts(page: Int, size: Int) -> Observable<Result<[RPEntity], APIError>>
 }

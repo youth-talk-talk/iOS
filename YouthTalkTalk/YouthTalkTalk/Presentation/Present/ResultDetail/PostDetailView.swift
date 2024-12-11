@@ -232,6 +232,12 @@ final class CommentView: UIView {
         }
     }
     
+    func bind(userName: String, commentId: Int,  comment: String, isItOwnComment: Bool, isLiked: Bool) {
+        userNameLabel.text = (userName == "null") ? "익명" : userName
+        commentLabel.text = comment
+        likeImageView.image = isLiked ? UIImage(named: "like_fill") : UIImage(named: "like")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

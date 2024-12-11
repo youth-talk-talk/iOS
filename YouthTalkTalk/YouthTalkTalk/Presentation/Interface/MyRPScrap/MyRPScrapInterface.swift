@@ -13,12 +13,16 @@ protocol MyRPScrapInput {
     
     var fetchScrapEvent: PublishRelay<Void> { get }
     var updateScrap: PublishRelay<String> { get }
+    
+    var fetchLikedComment: PublishRelay<Void> { get }
 }
 
 protocol MyRPScrapOutput {
     
     var scrap: PublishRelay<[RPEntity]> { get }
     var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
+    
+    var likedCommentList: PublishRelay<[LikedCommentData]> { get }
     
 }
 

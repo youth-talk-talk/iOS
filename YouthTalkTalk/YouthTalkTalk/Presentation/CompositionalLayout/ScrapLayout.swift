@@ -37,4 +37,30 @@ enum MyScrapSection: Int, CaseIterable {
         
         return layout
     }
+    
+    static func commentListLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { section, environment in
+            
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(70)
+            )
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(70)
+            )
+            
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 17, bottom: 0, trailing: 17)
+            section.interGroupSpacing = 12
+            
+            return section
+        }
+        
+        return layout
+    }
 }

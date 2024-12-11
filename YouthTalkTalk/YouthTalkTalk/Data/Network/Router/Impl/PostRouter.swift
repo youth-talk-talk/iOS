@@ -18,6 +18,7 @@ enum PostRouter: Router {
     case fetchConditionPost(query: ConditionRPQuery)
     case updatePostScrap(id: String)
     case fetchScrapPost(query: RPQuery)
+    case fetchLikedComment
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -32,13 +33,15 @@ enum PostRouter: Router {
         case .updatePostScrap(let id):
             return "/posts/\(id)/scrap"
         case .fetchScrapPost:
-            return "/posts/scrap"
+            return "/posts/scrap"   
+        case .fetchLikedComment:
+            return "/members/me/comments/likes"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchPost, .fetchConditionPost, .fetchScrapPost:
+        case .fetchPost, .fetchConditionPost, .fetchScrapPost, .fetchLikedComment:
             return .get
         case .updatePostScrap:
             return .post
@@ -58,7 +61,7 @@ enum PostRouter: Router {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchPost, .fetchConditionPost, .updatePostScrap, .fetchScrapPost:
+        case .fetchPost, .fetchConditionPost, .updatePostScrap, .fetchScrapPost, .fetchLikedComment:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -70,7 +73,7 @@ enum PostRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchPost, .fetchConditionPost, .updatePostScrap, .fetchScrapPost:
+        case .fetchPost, .fetchConditionPost, .updatePostScrap, .fetchScrapPost, .fetchLikedComment:
             return nil
         }
     }
