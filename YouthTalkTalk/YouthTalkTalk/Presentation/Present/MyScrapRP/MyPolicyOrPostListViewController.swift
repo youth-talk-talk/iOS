@@ -14,6 +14,9 @@ import RxCocoa
 class MyPolicyOrPostListViewController: RootViewController {
     
     private let viewModel: MyRPScrapInterface
+    private let listType: ListType
+    
+    private lazy var page: Int = 0
     
     private var dataSource: UICollectionViewDiffableDataSource<MyScrapSection, RPEntity>!
     private var snapshot = NSDiffableDataSourceSnapshot<MyScrapSection, RPEntity>()
@@ -22,8 +25,9 @@ class MyPolicyOrPostListViewController: RootViewController {
         $0.backgroundColor = .clear
     }
     
-    init(viewModel: MyRPScrapInterface) {
+    init(viewModel: MyRPScrapInterface, listType: ListType) {
         self.viewModel = viewModel
+        self.listType = listType
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,7 +46,7 @@ class MyPolicyOrPostListViewController: RootViewController {
     
     override func configureView() {
         
-        updateNavigationTitle(title: "스크랩한 게시물")
+        updateNavigationTitle(title: listType == .scrapPost ? "스크랩한 게시물" : "작성한 게시물")
         updateNavigationBackButtonTitle()
         
         self.view.backgroundColor = .white
@@ -111,26 +115,35 @@ class MyPolicyOrPostListViewController: RootViewController {
     }
     
     override func bind() {
-        
-        
-        viewModel.output.scrap
-            .bind(with: self) { owner, rpEntities in
-                 owner.update(section: .scrap, items: rpEntities)
-            }
-            .disposed(by: disposeBag)
-        
-         viewModel.output.canceledScrapEntity
-             .bind(with: self) { owner, scrapEntity in
-                 
-                 let policyItems = owner.snapshot.itemIdentifiers(inSection: .scrap)
-                 
-                 guard let item = policyItems.filter({ ($0.policyId == scrapEntity.id) || ((String($0.postId ?? 0) == scrapEntity.id)) }).first else { return }
-                 
-                 owner.delete(item: item)
-             }
-             .disposed(by: disposeBag)
-        
-        viewModel.input.fetchScrapEvent.accept(())
+        if listType == .scrapPost {
+            viewModel.output.scrap
+                .bind(with: self) { owner, rpEntities in
+                    owner.update(section: .scrap, items: rpEntities)
+                }
+                .disposed(by: disposeBag)
+            
+            viewModel.output.canceledScrapEntity
+                .bind(with: self) { owner, scrapEntity in
+                    
+                    let policyItems = owner.snapshot.itemIdentifiers(inSection: .scrap)
+                    
+                    guard let item = policyItems.filter({ ($0.policyId == scrapEntity.id) || ((String($0.postId ?? 0) == scrapEntity.id)) }).first else { return }
+                    
+                    owner.delete(item: item)
+                }
+                .disposed(by: disposeBag)
+            
+            viewModel.input.fetchScrapEvent.accept(())
+            
+        } else if listType == .myPost {
+            viewModel.output.myPost
+                .bind(with: self) { owner, rpEntities in
+                    owner.update(section: .scrap, items: rpEntities)
+                }
+                .disposed(by: disposeBag)
+            
+            viewModel.input.fetchMyPost.accept(page)
+        }
     }
 }
 

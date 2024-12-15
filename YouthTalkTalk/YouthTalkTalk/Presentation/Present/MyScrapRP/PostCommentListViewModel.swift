@@ -13,10 +13,10 @@ enum ListType {
     case scrapPost
     case likedComment
     case myWrittenComment
+    case myPost
 }
 
 final class PostCommentListViewModel: MyRPScrapInterface {
-    
     private var disposeBag = DisposeBag()
     private var useCase: PostUseCase
     
@@ -31,12 +31,14 @@ final class PostCommentListViewModel: MyRPScrapInterface {
     var updateScrap = PublishRelay<String>()
     var fetchLikedComment = PublishRelay<Void>()
     var fetchMyComment = PublishRelay<Void>()
-    
+    var fetchMyPost = PublishRelay<Int>()
+
     // Outputs
     var scrap = PublishRelay<[RPEntity]>()
     var canceledScrapEntity = PublishRelay<ScrapEntity>()
     var likedCommentList = PublishRelay<[LikedCommentData]>()
     var myCommentList = PublishRelay<[LikedCommentData]>()
+    var myPost = PublishRelay<[RPEntity]>()
     
     init(useCase: PostUseCase, listType: ListType) {
         self.useCase = useCase
@@ -102,6 +104,34 @@ final class PostCommentListViewModel: MyRPScrapInterface {
                     switch result {
                     case .success(let scrapEntity):
                         owner.myCommentList.accept(scrapEntity.data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                .disposed(by: disposeBag)
+            
+        } else if listType == .myPost {
+            fetchMyPost
+                .withUnretained(self)
+                .flatMap { owner, page in
+                    return owner.useCase.fetchMyPost(page)
+                }
+                .subscribe(with: self) { owner, result in
+                    switch result {
+                    case .success(let scrapEntity):
+                        let postList: [RPEntity] = scrapEntity.map { post in
+                            return RPEntity(postId: post.postId,
+                                            title: post.title,
+                                            content: post.content,
+                                            writerID: post.writerId,
+                                            scraps: post.scraps,
+                                            scrap: post.scrap,
+                                            comments: post.comments,
+                                            policyId: post.policyId,
+                                            policyTitle: post.policyTitle)
+                        }
+                        
+                        owner.myPost.accept(postList)
                     case .failure(let error):
                         print(error)
                     }

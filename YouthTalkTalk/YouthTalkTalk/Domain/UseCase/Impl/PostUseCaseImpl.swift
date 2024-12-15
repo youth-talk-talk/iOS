@@ -113,7 +113,7 @@ final class PostUseCaseImpl: PostUseCase {
             }
     }
     
-    func fetchMyComment() -> RxSwift.Observable<Result<LikedComment, APIError>> {
+    func fetchMyComment() -> Observable<Result<LikedComment, APIError>> {
         postRepository.fetchMyComment()
             .withUnretained(self)
             .map { owner, result in
@@ -122,6 +122,20 @@ final class PostUseCaseImpl: PostUseCase {
                 case .success(let likedComment):
                                         
                     return .success(likedComment)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }    
+    
+    func fetchMyPost(_ page: Int) -> Observable<Result<[MyPostData], APIError>> {
+        postRepository.fetchMyPost(page)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let myPost):
+                    return .success(myPost.data)
                 case .failure(let error):
                     return .failure(error)
                 }

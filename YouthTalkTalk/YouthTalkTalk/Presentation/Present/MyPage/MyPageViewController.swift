@@ -16,7 +16,7 @@ class MyPageViewController: RootViewController {
     enum FavoriteList: String, CaseIterable, Hashable {
         case scrapPolicy = "스크랩한 정책"
         case scrapPost = "스크랩한 게시물"
-//        case myPost = " " // "작성한 게시물"
+        case myPost = "작성한 게시물"
         case myComment = "작성한 댓글"
         case likeComment = "좋아요한 댓글"
     }
@@ -190,12 +190,17 @@ class MyPageViewController: RootViewController {
                     case .scrapPost:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
                         let viewModel = PostCommentListViewModel(useCase: useCase, listType: .scrapPost)
-                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel)
+                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .scrapPost)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                         
-//                    case .myPost:
-//                        break
+                    case .myPost:
+                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .myPost)
+                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .myPost)
+                        
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                        
                     case .myComment:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
                         let viewModel = PostCommentListViewModel(useCase: useCase, listType: .myWrittenComment)
