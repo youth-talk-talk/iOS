@@ -186,4 +186,17 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                 }
             }
     }
+    
+    func editPost(_ postId: Int, postData: PostEditRequestModel) -> Observable<Result<PostEditResponseModel, APIError>> {
+        policyRepository.editPost(postId, postData)
+            .withUnretained(self)
+            .map { owner, result in
+                switch result {
+                case .success(let postData):
+                    return .success(postData)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

@@ -18,7 +18,7 @@ struct RPEntity: Hashable {
     let uuid = UUID()
     let postId: Int?
     let title: String
-    let content: String
+    var content: String
     let writerID: Int?
     var scraps: Int
     let scrap: Bool

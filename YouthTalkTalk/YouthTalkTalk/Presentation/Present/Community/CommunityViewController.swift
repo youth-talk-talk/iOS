@@ -256,7 +256,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
 
             if type == .review {
                 supplementaryView.configureWithCategory()
-            } else if type == .post {
+            } else if type == .freePost {
                 supplementaryView.configureWithOutCategory()
             }
             

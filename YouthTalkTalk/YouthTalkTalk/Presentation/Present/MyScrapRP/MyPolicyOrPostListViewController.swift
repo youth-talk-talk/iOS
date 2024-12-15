@@ -43,10 +43,10 @@ class MyPolicyOrPostListViewController: RootViewController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
-        // MARK: 게시글 삭제 후 리스트 최신화
-        if listType == .myPost {
-            viewModel.input.fetchMyPost.accept(0)
-        }
+        // TODO: 게시글 삭제 후 리스트 최신화
+//        if listType == .myPost {
+//            viewModel.input.fetchMyPost.accept(0)
+//        }
     }
     
     override func configureView() {
@@ -155,7 +155,6 @@ class MyPolicyOrPostListViewController: RootViewController {
 extension MyPolicyOrPostListViewController {
     
     func update(section: MyScrapSection, items: [RPEntity]) {
-        
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)

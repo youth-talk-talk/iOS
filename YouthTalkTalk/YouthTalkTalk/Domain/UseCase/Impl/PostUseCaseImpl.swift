@@ -40,7 +40,7 @@ final class PostUseCaseImpl: PostUseCase {
     
     func fetchConditionPosts(keyword: String, page: Int, size: Int) -> Observable<Result<([RPEntity], Int), APIError>> {
         
-        let query = ConditionRPQuery(type: .post, keyword: keyword, size: size, page: page)
+        let query = ConditionRPQuery(type: .freePost, keyword: keyword, size: size, page: page)
         
         return postRepository.fetchConditionPosts(conditionRPQuery: query)
             .withUnretained(self)

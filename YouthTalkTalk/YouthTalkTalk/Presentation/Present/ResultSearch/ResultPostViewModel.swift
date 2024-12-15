@@ -8,9 +8,12 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
 final class ResultPostViewModel: ResultSearchInterface {
-    func uploadImages(_ images: [Data?], body: UploadPostBody) { }
+    var successEditPost = PassthroughSubject<Void, Never>()
+    
+    func uploadImages(_ images: [Data?], body: UploadPostBody, _ writeType: WriteType, postId: Int) { }
     
     func setKeyword(_ keyword: String) { }
     

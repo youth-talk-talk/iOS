@@ -14,7 +14,7 @@ final class PostViewModel: RPInterface {
     private let disposeBag: DisposeBag = DisposeBag()
     private let useCase: PostUseCase
     
-    var type: MainContentsType = .post
+    var type: MainContentsType = .freePost
     var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
     
     var fetchRPs = PublishRelay<Void>()

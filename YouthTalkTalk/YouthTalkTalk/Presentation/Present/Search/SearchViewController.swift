@@ -118,7 +118,7 @@ final class SearchViewController: BaseViewController<SearchView> {
                case .review:
                    let useCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
                    viewModel = ResultReviewViewModel(keyword, useCase: useCase)
-               case .post:
+               case .freePost:
                    let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
                    viewModel = ResultPostViewModel(keyword, useCase: useCase)
                }

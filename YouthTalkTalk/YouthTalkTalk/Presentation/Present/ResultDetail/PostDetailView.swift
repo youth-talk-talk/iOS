@@ -16,7 +16,7 @@ final class PostDetailView: BaseView {
     private let titleLabel = UILabel()
     private let policyLiteralLabel = UILabel()
     private let policyLabel = UILabel()
-    private let contentLabel = UILabel()
+    let contentLabel = UILabel()
     
     let commentTextFieldView = CommentTextFieldView()
     
@@ -140,6 +140,8 @@ final class PostDetailView: BaseView {
             
             complete()
         } else {
+            contentLabel.text = data.contentList.first?.content
+            
             FontManager.imageWithText(contentList: data.contentList, fontType: .p14Regular, textColor: .black) { [weak self] attributeString in
                 
                 guard let self else { return }

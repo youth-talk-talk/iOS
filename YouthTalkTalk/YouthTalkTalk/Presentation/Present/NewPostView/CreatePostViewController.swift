@@ -14,6 +14,8 @@ import Combine
 final class CreatePostViewController: BaseViewController<NewPostView> {
     
     let postType: MainContentsType
+    let writeType: WriteType
+    let postData: RPEntity?
     
     weak var delegate: EventDelegate?
     
@@ -119,8 +121,10 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     
     private lazy var addPhotoView = AddPhotoView()
     
-    init(postType: MainContentsType) {
+    init(postType: MainContentsType, writeType: WriteType = .new, postData: RPEntity? = nil) {
         self.postType = postType
+        self.writeType = writeType
+        self.postData = postData
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -145,12 +149,25 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         
         cameraVC.delegate = self
         
+        // MARK: 게시글을 수정하는 경우 이전에 작성한 글 화면에 표시
+        if writeType == .edit {
+            titleTextField.text = postData?.title
+            contentsTextView.text = postData?.content
+            selectedPolicyLabel.text = postData?.policyTitle
+            selectedPolicyId = postData?.policyId ?? ""
+            contentsTextView.textColor = .black
+        }
+        
         // MARK: 게시글 작성 API 호출 성공
         viewModel.successUploadPost.sink { [weak self] item in
             self?.navigationController?.popViewController(animated: true)
             self?.delegate?.eventDelegate(item: item)
-        }
-        .store(in: &cancelBag)
+        }.store(in: &cancelBag)
+        
+        // MARK: 게시글 수정 API 성공
+        viewModel.output.successEditPost.sink { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }.store(in: &cancelBag)
         
         addPhotoView.moveToCameraLabel.onTapped { [weak self] in
             AVCaptureDevice.requestAccess(for: .video) { isAuthorized in
@@ -201,7 +218,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
                 viewModel.uploadImages(images.map{ $0.imageView.image?.pngData() }, body: .init(title: titleTextField.text ?? "",
                                                                                                 postType: postType.key,
                                                                                       policyId: "\(selectedPolicyId)",
-                                                                                      contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]))
+                                                                                                contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]), writeType, postId: postData?.postId ?? 0)
             } else {
                 showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
                     self?.alertView.isHidden = true

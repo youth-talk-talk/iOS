@@ -210,7 +210,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             .bind(with: self) { [weak self] owner, _ in
                 guard let self, let text = layoutView.commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
                 
-                if text != "", let postId = owner.viewModel.output.rpEntity.postId {
+                if text != "", let postId = owner.viewModel.postData.postId {
                     
                     if isCommentChanging { // MARK: 댓글 수정
                         owner.viewModel.output.editComment(commentId: idOfChangingComment,
@@ -229,7 +229,15 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         
         // MARK: 게시글 수정 버튼 탭
         moreEditLabel.onTapped { [weak self] in
-            
+            // MARK: 수정할 게시글이 후기게시글 / 자유게시글 인지 판별하여 게시글 수정 페이지 진입
+            var postData = self?.viewModel.postData
+            postData?.content = self?.layoutView.contentLabel.text ?? ""
+            let policyId = self?.viewModel.postData.policyId
+            let postType: MainContentsType = (policyId == nil) ? .freePost : .review
+            let editPostVC = CreatePostViewController(postType: postType,
+                                                      writeType: .edit,
+                                                      postData: postData)
+            self?.navigationController?.pushViewController(editPostVC, animated: true)
         }
         
         // MARK: 게시글 삭제 버튼 탭

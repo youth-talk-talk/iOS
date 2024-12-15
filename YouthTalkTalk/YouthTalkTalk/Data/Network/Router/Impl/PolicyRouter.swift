@@ -22,6 +22,7 @@ enum PolicyRouter: Router {
     case fetchScrapPolicy
     case uploadImage(image: String)
     case uploadPost(body: UploadPostBody)
+    case editPost(_ postId: Int, _ postData: PostEditRequestModel)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -45,6 +46,8 @@ enum PolicyRouter: Router {
             return "/posts/image"
         case .uploadPost:
             return "/posts/create"
+        case .editPost(let postId, _):
+            return "/posts/update/\(postId)"
         }
     }
     
@@ -54,6 +57,8 @@ enum PolicyRouter: Router {
             return .get
         case .fetchConditionPolicy, .updatePolicyScrap, .uploadImage, .uploadPost:
             return .post
+        case .editPost:
+            return .patch
         }
     }
     
@@ -63,14 +68,14 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let page, _):
             return convertToParameters(page)
-        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadPost:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadPost, .editPost:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
             
@@ -91,6 +96,8 @@ enum PolicyRouter: Router {
         case .uploadImage(let image):
             return try? encoder.encode(image)
         case .uploadPost(let body):
+            return try? encoder.encode(body)
+        case .editPost(_, let body):
             return try? encoder.encode(body)
         case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil

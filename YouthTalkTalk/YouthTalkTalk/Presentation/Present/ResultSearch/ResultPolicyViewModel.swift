@@ -32,6 +32,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var errorHandler = PublishRelay<APIError>()
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
+    var successEditPost = PassthroughSubject<Void, Never>()
     
     lazy var successUploadPost = PassthroughSubject<RPEntity, Never>()
     private lazy var uploadedImage: [String] = []
@@ -111,7 +112,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
         
     }
     
-    func uploadImages(_ images: [Data?], body: UploadPostBody) {
+    func uploadImages(_ images: [Data?], body: UploadPostBody, _ writeType: WriteType, postId: Int = 0) {
         let images = images.compactMap({ $0 })
         uploadedImage = []
         
@@ -131,21 +132,26 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                                 bodyWithImage.contentList.append(.init(content: imageUrl, type: "IMAGE"))
                             }
                             
-                            // MARK: 이미지 업로드가 모두 완료되어 게시글 작성 API 호출
+                            // MARK: 이미지 업로드가 모두 완료되어 게시글 작성/수정 API 호출
                             if images.count == uploadedImage.count {
-                                policyUseCase.uploadPost(bodyWithImage)
-                                    .subscribe { [weak self] result in
-                                        switch result {
-                                        case .success(let data):
-                                            self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
-                                            break
-                                        case .failure:
-                                            break
+                                
+                                // MARK: 게시글 작성 API 호출
+                                if writeType == .new {
+                                    policyUseCase.uploadPost(bodyWithImage)
+                                        .subscribe { [weak self] result in
+                                            switch result {
+                                            case .success(let data):
+                                                self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
+                                                break
+                                            case .failure:
+                                                break
+                                            }
                                         }
-                                    }
-                                    .disposed(by: disposeBag)
-                            } else {
-                                print("달라..?")
+                                        .disposed(by: disposeBag)
+                                    
+                                } else if writeType == .edit {
+                                    // MARK: 게시글 수정 API 호출
+                                }
                             }
                             
                         case .failure(let error):
@@ -154,19 +160,21 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                     })
                     .disposed(by: disposeBag)
             }
-            
-            // MARK: 이미지가 없을경우 바로 포스트 작성
-        } else {
-            policyUseCase.uploadPost(body)
-                .subscribe { [weak self] result in
-                    switch result {
-                    case .success(let data):
-                        self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
-                    case .failure(let error):
-                        break
+        } else { // MARK: 이미지가 없을경우 바로 포스트 작성/수정
+            if writeType == .new {
+                policyUseCase.uploadPost(body)
+                    .subscribe { [weak self] result in
+                        switch result {
+                        case .success(let data):
+                            self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
+                        case .failure(let error):
+                            break
+                        }
                     }
-                }
-                .disposed(by: disposeBag)
+                    .disposed(by: disposeBag)
+            } else if writeType == .edit {
+                // MARK: 게시글 수정 API 호출
+            }
         }
     }
     
@@ -181,4 +189,36 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     func fetchPage() -> Int {
         return page
     }
+}
+
+struct PostEditRequestModel: Encodable {
+    let title: String
+//    let policyId: String?
+//    let postType: String
+    let contentList: [DetailContentDTO]
+//    let addImgUrlList: [String]
+//    let deletedImgUrlList: [String]
+}
+
+struct PostEditResponseModel: Decodable {
+    let status: Int
+    let message: String
+    let code: String
+    let data: PostEditData
+}
+
+struct PostEditData: Decodable {
+    let postId: Int
+    let postType: String
+    let title: String
+    let content: String
+    let policyId: String?
+    let policyTitle: String?
+    let writerId: Int
+    let images: [ImageResponseModel]?
+}
+
+struct ImageResponseModel: Decodable {
+    let id: Int
+    let imgUrl: String
 }

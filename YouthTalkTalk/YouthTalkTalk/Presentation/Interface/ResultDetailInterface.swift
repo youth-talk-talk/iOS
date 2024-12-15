@@ -30,7 +30,6 @@ protocol ResultDetailOutput {
     
     var detailInfo: PublishRelay<DetailRPEntity> { get }
     var commentsInfo: PublishRelay<[CommentDetailEntity]> { get }
-    var rpEntity: RPEntity { get }
     var userNickName: String { get }
     
     func uploadPostComment(_ body: UploadPostCommentBody)
@@ -41,4 +40,5 @@ protocol ResultDetailInterface: ResultDetailInput, ResultDetailOutput {
     
     var input: ResultDetailInput { get }
     var output: ResultDetailOutput { get }
+    var postData: RPEntity { get }
 }

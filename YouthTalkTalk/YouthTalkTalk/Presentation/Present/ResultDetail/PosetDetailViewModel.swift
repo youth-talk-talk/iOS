@@ -11,8 +11,7 @@ import RxCocoa
 import Combine
 
 final class PosetDetailViewModel: ResultDetailInterface {
-    
-    let rpEntity: RPEntity
+    var postData: RPEntity
     var commentWriterName: String = ""
     
     private let disposeBag = DisposeBag()
@@ -42,7 +41,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
     private lazy var memberUseCase: MemberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
     
     init(data: RPEntity, useCase: ReviewUseCase, commnetUseCase: CommentUseCase) {
-        self.rpEntity = data
+        self.postData = data
         self.useCase = useCase
         self.commentUseCase = commnetUseCase
         
@@ -59,7 +58,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
         }
         .disposed(by: disposeBag)
         
-        useCase.fetchReviewDetail(id: rpEntity.postId!)
+        useCase.fetchReviewDetail(id: postData.postId!)
             .bind(with: self) { [weak self] owner, result in
                 
                 switch result {
@@ -88,7 +87,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
         
         deletePost
             .flatMap { [weak self] in
-                self!.useCase.deletePost(String(self!.rpEntity.postId ?? 0))
+                self!.useCase.deletePost(String(self!.postData.postId ?? 0))
             }
             .bind(with: self) { owner, result in
                 
