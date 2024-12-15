@@ -12,6 +12,7 @@ import Combine
 
 protocol ResultDetailInput {
     var fetchDetailInfo: PublishRelay<Void> { get }
+    var deletePost: PublishRelay<Void> { get }
     
     func commentDelete(_ commentId: Int)
     func likeComment(_ commentId: Int, _ isSetLiked: Bool)
@@ -25,6 +26,7 @@ protocol ResultDetailOutput {
     var successDeleteComment: PassthroughSubject<Int, Never> { get }
     var successEditComment: PassthroughSubject<(commentId: Int, newComment: String), Never> { get }
     var successLikeComment: PassthroughSubject<(commentId: Int, isLiked: Bool), Never> { get }
+    var successDeletePost: PassthroughSubject<Void, Never> { get }
     
     var detailInfo: PublishRelay<DetailRPEntity> { get }
     var commentsInfo: PublishRelay<[CommentDetailEntity]> { get }

@@ -42,6 +42,11 @@ class MyPolicyOrPostListViewController: RootViewController {
         tabBarController?.tabBar.isHidden = true
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        // MARK: 게시글 삭제 후 리스트 최신화
+        if listType == .myPost {
+            viewModel.input.fetchMyPost.accept(0)
+        }
     }
     
     override func configureView() {

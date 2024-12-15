@@ -12,7 +12,7 @@ final class PostDetailView: BaseView {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let nicknameLabel = UILabel()
+    let nicknameLabel = UILabel()
     private let titleLabel = UILabel()
     private let policyLiteralLabel = UILabel()
     private let policyLabel = UILabel()

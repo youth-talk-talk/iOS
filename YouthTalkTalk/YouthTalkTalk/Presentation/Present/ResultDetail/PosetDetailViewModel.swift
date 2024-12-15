@@ -11,6 +11,7 @@ import RxCocoa
 import Combine
 
 final class PosetDetailViewModel: ResultDetailInterface {
+    
     let rpEntity: RPEntity
     var commentWriterName: String = ""
     
@@ -20,6 +21,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
     
     // Inputs
     var fetchDetailInfo = PublishRelay<Void>()
+    var deletePost = PublishRelay<Void>()
     
     // Outputs
     var detailInfo = PublishRelay<DetailRPEntity>()
@@ -28,6 +30,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
     var successDeleteComment = PassthroughSubject<Int, Never>()
     var successEditComment = PassthroughSubject<(commentId: Int, newComment: String), Never>()
     var successLikeComment = PassthroughSubject<(commentId: Int, isLiked: Bool), Never>()
+    var successDeletePost = PassthroughSubject<Void, Never>()
     
     // Interface
     var input: ResultDetailInput { return self }
@@ -79,6 +82,21 @@ final class PosetDetailViewModel: ResultDetailInterface {
                     
                 case .failure(let error):
                     owner.commentsInfo.accept([])
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        deletePost
+            .flatMap { [weak self] in
+                self!.useCase.deletePost(String(self!.rpEntity.postId ?? 0))
+            }
+            .bind(with: self) { owner, result in
+                
+                switch result {
+                case .success:
+                    owner.successDeletePost.send(())
+                case .failure:
+                    break
                 }
             }
             .disposed(by: disposeBag)

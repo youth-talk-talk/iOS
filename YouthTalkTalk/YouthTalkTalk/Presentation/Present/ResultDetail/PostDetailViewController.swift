@@ -13,13 +13,14 @@ import RxCocoa
 import Combine
 
 class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldDelegate {
-    // TODO: 게시글 생성, 삭제 기능 추가
     private lazy var moreImageView = UIImageView(image: UIImage(named: "more"))
     private lazy var keyboardHeight: CGFloat = 0
     private lazy var moreContainerStackView = UIStackView(arrangedSubviews: [moreEditLabel,
                                                                              moreCenterLineView,
                                                                              moreDeleteLabel]).then {
+        $0.axis = .vertical
         $0.backgroundColor = .white
+        $0.distribution = .fillProportionally
         $0.layer.cornerRadius = 10
         $0.layer.borderColor = FontColor.gray30.value.cgColor
         $0.layer.borderWidth = 1
@@ -69,6 +70,20 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         )
         
         layoutView.commentTextFieldView.textField.delegate = self
+        
+        view.addSubview(moreContainerStackView)
+        navigationItem.setRightBarButton(UIBarButtonItem(customView: moreImageView), animated: true)
+        
+        moreCenterLineView.snp.makeConstraints {
+            $0.height.equalTo(1)
+        }
+        
+        moreContainerStackView.snp.makeConstraints {
+            $0.top.equalTo(layoutView.nicknameLabel)
+            $0.trailing.equalToSuperview().inset(17)
+            $0.width.equalTo(121)
+            $0.height.equalTo(80)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -182,6 +197,11 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             likedCommentView.likeImageView.image = isLiked ? UIImage(named: "like_fill") : UIImage(named: "like")
             
         }.store(in: &cancelBag)
+        
+        // MARK: 게시글 삭제 API 완료
+        viewModel.output.successDeletePost.sink { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }.store(in: &cancelBag)
     }
     
     private func setTabEvents() {
@@ -202,6 +222,23 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                 }
             }
             .disposed(by: disposeBag)
+        
+        moreImageView.onTapped { [weak self] in
+            self?.moreContainerStackView.isHidden.toggle()
+        }
+        
+        // MARK: 게시글 수정 버튼 탭
+        moreEditLabel.onTapped { [weak self] in
+            
+        }
+        
+        // MARK: 게시글 삭제 버튼 탭
+        moreDeleteLabel.onTapped { [weak self] in
+            self?.showAlertView("게시물을 삭제하시겠습니까?",
+                                okAction: { [weak self] in
+                self?.viewModel.input.deletePost.accept(())
+            })
+        }
     }
     
     func animateTextField(textField: UITextField, up: Bool) {

@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class ReviewUseCaseImpl: ReviewUseCase {
-    
     private let disposeBag = DisposeBag()
     private let reviewRepository: ReviewRepository
     
@@ -116,4 +115,22 @@ final class ReviewUseCaseImpl: ReviewUseCase {
                 }
             }
     }
+    
+    func deletePost(_ postId: String) -> Observable<Result<Void, APIError>> {
+        reviewRepository.deletePost(postId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success:
+                    return .success(())
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    
 }

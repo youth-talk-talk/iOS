@@ -15,4 +15,5 @@ protocol ReviewRepository {
     func updatePostScrap(id: String) -> Observable<Result<ScrapDTO, APIError>>
     func fetchReviewDetailInfo(id: Int) -> Observable<Result<DetailRPDTO, APIError>>
     func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>>
+    func deletePost(_ postId: String) -> Observable<Result<DeleteAccountDTO, APIError>>
 }
