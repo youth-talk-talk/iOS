@@ -30,6 +30,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
     var successEditComment = PassthroughSubject<(commentId: Int, newComment: String), Never>()
     var successLikeComment = PassthroughSubject<(commentId: Int, isLiked: Bool), Never>()
     var successDeletePost = PassthroughSubject<Void, Never>()
+    var successReportPost = PassthroughSubject<Int, Never>()
     
     // Interface
     var input: ResultDetailInput { return self }
@@ -149,6 +150,19 @@ final class PosetDetailViewModel: ResultDetailInterface {
                 switch result {
                 case .success:
                     self?.successLikeComment.send((commentId, isSetLiked))
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func reportPost() {
+        useCase.reportPost(postData.postId ?? 0)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    self?.successReportPost.send(self?.postData.postId ?? 0)
                 case .failure:
                     break
                 }

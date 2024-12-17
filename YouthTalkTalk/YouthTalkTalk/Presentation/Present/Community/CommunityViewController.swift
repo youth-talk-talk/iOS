@@ -31,7 +31,14 @@ enum CommunitySectionItems: Hashable {
     }
 }
 
-class CommunityViewController: BaseViewController<CommunityView> {
+class CommunityViewController: BaseViewController<CommunityView>, RemoveReportedPostProtocol {
+    func removeReportedPost(postId: Int) {
+        guard let reportedPost: CommunitySectionItems = dataSource.snapshot().itemIdentifiers.first(where: { _ in postId == postId }) else { return }
+        var newSnapshot = dataSource.snapshot()
+        newSnapshot.deleteItems([reportedPost])
+        
+        self.dataSource.apply(newSnapshot, animatingDifferences: true)
+    }
     
     var viewModel: RPInterface
     
@@ -130,7 +137,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
                     let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-                    
+                    resultDetailVC.delegate = self
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
@@ -179,7 +186,7 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
                     let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-                    
+                    resultDetailVC.delegate = self
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
@@ -394,7 +401,7 @@ extension CommunityViewController: EventDelegate {
         let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
         let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
         let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-        
+        resultDetailVC.delegate = self
         navigationController?.pushViewController(resultDetailVC, animated: true)
     }
 }

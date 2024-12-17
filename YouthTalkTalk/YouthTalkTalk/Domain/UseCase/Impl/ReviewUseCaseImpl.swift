@@ -132,5 +132,19 @@ final class ReviewUseCaseImpl: ReviewUseCase {
             }
     }
     
-    
+    func reportPost(_ postId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        reviewRepository.reportPost(postId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let data):
+                    return .success(data)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

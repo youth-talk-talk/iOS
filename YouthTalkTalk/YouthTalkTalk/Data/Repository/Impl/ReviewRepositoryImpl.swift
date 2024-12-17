@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 final class ReviewRepositoryImpl: ReviewRepository {
-    
+
     private let apiManager = APIManager()
     
     func fetchReviews(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<CommunityRPDTO, APIError>> {
@@ -52,6 +52,12 @@ final class ReviewRepositoryImpl: ReviewRepository {
     
     func deletePost(_ postId: String) -> Observable<Result<DeleteAccountDTO, APIError>> {
         let router = ReviewRouter.deletePost(postId)
+        
+        return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
+    }
+    
+    func reportPost(_ postId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        let router = ReviewRouter.reportPost(postId)
         
         return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
     }

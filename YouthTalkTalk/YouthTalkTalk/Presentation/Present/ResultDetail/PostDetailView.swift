@@ -13,7 +13,9 @@ final class PostDetailView: BaseView {
     private let contentView = UIView()
     
     let nicknameLabel = UILabel()
-    private let titleLabel = UILabel()
+    private let titleLabel = UILabel().then {
+        $0.numberOfLines = 0
+    }
     private let policyLiteralLabel = UILabel()
     private let policyLabel = UILabel()
     let contentLabel = UILabel()
@@ -81,6 +83,7 @@ final class PostDetailView: BaseView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(5)
             $0.leading.equalTo(nicknameLabel)
+            $0.trailing.equalToSuperview().inset(17)
         }
         
         policyLiteralLabel.snp.makeConstraints {
@@ -152,6 +155,8 @@ final class PostDetailView: BaseView {
                 complete()
             }
         }
+        
+        contentLabel.textColor = .black
     }
 }
 

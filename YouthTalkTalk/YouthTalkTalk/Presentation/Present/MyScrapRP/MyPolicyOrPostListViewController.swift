@@ -79,7 +79,7 @@ class MyPolicyOrPostListViewController: RootViewController {
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
                     let viewModel = PosetDetailViewModel(data: itemIdentifier, useCase: useCase, commnetUseCase: commentUseCase)
                     let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-                    
+                    resultDetailVC.delegate = self
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
@@ -152,7 +152,7 @@ class MyPolicyOrPostListViewController: RootViewController {
     }
 }
 
-extension MyPolicyOrPostListViewController {
+extension MyPolicyOrPostListViewController: RemoveReportedPostProtocol {
     
     func update(section: MyScrapSection, items: [RPEntity]) {
         snapshot.appendItems(items, toSection: section)
@@ -165,5 +165,13 @@ extension MyPolicyOrPostListViewController {
         snapshot.deleteItems([item])
         
         self.dataSource.apply(snapshot)
+    }
+    
+    func removeReportedPost(postId: Int) {
+        guard let reportedPost: RPEntity = dataSource.snapshot().itemIdentifiers.first(where: { _ in postId == postId }) else { return }
+        var newSnapshot = dataSource.snapshot()
+        newSnapshot.deleteItems([reportedPost])
+        
+        self.dataSource.apply(newSnapshot, animatingDifferences: true)
     }
 }

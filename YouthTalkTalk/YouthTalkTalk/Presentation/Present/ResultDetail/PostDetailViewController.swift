@@ -12,12 +12,25 @@ import RxSwift
 import RxCocoa
 import Combine
 
+protocol RemoveReportedPostProtocol: AnyObject {
+    func removeReportedPost(postId: Int)
+}
+
 class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldDelegate {
+    weak var delegate: RemoveReportedPostProtocol?
+    
+    private lazy var isMyPost: Bool = false {
+        didSet {
+            moreEditReportLabel.text = isMyPost ? "수정" : "신고"
+            moreDeleteBlokLabel.text = isMyPost ? "삭제" : "차단"
+        }
+    }
+    
     private lazy var moreImageView = UIImageView(image: UIImage(named: "more"))
     private lazy var keyboardHeight: CGFloat = 0
-    private lazy var moreContainerStackView = UIStackView(arrangedSubviews: [moreEditLabel,
+    private lazy var moreContainerStackView = UIStackView(arrangedSubviews: [moreEditReportLabel,
                                                                              moreCenterLineView,
-                                                                             moreDeleteLabel]).then {
+                                                                             moreDeleteBlokLabel]).then {
         $0.axis = .vertical
         $0.backgroundColor = .white
         $0.distribution = .fillProportionally
@@ -27,7 +40,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         $0.isHidden = true
     }
     
-    private lazy var moreEditLabel = UILabel().then {
+    private lazy var moreEditReportLabel = UILabel().then {
         $0.designed(text: "수정", fontType: .p16Regular16)
         $0.textAlignment = .center
     }
@@ -36,7 +49,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         $0.backgroundColor = FontColor.gray30.value
     }
     
-    private lazy var moreDeleteLabel = UILabel().then {
+    private lazy var moreDeleteBlokLabel = UILabel().then {
         $0.designed(text: "삭제", fontType: .p16Regular16)
         $0.textAlignment = .center
     }
@@ -123,13 +136,15 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         }
         .store(in: &cancelBag)
         
-        // MARK: 초기 댓글 데이터 바인딩
+        // MARK: 초기 게시글, 댓글 데이터 바인딩
         Observable.zip(viewModel.output.detailInfo, viewModel.output.commentsInfo)
             .bind(with: self) { owner, combined in
                 
                 let (detailRPEntity, comments) = combined
                 
                 owner.layoutView.configure(data: detailRPEntity) {
+                    owner.isMyPost = (owner.viewModel.output.userNickName == detailRPEntity.nickname)
+                    
                     owner.layoutView.commentCountLabel.text = "\(comments.count)"
                     
                     comments.forEach { comment in
@@ -202,6 +217,12 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         viewModel.output.successDeletePost.sink { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }.store(in: &cancelBag)
+        
+        // MARK: 게시글 신고 API 완료
+        viewModel.output.successReportPost.sink { [weak self] postId in
+            self?.delegate?.removeReportedPost(postId: postId)
+            self?.navigationController?.popViewController(animated: true)
+        }.store(in: &cancelBag)
     }
     
     private func setTabEvents() {
@@ -223,29 +244,44 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             }
             .disposed(by: disposeBag)
         
+        // MARK: 더보기 버튼 탭
         moreImageView.onTapped { [weak self] in
             self?.moreContainerStackView.isHidden.toggle()
         }
         
         // MARK: 게시글 수정 버튼 탭
-        moreEditLabel.onTapped { [weak self] in
-            // MARK: 수정할 게시글이 후기게시글 / 자유게시글 인지 판별하여 게시글 수정 페이지 진입
-            var postData = self?.viewModel.postData
-            postData?.content = self?.layoutView.contentLabel.text ?? ""
-            let policyId = self?.viewModel.postData.policyId
-            let postType: MainContentsType = (policyId == nil) ? .freePost : .review
-            let editPostVC = CreatePostViewController(postType: postType,
-                                                      writeType: .edit,
-                                                      postData: postData)
-            self?.navigationController?.pushViewController(editPostVC, animated: true)
+        moreEditReportLabel.onTapped { [weak self] in
+            guard let self else { return }
+            
+            if moreEditReportLabel.text == "신고" {
+                // TODO: delegate 패턴으로 포스트삭제
+                viewModel.input.reportPost()
+                
+            } else {
+                // MARK: 수정할 게시글이 후기게시글 / 자유게시글 인지 판별하여 게시글 수정 페이지 진입
+                var postData = viewModel.postData
+                postData.content = layoutView.contentLabel.text ?? ""
+                let policyId = viewModel.postData.policyId
+                let postType: MainContentsType = (policyId == nil) ? .freePost : .review
+                let editPostVC = CreatePostViewController(postType: postType,
+                                                          writeType: .edit,
+                                                          postData: postData)
+                navigationController?.pushViewController(editPostVC, animated: true)
+            }
         }
         
         // MARK: 게시글 삭제 버튼 탭
-        moreDeleteLabel.onTapped { [weak self] in
-            self?.showAlertView("게시물을 삭제하시겠습니까?",
-                                okAction: { [weak self] in
-                self?.viewModel.input.deletePost.accept(())
-            })
+        moreDeleteBlokLabel.onTapped { [weak self] in
+            guard let self else { return }
+            
+            if moreDeleteBlokLabel.text == "차단" {
+                
+            } else {
+                showAlertView("게시물을 삭제하시겠습니까?",
+                                    okAction: { [weak self] in
+                    self?.viewModel.input.deletePost.accept(())
+                })
+            }
         }
     }
     

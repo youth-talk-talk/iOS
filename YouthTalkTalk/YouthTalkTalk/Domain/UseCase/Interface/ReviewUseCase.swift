@@ -17,4 +17,5 @@ protocol ReviewUseCase {
     func updatePostScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
     func fetchReviewDetail(id: Int) -> Observable<Result<DetailRPEntity, APIError>>
     func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>>
+    func reportPost(_ postId: Int) -> Observable<Result<DeleteAccountDTO, APIError>>
 }
