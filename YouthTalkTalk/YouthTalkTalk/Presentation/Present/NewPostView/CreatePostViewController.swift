@@ -11,12 +11,17 @@ import Photos
 import AVFoundation
 import Combine
 
+protocol UpdateEditedPostProtocol: AnyObject {
+    func updateEditedPost(body: UploadPostBody)
+}
+
 final class CreatePostViewController: BaseViewController<NewPostView> {
     
     let postType: MainContentsType
     let writeType: WriteType
     let postData: RPEntity?
     
+    weak var editDelegate: UpdateEditedPostProtocol?
     weak var delegate: EventDelegate?
     
     private lazy var cancelBag = Set<AnyCancellable>()
@@ -165,7 +170,8 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         }.store(in: &cancelBag)
         
         // MARK: 게시글 수정 API 성공
-        viewModel.output.successEditPost.sink { [weak self] in
+        viewModel.output.successEditPost.sink { [weak self] body in
+            self?.editDelegate?.updateEditedPost(body: body)
             self?.navigationController?.popViewController(animated: true)
         }.store(in: &cancelBag)
         

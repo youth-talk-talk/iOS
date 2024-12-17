@@ -13,7 +13,7 @@ final class PostDetailView: BaseView {
     private let contentView = UIView()
     
     let nicknameLabel = UILabel()
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.numberOfLines = 0
     }
     private let policyLiteralLabel = UILabel()

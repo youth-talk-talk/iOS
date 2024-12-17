@@ -16,7 +16,7 @@ protocol RemoveReportedPostProtocol: AnyObject {
     func removeReportedPost(postId: Int)
 }
 
-class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldDelegate {
+final class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldDelegate, UpdateEditedPostProtocol {
     weak var delegate: RemoveReportedPostProtocol?
     
     private lazy var isMyPost: Bool = false {
@@ -271,6 +271,7 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
                 let editPostVC = CreatePostViewController(postType: postType,
                                                           writeType: .edit,
                                                           postData: postData)
+                editPostVC.editDelegate = self
                 navigationController?.pushViewController(editPostVC, animated: true)
             }
         }
@@ -325,5 +326,10 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             animateTextField(textField: layoutView.commentTextFieldView.textField, up: false)
             
         }
+    }
+    
+    func updateEditedPost(body: UploadPostBody) {
+        layoutView.titleLabel.text = body.title
+        layoutView.contentLabel.text = body.contentList.first?.content
     }
 }

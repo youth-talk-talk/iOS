@@ -11,7 +11,6 @@ import RxCocoa
 import Combine
 
 final class ResultPostViewModel: ResultSearchInterface {
-    var successEditPost = PassthroughSubject<Void, Never>()
     
     func uploadImages(_ images: [Data?], body: UploadPostBody, _ writeType: WriteType, postId: Int) { }
     
@@ -33,6 +32,7 @@ final class ResultPostViewModel: ResultSearchInterface {
     var errorHandler = PublishRelay<APIError>()
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
+    var successEditPost = PassthroughSubject<UploadPostBody, Never>()
     
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }

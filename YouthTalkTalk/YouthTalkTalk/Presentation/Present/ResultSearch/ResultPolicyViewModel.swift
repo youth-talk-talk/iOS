@@ -32,7 +32,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var errorHandler = PublishRelay<APIError>()
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
-    var successEditPost = PassthroughSubject<Void, Never>()
+    var successEditPost = PassthroughSubject<UploadPostBody, Never>()
     
     lazy var successUploadPost = PassthroughSubject<RPEntity, Never>()
     private lazy var uploadedImage: [String] = []
@@ -172,8 +172,21 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                         }
                     }
                     .disposed(by: disposeBag)
+                
             } else if writeType == .edit {
-                // MARK: 게시글 수정 API 호출
+                // TODO: failure로 success 넘어오는 이슈 체크 (게시글 수정)
+//                policyUseCase.editPost(postId, postData: .init(title: body.title,
+//                                                               contentList: body.contentList))
+//                .subscribe { [weak self] result in
+//                    switch result {
+//                    case .success(let data):
+//                        self?.successEditPost.send(body)
+//                        
+//                    case .failure(let error):
+//                        break
+//                    }
+//                }
+//                .disposed(by: disposeBag)
             }
         }
     }
