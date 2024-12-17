@@ -222,6 +222,12 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
         viewModel.output.successReportPost.sink { [weak self] postId in
             self?.delegate?.removeReportedPost(postId: postId)
             self?.navigationController?.popViewController(animated: true)
+        }.store(in: &cancelBag)  
+        
+        // MARK: 유저 차단 API 완료
+        viewModel.output.successBlockUser.sink { [weak self] postId in
+            self?.delegate?.removeReportedPost(postId: postId)
+            self?.navigationController?.popViewController(animated: true)
         }.store(in: &cancelBag)
     }
     
@@ -254,7 +260,6 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             guard let self else { return }
             
             if moreEditReportLabel.text == "신고" {
-                // TODO: delegate 패턴으로 포스트삭제
                 viewModel.input.reportPost()
                 
             } else {
@@ -275,7 +280,8 @@ class PostDetailViewController: BaseViewController<PostDetailView>, UITextFieldD
             guard let self else { return }
             
             if moreDeleteBlokLabel.text == "차단" {
-                
+                viewModel.input.userBlock()
+
             } else {
                 showAlertView("게시물을 삭제하시겠습니까?",
                                     okAction: { [weak self] in

@@ -21,6 +21,7 @@ enum ReviewRouter: Router {
     case uploadPostComment(body: UploadPostCommentBody)
     case deletePost(_ postId: String)
     case reportPost(_ postId: Int)
+    case userBlock(_ userId: Int)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -42,6 +43,8 @@ enum ReviewRouter: Router {
             return "/posts/\(id)"
         case .reportPost(let id):
             return "/report/post/\(id)"
+        case .userBlock(let userId):
+            return "/members/block/\(userId)"
         }
     }
     
@@ -49,7 +52,7 @@ enum ReviewRouter: Router {
         switch self {
         case .fetchReview, .fetchConditionReview, .fetchReviewDetilInfo:
             return .get
-        case .updatePostScrap, .uploadPostComment, .reportPost:
+        case .updatePostScrap, .uploadPostComment, .reportPost, .userBlock:
             return .post
         case .deletePost:
             return .delete
@@ -71,7 +74,7 @@ enum ReviewRouter: Router {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchReview, .fetchConditionReview, .updatePostScrap, .fetchReviewDetilInfo, .uploadPostComment, .deletePost, .reportPost:
+        case .fetchReview, .fetchConditionReview, .updatePostScrap, .fetchReviewDetilInfo, .uploadPostComment, .deletePost, .reportPost, .userBlock:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -83,7 +86,7 @@ enum ReviewRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchReview, .fetchConditionReview, .updatePostScrap, .fetchReviewDetilInfo, .deletePost, .reportPost:
+        case .fetchReview, .fetchConditionReview, .updatePostScrap, .fetchReviewDetilInfo, .deletePost, .reportPost, .userBlock:
             return nil
         case .uploadPostComment(let body):
             return try? encoder.encode(body)

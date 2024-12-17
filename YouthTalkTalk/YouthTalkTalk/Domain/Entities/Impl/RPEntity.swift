@@ -19,7 +19,7 @@ struct RPEntity: Hashable {
     let postId: Int?
     let title: String
     var content: String
-    let writerID: Int?
+    var writerID: Int?
     var scraps: Int
     let scrap: Bool
     let comments: Int

@@ -17,6 +17,7 @@ protocol ResultDetailInput {
     func commentDelete(_ commentId: Int)
     func likeComment(_ commentId: Int, _ isSetLiked: Bool)
     func reportPost()
+    func userBlock()
 }
 
 protocol ResultDetailOutput {
@@ -29,6 +30,7 @@ protocol ResultDetailOutput {
     var successLikeComment: PassthroughSubject<(commentId: Int, isLiked: Bool), Never> { get }
     var successDeletePost: PassthroughSubject<Void, Never> { get }
     var successReportPost: PassthroughSubject<Int, Never> { get }
+    var successBlockUser: PassthroughSubject<Int, Never> { get }
     
     var detailInfo: PublishRelay<DetailRPEntity> { get }
     var commentsInfo: PublishRelay<[CommentDetailEntity]> { get }

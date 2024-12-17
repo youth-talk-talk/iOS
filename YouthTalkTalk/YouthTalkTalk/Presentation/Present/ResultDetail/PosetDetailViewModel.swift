@@ -31,6 +31,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
     var successLikeComment = PassthroughSubject<(commentId: Int, isLiked: Bool), Never>()
     var successDeletePost = PassthroughSubject<Void, Never>()
     var successReportPost = PassthroughSubject<Int, Never>()
+    var successBlockUser = PassthroughSubject<Int, Never>()
     
     // Interface
     var input: ResultDetailInput { return self }
@@ -53,7 +54,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
             switch result {
             case .success(let meEntity):
                 owner.userNickName = meEntity.nickname
-            case .failure(let error):
+            case .failure:
                 break
             }
         }
@@ -64,6 +65,7 @@ final class PosetDetailViewModel: ResultDetailInterface {
                 
                 switch result {
                 case .success(let detailEntity):
+                    self?.postData.writerID = detailEntity.writerId
                     self?.commentWriterName = detailEntity.nickname ?? "익명"
                     owner.detailInfo.accept(detailEntity)
                 case .failure(let error):
@@ -163,6 +165,19 @@ final class PosetDetailViewModel: ResultDetailInterface {
                 switch result {
                 case .success:
                     self?.successReportPost.send(self?.postData.postId ?? 0)
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+    }    
+    
+    func userBlock() {
+        useCase.userBlock(postData.writerID ?? 0)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    self?.successBlockUser.send(self?.postData.postId ?? 0)
                 case .failure:
                     break
                 }

@@ -146,5 +146,21 @@ final class ReviewUseCaseImpl: ReviewUseCase {
                     return .failure(error)
                 }
             }
+    }    
+    
+    func userBlock(_ userId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        reviewRepository.userBlock(userId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let data):
+                    return .success(data)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
     }
 }

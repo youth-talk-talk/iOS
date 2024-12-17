@@ -60,5 +60,11 @@ final class ReviewRepositoryImpl: ReviewRepository {
         let router = ReviewRouter.reportPost(postId)
         
         return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
+    }    
+    
+    func userBlock(_ userId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        let router = ReviewRouter.userBlock(userId)
+        
+        return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
     }
 }
