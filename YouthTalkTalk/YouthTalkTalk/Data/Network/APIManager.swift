@@ -107,7 +107,7 @@ extension APIManager {
         do {
             if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 if let code = jsonObject["code"] as? String {
-                    let error = APIError(code: code)                    
+                    let error = APIError(code: code)
                     return error
                 }
             }

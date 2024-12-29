@@ -66,7 +66,6 @@ final class PolicyRepositoryImpl: PolicyRepository {
     func uploadPost(_ body: UploadPostBody) -> Observable<Result<UploadPostDTO, APIError>> {
         
         let router = PolicyRouter.uploadPost(body: body)
-        
         return apiManager.request(router: router, type: UploadPostDTO.self).asObservable()
     }    
     

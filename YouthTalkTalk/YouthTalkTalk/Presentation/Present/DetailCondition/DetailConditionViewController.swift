@@ -59,9 +59,9 @@ enum DeadlineStatus: Int, CaseIterable {
         case .all:
             return nil
         case .inProgress:
-            return true
-        case .closed:
             return false
+        case .closed:
+            return true
         }
     }
 }

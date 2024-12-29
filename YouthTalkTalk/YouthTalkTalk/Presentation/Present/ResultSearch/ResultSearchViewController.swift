@@ -217,7 +217,6 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                     let nextVC = DetailConditionViewController()
                     
                     nextVC.viewModel.result = { age, codeList, isFinished in
-                        
                         let items = owner.snapshot.itemIdentifiers(inSection: .result)
                         owner.snapshot.deleteItems(items)
                         
