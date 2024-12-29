@@ -8,11 +8,11 @@
 import UIKit
 
 final class CommentCell: UICollectionViewCell {
-    private lazy var commentView = CommentView(userName: "",
-                                               commentId: 0,
-                                               comment: "",
-                                               isItOwnComment: false,
-                                               isLiked: true)
+    lazy var commentView = CommentView(userName: "",
+                                       commentId: 0,
+                                       comment: "",
+                                       isItOwnComment: false,
+                                       isLiked: true)
     
     
     override init(frame: CGRect) {

@@ -178,6 +178,7 @@ class MyPageViewController: RootViewController {
                 
                 switch item {
                 case .favorite(let favorite):
+                    let commentUseCase = CommentUseCaseImpl(commentRepository: CommentRepositoryImpl())
                     
                     switch favorite {
                         
@@ -189,29 +190,29 @@ class MyPageViewController: RootViewController {
                         owner.navigationController?.pushViewController(vc, animated: true)
                     case .scrapPost:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .scrapPost)
+                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .scrapPost)
                         let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .scrapPost)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                         
                     case .myPost:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .myPost)
+                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .myPost)
                         let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .myPost)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                         
                     case .myComment:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .myWrittenComment)
-                        let vc = LikedCommentListViewController(viewModel: viewModel, listType: .myWrittenComment)
+                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .myWrittenComment)
+                        let vc = LikedOrMyCommentListViewController(viewModel: viewModel, listType: .myWrittenComment)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                         
                     case .likeComment:
                         let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                        let viewModel = PostCommentListViewModel(useCase: useCase, listType: .likedComment)
-                        let vc = LikedCommentListViewController(viewModel: viewModel, listType: .likedComment)
+                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .likedComment)
+                        let vc = LikedOrMyCommentListViewController(viewModel: viewModel, listType: .likedComment)
                         
                         owner.navigationController?.pushViewController(vc, animated: true)
                     }

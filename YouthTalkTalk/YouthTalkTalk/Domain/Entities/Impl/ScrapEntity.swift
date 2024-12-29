@@ -31,7 +31,8 @@ struct LikedComment: Decodable {
 
 struct LikedCommentData: Decodable, Hashable {
     let commentId: Int
-    let nickname, content: String
+    let nickname: String
+    var content: String
     let policyId: String?
     let postID: Int?
 }

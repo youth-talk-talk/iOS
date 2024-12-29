@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
 enum ListType {
     case scrapPost
@@ -19,6 +20,7 @@ enum ListType {
 final class PostCommentListViewModel: MyRPScrapInterface {
     private var disposeBag = DisposeBag()
     private var useCase: PostUseCase
+    private var commentUseCase: CommentUseCase
     
     var input: MyRPScrapInput { return self }
     var output: MyRPScrapOutput { return self }
@@ -34,14 +36,17 @@ final class PostCommentListViewModel: MyRPScrapInterface {
     var fetchMyPost = PublishRelay<Int>()
 
     // Outputs
+    var successDeleteComment = PassthroughSubject<Int, Never>()
+    var successEditComment = PassthroughSubject<(commentId: Int, newComment: String), Never>()
     var scrap = PublishRelay<[RPEntity]>()
     var canceledScrapEntity = PublishRelay<ScrapEntity>()
     var likedCommentList = PublishRelay<[LikedCommentData]>()
     var myCommentList = PublishRelay<[LikedCommentData]>()
     var myPost = PublishRelay<[RPEntity]>()
     
-    init(useCase: PostUseCase, listType: ListType) {
+    init(useCase: PostUseCase, commentUseCase: CommentUseCase, listType: ListType) {
         self.useCase = useCase
+        self.commentUseCase = commentUseCase
         
         if listType == .scrapPost {
             fetchScrapEvent
@@ -138,5 +143,31 @@ final class PostCommentListViewModel: MyRPScrapInterface {
                 }
                 .disposed(by: disposeBag)
         }
+    }
+    
+    func commentDelete(_ commentId: Int) {
+        commentUseCase.commentDelete(commentId)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    self?.successDeleteComment.send(commentId)
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func editComment(commentId: Int, newComment: String) {
+        commentUseCase.editComment(commentId, newComment)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    self?.successEditComment.send((commentId, newComment))
+                case .failure:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
