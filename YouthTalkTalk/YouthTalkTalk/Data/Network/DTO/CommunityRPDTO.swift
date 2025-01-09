@@ -20,8 +20,8 @@ struct CommunityRPDTOData: Decodable {
     let recentPosts: [RPDTO]
     
     enum CodingKeys: String, CodingKey {
-        case popularPosts = "top5_posts"
-        case recentPosts = "other_posts"
+        case popularPosts = "top5Posts"
+        case recentPosts = "allPosts"
     }
 }
 

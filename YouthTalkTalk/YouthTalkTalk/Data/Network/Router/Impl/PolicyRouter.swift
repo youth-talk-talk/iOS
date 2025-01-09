@@ -45,9 +45,9 @@ enum PolicyRouter: Router {
         case .uploadImage:
             return "/posts/image"
         case .uploadPost:
-            return "/posts/create"
+            return "/posts"
         case .editPost(let postId, _):
-            return "/posts/update/\(postId)"
+            return "/posts/\(postId)"
         }
     }
     
