@@ -112,11 +112,6 @@ final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
             }
         }
         
-        jobCheckBoxButton.isSelected = true
-        educationCheckBoxButton.isSelected = true
-        lifeCheckBoxButton.isSelected = true
-        participationCheckBoxButton.isSelected = true
-        
         jobCheckBoxButton.configurationUpdateHandler = updateHandler
         educationCheckBoxButton.configurationUpdateHandler = updateHandler
         lifeCheckBoxButton.configurationUpdateHandler = updateHandler

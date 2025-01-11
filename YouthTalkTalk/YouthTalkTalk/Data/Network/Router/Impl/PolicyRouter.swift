@@ -107,6 +107,11 @@ enum PolicyRouter: Router {
     private func convertToParameters(_ query: PolicyQuery) -> [String: Any] {
         var params: [String: Any] = [:]
         
+        // 카테고리를 하나도 선택하지 않은 경우에는 모든 카테고리의 정책을 불러옴
+        if query.categories.isEmpty {
+            params["categories"] = "JOB,EDUCATION,LIFE,PARTICIPATION"
+        }
+        
         query.categories.forEach { category in
             if params["categories"] == nil {
                 params["categories"] = category.rawValue

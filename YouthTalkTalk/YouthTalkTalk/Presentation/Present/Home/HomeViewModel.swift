@@ -15,7 +15,7 @@ final class HomeViewModel: HomeInterface {
     private let policyUseCase: PolicyUseCase
     
     // 선택된 정책 카테고리
-    var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
+    var selectedPolicyCategory: [PolicyCategory] = []
     var currentPage = 1
     var fetchRecentPolicies = PublishRelay<Void>()
     

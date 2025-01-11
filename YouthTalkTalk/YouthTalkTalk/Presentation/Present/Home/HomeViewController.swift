@@ -311,22 +311,7 @@ final class HomeViewController: BaseViewController<HomeView> {
                         supplementaryView.participationCheckBoxButton
                     ].filter { $0.isSelected }
                     
-                    // 선택된 버튼이 없으면, 마지막으로 클릭한 버튼 'selected'
-                    if selectedButtons.isEmpty {
-                        switch category {
-                        case .job:
-                            supplementaryView.jobCheckBoxButton.isSelected = true
-                        case .education:
-                            supplementaryView.educationCheckBoxButton.isSelected = true
-                        case .life:
-                            supplementaryView.lifeCheckBoxButton.isSelected = true
-                        case .participation:
-                            supplementaryView.participationCheckBoxButton.isSelected = true
-                        }
-                    } else {
-                        
-                        owner.viewModel.input.policyCategorySeleted.accept(category)
-                    }
+                    owner.viewModel.input.policyCategorySeleted.accept(category)
                 }.disposed(by: supplementaryView.disposeBag)
         }
         
