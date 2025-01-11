@@ -29,7 +29,7 @@ struct RPDTO: Decodable {
     
     let postId: Int?
     let title: String
-    let content: String
+    let content: String?
     let writerID: Int?
     let scraps: Int
     let scrap: Bool
@@ -39,6 +39,6 @@ struct RPDTO: Decodable {
     
     func translateEntity() -> RPEntity {
         
-        return RPEntity(postId: postId, title: title, content: content, writerID: writerID, scraps: scraps, scrap: scrap, comments: comments, policyId: policyId, policyTitle: policyTitle)
+        return RPEntity(postId: postId, title: title, content: content ?? "", writerID: writerID, scraps: scraps, scrap: scrap, comments: comments, policyId: policyId, policyTitle: policyTitle)
     }
 }
