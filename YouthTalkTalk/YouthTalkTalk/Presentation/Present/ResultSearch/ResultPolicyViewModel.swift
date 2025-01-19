@@ -141,7 +141,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                                         .subscribe { [weak self] result in
                                             switch result {
                                             case .success(let data):
-                                                self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
+                                                self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content ?? "", writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
                                                 break
                                             case .failure:
                                                 break
@@ -166,7 +166,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                     .subscribe { [weak self] result in
                         switch result {
                         case .success(let data):
-                            self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content, writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
+                            self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content ?? "", writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
                         case .failure(let error):
                             break
                         }
@@ -174,7 +174,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                     .disposed(by: disposeBag)
                 
             } else if writeType == .edit {
-                // TODO: failure로 success 넘어오는 이슈 체크 (게시글 수정)
+                // TODO: failure로 success 넘어오는 이슈 체크 (게시글 수정), 디코딩 모델이 달라서인듯
 //                policyUseCase.editPost(postId, postData: .init(title: body.title,
 //                                                               contentList: body.contentList))
 //                .subscribe { [weak self] result in
