@@ -65,6 +65,7 @@ final class PolicyViewController: RootViewController {
     
     private let tableview = UITableView().then {
         $0.backgroundColor = .white
+        $0.showsVerticalScrollIndicator = false
     }
     
     var dataSource: UITableViewDiffableDataSource<PolicySection, PolicySectionItems>!
