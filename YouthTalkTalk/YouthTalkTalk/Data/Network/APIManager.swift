@@ -62,7 +62,7 @@ final class APIManager: APIInterface {
             AF.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(image, withName: "image", fileName: "image.png")
                 
-            }, to: "http://43.202.212.173\(stringURL)", method: .post, headers: defaultHeader)
+            }, to: "\(APIKey.baseURL.rawValue)\(stringURL)", method: .post, headers: defaultHeader)
             .validate(statusCode: 200..<900)
             .responseJSON { response in
                 switch response.result {
