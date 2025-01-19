@@ -26,10 +26,10 @@ class DetailTableViewCell: BaseTableViewCell {
     
     let refSiteTitleLabel = UILabel()
     let refFirstTitleLabel = UILabel()
-    let refFirstLabel = UILabel()
+    let refFirstLabel = UITextView()
     
     let refSecondTitleLabel = UILabel()
-    let refSecondLabel = UILabel()
+    let refSecondLabel = UITextView()
     
     let applyButton = UIButton()
     
@@ -122,14 +122,23 @@ class DetailTableViewCell: BaseTableViewCell {
         hostLabel.designed(text: data.hostDep ?? "-", fontType: .p14Regular, textColor: .black)
         operatingLabel.designed(text: data.operatingOrg ?? "-", fontType: .p14Regular, textColor: .black)
         
-        refFirstLabel.designed(text: data.refUrl1 ?? "-", fontType: .p14Regular, textColor: .black)
-        refSecondLabel.designed(text: data.refUrl2 ?? "-", fontType: .p14Regular, textColor: .black)
+        refFirstLabel.isEditable = false
+        refFirstLabel.dataDetectorTypes = .link
+        refFirstLabel.tintColor = .black
+        refFirstLabel.attributedText = NSAttributedString(string: data.refUrl1 ?? "-",
+                                                          attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                                                                       NSAttributedString.Key.font: FontManager.font(.p14Regular)])
+        
+        refSecondLabel.isEditable = false
+        refSecondLabel.dataDetectorTypes = .link
+        refSecondLabel.tintColor = .black
+        refSecondLabel.attributedText = NSAttributedString(string: data.refUrl2 ?? "-",
+                                                           attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                                                                        NSAttributedString.Key.font: FontManager.font(.p14Regular)])
         
         etcLabel.numberOfLines = 0
         hostLabel.numberOfLines = 0
         operatingLabel.numberOfLines = 0
-        refFirstLabel.numberOfLines = 0
-        refSecondLabel.numberOfLines = 0
         
         if !isValid(data.applUrlv) {
             applyButton.flex.display(.none)
