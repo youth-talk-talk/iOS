@@ -85,7 +85,7 @@ extension UIButton {
             
             switch btn.state {
             case .disabled:
-                btn.configuration?.background.backgroundColor = .systemGray
+                btn.configuration?.background.backgroundColor = .gray20
             case .highlighted:
                 btn.animate()
             default:
