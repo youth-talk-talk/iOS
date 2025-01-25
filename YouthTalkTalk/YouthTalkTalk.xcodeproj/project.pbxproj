@@ -14,6 +14,8 @@
 		6A90810D2CEDF3C700B52C91 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */; };
 		6A90810F2CEEA3EA00B52C91 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */; };
 		6A9081112CEEAB6000B52C91 /* PostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9081102CEEAB6000B52C91 /* PostImageView.swift */; };
+		6AC5E9F62D44D83D00CBC5E6 /* KakaoConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */; };
+		6AC5E9F82D44D83F00CBC5E6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */; };
 		6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */; };
 		6AF137602CDE2177004E927B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF1375F2CDE2177004E927B /* Then */; };
 		6AF5FAEF2D09AD8100BD0CA8 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF5FAEE2D09AD8100BD0CA8 /* CommentCell.swift */; };
@@ -239,7 +241,6 @@
 		ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */; };
 		ACF2A3032C34171E00FE8D63 /* ResultSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */; };
 		ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */; };
-		ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A3082C35215700FE8D63 /* APIKey.swift */; };
 		ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */; };
 		ACF2A30E2C35322700FE8D63 /* SignInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */; };
 		ACF2A3102C3532A700FE8D63 /* SignInRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */; };
@@ -275,6 +276,8 @@
 		6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
+		6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
+		6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
 		6AF5FAEE2D09AD8100BD0CA8 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		AC0AA5972CC374C600DB032E /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -473,7 +476,6 @@
 		ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		ACF2A2AF2C2AB78200FE8D63 /* PolicyLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCase.swift; sourceTree = "<group>"; };
 		ACF2A2B12C2AB79200FE8D63 /* PolicyLocationUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationUseCaseImpl.swift; sourceTree = "<group>"; };
-		ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 		ACF2A2C12C2D453C00FE8D63 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		ACF2A2C42C2D58A600FE8D63 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		ACF2A2C62C2D58AF00FE8D63 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -494,7 +496,6 @@
 		ACF2A3002C34170600FE8D63 /* RecentSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewController.swift; sourceTree = "<group>"; };
 		ACF2A3022C34171E00FE8D63 /* ResultSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewController.swift; sourceTree = "<group>"; };
 		ACF2A3042C34172B00FE8D63 /* ResultSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchView.swift; sourceTree = "<group>"; };
-		ACF2A3082C35215700FE8D63 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		ACF2A30B2C352F1300FE8D63 /* SignInBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInBody.swift; sourceTree = "<group>"; };
 		ACF2A30D2C35322700FE8D63 /* SignInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRepository.swift; sourceTree = "<group>"; };
 		ACF2A30F2C3532A700FE8D63 /* SignInRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -754,8 +755,8 @@
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
-				ACF2A3082C35215700FE8D63 /* APIKey.swift */,
-				ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */,
+				6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */,
+				6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */,
 				AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */,
 				AC5A7C072BF0FDB700A13991 /* YouthTalkTalkTests */,
 				AC5A7C112BF0FDB700A13991 /* YouthTalkTalkUITests */,
@@ -1524,6 +1525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC5E9F62D44D83D00CBC5E6 /* KakaoConfig.xcconfig in Resources */,
 				AC5A7BFB2BF0FDB600A13991 /* Assets.xcassets in Resources */,
 				ACF2A2772C2451DD00FE8D63 /* GmarketSansBold.otf in Resources */,
 				AC5A7BFE2BF0FDB600A13991 /* Base in Resources */,
@@ -1673,6 +1675,7 @@
 				ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */,
 				AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */,
 				AC0AA5AA2CCDFA6000DB032E /* ImageManager.swift in Sources */,
+				6AC5E9F82D44D83F00CBC5E6 /* APIKey.swift in Sources */,
 				AC604C152C67826F00804950 /* PostRouter.swift in Sources */,
 				AC51E8302C9567F700550148 /* DetailConditionHeaderView.swift in Sources */,
 				ACF2A2972C28691F00FE8D63 /* SignInUseCase.swift in Sources */,
@@ -1761,7 +1764,6 @@
 				ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */,
 				AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */,
 				6A90810D2CEDF3C700B52C91 /* ImagePicker.swift in Sources */,
-				ACF2A3092C35215700FE8D63 /* APIKey.swift in Sources */,
 				6A9081112CEEAB6000B52C91 /* PostImageView.swift in Sources */,
 				ACF2A2AA2C2AB02000FE8D63 /* SignUpOutput.swift in Sources */,
 				ACF2A3102C3532A700FE8D63 /* SignInRepositoryImpl.swift in Sources */,
@@ -1823,7 +1825,6 @@
 /* Begin XCBuildConfiguration section */
 		AC5A7C162BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1887,7 +1888,6 @@
 		};
 		AC5A7C172BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1944,7 +1944,6 @@
 		};
 		AC5A7C192BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1982,7 +1981,6 @@
 		};
 		AC5A7C1A2BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2021,7 +2019,6 @@
 		};
 		AC5A7C1C2BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2042,7 +2039,6 @@
 		};
 		AC5A7C1D2BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2063,7 +2059,6 @@
 		};
 		AC5A7C1F2BF0FDB700A13991 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2082,7 +2077,6 @@
 		};
 		AC5A7C202BF0FDB700A13991 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACF2A2B32C2C086700FE8D63 /* KakaoConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
