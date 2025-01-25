@@ -60,7 +60,13 @@ enum PolicySectionItems: Hashable {
     }
 }
 
-class PolicyViewController: BaseViewController<PolicyView> {
+final class PolicyViewController: RootViewController {
+    private let backImageView = UIImageView(image: .back.withRenderingMode(.alwaysOriginal))
+    
+    private let tableview = UITableView().then {
+        $0.backgroundColor = .white
+        $0.showsVerticalScrollIndicator = false
+    }
     
     var dataSource: UITableViewDiffableDataSource<PolicySection, PolicySectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<PolicySection, PolicySectionItems>()
@@ -78,7 +84,7 @@ class PolicyViewController: BaseViewController<PolicyView> {
     
     override func bind() {
         tabBarController?.tabBar.isHidden = true
-        
+
         snapshot.appendSections(PolicySection.allCases)
         
         viewModel.input.fetchPolicyDetail.accept(viewModel.policyID)
@@ -113,16 +119,36 @@ class PolicyViewController: BaseViewController<PolicyView> {
     }
     
     override func configureTableView() {
+        view.backgroundColor = .white
         
-        layoutView.tableview.rowHeight = UITableView.automaticDimension
-        layoutView.tableview.sectionHeaderTopPadding = 0
-        layoutView.tableview.sectionHeaderHeight = 0
-        layoutView.tableview.sectionFooterHeight = 0
+        view.addSubview(backImageView)
+        view.addSubview(tableview)
         
-        layoutView.tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
-        layoutView.tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
-        layoutView.tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
-        layoutView.tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
+        backImageView.onTapped { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        backImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(13)
+            $0.leading.equalToSuperview().inset(18)
+            $0.size.equalTo(24)
+        }
+
+        tableview.snp.makeConstraints {
+            $0.top.equalTo(backImageView.snp.bottom).offset(13)
+            $0.leading.trailing.equalToSuperview().inset(17)
+            $0.bottom.equalToSuperview()
+        }
+        
+        tableview.rowHeight = UITableView.automaticDimension
+        tableview.sectionHeaderTopPadding = 0
+        tableview.sectionHeaderHeight = 0
+        tableview.sectionFooterHeight = 0
+        
+        tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
+        tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
+        tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
+        tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
         
         cellRegistration()
     }
@@ -130,7 +156,7 @@ class PolicyViewController: BaseViewController<PolicyView> {
     //MARK: Cell Registration
     private func cellRegistration() {
         
-        dataSource = UITableViewDiffableDataSource<PolicySection, PolicySectionItems>(tableView: layoutView.tableview) { tableView, indexPath, item in
+        dataSource = UITableViewDiffableDataSource<PolicySection, PolicySectionItems>(tableView: tableview) { tableView, indexPath, item in
             
             let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
             

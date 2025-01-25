@@ -56,13 +56,13 @@ final class APIManager: APIInterface {
     
     public func postUploadImage(stringURL: String, image: Data) -> Single<Result<String, APIError>> {
         return Single.create { [weak self] single in
-            var defaultHeader: HTTPHeaders = ["Content-Type": "multipart/form-data",
+            let defaultHeader: HTTPHeaders = ["Content-Type": "multipart/form-data",
                                               "Authorization": "Bearer \(self!.keyChainHelper.loadTokenInfo(type: .accessToken))"]
             
             AF.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(image, withName: "image", fileName: "image.png")
                 
-            }, to: "http://43.202.212.173\(stringURL)", method: .post, headers: defaultHeader)
+            }, to: "\(APIKey.baseURL.rawValue)\(stringURL)", method: .post, headers: defaultHeader)
             .validate(statusCode: 200..<900)
             .responseJSON { response in
                 switch response.result {
@@ -78,7 +78,7 @@ final class APIManager: APIInterface {
                              single(.success(.failure(APIError(code: "999"))))
                          }
                      }                
-                case .failure(let error):
+                case .failure(_):
                     if let error = self?.handleResponseError(from: response.data) {
                         single(.success(.failure(error)))
                     }

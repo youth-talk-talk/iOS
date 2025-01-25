@@ -10,6 +10,8 @@ import FlexLayout
 import PinLayout
 
 class PolicyView: BaseView {
+    
+    // 제거
 
     let tableview = UITableView()
     // TODO: 추후 댓글추가

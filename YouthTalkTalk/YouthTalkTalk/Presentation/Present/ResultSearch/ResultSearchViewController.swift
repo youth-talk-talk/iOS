@@ -237,7 +237,11 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
             
             self.viewModel.output.totalCountRelay
                 .bind(with: self) { owner, totalCount in
-                    supplementaryView.setTitle("총 \(totalCount)건의 정책이 있어요")
+                    var text = "건의 정책이 있어요"
+                    if owner.viewModel is ResultReviewViewModel { text = "건의 후기가 있어요" }
+                    if owner.viewModel is ResultPostViewModel { text = "건의 게시글이 있어요" }
+
+                    supplementaryView.setTitle("총 \(totalCount)\(text)")
                 }
                 .disposed(by: supplementaryView.disposeBag)
         }

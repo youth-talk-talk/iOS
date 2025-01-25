@@ -31,7 +31,7 @@ final class PostDetailView: BaseView {
         nicknameLabel.designed(text: "닉네임", fontType: .p14Bold)
         titleLabel.designed(text: "제목", fontType: .p18Bold, textColor: .black)
         policyLiteralLabel.designed(text: "정책명", fontType: .p16Bold)
-        policyLabel.designed(text: "정책명 --", fontType: .p12Regular)
+        policyLabel.designed(text: "", fontType: .p12Regular)
     }
     
     lazy var commentStackView = UIStackView().then {
@@ -135,6 +135,12 @@ final class PostDetailView: BaseView {
         policyLabel.designed(text: policyTitle, fontType: .p12Regular)
         policyLabel.numberOfLines = 1
         policyLabel.lineBreakMode = .byTruncatingTail
+        
+        // 게시글 상세에서는 정책 필드 안보이게 처리하기 위함
+        if data.policyId == nil {
+            policyLabel.text = nil
+            policyLiteralLabel.text = nil
+        }
         
         if data.contentList.isEmpty {
             

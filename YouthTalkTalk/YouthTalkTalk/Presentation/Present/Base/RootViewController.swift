@@ -20,7 +20,9 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.addSubview(flexView)
-        
+
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         configureView()
         configureLayout()
         configureTableView()

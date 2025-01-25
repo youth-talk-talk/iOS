@@ -59,7 +59,11 @@ final class SearchPolicyView: UIView {
         $0.delegate = self
     }
     
-    private lazy var searchIconImageView = UIImageView(image: UIImage(named: "magnifyingglass"))
+    private lazy var searchIconImageView = UIImageView(image: UIImage(named: "magnifyingglass")).then {
+        $0.onTapped { [weak self] in
+            self?.searchPolicy()
+        }
+    }
     
     private lazy var policyTableView = UITableView(frame: .zero, style: .plain).then {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "sampleIdentifier")
@@ -137,6 +141,13 @@ final class SearchPolicyView: UIView {
         addButton.onTapped{ [weak self] in
             self?.isHidden = true
         }
+    }
+    
+    private func searchPolicy() {
+        loadPurpose = .search
+        
+        viewModel.output.setKeyword(policyTextField.text ?? "")
+        viewModel.input.pageUpdate.accept(0)
     }
     
     private func layout() {
@@ -221,10 +232,7 @@ extension SearchPolicyView: UITableViewDataSourcePrefetching, UITableViewDelegat
 
 extension SearchPolicyView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        loadPurpose = .search
-        
-        viewModel.output.setKeyword(textField.text ?? "")
-        viewModel.input.pageUpdate.accept(0)
+        searchPolicy()
         
         return true
     }
