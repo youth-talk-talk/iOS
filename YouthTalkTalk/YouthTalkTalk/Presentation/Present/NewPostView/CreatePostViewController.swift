@@ -42,6 +42,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         $0.layer.cornerRadius = 8
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 50))
         $0.leftViewMode = .always
+        $0.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
     }
     
     private lazy var policyView = UIView().then {
@@ -122,6 +123,8 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         self?.selectedPolicyLabel.text = selectedPolicy.policyTitle
         self?.selectedPolicyLabel.textColor = .black
         self?.selectedPolicyId = selectedPolicy.id
+        
+        self?.checkUploadButtonValid()
     })
     
     private lazy var addPhotoView = AddPhotoView()
@@ -215,10 +218,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         writePostLabel.onTapped { [weak self] in
             guard let self else { return }
             
-            let reviewPostCondition = titleLabel.isNotEmpty() && selectedPolicyLabel.text != "정책명" && contentsTextView.text != textViewPlaceHolder
-            let freePostCondition = titleLabel.isNotEmpty() && contentsTextView.text != textViewPlaceHolder
-            
-            if (postType == .review) ? reviewPostCondition : freePostCondition {
+            if isUploadValid() {
                 let images: [PostImageView] = Array(contentStackView.arrangedSubviews.dropFirst()) as? [PostImageView] ?? []
                 
                 viewModel.uploadImages(images.map{ $0.imageView.image?.pngData() }, body: .init(title: titleTextField.text ?? "",
@@ -237,6 +237,18 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
                 self?.navigationController?.popViewController(animated: true)
             })
         }
+    }
+    
+    private func isUploadValid() -> Bool {
+        let commonCondition = titleTextField.isNotEmpty() && contentsTextView.text != textViewPlaceHolder && !contentsTextView.text.isEmpty
+        let reviewPostCondition = selectedPolicyLabel.text != "정책명" && commonCondition
+        let freePostCondition = commonCondition
+        
+        return (postType == .review) ? reviewPostCondition : freePostCondition
+    }
+    
+    private func checkUploadButtonValid() {
+        writePostLabel.backgroundColor = isUploadValid() ? .lime40 : FontColor.gray20.value
     }
     
     private func showAlertGoToSetting() {
@@ -473,11 +485,19 @@ extension CreatePostViewController: UIImagePickerControllerDelegate,
 }
 
 extension CreatePostViewController: UITextViewDelegate {
+    @objc func titleTextFieldDidChange() {
+        checkUploadButtonValid()
+    }
+    
     public func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
             textView.textColor = .black
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        checkUploadButtonValid()
     }
 
     public func textViewDidEndEditing(_ textView: UITextView) {
