@@ -124,6 +124,15 @@ final class PostDetailViewController: BaseViewController<PostDetailView>, UIText
                                           comment: viewModel.output.writtenCommentText,
                                           isItOwnComment: true,
                                           isLiked: false)
+            
+            // MARK: 댓글 수정 버튼
+            commentView.editLabel.onTapped { [weak self] in
+                self?.isCommentChanging = true
+                self?.layoutView.commentTextFieldView.textField.becomeFirstResponder()
+                self?.layoutView.commentTextFieldView.textField.text = self?.viewModel.output.writtenCommentText
+                self?.idOfChangingComment = commentId
+            }
+            
             // MARK: 댓글 삭제 버튼
             commentView.deleteLabel.onTapped { [weak self] in
                 self?.viewModel.input.commentDelete(commentId)

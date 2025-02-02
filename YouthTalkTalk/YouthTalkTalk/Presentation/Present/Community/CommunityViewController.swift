@@ -58,6 +58,15 @@ class CommunityViewController: BaseViewController<CommunityView>, RemoveReported
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
+        
+        // MARK: 목록 업데이트 전 데이터 모두 제거
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.search, .popular, .recent])
+        
+        dataSource.apply(snapshot) { [weak self] in
+            // MARK: 게시글 작성 후 목록 업데이트를 위함
+            self?.viewModel.input.fetchRPs.accept(())
+        }
     }
     
     override func configureCollectionView() {
@@ -105,8 +114,6 @@ class CommunityViewController: BaseViewController<CommunityView>, RemoveReported
                 owner.dataSource.apply(owner.snapshot, animatingDifferences: false)
             }
             .disposed(by: disposeBag)
-        
-        viewModel.input.fetchRPs.accept(())
     }
     
     //MARK: Cell Registration
@@ -372,7 +379,6 @@ class CommunityViewController: BaseViewController<CommunityView>, RemoveReported
     }
 
     func update(section: CommunityLayout, items: [CommunitySectionItems]) {
-            
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
