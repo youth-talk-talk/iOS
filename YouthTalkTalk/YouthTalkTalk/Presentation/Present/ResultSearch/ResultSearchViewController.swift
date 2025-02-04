@@ -96,8 +96,8 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                     
                     switch itemIdentifier {
                         
+                        // 검색 결과 페이지에서 정책 탭할시 정책 상세로 이동
                     case .resultPolicy(let policyEntity):
-                        
                         let repository = PolicyRepositoryImpl()
                         let useCase = PolicyUseCaseImpl(policyRepository: repository)
                         let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
@@ -105,10 +105,18 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         
                         owner.navigationController?.pushViewController(nextVC, animated: true)
                         
-                        // TODO: 해라
+                        // 검색 결과 페이지에서 게시글 탭할시 게시글 상세로 이동
                     case .resultRP(let rpEntity):
+                        let repository = ReviewRepositoryImpl()
+                        let commentRepository = CommentRepositoryImpl()
+                        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+                        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+                        let viewModel = PosetDetailViewModel(data: rpEntity, useCase: useCase, commnetUseCase: commentUseCase)
+                        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+                        // 게시글 상세에서 신고할 시 검색 결과에서 사라지는 동작 필요할 시 주석 해제
+                        // resultDetailVC.delegate = self
                         
-                        break
+                        owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                         
                     default:
                         break
