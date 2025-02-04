@@ -50,9 +50,28 @@ final class SettingViewController: RootViewController {
         nicknameButtonView.setTitle(data.nickname)
         nicknameButtonView.setImage(.edit)
         
+        nicknameButtonView.imageButton.onTapped { [weak self] in
+            guard let self else { return }
+            
+            let vc = SettingNicknameViewController(originName: data.nickname,
+                                                   completeChangedMeData: { [weak self] newMeData in
+                self?.nicknameButtonView.setTitle(newMeData.nickname)
+            })
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
         regionLabel.designed(text: "나의 지역설정", fontType: .g14Bold)
         regionButtonView.setTitle(data.region)
         regionButtonView.setImage(.setting)
+        
+        regionButtonView.imageButton.onTapped { [weak self] in
+            let vc = SettingRegionViewController(completeChangedMeData: { [weak self] newMeData in
+                self?.regionButtonView.setTitle(newMeData.region)
+            })
+            
+            self?.present(vc, animated: true)
+        }
         
         logoutLabel.onTapped { [weak self] in
             self?.goSignInView()

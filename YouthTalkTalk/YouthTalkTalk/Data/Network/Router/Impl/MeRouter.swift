@@ -18,6 +18,7 @@ enum MeRouter: Router {
     
     case requestMe
     case deleteAccount
+    case patchMe(ChangedRegion)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -25,7 +26,7 @@ enum MeRouter: Router {
     
     var path: String {
         switch self {
-        case .requestMe, .deleteAccount:
+        case .requestMe, .deleteAccount, .patchMe:
             return "/members/me"
         }
     }
@@ -35,20 +36,22 @@ enum MeRouter: Router {
         case .requestMe:
             return .get
         case .deleteAccount:
-            return .post
+            return .post  
+        case .patchMe:
+            return .patch
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .requestMe, .deleteAccount:
+        case .requestMe, .deleteAccount, .patchMe:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .requestMe, .deleteAccount:
+        case .requestMe, .deleteAccount, .patchMe:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -65,6 +68,8 @@ enum MeRouter: Router {
         case .deleteAccount:
             // TODO: 애플/ 카카오 로그인 유저 구분해서 바디 생성
             return nil
+        case .patchMe(let body):
+            return try? encoder.encode(body)
         }
     }
 }
