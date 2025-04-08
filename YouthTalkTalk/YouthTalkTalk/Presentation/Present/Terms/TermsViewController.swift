@@ -25,7 +25,7 @@ final class TermsViewController: BaseViewController<TermsView> {
                 let signUpUseCase = SignUpUseCaseImpl()
                 let signUpViewModel = SignUpViewModel(policyLocationUseCase: policyLoactionUseCase,
                                                       signUpUseCase: signUpUseCase)
-                let nextVC = SignUpViewController(viewModel: signUpViewModel)
+                let nextVC = WriteNickNameViewController(viewModel: signUpViewModel)
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             }.disposed(by: disposeBag)

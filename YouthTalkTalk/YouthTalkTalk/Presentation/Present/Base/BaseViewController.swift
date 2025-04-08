@@ -56,7 +56,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     func updateNavigationTitle(title: String) {
         
         let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Bold)
+        titleLabel.designed(text: title, font: .p18Bold)
         self.navigationItem.titleView = titleLabel
     }
 
@@ -70,7 +70,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         let backButtonItem = UIBarButtonItem(customView: customBackView)
         
         let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Regular)
+        titleLabel.designed(text: title, font: .p18Regular)
         let titleItem = UIBarButtonItem(customView: titleLabel)
         
         self.navigationItem.leftBarButtonItems = [backButtonItem, titleItem]

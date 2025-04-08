@@ -24,9 +24,9 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         
         disposeBag = DisposeBag()
         
-        regionLabel.designed(text: "", fontType: .p12Regular, textColor: .gray60)
-        policyTitleLabel.designed(text: "", fontType: .p18Bold, textColor: .black)
-        categoryLabel.designed(text: "", fontType: .p12Bold, textColor: .gray40)
+        regionLabel.designed(text: "", font: .p12Regular, textColor: .gray60)
+        policyTitleLabel.designed(text: "", font: .p18Bold, textColor: .black)
+        categoryLabel.designed(text: "", font: .p12Bold, textColor: .gray40)
         
         scrapButton.configuration?.image = nil
     }
@@ -77,9 +77,9 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         
         let policyCategory = PolicyCategory(rawValue: data.category) ?? .life
         
-        regionLabel.designed(text: data.hostDep, fontType: .p12Regular, textColor: .gray60)
-        policyTitleLabel.designed(text: data.title, fontType: .p18Bold, textColor: .black)
-        categoryLabel.designed(text: policyCategory.name, fontType: .p12Bold, textColor: .gray40)
+        regionLabel.designed(text: data.hostDep, font: .p12Regular, textColor: .gray60)
+        policyTitleLabel.designed(text: data.title, font: .p18Bold, textColor: .black)
+        categoryLabel.designed(text: policyCategory.name, font: .p12Bold, textColor: .gray40)
         scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
         
         if policyTitleLabel.frame.height != 0 {

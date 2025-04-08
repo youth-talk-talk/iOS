@@ -68,36 +68,36 @@ class MethodTableViewCell: BaseTableViewCell {
         
         questionMarkImageView.image = UIImage.questionMark
         
-        sectionTitleLabel.designed(text: "신청방법이 궁금해요", fontType: .p18Bold, textColor: .black)
+        sectionTitleLabel.designed(text: "신청방법이 궁금해요", font: .p18Bold, textColor: .black)
         
-        applStepTitleLabel.designed(text: "신청절차", fontType: .p16SemiBold, textColor: .gray50)
-        evaluationTitleLabel.designed(text: "심사 및 발표", fontType: .p16SemiBold, textColor: .gray50)
-        applUrlTitleLabel.designed(text: "신청 사이트", fontType: .p16SemiBold, textColor: .gray50)
-        submitDocTitleLabel.designed(text: "제출 서류", fontType: .p16SemiBold, textColor: .gray50)
+        applStepTitleLabel.designed(text: "신청절차", font: .p16SemiBold, textColor: .gray50)
+        evaluationTitleLabel.designed(text: "심사 및 발표", font: .p16SemiBold, textColor: .gray50)
+        applUrlTitleLabel.designed(text: "신청 사이트", font: .p16SemiBold, textColor: .gray50)
+        submitDocTitleLabel.designed(text: "제출 서류", font: .p16SemiBold, textColor: .gray50)
     }
     
     func configure(_ data: DetailPolicyEntity.PolicyMethod) {
         
         if let applStep = data.applStep, applStep != "null" {
-            applStepLabel.designed(text: applStep, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            applStepLabel.designed(text: applStep, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             applStepFlexView.flex.display(.none)
         }
         
         if let evaluation = data.evaluation, evaluation != "null" {
-            evaluationLabel.designed(text: evaluation, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            evaluationLabel.designed(text: evaluation, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             evaluationFlexView.flex.display(.none)
         }
         
         if let applUrl = data.applUrl, applUrl != "null" {
-            applUrlLabel.designed(text: applUrl, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            applUrlLabel.designed(text: applUrl, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             applUrlFlexView.flex.display(.none)
         }
         
         if let submitDoc = data.submitDoc, submitDoc != "null" {
-            submitDocLabel.designed(text: submitDoc, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            submitDocLabel.designed(text: submitDoc, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             submitDocFlexView.flex.display(.none)
         }

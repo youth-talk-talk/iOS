@@ -46,7 +46,7 @@ final class SettingViewController: RootViewController {
         
         view.backgroundColor = .white
         
-        nicknameLabel.designed(text: "닉네임 설정", fontType: .g14Bold)
+        nicknameLabel.designed(text: "닉네임 설정", font: .g14Bold)
         nicknameButtonView.setTitle(data.nickname)
         nicknameButtonView.setImage(.edit)
         
@@ -61,7 +61,7 @@ final class SettingViewController: RootViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
         
-        regionLabel.designed(text: "나의 지역설정", fontType: .g14Bold)
+        regionLabel.designed(text: "나의 지역설정", font: .g14Bold)
         regionButtonView.setTitle(data.region)
         regionButtonView.setImage(.setting)
         
@@ -89,8 +89,8 @@ final class SettingViewController: RootViewController {
             }
         }
         
-        logoutLabel.designed(text: "로그아웃", fontType: .p16SemiBold, textColor: .gray60)
-        withdrawLabel.designed(text: "회원탈퇴", fontType: .p16SemiBold, textColor: .gray60)
+        logoutLabel.designed(text: "로그아웃", font: .p16SemiBold, textColor: .gray60)
+        withdrawLabel.designed(text: "회원탈퇴", font: .p16SemiBold, textColor: .gray60)
     }
     
     private func goSignInView() {

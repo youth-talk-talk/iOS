@@ -98,7 +98,6 @@ final class LikedOrMyCommentListViewController: RootViewController {
     override func configureView() {
         
         updateNavigationTitle(title: listType == .likedComment ? "좋아요한 댓글" : "작성한 댓글")
-        updateNavigationBackButtonTitle()
         
         self.view.backgroundColor = .white
         collectionView.backgroundColor = .gray10

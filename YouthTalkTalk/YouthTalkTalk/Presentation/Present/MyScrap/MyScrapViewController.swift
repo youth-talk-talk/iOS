@@ -43,7 +43,6 @@ class MyScrapViewController: RootViewController {
     override func configureView() {
         
         updateNavigationTitle(title: "스크랩한 정책")
-        updateNavigationBackButtonTitle()
         
         self.view.backgroundColor = .white
         collectionView.backgroundColor = .gray10

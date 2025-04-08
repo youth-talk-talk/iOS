@@ -32,11 +32,11 @@ final class TitleWithImageHeaderView: BaseCollectionReusableView {
     override func configureView() {
         
         imageView.image = .magnifyingglass
-        titleLabel.designed(text: "-", fontType: .p18Bold)
+        titleLabel.designed(text: "-", font: .p18Bold)
     }
     
     func setTitle(_ title: String) {
         
-        titleLabel.designed(text: title, fontType: .p18Bold, textColor: .gray60)
+        titleLabel.designed(text: title, font: .p18Bold, textColor: .gray60)
     }
 }

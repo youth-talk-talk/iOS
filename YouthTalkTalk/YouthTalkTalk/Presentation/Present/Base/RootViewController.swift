@@ -20,6 +20,8 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.addSubview(flexView)
+        
+        view.backgroundColor = .white
 
         navigationController?.setNavigationBarHidden(true, animated: false)
 
@@ -29,6 +31,7 @@ class RootViewController: UIViewController {
         configureCollectionView()
         configureNavigation()
         bind()
+        setMenuBar()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,23 +54,18 @@ class RootViewController: UIViewController {
     func updateNavigationTitle(title: String) {
         
         let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Bold)
+        titleLabel.designed(text: title, font: .p18Bold)
         self.navigationItem.titleView = titleLabel
     }
     
-    func updateNavigationBackButtonTitle(title: String = "") {
-        
+    func setMenuBar() {
         self.navigationItem.hidesBackButton = true
         
         let customBackView = UIImageView()
         customBackView.image = .back.withRenderingMode(.alwaysOriginal)
         let backButtonItem = UIBarButtonItem(customView: customBackView)
         
-        let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Regular)
-        let titleItem = UIBarButtonItem(customView: titleLabel)
-        
-        self.navigationItem.leftBarButtonItems = [backButtonItem, titleItem]
+        self.navigationItem.leftBarButtonItems = [backButtonItem]
         
         // 뒤로 가기 동작 추가
         let tapGesture = UITapGestureRecognizer()
@@ -76,7 +74,6 @@ class RootViewController: UIViewController {
         
         tapGesture.rx.event
             .bind(with: self) { owner, _ in
-                
                 owner.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)

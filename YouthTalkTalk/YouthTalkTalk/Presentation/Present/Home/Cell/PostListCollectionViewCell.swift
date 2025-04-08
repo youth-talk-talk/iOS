@@ -107,10 +107,10 @@ final class PostListCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
      
-        subTitleLabel.designed(text: "지역", fontType: .p12Regular, textColor: .gray60)
-        deadlineLabel.designed(text: "", fontType: .p16SemiBold, textColor: .gray40)
-        titleLabel.designed(text: "정책명", fontType: .p18Bold, textColor: .black)
-        categoryLabel.designed(text: "카테고리", fontType: .p12Bold, textColor: .gray40)
+        subTitleLabel.designed(text: "지역", font: .p12Regular, textColor: .gray60)
+        deadlineLabel.designed(text: "", font: .p16SemiBold, textColor: .gray40)
+        titleLabel.designed(text: "정책명", font: .p18Bold, textColor: .black)
+        categoryLabel.designed(text: "카테고리", font: .p12Bold, textColor: .gray40)
         commentsButton.designedByImage(.comments)
         
         addGestureRecognizer(tapGesture)
@@ -148,7 +148,7 @@ final class PostListCollectionViewCell: BaseCollectionViewCell {
         subTitleLabel.text = data.policyTitle
         titleLabel.text = data.title
         scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
-        commentsLabel.designed(text: String(data.comments), fontType: .p14Regular)
+        commentsLabel.designed(text: String(data.comments), font: .p14Regular)
         
         deadlineLabel.text = ""
         categoryLabel.text = ""

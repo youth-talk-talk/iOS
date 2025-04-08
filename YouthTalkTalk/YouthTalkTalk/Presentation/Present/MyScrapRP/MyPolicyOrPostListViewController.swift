@@ -52,7 +52,6 @@ class MyPolicyOrPostListViewController: RootViewController {
     override func configureView() {
         
         updateNavigationTitle(title: listType == .scrapPost ? "스크랩한 게시물" : "작성한 게시물")
-        updateNavigationBackButtonTitle()
         
         self.view.backgroundColor = .white
         collectionView.backgroundColor = .gray10

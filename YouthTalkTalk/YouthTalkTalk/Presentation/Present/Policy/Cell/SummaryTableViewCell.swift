@@ -82,41 +82,41 @@ class SummaryTableViewCell: BaseTableViewCell {
         
         rightImageView.image = UIImage.right
         
-        sectionTitleLabel.designed(text: "한눈에 보는 정책 요약", fontType: .p18Bold, textColor: .black)
+        sectionTitleLabel.designed(text: "한눈에 보는 정책 요약", font: .p18Bold, textColor: .black)
         
         supportDetailTitleLabel
-            .designed(text: "지원내용", fontType: .p14Regular, textColor: .gray50, applyLineHeight: false)
+            .designed(text: "지원내용", font: .p14Regular, textColor: .gray50, applyLineHeight: false)
         
         applyTermTitleLabel
-            .designed(text: "신청기간", fontType: .p14Regular, textColor: .gray50, applyLineHeight: false)
+            .designed(text: "신청기간", font: .p14Regular, textColor: .gray50, applyLineHeight: false)
         
         operationTermTitleLabel
-            .designed(text: "운영기간", fontType: .p14Regular, textColor: .gray50, applyLineHeight: false)
+            .designed(text: "운영기간", font: .p14Regular, textColor: .gray50, applyLineHeight: false)
     }
     
     func configure(_ data: DetailPolicyEntity.PolicySummary) {
         
-        hostDepLabel.designed(text: data.hostDep ?? "-", fontType: .p14Bold, textColor: .gray50)
+        hostDepLabel.designed(text: data.hostDep ?? "-", font: .p14Bold, textColor: .gray50)
         
-        titleLabel.designed(text: data.title, fontType: .p24Bold, textColor: .black, applyLineHeight: false)
+        titleLabel.designed(text: data.title, font: .p24Bold, textColor: .black, applyLineHeight: false)
         titleLabel.numberOfLines = 0
         
-        introduceLabel.designed(text: data.introduction ?? "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+        introduceLabel.designed(text: data.introduction ?? "-", font: .p14Regular, textColor: .black, applyLineHeight: false)
         introduceLabel.numberOfLines = 0
         
         supportDetailLabel
-            .designed(text: data.supportDetail ?? "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            .designed(text: data.supportDetail ?? "-", font: .p14Regular, textColor: .black, applyLineHeight: false)
         supportDetailLabel.numberOfLines = 0
         
         applyTermLabel
-            .designed(text: data.applyTerm ?? "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            .designed(text: data.applyTerm ?? "-", font: .p14Regular, textColor: .black, applyLineHeight: false)
         
         if let operationTerm = data.operationTerm, operationTerm != "null" {
             operationTermLabel
-                .designed(text: operationTerm, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+                .designed(text: operationTerm, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             operationTermLabel
-                .designed(text: "-", fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+                .designed(text: "-", font: .p14Regular, textColor: .black, applyLineHeight: false)
         }
     }
     

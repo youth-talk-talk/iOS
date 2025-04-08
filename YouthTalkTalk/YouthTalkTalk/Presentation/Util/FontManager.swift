@@ -14,6 +14,7 @@ enum FontType {
     
     case p18Bold
     case p18Regular
+    case p18Semi
     
     case p16Bold
     case p16SemiBold
@@ -90,79 +91,68 @@ final class FontManager {
         
         switch fontType {
         case .p24Bold:
-            
             fontWeight = "Bold"
             fontSize = 24
             
         case .p18Bold:
-            
             fontWeight = "Bold"
             fontSize = 18
             
         case .p18Regular:
-            
             fontWeight = "Regular"
             fontSize = 18
             
-        case .p16Bold:
+        case .p18Semi:
+            fontWeight = "SemiBold"
+            fontSize = 18
             
+        case .p16Bold:
             fontWeight = "Bold"
             fontSize = 16
             
         case .p16SemiBold:
-            
             fontWeight = "SemiBold"
             fontSize = 16
             
         case .p16Regular24:
-            
             fontWeight = "Regular"
             fontSize = 16
             
         case .p16Regular16:
-            
             fontWeight = "Regular"
             fontSize = 16
             
         case .p14Bold:
-            
             fontWeight = "Bold"
             fontSize = 14
             
         case .p14Regular:
-            
             fontWeight = "Regular"
             fontSize = 14
             
         case .p12Bold:
-            
             fontWeight = "Bold"
             fontSize = 12
             
         case .p12Regular:
-            
             fontWeight = "Regular"
             fontSize = 12
             
         case .p10Regular:
-            
             fontWeight = "Regular"
             fontSize = 10
             
         case .g20Bold:
-            
             familyName = "GmarketSans"
             fontWeight = "Bold"
             fontSize = 20
             
         case .g14Bold:
-            
             familyName = "GmarketSans"
             fontWeight = "Bold"
             fontSize = 14
             
         case .g18Medium:
-            
             familyName = "GmarketSans"
             fontWeight = "Medium"
             fontSize = 18
@@ -184,6 +174,8 @@ final class FontManager {
         case .p18Regular:
             lineHeight = 24
         case .p16Bold:
+            lineHeight = 24
+        case .p18Semi:
             lineHeight = 24
         case .p16SemiBold:
             lineHeight = 24

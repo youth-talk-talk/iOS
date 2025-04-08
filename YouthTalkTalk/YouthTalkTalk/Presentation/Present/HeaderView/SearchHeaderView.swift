@@ -40,10 +40,10 @@ class SearchHeaderView: BaseCollectionReusableView {
         lifeCheckBoxButton.configuration?.image = nil
         participationCheckBoxButton.configuration?.image = nil
         
-        jobLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
-        educationLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
-        lifeLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
-        participationLiteralLabel.designed(text: "", fontType: .p14Bold, textColor: .gray60)
+        jobLiteralLabel.designed(text: "", font: .p14Bold, textColor: .gray60)
+        educationLiteralLabel.designed(text: "", font: .p14Bold, textColor: .gray60)
+        lifeLiteralLabel.designed(text: "", font: .p14Bold, textColor: .gray60)
+        participationLiteralLabel.designed(text: "", font: .p14Bold, textColor: .gray60)
     }
     
     override func configureLayout() {
@@ -178,10 +178,10 @@ class SearchHeaderView: BaseCollectionReusableView {
         lifeCheckBoxButton.configurationUpdateHandler = updateHandler
         participationCheckBoxButton.configurationUpdateHandler = updateHandler
         
-        jobLiteralLabel.designed(text: "일자리", fontType: .p14Bold, textColor: .gray60)
-        educationLiteralLabel.designed(text: "교육", fontType: .p14Bold, textColor: .gray60)
-        lifeLiteralLabel.designed(text: "생활지원", fontType: .p14Bold, textColor: .gray60)
-        participationLiteralLabel.designed(text: "참여", fontType: .p14Bold, textColor: .gray60)
+        jobLiteralLabel.designed(text: "일자리", font: .p14Bold, textColor: .gray60)
+        educationLiteralLabel.designed(text: "교육", font: .p14Bold, textColor: .gray60)
+        lifeLiteralLabel.designed(text: "생활지원", font: .p14Bold, textColor: .gray60)
+        participationLiteralLabel.designed(text: "참여", font: .p14Bold, textColor: .gray60)
     }
     
     func configureWithOutCategory() {

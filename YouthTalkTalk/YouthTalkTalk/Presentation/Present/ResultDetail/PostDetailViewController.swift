@@ -41,7 +41,7 @@ final class PostDetailViewController: BaseViewController<PostDetailView>, UIText
     }
     
     private lazy var moreEditReportLabel = UILabel().then {
-        $0.designed(text: "수정", fontType: .p16Regular16)
+        $0.designed(text: "수정", font: .p16Regular16)
         $0.textAlignment = .center
     }
     
@@ -50,7 +50,7 @@ final class PostDetailViewController: BaseViewController<PostDetailView>, UIText
     }
     
     private lazy var moreDeleteBlokLabel = UILabel().then {
-        $0.designed(text: "삭제", fontType: .p16Regular16)
+        $0.designed(text: "삭제", font: .p16Regular16)
         $0.textAlignment = .center
     }
     

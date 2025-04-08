@@ -88,7 +88,7 @@ final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "최근 업데이트", fontType: .g14Bold, textColor: .gray60)
+        titleLabel.designed(text: "최근 업데이트", font: .g14Bold, textColor: .gray60)
         
         let checkmarkImage = UIImage.emptyCheckbox.withTintColor(.gray30, renderingMode: .alwaysOriginal)
         
@@ -117,9 +117,9 @@ final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
         lifeCheckBoxButton.configurationUpdateHandler = updateHandler
         participationCheckBoxButton.configurationUpdateHandler = updateHandler
         
-        jobLiteralLabel.designed(text: "일자리", fontType: .p12Regular, textColor: .gray60)
-        educationLiteralLabel.designed(text: "교육", fontType: .p12Regular, textColor: .gray60)
-        lifeLiteralLabel.designed(text: "생활지원", fontType: .p12Regular, textColor: .gray60)
-        participationLiteralLabel.designed(text: "참여", fontType: .p12Regular, textColor: .gray60)
+        jobLiteralLabel.designed(text: "일자리", font: .p12Regular, textColor: .gray60)
+        educationLiteralLabel.designed(text: "교육", font: .p12Regular, textColor: .gray60)
+        lifeLiteralLabel.designed(text: "생활지원", font: .p12Regular, textColor: .gray60)
+        participationLiteralLabel.designed(text: "참여", font: .p12Regular, textColor: .gray60)
     }
 }

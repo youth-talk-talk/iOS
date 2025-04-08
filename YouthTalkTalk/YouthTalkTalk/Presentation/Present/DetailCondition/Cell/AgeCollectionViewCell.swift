@@ -42,8 +42,8 @@ class AgeCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         
-        fullLabel.designed(text: "만", fontType: .p16Regular16, textColor: .gray40)
-        ageLabel.designed(text: "세", fontType: .p16Regular16, textColor: .gray40)
+        fullLabel.designed(text: "만", font: .p16Regular16, textColor: .gray40)
+        ageLabel.designed(text: "세", font: .p16Regular16, textColor: .gray40)
         
         ageTextField.textAlignment = .center
         ageTextField.textColor = .black

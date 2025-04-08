@@ -64,7 +64,7 @@ class DetailConditionHeaderView: BaseCollectionReusableView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "상세조건", fontType: .p14Regular, textColor: .gray40)
+        titleLabel.designed(text: "상세조건", font: .p14Regular, textColor: .gray40)
         conditionImageView.image = .detailCondition
         
         containerView.isUserInteractionEnabled = true

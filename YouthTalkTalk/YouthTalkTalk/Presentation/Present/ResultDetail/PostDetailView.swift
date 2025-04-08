@@ -28,10 +28,10 @@ final class PostDetailView: BaseView {
         
         flexView.backgroundColor = .clear
         
-        nicknameLabel.designed(text: "닉네임", fontType: .p14Bold)
-        titleLabel.designed(text: "제목", fontType: .p18Bold, textColor: .black)
-        policyLiteralLabel.designed(text: "정책명", fontType: .p16Bold)
-        policyLabel.designed(text: "", fontType: .p12Regular)
+        nicknameLabel.designed(text: "닉네임", font: .p14Bold)
+        titleLabel.designed(text: "제목", font: .p18Bold, textColor: .black)
+        policyLiteralLabel.designed(text: "정책명", font: .p16Bold)
+        policyLabel.designed(text: "", font: .p12Regular)
     }
     
     lazy var commentStackView = UIStackView().then {
@@ -42,11 +42,11 @@ final class PostDetailView: BaseView {
     }
     
     private lazy var commentTitleLabel = UILabel().then {
-        $0.designed(text: "댓글", fontType: .g14Bold)
+        $0.designed(text: "댓글", font: .g14Bold)
     }
     
     lazy var commentCountLabel = UILabel().then {
-        $0.designed(text: "0", fontType: .g14Bold, textColor: .gray40)
+        $0.designed(text: "0", font: .g14Bold, textColor: .gray40)
     }
     
     override func configureLayout() {
@@ -129,10 +129,10 @@ final class PostDetailView: BaseView {
         let nickname = data.nickname ?? "익명"
         let policyTitle = data.policyTitle ?? "-"
         
-        nicknameLabel.designed(text: nickname, fontType: .p14Bold)
-        titleLabel.designed(text: data.title, fontType: .p18Bold, textColor: .black)
-        policyLiteralLabel.designed(text: "정책명", fontType: .p16Bold)
-        policyLabel.designed(text: policyTitle, fontType: .p12Regular)
+        nicknameLabel.designed(text: nickname, font: .p14Bold)
+        titleLabel.designed(text: data.title, font: .p18Bold, textColor: .black)
+        policyLiteralLabel.designed(text: "정책명", font: .p16Bold)
+        policyLabel.designed(text: policyTitle, font: .p12Regular)
         policyLabel.numberOfLines = 1
         policyLabel.lineBreakMode = .byTruncatingTail
         
@@ -144,7 +144,7 @@ final class PostDetailView: BaseView {
         
         if data.contentList.isEmpty {
             
-            contentLabel.designed(text: data.content, fontType: .p14Regular)
+            contentLabel.designed(text: data.content, font: .p14Regular)
             contentLabel.numberOfLines = 0
             
             complete()
@@ -182,11 +182,11 @@ final class CommentView: UIView {
     }
     
     lazy var editLabel = UILabel().then {
-        $0.designed(text: "수정", fontType: .p10Regular, textColor: .gray40)
+        $0.designed(text: "수정", font: .p10Regular, textColor: .gray40)
     }
     
     lazy var deleteLabel = UILabel().then {
-        $0.designed(text: "삭제", fontType: .p10Regular, textColor: .gray40)
+        $0.designed(text: "삭제", font: .p10Regular, textColor: .gray40)
     }
     
     lazy var likeImageView = UIImageView(image: UIImage(named: "like"))

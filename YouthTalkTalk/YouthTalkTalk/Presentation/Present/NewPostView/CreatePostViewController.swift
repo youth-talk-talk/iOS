@@ -32,7 +32,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     private var imagePickerController: ImagePickerProtocol?
     
     private lazy var titleLabel = UILabel().then {
-        $0.designed(text: "제목", fontType: .p16SemiBold, textColor: .black)
+        $0.designed(text: "제목", font: .p16SemiBold, textColor: .black)
     }
     
     private lazy var titleTextField = UITextField().then {
@@ -52,12 +52,12 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     }
     
     private lazy var policyLabel = UILabel().then {
-        $0.designed(text: "정책명", fontType: .p16SemiBold, textColor: .black)
+        $0.designed(text: "정책명", font: .p16SemiBold, textColor: .black)
     }
     
     private lazy var selectedPolicyLabel = UILabel().then {
         $0.adjustsFontSizeToFitWidth = true
-        $0.designed(text: "정책명", fontType: .p16Regular16, textColor: .gray50)
+        $0.designed(text: "정책명", font: .p16Regular16, textColor: .gray50)
     }
     
     private lazy var selectedPolicyId: String = ""
@@ -65,7 +65,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     private lazy var searchIconImageView = UIImageView(image: UIImage(named: "magnifyingglass"))
     
     private lazy var contentsLabel = UILabel().then {
-        $0.designed(text: "내용 작성", fontType: .p16SemiBold, textColor: .black)
+        $0.designed(text: "내용 작성", font: .p16SemiBold, textColor: .black)
     }
     
     private lazy var contentContainerView = UIView().then {
@@ -106,7 +106,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     private lazy var addPhotoImageView = UIImageView(image: UIImage(named: "addPhoto"))
     
     private lazy var addPhotoLabel = UILabel().then {
-        $0.designed(text: "사진추가하기", fontType: .p16Regular16)
+        $0.designed(text: "사진추가하기", font: .p16Regular16)
     }
     
     private lazy var cameraVC = UIImagePickerController()
@@ -114,7 +114,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     private lazy var writePostLabel = UILabel().then {
         $0.backgroundColor = FontColor.gray20.value
         $0.layer.cornerRadius = 25
-        $0.designed(text: "등록하기", fontType: .p16Regular16)
+        $0.designed(text: "등록하기", font: .p16Regular16)
         $0.textAlignment = .center
         $0.clipsToBounds = true
     }

@@ -63,7 +63,7 @@ class DetailConditionView: BaseView {
 
     override func configureView() {
         
-        infoLabel.designed(text: "상세조건은 모든 카테고리에 적용됩니다", fontType: .p16Regular16, textColor: .gray60)
+        infoLabel.designed(text: "상세조건은 모든 카테고리에 적용됩니다", font: .p16Regular16, textColor: .gray60)
         infoLabel.textAlignment = .center
         
         let title = "초기화"

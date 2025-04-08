@@ -73,7 +73,7 @@ class MyPageViewController: RootViewController {
         view.backgroundColor = .white
         flexView.backgroundColor = .white
         
-        nicknameLabel.designed(text: "abc", fontType: .p18Bold, textColor: .black)
+        nicknameLabel.designed(text: "abc", font: .p18Bold, textColor: .black)
         settingButton.designWithImage(title: "계정 관리", image: UIImage.setting, bgColor: .clear, titleColor: .black, fontType: .p14Regular)
         
         settingButton.layer.cornerRadius = 18
@@ -258,7 +258,7 @@ class MyPageViewController: RootViewController {
         // 내 정보
         viewModel.output.meEntity
             .bind(with: self) { owner, meEntity in
-                owner.nicknameLabel.designed(text: meEntity.nickname, fontType: .p18Bold, textColor: .black)
+                owner.nicknameLabel.designed(text: meEntity.nickname, font: .p18Bold, textColor: .black)
             }
             .disposed(by: disposeBag)
         

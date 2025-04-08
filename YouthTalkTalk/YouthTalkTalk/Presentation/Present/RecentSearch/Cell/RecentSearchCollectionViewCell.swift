@@ -21,7 +21,7 @@ class RecentSearchCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        titleLabel.designed(text: "", fontType: .p14Bold, textColor: .black)
+        titleLabel.designed(text: "", font: .p14Bold, textColor: .black)
         
         disposeBag = DisposeBag()
     }
@@ -51,14 +51,14 @@ class RecentSearchCollectionViewCell: BaseCollectionViewCell {
         
         removeButton.designedByImage(.littleXmark)
         
-        titleLabel.designed(text: "", fontType: .p14Bold, textColor: .black)
+        titleLabel.designed(text: "", font: .p14Bold, textColor: .black)
         
         self.addGestureRecognizer(tapGesture)
     }
     
     func configure(title: String) {
         
-        titleLabel.designed(text: title, fontType: .p14Bold, textColor: .black)
+        titleLabel.designed(text: title, font: .p14Bold, textColor: .black)
         
         flexView.flex.layout(mode: .adjustWidth)
     }

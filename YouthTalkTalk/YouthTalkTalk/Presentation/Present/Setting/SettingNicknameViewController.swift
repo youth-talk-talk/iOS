@@ -16,7 +16,7 @@ final class SettingNicknameViewController: UIViewController {
     private let backImageView = UIImageView(image: .back.withRenderingMode(.alwaysOriginal))
 
     private let nicknameLabel = UILabel().then {
-        $0.designed(text: "닉네임 설정", fontType: .g14Bold)
+        $0.designed(text: "닉네임 설정", font: .g14Bold)
     }
     
     private let nicknameTextFieldBgView = UIView().then {

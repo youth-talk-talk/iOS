@@ -60,7 +60,7 @@
 		AC4B43182C1D7041005FC370 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43172C1D7041005FC370 /* TermsViewController.swift */; };
 		AC4B431A2C1EB6E6005FC370 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43192C1EB6E6005FC370 /* FontManager.swift */; };
 		AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */; };
-		AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */; };
+		AC4B431F2C1EE024005FC370 /* WriteNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B431E2C1EE024005FC370 /* WriteNickNameViewController.swift */; };
 		AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43202C1EE02C005FC370 /* SignUpView.swift */; };
 		AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43232C206839005FC370 /* PolicyLocationKR.swift */; };
 		AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43262C2072E2005FC370 /* DropdownView.swift */; };
@@ -320,7 +320,7 @@
 		AC4B43172C1D7041005FC370 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		AC4B43192C1EB6E6005FC370 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton++.swift"; sourceTree = "<group>"; };
-		AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		AC4B431E2C1EE024005FC370 /* WriteNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNickNameViewController.swift; sourceTree = "<group>"; };
 		AC4B43202C1EE02C005FC370 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AC4B43232C206839005FC370 /* PolicyLocationKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyLocationKR.swift; sourceTree = "<group>"; };
 		AC4B43262C2072E2005FC370 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
@@ -658,7 +658,7 @@
 		AC4B431D2C1EE016005FC370 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				AC4B431E2C1EE024005FC370 /* SignUpViewController.swift */,
+				AC4B431E2C1EE024005FC370 /* WriteNickNameViewController.swift */,
 				ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */,
 				AC4B43202C1EE02C005FC370 /* SignUpView.swift */,
 			);
@@ -1732,7 +1732,7 @@
 				AC5A7C272BF102E900A13991 /* BaseView.swift in Sources */,
 				AC604BDB2C63970600804950 /* CommunityTabViewController.swift in Sources */,
 				AC0AA5A62CC50D2900DB032E /* DetailRPEntity.swift in Sources */,
-				AC4B431F2C1EE024005FC370 /* SignUpViewController.swift in Sources */,
+				AC4B431F2C1EE024005FC370 /* WriteNickNameViewController.swift in Sources */,
 				ACF2A2AC2C2AB45400FE8D63 /* SignUpInterface.swift in Sources */,
 				ACC46C9A2CD12EB60004ED5C /* UpcomingScrapDTO.swift in Sources */,
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
@@ -1966,7 +1966,7 @@
 				CODE_SIGN_ENTITLEMENTS = YouthTalkTalk/YouthTalkTalk.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Q25U65UWAP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
@@ -1981,7 +1981,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yujinkim.YouthTalkTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2003,7 +2003,7 @@
 				CODE_SIGN_ENTITLEMENTS = YouthTalkTalk/YouthTalkTalk.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Q25U65UWAP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YouthTalkTalk/App/Info.plist;
@@ -2018,7 +2018,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yujinkim.YouthTalkTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

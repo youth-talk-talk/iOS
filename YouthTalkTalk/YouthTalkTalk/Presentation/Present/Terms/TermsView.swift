@@ -191,8 +191,8 @@ final class TermsView: BaseView {
         
         backgroundColor = .white
         
-        termIntroLabel.designed(text: "청년톡톡 서비스 약관에 동의하시겠습니까?", fontType: .p14Bold)
-        termIntroSubLabel.designed(text: "약관 미동의 시 서비스 이용이 불가합니다", fontType: .p12Regular, textColor: .gray40)
+        termIntroLabel.designed(text: "청년톡톡 서비스 약관에 동의하시겠습니까?", font: .p14Bold)
+        termIntroSubLabel.designed(text: "약관 미동의 시 서비스 이용이 불가합니다", font: .p12Regular, textColor: .gray40)
         
         cancelButton.designed(title: "아니요", bgColor: .gray20, cornerRadius: 25)
         confirmButton.designed(title: "예", cornerRadius: 25)

@@ -13,7 +13,7 @@ final class SettingRegionViewController: UIViewController {
     private let viewModel = SettingViewModel()
     
     private let titleLabel = UILabel().then {
-        $0.designed(text: "지역설정", fontType: .g20Bold, textColor: .gray60)
+        $0.designed(text: "지역설정", font: .g20Bold, textColor: .gray60)
     }
     
     private let closeButton = UIButton().then {
@@ -22,7 +22,7 @@ final class SettingRegionViewController: UIViewController {
     
     private let noticeLabel = UILabel().then {
         $0.designed(text: "지역설정은 모든 카테고리에 적용됩니다",
-                    fontType: .p16Regular16,
+                    font: .p16Regular16,
                     textColor: .gray60)
         $0.backgroundColor = .gray10
         $0.textAlignment = .center
@@ -31,7 +31,7 @@ final class SettingRegionViewController: UIViewController {
     private let searchImageView = UIImageView(image: UIImage.magnifyingglass)
     
     private let selectRegionLabel = UILabel().then {
-        $0.designed(text: "지역선택", fontType: .p18Bold)
+        $0.designed(text: "지역선택", font: .p18Bold)
     }
     
     private lazy var collectionView = UICollectionView(frame: .zero,
