@@ -36,38 +36,6 @@ enum FontType {
 }
 
 enum FontColor {
-    
-    var value: UIColor {
-        
-        switch self {
-        case .white:
-            
-            return .white
-        case .gray10:
-            
-            return .gray10
-        case .gray20:
-            
-            return .gray20
-        case .gray30:
-            
-            return .gray30
-        case .gray40:
-            
-            return .gray40
-        case .gray50:
-            
-            return .gray50
-        case .gray60:
-            
-            return .gray60
-            
-        case .black:
-            
-            return .black
-        }
-    }
-    
     case white
     case gray10
     case gray20
@@ -75,7 +43,30 @@ enum FontColor {
     case gray40
     case gray50
     case gray60
+    case gray70
+    case gray80
+    case gray90
+    case gray100
     case black
+    case green
+    
+    var value: UIColor {
+        switch self {
+        case .white:        return .white
+        case .gray10:       return .gray10
+        case .gray20:       return .gray20
+        case .gray30:       return .gray30
+        case .gray40:       return .gray40
+        case .gray50:       return .gray50
+        case .gray60:       return .gray60
+        case .gray70:       return .gray70
+        case .gray80:       return .gray80
+        case .gray90:       return .gray90
+        case .gray100:      return .gray100
+        case .black:        return .black
+        case .green:        return .greenNormal
+        }
+    }
 }
 
 final class FontManager {

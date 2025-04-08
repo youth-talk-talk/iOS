@@ -43,7 +43,12 @@ extension UIButton {
     }
     
     // 기본 버튼 디자인
-    func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .p16Regular16, withAction: Bool = true, cornerRadius: CGFloat = 8) {
+    func designed(title: String,
+                  titleColor: UIColor = .white,
+                  bgColor: UIColor = FontColor.green.value,
+                  fontType: FontType = .p16Regular16,
+                  withAction: Bool = true,
+                  cornerRadius: CGFloat = 6) {
         
         var titleAttrribute = AttributedString.init(title)
         titleAttrribute.font = FontManager.font(fontType)
@@ -85,9 +90,9 @@ extension UIButton {
             
             switch btn.state {
             case .disabled:
-                btn.configuration?.background.backgroundColor = .gray20
-            case .highlighted:
-                btn.animate()
+                btn.configuration?.background.backgroundColor = .gray30
+//            case .highlighted:
+//                btn.animate()
             default:
                 btn.configuration?.background.backgroundColor = bgColor
             }
