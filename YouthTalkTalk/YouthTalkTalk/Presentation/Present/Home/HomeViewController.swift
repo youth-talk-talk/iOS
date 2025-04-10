@@ -6,10 +6,15 @@
 //
 
 import UIKit
-import PinLayout
-import RxCocoa
-import RxSwift
 
+final class HomeViewController: RootViewController {
+    
+}
+
+//import PinLayout
+//import RxCocoa
+//import RxSwift
+//
 enum HomeSectionItems: Hashable {
     
     case category
@@ -27,367 +32,367 @@ enum HomeSectionItems: Hashable {
         }
     }
 }
-
-final class HomeViewController: BaseViewController<HomeView> {
-    
-    var viewModel: HomeInterface
-    var dataSource: UICollectionViewDiffableDataSource<HomeLayout, HomeSectionItems>!
-    var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, HomeSectionItems>()
-    
-    init(viewModel: HomeInterface) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = false
-
-        viewModel.input.fetchPolicies.accept(())
-    }
-    
-    override func configureCollectionView() {
-        
-        layoutView.collectionView.prefetchDataSource = self
-        
-        cellRegistration()
-        headerRegistration()
-    }
-    
-    override func bind() {
-        
-        snapshot.appendSections([.category, .popular, .recent])
-        
-        viewModel.output.popularPoliciesRelay
-            .bind(with: self) { owner, popularPolicies in
-                
-                owner.update(section: .popular, items: popularPolicies)
-                
-            }.disposed(by: disposeBag)
-        
-        viewModel.output.recentPoliciesRelay
-            .bind(with: self) { owner, recentPolicies in
-                
-                owner.update(section: .recent, items: recentPolicies)
-                
-            }.disposed(by: disposeBag)
-        
-        viewModel.output.resetSectionItems
-            .bind(with: self) { owner, _ in
-                
-                owner.snapshot.deleteItems(owner.snapshot.itemIdentifiers(inSection: .recent))
-                
-                owner.dataSource.apply(owner.snapshot, animatingDifferences: true)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.errorHandler
-            .bind(with: self) { owner, error in
-                owner.errorHandler(error)
-            }
-            .disposed(by: disposeBag)
-        
-        layoutView.collectionView.rx.itemSelected
-            .bind(with: self) { owner, indexPath in
-                
-                let homeLayout = HomeLayout(rawValue: indexPath.section) ?? .category
-                let items = owner.dataSource.snapshot().itemIdentifiers(inSection: homeLayout)
-                
-                guard let item = items[indexPath.item].data else { return }
-                
-                switch homeLayout {
-                case .popular, .recent:
-                    
-                    let repository = PolicyRepositoryImpl()
-                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
-                    let viewModel = PolicyViewModel(policyID: item.policyId, policyUseCase: useCase)
-                    let nextVC = PolicyViewController(viewModel: viewModel)
-                    
-                    owner.navigationController?.pushViewController(nextVC, animated: true)
-                    
-                default:
-                    break
-                }
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    //MARK: Cell Registration
-    private func cellRegistration() {
-        
-        // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self,
-                  let data = itemIdentifier.data else { return }
-            
-            cell.layer.cornerRadius = 10
-            cell.layer.masksToBounds = true
-            cell.configure(data: data)
-            
-            // cell에 적용(스크롤시에도 유지)
-            if let scrap = viewModel.output.scrapStatus[data.policyId] {
-                cell.updateScrapStatus(scrap)
-            }
-            
-            // cell에 즉시 적용
-            viewModel.output.scrapStatusRelay
-                .bind(with: self) { owner, scrapStatus in
-                    if let scrap = scrapStatus[data.policyId] {
-                        cell.updateScrapStatus(scrap)
-                    }
-                }
-                .disposed(by: self.disposeBag)
-            
-            cell.scrapButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    
-                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
-                }
-                .disposed(by: cell.disposeBag)
-        }
-        
-        // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self,
-                  let data = itemIdentifier.data else { return }
-            
-            cell.layer.cornerRadius = 10
-            cell.layer.masksToBounds = true
-            cell.configure(data: data)
-            
-            // cell에 적용(스크롤시에도 유지)
-            if let scrap = viewModel.output.scrapStatus[data.policyId] {
-                cell.updateScrapStatus(scrap, 0)
-            }
-            
-            // cell에 즉시 적용
-            viewModel.output.scrapStatusRelay
-                .bind(with: self) { owner, scrapStatus in
-                    if let scrap = scrapStatus[data.policyId] {
-                        cell.updateScrapStatus(scrap, 0)
-                    }
-                }
-                .disposed(by: self.disposeBag)
-            
-            cell.scrapButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
-                }
-                .disposed(by: cell.disposeBag)
-            
-            switch itemIdentifier {
-            case .recent(let policyEntity):
-                
-                cell.tapGesture.rx.event
-                    .bind(with: self) { owner, _ in
-                        let repository = PolicyRepositoryImpl()
-                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
-                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
-                        let nextVC = PolicyViewController(viewModel: viewModel)
-                        
-                        self.navigationController?.pushViewController(nextVC, animated: true)
-                    }
-                    .disposed(by: cell.disposeBag)
-                
-            default: break
-            }
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
-            
-            guard let section = HomeLayout(rawValue: indexPath.section) else { return nil }
-            
-            if section == .popular {
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: popularSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                return cell
-            }
-            
-            if section == .recent {
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                return cell
-            }
-            
-            return nil
-        }
-    }
-    
-    //MARK: Header Registration
-    private func headerRegistration() {
-        
-        // 카테고리 Header Registration
-        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryButtonHeaderView>(elementKind: CategoryButtonHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
-            
-            guard let self else { return }
-            
-            supplementaryView.searchButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    
-                    let viewModel = SearchViewModel(type: .policy)
-                    
-                    let nextVC = SearchViewController(viewModel: viewModel)
-                    owner.navigationController?.pushViewController(nextVC, animated: true)
-                }
-                .disposed(by: supplementaryView.disposeBag)
-            
-            // 버튼의 tap 이벤트에 식별자 추가
-            let jobTap = supplementaryView.jobCategoryButton.rx.tap
-                .map { PolicyCategory.job }
-
-            let educationTap = supplementaryView.educationCategoryButton.rx.tap
-                .map { PolicyCategory.education }
-            
-            let lifeTap = supplementaryView.cultureCategoryButton.rx.tap
-                .map { PolicyCategory.life }
-
-            let participationTap = supplementaryView.collaborateCategoryButton.rx.tap
-                .map { PolicyCategory.participation }
-
-            Observable.merge(jobTap, educationTap, lifeTap, participationTap)
-            .bind(with: self) { owner, category in
-                
-                let policyUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-                let viewModel = ResultPolicyViewModel(type: [category], policyUseCase: policyUseCase)
-                let resultSearchVC = ResultSearchViewController(viewModel: viewModel, type: category)
-                
-                // let titleLabelView = UILabel()
-                // titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
-                // let leftTitleView = UIBarButtonItem(customView: titleLabelView)
-                // resultSearchVC.navigationItem.leftBarButtonItem = leftTitleView
-                // resultSearchVC.navigationItem.leftItemsSupplementBackButton = true
-                
-                owner.navigationController?.pushViewController(resultSearchVC, animated: true)
-            }
-            .disposed(by: supplementaryView.disposeBag)
-        }
-        
-        // 인기정책 Header Registration
-        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
-            
-            supplementaryView.setTitle("인기 정책")
-        }
-        
-        // 최근업데이트 Header Registration
-        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleWithCategoryHeaderView>(elementKind: TitleWithCategoryHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
-            
-            guard let self else { return }
-            
-            let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
-            let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
-            let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()
-            let participationButtonTap = supplementaryView.participationCheckBoxButton.rx.tap.map { PolicyCategory.participation }.asObservable()
-            
-            Observable.merge(jobButtonTap, educationButtonTap, lifeButtonTap, participationButtonTap)
-                .bind(with: self) { owner, category in
-                    
-                    // 선택 시 'seleted' 활성화/비활성화
-                    switch category {
-                    case .job:
-                        supplementaryView.jobCheckBoxButton.isSelected.toggle()
-                    case .education:
-                        supplementaryView.educationCheckBoxButton.isSelected.toggle()
-                    case .life:
-                        supplementaryView.lifeCheckBoxButton.isSelected.toggle()
-                    case .participation:
-                        supplementaryView.participationCheckBoxButton.isSelected.toggle()
-                    }
-                    
-                    // 선택된 버튼만 필터링
-                    let selectedButtons = [
-                        supplementaryView.jobCheckBoxButton,
-                        supplementaryView.educationCheckBoxButton,
-                        supplementaryView.lifeCheckBoxButton,
-                        supplementaryView.participationCheckBoxButton
-                    ].filter { $0.isSelected }
-                    
-                    owner.viewModel.input.policyCategorySeleted.accept(category)
-                }.disposed(by: supplementaryView.disposeBag)
-        }
-        
-        // Header 등록
-        dataSource.supplementaryViewProvider = { [weak self] (view, kind, index) in
-            
-            guard let self else { return nil }
-            
-            switch kind {
-            case CategoryButtonHeaderView.identifier:
-                
-                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: categoryHeaderRegistration,
-                    for: index)
-                
-            case TitleHeaderView.identifier:
-                
-                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: popularHeaderRegistration,
-                    for: index)
-                
-            case TitleWithCategoryHeaderView.identifier:
-                
-                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
-                    using: recentHeaderRegistration,
-                    for: index)
-                
-            default: return nil
-            }
-        }
-    }
-    
-    override func configureNavigation() {
-        
-        let customLabel = UILabel()
-        customLabel.designed(text: "청년톡톡", font: .g20Bold, textColor: .black)
-        
-        let customView = UIBarButtonItem(customView: customLabel)
-        
-        self.navigationItem.leftBarButtonItem = customView
-        
-        // MARK: 디버그 시 사용
-//        // #if DEBUG
-//        let commandButton = UIButton()
-//        commandButton.designed(title: "DEBUG", bgColor: .clear, fontType: .g14Bold)
-//        let commandItem = UIBarButtonItem(customView: commandButton)
-//        self.navigationItem.rightBarButtonItem = commandItem
+//
+//final class HomeViewController: RootViewController {
+//    
+//    var viewModel: HomeInterface
+//    var dataSource: UICollectionViewDiffableDataSource<HomeLayout, HomeSectionItems>!
+//    var snapshot = NSDiffableDataSourceSnapshot<HomeLayout, HomeSectionItems>()
+//    
+//    init(viewModel: HomeInterface) {
+//        self.viewModel = viewModel
 //        
-//        commandButton.rx.tap
-//            .subscribe(with: self) { owner, _ in
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        tabBarController?.tabBar.isHidden = false
+//
+//        viewModel.input.fetchPolicies.accept(())
+//    }
+//    
+//    override func configureCollectionView() {
+//        
+//        layoutView.collectionView.prefetchDataSource = self
+//        
+//        cellRegistration()
+//        headerRegistration()
+//    }
+//    
+//    override func bind() {
+//        
+//        snapshot.appendSections([.category, .popular, .recent])
+//        
+//        viewModel.output.popularPoliciesRelay
+//            .bind(with: self) { owner, popularPolicies in
 //                
-//                owner.modalPresentationStyle = .formSheet
-//                owner.present(DebugViewController(), animated: true)
+//                owner.update(section: .popular, items: popularPolicies)
 //                
 //            }.disposed(by: disposeBag)
 //        
-//        // #endif
-    }
-    
-    func update(section: HomeLayout, items: [HomeSectionItems]) {
-        
-        snapshot.appendItems(items, toSection: section)
-        
-        self.dataSource.apply(snapshot, animatingDifferences: true)
-    }
-}
-
-extension HomeViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        
-        let total = self.snapshot.itemIdentifiers(inSection: .recent).count
-        let currentPage = (total / 10) + 1
-        
-        // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
-        if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
-            viewModel.input.pageUpdate.accept(currentPage)
-        }
-    }
-}
+//        viewModel.output.recentPoliciesRelay
+//            .bind(with: self) { owner, recentPolicies in
+//                
+//                owner.update(section: .recent, items: recentPolicies)
+//                
+//            }.disposed(by: disposeBag)
+//        
+//        viewModel.output.resetSectionItems
+//            .bind(with: self) { owner, _ in
+//                
+//                owner.snapshot.deleteItems(owner.snapshot.itemIdentifiers(inSection: .recent))
+//                
+//                owner.dataSource.apply(owner.snapshot, animatingDifferences: true)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.errorHandler
+//            .bind(with: self) { owner, error in
+//                owner.errorHandler(error)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        layoutView.collectionView.rx.itemSelected
+//            .bind(with: self) { owner, indexPath in
+//                
+//                let homeLayout = HomeLayout(rawValue: indexPath.section) ?? .category
+//                let items = owner.dataSource.snapshot().itemIdentifiers(inSection: homeLayout)
+//                
+//                guard let item = items[indexPath.item].data else { return }
+//                
+//                switch homeLayout {
+//                case .popular, .recent:
+//                    
+//                    let repository = PolicyRepositoryImpl()
+//                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
+//                    let viewModel = PolicyViewModel(policyID: item.policyId, policyUseCase: useCase)
+//                    let nextVC = PolicyViewController(viewModel: viewModel)
+//                    
+//                    owner.navigationController?.pushViewController(nextVC, animated: true)
+//                    
+//                default:
+//                    break
+//                }
+//            }
+//            .disposed(by: disposeBag)
+//    }
+//    
+//    //MARK: Cell Registration
+//    private func cellRegistration() {
+//        
+//        // 인기정책 Section
+//        let popularSectionRegistration = UICollectionView.CellRegistration<PopularCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+//            
+//            guard let self,
+//                  let data = itemIdentifier.data else { return }
+//            
+//            cell.layer.cornerRadius = 10
+//            cell.layer.masksToBounds = true
+//            cell.configure(data: data)
+//            
+//            // cell에 적용(스크롤시에도 유지)
+//            if let scrap = viewModel.output.scrapStatus[data.policyId] {
+//                cell.updateScrapStatus(scrap)
+//            }
+//            
+//            // cell에 즉시 적용
+//            viewModel.output.scrapStatusRelay
+//                .bind(with: self) { owner, scrapStatus in
+//                    if let scrap = scrapStatus[data.policyId] {
+//                        cell.updateScrapStatus(scrap)
+//                    }
+//                }
+//                .disposed(by: self.disposeBag)
+//            
+//            cell.scrapButton.rx.tap
+//                .bind(with: self) { owner, _ in
+//                    
+//                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
+//                }
+//                .disposed(by: cell.disposeBag)
+//        }
+//        
+//        // 최근 업데이트 Section
+//        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, HomeSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+//            
+//            guard let self,
+//                  let data = itemIdentifier.data else { return }
+//            
+//            cell.layer.cornerRadius = 10
+//            cell.layer.masksToBounds = true
+//            cell.configure(data: data)
+//            
+//            // cell에 적용(스크롤시에도 유지)
+//            if let scrap = viewModel.output.scrapStatus[data.policyId] {
+//                cell.updateScrapStatus(scrap, 0)
+//            }
+//            
+//            // cell에 즉시 적용
+//            viewModel.output.scrapStatusRelay
+//                .bind(with: self) { owner, scrapStatus in
+//                    if let scrap = scrapStatus[data.policyId] {
+//                        cell.updateScrapStatus(scrap, 0)
+//                    }
+//                }
+//                .disposed(by: self.disposeBag)
+//            
+//            cell.scrapButton.rx.tap
+//                .bind(with: self) { owner, _ in
+//                    owner.viewModel.input.updatePolicyScrap.accept(data.policyId)
+//                }
+//                .disposed(by: cell.disposeBag)
+//            
+//            switch itemIdentifier {
+//            case .recent(let policyEntity):
+//                
+//                cell.tapGesture.rx.event
+//                    .bind(with: self) { owner, _ in
+//                        let repository = PolicyRepositoryImpl()
+//                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
+//                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
+//                        let nextVC = PolicyViewController(viewModel: viewModel)
+//                        
+//                        self.navigationController?.pushViewController(nextVC, animated: true)
+//                    }
+//                    .disposed(by: cell.disposeBag)
+//                
+//            default: break
+//            }
+//        }
+//        
+//        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
+//            
+//            guard let section = HomeLayout(rawValue: indexPath.section) else { return nil }
+//            
+//            if section == .popular {
+//                
+//                let cell = collectionView.dequeueConfiguredReusableCell(using: popularSectionRegistration, for: indexPath, item: itemIdentifier)
+//                
+//                return cell
+//            }
+//            
+//            if section == .recent {
+//                
+//                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
+//                
+//                return cell
+//            }
+//            
+//            return nil
+//        }
+//    }
+//    
+//    //MARK: Header Registration
+//    private func headerRegistration() {
+//        
+//        // 카테고리 Header Registration
+//        let categoryHeaderRegistration = UICollectionView.SupplementaryRegistration<CategoryButtonHeaderView>(elementKind: CategoryButtonHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+//            
+//            guard let self else { return }
+//            
+//            supplementaryView.searchButton.rx.tap
+//                .bind(with: self) { owner, _ in
+//                    
+//                    let viewModel = SearchViewModel(type: .policy)
+//                    
+//                    let nextVC = SearchViewController(viewModel: viewModel)
+//                    owner.navigationController?.pushViewController(nextVC, animated: true)
+//                }
+//                .disposed(by: supplementaryView.disposeBag)
+//            
+//            // 버튼의 tap 이벤트에 식별자 추가
+//            let jobTap = supplementaryView.jobCategoryButton.rx.tap
+//                .map { PolicyCategory.job }
+//
+//            let educationTap = supplementaryView.educationCategoryButton.rx.tap
+//                .map { PolicyCategory.education }
+//            
+//            let lifeTap = supplementaryView.cultureCategoryButton.rx.tap
+//                .map { PolicyCategory.life }
+//
+//            let participationTap = supplementaryView.collaborateCategoryButton.rx.tap
+//                .map { PolicyCategory.participation }
+//
+//            Observable.merge(jobTap, educationTap, lifeTap, participationTap)
+//            .bind(with: self) { owner, category in
+//                
+//                let policyUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+//                let viewModel = ResultPolicyViewModel(type: [category], policyUseCase: policyUseCase)
+//                let resultSearchVC = ResultSearchViewController(viewModel: viewModel, type: category)
+//                
+//                // let titleLabelView = UILabel()
+//                // titleLabelView.designed(text: category.name, fontType: .g18Medium, textColor: .black)
+//                // let leftTitleView = UIBarButtonItem(customView: titleLabelView)
+//                // resultSearchVC.navigationItem.leftBarButtonItem = leftTitleView
+//                // resultSearchVC.navigationItem.leftItemsSupplementBackButton = true
+//                
+//                owner.navigationController?.pushViewController(resultSearchVC, animated: true)
+//            }
+//            .disposed(by: supplementaryView.disposeBag)
+//        }
+//        
+//        // 인기정책 Header Registration
+//        let popularHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) { supplementaryView, elementKind, indexPath in
+//            
+//            supplementaryView.setTitle("인기 정책")
+//        }
+//        
+//        // 최근업데이트 Header Registration
+//        let recentHeaderRegistration = UICollectionView.SupplementaryRegistration<TitleWithCategoryHeaderView>(elementKind: TitleWithCategoryHeaderView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+//            
+//            guard let self else { return }
+//            
+//            let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
+//            let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
+//            let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()
+//            let participationButtonTap = supplementaryView.participationCheckBoxButton.rx.tap.map { PolicyCategory.participation }.asObservable()
+//            
+//            Observable.merge(jobButtonTap, educationButtonTap, lifeButtonTap, participationButtonTap)
+//                .bind(with: self) { owner, category in
+//                    
+//                    // 선택 시 'seleted' 활성화/비활성화
+//                    switch category {
+//                    case .job:
+//                        supplementaryView.jobCheckBoxButton.isSelected.toggle()
+//                    case .education:
+//                        supplementaryView.educationCheckBoxButton.isSelected.toggle()
+//                    case .life:
+//                        supplementaryView.lifeCheckBoxButton.isSelected.toggle()
+//                    case .participation:
+//                        supplementaryView.participationCheckBoxButton.isSelected.toggle()
+//                    }
+//                    
+//                    // 선택된 버튼만 필터링
+//                    let selectedButtons = [
+//                        supplementaryView.jobCheckBoxButton,
+//                        supplementaryView.educationCheckBoxButton,
+//                        supplementaryView.lifeCheckBoxButton,
+//                        supplementaryView.participationCheckBoxButton
+//                    ].filter { $0.isSelected }
+//                    
+//                    owner.viewModel.input.policyCategorySeleted.accept(category)
+//                }.disposed(by: supplementaryView.disposeBag)
+//        }
+//        
+//        // Header 등록
+//        dataSource.supplementaryViewProvider = { [weak self] (view, kind, index) in
+//            
+//            guard let self else { return nil }
+//            
+//            switch kind {
+//            case CategoryButtonHeaderView.identifier:
+//                
+//                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+//                    using: categoryHeaderRegistration,
+//                    for: index)
+//                
+//            case TitleHeaderView.identifier:
+//                
+//                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+//                    using: popularHeaderRegistration,
+//                    for: index)
+//                
+//            case TitleWithCategoryHeaderView.identifier:
+//                
+//                return self.layoutView.collectionView.dequeueConfiguredReusableSupplementary(
+//                    using: recentHeaderRegistration,
+//                    for: index)
+//                
+//            default: return nil
+//            }
+//        }
+//    }
+//    
+//    override func configureNavigation() {
+//        
+//        let customLabel = UILabel()
+//        customLabel.designed(text: "청년톡톡", font: .g20Bold, textColor: .black)
+//        
+//        let customView = UIBarButtonItem(customView: customLabel)
+//        
+//        self.navigationItem.leftBarButtonItem = customView
+//        
+//        // MARK: 디버그 시 사용
+////        // #if DEBUG
+////        let commandButton = UIButton()
+////        commandButton.designed(title: "DEBUG", bgColor: .clear, fontType: .g14Bold)
+////        let commandItem = UIBarButtonItem(customView: commandButton)
+////        self.navigationItem.rightBarButtonItem = commandItem
+////        
+////        commandButton.rx.tap
+////            .subscribe(with: self) { owner, _ in
+////                
+////                owner.modalPresentationStyle = .formSheet
+////                owner.present(DebugViewController(), animated: true)
+////                
+////            }.disposed(by: disposeBag)
+////        
+////        // #endif
+//    }
+//    
+//    func update(section: HomeLayout, items: [HomeSectionItems]) {
+//        
+//        snapshot.appendItems(items, toSection: section)
+//        
+//        self.dataSource.apply(snapshot, animatingDifferences: true)
+//    }
+//}
+//
+//extension HomeViewController: UICollectionViewDataSourcePrefetching {
+//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        
+//        let total = self.snapshot.itemIdentifiers(inSection: .recent).count
+//        let currentPage = (total / 10) + 1
+//        
+//        // 끝에서 5개의 아이템 이내일 경우 다음 페이지 로드 요청
+//        if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
+//            viewModel.input.pageUpdate.accept(currentPage)
+//        }
+//    }
+//}

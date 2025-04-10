@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         configureNavigationAppearance()
@@ -23,18 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let policyLoactionUseCase = PolicyLocationUseCaseImpl()
-        let signUpUseCase = SignUpUseCaseImpl()
-        let signUpViewModel = SignUpViewModel(policyLocationUseCase: policyLoactionUseCase,
-                                              signUpUseCase: signUpUseCase)
-        let nextVC = SelectRegionViewController()
-        let naviVC = UINavigationController(rootViewController: nextVC)
+        let useCase = SignInUseCaseImpl()
+        let viewModel = SplashViewModel(signInUseCase: useCase)
+        let rootVC = SplashViewController(viewModel: viewModel)
+        let naviVC = UINavigationController(rootViewController: rootVC)
         
         self.window = window
         
         self.window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         self.window?.makeKeyAndVisible()
-
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.window?.rootViewController = naviVC
             self.window?.makeKeyAndVisible()
@@ -107,38 +104,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     static func makeRootVC() {
+        struct TabItem {
+            let viewController: UIViewController
+            let title: String
+            let icon: String
+        }
         
-        let tabVC = UITabBarController()
-        
-        // HOME TAB
-        let repository = PolicyRepositoryImpl()
-        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
-        let homeViewModel = HomeViewModel(policyUseCase: policyUseCase)
-        let homeVC = HomeViewController(viewModel: homeViewModel)
+        // 홈 탭
+        let homeVC = HomeViewController()
         let homeNaviVC = UINavigationController(rootViewController: homeVC)
         
-        // COMMUNITY TAB
+        // 커뮤니티 탭
         let communityVC = CommunityTabViewController()
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
-        // MYPAGE TAB
+        // 마이페이지 탭
         let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
         let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
         let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
         let myPageVC = MyPageViewController(viewModel: myPageViewModel)
         let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
         
-        tabVC.setViewControllers([communityNaviVC, homeNaviVC, myPageNaviVC], animated: true)
-        tabVC.selectedIndex = 1
+        // 탭 구성요소
+        let tabItems: [TabItem] = [
+            TabItem(viewController: homeNaviVC, title: "홈", icon: "house"),
+            TabItem(viewController: communityNaviVC, title: "커뮤니티", icon: "community"),
+            TabItem(viewController: myPageNaviVC, title: "마이페이지", icon: "profile")
+        ]
         
-        tabVC.tabBar.items?[0].image = UIImage(named: "community")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[0].selectedImage = UIImage(named: "community")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        let tabVC = UITabBarController()
         
-        tabVC.tabBar.items?[1].image = UIImage(named: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[1].selectedImage = UIImage(named: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        // 탭 설정
+        tabVC.setViewControllers(tabItems.map { $0.viewController }, animated: true)
+        tabVC.tabBar.tintColor = FontColor.green.value
+        tabVC.selectedIndex = 0
         
-        tabVC.tabBar.items?[2].image = UIImage(named: "profile")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[2].selectedImage = UIImage(named: "profile")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        // 탭 데이터 삽입
+        if let items = tabVC.tabBar.items {
+            items.enumerated().forEach { index, tab in
+                tab.title = tabItems[index].title
+                tab.image = UIImage(named: tabItems[index].icon)?.withTintColor(FontColor.gray80.value, renderingMode: .alwaysOriginal)
+                tab.selectedImage = UIImage(named: tabItems[index].icon)?.withTintColor(FontColor.green.value, renderingMode: .alwaysOriginal)
+            }
+        }
         
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
@@ -149,4 +157,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
-
