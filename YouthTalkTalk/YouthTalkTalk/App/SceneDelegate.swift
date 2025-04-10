@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let signUpUseCase = SignUpUseCaseImpl()
         let signUpViewModel = SignUpViewModel(policyLocationUseCase: policyLoactionUseCase,
                                               signUpUseCase: signUpUseCase)
-        let nextVC = WriteNickNameViewController(viewModel: signUpViewModel)
+        let nextVC = SelectRegionViewController()
         let naviVC = UINavigationController(rootViewController: nextVC)
         
         self.window = window

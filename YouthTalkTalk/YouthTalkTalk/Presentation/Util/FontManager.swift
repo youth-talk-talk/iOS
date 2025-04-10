@@ -49,6 +49,7 @@ enum FontColor {
     case gray100
     case black
     case green
+    case greenLight
     
     var value: UIColor {
         switch self {
@@ -65,6 +66,7 @@ enum FontColor {
         case .gray100:      return .gray100
         case .black:        return .black
         case .green:        return .greenNormal
+        case .greenLight:   return .greenLight
         }
     }
 }

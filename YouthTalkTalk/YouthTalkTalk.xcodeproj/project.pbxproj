@@ -10,6 +10,9 @@
 		6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */; };
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
 		6A753C232CEC77F1009A4D40 /* SearchPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */; };
+		6A7A6F5B2DA5F4A9004C15FA /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */; };
+		6A7A6F5D2DA67CF8004C15FA /* RegionBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5C2DA67CF0004C15FA /* RegionBottomSheetViewController.swift */; };
+		6A7A6F5F2DA67E22004C15FA /* RegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5E2DA67E1E004C15FA /* RegionCell.swift */; };
 		6A90810B2CEDF3AD00B52C91 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6A90810A2CEDF3AD00B52C91 /* BSImagePicker */; };
 		6A90810D2CEDF3C700B52C91 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */; };
 		6A90810F2CEEA3EA00B52C91 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */; };
@@ -277,6 +280,9 @@
 		6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedOrMyCommentListViewController.swift; sourceTree = "<group>"; };
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPolicyView.swift; sourceTree = "<group>"; };
+		6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
+		6A7A6F5C2DA67CF0004C15FA /* RegionBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionBottomSheetViewController.swift; sourceTree = "<group>"; };
+		6A7A6F5E2DA67E1E004C15FA /* RegionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCell.swift; sourceTree = "<group>"; };
 		6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
@@ -658,6 +664,9 @@
 		AC4B431D2C1EE016005FC370 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				6A7A6F5E2DA67E1E004C15FA /* RegionCell.swift */,
+				6A7A6F5C2DA67CF0004C15FA /* RegionBottomSheetViewController.swift */,
+				6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */,
 				AC4B431E2C1EE024005FC370 /* WriteNickNameViewController.swift */,
 				ACF2A2AD2C2AB4A300FE8D63 /* SignUpViewModel.swift */,
 				AC4B43202C1EE02C005FC370 /* SignUpView.swift */,
@@ -1592,6 +1601,7 @@
 				AC579B4E2C451CA500D1C9FC /* HomeOutput.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
 				ACC46C972CD12D1E0004ED5C /* RadiusCollectionReusableView.swift in Sources */,
+				6A7A6F5D2DA67CF8004C15FA /* RegionBottomSheetViewController.swift in Sources */,
 				ACF2A28F2C28234000FE8D63 /* SignInOutput.swift in Sources */,
 				6AE67EE32D518ECE00888F87 /* SettingRegionCell.swift in Sources */,
 				ACF2A29B2C28698D00FE8D63 /* SignInUseCaseImpl.swift in Sources */,
@@ -1629,6 +1639,7 @@
 				AC579B392C3D73C100D1C9FC /* RecentSearchCollectionViewCell.swift in Sources */,
 				AC0AA5A22CC509A800DB032E /* DetailRPDTO.swift in Sources */,
 				AC4B43242C206839005FC370 /* PolicyLocationKR.swift in Sources */,
+				6A7A6F5F2DA67E22004C15FA /* RegionCell.swift in Sources */,
 				AC604C762C7B1B1C00804950 /* PolicyConditionBody.swift in Sources */,
 				ACC46CCA2CD29CE60004ED5C /* TitleWithImageButtonView.swift in Sources */,
 				ACF2A2D32C2D967100FE8D63 /* KeyChainHelper.swift in Sources */,
@@ -1661,6 +1672,7 @@
 				AC604C6D2C7A23FA00804950 /* ResultPostViewModel.swift in Sources */,
 				AC604C3B2C74A5A300804950 /* ScrapDTO.swift in Sources */,
 				ACF2A27C2C25859E00FE8D63 /* DefaultDecoView.swift in Sources */,
+				6A7A6F5B2DA5F4A9004C15FA /* SelectRegionViewController.swift in Sources */,
 				AC579B9B2C5CB9C000D1C9FC /* SummaryTableViewCell.swift in Sources */,
 				AC604C132C67823300804950 /* PostUseCaseImpl.swift in Sources */,
 				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
@@ -1977,6 +1989,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2014,6 +2027,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

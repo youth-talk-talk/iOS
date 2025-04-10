@@ -11,7 +11,7 @@ import RxCocoa
 
 extension UILabel {
     
-    func designed(text: String, font: FontType, textColor: FontColor = .gray100, applyLineHeight: Bool = true) {
+    func designed(text: String = "", font: FontType, textColor: FontColor = .gray100, applyLineHeight: Bool = true) {
         
         self.text = text
         self.textColor = textColor.value
