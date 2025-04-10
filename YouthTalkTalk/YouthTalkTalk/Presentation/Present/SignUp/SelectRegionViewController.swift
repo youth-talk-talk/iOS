@@ -37,7 +37,7 @@ final class SelectRegionViewController: RootViewController {
     
     
     private let nextButton = UIButton().then {
-        $0.designed(title: "다음")
+        $0.designed(title: "완료하기")
         $0.isEnabled = false
     }
     
