@@ -8,7 +8,14 @@
 import UIKit
 
 final class HomeViewController: RootViewController {
+    private let regionTipImageView = UIImageView(image: .locationTip)
     
+    private let selectionRegionLabel = UILabel().then {
+        $0.designed(text: "유저가 선택한 지역", font: .p18Semi)
+    }
+    
+    private let regionDownArrowImageView = UIImageView(image: .arrowDown)
+    private let searchImageView = UIImageView(image: .search)
 }
 
 //import PinLayout
