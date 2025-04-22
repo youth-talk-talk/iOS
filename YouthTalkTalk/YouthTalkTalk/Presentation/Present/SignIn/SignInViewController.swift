@@ -56,6 +56,14 @@ final class SignInViewController: RootViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        kakaoButton.onTapped { [weak self] in
+            self?.viewModel.input.kakaoSignInButtonClicked.accept(())
+        }
+        
+        appleButton.onTapped { [weak self] in
+            self?.viewModel.input.appleSignInButtonClicked.accept(())
+        }
+        
         view.addSubview(logoAnimationView)
         view.addSubview(titleLabel)
         view.addSubview(contentLabel)
