@@ -6,12 +6,42 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
-final class SignInViewController: BaseViewController<SignInView> {
+import Lottie
+
+final class SignInViewController: RootViewController{
     
     var viewModel: SignInInterface
+    
+    private let logoAnimationView: LottieAnimationView = .init(name: "splash",
+                                                                bundle: Bundle.main).then {
+        $0.loopMode = .loop
+        $0.play()
+    }
+    
+    private let titleLabel = UILabel().then {
+        $0.designed(text: "청년톡톡", font: .p24Bold)
+    }
+    
+    private let contentLabel = UILabel().then {
+        $0.designed(text: "한눈에 보는 청년 정책! 청년톡톡과 함께해요 :)", font: .p16Regular16)
+    }
+    
+    private let kakaoButton = UIButton().then {
+        $0.designWithImage(title: "카카오로 시작하기",
+                           image: .kakao,
+                           bgColor: .kakao,
+                           titleColor: .black,
+                           fontType: .p16Regular16)
+    }
+    
+    private let appleButton = UIButton().then {
+        $0.designWithImage(title: "Apple로 시작하기",
+                           image: .apple,
+                           bgColor: .apple,
+                           titleColor: .white,
+                           fontType: .p16Regular16)
+    }
     
     init(viewModel: SignInInterface) {
         self.viewModel = viewModel
@@ -26,63 +56,41 @@ final class SignInViewController: BaseViewController<SignInView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        view.addSubview(logoAnimationView)
+        view.addSubview(titleLabel)
+        view.addSubview(contentLabel)
+        view.addSubview(kakaoButton)
+        view.addSubview(appleButton)
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
+        logoAnimationView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(40)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(411)
+            $0.height.equalTo(393)
+        }
         
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    override func bind() {
-        // Inputs
-        // apple 로그인 버튼 클릭 이벤트 전달
-        layoutView.appleSignInButton.rx.tap
-            .bind(to: viewModel.input.appleSignInButtonClicked)
-            .disposed(by: disposeBag)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(logoAnimationView.snp.bottom).offset(25)
+            $0.centerX.equalToSuperview()
+        }
         
-        // kakao 로그인 버튼 클릭 이벤트 전달
-        layoutView.kakaoSignInButton.rx.tap
-            .bind(to: viewModel.input.kakaoSignInButtonClicked)
-            .disposed(by: disposeBag)
+        contentLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.centerX.equalToSuperview()
+        }
         
-        // Outputs
-        // apple 로그인 성공
-        viewModel.output.signInSuccessApple
-            .drive(with: self) { owner, isSuccess in
-                
-                owner.changeViewController(isSuccessToSignIn: isSuccess)
-                
-            }.disposed(by: disposeBag)
+        kakaoButton.snp.makeConstraints {
+            $0.top.equalTo(contentLabel.snp.bottom).offset(40)
+            $0.height.equalTo(45)
+            $0.width.equalToSuperview().inset(16)
+            $0.centerX.equalToSuperview()
+        }
         
-        viewModel.output.signInSuccessKakao
-            .drive(with: self) { owner, isSuccess in
-                
-                owner.changeViewController(isSuccessToSignIn: isSuccess)
-                
-            }.disposed(by: disposeBag)
-    }
-    
-    private func changeViewController(isSuccessToSignIn: Bool) {
-        
-        if isSuccessToSignIn {
-            
-            SceneDelegate.makeRootVC()
-        } else {
-            // MARK: 이용약관이 여러번 푸시되는 이슈 방어 로직
-            // TODO: ( 추후 수정 필요 )
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if let viewControllers = self.navigationController?.viewControllers,
-                   !viewControllers.contains(where: { $0 is TermsViewController }) {
-                    let nextVC = TermsViewController()
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-                }
-            }
+        appleButton.snp.makeConstraints {
+            $0.top.equalTo(kakaoButton.snp.bottom).offset(14)
+            $0.height.equalTo(45)
+            $0.width.equalToSuperview().inset(16)
+            $0.centerX.equalToSuperview()
         }
     }
 }

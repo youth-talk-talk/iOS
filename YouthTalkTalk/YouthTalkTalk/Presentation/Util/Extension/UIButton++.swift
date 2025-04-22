@@ -30,7 +30,7 @@ extension UIButton {
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = image
-        buttonConfiguration.imagePadding = 2 // 이미지와 텍스트 사이의 패딩을 0으로 설정
+        buttonConfiguration.imagePadding = 8 // 이미지와 텍스트 사이의 패딩을 0으로 설정
         buttonConfiguration.imagePlacement = .leading
         
         buttonConfiguration.title = title
@@ -39,6 +39,8 @@ extension UIButton {
         buttonConfiguration.baseForegroundColor = titleColor
         buttonConfiguration.background.cornerRadius = 8
         
+        self.layer.cornerRadius = 6
+        self.backgroundColor = bgColor
         self.configuration = buttonConfiguration
     }
     

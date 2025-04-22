@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */; };
+		6A5B05A42DB74EB10096F608 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A5B05A32DB74EB10096F608 /* splash.json */; };
+		6A5B05A72DB74EE20096F608 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6A5B05A62DB74EE20096F608 /* Lottie */; };
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
 		6A753C232CEC77F1009A4D40 /* SearchPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */; };
 		6A7A6F5B2DA5F4A9004C15FA /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */; };
@@ -54,7 +56,6 @@
 		AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */; };
 		AC4B42F92C18904F005FC370 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */; };
 		AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */; };
-		AC4B43002C197015005FC370 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B42FF2C197015005FC370 /* SignInView.swift */; };
 		AC4B43032C19C829005FC370 /* Flex++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B43022C19C829005FC370 /* Flex++.swift */; };
 		AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B43082C1B147F005FC370 /* RxCocoa */; };
 		AC4B430B2C1B147F005FC370 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC4B430A2C1B147F005FC370 /* RxSwift */; };
@@ -278,6 +279,7 @@
 
 /* Begin PBXFileReference section */
 		6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedOrMyCommentListViewController.swift; sourceTree = "<group>"; };
+		6A5B05A32DB74EB10096F608 /* splash.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPolicyView.swift; sourceTree = "<group>"; };
 		6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
@@ -318,7 +320,6 @@
 		AC4B42EC2C18904E005FC370 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		AC4B42F02C18904F005FC370 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		AC4B42FF2C197015005FC370 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		AC4B43012C1998DF005FC370 /* YouthTalkTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YouthTalkTalk.entitlements; sourceTree = "<group>"; };
 		AC4B43022C19C829005FC370 /* Flex++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flex++.swift"; sourceTree = "<group>"; };
 		AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -527,6 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF2A2BB2C2C1D3700FE8D63 /* KakaoSDKAuth in Frameworks */,
+				6A5B05A72DB74EE20096F608 /* Lottie in Frameworks */,
 				ACF2A2B82C2C184D00FE8D63 /* RxKakaoSDKUser in Frameworks */,
 				6AF137602CDE2177004E927B /* Then in Frameworks */,
 				AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */,
@@ -627,7 +629,6 @@
 			children = (
 				AC4B42FD2C196FF8005FC370 /* SignInViewController.swift */,
 				AC4B430D2C1B14D1005FC370 /* SignInViewModel.swift */,
-				AC4B42FF2C197015005FC370 /* SignInView.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -1100,6 +1101,7 @@
 		ACF2A2922C28409A00FE8D63 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6A5B05A32DB74EB10096F608 /* splash.json */,
 				AC5A7BFC2BF0FDB600A13991 /* LaunchScreen.storyboard */,
 				AC5A7BFA2BF0FDB600A13991 /* Assets.xcassets */,
 				AC4B42E92C189038005FC370 /* Font */,
@@ -1445,6 +1447,7 @@
 				6AF1375F2CDE2177004E927B /* Then */,
 				6AFE80762CDE26D30039A01B /* SnapKit */,
 				6A90810A2CEDF3AD00B52C91 /* BSImagePicker */,
+				6A5B05A62DB74EE20096F608 /* Lottie */,
 			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
@@ -1529,6 +1532,7 @@
 				6AF1375E2CDE2177004E927B /* XCRemoteSwiftPackageReference "Then" */,
 				6AFE80752CDE26D30039A01B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6A9081092CEDF3AD00B52C91 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
+				6A5B05A52DB74EE20096F608 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
@@ -1552,6 +1556,7 @@
 				AC5A7BFE2BF0FDB600A13991 /* Base in Resources */,
 				AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */,
 				AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */,
+				6A5B05A42DB74EB10096F608 /* splash.json in Resources */,
 				AC604C652C79F83500804950 /* GmarketSansMedium.otf in Resources */,
 				AC4B42F92C18904F005FC370 /* Pretendard-Bold.otf in Resources */,
 			);
@@ -1784,7 +1789,6 @@
 				AC604C372C6B8BFE00804950 /* TitleImageSpacingView.swift in Sources */,
 				ACC46CA12CD131C10004ED5C /* MyPageInterface.swift in Sources */,
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
-				AC4B43002C197015005FC370 /* SignInView.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
 				AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */,
 				AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */,
@@ -2165,6 +2169,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6A5B05A52DB74EE20096F608 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 		6A9081092CEDF3AD00B52C91 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikaoj/BSImagePicker";
@@ -2248,6 +2260,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6A5B05A62DB74EE20096F608 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A5B05A52DB74EE20096F608 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		6A90810A2CEDF3AD00B52C91 /* BSImagePicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6A9081092CEDF3AD00B52C91 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
