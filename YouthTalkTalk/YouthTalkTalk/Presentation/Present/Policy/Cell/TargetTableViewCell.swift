@@ -153,7 +153,7 @@ class TargetTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         
-        personImageView.image = UIImage.person
+        personImageView.image = UIImage.actions
         
         sectionTitleLabel.designed(text: "누구를 위한 정책인가요?", font: .p18Bold, textColor: .black)
         

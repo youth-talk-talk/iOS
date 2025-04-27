@@ -80,7 +80,7 @@ class SummaryTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         
-        rightImageView.image = UIImage.right
+        rightImageView.image = UIImage.actions
         
         sectionTitleLabel.designed(text: "한눈에 보는 정책 요약", font: .p18Bold, textColor: .black)
         

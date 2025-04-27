@@ -14,6 +14,7 @@
 		6A478CCF2DBE06F900AF8494 /* PolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */; };
 		6A478CD12DBE253E00AF8494 /* ReviewPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CD02DBE253800AF8494 /* ReviewPolicyView.swift */; };
 		6A478CD32DBE2F8900AF8494 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CD22DBE2F8100AF8494 /* PostView.swift */; };
+		6A478CD52DBE497000AF8494 /* PolicyMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CD42DBE496B00AF8494 /* PolicyMainViewController.swift */; };
 		6A5B05A42DB74EB10096F608 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A5B05A32DB74EB10096F608 /* splash.json */; };
 		6A5B05A72DB74EE20096F608 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6A5B05A62DB74EE20096F608 /* Lottie */; };
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
@@ -291,6 +292,7 @@
 		6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCell.swift; sourceTree = "<group>"; };
 		6A478CD02DBE253800AF8494 /* ReviewPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPolicyView.swift; sourceTree = "<group>"; };
 		6A478CD22DBE2F8100AF8494 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		6A478CD42DBE496B00AF8494 /* PolicyMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyMainViewController.swift; sourceTree = "<group>"; };
 		6A5B05A32DB74EB10096F608 /* splash.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPolicyView.swift; sourceTree = "<group>"; };
@@ -755,6 +757,7 @@
 		AC579B672C51341D00D1C9FC /* Policy */ = {
 			isa = PBXGroup;
 			children = (
+				6A478CD42DBE496B00AF8494 /* PolicyMainViewController.swift */,
 				AC579B972C5CB8CE00D1C9FC /* Cell */,
 				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
 				AC579B682C51349A00D1C9FC /* PolicyViewController.swift */,
@@ -1814,6 +1817,7 @@
 				AC4B42FE2C196FF8005FC370 /* SignInViewController.swift in Sources */,
 				ACF2A2CA2C2D8B2400FE8D63 /* SplashViewModel.swift in Sources */,
 				AC579B5C2C453EDE00D1C9FC /* PolicyRepositoryImpl.swift in Sources */,
+				6A478CD52DBE497000AF8494 /* PolicyMainViewController.swift in Sources */,
 				AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */,
 				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */,
 				ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */,

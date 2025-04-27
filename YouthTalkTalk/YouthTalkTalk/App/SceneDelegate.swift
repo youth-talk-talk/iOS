@@ -118,6 +118,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let communityVC = CommunityTabViewController()
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
+        // 정책 탭
+        let policyVC = PolicyMainViewController()
+                
         // 마이페이지 탭
         let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
         let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
@@ -128,6 +131,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 탭 구성요소
         let tabItems: [TabItem] = [
             TabItem(viewController: homeNaviVC, title: "홈", icon: "house"),
+            TabItem(viewController: policyVC, title: "정책", icon: "policy"),
             TabItem(viewController: communityNaviVC, title: "커뮤니티", icon: "community"),
             TabItem(viewController: myPageNaviVC, title: "마이페이지", icon: "profile")
         ]

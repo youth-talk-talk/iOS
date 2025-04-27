@@ -29,10 +29,10 @@ enum PolicySection: Int, CaseIterable {
     
     var image: UIImage? {
         switch self {
-        case .summary: return .right
-        case .target: return .person
-        case .method: return .questionMark
-        case .detail: return .plus
+        case .summary: return .addPhoto
+        case .target: return .addPhoto
+        case .method: return .addPhoto
+        case .detail: return .addPhoto
         case .comments: return nil
         }
     }

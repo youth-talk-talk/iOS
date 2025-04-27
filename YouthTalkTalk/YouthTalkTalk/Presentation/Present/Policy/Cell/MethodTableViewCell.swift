@@ -66,7 +66,7 @@ class MethodTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         
-        questionMarkImageView.image = UIImage.questionMark
+        questionMarkImageView.image = UIImage.actions
         
         sectionTitleLabel.designed(text: "신청방법이 궁금해요", font: .p18Bold, textColor: .black)
         

@@ -101,7 +101,7 @@ class DetailTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         
-        plusImageView.image = UIImage.plus
+        plusImageView.image = UIImage.actions
         
         sectionTitleLabel.designed(text: "더 자세한 정보를 알려주세요", font: .p18Bold, textColor: .black)
         
