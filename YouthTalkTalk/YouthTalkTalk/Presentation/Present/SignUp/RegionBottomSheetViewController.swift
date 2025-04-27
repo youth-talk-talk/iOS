@@ -43,10 +43,14 @@ final class RegionBottomSheetViewController: RootViewController {
     
     private let onRegionTapped: (String?) -> Void
     
-    init(onRegionTapped: @escaping (String?) -> Void) {
+    init(selectedRegion: String? = nil,
+         onRegionTapped: @escaping (String?) -> Void) {
+        self.selectedRegion = selectedRegion
         self.onRegionTapped = onRegionTapped
         
         super.init(nibName: nil, bundle: nil)
+        
+        self.applyButton.isEnabled = selectedRegion != nil
     }
     
     @MainActor required init?(coder: NSCoder) {

@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController {
     private let regionTipImageView = UIImageView(image: .locationTip)
     
     private let selectionRegionLabel = UILabel().then {
-        $0.designed(text: "유저가 선택한 지역", font: .p18Semi)
+        $0.designed(text: "서울", font: .p18Semi)
     }
     
     private let regionDownArrowImageView = UIImageView(image: .arrowDown.withTintColor(.black))
@@ -50,7 +50,6 @@ final class HomeViewController: UIViewController {
     private let reviewPolicyView = ReviewPolicyView()
     
     // MARK: 청년톡톡 Best
-    // TODO: 준영님께 청년톡톡 Best 최대 몇개까지 보여줘야하는지 여쭤보기
     private let bestTitleLabel = UILabel().then {
         $0.designed(text: "청년톡톡 Best", font: .p16SemiBold, textColor: .gray100)
     }
@@ -73,6 +72,25 @@ final class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         setLayout()
+        setTapEvents()
+    }
+    
+    private func setTapEvents() {
+        // MARK: 지역 선택
+        [regionTipImageView, selectionRegionLabel, regionDownArrowImageView].forEach {
+            $0.onTapped { [weak self] in
+                guard let self else { return }
+                
+                let vc = RegionBottomSheetViewController(selectedRegion: selectionRegionLabel.text,
+                                                         onRegionTapped: { [weak self] selectedRegion in
+                    self?.selectionRegionLabel.text = selectedRegion
+                })
+                
+                if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
+                
+                present(vc, animated: true, completion: nil)
+            }
+        }
     }
     
     private func makeCollectionView(_ itemSize: CGSize) -> UICollectionView {
