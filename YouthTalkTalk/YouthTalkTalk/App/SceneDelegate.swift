@@ -137,6 +137,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 탭 설정
         tabVC.setViewControllers(tabItems.map { $0.viewController }, animated: true)
         tabVC.tabBar.tintColor = FontColor.green.value
+        tabVC.tabBar.backgroundColor = .white
         tabVC.selectedIndex = 0
         
         // 탭 데이터 삽입

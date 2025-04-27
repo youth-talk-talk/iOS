@@ -8,6 +8,13 @@
 import UIKit
 
 extension UIView {
+    public func setShadow() {
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.9).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.1
+        layer.shadowRadius = 5
+    }
+    
     public func onTapped(_ handler: (() -> Void)?) {
         self.isUserInteractionEnabled = true
         self.tapGestureRecognizerHandler = handler

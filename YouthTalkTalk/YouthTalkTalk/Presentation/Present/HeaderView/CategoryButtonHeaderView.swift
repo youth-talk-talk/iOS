@@ -97,11 +97,11 @@ final class CategoryButtonHeaderView: BaseCollectionReusableView {
         buttonConfiguration.title = " "
         
         searchButton.configuration = buttonConfiguration
-        
-        jobCategoryButton.designedCategoryLayout(title: "일자리", image: .job)
-        educationCategoryButton.designedCategoryLayout(title: "교육", image: .education)
-        cultureCategoryButton.designedCategoryLayout(title: "생활지원", image: .culture)
-        collaborateCategoryButton.designedCategoryLayout(title: "참여", image: .collaborate)
+//        
+//        jobCategoryButton.designedCategoryLayout(title: "일자리", image: .job)
+//        educationCategoryButton.designedCategoryLayout(title: "교육", image: .education)
+//        cultureCategoryButton.designedCategoryLayout(title: "생활지원", image: .culture)
+//        collaborateCategoryButton.designedCategoryLayout(title: "참여", image: .collaborate)
     }
     
     override func layoutSubviews() {

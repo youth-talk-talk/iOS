@@ -56,6 +56,18 @@ extension UILabel {
         
         return text != ""
     }
+    
+    func changeFont(forText text: String, withNewFont font: UIFont) {
+        guard let currentText = self.text else { return }
+        
+        let range = (currentText as NSString).range(of: text)
+        
+        if range.location != NSNotFound {
+            let attributedString = NSMutableAttributedString(string: currentText)
+            attributedString.addAttribute(.font, value: font, range: range)
+            self.attributedText = attributedString
+        }
+    }
 }
 
 extension UITextField {

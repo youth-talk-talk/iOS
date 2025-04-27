@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6A177B9C2DB7A08C0016BF41 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A177B9B2DB7A0870016BF41 /* TermViewController.swift */; };
 		6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */; };
+		6A478CC92DBDFE0A00AF8494 /* UICollectionView++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */; };
+		6A478CCB2DBDFE5A00AF8494 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */; };
+		6A478CCF2DBE06F900AF8494 /* PolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */; };
+		6A478CD12DBE253E00AF8494 /* ReviewPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CD02DBE253800AF8494 /* ReviewPolicyView.swift */; };
+		6A478CD32DBE2F8900AF8494 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CD22DBE2F8100AF8494 /* PostView.swift */; };
 		6A5B05A42DB74EB10096F608 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A5B05A32DB74EB10096F608 /* splash.json */; };
 		6A5B05A72DB74EE20096F608 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6A5B05A62DB74EE20096F608 /* Lottie */; };
 		6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */; };
@@ -281,6 +286,11 @@
 /* Begin PBXFileReference section */
 		6A177B9B2DB7A0870016BF41 /* TermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewController.swift; sourceTree = "<group>"; };
 		6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedOrMyCommentListViewController.swift; sourceTree = "<group>"; };
+		6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++.swift"; sourceTree = "<group>"; };
+		6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCell.swift; sourceTree = "<group>"; };
+		6A478CD02DBE253800AF8494 /* ReviewPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPolicyView.swift; sourceTree = "<group>"; };
+		6A478CD22DBE2F8100AF8494 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		6A5B05A32DB74EB10096F608 /* splash.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		6A5E0BCA2CDB7E5100E5E664 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		6A753C222CEC77F1009A4D40 /* SearchPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPolicyView.swift; sourceTree = "<group>"; };
@@ -604,6 +614,7 @@
 		AC4B42E42C183F81005FC370 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */,
 				AC4B42E52C183F8F005FC370 /* UILabel++.swift */,
 				AC4B431B2C1EBAC2005FC370 /* UIButton++.swift */,
 				AC4B43022C19C829005FC370 /* Flex++.swift */,
@@ -931,14 +942,14 @@
 			path = DecoView;
 			sourceTree = "<group>";
 		};
-		AC604BE72C64B32300804950 /* Cell */ = {
+		AC604BE72C64B32300804950 /* LegacyCell */ = {
 			isa = PBXGroup;
 			children = (
 				ACF2A27D2C25884300FE8D63 /* PostListCollectionViewCell.swift */,
 				ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */,
 				6AF5FAEE2D09AD8100BD0CA8 /* CommentCell.swift */,
 			);
-			path = Cell;
+			path = LegacyCell;
 			sourceTree = "<group>";
 		};
 		AC604BE82C64B35000804950 /* Cell */ = {
@@ -1056,7 +1067,11 @@
 		ACF2A25F2C215A2700FE8D63 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				AC604BE72C64B32300804950 /* Cell */,
+				6A478CD22DBE2F8100AF8494 /* PostView.swift */,
+				6A478CD02DBE253800AF8494 /* ReviewPolicyView.swift */,
+				6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */,
+				6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */,
+				AC604BE72C64B32300804950 /* LegacyCell */,
 				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
 				AC579B482C451C4B00D1C9FC /* HomeViewModel.swift */,
 				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
@@ -1595,11 +1610,13 @@
 				6AE67EE12D518C2000888F87 /* SettingViewModel.swift in Sources */,
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
 				AC51E8402C969EF600550148 /* DetailConditionViewModel.swift in Sources */,
+				6A478CC92DBDFE0A00AF8494 /* UICollectionView++.swift in Sources */,
 				AC0AA5BD2CCE23B300DB032E /* CommentUseCaseImpl.swift in Sources */,
 				AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */,
 				AC0AA5B32CCE18D800DB032E /* CommentEntity.swift in Sources */,
 				AC604BD52C63967F00804950 /* CommunityViewController.swift in Sources */,
 				ACC46CAA2CD27E110004ED5C /* ScrapLayout.swift in Sources */,
+				6A478CCF2DBE06F900AF8494 /* PolicyCell.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
@@ -1626,6 +1643,7 @@
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
+				6A478CD12DBE253E00AF8494 /* ReviewPolicyView.swift in Sources */,
 				AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */,
 				AC51E8392C967D2B00550148 /* TitleWithImageHeaderView.swift in Sources */,
 				6AB7B95E2D503E5C00E85371 /* SettingRegionViewController.swift in Sources */,
@@ -1758,6 +1776,7 @@
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
 				AC0AA5B72CCE21D500DB032E /* CommentRepositoryImpl.swift in Sources */,
 				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
+				6A478CD32DBE2F8900AF8494 /* PostView.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
 				ACC46CC12CD2913F0004ED5C /* MemberUseCase.swift in Sources */,
 				AC0AA5BF2CCE23C100DB032E /* CommentUseCase.swift in Sources */,
@@ -1776,6 +1795,7 @@
 				ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */,
 				AC0AA59A2CC374D100DB032E /* PostDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
+				6A478CCB2DBDFE5A00AF8494 /* CategoryCell.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
 				ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,
