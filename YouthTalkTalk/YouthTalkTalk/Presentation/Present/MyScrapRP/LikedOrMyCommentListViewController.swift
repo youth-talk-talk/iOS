@@ -34,23 +34,23 @@ final class LikedOrMyCommentListViewController: RootViewController {
         self.listType = listType
         
         super.init(nibName: nil, bundle: nil)
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        
-        commentTextFieldView.commentTap.rx.event
-            .bind(with: self) { [weak self] owner, _ in
-                guard let self, let text = commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else { return }
-                
-                owner.viewModel.input.editComment(commentId: idOfChangingComment,
-                                                  newComment: text)
-            }
-            .disposed(by: disposeBag)
-        
+//        
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(keyboardWillShow),
+//            name: UIResponder.keyboardWillShowNotification,
+//            object: nil
+//        )
+//        
+//        commentTextFieldView.commentTap.rx.event
+//            .bind(with: self) { [weak self] owner, _ in
+//                guard let self, let text = commentTextFieldView.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else { return }
+//                
+//                owner.viewModel.input.editComment(commentId: idOfChangingComment,
+//                                                  newComment: text)
+//            }
+//            .disposed(by: disposeBag)
+//        
         // MARK: 댓글 삭제 API 완료
         viewModel.output.successDeleteComment.sink { [weak self] deletedCommentId in
             guard let self,
@@ -94,91 +94,91 @@ final class LikedOrMyCommentListViewController: RootViewController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
-    override func configureView() {
-        
-        updateNavigationTitle(title: listType == .likedComment ? "좋아요한 댓글" : "작성한 댓글")
-        
-        self.view.backgroundColor = .white
-        collectionView.backgroundColor = .gray10
-        
-        snapshot.appendSections([.scrap])
-        
-        let recentCellRegistration = UICollectionView.CellRegistration<CommentCell, LikedCommentData> { [weak self] cell, indexPath, data in
-            guard let self else { return }
-            
-            cell.layer.cornerRadius = 10
-            cell.layer.masksToBounds = true
-            cell.bind(userName: data.nickname,
-                      commentId: data.commentId,
-                      comment: data.content,
-                      isItOwnComment: (listType == .myWrittenComment),
-                      isLiked: (listType == .likedComment))
-            
-            // MARK: 댓글 삭제 버튼
-            cell.commentView.deleteLabel.onTapped { [weak self] in
-                self?.viewModel.input.commentDelete(data.commentId)
-            }
-            
-            // MARK: 댓글 수정 버튼
-            cell.commentView.editLabel.onTapped { [weak self] in
-                guard let self else { return }
-                
-                commentTextFieldView.textField.becomeFirstResponder()
-                commentTextFieldView.textField.text = data.content
-                idOfChangingComment = data.commentId
-            }
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource<MyScrapSection, LikedCommentData>(collectionView: collectionView) {
-            collectionView, indexPath, itemIdentifier in
-            
-            return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: itemIdentifier)
-        }
-    }
-    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            
-            commentTextFieldView.snp.updateConstraints {
-                $0.bottom.equalToSuperview().offset(-keyboardRectangle.height)
-            }
-        }
-    }
-    
-    override func configureLayout() {
-        view.addSubview(collectionView)
-        view.addSubview(commentTextFieldView)
-        
-        collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(commentTextFieldView.snp.top)
-        }
-        
-        commentTextFieldView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(64)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(64)
-        }
-    }
-    
-    override func bind() {
-        if listType == .likedComment {
-            viewModel.output.likedCommentList.subscribe { [weak self] commentList in
-                self?.update(section: .scrap, items: commentList)
-            }.disposed(by: disposeBag)
-            
-            viewModel.input.fetchLikedComment.accept(())
-            
-        } else if listType == .myWrittenComment {
-            viewModel.output.myCommentList.subscribe { [weak self] commentList in
-                self?.update(section: .scrap, items: commentList)
-            }.disposed(by: disposeBag)
-            
-            viewModel.input.fetchMyComment.accept(())
-        }
-    }
+//    
+//    override func configureView() {
+//        
+//        updateNavigationTitle(title: listType == .likedComment ? "좋아요한 댓글" : "작성한 댓글")
+//        
+//        self.view.backgroundColor = .white
+//        collectionView.backgroundColor = .gray10
+//        
+//        snapshot.appendSections([.scrap])
+//        
+//        let recentCellRegistration = UICollectionView.CellRegistration<CommentCell, LikedCommentData> { [weak self] cell, indexPath, data in
+//            guard let self else { return }
+//            
+//            cell.layer.cornerRadius = 10
+//            cell.layer.masksToBounds = true
+//            cell.bind(userName: data.nickname,
+//                      commentId: data.commentId,
+//                      comment: data.content,
+//                      isItOwnComment: (listType == .myWrittenComment),
+//                      isLiked: (listType == .likedComment))
+//            
+//            // MARK: 댓글 삭제 버튼
+//            cell.commentView.deleteLabel.onTapped { [weak self] in
+//                self?.viewModel.input.commentDelete(data.commentId)
+//            }
+//            
+//            // MARK: 댓글 수정 버튼
+//            cell.commentView.editLabel.onTapped { [weak self] in
+//                guard let self else { return }
+//                
+//                commentTextFieldView.textField.becomeFirstResponder()
+//                commentTextFieldView.textField.text = data.content
+//                idOfChangingComment = data.commentId
+//            }
+//        }
+//        
+//        dataSource = UICollectionViewDiffableDataSource<MyScrapSection, LikedCommentData>(collectionView: collectionView) {
+//            collectionView, indexPath, itemIdentifier in
+//            
+//            return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: itemIdentifier)
+//        }
+//    }
+//    
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardRectangle = keyboardFrame.cgRectValue
+//            
+//            commentTextFieldView.snp.updateConstraints {
+//                $0.bottom.equalToSuperview().offset(-keyboardRectangle.height)
+//            }
+//        }
+//    }
+//    
+//    override func configureLayout() {
+//        view.addSubview(collectionView)
+//        view.addSubview(commentTextFieldView)
+//        
+//        collectionView.snp.makeConstraints {
+//            $0.top.leading.trailing.equalToSuperview()
+//            $0.bottom.equalTo(commentTextFieldView.snp.top)
+//        }
+//        
+//        commentTextFieldView.snp.makeConstraints {
+//            $0.bottom.equalToSuperview().offset(64)
+//            $0.leading.trailing.equalToSuperview()
+//            $0.height.equalTo(64)
+//        }
+//    }
+//    
+//    override func bind() {
+//        if listType == .likedComment {
+//            viewModel.output.likedCommentList.subscribe { [weak self] commentList in
+//                self?.update(section: .scrap, items: commentList)
+//            }.disposed(by: disposeBag)
+//            
+//            viewModel.input.fetchLikedComment.accept(())
+//            
+//        } else if listType == .myWrittenComment {
+//            viewModel.output.myCommentList.subscribe { [weak self] commentList in
+//                self?.update(section: .scrap, items: commentList)
+//            }.disposed(by: disposeBag)
+//            
+//            viewModel.input.fetchMyComment.accept(())
+//        }
+//    }
 }
 
 extension LikedOrMyCommentListViewController {

@@ -35,7 +35,6 @@ final class SelectRegionViewController: RootViewController {
         $0.rightViewMode = .always
     }
     
-    
     private let nextButton = UIButton().then {
         $0.designed(title: "완료하기")
         $0.isEnabled = false

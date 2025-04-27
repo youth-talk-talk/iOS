@@ -81,78 +81,78 @@ final class PolicyViewController: RootViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func bind() {
-        tabBarController?.tabBar.isHidden = true
-
-        snapshot.appendSections(PolicySection.allCases)
-        
-        viewModel.input.fetchPolicyDetail.accept(viewModel.policyID)
-        
-        viewModel.output.summarySectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .summary, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.detailSectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .detail, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.methodSectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .method, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.targetSectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .target, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    override func configureTableView() {
-        view.backgroundColor = .white
-        
-        view.addSubview(backImageView)
-        view.addSubview(tableview)
-        
-        backImageView.onTapped { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
-        backImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(13)
-            $0.leading.equalToSuperview().inset(18)
-            $0.size.equalTo(24)
-        }
-
-        tableview.snp.makeConstraints {
-            $0.top.equalTo(backImageView.snp.bottom).offset(13)
-            $0.leading.trailing.equalToSuperview().inset(17)
-            $0.bottom.equalToSuperview()
-        }
-        
-        tableview.rowHeight = UITableView.automaticDimension
-        tableview.sectionHeaderTopPadding = 0
-        tableview.sectionHeaderHeight = 0
-        tableview.sectionFooterHeight = 0
-        
-        tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
-        tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
-        tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
-        tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
-        
-        cellRegistration()
-    }
-    
+//    
+//    override func bind() {
+//        tabBarController?.tabBar.isHidden = true
+//
+//        snapshot.appendSections(PolicySection.allCases)
+//        
+//        viewModel.input.fetchPolicyDetail.accept(viewModel.policyID)
+//        
+//        viewModel.output.summarySectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .summary, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.detailSectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .detail, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.methodSectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .method, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.targetSectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .target, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//    }
+//    
+//    override func configureTableView() {
+//        view.backgroundColor = .white
+//        
+//        view.addSubview(backImageView)
+//        view.addSubview(tableview)
+//        
+//        backImageView.onTapped { [weak self] in
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//        
+//        backImageView.snp.makeConstraints {
+//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(13)
+//            $0.leading.equalToSuperview().inset(18)
+//            $0.size.equalTo(24)
+//        }
+//
+//        tableview.snp.makeConstraints {
+//            $0.top.equalTo(backImageView.snp.bottom).offset(13)
+//            $0.leading.trailing.equalToSuperview().inset(17)
+//            $0.bottom.equalToSuperview()
+//        }
+//        
+//        tableview.rowHeight = UITableView.automaticDimension
+//        tableview.sectionHeaderTopPadding = 0
+//        tableview.sectionHeaderHeight = 0
+//        tableview.sectionFooterHeight = 0
+//        
+//        tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
+//        tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
+//        tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
+//        tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
+//        
+//        cellRegistration()
+//    }
+//    
     //MARK: Cell Registration
     private func cellRegistration() {
         

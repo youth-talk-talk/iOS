@@ -64,19 +64,19 @@ final class SignInViewController: RootViewController{
         appleButton.onTapped { [weak self] in
             self?.viewModel.input.appleSignInButtonClicked.accept(())
         }
-        
-        viewModel.output.signInSuccessKakao
-            .drive { [weak self] isSuccess in
-                self?.moveToPage(isLoginSuccess: isSuccess)
-            }
-            .disposed(by: disposeBag)
-                
-        viewModel.output.signInSuccessApple
-            .drive { [weak self] isSuccess in
-                self?.moveToPage(isLoginSuccess: isSuccess)
-            }
-            .disposed(by: disposeBag)
-        
+//        
+//        viewModel.output.signInSuccessKakao
+//            .drive { [weak self] isSuccess in
+//                self?.moveToPage(isLoginSuccess: isSuccess)
+//            }
+//            .disposed(by: disposeBag)
+//                
+//        viewModel.output.signInSuccessApple
+//            .drive { [weak self] isSuccess in
+//                self?.moveToPage(isLoginSuccess: isSuccess)
+//            }
+//            .disposed(by: disposeBag)
+//        
         view.addSubview(logoAnimationView)
         view.addSubview(titleLabel)
         view.addSubview(contentLabel)
