@@ -96,7 +96,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         tabBarAppearance.backgroundColor = .clear
-        tabBarAppearance.shadowColor = .clear
+        tabBarAppearance.shadowColor = .gray40
         // 스크롤 엣지가 닿았을 때 탭바 appearance settings
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         // 일반 탭바 appearance settings

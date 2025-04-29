@@ -9,22 +9,26 @@ import UIKit
 
 class RootViewController: UIViewController {
     
+    private(set) var backImageView = UIImageView(image: .back)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         view.backgroundColor = .white
         
-        let customBackButton = UIButton(type: .system)
-        customBackButton.setImage(.back.withRenderingMode(.alwaysOriginal), for: .normal)
-
-         customBackButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-         
-         let backBarButtonItem = UIBarButtonItem(customView: customBackButton)
-         navigationItem.leftBarButtonItem = backBarButtonItem
-    }
-    
-    @objc private func didTapBackButton() {
-        navigationController?.popViewController(animated: true)
+        view.addSubview(backImageView)
+        
+        backImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(33)
+            $0.leading.equalToSuperview().inset(16)
+            $0.size.equalTo(24)
+        }
+        
+        backImageView.onTapped { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -26,6 +26,8 @@
 		6A90810D2CEDF3C700B52C91 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */; };
 		6A90810F2CEEA3EA00B52C91 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */; };
 		6A9081112CEEAB6000B52C91 /* PostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9081102CEEAB6000B52C91 /* PostImageView.swift */; };
+		6A918F212DBEFFE10047ED55 /* RecentSearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */; };
+		6A918F232DBF015D0047ED55 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F222DBF015B0047ED55 /* EmptyView.swift */; };
 		6AB7B95E2D503E5C00E85371 /* SettingRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7B95D2D503E5C00E85371 /* SettingRegionViewController.swift */; };
 		6AC5E9F62D44D83D00CBC5E6 /* KakaoConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */; };
 		6AC5E9F82D44D83F00CBC5E6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */; };
@@ -302,6 +304,8 @@
 		6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
+		6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchItemView.swift; sourceTree = "<group>"; };
+		6A918F222DBF015B0047ED55 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		6AB7B95D2D503E5C00E85371 /* SettingRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRegionViewController.swift; sourceTree = "<group>"; };
 		6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 		6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
@@ -578,6 +582,7 @@
 		6AC5EBE02CDE1EF5003EFD37 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				6A918F222DBF015B0047ED55 /* EmptyView.swift */,
 				6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */,
 				6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */,
 			);
@@ -1365,6 +1370,7 @@
 		ACF2A2F32C32CC5600FE8D63 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */,
 				ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */,
 				AC579B2F2C3BE19E00D1C9FC /* SearchViewModel.swift */,
 				ACF2A2F62C32CC7100FE8D63 /* SearchView.swift */,
@@ -1722,6 +1728,7 @@
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
 				AC579B9D2C5CB9DF00D1C9FC /* DetailTableViewCell.swift in Sources */,
 				6A5E0BCB2CDB7E5100E5E664 /* UIView+.swift in Sources */,
+				6A918F232DBF015D0047ED55 /* EmptyView.swift in Sources */,
 				AC579B432C40160F00D1C9FC /* SignUpRepository.swift in Sources */,
 				AC604C192C67832400804950 /* PostRepositoryImpl.swift in Sources */,
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
@@ -1799,6 +1806,7 @@
 				AC0AA59A2CC374D100DB032E /* PostDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				6A478CCB2DBDFE5A00AF8494 /* CategoryCell.swift in Sources */,
+				6A918F212DBEFFE10047ED55 /* RecentSearchItemView.swift in Sources */,
 				AC604C242C69FFD100804950 /* RecentSearchOutput.swift in Sources */,
 				ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */,
 				ACF2A3162C3558A400FE8D63 /* Mapper.swift in Sources */,

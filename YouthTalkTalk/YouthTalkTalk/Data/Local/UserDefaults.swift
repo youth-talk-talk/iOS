@@ -109,7 +109,7 @@ extension UserDefaults {
         set(list, forKey: type.key)
     }
     
-    func fetchRecentSearchList(type: MainContentsType) -> [String] {
+    func getRecentSearchList(type: MainContentsType) -> [String] {
         
         return self.array(forKey: type.key) as? [String] ?? [String]()
     }

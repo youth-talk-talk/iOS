@@ -6,142 +6,150 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
-enum SearchViewType {
+final class SearchViewController: RootViewController, UITextFieldDelegate {
+    private let viewModel = SearchViewModel()
     
-    case recent
-    case result
-}
-
-final class SearchViewController: BaseViewController<SearchView> {
-    
-    var viewModel: SearchInterface
-    
-    var currentChildVC: UIViewController?
-    let clearSearchView = ClearSearchView(frame: .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
-    
-    init(viewModel: SearchInterface) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
+    // MARK: 검색 바
+    private let searchBarView = UIView().then {
+        $0.backgroundColor = .gray30
+        $0.layer.cornerRadius = 6
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private let searchImageView = UIImageView(image: .search.withTintColor(.gray70))
+    
+    private lazy var searchTextField = UITextField().then {
+        $0.designedPlaceholder(placeholder: "검색어를 입력해주세요.",
+                               textColor: .gray70,
+                               font: .p16Regular16)
+        $0.tintColor = .greenNormal
+        $0.clearButtonMode = .whileEditing
+        $0.delegate = self
     }
     
-    override func configureNavigation() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: clearSearchView)
+    // MARK: 최근 검색
+    private let recentSearchLabel = UILabel().then {
+        $0.designed(text: "최근 검색", font: .p14Bold)
     }
     
-    override func bind() {
+    private let deleteRecentLabel = UILabel().then {
+        $0.designed(text: "전체 삭제", font: .p12Regular, textColor: .gray80)
+        $0.isHidden = true
+    }
+    
+    private let recentSearchStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+    }
+    
+    private let recnetSearchEmptyView = EmptyView(text: "최근 검색된 내역이 없습니다.")
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        // MARK: Inputs
-        // 검색
-        clearSearchView.textField.rx.controlEvent(.editingDidEndOnExit)
-            .withLatestFrom(clearSearchView.textField.rx.text.orEmpty)
-            .bind(to: viewModel.input.searchButtonClicked)
-            .disposed(by: disposeBag)
+        setRecentSearch()
         
-        // 검색 내용 삭제
-        clearSearchView.cancelButton.rx.tap
-            .bind(with: self) { owner, _ in
+        view.addSubview(searchBarView)
+        view.addSubview(recentSearchLabel)
+        view.addSubview(deleteRecentLabel)
+        view.addSubview(recnetSearchEmptyView)
+        view.addSubview(recentSearchStackView)
+        
+        searchBarView.addSubviews([searchImageView,
+                                   searchTextField])
+        
+        searchBarView.snp.makeConstraints {
+            $0.centerY.equalTo(backImageView)
+            $0.leading.equalTo(backImageView.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(42)
+        }
+        
+        searchImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(14)
+            $0.size.equalTo(20)
+        }
+        
+        searchTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(searchImageView.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().inset(14)
+            $0.top.bottom.equalToSuperview()
+        }
+        
+        recentSearchLabel.snp.makeConstraints {
+            $0.top.equalTo(searchBarView.snp.bottom).offset(30)
+            $0.leading.equalTo(backImageView)
+        }
+        
+        deleteRecentLabel.snp.makeConstraints {
+            $0.centerY.equalTo(recentSearchLabel)
+            $0.trailing.equalTo(searchBarView)
+        }
+        
+        recnetSearchEmptyView.snp.makeConstraints {
+            $0.top.equalTo(recentSearchLabel.snp.bottom).offset(100)
+            $0.centerX.equalToSuperview()
+        }
+        
+        recentSearchStackView.snp.makeConstraints {
+            $0.top.equalTo(recentSearchLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text, !text.isEmpty else { return true }
+        
+        UserDefaults.standard.saveRecentSearch(searchText: text,
+                                               type: .policy)
+        
+        return true
+    }
+    
+    private func setRecentSearch() {
+        let recentSearchList = UserDefaults.standard.getRecentSearchList(type: .policy)
+        
+        showRecentSearchEmptyView(recentSearchList.isEmpty)
+        
+        recentSearchList.forEach { recentSearch in
+            let recentSearchItem = RecentSearchItemView(text: recentSearch)
+            
+            recentSearchItem.snp.makeConstraints {
+                $0.height.equalTo(30)
+            }
+            
+            recentSearchItem.xImageView.onTapped { [weak self] in
+                self?.recentSearchStackView.removeArrangedSubview(recentSearchItem)
+                recentSearchItem.removeFromSuperview()
+                UserDefaults.standard.removeRecentSearch(searchText: recentSearch,
+                                                         type: .policy)
                 
-                owner.clearSearchView.textField.text = nil
-                owner.viewModel.input.cancelButtonClicked.accept(())
+                // 최근 검색어가 다 삭제된 경우 엠티뷰 표시
+                if ((self?.recentSearchStackView.arrangedSubviews.isEmpty) != nil) {
+                    self?.showRecentSearchEmptyView(true)
+                }
             }
-            .disposed(by: disposeBag)
+            
+            recentSearchStackView.addArrangedSubview(recentSearchItem)
+        }
         
-        // 키보드 내리기
-        let viewTap = UITapGestureRecognizer()
-        layoutView.addGestureRecognizer(viewTap)
-        viewTap.rx.event
-            .bind(with: self) { owner, _ in
-                owner.clearSearchView.textField.resignFirstResponder()
+        // 최근 검색어 전체 삭제
+        deleteRecentLabel.onTapped { [weak self] in
+            self?.showRecentSearchEmptyView(true)
+            
+            recentSearchList.forEach { search in
+                UserDefaults.standard.removeRecentSearch(searchText: search,
+                                                         type: .policy)
             }
-            .disposed(by: disposeBag)
-        
-        // MARK: Outputs
-        // 화면 타입
-        viewModel.output.searchTypeEvent
-                    .bind(with: self) { owner, viewType in
-                        switch viewType {
-                        case .recent:
-                            owner.showRecentSearchViewController()
-                        case .result:
-                            owner.showResultSearchViewController()
-                        }
-                    }
-                    .disposed(by: disposeBag)
+        }
     }
     
-    func showRecentSearchViewController() {
-           // 기존 child view controller가 RecentSearchViewController가 아닌 경우에만 새로운 child view controller를 추가
-           if !(currentChildVC is RecentSearchViewController) {
-               // 기존 child view controller 제거
-               removeCurrentChildViewController()
-               
-               // 새로운 child view controller 추가
-               let viewModel = RecentSearchViewModel(type: viewModel.type)
-               let childVC = RecentSearchViewController(viewModel: viewModel)
-               addChild(childVC)
-               layoutView.flexView.insertSubview(childVC.layoutView, at: 0)
-               childVC.layoutView.frame = layoutView.flexView.bounds
-               childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-               childVC.didMove(toParent: self)
-               viewModel.clickRecentKeywordEvent = { [weak self] text in
-                   
-                   guard let self else { return }
-                   
-                   self.clearSearchView.textField.text = text
-                   self.clearSearchView.textField.sendActions(for: .editingDidEndOnExit)
-               }
-               
-               // 현재 child view controller 업데이트
-               currentChildVC = childVC
-           }
-       }
-       
-       func showResultSearchViewController() {
-               removeCurrentChildViewController()
-               
-               let keyword = self.viewModel.fetchKeyword()
-               
-               var viewModel: ResultSearchInterface
-               switch self.viewModel.type {
-               case .policy:
-                   let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-                   viewModel = ResultPolicyViewModel(keyword: keyword, type: PolicyCategory.allCases, policyUseCase: useCase)
-               case .review:
-                   let useCase = ReviewUseCaseImpl(reviewRepository: ReviewRepositoryImpl())
-                   viewModel = ResultReviewViewModel(keyword, useCase: useCase)
-               case .freePost:
-                   let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                   viewModel = ResultPostViewModel(keyword, useCase: useCase)
-               }
-               
-               // 새로운 child view controller 추가
-               let childVC = ResultSearchViewController(viewModel: viewModel)
-               addChild(childVC)
-               layoutView.flexView.addSubview(childVC.layoutView)
-               childVC.layoutView.frame = layoutView.flexView.bounds
-               childVC.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-               childVC.didMove(toParent: self)
-               
-               // 현재 child view controller 업데이트
-               currentChildVC = childVC
-       }
-       
-       func removeCurrentChildViewController() {
-           // 현재 child view controller 제거
-           if let childVC = currentChildVC {
-               childVC.willMove(toParent: nil)
-               childVC.view.removeFromSuperview()
-               childVC.removeFromParent()
-               currentChildVC = nil
-           }
-       }
+    private func showRecentSearchEmptyView(_ isShow: Bool) {
+        recnetSearchEmptyView.isHidden = !isShow
+        recentSearchStackView.isHidden = isShow
+        deleteRecentLabel.isHidden = isShow
+    }
 }

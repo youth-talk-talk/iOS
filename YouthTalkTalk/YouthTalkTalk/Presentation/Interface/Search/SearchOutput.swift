@@ -10,5 +10,4 @@ import RxCocoa
 
 protocol SearchOutput {
     
-    var searchTypeEvent: BehaviorRelay<SearchViewType> { get }
 }

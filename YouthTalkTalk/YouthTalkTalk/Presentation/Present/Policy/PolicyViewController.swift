@@ -61,8 +61,6 @@ enum PolicySectionItems: Hashable {
 }
 
 final class PolicyViewController: RootViewController {
-    private let backImageView = UIImageView(image: .back.withRenderingMode(.alwaysOriginal))
-    
     private let tableview = UITableView().then {
         $0.backgroundColor = .white
         $0.showsVerticalScrollIndicator = false

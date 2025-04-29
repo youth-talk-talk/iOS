@@ -260,10 +260,7 @@ class CommunityViewController: BaseViewController<CommunityView>, RemoveReported
             
             supplementaryView.searchButton.rx.tap
                 .bind(with: self) { owner, _ in
-                    
-                    let viewModel = SearchViewModel(type: type)
-                    
-                    let nextVC = SearchViewController(viewModel: viewModel)
+                    let nextVC = SearchViewController()
                     owner.navigationController?.pushViewController(nextVC, animated: true)
                 }
                 .disposed(by: supplementaryView.disposeBag)

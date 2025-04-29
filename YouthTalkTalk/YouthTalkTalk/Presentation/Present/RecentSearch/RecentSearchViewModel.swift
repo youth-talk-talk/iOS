@@ -36,7 +36,7 @@ final class RecentSearchViewModel: RecentSearchInterface {
             .withUnretained(self)
             .map { owner, _ in
                 
-                owner.userDefualts.fetchRecentSearchList(type: type)
+                owner.userDefualts.getRecentSearchList(type: type)
             }.subscribe(with: self) { owner, recentSearchList in
                 
                 owner.recentSearchListRelay.accept(recentSearchList)

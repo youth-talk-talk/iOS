@@ -69,10 +69,13 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        navigationController?.setNavigationBarHidden(true, animated: false)
         
         setLayout()
         setTapEvents()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func setTapEvents() {
@@ -90,6 +93,12 @@ final class HomeViewController: UIViewController {
                 
                 present(vc, animated: true, completion: nil)
             }
+        }
+        
+        searchImageView.onTapped { [weak self] in
+            let searchVC = SearchViewController()
+            
+            self?.navigationController?.pushViewController(searchVC, animated: true)
         }
     }
     
