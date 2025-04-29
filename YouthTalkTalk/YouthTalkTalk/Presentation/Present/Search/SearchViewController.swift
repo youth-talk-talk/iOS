@@ -42,6 +42,13 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         $0.spacing = 10
     }
     
+    // MARK: 검색 결과 필터
+    private lazy var searchFilterCollectionView = SearchFilterCollectionView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(cells: SearchFilterCell.self)
+    }
+    
     private let recnetSearchEmptyView = EmptyView(text: "최근 검색된 내역이 없습니다.")
     
     override func viewDidLoad() {
@@ -54,6 +61,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         view.addSubview(deleteRecentLabel)
         view.addSubview(recnetSearchEmptyView)
         view.addSubview(recentSearchStackView)
+        view.addSubview(searchFilterCollectionView)
         
         searchBarView.addSubviews([searchImageView,
                                    searchTextField])
@@ -96,6 +104,12 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         recentSearchStackView.snp.makeConstraints {
             $0.top.equalTo(recentSearchLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
+        }
+        
+        searchFilterCollectionView.snp.makeConstraints {
+            $0.top.equalTo(searchBarView.snp.bottom).offset(20)
+            $0.left.trailing.equalToSuperview()
+            $0.height.equalTo(32)
         }
     }
     
@@ -151,5 +165,21 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         recnetSearchEmptyView.isHidden = !isShow
         recentSearchStackView.isHidden = isShow
         deleteRecentLabel.isHidden = isShow
+    }
+}
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.filters.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: SearchFilterCell = collectionView.dequeueCell(for: indexPath) else { return .init() }
+        
+        let filterTitle = viewModel.filters[indexPath.row]
+        
+        cell.setTitle(filterTitle)
+        
+        return cell
     }
 }

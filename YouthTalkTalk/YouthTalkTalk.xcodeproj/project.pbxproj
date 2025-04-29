@@ -28,6 +28,8 @@
 		6A9081112CEEAB6000B52C91 /* PostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9081102CEEAB6000B52C91 /* PostImageView.swift */; };
 		6A918F212DBEFFE10047ED55 /* RecentSearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */; };
 		6A918F232DBF015D0047ED55 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F222DBF015B0047ED55 /* EmptyView.swift */; };
+		6A918F272DC058300047ED55 /* SearchFilterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */; };
+		6A918F292DC089750047ED55 /* SearchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F282DC089730047ED55 /* SearchFilterCell.swift */; };
 		6AB7B95E2D503E5C00E85371 /* SettingRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7B95D2D503E5C00E85371 /* SettingRegionViewController.swift */; };
 		6AC5E9F62D44D83D00CBC5E6 /* KakaoConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */; };
 		6AC5E9F82D44D83F00CBC5E6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */; };
@@ -306,6 +308,8 @@
 		6A9081102CEEAB6000B52C91 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
 		6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchItemView.swift; sourceTree = "<group>"; };
 		6A918F222DBF015B0047ED55 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterCollectionView.swift; sourceTree = "<group>"; };
+		6A918F282DC089730047ED55 /* SearchFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterCell.swift; sourceTree = "<group>"; };
 		6AB7B95D2D503E5C00E85371 /* SettingRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRegionViewController.swift; sourceTree = "<group>"; };
 		6AC5E9F52D44D83D00CBC5E6 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 		6AC5E9F72D44D83F00CBC5E6 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
@@ -1370,6 +1374,8 @@
 		ACF2A2F32C32CC5600FE8D63 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				6A918F282DC089730047ED55 /* SearchFilterCell.swift */,
+				6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */,
 				6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */,
 				ACF2A2F42C32CC6A00FE8D63 /* SearchViewController.swift */,
 				AC579B2F2C3BE19E00D1C9FC /* SearchViewModel.swift */,
@@ -1770,9 +1776,11 @@
 				AC604C262C6A002100804950 /* RecentSearchInterface.swift in Sources */,
 				6AF5FAEF2D09AD8100BD0CA8 /* CommentCell.swift in Sources */,
 				AC4B43212C1EE02C005FC370 /* SignUpView.swift in Sources */,
+				6A918F272DC058300047ED55 /* SearchFilterCollectionView.swift in Sources */,
 				ACF2A2EB2C315F3E00FE8D63 /* APIInterface.swift in Sources */,
 				AC5A7C2E2BF10BEE00A13991 /* AppCoordinator.swift in Sources */,
 				AC4B430E2C1B14D1005FC370 /* SignInViewModel.swift in Sources */,
+				6A918F292DC089750047ED55 /* SearchFilterCell.swift in Sources */,
 				6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */,
 				AC604C2D2C6A3C0300804950 /* CreatePostViewController.swift in Sources */,
 				AC604C092C6764A900804950 /* RPQuery.swift in Sources */,
@@ -2029,7 +2037,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2067,7 +2075,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
