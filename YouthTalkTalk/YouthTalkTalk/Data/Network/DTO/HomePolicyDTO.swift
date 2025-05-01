@@ -15,6 +15,15 @@ struct HomePolicyDTO: Decodable {
     let data: HomePolicyDataDTO
 }
 
+struct SearchPolicyDTO: Decodable {
+    let data: SearchPolicyDataDTO
+}
+
+struct SearchPolicyDataDTO: Decodable {
+    let totalCount: Int
+    let policyList: [PolicyDTO]
+}
+
 
 struct HomePolicyDataDTO: Decodable {
     

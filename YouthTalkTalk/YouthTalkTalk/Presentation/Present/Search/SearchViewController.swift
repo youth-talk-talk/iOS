@@ -47,6 +47,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         $0.delegate = self
         $0.dataSource = self
         $0.register(cells: SearchFilterCell.self)
+        $0.isHidden = true
     }
     
     private let recnetSearchEmptyView = EmptyView(text: "최근 검색된 내역이 없습니다.")
@@ -55,6 +56,14 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         setRecentSearch()
+        
+        viewModel.onError = { [weak self] error in
+            // TODO: 에러 얼럿 표시
+        }
+        
+        viewModel.onSearched = { [weak self] searchedPolicy in
+            print("|| \(searchedPolicy)")
+        }
         
         view.addSubview(searchBarView)
         view.addSubview(recentSearchLabel)
@@ -120,6 +129,11 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         UserDefaults.standard.saveRecentSearch(searchText: text,
                                                type: .policy)
         
+        viewModel.requestSearchAPI(text)
+        
+        // 검색할 시, 최근검색 뷰 미노출 / 카테고리 표시
+        searchFilterCollectionView.isHidden = false
+        
         return true
     }
     
@@ -128,6 +142,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         
         showRecentSearchEmptyView(recentSearchList.isEmpty)
         
+        // 최근 검색어 표시
         recentSearchList.forEach { recentSearch in
             let recentSearchItem = RecentSearchItemView(text: recentSearch)
             
@@ -161,10 +176,16 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         }
     }
     
+    private func hideRecentSearchView() {
+        recnetSearchEmptyView.isHidden = true
+        recentSearchStackView.isHidden = true
+        deleteRecentLabel.isHidden = true
+    }
+    
     private func showRecentSearchEmptyView(_ isShow: Bool) {
-        recnetSearchEmptyView.isHidden = !isShow
-        recentSearchStackView.isHidden = isShow
-        deleteRecentLabel.isHidden = isShow
+        recnetSearchEmptyView.isHidden = isShow
+        recentSearchStackView.isHidden = !isShow
+        deleteRecentLabel.isHidden = !isShow
     }
 }
 
@@ -179,6 +200,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let filterTitle = viewModel.filters[indexPath.row]
         
         cell.setTitle(filterTitle)
+        
+        cell.onTapped { [weak self] in
+            let vc = DetailFilterBottomSheetViewController()
+            
+            if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
+            
+            self?.present(vc, animated: true, completion: nil)
+        }
         
         return cell
     }

@@ -27,6 +27,26 @@ final class APIManager: APIInterface {
         self.session = session
     }
     
+    func requestAPI<T: Decodable>(router: Router, type: T.Type) async -> Result<T, APIError> {
+        let response = await session.request(router, interceptor: interceptor)
+            .validate(statusCode: 200...399)
+            .serializingDecodable(T.self)
+            .response
+
+        if let httpResponse = response.response {
+            handleResponseHeaders(httpResponse)
+        }
+
+        switch response.result {
+        case .success(let value):
+            return .success(value)
+
+        case .failure:
+            let error = handleResponseError(from: response.data)
+            return .failure(error)
+        }
+    }
+    
     func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, APIError>> {
         
         return Single.create { [weak self] single in

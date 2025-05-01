@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6A177B9C2DB7A08C0016BF41 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A177B9B2DB7A0870016BF41 /* TermViewController.swift */; };
 		6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */; };
+		6A42F9B42DC25D3300BFC347 /* DetailFilterBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B32DC25D2D00BFC347 /* DetailFilterBottomSheetViewController.swift */; };
+		6A42F9B62DC2DE4A00BFC347 /* GrabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B52DC2DE4800BFC347 /* GrabView.swift */; };
+		6A42F9B82DC2E0A800BFC347 /* DetailFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */; };
+		6A42F9BC2DC2EB3300BFC347 /* DetailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9BB2DC2EB3000BFC347 /* DetailFilterCell.swift */; };
 		6A478CC92DBDFE0A00AF8494 /* UICollectionView++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */; };
 		6A478CCB2DBDFE5A00AF8494 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */; };
 		6A478CCF2DBE06F900AF8494 /* PolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */; };
@@ -291,6 +295,10 @@
 /* Begin PBXFileReference section */
 		6A177B9B2DB7A0870016BF41 /* TermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewController.swift; sourceTree = "<group>"; };
 		6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedOrMyCommentListViewController.swift; sourceTree = "<group>"; };
+		6A42F9B32DC25D2D00BFC347 /* DetailFilterBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterBottomSheetViewController.swift; sourceTree = "<group>"; };
+		6A42F9B52DC2DE4800BFC347 /* GrabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabView.swift; sourceTree = "<group>"; };
+		6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterViewController.swift; sourceTree = "<group>"; };
+		6A42F9BB2DC2EB3000BFC347 /* DetailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterCell.swift; sourceTree = "<group>"; };
 		6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++.swift"; sourceTree = "<group>"; };
 		6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCell.swift; sourceTree = "<group>"; };
@@ -586,6 +594,7 @@
 		6AC5EBE02CDE1EF5003EFD37 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				6A42F9B52DC2DE4800BFC347 /* GrabView.swift */,
 				6A918F222DBF015B0047ED55 /* EmptyView.swift */,
 				6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */,
 				6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */,
@@ -1374,6 +1383,9 @@
 		ACF2A2F32C32CC5600FE8D63 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				6A42F9BB2DC2EB3000BFC347 /* DetailFilterCell.swift */,
+				6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */,
+				6A42F9B32DC25D2D00BFC347 /* DetailFilterBottomSheetViewController.swift */,
 				6A918F282DC089730047ED55 /* SearchFilterCell.swift */,
 				6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */,
 				6A918F202DBEFFD10047ED55 /* RecentSearchItemView.swift */,
@@ -1626,6 +1638,7 @@
 				AC604C012C67604E00804950 /* ReviewRepository.swift in Sources */,
 				AC51E8402C969EF600550148 /* DetailConditionViewModel.swift in Sources */,
 				6A478CC92DBDFE0A00AF8494 /* UICollectionView++.swift in Sources */,
+				6A42F9BC2DC2EB3300BFC347 /* DetailFilterCell.swift in Sources */,
 				AC0AA5BD2CCE23B300DB032E /* CommentUseCaseImpl.swift in Sources */,
 				AC604C702C7A24BB00804950 /* ResultSearchInput.swift in Sources */,
 				AC0AA5B32CCE18D800DB032E /* CommentEntity.swift in Sources */,
@@ -1658,6 +1671,7 @@
 				ACF2A2DF2C2E921900FE8D63 /* SplashOutput.swift in Sources */,
 				ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */,
 				ACF2A3012C34170600FE8D63 /* RecentSearchViewController.swift in Sources */,
+				6A42F9B42DC25D3300BFC347 /* DetailFilterBottomSheetViewController.swift in Sources */,
 				6A478CD12DBE253E00AF8494 /* ReviewPolicyView.swift in Sources */,
 				AC9389402CA0503E0021479B /* DefaultFooterView.swift in Sources */,
 				AC51E8392C967D2B00550148 /* TitleWithImageHeaderView.swift in Sources */,
@@ -1729,6 +1743,7 @@
 				AC579B4C2C451C6B00D1C9FC /* HomeInput.swift in Sources */,
 				AC93893E2CA036150021479B /* ConditionReviewDTO.swift in Sources */,
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
+				6A42F9B62DC2DE4A00BFC347 /* GrabView.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
@@ -1796,6 +1811,7 @@
 				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
 				6A478CD32DBE2F8900AF8494 /* PostView.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
+				6A42F9B82DC2E0A800BFC347 /* DetailFilterViewController.swift in Sources */,
 				ACC46CC12CD2913F0004ED5C /* MemberUseCase.swift in Sources */,
 				AC0AA5BF2CCE23C100DB032E /* CommentUseCase.swift in Sources */,
 				AC4B43272C2072E2005FC370 /* DropdownView.swift in Sources */,
