@@ -119,7 +119,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
         // 정책 탭
-        let policyVC = PolicyMainViewController()
+        let policyVC = UINavigationController(rootViewController: PolicyMainViewController())
                 
         // 마이페이지 탭
         let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())

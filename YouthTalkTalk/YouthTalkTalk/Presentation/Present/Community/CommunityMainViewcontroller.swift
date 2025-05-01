@@ -66,6 +66,11 @@ final class CommunityMainViewcontroller: UIViewController {
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         
+        searchBarStackView.onTapped { [weak self] in
+            let searchVC = SearchViewController()
+            self?.navigationController?.pushViewController(searchVC, animated: true)
+        }
+        
         setLayout()
     }
     

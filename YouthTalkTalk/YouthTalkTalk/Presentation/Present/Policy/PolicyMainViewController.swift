@@ -132,6 +132,29 @@ final class PolicyMainViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .white
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        // MARK: 지역 선택
+        [regionTipImageView, selectionRegionLabel, regionDownArrowImageView].forEach {
+            $0.onTapped { [weak self] in
+                guard let self else { return }
+                
+                let vc = RegionBottomSheetViewController(selectedRegion: selectionRegionLabel.text,
+                                                         onRegionTapped: { [weak self] selectedRegion in
+                    self?.selectionRegionLabel.text = selectedRegion
+                })
+                
+                if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
+                
+                present(vc, animated: true, completion: nil)
+            }
+        }
+        
+        searchImageView.onTapped { [weak self] in
+            let searchVC = SearchViewController()
+            self?.navigationController?.pushViewController(searchVC, animated: true)
+        }
+        
         setLayout()
         setupFilterTitles()
         setupIndicatorBar()

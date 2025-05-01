@@ -97,7 +97,6 @@ final class HomeViewController: UIViewController {
         
         searchImageView.onTapped { [weak self] in
             let searchVC = SearchViewController()
-            
             self?.navigationController?.pushViewController(searchVC, animated: true)
         }
     }
