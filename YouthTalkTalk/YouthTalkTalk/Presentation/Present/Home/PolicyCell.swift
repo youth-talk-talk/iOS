@@ -9,6 +9,12 @@ import UIKit
 
 final class PolicyCell: UICollectionViewCell {
     
+    private let contentStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = moderate(14)
+        $0.alignment = .leading
+    }
+    
     private let tagStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 8
@@ -19,6 +25,12 @@ final class PolicyCell: UICollectionViewCell {
     
     private let scrapCountLabel = UILabel().then {
         $0.designed(text: "스크랩 수", font: .p12Regular, textColor: .gray90)
+    }
+    
+    private let hostImageTitleStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = moderate(10)
+        $0.alignment = .center
     }
     
     private let hostImageView = UIImageView().then {
@@ -41,49 +53,44 @@ final class PolicyCell: UICollectionViewCell {
         
         backgroundColor = .white
         layer.cornerRadius = 10
+        
         setShadow()
         
-        addSubviews([tagStackView,
-                     scrapImageView,
-                     scrapCountLabel,
-                     hostImageView,
-                     titleLabel,
-                     totalScrapLabel])
+        addSubview(contentStackView)
+        addSubview(scrapCountLabel)
+        addSubview(scrapImageView)
         
-        tagStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16)
-            $0.leading.equalToSuperview().inset(14)
-            $0.height.equalTo(21)
-            $0.width.equalTo(100)
+        contentStackView.addArrangedSubviews(tagStackView,
+                                             hostImageTitleStackView,
+                                             totalScrapLabel)
+        
+        hostImageTitleStackView.addArrangedSubviews(hostImageView, titleLabel)
+        
+        
+        
+        contentStackView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(moderate(16))
+            $0.leading.trailing.equalToSuperview().inset(moderate(14))
+        }
+        
+        scrapCountLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(moderate(16))
+            $0.trailing.equalToSuperview().inset(moderate(14))
         }
         
         scrapImageView.snp.makeConstraints {
             $0.trailing.equalTo(scrapCountLabel.snp.leading)
-            $0.size.equalTo(20)
-            $0.centerY.equalTo(tagStackView)
+            $0.size.equalTo(moderate(20))
+            $0.centerY.equalTo(scrapCountLabel)
         }
         
-        scrapCountLabel.snp.makeConstraints {
-            $0.centerY.equalTo(tagStackView)
-            $0.trailing.equalToSuperview().inset(14)
+        tagStackView.snp.makeConstraints {
+            $0.height.equalTo(moderate(21))
+            $0.width.equalTo(moderate(100))
         }
         
         hostImageView.snp.makeConstraints {
-            $0.size.equalTo(56)
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(tagStackView)
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(hostImageView)
-            $0.leading.equalTo(hostImageView.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().inset(14)
-            $0.height.equalTo(hostImageView)
-        }
-        
-        totalScrapLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(16)
-            $0.leading.equalTo(tagStackView)
+            $0.size.equalTo(moderate(56))
         }
     }
     
@@ -91,6 +98,23 @@ final class PolicyCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    func setStyle(_ style: policyCellStyle) {
+        if style == .shadow {
+            setShadow()
+        } else {
+            backgroundColor = .gray10
+            layer.shadowColor = UIColor.clear.cgColor
+            layer.borderColor = UIColor.gray40.cgColor
+            layer.borderWidth = 1
+            totalScrapLabel.isHidden = true
+        }
+    }
+    
     func setData(categoryImage: UIImage, categoryName: String) {
     }
+}
+
+enum policyCellStyle {
+    case shadow
+    case border
 }

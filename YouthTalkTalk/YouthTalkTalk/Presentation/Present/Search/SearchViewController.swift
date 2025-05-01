@@ -52,6 +52,46 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
     
     private let recnetSearchEmptyView = EmptyView(text: "최근 검색된 내역이 없습니다.")
     
+    private let dividerView = UIView().then {
+        $0.backgroundColor = .gray30
+        $0.isHidden = true
+    }
+    
+    private let resultCountLabel = UILabel().then {
+        $0.designed(text: "총 0건", font: .p14Regular)
+        $0.isHidden = true
+    }
+    
+    private let sortStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = moderate(2)
+        $0.alignment = .center
+        $0.isHidden = true
+    }
+    
+    private let sortLabel = UILabel().then {
+        $0.designed(text: "최신순", font: .p14Regular)
+    }
+    
+    private let sortArrowImageView = UIImageView(image: .arrowDown.withTintColor(.black))
+    
+    private lazy var resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 35, height: 123)
+
+        $0.showsVerticalScrollIndicator = false
+        $0.collectionViewLayout = layout
+        $0.delegate = self
+        $0.dataSource = self
+        $0.backgroundColor = .white
+        $0.contentInset.left = 16
+        $0.contentInset.right = 16
+        $0.showsLargeContentViewer = false
+        $0.register(cells: PolicyCell.self)
+        $0.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,6 +111,14 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         view.addSubview(recnetSearchEmptyView)
         view.addSubview(recentSearchStackView)
         view.addSubview(searchFilterCollectionView)
+        view.addSubview(dividerView)
+        
+        view.addSubview(resultCountLabel)
+        view.addSubview(sortStackView)
+        view.addSubview(resultCollectionView)
+        
+        sortStackView.addArrangedSubview(sortLabel)
+        sortStackView.addArrangedSubview(sortArrowImageView)
         
         searchBarView.addSubviews([searchImageView,
                                    searchTextField])
@@ -120,6 +168,32 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
             $0.left.trailing.equalToSuperview()
             $0.height.equalTo(32)
         }
+        
+        dividerView.snp.makeConstraints {
+            $0.top.equalTo(searchFilterCollectionView.snp.bottom).offset(moderate(14))
+            $0.height.equalTo(moderate(1))
+            $0.width.centerX.equalToSuperview()
+        }
+        
+        resultCountLabel.snp.makeConstraints {
+            $0.top.equalTo(dividerView.snp.bottom).offset(moderate(10))
+            $0.leading.equalToSuperview().inset(moderate(16))
+        }
+        
+        sortStackView.snp.makeConstraints {
+            $0.centerY.equalTo(resultCountLabel)
+            $0.trailing.equalToSuperview().inset(moderate(16))
+        }
+        
+        sortArrowImageView.snp.makeConstraints {
+            $0.size.equalTo(moderate(16))
+        }
+        
+        resultCollectionView.snp.makeConstraints {
+            $0.top.equalTo(resultCountLabel.snp.bottom).offset(moderate(10))
+            $0.leading.trailing.equalToSuperview().inset(moderate(16))
+            $0.bottom.equalToSuperview()
+        }
     }
     
     
@@ -131,8 +205,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         
         viewModel.requestSearchAPI(text)
         
-        // 검색할 시, 최근검색 뷰 미노출 / 카테고리 표시
-        searchFilterCollectionView.isHidden = false
+        showSearchResultViews()
         
         return true
     }
@@ -176,6 +249,14 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         }
     }
     
+    private func showSearchResultViews(_ isShow: Bool = true) {
+        searchFilterCollectionView.isHidden = !isShow
+        dividerView.isHidden = !isShow
+        resultCountLabel.isHidden = !isShow
+        sortStackView.isHidden = !isShow
+        resultCollectionView.isHidden = !isShow
+    }
+    
     private func hideRecentSearchView() {
         recnetSearchEmptyView.isHidden = true
         recentSearchStackView.isHidden = true
@@ -191,24 +272,37 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.filters.count
+        if collectionView == searchFilterCollectionView {
+            return viewModel.filters.count
+            
+        } else {
+            return 10
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: SearchFilterCell = collectionView.dequeueCell(for: indexPath) else { return .init() }
-        
-        let filterTitle = viewModel.filters[indexPath.row]
-        
-        cell.setTitle(filterTitle)
-        
-        cell.onTapped { [weak self] in
-            let vc = DetailFilterBottomSheetViewController()
+        if collectionView == searchFilterCollectionView {
+            guard let cell: SearchFilterCell = collectionView.dequeueCell(for: indexPath) else { return .init() }
             
-            if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
+            let filterTitle = viewModel.filters[indexPath.row]
             
-            self?.present(vc, animated: true, completion: nil)
+            cell.setTitle(filterTitle)
+            
+            cell.onTapped { [weak self] in
+                let vc = DetailFilterBottomSheetViewController()
+                
+                if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
+                
+                self?.present(vc, animated: true, completion: nil)
+            }
+            
+            return cell
+        } else {
+            guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
+            
+            cell.setStyle(.border)
+
+            return cell
         }
-        
-        return cell
     }
 }

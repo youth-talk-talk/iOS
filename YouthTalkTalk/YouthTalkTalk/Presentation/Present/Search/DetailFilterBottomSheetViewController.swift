@@ -73,63 +73,6 @@ final class DetailFilterBottomSheetViewController: UIViewController {
         setupFilterTitles()
         setupIndicatorBar()
     }
-    
-    private func setLayout() {
-        addChild(pageViewController)
-        
-        view.addSubview(grabView)
-        view.addSubview(titleLabel)
-        view.addSubview(pageViewController.view)
-        view.addSubview(filterTitleScrollView)
-        view.addSubview(resetStackView)
-        view.addSubview(applyButton)
-        
-        resetStackView.addArrangedSubview(resetLabel)
-        resetStackView.addArrangedSubview(resetImageView)
-        
-        filterTitleScrollView.addSubview(filterTitleStackView)
-        filterTitleScrollView.addSubview(indicatorBar)
-        
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(grabView).offset(16)
-            $0.leading.equalToSuperview().inset(16)
-        }
-        
-        filterTitleScrollView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(6)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(40)
-        }
-        
-        filterTitleStackView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(16)
-        }
-        
-        pageViewController.view.snp.makeConstraints {
-            $0.top.equalTo(filterTitleScrollView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(resetStackView.snp.top).offset(moderate(-26))
-        }
-        
-        resetStackView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(moderate(26))
-            $0.height.equalTo(moderate(46))
-            $0.leading.equalToSuperview().inset(28.5)
-            $0.trailing.equalTo(applyButton.snp.leading).offset(moderate(-22.5))
-        }
-        
-        applyButton.snp.makeConstraints {
-            $0.width.lessThanOrEqualToSuperview().dividedBy(1.5)
-            $0.height.equalTo(moderate(46))
-            $0.trailing.equalToSuperview().inset(moderate(20))
-            $0.bottom.equalTo(resetStackView)
-        }
-        
-        resetImageView.snp.makeConstraints {
-            $0.size.equalTo(moderate(16))
-        }
-    }
 
     private func setupFilterTitles() {
         for (index, title) in filters.enumerated() {
@@ -189,6 +132,63 @@ final class DetailFilterBottomSheetViewController: UIViewController {
             self.filterTitleScrollView.layoutIfNeeded()
         }
     }
+    
+    private func setLayout() {
+        addChild(pageViewController)
+        
+        view.addSubview(grabView)
+        view.addSubview(titleLabel)
+        view.addSubview(pageViewController.view)
+        view.addSubview(filterTitleScrollView)
+        view.addSubview(resetStackView)
+        view.addSubview(applyButton)
+        
+        resetStackView.addArrangedSubview(resetLabel)
+        resetStackView.addArrangedSubview(resetImageView)
+        
+        filterTitleScrollView.addSubview(filterTitleStackView)
+        filterTitleScrollView.addSubview(indicatorBar)
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(grabView).offset(16)
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        filterTitleScrollView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(6)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(40)
+        }
+        
+        filterTitleStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+        pageViewController.view.snp.makeConstraints {
+            $0.top.equalTo(filterTitleScrollView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(resetStackView.snp.top).offset(moderate(-26))
+        }
+        
+        resetStackView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(moderate(26))
+            $0.height.equalTo(moderate(46))
+            $0.leading.equalToSuperview().inset(28.5)
+            $0.trailing.equalTo(applyButton.snp.leading).offset(moderate(-22.5))
+        }
+        
+        applyButton.snp.makeConstraints {
+            $0.width.lessThanOrEqualToSuperview().dividedBy(1.5)
+            $0.height.equalTo(moderate(46))
+            $0.trailing.equalToSuperview().inset(moderate(20))
+            $0.bottom.equalTo(resetStackView)
+        }
+        
+        resetImageView.snp.makeConstraints {
+            $0.size.equalTo(moderate(16))
+        }
+    }
 }
 
 extension DetailFilterBottomSheetViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
@@ -207,5 +207,21 @@ extension DetailFilterBottomSheetViewController: UIPageViewControllerDelegate, U
               let index = pages.firstIndex(of: currentVC) else { return }
         currentIndex = index
         moveIndicator(to: filterTitleLabels[index])
+    }
+}
+
+extension DetailFilterBottomSheetViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
+
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return moderate(16)
     }
 }
