@@ -62,6 +62,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         $0.isHidden = true
     }
     
+    // MARK: 최신순 정렬
     private let sortStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = moderate(2)

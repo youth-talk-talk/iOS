@@ -80,15 +80,143 @@ final class PolicyMainViewController: UIViewController {
         $0.setViewControllers([pages[0]], direction: .forward, animated: false)
     }
     
-    private let filters = ["전체", "주거", "교육", "일자리", "복지", "참여", "똥"]
-    private lazy var pages: [UIViewController] = filters.map { _ in PolicyPageViewController() }
-    
     private var currentIndex: Int = 0
+    private let filters = ["전체", "주거", "교육", "일자리 카테고리", "복지", "참여", "카테고리"]
+    private lazy var pages: [UIViewController] = filters.map { _ in PolicyPageViewController() }
+    private lazy var pageControl = UIPageControl().then {
+        $0.currentPage = 0
+        $0.numberOfPages = filters.count
+        $0.pageIndicatorTintColor = .gray40
+        $0.currentPageIndicatorTintColor = .black
+        $0.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+    }
+    
+    private let dividerView3 = UIView().then {
+        $0.backgroundColor = .gray30
+    }
+    
+    // MARK: 모든 정책 보기
+    private let allPolicyHeaderView = TitleArrowView(text: "모든 정책 한눈에 보기")
+    
+    private let filterTitleScrollView = UIScrollView().then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.bounces = false
+    }
+    
+    private let allPolicyDividerView = UIView().then {
+        $0.backgroundColor = .gray30
+    }
+    
+    private let filterTitleStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 16
+    }
+    
+    private var filterTitleLabels: [UILabel] = []
+    
+    private let indicatorBar = UIView().then {
+        $0.backgroundColor = .greenNormal
+    }
+    
+    private lazy var allPolicyPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.didMove(toParent: self)
+        $0.setViewControllers([allPolicypages[0]], direction: .forward, animated: false)
+    }
+    
+    private var allPolicycurrentIndex: Int = 0
+    private let allPolicyfilters = ["전체", "주거", "교육", "일자리", "복지", "참여", "카테고리"]
+    private lazy var allPolicypages: [UIViewController] = allPolicyfilters.map { _ in PolicyInfinityPageViewController() }
     
     override func viewDidLoad() {
         view.backgroundColor = .white
         
+        setLayout()
+        setupFilterTitles()
+        setupIndicatorBar()
+    }
+    
+    private func setupFilterTitles() {
+        for (index, title) in allPolicyfilters.enumerated() {
+            let filterLabel = UILabel().then {
+                if index == 0 {
+                    $0.designed(text: title, font: .p14Bold, textColor: .green)
+                    
+                } else {
+                    $0.designed(text: title, font: .p14Regular, textColor: .gray70)
+                }
+            }
+            
+            filterLabel.onTapped { [weak self] in
+                guard let self else { return }
+                
+                let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
+                allPolicyPageViewController.setViewControllers([allPolicypages[index]], direction: direction, animated: true)
+                
+                allPolicycurrentIndex = index
+                moveIndicator(to: filterLabel)
+            }
+            
+            filterTitleStackView.addArrangedSubview(filterLabel)
+            filterTitleLabels.append(filterLabel)
+        }
+    }
+
+    private func setupIndicatorBar() {
+        guard let firstLabel = filterTitleLabels.first else { return }
+        
+        indicatorBar.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(38)
+            $0.height.equalTo(2)
+            $0.width.equalTo(firstLabel)
+            $0.centerX.equalTo(firstLabel)
+        }
+    }
+
+    private func moveIndicator(to label: UILabel) {
+        filterTitleLabels.forEach {
+            if $0 == label {
+                $0.designed(text: $0.text ?? "", font: .p14Bold, textColor: .green)
+                
+            } else {
+                $0.designed(text: $0.text ?? "", font: .p14Regular, textColor: .gray70)
+            }
+        }
+        
+        indicatorBar.snp.remakeConstraints {
+            $0.top.equalToSuperview().inset(38)
+            $0.height.equalTo(2)
+            $0.width.equalTo(label)
+            $0.centerX.equalTo(label)
+        }
+
+        UIView.animate(withDuration: 0.25) {
+            self.filterTitleScrollView.layoutIfNeeded()
+        }
+    }
+    
+    private func makeCollectionView(_ itemSize: CGSize, direction: UICollectionView.ScrollDirection = .horizontal) -> UICollectionView {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = direction
+            layout.itemSize = itemSize
+
+            $0.collectionViewLayout = layout
+            $0.delegate = self
+            $0.dataSource = self
+            $0.backgroundColor = .white
+            $0.contentInset.left = 16
+            $0.contentInset.right = 16
+            $0.showsHorizontalScrollIndicator = false
+        }
+        
+        return collectionView
+    }
+    
+    private func setLayout() {
         addChild(pageViewController)
+        addChild(allPolicyPageViewController)
         view.addSubview(baseScrollView)
         baseScrollView.addSubview(containerView)
         
@@ -114,6 +242,16 @@ final class PolicyMainViewController: UIViewController {
         containerView.addSubview(newManyPolicyHeaderView)
         containerView.addSubview(newManyPolicyFilterCollectionView)
         containerView.addSubview(pageViewController.view)
+        containerView.addSubview(pageControl)
+        containerView.addSubview(dividerView3)
+        
+        // 모든 정책 보기
+        containerView.addSubview(allPolicyHeaderView)
+        containerView.addSubview(filterTitleScrollView)
+        containerView.addSubview(allPolicyDividerView)
+        containerView.addSubview(allPolicyPageViewController.view)
+        filterTitleScrollView.addSubview(filterTitleStackView)
+        filterTitleScrollView.addSubview(indicatorBar)
 
         baseScrollView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -209,26 +347,48 @@ final class PolicyMainViewController: UIViewController {
             $0.top.equalTo(newManyPolicyFilterCollectionView.snp.bottom).offset(moderate(20))
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
             $0.height.equalTo(moderate(540))
-            $0.bottom.equalToSuperview().inset(moderate(30))
-        }
-    }
-    
-    private func makeCollectionView(_ itemSize: CGSize, direction: UICollectionView.ScrollDirection = .horizontal) -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = direction
-            layout.itemSize = itemSize
-
-            $0.collectionViewLayout = layout
-            $0.delegate = self
-            $0.dataSource = self
-            $0.backgroundColor = .white
-            $0.contentInset.left = 16
-            $0.contentInset.right = 16
-            $0.showsHorizontalScrollIndicator = false
         }
         
-        return collectionView
+        pageControl.snp.makeConstraints {
+            $0.top.equalTo(pageViewController.view.snp.bottom).offset(moderate(12))
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
+        }
+        
+        dividerView3.snp.makeConstraints {
+            $0.top.equalTo(pageControl.snp.bottom).offset(moderate(30))
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(moderate(10))
+        }
+        
+        allPolicyHeaderView.snp.makeConstraints {
+            $0.top.equalTo(dividerView3.snp.bottom).offset(moderate(21))
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        filterTitleScrollView.snp.makeConstraints {
+            $0.top.equalTo(allPolicyHeaderView.snp.bottom).offset(moderate(14))
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(moderate(40))
+        }
+        
+        allPolicyDividerView.snp.makeConstraints {
+            $0.top.equalTo(filterTitleScrollView.snp.bottom)
+            $0.height.equalTo(moderate(1))
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        filterTitleStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+        allPolicyPageViewController.view.snp.makeConstraints {
+            $0.top.equalTo(filterTitleStackView.snp.bottom).offset(moderate(10))
+            $0.leading.trailing.equalToSuperview().inset(moderate(16))
+            $0.height.greaterThanOrEqualTo(moderate(600))
+            $0.bottom.equalToSuperview().inset(moderate(30))
+        }
     }
 }
 
@@ -276,18 +436,42 @@ extension PolicyMainViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension PolicyMainViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     func pageViewController(_ pvc: UIPageViewController, viewControllerBefore vc: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: vc), index > 0 else { return nil }
-        return pages[index - 1]
+        if pvc == pageViewController {
+            guard let index = pages.firstIndex(of: vc), index > 0 else { return nil }
+            return pages[index - 1]
+            
+        } else {
+            guard let index = allPolicypages.firstIndex(of: vc), index > 0 else { return nil }
+            return allPolicypages[index - 1]
+        }
     }
 
     func pageViewController(_ pvc: UIPageViewController, viewControllerAfter vc: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: vc), index < pages.count - 1 else { return nil }
-        return pages[index + 1]
+        if pvc == pageViewController {
+            guard let index = pages.firstIndex(of: vc), index < pages.count - 1 else { return nil }
+            return pages[index + 1]
+            
+        } else {
+            guard let index = allPolicypages.firstIndex(of: vc), index < allPolicypages.count - 1 else { return nil }
+            return allPolicypages[index + 1]
+            
+        }
     }
 
     func pageViewController(_ pvc: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard completed, let currentVC = pvc.viewControllers?.first,
-              let index = pages.firstIndex(of: currentVC) else { return }
-        currentIndex = index
+        if pvc == pageViewController {
+            guard completed, let currentVC = pvc.viewControllers?.first,
+                  let index = pages.firstIndex(of: currentVC) else { return }
+            
+            currentIndex = index
+            pageControl.currentPage = index
+            
+        } else {
+            guard completed, let currentVC = pvc.viewControllers?.first,
+                  let index = allPolicypages.firstIndex(of: currentVC) else { return }
+            
+            allPolicycurrentIndex = index
+            moveIndicator(to: filterTitleLabels[index])
+        }
     }
 }
