@@ -38,6 +38,6 @@ extension FavoriteCollectionViewCell {
     
     func configure(title: String) {
         
-        titleLabel.designed(text: title, fontType: .p16SemiBold, textColor: .gray60)
+        titleLabel.designed(text: title, font: .p16SemiBold, textColor: .gray60)
     }
 }

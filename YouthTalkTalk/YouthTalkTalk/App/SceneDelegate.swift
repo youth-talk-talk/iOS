@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         configureNavigationAppearance()
@@ -30,9 +29,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
         
-        self.window?.rootViewController = naviVC
+        self.window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         self.window?.makeKeyAndVisible()
         
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.window?.rootViewController = naviVC
+            self.window?.makeKeyAndVisible()
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -93,7 +96,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         tabBarAppearance.backgroundColor = .clear
-        tabBarAppearance.shadowColor = .clear
+        tabBarAppearance.shadowColor = .gray40
         // 스크롤 엣지가 닿았을 때 탭바 appearance settings
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         // 일반 탭바 appearance settings
@@ -101,38 +104,54 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     static func makeRootVC() {
+        struct TabItem {
+            let viewController: UIViewController
+            let title: String
+            let icon: String
+        }
         
-        let tabVC = UITabBarController()
-        
-        // HOME TAB
-        let repository = PolicyRepositoryImpl()
-        let policyUseCase = PolicyUseCaseImpl(policyRepository: repository)
-        let homeViewModel = HomeViewModel(policyUseCase: policyUseCase)
-        let homeVC = HomeViewController(viewModel: homeViewModel)
+        // 홈 탭
+        let homeVC = HomeViewController()
         let homeNaviVC = UINavigationController(rootViewController: homeVC)
         
-        // COMMUNITY TAB
-        let communityVC = CommunityTabViewController()
+        // 커뮤니티 탭
+        let communityVC = CommunityMainViewcontroller()
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
-        // MYPAGE TAB
+        // 정책 탭
+        let policyVC = UINavigationController(rootViewController: PolicyMainViewController())
+                
+        // 마이페이지 탭
         let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
         let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
         let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
         let myPageVC = MyPageViewController(viewModel: myPageViewModel)
         let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
         
-        tabVC.setViewControllers([communityNaviVC, homeNaviVC, myPageNaviVC], animated: true)
-        tabVC.selectedIndex = 1
+        // 탭 구성요소
+        let tabItems: [TabItem] = [
+            TabItem(viewController: homeNaviVC, title: "홈", icon: "house"),
+            TabItem(viewController: policyVC, title: "정책", icon: "policy"),
+            TabItem(viewController: communityNaviVC, title: "커뮤니티", icon: "community"),
+            TabItem(viewController: myPageNaviVC, title: "마이페이지", icon: "profile")
+        ]
         
-        tabVC.tabBar.items?[0].image = UIImage(named: "community")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[0].selectedImage = UIImage(named: "community")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        let tabVC = UITabBarController()
         
-        tabVC.tabBar.items?[1].image = UIImage(named: "house")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[1].selectedImage = UIImage(named: "house")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        // 탭 설정
+        tabVC.setViewControllers(tabItems.map { $0.viewController }, animated: true)
+        tabVC.tabBar.tintColor = FontColor.green.value
+        tabVC.tabBar.backgroundColor = .white
+        tabVC.selectedIndex = 0
         
-        tabVC.tabBar.items?[2].image = UIImage(named: "profile")?.withTintColor(.gray40, renderingMode: .alwaysOriginal)
-        tabVC.tabBar.items?[2].selectedImage = UIImage(named: "profile")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        // 탭 데이터 삽입
+        if let items = tabVC.tabBar.items {
+            items.enumerated().forEach { index, tab in
+                tab.title = tabItems[index].title
+                tab.image = UIImage(named: tabItems[index].icon)?.withTintColor(FontColor.gray80.value, renderingMode: .alwaysOriginal)
+                tab.selectedImage = UIImage(named: tabItems[index].icon)?.withTintColor(FontColor.green.value, renderingMode: .alwaysOriginal)
+            }
+        }
         
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
@@ -143,4 +162,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
-

@@ -83,7 +83,7 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     private func cellRegistration() {
         
         // 인기정책 Section
-        let resultSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let resultSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
@@ -96,8 +96,8 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                     
                     switch itemIdentifier {
                         
+                        // 검색 결과 페이지에서 정책 탭할시 정책 상세로 이동
                     case .resultPolicy(let policyEntity):
-                        
                         let repository = PolicyRepositoryImpl()
                         let useCase = PolicyUseCaseImpl(policyRepository: repository)
                         let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
@@ -105,10 +105,18 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         
                         owner.navigationController?.pushViewController(nextVC, animated: true)
                         
-                        // TODO: 해라
+                        // 검색 결과 페이지에서 게시글 탭할시 게시글 상세로 이동
                     case .resultRP(let rpEntity):
+                        let repository = ReviewRepositoryImpl()
+                        let commentRepository = CommentRepositoryImpl()
+                        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+                        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+                        let viewModel = PosetDetailViewModel(data: rpEntity, useCase: useCase, commnetUseCase: commentUseCase)
+                        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+                        // 게시글 상세에서 신고할 시 검색 결과에서 사라지는 동작 필요할 시 주석 해제
+                        // resultDetailVC.delegate = self
                         
-                        break
+                        owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                         
                     default:
                         break
@@ -124,13 +132,13 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                         
                     case .resultPolicy(let policyEntity):
                         
-                        owner.viewModel.input.updatePolicyScrap.accept(policyEntity.policyId)
+                        owner.viewModel.input.updatePostScrap.accept(policyEntity.policyId)
                         
                     case .resultRP(let rpEntity):
                         
                         guard let postId = rpEntity.postId else { return }
                         
-                        owner.viewModel.input.updatePolicyScrap.accept(String(postId))
+                        owner.viewModel.input.updatePostScrap.accept(String(postId))
                         
                     default:
                         break
@@ -144,14 +152,14 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 
                 // cell에 적용(스크롤시에도 유지)
                 if let scrap = viewModel.output.scrapStatus[policyEntity.policyId] {
-                    cell.updateScrapStatus(scrap)
+                    cell.updateScrapStatus(scrap, 0)
                 }
                 
                 // cell에 즉시 적용
                 viewModel.output.scrapStatusRelay
                     .bind(with: self) { owner, scrapStatus in
                         if let scrap = scrapStatus[policyEntity.policyId] {
-                            cell.updateScrapStatus(scrap)
+                            cell.updateScrapStatus(scrap, 0)
                         }
                     }
                     .disposed(by: self.disposeBag)
@@ -161,14 +169,14 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                 guard let id = rpEntity.postId else { return }
                 
                 if let scrap = viewModel.output.scrapStatus[String(id)] {
-                    cell.updateScrapStatus(scrap)
+                    cell.updateScrapStatus(scrap, 0)
                 }
                 
                 viewModel.output.scrapStatusRelay
                     .bind(with: self) { owner, scrapStatus in
                         
                         if let scrap = scrapStatus[String(id)] {
-                            cell.updateScrapStatus(scrap)
+                            cell.updateScrapStatus(scrap, 0)
                         }
                     }
                     .disposed(by: disposeBag)
@@ -217,7 +225,6 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
                     let nextVC = DetailConditionViewController()
                     
                     nextVC.viewModel.result = { age, codeList, isFinished in
-                        
                         let items = owner.snapshot.itemIdentifiers(inSection: .result)
                         owner.snapshot.deleteItems(items)
                         
@@ -238,7 +245,11 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
             
             self.viewModel.output.totalCountRelay
                 .bind(with: self) { owner, totalCount in
-                    supplementaryView.setTitle("총 \(totalCount)건의 정책이 있어요")
+                    var text = "건의 정책이 있어요"
+                    if owner.viewModel is ResultReviewViewModel { text = "건의 후기가 있어요" }
+                    if owner.viewModel is ResultPostViewModel { text = "건의 게시글이 있어요" }
+
+                    supplementaryView.setTitle("총 \(totalCount)\(text)")
                 }
                 .disposed(by: supplementaryView.disposeBag)
         }

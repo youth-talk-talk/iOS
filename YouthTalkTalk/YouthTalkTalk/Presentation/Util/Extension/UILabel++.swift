@@ -11,14 +11,14 @@ import RxCocoa
 
 extension UILabel {
     
-    func designed(text: String, fontType: FontType, textColor: FontColor = .gray60, applyLineHeight: Bool = true) {
+    func designed(text: String = "", font: FontType, textColor: FontColor = .gray100, applyLineHeight: Bool = true) {
         
         self.text = text
         self.textColor = textColor.value
-        self.font = FontManager.font(fontType)
+        self.font = FontManager.font(font)
         
         if applyLineHeight {
-            self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(fontType))
+            self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(font))
         }
     }
     
@@ -49,6 +49,32 @@ extension UILabel {
         let boundingRect = text.boundingRect(with: maxSize, options: options, attributes: attributes, context: nil)
         
         return ceil(boundingRect.width)
+    }
+    
+    func isNotEmpty() -> Bool {
+        guard let text = self.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+        
+        return text != ""
+    }
+    
+    func changeFont(forText text: String, withNewFont font: UIFont) {
+        guard let currentText = self.text else { return }
+        
+        let range = (currentText as NSString).range(of: text)
+        
+        if range.location != NSNotFound {
+            let attributedString = NSMutableAttributedString(string: currentText)
+            attributedString.addAttribute(.font, value: font, range: range)
+            self.attributedText = attributedString
+        }
+    }
+}
+
+extension UITextField {
+    func isNotEmpty() -> Bool {
+        guard let text = self.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+        
+        return text != ""
     }
 }
 

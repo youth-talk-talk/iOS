@@ -11,7 +11,9 @@ import PinLayout
 import RxSwift
 import RxCocoa
 
-class SettingViewController: RootViewController {
+final class SettingViewController: RootViewController {
+    
+    private let viewModel: MyPageInterface
     
     let nicknameLabel = UILabel()
     let nicknameButtonView = TitleWithImageButtonView()
@@ -24,73 +26,89 @@ class SettingViewController: RootViewController {
     
     private let data: MeEntity
     
-    init(data: MeEntity) {
+    init(data: MeEntity, viewModel: MyPageInterface) {
         self.data = data
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+//        viewModel.output.successDeleteAccount.bind { [weak self] _ in
+//            self?.goSignInView()
+//        }
+//        .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+//    
+//    override func configureView() {
+//        
+//        view.backgroundColor = .white
+//        
+//        nicknameLabel.designed(text: "닉네임 설정", font: .g14Bold)
+//        nicknameButtonView.setTitle(data.nickname)
+//        nicknameButtonView.setImage(.edit)
+//        
+//        nicknameButtonView.imageButton.onTapped { [weak self] in
+//            guard let self else { return }
+//            
+//            let vc = SettingNicknameViewController(originName: data.nickname,
+//                                                   completeChangedMeData: { [weak self] newMeData in
+//                self?.nicknameButtonView.setTitle(newMeData.nickname)
+//            })
+//            
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
+//        
+//        regionLabel.designed(text: "나의 지역설정", font: .g14Bold)
+//        regionButtonView.setTitle(data.region)
+//        regionButtonView.setImage(.setting)
+//        
+//        regionButtonView.imageButton.onTapped { [weak self] in
+//            let vc = SettingRegionViewController(completeChangedMeData: { [weak self] newMeData in
+//                self?.regionButtonView.setTitle(newMeData.region)
+//            })
+//            
+//            self?.present(vc, animated: true)
+//        }
+//        
+//        logoutLabel.onTapped { [weak self] in
+//            self?.goSignInView()
+//        }
+//        
+//        withdrawLabel.onTapped { [weak self] in
+//            let alertView = TwoButtonAlertView(title: "정말로 탈퇴 하시겠습니까?") { [weak self] in
+//                self?.viewModel.input.deleteAccount.accept(())
+//            }
+//            
+//            self?.view.addSubview(alertView)
+//            
+//            alertView.snp.makeConstraints {
+//                $0.edges.equalToSuperview()
+//            }
+//        }
+//        
+//        logoutLabel.designed(text: "로그아웃", font: .p16SemiBold, textColor: .gray60)
+//        withdrawLabel.designed(text: "회원탈퇴", font: .p16SemiBold, textColor: .gray60)
+//    }
     
-    override func configureView() {
+    private func goSignInView() {
+        let useCase = SignInUseCaseImpl()
+        let viewModel = SignInViewModel(signInUseCase: useCase)
+        let newRootVC = SignInViewController(viewModel: viewModel)
+        let naviVC = UINavigationController(rootViewController: newRootVC)
         
-        view.backgroundColor = .white
+        let keyChainHelper = KeyChainHelper()
+        keyChainHelper.deleteTokenInfo(type: .accessToken)
+        keyChainHelper.deleteTokenInfo(type: .refreshToken)
         
-        nicknameLabel.designed(text: "닉네임 설정", fontType: .g14Bold)
-        nicknameButtonView.setTitle(data.nickname)
-        nicknameButtonView.setImage(.edit)
-        
-        regionLabel.designed(text: "나의 지역설정", fontType: .g14Bold)
-        regionButtonView.setTitle(data.region)
-        regionButtonView.setImage(.setting)
-        
-        logoutLabel.designed(text: "로그아웃", fontType: .p16SemiBold, textColor: .gray60)
-        withdrawLabel.designed(text: "회원탈퇴", fontType: .p16SemiBold, textColor: .gray60)
-    }
-    
-    override func configureLayout() {
-        
-        flexView.flex.define { flex in
-            
-            flex.addItem(nicknameLabel)
-                .marginTop(29)
-                .width(100%)
-            
-            flex.addItem(nicknameButtonView)
-                .marginTop(12)
-                .width(100%)
-                .height(50)
-            
-            flex.addItem(regionLabel)
-                .marginTop(29)
-                .width(100%)
-            
-            flex.addItem(regionButtonView)
-                .marginTop(12)
-                .width(100%)
-                .height(50)
-            
-            flex.addItem(logoutLabel)
-                .marginTop(24)
-                .width(100%)
-                .height(50)
-            
-            flex.addItem(withdrawLabel)
-                .width(100%)
-                .height(50)
-            
-        }
-        .marginHorizontal(17)
-    }
-    
-    override func bind() {
-        
-        regionButtonView.imageButton.rx.tap
-            .bind(with: self) { owner, _ in
-                //
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            guard let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+                fatalError("Failed to get SceneDelegate")
             }
-            .disposed(by: disposeBag)
+            sceneDelegate.window?.rootViewController = naviVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
 }

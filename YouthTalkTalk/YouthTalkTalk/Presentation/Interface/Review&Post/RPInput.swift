@@ -13,6 +13,7 @@ protocol RPInput {
     var fetchRPs: PublishRelay<Void> { get }
     var updateRecentRPs: PublishRelay<Int> { get }
     var pageUpdate: PublishRelay<Int> { get }
+    var updatePostScrap: PublishRelay<String> { get }
     
     var policyCategorySeleted: PublishRelay<PolicyCategory> { get }
 }

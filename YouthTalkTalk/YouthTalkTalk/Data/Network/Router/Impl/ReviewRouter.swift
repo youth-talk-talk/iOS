@@ -16,8 +16,12 @@ enum ReviewRouter: Router {
     
     case fetchReview(query: RPQuery)
     case fetchConditionReview(query: ConditionRPQuery)
-    case updateReviewScrap(id: String)
+    case updatePostScrap(id: String)
     case fetchReviewDetilInfo(id: Int)
+    case uploadPostComment(body: UploadPostCommentBody)
+    case deletePost(_ postId: String)
+    case reportPost(_ postId: Int)
+    case userBlock(_ userId: Int)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -29,10 +33,18 @@ enum ReviewRouter: Router {
             return "/posts/review"
         case .fetchConditionReview:
             return "/posts/keyword"
-        case .updateReviewScrap(let id):
+        case .updatePostScrap(let id):
             return "/posts/\(id)/scrap"
         case .fetchReviewDetilInfo(let id):
             return "/posts/\(id)"
+        case .uploadPostComment:
+            return "/posts/comments"  
+        case .deletePost(let id):
+            return "/posts/\(id)"
+        case .reportPost(let id):
+            return "/report/post/\(id)"
+        case .userBlock(let userId):
+            return "/members/block/\(userId)"
         }
     }
     
@@ -40,8 +52,10 @@ enum ReviewRouter: Router {
         switch self {
         case .fetchReview, .fetchConditionReview, .fetchReviewDetilInfo:
             return .get
-        case .updateReviewScrap:
+        case .updatePostScrap, .uploadPostComment, .reportPost, .userBlock:
             return .post
+        case .deletePost:
+            return .delete
         }
     }
     
@@ -51,6 +65,8 @@ enum ReviewRouter: Router {
             return convertToParameters(rpQuery: query)
         case .fetchConditionReview(let query):
             return convertToParameters(conditionQuery: query)
+        case .uploadPostComment:
+            return nil
         default:
             return nil
         }
@@ -58,7 +74,7 @@ enum ReviewRouter: Router {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchReview, .fetchConditionReview, .updateReviewScrap, .fetchReviewDetilInfo:
+        case .fetchReview, .fetchConditionReview, .updatePostScrap, .fetchReviewDetilInfo, .uploadPostComment, .deletePost, .reportPost, .userBlock:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -70,8 +86,10 @@ enum ReviewRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchReview, .fetchConditionReview, .updateReviewScrap, .fetchReviewDetilInfo:
+        case .fetchReview, .fetchConditionReview, .updatePostScrap, .fetchReviewDetilInfo, .deletePost, .reportPost, .userBlock:
             return nil
+        case .uploadPostComment(let body):
+            return try? encoder.encode(body)
         }
     }
     

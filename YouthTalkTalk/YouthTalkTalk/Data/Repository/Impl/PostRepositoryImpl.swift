@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 final class PostRepositoryImpl: PostRepository {
-    
+
     private let apiManager = APIManager()
     
     func fetchPosts(page: Int, size: Int) -> Observable<Result<CommunityRPDTO, APIError>> {
@@ -41,5 +41,23 @@ final class PostRepositoryImpl: PostRepository {
         let router = PostRouter.fetchScrapPost(query: rpQuery)
         
         return apiManager.request(router: router, type: ScrapPostDTO.self).asObservable()
+    }
+    
+    func fetchLikedComment() -> Observable<Result<LikedComment, APIError>> {
+        let router = PostRouter.fetchLikedComment
+        
+        return apiManager.request(router: router, type: LikedComment.self).asObservable()
+    }   
+    
+    func fetchMyComment() -> Observable<Result<LikedComment, APIError>> {
+        let router = PostRouter.fetchMyComment
+        
+        return apiManager.request(router: router, type: LikedComment.self).asObservable()
+    }    
+    
+    func fetchMyPost(_ page: Int) -> Observable<Result<MyPost, APIError>> {
+        let router = PostRouter.fetchMyPost(page: page)
+        
+        return apiManager.request(router: router, type: MyPost.self).asObservable()
     }
 }

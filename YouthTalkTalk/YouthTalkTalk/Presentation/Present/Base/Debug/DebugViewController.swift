@@ -30,10 +30,6 @@ class DebugViewController: BaseViewController<DebugView> {
         layoutView.tableView.dataSource = self
         layoutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DebugCell")
     }
-    
-    deinit {
-        print("DebugViewController Deinit")
-    }
 }
 
 extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
@@ -49,7 +45,7 @@ extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
         let item = DebugItem(rawValue: indexPath.row) ?? .signInPage
         
         cell.backgroundColor = .clear
-        cell.textLabel?.designed(text: item.name, fontType: .g20Bold, textColor: .white)
+        cell.textLabel?.designed(text: item.name, font: .g20Bold, textColor: .white)
         
         return cell
     }

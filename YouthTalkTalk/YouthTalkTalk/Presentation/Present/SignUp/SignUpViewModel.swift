@@ -76,7 +76,6 @@ final class SignUpViewModel: SignUpInterface {
                     
                     // TODO: 에러 처리 필요
                     if error == .alreadyRegisteredUser {
-                        print("이미 가입한 유저 처리 추가 필요")
                     }
                     
                     signUpResult.accept(false)

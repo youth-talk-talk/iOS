@@ -14,3 +14,10 @@ struct ScrapPolicyDTO: Decodable {
     let code: String
     let data: [PolicyDTO]
 }
+
+struct UploadImageDTO: Decodable {
+    let status: Int
+    let message: String
+    let code: String
+    let data: String
+}

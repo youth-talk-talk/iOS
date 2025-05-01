@@ -11,4 +11,5 @@ import RxSwift
 protocol MemberRepository {
     
     func fetchMe() -> Observable<Result<MeDTO, APIError>>
+    func deleteAccount() -> Observable<Result<DeleteAccountDTO, APIError>>
 }

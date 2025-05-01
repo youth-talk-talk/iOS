@@ -14,12 +14,15 @@ final class PostViewModel: RPInterface {
     private let disposeBag: DisposeBag = DisposeBag()
     private let useCase: PostUseCase
     
-    var type: MainContentsType = .post
+    var type: MainContentsType = .freePost
     var selectedPolicyCategory: [PolicyCategory] = PolicyCategory.allCases
     
     var fetchRPs = PublishRelay<Void>()
     var updateRecentRPs = PublishRelay<Int>()
     var pageUpdate = PublishRelay<Int>()
+    var updatePostScrap = PublishRelay<String>()
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
     var popularRPsRelay = PublishRelay<[CommunitySectionItems]>()
     var recentRPsRelay = PublishRelay<[CommunitySectionItems]>()
@@ -49,8 +52,27 @@ final class PostViewModel: RPInterface {
                     owner.recentRPsRelay.accept(recent)
                     
                 case .failure(let error):
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        updatePostScrap
+            .withUnretained(self)
+            .flatMap { owner, policyID in
+                
+                return owner.useCase.updatePostScrap(id: policyID)
+            }
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let scrapEntity):
+                    // TODO: viewmodel에서 cell에 넣는 데이터 원본의 scrpas count 수정하기
+                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatusRelay.accept(owner.scrapStatus)
                     
-                    print(error)
+                case .failure(let error):
+                    break
                 }
             }
             .disposed(by: disposeBag)

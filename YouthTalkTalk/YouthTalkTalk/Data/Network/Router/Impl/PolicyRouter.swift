@@ -20,6 +20,9 @@ enum PolicyRouter: Router {
     case updatePolicyScrap(id: String)
     case fetchUpComingDeadlineScrap
     case fetchScrapPolicy
+    case uploadImage(image: String)
+    case uploadPost(body: UploadPostBody)
+    case editPost(_ postId: Int, _ postData: PostEditRequestModel)
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -39,6 +42,12 @@ enum PolicyRouter: Router {
             return "policies/scrapped/upcoming-deadline"
         case .fetchScrapPolicy:
             return "policies/scrap"
+        case .uploadImage:
+            return "/posts/image"
+        case .uploadPost:
+            return "/posts"
+        case .editPost(let postId, _):
+            return "/posts/\(postId)"
         }
     }
     
@@ -46,8 +55,10 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy :
             return .get
-        case .fetchConditionPolicy, .updatePolicyScrap:
+        case .fetchConditionPolicy, .updatePolicyScrap, .uploadImage, .uploadPost:
             return .post
+        case .editPost:
+            return .patch
         }
     }
     
@@ -57,15 +68,19 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let page, _):
             return convertToParameters(page)
-        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadPost, .editPost:
             return ["Content-Type": "application/json",
+                    "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
+            
+        case .uploadImage:
+            return ["Content-Type": "multipart/form-data",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
     }
@@ -78,6 +93,12 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchConditionPolicy(_, let body):
             return try? encoder.encode(body)
+        case .uploadImage(let image):
+            return try? encoder.encode(image)
+        case .uploadPost(let body):
+            return try? encoder.encode(body)
+        case .editPost(_, let body):
+            return try? encoder.encode(body)
         case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
             return nil
         }
@@ -85,6 +106,11 @@ enum PolicyRouter: Router {
     
     private func convertToParameters(_ query: PolicyQuery) -> [String: Any] {
         var params: [String: Any] = [:]
+        
+        // 카테고리를 하나도 선택하지 않은 경우에는 모든 카테고리의 정책을 불러옴
+        if query.categories.isEmpty {
+            params["categories"] = "JOB,EDUCATION,LIFE,PARTICIPATION"
+        }
         
         query.categories.forEach { category in
             if params["categories"] == nil {

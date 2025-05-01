@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class ReviewViewModel: RPInterface {
-    
     private let disposeBag: DisposeBag = DisposeBag()
     private let useCase: ReviewUseCase
     
@@ -25,6 +24,9 @@ final class ReviewViewModel: RPInterface {
     var updateRecentRPs = PublishRelay<Int>()
     var policyCategorySeleted = PublishRelay<PolicyCategory>()
     var pageUpdate = PublishRelay<Int>()
+    var updatePostScrap = PublishRelay<String>()
+    var scrapStatus = [String: Bool]()
+    var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
     
     var popularRPsRelay = PublishRelay<[CommunitySectionItems]>()
     var recentRPsRelay = PublishRelay<[CommunitySectionItems]>()
@@ -46,7 +48,6 @@ final class ReviewViewModel: RPInterface {
                 
                 switch result {
                 case .success(let communityRPEntity):
-                    
                     let popular = communityRPEntity.popularRP.map { CommunitySectionItems.popular($0) }
                     let recent = communityRPEntity.recentRP.map { CommunitySectionItems.recent($0) }
                     
@@ -54,8 +55,27 @@ final class ReviewViewModel: RPInterface {
                     owner.recentRPsRelay.accept(recent)
                     
                 case .failure(let error):
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        updatePostScrap
+            .withUnretained(self)
+            .flatMap { owner, policyID in
+                
+                return owner.useCase.updatePostScrap(id: policyID)
+            }
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let scrapEntity):
                     
-                    print(error)
+                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatusRelay.accept(owner.scrapStatus)
+                    
+                case .failure(let error):
+                    break
                 }
             }
             .disposed(by: disposeBag)
@@ -113,7 +133,7 @@ final class ReviewViewModel: RPInterface {
                         owner.recentRPsRelay.accept(recent)
                         
                     case .failure(let error):
-                        print(error)
+                        break
                     }
                 }
                 .disposed(by: disposeBag)

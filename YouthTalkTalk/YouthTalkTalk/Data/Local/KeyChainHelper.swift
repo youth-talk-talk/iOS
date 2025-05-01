@@ -141,9 +141,7 @@ final class KeyChainHelper {
             let status = SecItemDelete(query)
             
             if status == errSecSuccess {
-                print("\(type.rawValue) 삭제 성공")
             } else {
-                print("\(type.rawValue) 삭제 실패, 상태 코드: \(status)")
             }
         }
     

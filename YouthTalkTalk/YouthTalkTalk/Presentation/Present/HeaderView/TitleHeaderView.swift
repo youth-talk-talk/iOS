@@ -27,11 +27,11 @@ final class TitleHeaderView: BaseCollectionReusableView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "-", fontType: .g14Bold)
+        titleLabel.designed(text: "-", font: .g14Bold)
     }
     
     func setTitle(_ title: String) {
         
-        titleLabel.designed(text: title, fontType: .g14Bold, textColor: .gray60)
+        titleLabel.designed(text: title, font: .g14Bold, textColor: .gray60)
     }
 }

@@ -14,6 +14,7 @@ enum FontType {
     
     case p18Bold
     case p18Regular
+    case p18Semi
     
     case p16Bold
     case p16SemiBold
@@ -35,38 +36,6 @@ enum FontType {
 }
 
 enum FontColor {
-    
-    var value: UIColor {
-        
-        switch self {
-        case .white:
-            
-            return .white
-        case .gray10:
-            
-            return .gray10
-        case .gray20:
-            
-            return .gray20
-        case .gray30:
-            
-            return .gray30
-        case .gray40:
-            
-            return .gray40
-        case .gray50:
-            
-            return .gray50
-        case .gray60:
-            
-            return .gray60
-            
-        case .black:
-            
-            return .black
-        }
-    }
-    
     case white
     case gray10
     case gray20
@@ -74,7 +43,32 @@ enum FontColor {
     case gray40
     case gray50
     case gray60
+    case gray70
+    case gray80
+    case gray90
+    case gray100
     case black
+    case green
+    case greenLight
+    
+    var value: UIColor {
+        switch self {
+        case .white:        return .white
+        case .gray10:       return .gray10
+        case .gray20:       return .gray20
+        case .gray30:       return .gray30
+        case .gray40:       return .gray40
+        case .gray50:       return .gray50
+        case .gray60:       return .gray60
+        case .gray70:       return .gray70
+        case .gray80:       return .gray80
+        case .gray90:       return .gray90
+        case .gray100:      return .gray100
+        case .black:        return .black
+        case .green:        return .greenNormal
+        case .greenLight:   return .greenLight
+        }
+    }
 }
 
 final class FontManager {
@@ -90,79 +84,68 @@ final class FontManager {
         
         switch fontType {
         case .p24Bold:
-            
             fontWeight = "Bold"
             fontSize = 24
             
         case .p18Bold:
-            
             fontWeight = "Bold"
             fontSize = 18
             
         case .p18Regular:
-            
             fontWeight = "Regular"
             fontSize = 18
             
-        case .p16Bold:
+        case .p18Semi:
+            fontWeight = "SemiBold"
+            fontSize = 18
             
+        case .p16Bold:
             fontWeight = "Bold"
             fontSize = 16
             
         case .p16SemiBold:
-            
             fontWeight = "SemiBold"
             fontSize = 16
             
         case .p16Regular24:
-            
             fontWeight = "Regular"
             fontSize = 16
             
         case .p16Regular16:
-            
             fontWeight = "Regular"
             fontSize = 16
             
         case .p14Bold:
-            
             fontWeight = "Bold"
             fontSize = 14
             
         case .p14Regular:
-            
             fontWeight = "Regular"
             fontSize = 14
             
         case .p12Bold:
-            
             fontWeight = "Bold"
             fontSize = 12
             
         case .p12Regular:
-            
             fontWeight = "Regular"
             fontSize = 12
             
         case .p10Regular:
-            
             fontWeight = "Regular"
             fontSize = 10
             
         case .g20Bold:
-            
             familyName = "GmarketSans"
             fontWeight = "Bold"
             fontSize = 20
             
         case .g14Bold:
-            
             familyName = "GmarketSans"
             fontWeight = "Bold"
             fontSize = 14
             
         case .g18Medium:
-            
             familyName = "GmarketSans"
             fontWeight = "Medium"
             fontSize = 18
@@ -184,6 +167,8 @@ final class FontManager {
         case .p18Regular:
             lineHeight = 24
         case .p16Bold:
+            lineHeight = 24
+        case .p18Semi:
             lineHeight = 24
         case .p16SemiBold:
             lineHeight = 24
@@ -231,7 +216,7 @@ final class FontManager {
             } else {
                 
                 let text = NSAttributedString(
-                    string: item.content,
+                    string: item.content + "\n",
                     attributes: [.font: font, .foregroundColor: textColor]
                 )
                 attributedStringArray[index] = NSMutableAttributedString(attributedString: text)

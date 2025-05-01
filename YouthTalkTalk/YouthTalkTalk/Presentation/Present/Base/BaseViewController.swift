@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
 class BaseViewController<LayoutView: UIView>: UIViewController {
     
@@ -21,6 +22,8 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         
         self.view = LayoutView()
     }
+    
+    let alertView = TwoButtonAlertView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,20 +56,21 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     func updateNavigationTitle(title: String) {
         
         let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Bold)
+        titleLabel.designed(text: title, font: .p18Bold)
         self.navigationItem.titleView = titleLabel
     }
-    
+
+    let customBackView = UIImageView()
+
     func updateNavigationBackButtonTitle(title: String = "") {
         
         self.navigationItem.hidesBackButton = true
         
-        let customBackView = UIImageView()
         customBackView.image = .back.withRenderingMode(.alwaysOriginal)
         let backButtonItem = UIBarButtonItem(customView: customBackView)
         
         let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Regular)
+        titleLabel.designed(text: title, font: .p18Regular)
         let titleItem = UIBarButtonItem(customView: titleLabel)
         
         self.navigationItem.leftBarButtonItems = [backButtonItem, titleItem]
@@ -82,6 +86,27 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
                 owner.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func setBackButtonTapped(_ action: @escaping () -> Void) {
+        // 기존 제스쳐 제거
+        customBackView.gestureRecognizers?.forEach(customBackView.removeGestureRecognizer)
+
+        customBackView.onTapped {
+            action()
+        }
+    }
+    
+    func showAlertView(_ title: String, okAction: @escaping () -> Void) {
+        alertView.isHidden = false
+        
+        view.addSubview(alertView)
+        
+        alertView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        alertView.setTitle(title, okAction: okAction)
     }
 }
 

@@ -20,4 +20,10 @@ final class MemberRepositoryImpl: MemberRepository {
         
         return apiManager.request(router: router, type: MeDTO.self).asObservable()
     }
+    
+    func deleteAccount() -> Observable<Result<DeleteAccountDTO, APIError>> {
+        let router = MeRouter.deleteAccount
+        
+        return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
+    }
 }

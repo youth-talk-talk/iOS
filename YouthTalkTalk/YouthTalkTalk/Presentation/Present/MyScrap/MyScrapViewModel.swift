@@ -38,7 +38,7 @@ final class MyScrapViewModel: MyScrapInterface {
                 case .success(let policyEntities):
                     owner.scrap.accept(policyEntities)
                 case .failure(let error):
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)
@@ -55,7 +55,7 @@ final class MyScrapViewModel: MyScrapInterface {
                 case .success(let scrapEntity):
                     owner.canceledScrapEntity.accept(scrapEntity)
                 case .failure(let error):
-                    print(error)
+                    break
                 }
             }
             .disposed(by: disposeBag)

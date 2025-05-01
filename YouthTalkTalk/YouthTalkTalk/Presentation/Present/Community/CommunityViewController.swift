@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol EventDelegate: AnyObject {
+    func eventDelegate(item: RPEntity)
+}
+
 enum CommunitySectionItems: Hashable {
     
     case search
@@ -27,7 +31,14 @@ enum CommunitySectionItems: Hashable {
     }
 }
 
-class CommunityViewController: BaseViewController<CommunityView> {
+class CommunityViewController: BaseViewController<CommunityView>, RemoveReportedPostProtocol {
+    func removeReportedPost(postId: Int) {
+        guard let reportedPost: CommunitySectionItems = dataSource.snapshot().itemIdentifiers.first(where: { _ in postId == postId }) else { return }
+        var newSnapshot = dataSource.snapshot()
+        newSnapshot.deleteItems([reportedPost])
+        
+        self.dataSource.apply(newSnapshot, animatingDifferences: true)
+    }
     
     var viewModel: RPInterface
     
@@ -45,6 +56,19 @@ class CommunityViewController: BaseViewController<CommunityView> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+        
+        // MARK: 목록 업데이트 전 데이터 모두 제거
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.search, .popular, .recent])
+        
+        dataSource.apply(snapshot) { [weak self] in
+            // MARK: 게시글 작성 후 목록 업데이트를 위함
+            self?.viewModel.input.fetchRPs.accept(())
+        }
+    }
+    
     override func configureCollectionView() {
         
         layoutView.collectionView.prefetchDataSource = self
@@ -57,10 +81,11 @@ class CommunityViewController: BaseViewController<CommunityView> {
         
         snapshot.appendSections([.search, .popular, .recent])
         
+        // MARK: 글 쓰기 버튼 탭
         layoutView.createButton.rx.tap
             .bind(with: self) { owner, _ in
-                
-                let nextVC = NewPostViewController()
+                let nextVC = CreatePostViewController(postType: owner.viewModel.type)
+                nextVC.delegate = self
                 
                 owner.tabmanParent?.navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -89,19 +114,23 @@ class CommunityViewController: BaseViewController<CommunityView> {
                 owner.dataSource.apply(owner.snapshot, animatingDifferences: false)
             }
             .disposed(by: disposeBag)
-        
-        viewModel.input.fetchRPs.accept(())
     }
     
     //MARK: Cell Registration
     private func cellRegistration() {
         
         // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let popularSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
             cell.configure(data: itemIdentifier.data)
+            
+            cell.scrapButton.onTapped { [weak self] in
+                guard let postId = itemIdentifier.data?.postId else { return }
+                
+                self?.viewModel.input.updatePostScrap.accept(String(postId))
+            }
             
             // 셀 선택
             cell.tapGesture.rx.event
@@ -113,20 +142,44 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     let commentRepository = CommentRepositoryImpl()
                     let useCase = ReviewUseCaseImpl(reviewRepository: repository)
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
-                    let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
-                    
+                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+                    let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+                    resultDetailVC.delegate = self
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let postId = itemIdentifier.data?.postId,
+               let scrapCount = itemIdentifier.data?.scraps,
+               let scrap = viewModel.output.scrapStatus[String(postId)] {
+                cell.updateScrapStatus(scrap, scrapCount)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let postId = itemIdentifier.data?.postId,
+                       let scrapCount = itemIdentifier.data?.scraps,
+                       let scrap = scrapStatus[String(postId)] {
+                        cell.updateScrapStatus(scrap, scrapCount)
+                    }
+                }
+                .disposed(by: self.disposeBag)
         }
         
         // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
+        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
             cell.configure(data: itemIdentifier.data)
+            
+            cell.scrapButton.onTapped { [weak self] in
+                guard let postId = itemIdentifier.data?.postId else { return }
+                
+                self?.viewModel.input.updatePostScrap.accept(String(postId))
+            }
             
             // 셀 선택
             cell.tapGesture.rx.event
@@ -138,12 +191,31 @@ class CommunityViewController: BaseViewController<CommunityView> {
                     let commentRepository = CommentRepositoryImpl()
                     let useCase = ReviewUseCaseImpl(reviewRepository: repository)
                     let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                    let viewModel = ReviewDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
-                    let resultDetailVC = ResultDetailViewController(viewModel: viewModel)
-                    
+                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+                    let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+                    resultDetailVC.delegate = self
                     owner.navigationController?.pushViewController(resultDetailVC, animated: true)
                 }
                 .disposed(by: cell.disposeBag)
+            
+            // cell에 적용(스크롤시에도 유지)
+            if let postId = itemIdentifier.data?.postId,
+               let scrapCount = itemIdentifier.data?.scraps,
+               let scrap = viewModel.output.scrapStatus[String(postId)] {
+                
+                cell.updateScrapStatus(scrap, scrapCount)
+            }
+            
+            // cell에 즉시 적용
+            viewModel.output.scrapStatusRelay
+                .bind(with: self) { owner, scrapStatus in
+                    if let postId = itemIdentifier.data?.postId,
+                       let scrapCount = itemIdentifier.data?.scraps,
+                       let scrap = scrapStatus[String(postId)] {
+                        cell.updateScrapStatus(scrap, scrapCount)
+                    }
+                }
+                .disposed(by: self.disposeBag)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
@@ -188,17 +260,14 @@ class CommunityViewController: BaseViewController<CommunityView> {
             
             supplementaryView.searchButton.rx.tap
                 .bind(with: self) { owner, _ in
-                    
-                    let viewModel = SearchViewModel(type: type)
-                    
-                    let nextVC = SearchViewController(viewModel: viewModel)
+                    let nextVC = SearchViewController()
                     owner.navigationController?.pushViewController(nextVC, animated: true)
                 }
                 .disposed(by: supplementaryView.disposeBag)
-            
+
             if type == .review {
                 supplementaryView.configureWithCategory()
-            } else if type == .post {
+            } else if type == .freePost {
                 supplementaryView.configureWithOutCategory()
             }
             
@@ -307,7 +376,6 @@ class CommunityViewController: BaseViewController<CommunityView> {
     }
 
     func update(section: CommunityLayout, items: [CommunitySectionItems]) {
-            
         snapshot.appendItems(items, toSection: section)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
@@ -324,5 +392,19 @@ extension CommunityViewController: UICollectionViewDataSourcePrefetching {
         if let max = indexPaths.map({ $0.item }).max(), max >= total - 2 {
             viewModel.input.pageUpdate.accept(currentPage)
         }
+    }
+}
+
+extension CommunityViewController: EventDelegate {
+    // MARK: 게시글 작성 완료 후 게시글 상세로 이동
+    func eventDelegate(item: RPEntity) {
+        let repository = ReviewRepositoryImpl()
+        let commentRepository = CommentRepositoryImpl()
+        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+        let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+        resultDetailVC.delegate = self
+        navigationController?.pushViewController(resultDetailVC, animated: true)
     }
 }

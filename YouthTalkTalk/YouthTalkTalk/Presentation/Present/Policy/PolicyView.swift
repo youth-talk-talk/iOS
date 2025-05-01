@@ -10,9 +10,12 @@ import FlexLayout
 import PinLayout
 
 class PolicyView: BaseView {
+    
+    // 제거
 
     let tableview = UITableView()
-    let commentTextfield = UITextField()
+    // TODO: 추후 댓글추가
+//    let commentTextfield = UITextField()
     
     override func configureLayout() {
         
@@ -24,12 +27,12 @@ class PolicyView: BaseView {
                 .alignSelf(.center)
                 .markDirty()
                 .backgroundColor(.clear)
-            
-            flex.addItem(commentTextfield)
-                .height(50)
-                .width(90%)
-                .alignSelf(.center)
-                .backgroundColor(.gray10)
+//            
+//            flex.addItem(commentTextfield)
+//                .height(50)
+//                .width(90%)
+//                .alignSelf(.center)
+//                .backgroundColor(.gray10)
         }
     }
     

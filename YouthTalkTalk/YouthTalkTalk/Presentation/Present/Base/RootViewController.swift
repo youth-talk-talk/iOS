@@ -6,84 +6,32 @@
 //
 
 import UIKit
-import FlexLayout
-import PinLayout
-import RxSwift
-import RxCocoa
 
 class RootViewController: UIViewController {
     
-    let flexView = UIView()
-    let disposeBag = DisposeBag()
+    private(set) var backImageView = UIImageView(image: .back)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(flexView)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
+        view.backgroundColor = .white
         
-        configureView()
-        configureLayout()
-        configureTableView()
-        configureCollectionView()
-        configureNavigation()
-        bind()
+        view.addSubview(backImageView)
+        
+        backImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(33)
+            $0.leading.equalToSuperview().inset(16)
+            $0.size.equalTo(24)
+        }
+        
+        backImageView.onTapped { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         self.view.endEditing(true)
-    }
-    
-    func configureView() { }
-    
-    func configureLayout() { }
-    
-    func configureTableView() { }
-    
-    func configureCollectionView() { }
-    
-    func bind() { }
-    
-    func configureNavigation() { }
-    
-    func updateNavigationTitle(title: String) {
-        
-        let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Bold)
-        self.navigationItem.titleView = titleLabel
-    }
-    
-    func updateNavigationBackButtonTitle(title: String = "") {
-        
-        self.navigationItem.hidesBackButton = true
-        
-        let customBackView = UIImageView()
-        customBackView.image = .back.withRenderingMode(.alwaysOriginal)
-        let backButtonItem = UIBarButtonItem(customView: customBackView)
-        
-        let titleLabel = UILabel()
-        titleLabel.designed(text: title, fontType: .p18Regular)
-        let titleItem = UIBarButtonItem(customView: titleLabel)
-        
-        self.navigationItem.leftBarButtonItems = [backButtonItem, titleItem]
-        
-        // 뒤로 가기 동작 추가
-        let tapGesture = UITapGestureRecognizer()
-        customBackView.addGestureRecognizer(tapGesture)
-        customBackView.isUserInteractionEnabled = true
-        
-        tapGesture.rx.event
-            .bind(with: self) { owner, _ in
-                
-                owner.navigationController?.popViewController(animated: true)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        flexView.pin.all(view.pin.safeArea)
-        flexView.flex.layout()
     }
 }

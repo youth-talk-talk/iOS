@@ -42,7 +42,7 @@ final class TitleWithImageButtonView: BaseView {
     
     func setTitle(_ title: String) {
         
-        titleLabel.designed(text: title, fontType: .p16Regular24, textColor: .black)
+        titleLabel.designed(text: title, font: .p16Regular24, textColor: .black)
     }
     
     func setImage(_ image: UIImage) {

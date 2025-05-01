@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class ReviewUseCaseImpl: ReviewUseCase {
-    
     private let disposeBag = DisposeBag()
     private let reviewRepository: ReviewRepository
     
@@ -64,9 +63,9 @@ final class ReviewUseCaseImpl: ReviewUseCase {
             }
     }
     
-    func updateReviewScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
+    func updatePostScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
         
-        reviewRepository.updatePolicyScrap(id: id)
+        reviewRepository.updatePostScrap(id: id)
             .withUnretained(self)
             .map { owner, result in
                 
@@ -95,6 +94,70 @@ final class ReviewUseCaseImpl: ReviewUseCase {
                     let entity = detailRPDTO.data.translate()
                     
                     return .success(entity)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>> {
+        reviewRepository.uploadPostComment(body)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let detailRPDTO):
+                                        
+                    return .success(detailRPDTO)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func deletePost(_ postId: String) -> Observable<Result<Void, APIError>> {
+        reviewRepository.deletePost(postId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success:
+                    return .success(())
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func reportPost(_ postId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        reviewRepository.reportPost(postId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let data):
+                    return .success(data)
+                    
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }    
+    
+    func userBlock(_ userId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        reviewRepository.userBlock(userId)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                    
+                case .success(let data):
+                    return .success(data)
+                    
                 case .failure(let error):
                     return .failure(error)
                 }

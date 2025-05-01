@@ -9,13 +9,11 @@ import Foundation
 import RxSwift
 
 final class ReviewRepositoryImpl: ReviewRepository {
-    
+
     private let apiManager = APIManager()
     
     func fetchReviews(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<CommunityRPDTO, APIError>> {
-        
-        let categoriesData = categories.map { $0.rawValue }
-        
+                
         let rpQuery = RPQuery(categories: categories, page: page, size: size)
         
         let router = ReviewRouter.fetchReview(query: rpQuery)
@@ -30,9 +28,9 @@ final class ReviewRepositoryImpl: ReviewRepository {
         return apiManager.request(router: router, type: ConditionReviewDTO.self).asObservable()
     }
     
-    func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
+    func updatePostScrap(id: String) -> Observable<Result<ScrapDTO, APIError>> {
         
-        let router = ReviewRouter.updateReviewScrap(id: id)
+        let router = ReviewRouter.updatePostScrap(id: id)
         
         return apiManager.request(router: router, type: ScrapDTO.self).asObservable()
     }
@@ -42,5 +40,29 @@ final class ReviewRepositoryImpl: ReviewRepository {
         let router = ReviewRouter.fetchReviewDetilInfo(id: id)
         
         return apiManager.request(router: router, type: DetailRPDTO.self).asObservable()
+    }
+    
+    func uploadPostComment(_ body: UploadPostCommentBody) -> Observable<Result<UploadPostCommentDTO, APIError>> {
+        let router = ReviewRouter.uploadPostComment(body: body)
+        
+        return apiManager.request(router: router, type: UploadPostCommentDTO.self).asObservable()
+    }    
+    
+    func deletePost(_ postId: String) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        let router = ReviewRouter.deletePost(postId)
+        
+        return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
+    }
+    
+    func reportPost(_ postId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        let router = ReviewRouter.reportPost(postId)
+        
+        return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
+    }    
+    
+    func userBlock(_ userId: Int) -> Observable<Result<DeleteAccountDTO, APIError>> {
+        let router = ReviewRouter.userBlock(userId)
+        
+        return apiManager.request(router: router, type: DeleteAccountDTO.self).asObservable()
     }
 }

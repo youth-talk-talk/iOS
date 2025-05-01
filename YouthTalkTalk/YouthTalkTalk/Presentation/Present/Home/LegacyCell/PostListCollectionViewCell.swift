@@ -1,0 +1,162 @@
+//
+//  RecentCollectionViewCell.swift
+//  YouthTalkTalk
+//
+//  Created by 이중엽 on 6/21/24.
+//
+
+import UIKit
+import PinLayout
+import FlexLayout
+import RxSwift
+
+final class PostListCollectionViewCell: BaseCollectionViewCell {
+    
+    var disposeBag = DisposeBag()
+
+    let subTitleLabel = UILabel()
+    let deadlineLabel = UILabel()
+    let titleLabel = UILabel()
+    let categoryLabel = UILabel()
+    let scrapButton = UIButton()
+    let commentsButton = UIButton()
+    let commentsLabel = UILabel()
+    
+    let tapGesture = UITapGestureRecognizer()   // itemSelected가 안먹힐때만 사용
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+        
+        subTitleLabel.text = ""
+        deadlineLabel.text = ""
+        titleLabel.text = ""
+        categoryLabel.text = ""
+        commentsLabel.text = ""
+        
+        scrapButton.configuration?.image = nil
+        
+        if gestureRecognizers?.isEmpty == false {
+            gestureRecognizers?.removeAll()
+            self.addGestureRecognizer(tapGesture)
+        } else {
+            self.addGestureRecognizer(tapGesture)
+        }
+        
+        scrapButton.designedByImage(.bookmark)
+    }
+    
+    override func configureLayout() {
+        
+        [titleLabel, categoryLabel, scrapButton].forEach { flexView.addSubview($0) }
+        
+        flexView.flex.define { flex in
+            
+            flex.addItem().define { flex in
+            
+                flex.addItem(subTitleLabel)
+                    .grow(1)
+                    .markDirty()
+                flex.addItem(deadlineLabel)
+                    .grow(1)
+                    .markDirty()
+            }
+            .direction(.row)
+            .marginHorizontal(11)
+            .justifyContent(.spaceBetween)
+            
+            flex.addItem(titleLabel)
+                .marginTop(1)
+                .marginHorizontal(11)
+                .markDirty()
+            
+            flex.addItem()
+                .grow(1)
+            
+            flex.addItem().define { flex in
+                
+                flex.addItem(categoryLabel)
+                    .grow(1)
+                    .markDirty()
+                
+                flex.define { flex in
+                    flex.addItem()
+                        .grow(1)
+                    
+                    flex.addItem(scrapButton)
+                        .height(24)
+                        .width(24)
+                        .markDirty()
+                    flex.addItem(commentsButton)
+                        .height(24)
+                        .width(24)
+                        .marginLeft(6)
+                        .markDirty()
+                    flex.addItem(commentsLabel)
+                        .marginLeft(2)
+                        .markDirty()
+                }
+                .direction(.row)
+            }
+            .direction(.row)
+            .marginHorizontal(11)
+        }
+        .paddingVertical(13)
+    }
+    
+    override func configureView() {
+     
+        subTitleLabel.designed(text: "지역", font: .p12Regular, textColor: .gray60)
+        deadlineLabel.designed(text: "", font: .p16SemiBold, textColor: .gray40)
+        titleLabel.designed(text: "정책명", font: .p18Bold, textColor: .black)
+        categoryLabel.designed(text: "카테고리", font: .p12Bold, textColor: .gray40)
+        commentsButton.designedByImage(.comments)
+        
+        addGestureRecognizer(tapGesture)
+        
+        subTitleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.lineBreakMode = .byTruncatingTail
+        
+        deadlineLabel.textAlignment = .right
+        
+        flexView.backgroundColor = .white
+    }
+    
+    func configure(data: PolicyEntity?) {
+        
+        guard let data else { return }
+        
+        subTitleLabel.text = data.hostDep
+        titleLabel.text = data.title
+        deadlineLabel.text = data.deadlineStatus
+        
+        scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
+        
+        let policyCategory = PolicyCategory(rawValue: data.category) ?? .life
+        categoryLabel.text = policyCategory.name
+        
+        commentsLabel.text = ""
+        commentsButton.configuration?.image = nil
+        commentsButton.flex.display(.none)
+        commentsLabel.flex.display(.none)
+    }
+    
+    func configure(data: RPEntity?) {
+        guard let data else { return }
+        
+        subTitleLabel.text = data.policyTitle
+        titleLabel.text = data.title
+        scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)
+        commentsLabel.designed(text: String(data.comments), font: .p14Regular)
+        
+        deadlineLabel.text = ""
+        categoryLabel.text = ""
+        deadlineLabel.flex.display(.none)
+        categoryLabel.flex.display(.none)
+    }
+    
+    func updateScrapStatus(_ isScrap: Bool, _ scrapCount: Int) {
+        scrapButton.designedByImage(isScrap ? .bookmarkFill : .bookmark)
+    }
+}

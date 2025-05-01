@@ -15,12 +15,20 @@ struct DetailRPDTO: Decodable {
     let data: DetailRPDetailDTO
 }
 
+struct UploadPostDTO: Decodable {
+    
+    let status: Int
+    let message: String
+    let code: String
+    let data: DetailRPDetailDTO
+}
+
 struct DetailRPDetailDTO: Decodable {
     
     let postId: Int
     let postType: String
     let title: String
-    let content: String
+    let content: String?
     let contentList: [DetailContentDTO]
     let policyId: String?
     let policyTitle: String?
@@ -33,14 +41,14 @@ struct DetailRPDetailDTO: Decodable {
     
     func translate() -> DetailRPEntity {
         
-        return DetailRPEntity(postId: postId, postType: postType, title: title, content: content,
+        return DetailRPEntity(postId: postId, postType: postType, title: title, content: content ?? "",
                               contentList: contentList.map { $0.translate() }, policyId: policyId, policyTitle: policyTitle,
                               writerId: writerId, nickname: nickname, view: view, images: images, category: category,
                               scrap: scrap)
     }
 }
 
-struct DetailContentDTO: Decodable {
+struct DetailContentDTO: Codable {
     
     let content: String
     let type: String
@@ -48,4 +56,15 @@ struct DetailContentDTO: Decodable {
     func translate() -> DetailContentEntity {
         return DetailContentEntity(content: content, type: type)
     }
+}
+
+struct UploadPostCommentDTO: Decodable {
+      let status: Int
+      let message: String
+      let code: String
+      let data: CommentData
+}
+
+struct CommentData: Decodable {
+    let commentId: Int
 }

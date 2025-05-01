@@ -30,7 +30,7 @@ extension UIButton {
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = image
-        buttonConfiguration.imagePadding = 2 // 이미지와 텍스트 사이의 패딩을 0으로 설정
+        buttonConfiguration.imagePadding = 8 // 이미지와 텍스트 사이의 패딩을 0으로 설정
         buttonConfiguration.imagePlacement = .leading
         
         buttonConfiguration.title = title
@@ -39,11 +39,18 @@ extension UIButton {
         buttonConfiguration.baseForegroundColor = titleColor
         buttonConfiguration.background.cornerRadius = 8
         
+        self.layer.cornerRadius = 6
+        self.backgroundColor = bgColor
         self.configuration = buttonConfiguration
     }
     
     // 기본 버튼 디자인
-    func designed(title: String, titleColor: UIColor = .black, bgColor: UIColor = .lime40, fontType: FontType = .p16Regular16, withAction: Bool = true) {
+    func designed(title: String,
+                  titleColor: UIColor = .white,
+                  bgColor: UIColor = FontColor.green.value,
+                  fontType: FontType = .p16Regular16,
+                  withAction: Bool = true,
+                  cornerRadius: CGFloat = 6) {
         
         var titleAttrribute = AttributedString.init(title)
         titleAttrribute.font = FontManager.font(fontType)
@@ -53,7 +60,7 @@ extension UIButton {
         buttonConfiguration.attributedTitle = titleAttrribute
         buttonConfiguration.baseBackgroundColor = bgColor
         buttonConfiguration.baseForegroundColor = titleColor
-        buttonConfiguration.background.cornerRadius = 8
+        buttonConfiguration.background.cornerRadius = cornerRadius
         
         self.configuration = buttonConfiguration
         
@@ -85,9 +92,9 @@ extension UIButton {
             
             switch btn.state {
             case .disabled:
-                btn.configuration?.background.backgroundColor = .systemGray
-            case .highlighted:
-                btn.animate()
+                btn.configuration?.background.backgroundColor = .gray30
+//            case .highlighted:
+//                btn.animate()
             default:
                 btn.configuration?.background.backgroundColor = bgColor
             }

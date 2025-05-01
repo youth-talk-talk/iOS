@@ -26,7 +26,6 @@ final class SignInViewModel: SignInInterface {
     var signInSuccessApple: Driver<Bool>
     var signInSuccessKakao: Driver<Bool>
     
-    // APPLE LOGIN
     private let signInSuccessAppleRelay = PublishRelay<Bool>()
     private let signInSuccessKakaoRelay = PublishRelay<Bool>()
     

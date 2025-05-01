@@ -13,6 +13,7 @@ protocol MyPageInput {
     var fetchMe: PublishRelay<Void> { get }
     var fetchUpcomingScrapEvent: PublishRelay<Void> { get }
     var updatePolicyScrap: PublishRelay<String> { get }
+    var deleteAccount: PublishRelay<Void> { get }
 }
 
 protocol MyPageOutput {
@@ -20,10 +21,11 @@ protocol MyPageOutput {
     var upcomingScrapPolicies: PublishRelay<[PolicyEntity]> { get }
     var canceledScrapEntity: PublishRelay<ScrapEntity> { get }
     var meEntity: PublishRelay<MeEntity> { get }
+    var successDeleteAccount: PublishRelay<Void> { get }
 }
 
 protocol MyPageInterface: MyPageInput, MyPageOutput {
-    
+
     var input: MyPageInput { get }
     var output: MyPageOutput { get }
 }

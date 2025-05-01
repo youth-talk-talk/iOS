@@ -16,4 +16,7 @@ protocol PolicyRepository {
     func updatePolicyScrap(id: String) -> Observable<Result<ScrapDTO, APIError>>
     func fetchUpComingDeadline() -> Observable<Result<UpcomingScrapDTO, APIError>>
     func fetchScrapPolicy() -> Observable<Result<ScrapPolicyDTO, APIError>>
+    func uploadImage(_ image: Data) -> Observable<Result<String, APIError>>
+    func uploadPost(_ body: UploadPostBody) -> Observable<Result<UploadPostDTO, APIError>>
+    func editPost(_ postId: Int, _ postData: PostEditRequestModel) -> Observable<Result<PostEditResponseModel, APIError>>
 }

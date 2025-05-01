@@ -34,7 +34,7 @@ class TitleImageSpacingView: BaseView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "정책명을 검색해주세요", fontType: .p16Regular16, textColor: .gray50)
+        titleLabel.designed(text: "정책명을 검색해주세요", font: .p16Regular16, textColor: .gray50)
         iconImageView.image = .magnifyingglass
     }
 }

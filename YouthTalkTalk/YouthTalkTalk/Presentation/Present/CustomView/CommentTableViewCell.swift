@@ -38,9 +38,9 @@ class CommentTableViewCell: BaseTableViewCell {
     
     func configure(_ data: CommentDetailEntity) {
         
-        nicknameLabel.designed(text: data.nickname, fontType: .p12Bold)
+        nicknameLabel.designed(text: data.nickname, font: .p12Bold)
         
-        commentLabel.designed(text: data.content, fontType: .p12Regular)
+        commentLabel.designed(text: data.content, font: .p12Regular)
         commentLabel.numberOfLines = 0
     }
     

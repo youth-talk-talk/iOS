@@ -11,4 +11,5 @@ import RxSwift
 protocol MemberUseCase {
     
     func fetchMe() -> Observable<Result<MeEntity, APIError>>
+    func deleteAccount() -> Observable<Bool>
 }

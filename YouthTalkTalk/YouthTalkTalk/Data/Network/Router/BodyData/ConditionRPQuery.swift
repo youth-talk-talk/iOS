@@ -21,3 +21,8 @@ struct ConditionRPQuery: Encodable {
         self.page = page
     }
 }
+
+struct UploadPostCommentBody: Encodable {
+    let postId: Int
+    let content: String
+}

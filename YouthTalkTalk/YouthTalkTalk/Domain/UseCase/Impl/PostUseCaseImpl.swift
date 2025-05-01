@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class PostUseCaseImpl: PostUseCase {
-    
     private let disposeBag = DisposeBag()
     private let postRepository: PostRepository
     
@@ -41,7 +40,7 @@ final class PostUseCaseImpl: PostUseCase {
     
     func fetchConditionPosts(keyword: String, page: Int, size: Int) -> Observable<Result<([RPEntity], Int), APIError>> {
         
-        let query = ConditionRPQuery(type: .post, keyword: keyword, size: size, page: page)
+        let query = ConditionRPQuery(type: .freePost, keyword: keyword, size: size, page: page)
         
         return postRepository.fetchConditionPosts(conditionRPQuery: query)
             .withUnretained(self)
@@ -76,7 +75,6 @@ final class PostUseCaseImpl: PostUseCase {
                     return .success(items)
                     
                 case .failure(let error):
-                    
                     return .failure(error)
                 }
             }
@@ -94,6 +92,50 @@ final class PostUseCaseImpl: PostUseCase {
                     let scrapEntity = ScrapEntity(isScrap: scrapDTO.message == "스크랩에 성공하였습니다.", id: id)
                     
                     return .success(scrapEntity)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchLikedComment() -> Observable<Result<LikedComment, APIError>> {
+        postRepository.fetchLikedComment()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let likedComment):
+                                        
+                    return .success(likedComment)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchMyComment() -> Observable<Result<LikedComment, APIError>> {
+        postRepository.fetchMyComment()
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let likedComment):
+                                        
+                    return .success(likedComment)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }    
+    
+    func fetchMyPost(_ page: Int) -> Observable<Result<[MyPostData], APIError>> {
+        postRepository.fetchMyPost(page)
+            .withUnretained(self)
+            .map { owner, result in
+                
+                switch result {
+                case .success(let myPost):
+                    return .success(myPost.data)
                 case .failure(let error):
                     return .failure(error)
                 }

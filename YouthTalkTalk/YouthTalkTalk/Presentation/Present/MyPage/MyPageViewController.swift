@@ -33,7 +33,9 @@ class MyPageViewController: RootViewController {
     let nicknameLabel = UILabel()
     let settingButton = UIButton()
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyPageSection.layout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyPageSection.layout()).then {
+        $0.backgroundColor = .clear
+    }
     
     init(viewModel: MyPageInterface) {
         self.viewModel = viewModel
@@ -48,6 +50,8 @@ class MyPageViewController: RootViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        tabBarController?.tabBar.isHidden = false
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         if !snapshot.itemIdentifiers(inSection: .policy).isEmpty {
@@ -59,201 +63,217 @@ class MyPageViewController: RootViewController {
         
         viewModel.input.fetchUpcomingScrapEvent.accept(())
     }
-    
-    override func configureView() {
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        snapshot.appendSections([.policy, .favorite])
-        
-        view.backgroundColor = .white
-        flexView.backgroundColor = .white
-        
-        nicknameLabel.designed(text: "abc", fontType: .p18Bold, textColor: .black)
-        settingButton.designWithImage(title: "계정 관리", image: UIImage.setting, bgColor: .clear, titleColor: .black, fontType: .p14Regular)
-        
-        settingButton.layer.cornerRadius = 18
-        settingButton.layer.masksToBounds = true
-        settingButton.layer.borderColor = UIColor.gray30.cgColor
-        settingButton.layer.borderWidth = 1
-        
-        let recentCellRegistration = UICollectionView.CellRegistration<RecentCollectionViewCell, PolicyEntity> { cell, indexPath, itemIdentifier in
-            
-            cell.layer.cornerRadius = 10
-            cell.layer.masksToBounds = true
-            cell.configure(data: itemIdentifier)
-            
-            let data = itemIdentifier.policyId
-            
-            cell.scrapButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    
-                    owner.viewModel.input.updatePolicyScrap.accept(data)
-                }
-                .disposed(by: cell.disposeBag)
-            
-            cell.tapGesture.rx.event
-                .bind(with: self) { owner, _ in
-                    
-                    let repository = PolicyRepositoryImpl()
-                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
-                    let viewModel = PolicyViewModel(policyID: itemIdentifier.policyId, policyUseCase: useCase)
-                    let nextVC = PolicyViewController(viewModel: viewModel)
-                    
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-                }
-                .disposed(by: cell.disposeBag)
-        }
-        
-        let favoriteCellRegistration = UICollectionView.CellRegistration<FavoriteCollectionViewCell, String> { cell, indexPath, itemIdentifier in
-            
-            cell.configure(title: itemIdentifier)
-        }
-        
-        let headerRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) {
-            supplementaryView, elementKind, indexPath in
-            
-            guard let section = MyPageSection(rawValue: indexPath.section) else { return }
-            
-            supplementaryView.setTitle(section.title)
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource<MyPageSection, MyPageItemType>(collectionView: collectionView) {
-            collectionView, indexPath, itemIdentifier in
-            
-            switch itemIdentifier {
-            case .policy(let policyEntity):
-                return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: policyEntity)
-            case .favorite(let favorite):
-                return collectionView.dequeueConfiguredReusableCell(using: favoriteCellRegistration, for: indexPath, item: favorite.rawValue)
-            }
-        }
-        
-        dataSource.supplementaryViewProvider = { view, kind, index in
-            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
-        }
-    }
-    
-    override func configureLayout() {
-        
-        flexView.flex.define { flex in
-            
-            flex.addItem().define { row in
-                
-                row.addItem(nicknameLabel)
-                    .alignSelf(.center)
-                    .grow(1)
-                
-                row.addItem(settingButton)
-                    .width(115)
-                    .height(36)
-                    .alignSelf(.center)
-            }
-            .direction(.row)
-            .marginHorizontal(17)
-            .justifyContent(.spaceBetween)
-            .height(100)
-            
-            flex.addItem(collectionView)
-                .width(100%)
-                .grow(1)
-        }
-    }
-    
-    override func bind() {
-        
-        let items = FavoriteList.allCases.map { MyPageItemType.favorite($0) }
-        update(section: .favorite, items: items)
-        
-        collectionView.rx.itemSelected
-            .bind(with: self) { owner, indexPath in
-                
-                let sectionType = MyPageSection(rawValue: indexPath.section) ?? .policy
-                let items = owner.snapshot.itemIdentifiers(inSection: sectionType)
-                let item = items[indexPath.item]
-                
-                switch item {
-                case .favorite(let favorite):
-                    
-                    switch favorite {
-                        
-                    case .scrapPolicy:
-                        let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-                        let viewModel = MyScrapViewModel(useCase: useCase)
-                        let vc = MyScrapViewController(viewModel: viewModel)
-                        
-                        owner.navigationController?.pushViewController(vc, animated: true)
-                    case .scrapPost:
-                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-                        let viewModel = MyScrapRPViewModel(useCase: useCase)
-                        let vc = MyScrapRPViewController(viewModel: viewModel)
-                        
-                        owner.navigationController?.pushViewController(vc, animated: true)
-                        
-                    case .myPost:
-                        break
-                    case .myComment:
-                        break
-                    case .likeComment:
-                        break
-                    }
-                    
-                default: break
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // 마감일 임박 리스트 호출
-        viewModel.output.upcomingScrapPolicies
-            .bind(with: self) { owner, upcomingEntities in
-                
-                let items = upcomingEntities.map { MyPageItemType.policy($0) }
-                
-                owner.update(section: .policy, items: items)
-            }
-            .disposed(by: disposeBag)
-        
-        // 스크랩 취소
-        viewModel.output.canceledScrapEntity
-            .bind(with: self) { owner, scrapEntity in
-                
-                let policyItems = owner.snapshot.itemIdentifiers(inSection: .policy)
-                    .compactMap { item in
-                        switch item {
-                        case .policy(let policyEntity):
-                            return policyEntity
-                        case .favorite:
-                            return nil
-                        }
-                    }
-                
-                guard let item = policyItems.filter({ $0.policyId == scrapEntity.id }).first else { return }
-                
-                let pageItemType = MyPageItemType.policy(item)
-                
-                owner.delete(item: pageItemType)
-                
-            }
-            .disposed(by: disposeBag)
-        
-        // 내 정보
-        viewModel.output.meEntity
-            .bind(with: self) { owner, meEntity in
-                owner.nicknameLabel.designed(text: meEntity.nickname, fontType: .p18Bold, textColor: .black)
-            }
-            .disposed(by: disposeBag)
-        
-        settingButton.rx.tap
-            .withLatestFrom(viewModel.output.meEntity)
-            .bind(with: self) { owner, meEntity in
-                
-                let vc = SettingViewController(data: meEntity)
-                owner.navigationController?.pushViewController(vc, animated: true)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.input.fetchMe.accept(())
-    }
+//    
+//    override func configureView() {
+//        
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+//        
+//        snapshot.appendSections([.policy, .favorite])
+//        
+//        view.backgroundColor = .white
+//        flexView.backgroundColor = .white
+//        
+//        nicknameLabel.designed(text: "abc", font: .p18Bold, textColor: .black)
+//        settingButton.designWithImage(title: "계정 관리", image: UIImage.setting, bgColor: .clear, titleColor: .black, fontType: .p14Regular)
+//        
+//        settingButton.layer.cornerRadius = 18
+//        settingButton.layer.masksToBounds = true
+//        settingButton.layer.borderColor = UIColor.gray30.cgColor
+//        settingButton.layer.borderWidth = 1
+//        
+//        let recentCellRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, PolicyEntity> { cell, indexPath, itemIdentifier in
+//            
+//            cell.layer.cornerRadius = 10
+//            cell.layer.masksToBounds = true
+//            cell.configure(data: itemIdentifier)
+//            
+//            let data = itemIdentifier.policyId
+//            
+//            cell.scrapButton.rx.tap
+//                .bind(with: self) { owner, _ in
+//                    
+//                    owner.viewModel.input.updatePolicyScrap.accept(data)
+//                }
+//                .disposed(by: cell.disposeBag)
+//            
+//            cell.tapGesture.rx.event
+//                .bind(with: self) { owner, _ in
+//                    
+//                    let repository = PolicyRepositoryImpl()
+//                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
+//                    let viewModel = PolicyViewModel(policyID: itemIdentifier.policyId, policyUseCase: useCase)
+//                    let nextVC = PolicyViewController(viewModel: viewModel)
+//                    
+//                    self.navigationController?.pushViewController(nextVC, animated: true)
+//                }
+//                .disposed(by: cell.disposeBag)
+//        }
+//        
+//        let favoriteCellRegistration = UICollectionView.CellRegistration<FavoriteCollectionViewCell, String> { cell, indexPath, itemIdentifier in
+//            
+//            cell.configure(title: itemIdentifier)
+//        }
+//        
+//        let headerRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) {
+//            supplementaryView, elementKind, indexPath in
+//            
+//            guard let section = MyPageSection(rawValue: indexPath.section) else { return }
+//            
+//            supplementaryView.setTitle(section.title)
+//        }
+//        
+//        dataSource = UICollectionViewDiffableDataSource<MyPageSection, MyPageItemType>(collectionView: collectionView) {
+//            collectionView, indexPath, itemIdentifier in
+//            
+//            switch itemIdentifier {
+//            case .policy(let policyEntity):
+//                return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: policyEntity)
+//            case .favorite(let favorite):
+//                return collectionView.dequeueConfiguredReusableCell(using: favoriteCellRegistration, for: indexPath, item: favorite.rawValue)
+//            }
+//        }
+//        
+//        dataSource.supplementaryViewProvider = { view, kind, index in
+//            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
+//        }
+//    }
+//    
+//    override func configureLayout() {
+//        
+//        flexView.flex.define { flex in
+//            
+//            flex.addItem().define { row in
+//                
+//                row.addItem(nicknameLabel)
+//                    .alignSelf(.center)
+//                    .grow(1)
+//                
+//                row.addItem(settingButton)
+//                    .width(115)
+//                    .height(36)
+//                    .alignSelf(.center)
+//            }
+//            .direction(.row)
+//            .marginHorizontal(17)
+//            .justifyContent(.spaceBetween)
+//            .height(100)
+//            
+//            flex.addItem(collectionView)
+//                .width(100%)
+//                .grow(1)
+//        }
+//    }
+//    
+//    override func bind() {
+//        
+//        let items = FavoriteList.allCases.map { MyPageItemType.favorite($0) }
+//        update(section: .favorite, items: items)
+//        
+//        collectionView.rx.itemSelected
+//            .bind(with: self) { owner, indexPath in
+//                
+//                let sectionType = MyPageSection(rawValue: indexPath.section) ?? .policy
+//                let items = owner.snapshot.itemIdentifiers(inSection: sectionType)
+//                let item = items[indexPath.item]
+//                
+//                switch item {
+//                case .favorite(let favorite):
+//                    let commentUseCase = CommentUseCaseImpl(commentRepository: CommentRepositoryImpl())
+//                    
+//                    switch favorite {
+//                        
+//                    case .scrapPolicy:
+//                        let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+//                        let viewModel = MyScrapViewModel(useCase: useCase)
+//                        let vc = MyScrapViewController(viewModel: viewModel)
+//                        
+//                        owner.navigationController?.pushViewController(vc, animated: true)
+//                    case .scrapPost:
+//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .scrapPost)
+//                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .scrapPost)
+//                        
+//                        owner.navigationController?.pushViewController(vc, animated: true)
+//                        
+//                    case .myPost:
+//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .myPost)
+//                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .myPost)
+//                        
+//                        owner.navigationController?.pushViewController(vc, animated: true)
+//                        
+//                    case .myComment:
+//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .myWrittenComment)
+//                        let vc = LikedOrMyCommentListViewController(viewModel: viewModel, listType: .myWrittenComment)
+//                        
+//                        owner.navigationController?.pushViewController(vc, animated: true)
+//                        
+//                    case .likeComment:
+//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
+//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .likedComment)
+//                        let vc = LikedOrMyCommentListViewController(viewModel: viewModel, listType: .likedComment)
+//                        
+//                        owner.navigationController?.pushViewController(vc, animated: true)
+//                    }
+//                    
+//                default: break
+//                }
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        // 마감일 임박 리스트 호출
+//        viewModel.output.upcomingScrapPolicies
+//            .bind(with: self) { owner, upcomingEntities in
+//                
+//                let items = upcomingEntities.map { MyPageItemType.policy($0) }
+//                
+//                owner.update(section: .policy, items: items)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        // 스크랩 취소
+//        viewModel.output.canceledScrapEntity
+//            .bind(with: self) { owner, scrapEntity in
+//                
+//                let policyItems = owner.snapshot.itemIdentifiers(inSection: .policy)
+//                    .compactMap { item in
+//                        switch item {
+//                        case .policy(let policyEntity):
+//                            return policyEntity
+//                        case .favorite:
+//                            return nil
+//                        }
+//                    }
+//                
+//                guard let item = policyItems.filter({ $0.policyId == scrapEntity.id }).first else { return }
+//                
+//                let pageItemType = MyPageItemType.policy(item)
+//                
+//                owner.delete(item: pageItemType)
+//                
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        // 내 정보
+//        viewModel.output.meEntity
+//            .bind(with: self) { owner, meEntity in
+//                owner.nicknameLabel.designed(text: meEntity.nickname, font: .p18Bold, textColor: .black)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        settingButton.rx.tap
+//            .withLatestFrom(viewModel.output.meEntity)
+//            .bind(with: self) { [weak self] owner, meEntity in
+//                guard let self else { return }
+//                
+//                let vc = SettingViewController(data: meEntity, viewModel: viewModel)
+//                owner.navigationController?.pushViewController(vc, animated: true)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.input.fetchMe.accept(())
+//    }
 }
 
 

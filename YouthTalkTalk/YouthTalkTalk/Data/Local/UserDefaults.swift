@@ -24,11 +24,16 @@ enum SignUpType: String {
     case kakao
 }
 
+enum WriteType {
+    case new
+    case edit
+}
+
 enum MainContentsType: Encodable {
     
     case policy
     case review
-    case post
+    case freePost
     
     var key: String {
         switch self {
@@ -36,7 +41,7 @@ enum MainContentsType: Encodable {
             return "policy"
         case .review:
             return "review"
-        case .post:
+        case .freePost:
             return "post"
         }
     }
@@ -47,7 +52,7 @@ enum MainContentsType: Encodable {
             return ""
         case .review:
             return "후기게시판"
-        case .post:
+        case .freePost:
             return "자유게시판"
         }
     }
@@ -104,7 +109,7 @@ extension UserDefaults {
         set(list, forKey: type.key)
     }
     
-    func fetchRecentSearchList(type: MainContentsType) -> [String] {
+    func getRecentSearchList(type: MainContentsType) -> [String] {
         
         return self.array(forKey: type.key) as? [String] ?? [String]()
     }

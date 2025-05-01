@@ -26,10 +26,10 @@ class DetailTableViewCell: BaseTableViewCell {
     
     let refSiteTitleLabel = UILabel()
     let refFirstTitleLabel = UILabel()
-    let refFirstLabel = UILabel()
+    let refFirstLabel = UITextView()
     
     let refSecondTitleLabel = UILabel()
-    let refSecondLabel = UILabel()
+    let refSecondLabel = UITextView()
     
     let applyButton = UIButton()
     
@@ -101,35 +101,44 @@ class DetailTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         
-        plusImageView.image = UIImage.plus
+        plusImageView.image = UIImage.actions
         
-        sectionTitleLabel.designed(text: "더 자세한 정보를 알려주세요", fontType: .p18Bold, textColor: .black)
+        sectionTitleLabel.designed(text: "더 자세한 정보를 알려주세요", font: .p18Bold, textColor: .black)
         
-        etcTitleLabel.designed(text: "기타정보", fontType: .p16SemiBold, textColor: .gray50)
-        hostOperatingTitleLabel.designed(text: "주관기관 및 운영기관", fontType: .p16SemiBold, textColor: .gray50)
-        refSiteTitleLabel.designed(text: "참고 사이트", fontType: .p16SemiBold, textColor: .gray50)
-        hostTitleLabel.designed(text: "-주관 기관: ", fontType: .p14Regular, textColor: .black)
-        operatingTitleLabel.designed(text: "-운영 기관: ", fontType: .p14Regular, textColor: .black)
-        refFirstTitleLabel.designed(text: "-사업관련 참고 사이트 1", fontType: .p14Regular, textColor: .black)
-        refSecondTitleLabel.designed(text: "-사업관련 참고 사이트 2", fontType: .p14Regular, textColor: .black)
+        etcTitleLabel.designed(text: "기타정보", font: .p16SemiBold, textColor: .gray50)
+        hostOperatingTitleLabel.designed(text: "주관기관 및 운영기관", font: .p16SemiBold, textColor: .gray50)
+        refSiteTitleLabel.designed(text: "참고 사이트", font: .p16SemiBold, textColor: .gray50)
+        hostTitleLabel.designed(text: "-주관 기관: ", font: .p14Regular, textColor: .black)
+        operatingTitleLabel.designed(text: "-운영 기관: ", font: .p14Regular, textColor: .black)
+        refFirstTitleLabel.designed(text: "-사업관련 참고 사이트 1", font: .p14Regular, textColor: .black)
+        refSecondTitleLabel.designed(text: "-사업관련 참고 사이트 2", font: .p14Regular, textColor: .black)
         
         applyButton.designed(title: "지원하기", titleColor: .black, fontType: .p16Regular16, withAction: true)
     }
     
     func configure(_ data: DetailPolicyEntity.PolicyDetail) {
         
-        etcLabel.designed(text: data.etc ?? "-", fontType: .p14Regular, textColor: .black)
-        hostLabel.designed(text: data.hostDep ?? "-", fontType: .p14Regular, textColor: .black)
-        operatingLabel.designed(text: data.operatingOrg ?? "-", fontType: .p14Regular, textColor: .black)
+        etcLabel.designed(text: data.etc ?? "-", font: .p14Regular, textColor: .black)
+        hostLabel.designed(text: data.hostDep ?? "-", font: .p14Regular, textColor: .black)
+        operatingLabel.designed(text: data.operatingOrg ?? "-", font: .p14Regular, textColor: .black)
         
-        refFirstLabel.designed(text: data.refUrl1 ?? "-", fontType: .p14Regular, textColor: .black)
-        refSecondLabel.designed(text: data.refUrl2 ?? "-", fontType: .p14Regular, textColor: .black)
+        refFirstLabel.isEditable = false
+        refFirstLabel.dataDetectorTypes = .link
+        refFirstLabel.tintColor = .black
+        refFirstLabel.attributedText = NSAttributedString(string: data.refUrl1 ?? "-",
+                                                          attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                                                                       NSAttributedString.Key.font: FontManager.font(.p14Regular)])
+        
+        refSecondLabel.isEditable = false
+        refSecondLabel.dataDetectorTypes = .link
+        refSecondLabel.tintColor = .black
+        refSecondLabel.attributedText = NSAttributedString(string: data.refUrl2 ?? "-",
+                                                           attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                                                                        NSAttributedString.Key.font: FontManager.font(.p14Regular)])
         
         etcLabel.numberOfLines = 0
         hostLabel.numberOfLines = 0
         operatingLabel.numberOfLines = 0
-        refFirstLabel.numberOfLines = 0
-        refSecondLabel.numberOfLines = 0
         
         if !isValid(data.applUrlv) {
             applyButton.flex.display(.none)

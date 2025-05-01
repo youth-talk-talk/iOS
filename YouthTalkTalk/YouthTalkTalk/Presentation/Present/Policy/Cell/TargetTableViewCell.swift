@@ -153,9 +153,9 @@ class TargetTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         
-        personImageView.image = UIImage.person
+        personImageView.image = UIImage.actions
         
-        sectionTitleLabel.designed(text: "누구를 위한 정책인가요?", fontType: .p18Bold, textColor: .black)
+        sectionTitleLabel.designed(text: "누구를 위한 정책인가요?", font: .p18Bold, textColor: .black)
         
         let titleLabels = [ageTitleLabel, addrIncomeTitleLabel, educationTitleLabel, majorTitleLabel, employmentTitleLabel, specializationTitleLabel, applLimitTitleLabel, additionTitleLabel]
         
@@ -163,52 +163,52 @@ class TargetTableViewCell: BaseTableViewCell {
             
             guard let type = PolicyTargetType(rawValue: i) else { return }
             
-            titleLabels[i].designed(text: type.text, fontType: .p16SemiBold, textColor: .gray50)
+            titleLabels[i].designed(text: type.text, font: .p16SemiBold, textColor: .gray50)
         }
     }
     
     func configure(_ data: DetailPolicyEntity.PolicyTarget) {
         
-        ageLabel.designed(text: data.age, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+        ageLabel.designed(text: data.age, font: .p14Regular, textColor: .black, applyLineHeight: false)
         
         if let addrIncome = data.addrIncome, addrIncome != "null" {
-            addrIncomeLabel.designed(text: addrIncome, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            addrIncomeLabel.designed(text: addrIncome, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             addrIncomeFlexView.flex.display(.none)
         }
         
         if let education = data.education, education != "null" {
-            educationLabel.designed(text: education, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            educationLabel.designed(text: education, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             educationFlexView.flex.display(.none)
         }
         
         if let major = data.major, major != "null" {
-            majorLabel.designed(text: major, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            majorLabel.designed(text: major, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             majorFlexView.flex.display(.none)
         }
         
         if let employment = data.employment, employment != "null"  {
-            employmentLabel.designed(text: employment, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            employmentLabel.designed(text: employment, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             employmentFlexView.flex.display(.none)
         }
         
         if let specialization = data.specialization, specialization != "null" {
-            specializationLabel.designed(text: specialization, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            specializationLabel.designed(text: specialization, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             specializationFlexView.flex.display(.none)
         }
         
         if let applLimit = data.applLimit, applLimit != "null" {
-            applLimitLabel.designed(text: applLimit, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            applLimitLabel.designed(text: applLimit, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             applLimitFlexView.flex.display(.none)
         }
         
         if let addition = data.addition, addition != "null" {
-            additionLabel.designed(text: addition, fontType: .p14Regular, textColor: .black, applyLineHeight: false)
+            additionLabel.designed(text: addition, font: .p14Regular, textColor: .black, applyLineHeight: false)
         } else {
             additionFlexView.flex.display(.none)
         }

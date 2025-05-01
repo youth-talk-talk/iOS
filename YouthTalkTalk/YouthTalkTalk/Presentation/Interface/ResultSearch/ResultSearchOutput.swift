@@ -7,6 +7,7 @@
 
 import Foundation
 import RxCocoa
+import Combine
 
 protocol ResultSearchOutput {
     
@@ -15,6 +16,9 @@ protocol ResultSearchOutput {
     var errorHandler: PublishRelay<APIError> { get }
     var scrapStatus: [String: Bool] { get }
     var scrapStatusRelay: BehaviorRelay<[String: Bool]> { get }
+    var successEditPost: PassthroughSubject<UploadPostBody, Never> { get }
     
+    func setKeyword(_ keyword: String)
+    func uploadImages(_ images: [Data?], body: UploadPostBody, _ writeType: WriteType, postId: Int)
     func fetchPage() -> Int
 }

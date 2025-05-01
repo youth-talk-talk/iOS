@@ -21,3 +21,24 @@ struct MeDataDTO: Decodable {
     let email: String?
     let region: String
 }
+
+struct DeleteAccountDTO: Decodable {
+    
+    let status: Int
+    let message: String
+    let code: String
+    let data: Data?
+}
+
+struct PatchMeDTO: Decodable {
+    let status: Int
+    let message: String
+    let code: String
+    let data: PatchMeDataDTO
+}
+
+struct PatchMeDataDTO: Decodable {
+    let memberId: Int
+    let nickname: String
+    let region: String
+}

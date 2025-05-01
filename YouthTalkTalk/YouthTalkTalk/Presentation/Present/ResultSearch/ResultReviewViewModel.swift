@@ -8,8 +8,14 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
 final class ResultReviewViewModel: ResultSearchInterface {
+    var successEditPost = PassthroughSubject<UploadPostBody, Never>()
+    
+    func uploadImages(_ images: [Data?], body: UploadPostBody, _ writeType: WriteType, postId: Int) { }
+    
+    func setKeyword(_ keyword: String) { }
     
     private let disposeBag = DisposeBag()
     private let reviewUseCase: ReviewUseCase
@@ -19,7 +25,7 @@ final class ResultReviewViewModel: ResultSearchInterface {
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var searchType: ResultSearchType = .review
-    var updatePolicyScrap = PublishRelay<String>()
+    var updatePostScrap = PublishRelay<String>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
@@ -54,18 +60,18 @@ final class ResultReviewViewModel: ResultSearchInterface {
                     owner.totalCountRelay.accept(total)
                     
                 case .failure(let apiError):
-                    print(apiError.msg)
+                    break
                 }
                 
             }
             .disposed(by: disposeBag)
         
         // 스크랩
-        updatePolicyScrap
+        updatePostScrap
             .withUnretained(self)
             .flatMap { owner, postID in
                 
-                return owner.reviewUseCase.updateReviewScrap(id: postID)
+                return owner.reviewUseCase.updatePostScrap(id: postID)
             }
             .subscribe(with: self) { owner, result in
                 

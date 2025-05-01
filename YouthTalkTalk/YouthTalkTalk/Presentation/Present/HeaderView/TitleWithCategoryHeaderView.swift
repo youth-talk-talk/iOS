@@ -88,7 +88,7 @@ final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
     
     override func configureView() {
         
-        titleLabel.designed(text: "최근 업데이트", fontType: .g14Bold, textColor: .gray60)
+        titleLabel.designed(text: "최근 업데이트", font: .g14Bold, textColor: .gray60)
         
         let checkmarkImage = UIImage.emptyCheckbox.withTintColor(.gray30, renderingMode: .alwaysOriginal)
         
@@ -112,23 +112,14 @@ final class TitleWithCategoryHeaderView: BaseCollectionReusableView {
             }
         }
         
-        jobCheckBoxButton.isSelected = true
-        educationCheckBoxButton.isSelected = true
-        lifeCheckBoxButton.isSelected = true
-        participationCheckBoxButton.isSelected = true
-        
         jobCheckBoxButton.configurationUpdateHandler = updateHandler
         educationCheckBoxButton.configurationUpdateHandler = updateHandler
         lifeCheckBoxButton.configurationUpdateHandler = updateHandler
         participationCheckBoxButton.configurationUpdateHandler = updateHandler
         
-        jobLiteralLabel.designed(text: "일자리", fontType: .p12Regular, textColor: .gray60)
-        educationLiteralLabel.designed(text: "교육", fontType: .p12Regular, textColor: .gray60)
-        lifeLiteralLabel.designed(text: "생활지원", fontType: .p12Regular, textColor: .gray60)
-        participationLiteralLabel.designed(text: "참여", fontType: .p12Regular, textColor: .gray60)
-    }
-    
-    deinit {
-        print("RecentHeaderReusableView Deinit")
+        jobLiteralLabel.designed(text: "일자리", font: .p12Regular, textColor: .gray60)
+        educationLiteralLabel.designed(text: "교육", font: .p12Regular, textColor: .gray60)
+        lifeLiteralLabel.designed(text: "생활지원", font: .p12Regular, textColor: .gray60)
+        participationLiteralLabel.designed(text: "참여", font: .p12Regular, textColor: .gray60)
     }
 }

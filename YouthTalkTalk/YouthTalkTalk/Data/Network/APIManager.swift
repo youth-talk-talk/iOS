@@ -27,13 +27,33 @@ final class APIManager: APIInterface {
         self.session = session
     }
     
+    func requestAPI<T: Decodable>(router: Router, type: T.Type) async -> Result<T, APIError> {
+        let response = await session.request(router, interceptor: interceptor)
+            .validate(statusCode: 200...399)
+            .serializingDecodable(T.self)
+            .response
+
+        if let httpResponse = response.response {
+            handleResponseHeaders(httpResponse)
+        }
+
+        switch response.result {
+        case .success(let value):
+            return .success(value)
+
+        case .failure:
+            let error = handleResponseError(from: response.data)
+            return .failure(error)
+        }
+    }
+    
     func request<T: Decodable>(router: Router, type: T.Type) -> Single<Result<T, APIError>> {
         
         return Single.create { [weak self] single in
             
             guard let self else { return Disposables.create() }
             
-            session.request(router, interceptor: interceptor).validate(statusCode: 200 ... 299)
+            session.request(router, interceptor: interceptor).validate(statusCode: 200 ... 399)
                 .responseDecodable(of: type.self) { response in
                     
                     switch response.result {
@@ -44,7 +64,7 @@ final class APIManager: APIInterface {
                         single(.success(.success(success)))
                         
                     case .failure:
-                        
+                        print("[⚠️ Request 실패] \(response.response?.url ?? URL(string: ""))")
                         let error = self.handleResponseError(from: response.data)
                         single(.success(.failure(error)))
                     }
@@ -54,8 +74,39 @@ final class APIManager: APIInterface {
         }
     }
     
-    deinit {
-        print("APIManager Deinit")
+    public func postUploadImage(stringURL: String, image: Data) -> Single<Result<String, APIError>> {
+        return Single.create { [weak self] single in
+            let defaultHeader: HTTPHeaders = ["Content-Type": "multipart/form-data",
+                                              "Authorization": "Bearer \(self!.keyChainHelper.loadTokenInfo(type: .accessToken))"]
+            
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(image, withName: "image", fileName: "image.png")
+                
+            }, to: "\(APIKey.baseURL.rawValue)\(stringURL)", method: .post, headers: defaultHeader)
+            .validate(statusCode: 200..<900)
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let responseData = response.data {
+                         do {
+                             let decoder = JSONDecoder()
+                             let decodedResponse = try decoder.decode(UploadImageDTO.self, from: responseData)
+
+                             single(.success(.success(decodedResponse.data)))
+                         } catch {
+                             print("Error decoding response:", error)
+                             single(.success(.failure(APIError(code: "999"))))
+                         }
+                     }                
+                case .failure(_):
+                    if let error = self?.handleResponseError(from: response.data) {
+                        single(.success(.failure(error)))
+                    }
+                }
+            }
+            
+            return Disposables.create()
+        }
     }
 }
 
@@ -76,15 +127,11 @@ extension APIManager {
         do {
             if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                 if let code = jsonObject["code"] as? String {
-                    print(code)
                     let error = APIError(code: code)
-                    print(error.isSuccess ? "\(error.msg) - DTO 타입 전환 에러입니다": error.msg)
-                    
                     return error
                 }
             }
         } catch {
-            print("Failed to parse JSON: \(error)")
         }
         
         return .unknown

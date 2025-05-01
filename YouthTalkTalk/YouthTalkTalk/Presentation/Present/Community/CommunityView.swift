@@ -11,7 +11,9 @@ import FlexLayout
 
 class CommunityView: BaseView {
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CommunityLayout.layout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CommunityLayout.layout()).then {
+        $0.backgroundColor = .clear
+    }
     let createButton = UIButton()
     
     override func configureLayout() {
@@ -33,13 +35,13 @@ class CommunityView: BaseView {
                 .bottom(12)
         }
     }
-
+    
     override func configureView() {
         
         collectionView.backgroundColor = .clear
         collectionView.bounces = false
         
-        createButton.designed(title: "글 쓰기", fontType: .p14Bold)
+        createButton.designed(title: "글 쓰기", fontType: .p14Bold, cornerRadius: 25)
         createButton.configuration?.image = .writePencil
         createButton.configuration?.imagePlacement = .leading
         createButton.configuration?.imagePadding = 8

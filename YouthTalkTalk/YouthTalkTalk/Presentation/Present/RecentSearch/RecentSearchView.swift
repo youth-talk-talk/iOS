@@ -13,7 +13,9 @@ final class RecentSearchView: BaseView {
     
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: RecentSearchLayout.layout()
-    )
+    ).then {
+        $0.backgroundColor = .clear
+    }
     
     override func configureLayout() {
         

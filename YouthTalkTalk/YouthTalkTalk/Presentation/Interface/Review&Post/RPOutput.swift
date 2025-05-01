@@ -11,8 +11,11 @@ import RxSwift
 
 protocol RPOutput {
     
-    var popularRPsRelay: PublishRelay<[CommunitySectionItems]> { get }
-    var recentRPsRelay: PublishRelay<[CommunitySectionItems]> { get }
+    var popularRPsRelay: PublishRelay<[CommunitySectionItems]> { get set }
+    var recentRPsRelay: PublishRelay<[CommunitySectionItems]> { get set }
     var resetSectionItems: PublishRelay<Void> { get }
+    var scrapStatus: [String: Bool] { get }
+    var scrapStatusRelay: BehaviorRelay<[String: Bool]> { get }
+
 }
 

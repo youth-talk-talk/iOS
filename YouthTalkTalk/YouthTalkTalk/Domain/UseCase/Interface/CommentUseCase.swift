@@ -9,6 +9,8 @@ import Foundation
 import RxSwift
 
 protocol CommentUseCase {
-    
+    func commentDelete(_ commentId: Int) -> Observable<Result<CommentDeleteEditLikeDTO, APIError>>
+    func editComment(_ commentId: Int, _ newComment: String) -> Observable<Result<CommentDeleteEditLikeDTO, APIError>>
+    func likeComment(_ commentId: Int, _ isSetLiked: Bool) -> Observable<Result<CommentDeleteEditLikeDTO, APIError>>
     func fetchComments(postID: Int) -> Observable<Result<[CommentDetailEntity], APIError>>
 }

@@ -9,6 +9,25 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum HomeSectionItems: Hashable {
+    
+    case category
+    case popular(PolicyEntity)
+    case recent(PolicyEntity)
+    
+    var data: PolicyEntity? {
+        switch self {
+        case .category:
+            return nil
+        case .popular(let policyEntity):
+            return policyEntity
+        case .recent(let policyEntity):
+            return policyEntity
+        }
+    }
+}
+
+
 protocol HomeOutput {
     
     var popularPoliciesRelay: PublishRelay<[HomeSectionItems]> { get }

@@ -56,9 +56,23 @@ final class PolicyRepositoryImpl: PolicyRepository {
         let router = PolicyRouter.fetchScrapPolicy
         
         return apiManager.request(router: router, type: ScrapPolicyDTO.self).asObservable()
+    }  
+    
+    func uploadImage(_ image: Data) -> Observable<Result<String, APIError>> {
+        
+        return apiManager.postUploadImage(stringURL: "/posts/image", image: image).asObservable()
     }
     
-    deinit {
-        print("PolicyRepositoryImpl Deinit")
+    func uploadPost(_ body: UploadPostBody) -> Observable<Result<UploadPostDTO, APIError>> {
+        
+        let router = PolicyRouter.uploadPost(body: body)
+        return apiManager.request(router: router, type: UploadPostDTO.self).asObservable()
+    }    
+    
+    func editPost(_ postId: Int, _ postData: PostEditRequestModel) -> Observable<Result<PostEditResponseModel, APIError>> {
+        
+        let router = PolicyRouter.editPost(postId, postData)
+        
+        return apiManager.request(router: router, type: PostEditResponseModel.self).asObservable()
     }
 }

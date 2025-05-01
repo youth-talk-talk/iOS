@@ -5,54 +5,33 @@
 //  Created by 이중엽 on 7/8/24.
 //
 
-import Foundation
-import RxSwift
-import RxCocoa
-
-final class SearchViewModel: SearchInterface {
+final class SearchViewModel {
+    private let apiManager = APIManager()
     
-    private let disposeBag: DisposeBag = DisposeBag()
-    private let userDefaults = UserDefaults.standard
-    private var keyword: String = ""
+    private(set) var filters: [String] = ["정책분야", "지역", "취업상태", "학력", "특화 분야", "연령 및 소득"]
     
-    var type: MainContentsType
+    var onError: ((Error) -> Void)?
     
-    var input: SearchInput { return self }
-    var output: SearchOutput { return self }
+    var onSearched: (([PolicyDTO]) -> Void)?
     
-    // Inputs
-    var searchButtonClicked = PublishRelay<String>()
-    var cancelButtonClicked = PublishRelay<Void>()
-    
-    // Outputs
-    var searchTypeEvent = BehaviorRelay<SearchViewType>(value: .recent)
-    
-    init(type: MainContentsType) {
-        self.type = type
+    func requestSearchAPI(_ keyword: String) {
+        let body: PolicyConditionBody = .init(categories: [],
+                                              age: nil,
+                                              employmentCodeList: [],
+                                              isFinished: nil,
+                                              keyword: keyword)
         
-        // 검색
-        searchButtonClicked
-            .subscribe(with: self) { owner, text in
-                
-                if text.isEmpty { return }
-                
-                owner.userDefaults.saveRecentSearch(searchText: text, type: type)
-                owner.keyword = text
-                // 결과창 화면으로 변경
-                owner.searchTypeEvent.accept(text.isEmpty ? .recent : .result)
-                
-            }.disposed(by: disposeBag)
-        
-        // 검색 취소
-        cancelButtonClicked
-            .subscribe(with: self) { owner, _ in
-                
-                // 최근검색창 화면으로 변경
-                owner.searchTypeEvent.accept(.recent)
-            }.disposed(by: disposeBag)
-    }
-    
-    func fetchKeyword() -> String {
-        return keyword
+        Task {
+            let result = await apiManager.requestAPI(
+                router: PolicyRouter.fetchConditionPolicy(page: 0,
+                                                          body: body),
+                type: SearchPolicyDTO.self)
+            switch result {
+            case .success(let response):
+                onSearched?(response.data.policyList) // TODO: 액세스 토큰 재발급 해보기
+            case .failure(let error):
+                onError?(error)
+            }
+        }
     }
 }

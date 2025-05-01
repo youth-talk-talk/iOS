@@ -37,4 +37,18 @@ final class MemberUseCaseImpl: MemberUseCase {
                 }
             }
     }
+    
+    func deleteAccount() -> Observable<Bool> {
+        return memberRepository.deleteAccount()
+            .map { result in
+                switch result {
+                    
+                case .success(let data):
+                    return true
+                    
+                case .failure(let error):
+                    return false
+                }
+            }
+    }
 }

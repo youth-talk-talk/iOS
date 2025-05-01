@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Combine
 
 final class ResultPolicyViewModel: ResultSearchInterface {
     
@@ -23,7 +24,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var fetchSearchList = PublishRelay<Void>()
     var pageUpdate = PublishRelay<Int>()
     var searchType: ResultSearchType = .policy
-    var updatePolicyScrap = PublishRelay<String>()
+    var updatePostScrap = PublishRelay<String>()
     
     // Output
     var searchListRelay = PublishRelay<[ResultSearchSectionItems]>()
@@ -31,6 +32,10 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     var errorHandler = PublishRelay<APIError>()
     var scrapStatus = [String: Bool]()
     var scrapStatusRelay = BehaviorRelay<[String: Bool]>(value: [:])
+    var successEditPost = PassthroughSubject<UploadPostBody, Never>()
+    
+    lazy var successUploadPost = PassthroughSubject<RPEntity, Never>()
+    private lazy var uploadedImage: [String] = []
     
     func fetchType() {
         
@@ -39,6 +44,10 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     
     var input: ResultSearchInput { return self }
     var output: ResultSearchOutput { return self }
+    
+    func setKeyword(_ keyword: String) {
+        self.keyword = keyword
+    }
     
     init(keyword: String = "", type: [PolicyCategory], policyUseCase: PolicyUseCase) {
         self.keyword = keyword
@@ -72,7 +81,6 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             }.disposed(by: disposeBag)
         
         pageUpdate
-            .distinctUntilChanged()
             .subscribe(with: self) { owner, newPage in
                 
                 owner.page = newPage
@@ -81,7 +89,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             .disposed(by: disposeBag)
         
         // 스크랩
-        updatePolicyScrap
+        updatePostScrap
             .withUnretained(self)
             .flatMap { owner, policyID in
                 
@@ -100,6 +108,87 @@ final class ResultPolicyViewModel: ResultSearchInterface {
                 }
             }
             .disposed(by: disposeBag)
+        
+        
+    }
+    
+    func uploadImages(_ images: [Data?], body: UploadPostBody, _ writeType: WriteType, postId: Int = 0) {
+        let images = images.compactMap({ $0 })
+        uploadedImage = []
+        
+        if images.count > 0 {
+            // MARK: 이미지가 있을경우 이미지 API 먼저 호출
+            images.forEach { data in
+                self.policyUseCase.uploadImage(data)
+                    .subscribe(onNext: { [weak self] result in
+                        guard let self else { return }
+                        
+                        switch result {
+                        case.success(let data):
+                            uploadedImage.append(data)
+                            
+                            var bodyWithImage = body
+                            uploadedImage.forEach { imageUrl in
+                                bodyWithImage.contentList.append(.init(content: imageUrl, type: "IMAGE"))
+                            }
+                            
+                            // MARK: 이미지 업로드가 모두 완료되어 게시글 작성/수정 API 호출
+                            if images.count == uploadedImage.count {
+                                
+                                // MARK: 게시글 작성 API 호출
+                                if writeType == .new {
+                                    policyUseCase.uploadPost(bodyWithImage)
+                                        .subscribe { [weak self] result in
+                                            switch result {
+                                            case .success(let data):
+                                                self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content ?? "", writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
+                                                break
+                                            case .failure:
+                                                break
+                                            }
+                                        }
+                                        .disposed(by: disposeBag)
+                                    
+                                } else if writeType == .edit {
+                                    // MARK: 게시글 수정 API 호출
+                                }
+                            }
+                            
+                        case .failure(let error):
+                            break
+                        }
+                    })
+                    .disposed(by: disposeBag)
+            }
+        } else { // MARK: 이미지가 없을경우 바로 포스트 작성/수정
+            if writeType == .new {
+                policyUseCase.uploadPost(body)
+                    .subscribe { [weak self] result in
+                        switch result {
+                        case .success(let data):
+                            self?.successUploadPost.send(RPEntity(postId: data.data.postId, title: data.data.title, content: data.data.content ?? "", writerID: data.data.writerId, scraps: 0, scrap: data.data.scrap, comments: 0, policyId: data.data.policyId, policyTitle: data.data.policyTitle))
+                        case .failure(let error):
+                            break
+                        }
+                    }
+                    .disposed(by: disposeBag)
+                
+            } else if writeType == .edit {
+                // TODO: failure로 success 넘어오는 이슈 체크 (게시글 수정), 디코딩 모델이 달라서인듯
+//                policyUseCase.editPost(postId, postData: .init(title: body.title,
+//                                                               contentList: body.contentList))
+//                .subscribe { [weak self] result in
+//                    switch result {
+//                    case .success(let data):
+//                        self?.successEditPost.send(body)
+//                        
+//                    case .failure(let error):
+//                        break
+//                    }
+//                }
+//                .disposed(by: disposeBag)
+            }
+        }
     }
     
     func updateData(age: Int?, employment: [String], isFinished: Bool?) {
@@ -113,4 +202,36 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     func fetchPage() -> Int {
         return page
     }
+}
+
+struct PostEditRequestModel: Encodable {
+    let title: String
+//    let policyId: String?
+//    let postType: String
+    let contentList: [DetailContentDTO]
+//    let addImgUrlList: [String]
+//    let deletedImgUrlList: [String]
+}
+
+struct PostEditResponseModel: Decodable {
+    let status: Int
+    let message: String
+    let code: String
+    let data: PostEditData
+}
+
+struct PostEditData: Decodable {
+    let postId: Int
+    let postType: String
+    let title: String
+    let content: String
+    let policyId: String?
+    let policyTitle: String?
+    let writerId: Int
+    let images: [ImageResponseModel]?
+}
+
+struct ImageResponseModel: Decodable {
+    let id: Int
+    let imgUrl: String
 }

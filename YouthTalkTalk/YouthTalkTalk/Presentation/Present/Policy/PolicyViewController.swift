@@ -29,10 +29,10 @@ enum PolicySection: Int, CaseIterable {
     
     var image: UIImage? {
         switch self {
-        case .summary: return .right
-        case .target: return .person
-        case .method: return .questionMark
-        case .detail: return .plus
+        case .summary: return .addPhoto
+        case .target: return .addPhoto
+        case .method: return .addPhoto
+        case .detail: return .addPhoto
         case .comments: return nil
         }
     }
@@ -60,7 +60,11 @@ enum PolicySectionItems: Hashable {
     }
 }
 
-class PolicyViewController: BaseViewController<PolicyView> {
+final class PolicyViewController: RootViewController {
+    private let tableview = UITableView().then {
+        $0.backgroundColor = .white
+        $0.showsVerticalScrollIndicator = false
+    }
     
     var dataSource: UITableViewDiffableDataSource<PolicySection, PolicySectionItems>!
     var snapshot = NSDiffableDataSourceSnapshot<PolicySection, PolicySectionItems>()
@@ -75,67 +79,82 @@ class PolicyViewController: BaseViewController<PolicyView> {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    override func bind() {
-        
-        snapshot.appendSections(PolicySection.allCases)
-        
-        viewModel.input.fetchPolicyDetail.accept(viewModel.policyID)
-        
-        viewModel.output.summarySectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .summary, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.detailSectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .detail, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.methodSectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .method, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.targetSectionRelay
-            .bind(with: self) { owner, sectionItems in
-                
-                owner.update(section: .target, items: sectionItems)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    override func configureTableView() {
-        
-        layoutView.tableview.rowHeight = UITableView.automaticDimension
-        layoutView.tableview.sectionHeaderTopPadding = 0
-        layoutView.tableview.sectionHeaderHeight = 0
-        layoutView.tableview.sectionFooterHeight = 0
-        
-        layoutView.tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
-        layoutView.tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
-        layoutView.tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
-        layoutView.tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
-        
-        cellRegistration()
-    }
-    
+//    
+//    override func bind() {
+//        tabBarController?.tabBar.isHidden = true
+//
+//        snapshot.appendSections(PolicySection.allCases)
+//        
+//        viewModel.input.fetchPolicyDetail.accept(viewModel.policyID)
+//        
+//        viewModel.output.summarySectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .summary, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.detailSectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .detail, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.methodSectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .method, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.targetSectionRelay
+//            .bind(with: self) { owner, sectionItems in
+//                
+//                owner.update(section: .target, items: sectionItems)
+//            }
+//            .disposed(by: disposeBag)
+//    }
+//    
+//    override func configureTableView() {
+//        view.backgroundColor = .white
+//        
+//        view.addSubview(backImageView)
+//        view.addSubview(tableview)
+//        
+//        backImageView.onTapped { [weak self] in
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//        
+//        backImageView.snp.makeConstraints {
+//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(13)
+//            $0.leading.equalToSuperview().inset(18)
+//            $0.size.equalTo(24)
+//        }
+//
+//        tableview.snp.makeConstraints {
+//            $0.top.equalTo(backImageView.snp.bottom).offset(13)
+//            $0.leading.trailing.equalToSuperview().inset(17)
+//            $0.bottom.equalToSuperview()
+//        }
+//        
+//        tableview.rowHeight = UITableView.automaticDimension
+//        tableview.sectionHeaderTopPadding = 0
+//        tableview.sectionHeaderHeight = 0
+//        tableview.sectionFooterHeight = 0
+//        
+//        tableview.register(SummaryTableViewCell.self, forCellReuseIdentifier: SummaryTableViewCell.identifier)
+//        tableview.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.identifier)
+//        tableview.register(MethodTableViewCell.self, forCellReuseIdentifier: MethodTableViewCell.identifier)
+//        tableview.register(TargetTableViewCell.self, forCellReuseIdentifier: TargetTableViewCell.identifier)
+//        
+//        cellRegistration()
+//    }
+//    
     //MARK: Cell Registration
     private func cellRegistration() {
         
-        dataSource = UITableViewDiffableDataSource<PolicySection, PolicySectionItems>(tableView: layoutView.tableview) { tableView, indexPath, item in
+        dataSource = UITableViewDiffableDataSource<PolicySection, PolicySectionItems>(tableView: tableview) { tableView, indexPath, item in
             
             let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
             
