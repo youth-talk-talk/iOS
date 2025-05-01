@@ -70,10 +70,6 @@ final class HomeViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        let searchVC = SearchViewController()
-        
-        navigationController?.pushViewController(searchVC, animated: true)
-        
         setLayout()
         setTapEvents()
     }

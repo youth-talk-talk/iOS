@@ -75,6 +75,22 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
     
     private let sortArrowImageView = UIImageView(image: .arrowDown.withTintColor(.black))
     
+    private let sortDropdownView = UIView().then {
+        $0.setShadow()
+        $0.layer.cornerRadius = moderate(6)
+        $0.isHidden = true
+    }
+    
+    private let newImageView = UIImageView(image: .checkGreen)
+    private let newLabel = UILabel().then {
+        $0.designed(text: "최신순", font: .p14Regular, textColor: .green)
+    }
+    
+    private let popularImageView = UIImageView(image: .checkGreen.withTintColor(.white))
+    private let popularLabel = UILabel().then {
+        $0.designed(text: "인기순", font: .p14Regular, textColor: .gray90)
+    }
+    
     private lazy var resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
         let layout = UICollectionViewFlowLayout()
         
@@ -87,6 +103,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         $0.backgroundColor = .white
         $0.contentInset.left = 16
         $0.contentInset.right = 16
+        $0.contentInset.bottom = 16
         $0.showsLargeContentViewer = false
         $0.register(cells: PolicyCell.self)
         $0.isHidden = true
@@ -95,7 +112,12 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setLayout()
         setRecentSearch()
+        
+        sortStackView.onTapped { [weak self] in
+            self?.sortDropdownView.isHidden.toggle()
+        }
         
         viewModel.onError = { [weak self] error in
             // TODO: 에러 얼럿 표시
@@ -104,18 +126,98 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         viewModel.onSearched = { [weak self] searchedPolicy in
             print("|| \(searchedPolicy)")
         }
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text, !text.isEmpty else { return true }
         
-        view.addSubview(searchBarView)
-        view.addSubview(recentSearchLabel)
-        view.addSubview(deleteRecentLabel)
-        view.addSubview(recnetSearchEmptyView)
-        view.addSubview(recentSearchStackView)
-        view.addSubview(searchFilterCollectionView)
-        view.addSubview(dividerView)
+        UserDefaults.standard.saveRecentSearch(searchText: text,
+                                               type: .policy)
         
-        view.addSubview(resultCountLabel)
-        view.addSubview(sortStackView)
-        view.addSubview(resultCollectionView)
+        viewModel.requestSearchAPI(text)
+        
+        showSearchResultViews()
+        
+        return true
+    }
+    
+    private func setRecentSearch() {
+        let recentSearchList = UserDefaults.standard.getRecentSearchList(type: .policy)
+        
+        showRecentSearchEmptyView(recentSearchList.isEmpty)
+        
+        // 최근 검색어 표시
+        recentSearchList.forEach { recentSearch in
+            let recentSearchItem = RecentSearchItemView(text: recentSearch)
+            
+            recentSearchItem.snp.makeConstraints {
+                $0.height.equalTo(30)
+            }
+            
+            recentSearchItem.xImageView.onTapped { [weak self] in
+                self?.recentSearchStackView.removeArrangedSubview(recentSearchItem)
+                recentSearchItem.removeFromSuperview()
+                UserDefaults.standard.removeRecentSearch(searchText: recentSearch,
+                                                         type: .policy)
+                
+                // 최근 검색어가 다 삭제된 경우 엠티뷰 표시
+                if ((self?.recentSearchStackView.arrangedSubviews.isEmpty) != nil) {
+                    self?.showRecentSearchEmptyView(true)
+                }
+            }
+            
+            recentSearchStackView.addArrangedSubview(recentSearchItem)
+        }
+        
+        // 최근 검색어 전체 삭제
+        deleteRecentLabel.onTapped { [weak self] in
+            self?.showRecentSearchEmptyView(true)
+            
+            recentSearchList.forEach { search in
+                UserDefaults.standard.removeRecentSearch(searchText: search,
+                                                         type: .policy)
+            }
+        }
+    }
+    
+    private func showSearchResultViews(_ isShow: Bool = true) {
+        searchFilterCollectionView.isHidden = !isShow
+        dividerView.isHidden = !isShow
+        resultCountLabel.isHidden = !isShow
+        sortStackView.isHidden = !isShow
+        resultCollectionView.isHidden = !isShow
+    }
+    
+    private func hideRecentSearchView() {
+        recnetSearchEmptyView.isHidden = true
+        recentSearchStackView.isHidden = true
+        deleteRecentLabel.isHidden = true
+    }
+    
+    private func showRecentSearchEmptyView(_ isShow: Bool) {
+        recnetSearchEmptyView.isHidden = isShow
+        recentSearchStackView.isHidden = !isShow
+        deleteRecentLabel.isHidden = !isShow
+    }
+    
+    private func setLayout() {
+        view.addSubviews(searchBarView,
+                         recentSearchLabel,
+                         deleteRecentLabel,
+                         recnetSearchEmptyView,
+                         recentSearchStackView,
+                         searchFilterCollectionView,
+                         dividerView,
+                         resultCountLabel,
+                         sortStackView,
+                         resultCollectionView,
+                         sortDropdownView)
+        
+        sortDropdownView.addSubviews(newLabel,
+                                     newImageView,
+                                     popularLabel,
+                                     popularImageView)
         
         sortStackView.addArrangedSubview(sortLabel)
         sortStackView.addArrangedSubview(sortArrowImageView)
@@ -194,79 +296,31 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
             $0.bottom.equalToSuperview()
         }
-    }
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text, !text.isEmpty else { return true }
         
-        UserDefaults.standard.saveRecentSearch(searchText: text,
-                                               type: .policy)
-        
-        viewModel.requestSearchAPI(text)
-        
-        showSearchResultViews()
-        
-        return true
-    }
-    
-    private func setRecentSearch() {
-        let recentSearchList = UserDefaults.standard.getRecentSearchList(type: .policy)
-        
-        showRecentSearchEmptyView(recentSearchList.isEmpty)
-        
-        // 최근 검색어 표시
-        recentSearchList.forEach { recentSearch in
-            let recentSearchItem = RecentSearchItemView(text: recentSearch)
-            
-            recentSearchItem.snp.makeConstraints {
-                $0.height.equalTo(30)
-            }
-            
-            recentSearchItem.xImageView.onTapped { [weak self] in
-                self?.recentSearchStackView.removeArrangedSubview(recentSearchItem)
-                recentSearchItem.removeFromSuperview()
-                UserDefaults.standard.removeRecentSearch(searchText: recentSearch,
-                                                         type: .policy)
-                
-                // 최근 검색어가 다 삭제된 경우 엠티뷰 표시
-                if ((self?.recentSearchStackView.arrangedSubviews.isEmpty) != nil) {
-                    self?.showRecentSearchEmptyView(true)
-                }
-            }
-            
-            recentSearchStackView.addArrangedSubview(recentSearchItem)
+        sortDropdownView.snp.makeConstraints {
+            $0.top.equalTo(sortStackView.snp.bottom).offset(moderate(7))
+            $0.trailing.equalTo(sortStackView)
+            $0.width.equalTo(moderate(120))
+            $0.height.equalTo(moderate(80))
         }
         
-        // 최근 검색어 전체 삭제
-        deleteRecentLabel.onTapped { [weak self] in
-            self?.showRecentSearchEmptyView(true)
-            
-            recentSearchList.forEach { search in
-                UserDefaults.standard.removeRecentSearch(searchText: search,
-                                                         type: .policy)
-            }
+        newLabel.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().inset(moderate(10))
         }
-    }
-    
-    private func showSearchResultViews(_ isShow: Bool = true) {
-        searchFilterCollectionView.isHidden = !isShow
-        dividerView.isHidden = !isShow
-        resultCountLabel.isHidden = !isShow
-        sortStackView.isHidden = !isShow
-        resultCollectionView.isHidden = !isShow
-    }
-    
-    private func hideRecentSearchView() {
-        recnetSearchEmptyView.isHidden = true
-        recentSearchStackView.isHidden = true
-        deleteRecentLabel.isHidden = true
-    }
-    
-    private func showRecentSearchEmptyView(_ isShow: Bool) {
-        recnetSearchEmptyView.isHidden = isShow
-        recentSearchStackView.isHidden = !isShow
-        deleteRecentLabel.isHidden = !isShow
+        
+        newImageView.snp.makeConstraints {
+            $0.trailing.top.equalToSuperview().inset(moderate(10))
+            $0.size.equalTo(20)
+        }
+        
+        popularLabel.snp.makeConstraints {
+            $0.leading.bottom.equalToSuperview().inset(moderate(10))
+        }
+        
+        popularImageView.snp.makeConstraints {
+            $0.trailing.bottom.equalToSuperview().inset(moderate(10))
+            $0.size.equalTo(20)
+        }
     }
 }
 

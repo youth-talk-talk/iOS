@@ -9,41 +9,71 @@ import UIKit
 
 final class PolicyCell: UICollectionViewCell {
     
-    private let contentStackView = UIStackView().then {
+    private let policyView = NewPolicyView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubviews(policyView)
+        
+        policyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func setStyle(_ style: policyCellStyle) {
+        policyView.setStyle(style)
+    }
+    
+    func setData(categoryImage: UIImage, categoryName: String) {
+    }
+}
+
+enum policyCellStyle {
+    case shadow
+    case border
+}
+
+final class NewPolicyView: UIView {
+    let contentStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = moderate(14)
         $0.alignment = .leading
     }
     
-    private let tagStackView = UIStackView().then {
+    let tagStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 8
         $0.backgroundColor = .gray40
     }
     
-    private let scrapImageView = UIImageView(image: .bookmarkLine)
+    let scrapImageView = UIImageView(image: .bookmarkLine)
     
-    private let scrapCountLabel = UILabel().then {
+    let scrapCountLabel = UILabel().then {
         $0.designed(text: "스크랩 수", font: .p12Regular, textColor: .gray90)
     }
     
-    private let hostImageTitleStackView = UIStackView().then {
+    let hostImageTitleStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = moderate(10)
         $0.alignment = .center
     }
     
-    private let hostImageView = UIImageView().then {
+    let hostImageView = UIImageView().then {
         $0.layer.borderColor = UIColor.gray40.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 28
     }
     
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.designed(text: "정책 타이틀입니다.", font: .p16Regular16)
     }
                     
-    private let totalScrapLabel = UILabel().then {
+    let totalScrapLabel = UILabel().then {
         $0.designed(text: "총 12회 스크랩 됐어요!", font: .p12Regular, textColor: .gray80)
         $0.changeFont(forText: "232", withNewFont: FontManager.font(.p12Regular))
     }
@@ -94,10 +124,6 @@ final class PolicyCell: UICollectionViewCell {
         }
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     func setStyle(_ style: policyCellStyle) {
         if style == .shadow {
             setShadow()
@@ -106,15 +132,12 @@ final class PolicyCell: UICollectionViewCell {
             layer.shadowColor = UIColor.clear.cgColor
             layer.borderColor = UIColor.gray40.cgColor
             layer.borderWidth = 1
+            
             totalScrapLabel.isHidden = true
         }
     }
     
-    func setData(categoryImage: UIImage, categoryName: String) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-}
-
-enum policyCellStyle {
-    case shadow
-    case border
 }

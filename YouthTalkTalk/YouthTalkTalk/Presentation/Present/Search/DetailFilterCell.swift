@@ -26,10 +26,10 @@ final class DetailFilterCell: UICollectionViewCell {
             $0.centerY.equalToSuperview()
         }
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     func adjustCellSize(height: CGFloat, label: String) -> CGSize {
         self.label.text = label

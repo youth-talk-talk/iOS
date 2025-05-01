@@ -24,7 +24,7 @@ final class SearchFilterCollectionView: UICollectionView {
     private func createLayout() -> UICollectionViewCompositionalLayout {
         
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(70),
+            widthDimension: .estimated(50),
             heightDimension: .absolute(32)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

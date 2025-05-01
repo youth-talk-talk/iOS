@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegionBottomSheetViewController: RootViewController {
+final class RegionBottomSheetViewController: UIViewController {
     
     private let regions = ["전체 지역", "서울", "부산", "대구", "인천", "광주",
                            "대전", "울산", "경기", "강원", "충북", "충남",
@@ -49,6 +49,9 @@ final class RegionBottomSheetViewController: RootViewController {
         self.onRegionTapped = onRegionTapped
         
         super.init(nibName: nil, bundle: nil)
+        
+        view.backgroundColor = .white
+        view.roundTopCorners(radius: moderate(20))
         
         self.applyButton.isEnabled = selectedRegion != nil
     }

@@ -13,6 +13,11 @@
 		6A42F9B62DC2DE4A00BFC347 /* GrabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B52DC2DE4800BFC347 /* GrabView.swift */; };
 		6A42F9B82DC2E0A800BFC347 /* DetailFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */; };
 		6A42F9BC2DC2EB3300BFC347 /* DetailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9BB2DC2EB3000BFC347 /* DetailFilterCell.swift */; };
+		6A42F9C12DC332EE00BFC347 /* PolicyMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9C02DC332EC00BFC347 /* PolicyMainViewModel.swift */; };
+		6A42F9C32DC3363900BFC347 /* TitleArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9C22DC3363700BFC347 /* TitleArrowView.swift */; };
+		6A42F9C52DC337B800BFC347 /* PolicyDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9C42DC337AF00BFC347 /* PolicyDateCell.swift */; };
+		6A42F9C72DC349A700BFC347 /* PolicyCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9C62DC3499F00BFC347 /* PolicyCategoryCell.swift */; };
+		6A42F9C92DC34D4D00BFC347 /* PolicyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9C82DC34D4500BFC347 /* PolicyPageViewController.swift */; };
 		6A478CC92DBDFE0A00AF8494 /* UICollectionView++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */; };
 		6A478CCB2DBDFE5A00AF8494 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */; };
 		6A478CCF2DBE06F900AF8494 /* PolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */; };
@@ -299,6 +304,11 @@
 		6A42F9B52DC2DE4800BFC347 /* GrabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabView.swift; sourceTree = "<group>"; };
 		6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterViewController.swift; sourceTree = "<group>"; };
 		6A42F9BB2DC2EB3000BFC347 /* DetailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterCell.swift; sourceTree = "<group>"; };
+		6A42F9C02DC332EC00BFC347 /* PolicyMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyMainViewModel.swift; sourceTree = "<group>"; };
+		6A42F9C22DC3363700BFC347 /* TitleArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleArrowView.swift; sourceTree = "<group>"; };
+		6A42F9C42DC337AF00BFC347 /* PolicyDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyDateCell.swift; sourceTree = "<group>"; };
+		6A42F9C62DC3499F00BFC347 /* PolicyCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCategoryCell.swift; sourceTree = "<group>"; };
+		6A42F9C82DC34D4500BFC347 /* PolicyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyPageViewController.swift; sourceTree = "<group>"; };
 		6A478CC82DBDFE0500AF8494 /* UICollectionView++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++.swift"; sourceTree = "<group>"; };
 		6A478CCA2DBDFE5200AF8494 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		6A478CCE2DBE06EF00AF8494 /* PolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCell.swift; sourceTree = "<group>"; };
@@ -594,6 +604,7 @@
 		6AC5EBE02CDE1EF5003EFD37 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				6A42F9C22DC3363700BFC347 /* TitleArrowView.swift */,
 				6A42F9B52DC2DE4800BFC347 /* GrabView.swift */,
 				6A918F222DBF015B0047ED55 /* EmptyView.swift */,
 				6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */,
@@ -775,6 +786,8 @@
 		AC579B672C51341D00D1C9FC /* Policy */ = {
 			isa = PBXGroup;
 			children = (
+				6A42F9C82DC34D4500BFC347 /* PolicyPageViewController.swift */,
+				6A42F9C02DC332EC00BFC347 /* PolicyMainViewModel.swift */,
 				6A478CD42DBE496B00AF8494 /* PolicyMainViewController.swift */,
 				AC579B972C5CB8CE00D1C9FC /* Cell */,
 				AC579B6A2C5134A200D1C9FC /* PolicyView.swift */,
@@ -797,6 +810,8 @@
 		AC579B972C5CB8CE00D1C9FC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				6A42F9C62DC3499F00BFC347 /* PolicyCategoryCell.swift */,
+				6A42F9C42DC337AF00BFC347 /* PolicyDateCell.swift */,
 				AC579B9A2C5CB9C000D1C9FC /* SummaryTableViewCell.swift */,
 				AC579BA02C5CBA0A00D1C9FC /* TargetTableViewCell.swift */,
 				AC579B9E2C5CB9F600D1C9FC /* MethodTableViewCell.swift */,
@@ -1647,6 +1662,7 @@
 				6A478CCF2DBE06F900AF8494 /* PolicyCell.swift in Sources */,
 				AC579B412C4015A000D1C9FC /* SignUpUseCase.swift in Sources */,
 				ACF2A3052C34172B00FE8D63 /* ResultSearchView.swift in Sources */,
+				6A42F9C12DC332EE00BFC347 /* PolicyMainViewModel.swift in Sources */,
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
 				AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */,
 				AC579B992C5CB90B00D1C9FC /* BaseTableViewCell.swift in Sources */,
@@ -1745,6 +1761,7 @@
 				ACF2A31C2C37CCC700FE8D63 /* SignUpRouter.swift in Sources */,
 				6A42F9B62DC2DE4A00BFC347 /* GrabView.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
+				6A42F9C52DC337B800BFC347 /* PolicyDateCell.swift in Sources */,
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
 				AC579B9D2C5CB9DF00D1C9FC /* DetailTableViewCell.swift in Sources */,
@@ -1755,6 +1772,7 @@
 				AC4B42E62C183F8F005FC370 /* UILabel++.swift in Sources */,
 				ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */,
 				AC579B602C45428500D1C9FC /* PolicyUseCaseImpl.swift in Sources */,
+				6A42F9C72DC349A700BFC347 /* PolicyCategoryCell.swift in Sources */,
 				ACF2A3132C35337200FE8D63 /* SignInDTO.swift in Sources */,
 				AC579B452C4016AC00D1C9FC /* SignUpRepositoryImpl.swift in Sources */,
 				ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */,
@@ -1809,6 +1827,7 @@
 				AC579B5E2C45423F00D1C9FC /* HomePolicyEntity.swift in Sources */,
 				AC0AA5B72CCE21D500DB032E /* CommentRepositoryImpl.swift in Sources */,
 				AC604C0D2C676D1800804950 /* ReviewUseCaseImpl.swift in Sources */,
+				6A42F9C92DC34D4D00BFC347 /* PolicyPageViewController.swift in Sources */,
 				6A478CD32DBE2F8900AF8494 /* PostView.swift in Sources */,
 				ACF2A30C2C352F1300FE8D63 /* SignInBody.swift in Sources */,
 				6A42F9B82DC2E0A800BFC347 /* DetailFilterViewController.swift in Sources */,
@@ -1852,6 +1871,7 @@
 				6A478CD52DBE497000AF8494 /* PolicyMainViewController.swift in Sources */,
 				AC93893C2CA0340E0021479B /* ConditionRPQuery.swift in Sources */,
 				ACF2A2A52C2AAF7B00FE8D63 /* PolicyLocation.swift in Sources */,
+				6A42F9C32DC3363900BFC347 /* TitleArrowView.swift in Sources */,
 				ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */,
 				AC604BF32C675BCD00804950 /* RPInterface.swift in Sources */,
 				6A90810D2CEDF3C700B52C91 /* ImagePicker.swift in Sources */,
