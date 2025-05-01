@@ -1,5 +1,5 @@
 //
-//  PolicyCategoryCell.swift
+//  NewCategoryCell.swift
 //  YouthTalkTalk
 //
 //  Created by 김유진 on 5/1/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PolicyCategoryCell: UICollectionViewCell {
+final class NewCategoryCell: UICollectionViewCell {
     let label = UILabel().then {
         $0.designed(font: .p14Regular, textColor: .gray80)
     }

@@ -115,7 +115,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeNaviVC = UINavigationController(rootViewController: homeVC)
         
         // 커뮤니티 탭
-        let communityVC = CommunityTabViewController()
+        let communityVC = CommunityMainViewcontroller()
         let communityNaviVC = UINavigationController(rootViewController: communityVC)
         
         // 정책 탭

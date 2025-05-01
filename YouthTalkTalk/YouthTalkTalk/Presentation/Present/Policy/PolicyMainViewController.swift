@@ -70,7 +70,7 @@ final class PolicyMainViewController: UIViewController {
     private lazy var newManyPolicyFilterCollectionView = SearchFilterCollectionView().then {
         $0.delegate = self
         $0.dataSource = self
-        $0.register(cells: PolicyCategoryCell.self)
+        $0.register(cells: NewCategoryCell.self)
     }
     
     private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
@@ -409,7 +409,7 @@ extension PolicyMainViewController: UICollectionViewDelegate, UICollectionViewDa
             
             return cell
         } else if collectionView == newManyPolicyFilterCollectionView {
-            guard let cell: PolicyCategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
+            guard let cell: NewCategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
             cell.label.text = filters[indexPath.row]
             
