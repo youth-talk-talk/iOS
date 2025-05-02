@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class CommunityMainViewcontroller: UIViewController {
     
@@ -48,6 +49,22 @@ final class CommunityMainViewcontroller: UIViewController {
         $0.backgroundColor = .gray100
     }
     
+    private let writePostView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = moderate(8)
+        $0.backgroundColor = .greenNormal
+        $0.isLayoutMarginsRelativeArrangement = true
+        $0.layoutMargins = .init(top: 0, left: moderate(16), bottom: 0, right: moderate(16))
+        $0.layer.cornerRadius = moderate(21)
+        $0.alignment = .center
+    }
+    
+    private let writeImageView = UIImageView(image: .writePencil.withTintColor(.white))
+    
+    private let writeLabel = UILabel().then {
+        $0.designed(text: "글쓰기", font: .p16Regular16, textColor: .white)
+    }
+    
     private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
         $0.delegate = self
         $0.dataSource = self
@@ -71,7 +88,44 @@ final class CommunityMainViewcontroller: UIViewController {
             self?.navigationController?.pushViewController(searchVC, animated: true)
         }
         
+        reviewLabel.onTapped { [weak self] in
+            self?.moveIndicator(to: self!.reviewLabel)
+        }
+        
+        freeLabel.onTapped { [weak self] in
+            self?.moveIndicator(to: self!.freeLabel)
+        }
+        
         setLayout()
+    }
+    
+    private func moveIndicator(to label: UILabel) {
+        let index = (label == reviewLabel) ? 0 : 1
+        let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
+        pageViewController.setViewControllers([pages[index]], direction: direction, animated: true)
+        
+        currentIndex = index
+        
+        [reviewLabel, freeLabel].forEach { tabLabel in
+            if label == tabLabel {
+                tabLabel.designed(text: tabLabel.text ?? "", font: .p14Bold)
+            } else {
+                tabLabel.designed(text: tabLabel.text ?? "", font: .p14Regular, textColor: .gray70)
+            }
+            
+            tabLabel.textAlignment = .center
+        }
+        
+        indicatorView.snp.remakeConstraints {
+            $0.centerX.equalTo(label)
+            $0.width.equalToSuperview().dividedBy(2.2)
+            $0.bottom.equalTo(label)
+            $0.height.equalTo(moderate(2))
+        }
+
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func setLayout() {
@@ -82,7 +136,11 @@ final class CommunityMainViewcontroller: UIViewController {
                          freeLabel,
                          dividerView,
                          indicatorView,
-                         pageViewController.view)
+                         pageViewController.view,
+                         writePostView)
+        
+        writePostView.addArrangedSubviews(writeImageView,
+                                          writeLabel)
         
         searchBarStackView.addArrangedSubview(searchImageView)
         searchBarStackView.addArrangedSubview(searchLabel)
@@ -131,6 +189,16 @@ final class CommunityMainViewcontroller: UIViewController {
             $0.top.equalTo(indicatorView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(moderate(30))
+        }
+        
+        writePostView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(moderate(16))
+            $0.bottom.equalToSuperview().inset(moderate(100))
+            $0.height.equalTo(moderate(42))
+        }
+        
+        writeImageView.snp.makeConstraints {
+            $0.size.equalTo(moderate(20))
         }
     }
 }
