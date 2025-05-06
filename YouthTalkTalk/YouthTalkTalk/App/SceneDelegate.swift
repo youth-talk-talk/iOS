@@ -122,11 +122,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let policyVC = UINavigationController(rootViewController: PolicyMainViewController())
                 
         // 마이페이지 탭
-        let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-        let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
-        let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
-        let myPageVC = MyPageViewController(viewModel: myPageViewModel)
-        let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
+//        let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
+//        let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
+//        let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
+//        let myPageVC = MyPageViewController(viewModel: myPageViewModel)
+//        let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
+        
+        let myPageNaviVC = UINavigationController(rootViewController: NewMyPageViewController())
         
         // 탭 구성요소
         let tabItems: [TabItem] = [

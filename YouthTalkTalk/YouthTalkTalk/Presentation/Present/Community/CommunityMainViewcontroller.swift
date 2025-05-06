@@ -80,7 +80,7 @@ final class CommunityMainViewcontroller: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
+                
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         searchBarStackView.onTapped { [weak self] in
@@ -96,7 +96,16 @@ final class CommunityMainViewcontroller: UIViewController {
             self?.moveIndicator(to: self!.freeLabel)
         }
         
+        writePostView.onTapped { [weak self] in
+            let vc = CreatePostViewController(postType: .review)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         setLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
     }
     
     private func moveIndicator(to label: UILabel) {

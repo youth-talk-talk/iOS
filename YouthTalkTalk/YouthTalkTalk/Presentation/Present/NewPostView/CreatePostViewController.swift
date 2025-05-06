@@ -15,7 +15,7 @@ protocol UpdateEditedPostProtocol: AnyObject {
     func updateEditedPost(body: UploadPostBody)
 }
 
-final class CreatePostViewController: BaseViewController<NewPostView> {
+final class CreatePostViewController: RootViewController {
     
     let postType: MainContentsType
     let writeType: WriteType
@@ -30,93 +30,63 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
                                                        policyUseCase: PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl()))
     
     private var imagePickerController: ImagePickerProtocol?
-    
-    private lazy var titleLabel = UILabel().then {
-        $0.designed(text: "제목", font: .p16SemiBold, textColor: .black)
-    }
-    
-    private lazy var titleTextField = UITextField().then {
-        $0.designedPlaceholder(placeholder: "제목을 작성해주세요", textColor: .gray50, font: .p16Regular16)
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = FontColor.gray20.value.cgColor
-        $0.layer.cornerRadius = 8
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 50))
-        $0.leftViewMode = .always
-        $0.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
-    }
-    
-    private lazy var policyView = UIView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = FontColor.gray20.value.cgColor
-        $0.layer.cornerRadius = 8
-    }
-    
-    private lazy var policyLabel = UILabel().then {
-        $0.designed(text: "정책명", font: .p16SemiBold, textColor: .black)
+   
+    private let pageTitleLabel = UILabel().then {
+        $0.designed(text: "후기 글쓰기", font: .p18Semi)
     }
     
     private lazy var selectedPolicyLabel = UILabel().then {
         $0.adjustsFontSizeToFitWidth = true
-        $0.designed(text: "정책명", font: .p16Regular16, textColor: .gray50)
+        $0.designed(text: "정책 선택", font: .p16Regular16)
     }
     
+    private lazy var searchIconImageView = UIImageView(image: .search)
+
+    private let dividerView = UIView().then {
+        $0.backgroundColor = .gray30
+    }
+    
+    private lazy var titleTextField = UITextField().then {
+        $0.designedPlaceholder(placeholder: "제목을 입력해주세요.", textColor: .gray80, font: .p16Regular16)
+        $0.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
+    }
+    
+    private let dividerView2 = UIView().then {
+        $0.backgroundColor = .gray30
+    }
+        
     private lazy var selectedPolicyId: String = ""
     
-    private lazy var searchIconImageView = UIImageView(image: UIImage(named: "magnifyingglass"))
-    
-    private lazy var contentsLabel = UILabel().then {
-        $0.designed(text: "내용 작성", font: .p16SemiBold, textColor: .black)
-    }
-    
-    private lazy var contentContainerView = UIView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = FontColor.gray20.value.cgColor
-        $0.layer.cornerRadius = 10
-    }
-    
+    private lazy var contentContainerView = UIView()
     private lazy var contentScrollView = UIScrollView()
-    
     private lazy var contentStackView = UIStackView(arrangedSubviews: [contentsTextView]).then {
         $0.axis = .vertical
         $0.spacing = 11
     }
     
-    private let textViewPlaceHolder = "*후기로 무얼 적어야 할 지 모르겠다면 아래 질문에 대한 답을 적어주세요!\n 1. 해당프로그램을 경험하면서 느낀 장점이나 단점이 있나요?\n 2. 주관부서에 남기고 싶은 피드백을 적어주세요!\n 3. 다음년도에 해당 프로그램을 신청할 청년들을 위한 tip! \n\n부적절하거나 불쾌감을 줄 수 있는 컨텐츠는 제재를 받을 수 있습니다"
+    private let textViewPlaceHolder = "*후기로 무얼 적어야 할 지 모르겠다면 아래 질문에 대한 답을 적어주세요! \n부적절하거나 불쾌감을 줄 수 있는 컨텐츠는 제재를 받을 수 있습니다.\n\n ∙  해당 프로그램을 경험하면서 느낀 장점이나 단점이 있나요?\n ∙  주관부서에 남기고 싶은 피드백을 적어주세요!\n ∙  다음년도에 해당 프로그램을 신청할 청년들을 위한 tip!"
     
     private lazy var contentsTextView = UITextView().then {
         $0.backgroundColor = .clear
-        $0.textColor = FontColor.gray40.value
-        $0.font = FontManager.font(.p14Regular)
+        $0.textColor = FontColor.gray80.value
+        $0.font = FontManager.font(.p12Regular)
         $0.delegate = self
         $0.text = textViewPlaceHolder
         $0.isScrollEnabled = false
     }
     
-    private lazy var addPhotoContainerView = UIView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = FontColor.gray20.value.cgColor
-        $0.layer.cornerRadius = 10
+    private let dividerView3 = UIView().then {
+        $0.backgroundColor = .gray30
     }
-    
-    private lazy var addPhotoStackView = UIStackView(arrangedSubviews: [addPhotoImageView, addPhotoLabel]).then {
-        $0.axis = .horizontal
-        $0.spacing = 8
-    }
-    
-    private lazy var addPhotoImageView = UIImageView(image: UIImage(named: "addPhoto"))
-    
-    private lazy var addPhotoLabel = UILabel().then {
-        $0.designed(text: "사진추가하기", font: .p16Regular16)
-    }
-    
-    private lazy var cameraVC = UIImagePickerController()
     
     private lazy var writePostLabel = UILabel().then {
-        $0.backgroundColor = FontColor.gray20.value
-        $0.layer.cornerRadius = 25
-        $0.designed(text: "등록하기", font: .p16Regular16)
-        $0.textAlignment = .center
-        $0.clipsToBounds = true
+        $0.designed(text: "등록", font: .p12Regular, textColor: .gray70)
+    }
+    
+    private lazy var addPhotoImageView = UIImageView(image: .addPhoto)
+    
+    private lazy var cameraVC = UIImagePickerController().then {
+        $0.delegate = self
     }
     
     private lazy var searchPolicyView = SearchPolicyView(onPolicyTapped: { [weak self] selectedPolicy in
@@ -144,8 +114,6 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateNavigationTitle(title: postType.title)
-        
         tabBarController?.tabBar.isHidden = true
         
         imagePickerController = ImagePicker(presentationController: self,
@@ -154,9 +122,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
         
         layout()
         setTabEvents()
-        
-        cameraVC.delegate = self
-        
+                
         // MARK: 게시글을 수정하는 경우 이전에 작성한 글 화면에 표시
         if writeType == .edit {
             titleTextField.text = postData?.title
@@ -203,7 +169,7 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
             self?.searchPolicyView.isHidden = false
         }
         
-        addPhotoContainerView.onTapped { [weak self] in
+        addPhotoImageView.onTapped { [weak self] in
             self?.addPhotoView.isHidden = false
         }
         
@@ -226,17 +192,17 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
                                                                                       policyId: "\(selectedPolicyId)",
                                                                                                 contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]), writeType, postId: postData?.postId ?? 0)
             } else {
-                showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
-                    self?.alertView.isHidden = true
-                })
+//                showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
+//                    self?.alertView.isHidden = true
+//                })
             }
         }
         
-        setBackButtonTapped { [weak self] in
-            self?.showAlertView("글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다", okAction: { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-            })
-        }
+//        setBackButtonTapped { [weak self] in
+//            self?.showAlertView("글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다", okAction: { [weak self] in
+//                self?.navigationController?.popViewController(animated: true)
+//            })
+//        }
     }
     
     private func isUploadValid() -> Bool {
@@ -252,123 +218,87 @@ final class CreatePostViewController: BaseViewController<NewPostView> {
     }
     
     private func showAlertGoToSetting() {
-        showAlertView("현재 카메라 사용에 대한 접근 권한이 없습니다.") {
-            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
-                UIApplication.shared.canOpenURL(settingURL)
-            else { return }
-            UIApplication.shared.open(settingURL, options: [:])
-        }
+//        showAlertView("현재 카메라 사용에 대한 접근 권한이 없습니다.") {
+//            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
+//                UIApplication.shared.canOpenURL(settingURL)
+//            else { return }
+//            UIApplication.shared.open(settingURL, options: [:])
+//        }
     }
     
     private func layout() {
-        view.addSubview(titleLabel)
+        view.addSubview(pageTitleLabel)
+        view.addSubview(selectedPolicyLabel)
+        view.addSubview(searchIconImageView)
+        view.addSubview(dividerView)
         view.addSubview(titleTextField)
-        view.addSubview(contentsLabel)
-        view.addSubview(contentContainerView)
-        view.addSubview(addPhotoContainerView)
+        view.addSubview(dividerView2)
+        view.addSubview(contentsTextView)
+        view.addSubview(dividerView3)
+        view.addSubview(addPhotoImageView)
         view.addSubview(writePostLabel)
-        addPhotoContainerView.addSubview(addPhotoStackView)
-        contentScrollView.addSubview(contentStackView)
-
-        contentContainerView.addSubview(contentScrollView)
-                
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(17)
-            $0.top.equalToSuperview().inset(131)
+        view.addSubview(addPhotoView)
+        
+        pageTitleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(backImageView)
+            $0.centerX.equalToSuperview()
+        }
+        
+        selectedPolicyLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(moderate(16))
+            $0.top.equalTo(backImageView.snp.bottom).offset(moderate(32))
+            $0.trailing.equalTo(searchIconImageView.snp.leading).offset(moderate(-10))
+            $0.height.equalTo(moderate(46))
+        }
+        
+        searchIconImageView.snp.makeConstraints {
+            $0.size.equalTo(moderate(24))
+            $0.trailing.equalToSuperview().inset(moderate(16))
+            $0.centerY.equalTo(selectedPolicyLabel)
+        }
+        
+        dividerView.snp.makeConstraints {
+            $0.width.centerX.equalToSuperview()
+            $0.top.equalTo(selectedPolicyLabel.snp.bottom)
+            $0.height.equalTo(moderate(1))
         }
         
         titleTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(71)
-            $0.trailing.equalToSuperview().inset(17)
-            $0.height.equalTo(50)
-            $0.centerY.equalTo(titleLabel)
+            $0.top.equalTo(dividerView.snp.bottom).offset(moderate(16))
+            $0.leading.equalTo(selectedPolicyLabel)
+            $0.trailing.equalTo(searchIconImageView)
         }
         
-        // MARK: 후기 페이지일 경우에만 정책 선택뷰 표시
-        if postType == .review {
-            view.addSubview(policyLabel)
-            view.addSubview(policyView)
-            policyView.addSubview(selectedPolicyLabel)
-            policyView.addSubview(searchIconImageView)
-            view.addSubview(searchPolicyView)
-
-            policyLabel.snp.makeConstraints {
-                $0.leading.equalTo(titleLabel)
-                $0.top.equalTo(titleLabel.snp.bottom).offset(38)
-            }
-            
-            policyView.snp.makeConstraints {
-                $0.leading.trailing.height.equalTo(titleTextField)
-                $0.centerY.equalTo(policyLabel)
-            }
-            
-            selectedPolicyLabel.snp.makeConstraints {
-                $0.leading.equalToSuperview().inset(13)
-                $0.trailing.equalTo(searchIconImageView.snp.leading).offset(-17)
-                $0.centerY.equalToSuperview()
-            }
-            
-            searchIconImageView.snp.makeConstraints {
-                $0.trailing.equalToSuperview().inset(13)
-                $0.size.equalTo(24)
-                $0.centerY.equalToSuperview()
-            }
-            
-            searchPolicyView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-            }
-            
-            contentsLabel.snp.makeConstraints {
-                $0.leading.equalTo(titleLabel)
-                $0.top.equalTo(policyLabel.snp.bottom).offset(38)
-            }
-        } else {
-            contentsLabel.snp.makeConstraints {
-                $0.leading.equalTo(titleLabel)
-                $0.top.equalTo(titleLabel.snp.bottom).offset(38)
-            }
+        dividerView2.snp.makeConstraints {
+            $0.width.centerX.equalToSuperview()
+            $0.top.equalTo(titleTextField.snp.bottom).offset(moderate(16))
+            $0.height.equalTo(moderate(1))
         }
         
-        contentContainerView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(17)
-            $0.top.equalTo(contentsLabel.snp.bottom).offset(12)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(addPhotoContainerView.snp.top).offset(-12)
+        contentsTextView.snp.makeConstraints {
+            $0.top.equalTo(dividerView2.snp.bottom).offset(moderate(16))
+            $0.leading.trailing.equalToSuperview().inset(moderate(16))
+            $0.bottom.equalTo(dividerView3)
+            $0.height.greaterThanOrEqualTo(300)
         }
         
-        contentScrollView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(13)
-        }
-        
-        contentStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(13)
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.width.equalToSuperview()
-        }
-        
-        addPhotoContainerView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(contentContainerView)
-            $0.height.equalTo(50)
-            $0.centerX.equalToSuperview()
-        }
-        
-        addPhotoStackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        dividerView3.snp.makeConstraints {
+            $0.width.centerX.equalToSuperview()
+            $0.height.equalTo(moderate(1))
+            $0.bottom.equalTo(addPhotoImageView.snp.top).offset(moderate(-14))
         }
         
         addPhotoImageView.snp.makeConstraints {
-            $0.size.equalTo(24)
+            $0.size.equalTo(moderate(28))
+            $0.bottom.equalToSuperview().inset(moderate(44))
+            $0.leading.equalToSuperview().inset(moderate(16))
         }
         
         writePostLabel.snp.makeConstraints {
-            $0.size.equalTo(addPhotoContainerView)
-            $0.top.equalTo(addPhotoContainerView.snp.bottom).offset(12)
-            $0.bottom.equalToSuperview().inset(46)
-            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(pageTitleLabel)
+            $0.trailing.equalToSuperview().inset(moderate(16))
         }
         
-        view.addSubview(addPhotoView)
         addPhotoView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -503,7 +433,7 @@ extension CreatePostViewController: UITextViewDelegate {
     public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = FontColor.gray40.value
+            textView.textColor = FontColor.gray80.value
         }
     }
 }
