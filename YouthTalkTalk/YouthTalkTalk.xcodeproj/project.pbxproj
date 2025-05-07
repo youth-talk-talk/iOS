@@ -48,6 +48,7 @@
 		6A918F232DBF015D0047ED55 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F222DBF015B0047ED55 /* EmptyView.swift */; };
 		6A918F272DC058300047ED55 /* SearchFilterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */; };
 		6A918F292DC089750047ED55 /* SearchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F282DC089730047ED55 /* SearchFilterCell.swift */; };
+		6AB69EDB2DC9AEAF00279C1C /* EditMyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB69EDA2DC9AE9300279C1C /* EditMyInfoViewController.swift */; };
 		6AB7B95E2D503E5C00E85371 /* SettingRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7B95D2D503E5C00E85371 /* SettingRegionViewController.swift */; };
 		6AC5EBE22CDE1F18003EFD37 /* TwoButtonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */; };
 		6AE67EE12D518C2000888F87 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE67EE02D518C2000888F87 /* SettingViewModel.swift */; };
@@ -344,6 +345,7 @@
 		6A918F222DBF015B0047ED55 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterCollectionView.swift; sourceTree = "<group>"; };
 		6A918F282DC089730047ED55 /* SearchFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterCell.swift; sourceTree = "<group>"; };
+		6AB69EDA2DC9AE9300279C1C /* EditMyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyInfoViewController.swift; sourceTree = "<group>"; };
 		6AB7B95D2D503E5C00E85371 /* SettingRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRegionViewController.swift; sourceTree = "<group>"; };
 		6AC5EBE12CDE1F18003EFD37 /* TwoButtonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlertView.swift; sourceTree = "<group>"; };
 		6AE67EE02D518C2000888F87 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 		AC0AA5C82CCFF04E00DB032E /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				6AB69EDA2DC9AE9300279C1C /* EditMyInfoViewController.swift */,
 				6A8C1DDE2DC5AFE800B0624D /* NewMyPageViewController.swift */,
 				AC0AA5C92CCFF07100DB032E /* MyPageViewController.swift */,
 				ACC46C9D2CD1318B0004ED5C /* MyPageViewModel.swift */,
@@ -1816,6 +1819,7 @@
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
+				6AB69EDB2DC9AEAF00279C1C /* EditMyInfoViewController.swift in Sources */,
 				AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */,
 				AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */,
 				6A6206F02DC38532009BF82A /* PopularPostCell.swift in Sources */,

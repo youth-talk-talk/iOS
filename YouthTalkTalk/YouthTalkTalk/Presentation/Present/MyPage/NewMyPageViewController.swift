@@ -61,6 +61,11 @@ final class NewMyPageViewController: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rightArrowImageView.onTapped { [weak self] in
+            let vc = EditMyInfoViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         setLayout()
         setMenuViews()
     }
@@ -252,7 +257,6 @@ final class NewMyPageViewController: RootViewController {
                 $0.width.equalToSuperview()
                 $0.height.equalTo(moderate(24))
             }
-            
         }
     }
     
