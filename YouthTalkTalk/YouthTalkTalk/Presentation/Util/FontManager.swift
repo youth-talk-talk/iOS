@@ -49,6 +49,8 @@ enum FontColor {
     case gray100
     case black
     case green
+    case redLight
+    case accentRed
     case greenLight
     
     var value: UIColor {
@@ -67,6 +69,8 @@ enum FontColor {
         case .black:        return .black
         case .green:        return .greenNormal
         case .greenLight:   return .greenLight
+        case .redLight:     return .redLight
+        case .accentRed:    return .accentRed
         }
     }
 }

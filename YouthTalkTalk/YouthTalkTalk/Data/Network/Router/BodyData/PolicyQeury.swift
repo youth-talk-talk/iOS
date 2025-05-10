@@ -14,6 +14,7 @@ enum PolicyCategory: String, CaseIterable, Encodable {
     case education = "EDUCATION"
     case life = "LIFE"
     case participation = "PARTICIPATION"
+    case dwelling = "DWELLING"
     
     var name: String {
         
@@ -26,6 +27,8 @@ enum PolicyCategory: String, CaseIterable, Encodable {
             return "생활지원"
         case .participation:
             return "참여"
+        case .dwelling:
+            return "주거"
         }
     }
 }

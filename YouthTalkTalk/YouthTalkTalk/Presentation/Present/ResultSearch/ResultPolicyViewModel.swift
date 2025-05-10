@@ -93,14 +93,14 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             .withUnretained(self)
             .flatMap { owner, policyID in
                 
-                return owner.policyUseCase.updatePolicyScrap(id: policyID)
+                return owner.policyUseCase.updatePolicyScrap(id: Int(policyID) ?? 0)
             }
             .subscribe(with: self) { owner, result in
                 
                 switch result {
                 case .success(let scrapEntity):
                     
-                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatus["\(scrapEntity.id)"] = scrapEntity.isScrap
                     owner.scrapStatusRelay.accept(owner.scrapStatus)
                     
                 case .failure(let error):

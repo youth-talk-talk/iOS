@@ -74,7 +74,7 @@ final class PostCommentListViewModel: MyRPScrapInterface {
                     
                     switch result {
                     case .success(let scrapEntity):
-                        owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                        owner.scrapStatus["\(scrapEntity.id)"] = scrapEntity.isScrap
                         owner.scrapStatusRelay.accept(owner.scrapStatus)
                         owner.canceledScrapEntity.accept(scrapEntity)
                     case .failure(let error):

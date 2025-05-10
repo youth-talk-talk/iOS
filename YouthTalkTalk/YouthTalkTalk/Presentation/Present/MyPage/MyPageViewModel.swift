@@ -21,7 +21,7 @@ final class MyPageViewModel: MyPageInterface {
     // Inputs
     var fetchMe = PublishRelay<Void>()
     var fetchUpcomingScrapEvent = PublishRelay<Void>()
-    var updatePolicyScrap = PublishRelay<String>()
+    var updatePolicyScrap = PublishRelay<Int>()
     var deleteAccount = PublishRelay<Void>()
     
     // Outputs
@@ -41,6 +41,7 @@ final class MyPageViewModel: MyPageInterface {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let meEntity):
+                    
                     owner.meEntity.accept(meEntity)
                 case .failure(let error):
                     break

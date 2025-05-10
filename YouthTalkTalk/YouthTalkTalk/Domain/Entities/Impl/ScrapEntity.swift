@@ -10,14 +10,14 @@ import Foundation
 struct ScrapEntity {
     
     let isScrap: Bool
-    let id: String
+    let id: Int
     
-    init(isScrap: Bool, id: String) {
+    init(isScrap: Bool, id: Int) {
         self.isScrap = isScrap
         self.id = id
     }
     
-    func isSameID(_ id: String) -> Bool {
+    func isSameID(_ id: Int) -> Bool {
         
         return self.id == id
     }

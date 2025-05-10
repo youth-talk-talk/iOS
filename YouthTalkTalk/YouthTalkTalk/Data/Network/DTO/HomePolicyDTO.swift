@@ -16,6 +16,9 @@ struct HomePolicyDTO: Decodable {
 }
 
 struct SearchPolicyDTO: Decodable {
+    let status: Int
+    let message: String
+    let code: String
     let data: SearchPolicyDataDTO
 }
 
@@ -37,12 +40,13 @@ struct HomePolicyDataDTO: Decodable {
 }
 
 struct PolicyDTO: Decodable {
-    
-    let policyId: String
+    let policyId: Int
     let category: String
     let title: String
     let deadlineStatus: String
     let hostDep: String
     let scrap: Bool
+    let scrapCount: Int
+    let departmentImgUrl: String
 }
 

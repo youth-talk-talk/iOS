@@ -67,8 +67,20 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // TODO: fetchMe 하고 userDefaults에 저장해두기 그걸로 내 지역 세팅
         view.backgroundColor = .white
+        
+        popularPolicyArrowImageView.onTapped { [weak self] in
+            let vc = PopularPolicyListViewController(policies: self?.viewModel.allPopularPolicies ?? [])
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        viewModel.onReloadData = { [weak self] in
+            DispatchQueue.main.async {
+                self?.popularPolicyCollectionView.reloadData()
+            }
+        }
         
         setLayout()
         setTapEvents()
@@ -124,7 +136,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case categoryCollectionView:        return viewModel.categories.count
-        case popularPolicyCollectionView:   return 3
+        case popularPolicyCollectionView:   return viewModel.popularPolicies.count
             
         default: return 0
         }
@@ -143,6 +155,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if collectionView == popularPolicyCollectionView {
             guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
 
+            let policyData = viewModel.popularPolicies[indexPath.row]
+            
+            cell.setData(policyData)
+            
             return cell
         } else {
             return .init()
@@ -153,7 +169,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         switch collectionView {
         case categoryCollectionView:        return 20
-        case popularPolicyCollectionView:   return 3
+        case popularPolicyCollectionView:   return 14
             
         default: return 0
         }

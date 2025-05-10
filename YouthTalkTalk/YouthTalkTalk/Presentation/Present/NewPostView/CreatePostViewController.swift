@@ -55,7 +55,7 @@ final class CreatePostViewController: RootViewController {
         $0.backgroundColor = .gray30
     }
         
-    private lazy var selectedPolicyId: String = ""
+    private lazy var selectedPolicyId: Int = 0
     
     private lazy var contentContainerView = UIView()
     private lazy var contentScrollView = UIScrollView()
@@ -128,7 +128,7 @@ final class CreatePostViewController: RootViewController {
             titleTextField.text = postData?.title
             contentsTextView.text = postData?.content
             selectedPolicyLabel.text = postData?.policyTitle
-            selectedPolicyId = postData?.policyId ?? ""
+            selectedPolicyId = Int(postData?.policyId ?? "") ?? 0
             contentsTextView.textColor = .black
         }
         

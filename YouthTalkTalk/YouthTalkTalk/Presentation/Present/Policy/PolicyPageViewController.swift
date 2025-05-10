@@ -8,26 +8,7 @@
 import UIKit
 
 final class PolicyPageViewController: UIViewController {
-    let policies: [PolicyDTO] = [.init(policyId: "", category: "주제",
-                                       title: "정책 타이틀입니다.",
-                                       deadlineStatus: "상태",
-                                       hostDep: "host",
-                                       scrap: false),
-                                 .init(policyId: "", category: "주제",
-                                       title: "정책 타이틀입니다.",
-                                       deadlineStatus: "상태",
-                                       hostDep: "host",
-                                       scrap: false),
-                                 .init(policyId: "", category: "주제",
-                                       title: "정책 타이틀입니다.",
-                                       deadlineStatus: "상태",
-                                       hostDep: "host",
-                                       scrap: false),
-                                 .init(policyId: "", category: "주제",
-                                       title: "정책 타이틀입니다.",
-                                       deadlineStatus: "상태",
-                                       hostDep: "host",
-                                       scrap: false)]
+    let policies: [PolicyDTO] = []
     
     private let policyStackView = UIStackView().then {
         $0.axis = .vertical

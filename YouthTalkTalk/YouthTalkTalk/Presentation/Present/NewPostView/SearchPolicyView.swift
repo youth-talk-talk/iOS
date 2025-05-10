@@ -15,7 +15,7 @@ enum SearchPolicySection {
 
 struct SearchPolicyItem: Hashable {
     let uuid = UUID()
-    let id: String
+    let id: Int
     let policyTitle: String
 }
 
@@ -116,7 +116,7 @@ final class SearchPolicyView: UIView {
                 guard let self else { return }
                 
                 let beforeItems = loadPurpose == .paging ? dataSource.snapshot().itemIdentifiers : []
-                let itemList: [SearchPolicyItem] = items.map { SearchPolicyItem(id: $0.policy?.policyId ?? "", policyTitle: $0.policy?.title ?? "") }
+                let itemList: [SearchPolicyItem] = items.map { SearchPolicyItem(id: $0.policy?.policyId ?? 0, policyTitle: $0.policy?.title ?? "") }
                 var snapshot = NSDiffableDataSourceSnapshot<SearchPolicySection, SearchPolicyItem>()
                 
                 snapshot.appendSections([.mainSection])

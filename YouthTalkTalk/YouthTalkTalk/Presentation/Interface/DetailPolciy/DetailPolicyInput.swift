@@ -10,7 +10,7 @@ import RxCocoa
 
 protocol DetailPolicyInput {
     
-    var policyID: String { get }
+    var policyID: Int { get }
     
-    var fetchPolicyDetail: PublishRelay<String> { get }
+    var fetchPolicyDetail: PublishRelay<Int> { get }
 }

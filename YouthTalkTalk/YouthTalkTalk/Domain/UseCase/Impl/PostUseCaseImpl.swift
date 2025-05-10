@@ -89,7 +89,7 @@ final class PostUseCaseImpl: PostUseCase {
                 switch result {
                 case .success(let scrapDTO):
                     
-                    let scrapEntity = ScrapEntity(isScrap: scrapDTO.message == "스크랩에 성공하였습니다.", id: id)
+                    let scrapEntity = ScrapEntity(isScrap: scrapDTO.message == "스크랩에 성공하였습니다.", id: Int(id) ?? 0)
                     
                     return .success(scrapEntity)
                 case .failure(let error):

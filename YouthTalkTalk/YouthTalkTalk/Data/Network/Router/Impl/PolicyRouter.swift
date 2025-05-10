@@ -66,8 +66,8 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy(let query):
             return convertToParameters(query)
-        case .fetchConditionPolicy(let page, _):
-            return convertToParameters(page)
+        case .fetchConditionPolicy(let page, let body):
+            return convertToParameters(page, body)
         case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost:
             return nil
         }
@@ -92,7 +92,7 @@ enum PolicyRouter: Router {
         
         switch self {
         case .fetchConditionPolicy(_, let body):
-            return try? encoder.encode(body)
+            return try? encoder.encode(PolicyConditionBody.init(categories: nil, age: nil, employmentCodeList: nil, isFinished: nil, keyword: nil))
         case .uploadImage(let image):
             return try? encoder.encode(image)
         case .uploadPost(let body):
@@ -125,11 +125,12 @@ enum PolicyRouter: Router {
         return params
     }
     
-    private func convertToParameters(_ page: Int) -> [String: Any] {
+    private func convertToParameters(_ page: Int, _ body: PolicyConditionBody) -> [String: Any] {
         var params: [String: Any] = [:]
         
         params["page"] = page
-        params["size"] = 10
+        params["size"] = 20
+        params["sort"] = "POPULAR"
         
         return params
     }

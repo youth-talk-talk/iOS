@@ -41,7 +41,6 @@ final class SignInViewModel: SignInInterface {
             .flatMap { _ in
                 return signInUseCase.loginWithApple()
             }.subscribe(with: self) { owner, isSuccess in
-                
                 owner.signInSuccessAppleRelay.accept(isSuccess)
                 
             }.disposed(by: disposeBag)
@@ -51,7 +50,6 @@ final class SignInViewModel: SignInInterface {
             .flatMap { _ in
                 return signInUseCase.loginWithKakao()
             }.subscribe(with: self) { owner, isSuccess in
-                
                 owner.signInSuccessKakaoRelay.accept(isSuccess)
                 
             }.disposed(by: disposeBag)

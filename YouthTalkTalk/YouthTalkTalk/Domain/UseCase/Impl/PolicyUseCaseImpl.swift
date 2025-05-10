@@ -73,9 +73,9 @@ final class PolicyUseCaseImpl: PolicyUseCase {
             }
     }
     
-    func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>> {
+    func fetchPolicyDetail(id: Int) -> Observable<Result<DetailPolicyEntity, APIError>> {
         
-        return policyRepository.fetchPolicyDetail(id: id)
+        return policyRepository.fetchPolicyDetail(id: "\(id)")
             .withUnretained(self)
             .map { owner, result in
                 
@@ -95,9 +95,9 @@ final class PolicyUseCaseImpl: PolicyUseCase {
         
     }
     
-    func updatePolicyScrap(id: String) -> Observable<Result<ScrapEntity, APIError>> {
+    func updatePolicyScrap(id: Int) -> Observable<Result<ScrapEntity, APIError>> {
         
-        policyRepository.updatePolicyScrap(id: id)
+        policyRepository.updatePolicyScrap(id: "\(id)")
             .withUnretained(self)
             .map { owner, result in
                 

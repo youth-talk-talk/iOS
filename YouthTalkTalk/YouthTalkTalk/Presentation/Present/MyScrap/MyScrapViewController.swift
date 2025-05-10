@@ -6,130 +6,91 @@
 //
 
 import UIKit
-import FlexLayout
-import PinLayout
-import RxSwift
-import RxCocoa
 
-class MyScrapViewController: RootViewController {
-    
-    private let viewModel: MyScrapInterface
-
-    private var dataSource: UICollectionViewDiffableDataSource<MyScrapSection, PolicyEntity>!
-    private var snapshot = NSDiffableDataSourceSnapshot<MyScrapSection, PolicyEntity>()
-    
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyScrapSection.layout()).then {
-        $0.backgroundColor = .clear
+final class MyScrapViewController: UIViewController {
+    private let titleLabel = UILabel().then {
+        $0.designed(text: "스크랩 한 정책", font: .p18Semi)
     }
     
-    init(viewModel: MyScrapInterface) {
-        self.viewModel = viewModel
+    private let xImageView = UIImageView(image: .littleXmark)
+    
+    private lazy var scrapCollectionView = makeCollectionView(cellSize).then {
+        $0.register(cells: PolicyCell.self)
+    }
+    
+    private let cellSize = CGSize(width: UIScreen.main.bounds.width - moderate(32),
+                                  height: moderate(123))
+    
+    private let emptyView = EmptyView(text: "아직 스크랩한 정책이 없습니다.")
+    
+    private func makeCollectionView(_ itemSize: CGSize, direction: UICollectionView.ScrollDirection = .vertical) -> UICollectionView {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = direction
+            layout.itemSize = itemSize
+
+            $0.collectionViewLayout = layout
+            $0.delegate = self
+            $0.dataSource = self
+            $0.backgroundColor = .white
+            $0.contentInset.left = 16
+            $0.contentInset.right = 16
+            $0.contentInset.bottom = 16
+            $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
+        }
         
-        super.init(nibName: nil, bundle: nil)
+        return collectionView
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
         
         tabBarController?.tabBar.isHidden = true
         
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        xImageView.onTapped { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        view.addSubviews([titleLabel,
+                          xImageView,
+                          scrapCollectionView])
+        
+        titleLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(moderate(24))
+        }
+        
+        xImageView.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(moderate(16))
+            $0.size.equalTo(moderate(24))
+        }
+        
+        scrapCollectionView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(moderate(29))
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
     }
-//    
-//    override func configureView() {
-//        
-//        updateNavigationTitle(title: "스크랩한 정책")
-//        
-//        self.view.backgroundColor = .white
-//        collectionView.backgroundColor = .gray10
-//        
-//        snapshot.appendSections([.scrap])
-//        
-//        let recentCellRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, PolicyEntity> { cell, indexPath, itemIdentifier in
-//            
-//            cell.layer.cornerRadius = 10
-//            cell.layer.masksToBounds = true
-//            cell.configure(data: itemIdentifier)
-//            
-//            let data = itemIdentifier.policyId
-//            
-//            cell.scrapButton.rx.tap
-//                .bind(with: self) { owner, _ in
-//                    
-//                    owner.viewModel.input.updateScrap.accept(data)
-//                }
-//                .disposed(by: cell.disposeBag)
-//            
-//            cell.tapGesture.rx.event
-//                .bind(with: self) { owner, _ in
-//                    
-//                    let repository = PolicyRepositoryImpl()
-//                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
-//                    let viewModel = PolicyViewModel(policyID: itemIdentifier.policyId, policyUseCase: useCase)
-//                    let nextVC = PolicyViewController(viewModel: viewModel)
-//                    
-//                    self.navigationController?.pushViewController(nextVC, animated: true)
-//                }
-//                .disposed(by: cell.disposeBag)
-//        }
-//        
-//        dataSource = UICollectionViewDiffableDataSource<MyScrapSection, PolicyEntity>(collectionView: collectionView) {
-//            collectionView, indexPath, itemIdentifier in
-//            
-//            return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: itemIdentifier)
-//        }
-//    }
-//    
-//    override func configureLayout() {
-//        
-//        flexView.flex.define { flex in
-//            
-//            flex.addItem(collectionView)
-//                .width(100%)
-//                .grow(1)
-//        }
-//    }
-//    
-//    override func bind() {
-//        
-//        viewModel.output.scrap
-//            .bind(with: self) { owner, policyEntities in
-//                owner.update(section: .scrap, items: policyEntities)
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        viewModel.output.canceledScrapEntity
-//            .bind(with: self) { owner, scrapEntity in
-//                
-//                let policyItems = owner.snapshot.itemIdentifiers(inSection: .scrap)
-//                
-//                guard let item = policyItems.filter({ $0.policyId == scrapEntity.id }).first else { return }
-//                
-//                owner.delete(item: item)
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        viewModel.input.fetchScrapEvent.accept(())
-//    }
 }
 
-extension MyScrapViewController {
-    
-    func update(section: MyScrapSection, items: [PolicyEntity]) {
-        
-        snapshot.appendItems(items, toSection: section)
-        
-        self.dataSource.apply(snapshot, animatingDifferences: true)
+extension MyScrapViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // TODO: 0일 시 EmptyView 표시
+        return 7
     }
     
-    func delete(item: PolicyEntity) {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
         
-        snapshot.deleteItems([item])
+        cell.setStyle(.border)
         
-        self.dataSource.apply(snapshot)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return moderate(16)
     }
 }

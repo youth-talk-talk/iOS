@@ -80,6 +80,26 @@ final class EditMyInfoViewController: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        logoutLabel.onTapped {
+            // MARK: 로그아웃 전 토큰 제거
+            let keyChainHelper = KeyChainHelper()
+            
+            keyChainHelper.deleteTokenInfo(type: .accessToken)
+            keyChainHelper.deleteTokenInfo(type: .refreshToken)
+            
+            // MARK: 로그인 페이지로 이동
+            let uc = SignInUseCaseImpl()
+            let vm = SignInViewModel(signInUseCase: uc)
+            let vc = SignInViewController(viewModel: vm)
+            
+            guard let sceneDelegate = UIApplication.shared.connectedScenes
+                    .first?.delegate as? SceneDelegate else { return }
+
+            let nav = UINavigationController(rootViewController: vc)
+            sceneDelegate.window?.rootViewController = nav
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
+        
         view.addSubviews(titleLabel,
                          saveLabel,
                          profileImageView,

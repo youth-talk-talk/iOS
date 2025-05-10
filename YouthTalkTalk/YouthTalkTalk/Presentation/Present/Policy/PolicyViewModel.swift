@@ -13,14 +13,14 @@ final class PolicyViewModel: DetailPolicyInterface {
     
     private let disposeBag = DisposeBag()
     
-    let policyID: String
+    let policyID: Int
     let policyUseCase: PolicyUseCase
     
     var input: DetailPolicyInput { return self }
     var output: DetailPolicyOutput { return self }
     
     // MARK: INPUT
-    var fetchPolicyDetail = PublishRelay<String>()
+    var fetchPolicyDetail = PublishRelay<Int>()
     
     // MARK: OUTPUT
     var summarySectionRelay = PublishRelay<[PolicySectionItems]>()
@@ -28,7 +28,7 @@ final class PolicyViewModel: DetailPolicyInterface {
     var methodSectionRelay = PublishRelay<[PolicySectionItems]>()
     var targetSectionRelay = PublishRelay<[PolicySectionItems]>()
     
-    init(policyID: String, policyUseCase: PolicyUseCase) {
+    init(policyID: Int, policyUseCase: PolicyUseCase) {
         self.policyID = policyID
         self.policyUseCase = policyUseCase
         

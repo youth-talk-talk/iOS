@@ -10,9 +10,11 @@ import UIKit
 import Lottie
 import RxSwift
 
-final class SignInViewController: RootViewController{
+final class SignInViewController: UIViewController {
     
     var viewModel: SignInInterface
+    
+    private let disposeBag: DisposeBag = DisposeBag()
     
     private let logoAnimationView: LottieAnimationView = .init(name: "splash",
                                                                 bundle: Bundle.main).then {
@@ -57,6 +59,8 @@ final class SignInViewController: RootViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         kakaoButton.onTapped { [weak self] in
             self?.viewModel.input.kakaoSignInButtonClicked.accept(())
         }
@@ -64,19 +68,20 @@ final class SignInViewController: RootViewController{
         appleButton.onTapped { [weak self] in
             self?.viewModel.input.appleSignInButtonClicked.accept(())
         }
-//        
-//        viewModel.output.signInSuccessKakao
-//            .drive { [weak self] isSuccess in
-//                self?.moveToPage(isLoginSuccess: isSuccess)
-//            }
-//            .disposed(by: disposeBag)
-//                
-//        viewModel.output.signInSuccessApple
-//            .drive { [weak self] isSuccess in
-//                self?.moveToPage(isLoginSuccess: isSuccess)
-//            }
-//            .disposed(by: disposeBag)
-//        
+        
+        viewModel.output.signInSuccessKakao
+            .drive { [weak self] isSuccess in
+                // TODO: 카카오 로그인 성공 후 토큰 저장하는지 체크
+                self?.moveToPage(isLoginSuccess: isSuccess)
+            }
+            .disposed(by: disposeBag)
+                
+        viewModel.output.signInSuccessApple
+            .drive { [weak self] isSuccess in
+                self?.moveToPage(isLoginSuccess: isSuccess)
+            }
+            .disposed(by: disposeBag)
+        
         view.addSubview(logoAnimationView)
         view.addSubview(titleLabel)
         view.addSubview(contentLabel)

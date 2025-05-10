@@ -19,7 +19,8 @@ final class SearchViewModel {
                                               age: nil,
                                               employmentCodeList: [],
                                               isFinished: nil,
-                                              keyword: keyword)
+                                              keyword: keyword,
+                                              sort: nil)
         
         Task {
             let result = await apiManager.requestAPI(

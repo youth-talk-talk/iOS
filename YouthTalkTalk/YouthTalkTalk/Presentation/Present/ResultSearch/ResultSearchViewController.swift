@@ -68,147 +68,147 @@ final class ResultSearchViewController: BaseViewController<ResultSearchView> {
     
     override func bind() {
         
-        snapshot.appendSections([.condition, .result])
-        
-        self.viewModel.output.searchListRelay
-            .bind(with: self) { owner, items in
-                owner.update(section: .result, items: items)
-            }
-            .disposed(by: disposeBag)
-        
-        self.viewModel.fetchSearchList.accept(())
+//        snapshot.appendSections([.condition, .result])
+//        
+//        self.viewModel.output.searchListRelay
+//            .bind(with: self) { owner, items in
+//                owner.update(section: .result, items: items)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        self.viewModel.fetchSearchList.accept(())
     }
     
     //MARK: Cell Registration
     private func cellRegistration() {
-        
-        // 인기정책 Section
-        let resultSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self else { return }
-            
-            cell.layer.cornerRadius = 10
-            cell.layer.masksToBounds = true
-            
-            // 셀 클릭
-            cell.tapGesture.rx.event
-                .bind(with: self) { owner, _ in
-                    
-                    switch itemIdentifier {
-                        
-                        // 검색 결과 페이지에서 정책 탭할시 정책 상세로 이동
-                    case .resultPolicy(let policyEntity):
-                        let repository = PolicyRepositoryImpl()
-                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
-                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
-                        let nextVC = PolicyViewController(viewModel: viewModel)
-                        
-                        owner.navigationController?.pushViewController(nextVC, animated: true)
-                        
-                        // 검색 결과 페이지에서 게시글 탭할시 게시글 상세로 이동
-                    case .resultRP(let rpEntity):
-                        let repository = ReviewRepositoryImpl()
-                        let commentRepository = CommentRepositoryImpl()
-                        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
-                        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                        let viewModel = PosetDetailViewModel(data: rpEntity, useCase: useCase, commnetUseCase: commentUseCase)
-                        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-                        // 게시글 상세에서 신고할 시 검색 결과에서 사라지는 동작 필요할 시 주석 해제
-                        // resultDetailVC.delegate = self
-                        
-                        owner.navigationController?.pushViewController(resultDetailVC, animated: true)
-                        
-                    default:
-                        break
-                    }
-                }
-                .disposed(by: cell.disposeBag)
-            
-            // 스크랩
-            cell.scrapButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    
-                    switch itemIdentifier {
-                        
-                    case .resultPolicy(let policyEntity):
-                        
-                        owner.viewModel.input.updatePostScrap.accept(policyEntity.policyId)
-                        
-                    case .resultRP(let rpEntity):
-                        
-                        guard let postId = rpEntity.postId else { return }
-                        
-                        owner.viewModel.input.updatePostScrap.accept(String(postId))
-                        
-                    default:
-                        break
-                    }
-                }
-                .disposed(by: cell.disposeBag)
-            
-            switch itemIdentifier {
-                
-            case .resultPolicy(let policyEntity):
-                
-                // cell에 적용(스크롤시에도 유지)
-                if let scrap = viewModel.output.scrapStatus[policyEntity.policyId] {
-                    cell.updateScrapStatus(scrap, 0)
-                }
-                
-                // cell에 즉시 적용
-                viewModel.output.scrapStatusRelay
-                    .bind(with: self) { owner, scrapStatus in
-                        if let scrap = scrapStatus[policyEntity.policyId] {
-                            cell.updateScrapStatus(scrap, 0)
-                        }
-                    }
-                    .disposed(by: self.disposeBag)
-                
-            case .resultRP(let rpEntity):
-                
-                guard let id = rpEntity.postId else { return }
-                
-                if let scrap = viewModel.output.scrapStatus[String(id)] {
-                    cell.updateScrapStatus(scrap, 0)
-                }
-                
-                viewModel.output.scrapStatusRelay
-                    .bind(with: self) { owner, scrapStatus in
-                        
-                        if let scrap = scrapStatus[String(id)] {
-                            cell.updateScrapStatus(scrap, 0)
-                        }
-                    }
-                    .disposed(by: disposeBag)
-                break
-                
-            default:
-                break
-            }
-            
-            
-            if let policy = itemIdentifier.policy {
-                cell.configure(data: policy)
-            }
-            
-            if let rp = itemIdentifier.rp {
-                cell.configure(data: rp)
-            }
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
-            
-            guard let section = ResultSearchLayout(rawValue: indexPath.section) else { return nil }
-            
-            if section == .result {
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: resultSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                return cell
-            }
-            
-            return nil
-        }
+//        
+//        // 인기정책 Section
+//        let resultSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, ResultSearchSectionItems> { [weak self] cell, indexPath, itemIdentifier in
+//            
+//            guard let self else { return }
+//            
+//            cell.layer.cornerRadius = 10
+//            cell.layer.masksToBounds = true
+//            
+//            // 셀 클릭
+//            cell.tapGesture.rx.event
+//                .bind(with: self) { owner, _ in
+//                    
+//                    switch itemIdentifier {
+//                        
+//                        // 검색 결과 페이지에서 정책 탭할시 정책 상세로 이동
+//                    case .resultPolicy(let policyEntity):
+//                        let repository = PolicyRepositoryImpl()
+//                        let useCase = PolicyUseCaseImpl(policyRepository: repository)
+//                        let viewModel = PolicyViewModel(policyID: policyEntity.policyId, policyUseCase: useCase)
+//                        let nextVC = PolicyViewController(viewModel: viewModel)
+//                        
+//                        owner.navigationController?.pushViewController(nextVC, animated: true)
+//                        
+//                        // 검색 결과 페이지에서 게시글 탭할시 게시글 상세로 이동
+//                    case .resultRP(let rpEntity):
+//                        let repository = ReviewRepositoryImpl()
+//                        let commentRepository = CommentRepositoryImpl()
+//                        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+//                        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+//                        let viewModel = PosetDetailViewModel(data: rpEntity, useCase: useCase, commnetUseCase: commentUseCase)
+//                        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+//                        // 게시글 상세에서 신고할 시 검색 결과에서 사라지는 동작 필요할 시 주석 해제
+//                        // resultDetailVC.delegate = self
+//                        
+//                        owner.navigationController?.pushViewController(resultDetailVC, animated: true)
+//                        
+//                    default:
+//                        break
+//                    }
+//                }
+//                .disposed(by: cell.disposeBag)
+//            
+//            // 스크랩
+//            cell.scrapButton.rx.tap
+//                .bind(with: self) { owner, _ in
+//                    
+//                    switch itemIdentifier {
+//                        
+//                    case .resultPolicy(let policyEntity):
+//                        
+//                        owner.viewModel.input.updatePostScrap.accept("\(policyEntity.policyId)")
+//                        
+//                    case .resultRP(let rpEntity):
+//                        
+//                        guard let postId = rpEntity.postId else { return }
+//                        
+//                        owner.viewModel.input.updatePostScrap.accept(String(postId))
+//                        
+//                    default:
+//                        break
+//                    }
+//                }
+//                .disposed(by: cell.disposeBag)
+//            
+//            switch itemIdentifier {
+//                
+//            case .resultPolicy(let policyEntity):
+//                
+//                // cell에 적용(스크롤시에도 유지)
+//                if let scrap = viewModel.output.scrapStatus["\(policyEntity.policyId)"] {
+//                    cell.updateScrapStatus(scrap, 0)
+//                }
+//                
+//                // cell에 즉시 적용
+//                viewModel.output.scrapStatusRelay
+//                    .bind(with: self) { owner, scrapStatus in
+//                        if let scrap = scrapStatus[policyEntity.policyId] {
+//                            cell.updateScrapStatus(scrap, 0)
+//                        }
+//                    }
+//                    .disposed(by: self.disposeBag)
+//                
+//            case .resultRP(let rpEntity):
+//                
+//                guard let id = rpEntity.postId else { return }
+//                
+//                if let scrap = viewModel.output.scrapStatus[String(id)] {
+//                    cell.updateScrapStatus(scrap, 0)
+//                }
+//                
+//                viewModel.output.scrapStatusRelay
+//                    .bind(with: self) { owner, scrapStatus in
+//                        
+//                        if let scrap = scrapStatus[String(id)] {
+//                            cell.updateScrapStatus(scrap, 0)
+//                        }
+//                    }
+//                    .disposed(by: disposeBag)
+//                break
+//                
+//            default:
+//                break
+//            }
+//            
+//            
+//            if let policy = itemIdentifier.policy {
+//                cell.configure(data: policy)
+//            }
+//            
+//            if let rp = itemIdentifier.rp {
+//                cell.configure(data: rp)
+//            }
+//        }
+//        
+//        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
+//            
+//            guard let section = ResultSearchLayout(rawValue: indexPath.section) else { return nil }
+//            
+//            if section == .result {
+//                
+//                let cell = collectionView.dequeueConfiguredReusableCell(using: resultSectionRegistration, for: indexPath, item: itemIdentifier)
+//                
+//                return cell
+//            }
+//            
+//            return nil
+//        }
     }
     
     //MARK: Header Registration

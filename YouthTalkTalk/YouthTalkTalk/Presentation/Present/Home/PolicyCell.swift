@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class PolicyCell: UICollectionViewCell {
     
@@ -25,11 +26,18 @@ final class PolicyCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        policyView.resetCategory()
+    }
+    
     func setStyle(_ style: policyCellStyle) {
         policyView.setStyle(style)
     }
     
-    func setData(categoryImage: UIImage, categoryName: String) {
+    func setData(_ policyData: PolicyDTO) {
+        policyView.setData(policyData)
     }
 }
 
@@ -47,14 +55,12 @@ final class NewPolicyView: UIView {
     
     let tagStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.spacing = 8
-        $0.backgroundColor = .gray40
-    }
+        $0.spacing = 8    }
     
     let scrapImageView = UIImageView(image: .bookmarkLine)
     
     let scrapCountLabel = UILabel().then {
-        $0.designed(text: "스크랩 수", font: .p12Regular, textColor: .gray90)
+        $0.designed(font: .p12Regular, textColor: .gray90)
     }
     
     let hostImageTitleStackView = UIStackView().then {
@@ -66,16 +72,18 @@ final class NewPolicyView: UIView {
     let hostImageView = UIImageView().then {
         $0.layer.borderColor = UIColor.gray40.cgColor
         $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 28
+        $0.layer.cornerRadius = moderate(28)
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
     }
     
     let titleLabel = UILabel().then {
-        $0.designed(text: "정책 타이틀입니다.", font: .p16Regular16)
+        $0.designed(font: .p16Regular16)
+        $0.numberOfLines = 2
     }
                     
     let totalScrapLabel = UILabel().then {
-        $0.designed(text: "총 12회 스크랩 됐어요!", font: .p12Regular, textColor: .gray80)
-        $0.changeFont(forText: "232", withNewFont: FontManager.font(.p12Regular))
+        $0.designed(font: .p12Regular, textColor: .gray80)
     }
     
     override init(frame: CGRect) {
@@ -116,12 +124,44 @@ final class NewPolicyView: UIView {
         
         tagStackView.snp.makeConstraints {
             $0.height.equalTo(moderate(21))
-            $0.width.equalTo(moderate(100))
         }
         
         hostImageView.snp.makeConstraints {
             $0.size.equalTo(moderate(56))
         }
+    }
+    
+    func resetCategory() {
+        hostImageView.image = nil
+        
+        tagStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+            tagStackView.removeArrangedSubview(view)
+        }
+    }
+    
+    func setData(_ data: PolicyDTO) {
+        titleLabel.text = data.title
+        scrapCountLabel.text = String(data.scrapCount)
+        totalScrapLabel.text = "총 \(data.scrapCount)회 스크랩 됐어요!"
+
+        if data.departmentImgUrl == "default" {
+            hostImageView.image = .govermentNull
+        } else {
+            hostImageView.kf.setImage(with: URL(string: data.departmentImgUrl))
+        }
+        
+        if data.deadlineStatus != "" {
+            let tagView = makeTagView(text: data.deadlineStatus, isRed: true)
+            tagStackView.addArrangedSubview(tagView)
+        }
+        
+        if data.category != "" {
+            let tagView = makeTagView(text: PolicyCategory(rawValue: data.category)?.name ?? data.category)
+            tagStackView.addArrangedSubview(tagView)
+        }
+        
+        // 현재 내 지역 태그에 추가
     }
     
     func setStyle(_ style: policyCellStyle) {
@@ -135,6 +175,30 @@ final class NewPolicyView: UIView {
             
             totalScrapLabel.isHidden = true
         }
+    }
+    
+    private func makeTagView(text: String, isRed: Bool = false) -> UIView {
+        let view = UIView().then {
+            $0.backgroundColor = isRed ? .redLight : .gray30
+            $0.layer.cornerRadius = moderate(4)
+        }
+        
+        let label = UILabel().then {
+            $0.designed(text: text, font: .p12Regular, textColor: isRed ? .accentRed : .gray80)
+        }
+        
+        view.addSubview(label)
+        
+        view.snp.makeConstraints {
+            $0.height.equalTo(moderate(21))
+        }
+        
+        label.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(moderate(6))
+        }
+        
+        return view
     }
     
     required init?(coder: NSCoder) {

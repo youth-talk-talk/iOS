@@ -41,7 +41,8 @@ final class APIManager: APIInterface {
         case .success(let value):
             return .success(value)
 
-        case .failure:
+        case .failure(let error):
+            print("❌ Decoding Failed: \(error)")
             let error = handleResponseError(from: response.data)
             return .failure(error)
         }

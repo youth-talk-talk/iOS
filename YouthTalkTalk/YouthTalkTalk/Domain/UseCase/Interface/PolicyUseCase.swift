@@ -13,8 +13,8 @@ protocol PolicyUseCase {
     
     func fetchHomePolicies(categories: [PolicyCategory], page: Int, size: Int) -> Observable<Result<HomePolicyEntity, APIError>>
     func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<([PolicyEntity], Int), APIError>>
-    func fetchPolicyDetail(id: String) -> Observable<Result<DetailPolicyEntity, APIError>>
-    func updatePolicyScrap(id: String) -> Observable<Result<ScrapEntity, APIError>>
+    func fetchPolicyDetail(id: Int) -> Observable<Result<DetailPolicyEntity, APIError>>
+    func updatePolicyScrap(id: Int) -> Observable<Result<ScrapEntity, APIError>>
     func fetchUpComingDeadline() -> Observable<Result<[PolicyEntity], APIError>>
     func fetchScrapPolicy() -> Observable<Result<[PolicyEntity], APIError>>
     func uploadImage(_ image: Data) -> Observable<Result<String, APIError>>

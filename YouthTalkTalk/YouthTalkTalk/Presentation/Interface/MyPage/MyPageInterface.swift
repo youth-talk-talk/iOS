@@ -12,7 +12,7 @@ protocol MyPageInput {
     
     var fetchMe: PublishRelay<Void> { get }
     var fetchUpcomingScrapEvent: PublishRelay<Void> { get }
-    var updatePolicyScrap: PublishRelay<String> { get }
+    var updatePolicyScrap: PublishRelay<Int> { get }
     var deleteAccount: PublishRelay<Void> { get }
 }
 

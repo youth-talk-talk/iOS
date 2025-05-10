@@ -71,7 +71,7 @@ final class ReviewViewModel: RPInterface {
                 switch result {
                 case .success(let scrapEntity):
                     
-                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatus["\(scrapEntity.id)"] = scrapEntity.isScrap
                     owner.scrapStatusRelay.accept(owner.scrapStatus)
                     
                 case .failure(let error):

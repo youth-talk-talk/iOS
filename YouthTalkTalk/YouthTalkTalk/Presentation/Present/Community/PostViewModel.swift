@@ -68,7 +68,7 @@ final class PostViewModel: RPInterface {
                 switch result {
                 case .success(let scrapEntity):
                     // TODO: viewmodel에서 cell에 넣는 데이터 원본의 scrpas count 수정하기
-                    owner.scrapStatus[scrapEntity.id] = scrapEntity.isScrap
+                    owner.scrapStatus["\(scrapEntity.id)"] = scrapEntity.isScrap
                     owner.scrapStatusRelay.accept(owner.scrapStatus)
                     
                 case .failure(let error):

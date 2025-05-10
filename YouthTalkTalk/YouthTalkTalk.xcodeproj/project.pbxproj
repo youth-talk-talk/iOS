@@ -227,7 +227,7 @@
 		ACC46CC82CD2949B0004ED5C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC72CD2949B0004ED5C /* SettingViewController.swift */; };
 		ACC46CCA2CD29CE60004ED5C /* TitleWithImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CC92CD29CE60004ED5C /* TitleWithImageButtonView.swift */; };
 		ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */; };
-		ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* HomeView.swift */; };
+		ACF2A2612C215A3600FE8D63 /* PopularPolicyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2602C215A3600FE8D63 /* PopularPolicyListViewController.swift */; };
 		ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */; };
 		ACF2A2662C216C2D00FE8D63 /* HomeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */; };
 		ACF2A2682C2178E500FE8D63 /* PopularCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */; };
@@ -521,7 +521,7 @@
 		ACC46CC72CD2949B0004ED5C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		ACC46CC92CD29CE60004ED5C /* TitleWithImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithImageButtonView.swift; sourceTree = "<group>"; };
 		ACF2A25D2C21533B00FE8D63 /* UITextField++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++.swift"; sourceTree = "<group>"; };
-		ACF2A2602C215A3600FE8D63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ACF2A2602C215A3600FE8D63 /* PopularPolicyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPolicyListViewController.swift; sourceTree = "<group>"; };
 		ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ACF2A2652C216C2D00FE8D63 /* HomeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLayout.swift; sourceTree = "<group>"; };
 		ACF2A2672C2178E500FE8D63 /* PopularCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1134,7 +1134,7 @@
 				AC604BE72C64B32300804950 /* LegacyCell */,
 				ACF2A2622C215A3F00FE8D63 /* HomeViewController.swift */,
 				AC579B482C451C4B00D1C9FC /* HomeViewModel.swift */,
-				ACF2A2602C215A3600FE8D63 /* HomeView.swift */,
+				ACF2A2602C215A3600FE8D63 /* PopularPolicyListViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1775,7 +1775,7 @@
 				ACF2A2822C2589A100FE8D63 /* TitleWithCategoryHeaderView.swift in Sources */,
 				AC4B431C2C1EBAC2005FC370 /* UIButton++.swift in Sources */,
 				ACC46C9C2CD130CE0004ED5C /* UpcomingScrapEntity.swift in Sources */,
-				ACF2A2612C215A3600FE8D63 /* HomeView.swift in Sources */,
+				ACF2A2612C215A3600FE8D63 /* PopularPolicyListViewController.swift in Sources */,
 				AC0AA59C2CC37A4900DB032E /* CommentTextFieldView.swift in Sources */,
 				ACC46CA82CD27DC10004ED5C /* MyScrapViewController.swift in Sources */,
 				ACF2A2B02C2AB78200FE8D63 /* PolicyLocationUseCase.swift in Sources */,

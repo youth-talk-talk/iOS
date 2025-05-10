@@ -15,7 +15,7 @@ struct HomePolicyEntity {
 
 struct PolicyEntity: Hashable {
     
-    let policyId: String
+    let policyId: Int
     let category: String
     let title: String
     let deadlineStatus: String
@@ -24,6 +24,6 @@ struct PolicyEntity: Hashable {
     
     static func mockupData() -> PolicyEntity {
         
-        return PolicyEntity(policyId: "", category: "", title: "더미 데이터", deadlineStatus: "", hostDep: "", scrap: false)
+        return PolicyEntity(policyId: 0, category: "", title: "더미 데이터", deadlineStatus: "", hostDep: "", scrap: false)
     }
 }

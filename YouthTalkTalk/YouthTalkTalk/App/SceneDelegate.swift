@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let useCase = SignInUseCaseImpl()
         let viewModel = SplashViewModel(signInUseCase: useCase)
         let rootVC = SplashViewController(viewModel: viewModel)
+        
+
         let naviVC = UINavigationController(rootViewController: rootVC)
         
         self.window = window
@@ -122,12 +124,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let policyVC = UINavigationController(rootViewController: PolicyMainViewController())
                 
         // 마이페이지 탭
-//        let myPageUseCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-//        let memberUseCase = MemberUseCaseImpl(memberRepository: MemberRepositoryImpl())
-//        let myPageViewModel = MyPageViewModel(useCase: myPageUseCase, memberUseCase: memberUseCase)
-//        let myPageVC = MyPageViewController(viewModel: myPageViewModel)
-//        let myPageNaviVC = UINavigationController(rootViewController: myPageVC)
-        
         let myPageNaviVC = UINavigationController(rootViewController: NewMyPageViewController())
         
         // 탭 구성요소

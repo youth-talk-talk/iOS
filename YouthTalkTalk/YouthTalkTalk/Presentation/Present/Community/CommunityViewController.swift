@@ -270,66 +270,66 @@ class CommunityViewController: BaseViewController<CommunityView>, RemoveReported
             } else if type == .freePost {
                 supplementaryView.configureWithOutCategory()
             }
-            
-            viewModel.selectedPolicyCategory.forEach {
-                switch $0 {
-                case .job:
-                    supplementaryView.jobCheckBoxButton.isSelected = true
-                case .education:
-                    supplementaryView.educationCheckBoxButton.isSelected = true
-                case .life:
-                    supplementaryView.lifeCheckBoxButton.isSelected = true
-                case .participation:
-                    supplementaryView.participationCheckBoxButton.isSelected = true
-                }
-            }
-            
-            let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
-            let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
-            let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()
-            let participationButtonTap = supplementaryView.participationCheckBoxButton.rx.tap.map { PolicyCategory.participation }.asObservable()
-            
-            Observable.merge(jobButtonTap, educationButtonTap, lifeButtonTap, participationButtonTap)
-                .bind(with: self) { owner, category in
-                    
-                    // 선택 시 'seleted' 활성화/비활성화
-                    switch category {
-                    case .job:
-                        supplementaryView.jobCheckBoxButton.isSelected.toggle()
-                    case .education:
-                        supplementaryView.educationCheckBoxButton.isSelected.toggle()
-                    case .life:
-                        supplementaryView.lifeCheckBoxButton.isSelected.toggle()
-                    case .participation:
-                        supplementaryView.participationCheckBoxButton.isSelected.toggle()
-                    }
-                    
-                    // 선택된 버튼만 필터링
-                    let selectedButtons = [
-                        supplementaryView.jobCheckBoxButton,
-                        supplementaryView.educationCheckBoxButton,
-                        supplementaryView.lifeCheckBoxButton,
-                        supplementaryView.participationCheckBoxButton
-                    ].filter { $0.isSelected }
-                    
-                    // 선택된 버튼이 없으면, 마지막으로 클릭한 버튼 'selected'
-                    if selectedButtons.isEmpty {
-                        switch category {
-                        case .job:
-                            supplementaryView.jobCheckBoxButton.isSelected = true
-                        case .education:
-                            supplementaryView.educationCheckBoxButton.isSelected = true
-                        case .life:
-                            supplementaryView.lifeCheckBoxButton.isSelected = true
-                        case .participation:
-                            supplementaryView.participationCheckBoxButton.isSelected = true
-                        }
-                    } else {
-                        owner.viewModel.input.policyCategorySeleted.accept(category)
-                    }
-                    
-                }.disposed(by: supplementaryView.disposeBag)
-            
+//            
+//            viewModel.selectedPolicyCategory.forEach {
+//                switch $0 {
+//                case .job:
+//                    supplementaryView.jobCheckBoxButton.isSelected = true
+//                case .education:
+//                    supplementaryView.educationCheckBoxButton.isSelected = true
+//                case .life:
+//                    supplementaryView.lifeCheckBoxButton.isSelected = true
+//                case .participation:
+//                    supplementaryView.participationCheckBoxButton.isSelected = true
+//                }
+//            }
+//            
+//            let jobButtonTap = supplementaryView.jobCheckBoxButton.rx.tap.map { PolicyCategory.job }.asObservable()
+//            let educationButtonTap = supplementaryView.educationCheckBoxButton.rx.tap.map { PolicyCategory.education }.asObservable()
+//            let lifeButtonTap = supplementaryView.lifeCheckBoxButton.rx.tap.map { PolicyCategory.life }.asObservable()
+//            let participationButtonTap = supplementaryView.participationCheckBoxButton.rx.tap.map { PolicyCategory.participation }.asObservable()
+//            
+//            Observable.merge(jobButtonTap, educationButtonTap, lifeButtonTap, participationButtonTap)
+//                .bind(with: self) { owner, category in
+//                    
+//                    // 선택 시 'seleted' 활성화/비활성화
+//                    switch category {
+//                    case .job:
+//                        supplementaryView.jobCheckBoxButton.isSelected.toggle()
+//                    case .education:
+//                        supplementaryView.educationCheckBoxButton.isSelected.toggle()
+//                    case .life:
+//                        supplementaryView.lifeCheckBoxButton.isSelected.toggle()
+//                    case .participation:
+//                        supplementaryView.participationCheckBoxButton.isSelected.toggle()
+//                    }
+//                    
+//                    // 선택된 버튼만 필터링
+//                    let selectedButtons = [
+//                        supplementaryView.jobCheckBoxButton,
+//                        supplementaryView.educationCheckBoxButton,
+//                        supplementaryView.lifeCheckBoxButton,
+//                        supplementaryView.participationCheckBoxButton
+//                    ].filter { $0.isSelected }
+//                    
+//                    // 선택된 버튼이 없으면, 마지막으로 클릭한 버튼 'selected'
+//                    if selectedButtons.isEmpty {
+//                        switch category {
+//                        case .job:
+//                            supplementaryView.jobCheckBoxButton.isSelected = true
+//                        case .education:
+//                            supplementaryView.educationCheckBoxButton.isSelected = true
+//                        case .life:
+//                            supplementaryView.lifeCheckBoxButton.isSelected = true
+//                        case .participation:
+//                            supplementaryView.participationCheckBoxButton.isSelected = true
+//                        }
+//                    } else {
+//                        owner.viewModel.input.policyCategorySeleted.accept(category)
+//                    }
+//                    
+//                }.disposed(by: supplementaryView.disposeBag)
+//            
         }
         
         // 인기정책 Header Registration

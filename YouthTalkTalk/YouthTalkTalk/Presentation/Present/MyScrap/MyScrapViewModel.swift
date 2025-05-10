@@ -47,7 +47,7 @@ final class MyScrapViewModel: MyScrapInterface {
         updateScrap
             .withUnretained(self)
             .flatMap { owner, policyID in
-                return owner.useCase.updatePolicyScrap(id: policyID)
+                return owner.useCase.updatePolicyScrap(id: Int(policyID) ?? 0)
             }
             .subscribe(with: self) { owner, result in
                 

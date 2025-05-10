@@ -58,11 +58,20 @@ final class NewMyPageViewController: RootViewController {
         $0.spacing = moderate(24)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         rightArrowImageView.onTapped { [weak self] in
             let vc = EditMyInfoViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        scrapView.onTapped { [weak self] in
+            let vc = MyScrapViewController()
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
