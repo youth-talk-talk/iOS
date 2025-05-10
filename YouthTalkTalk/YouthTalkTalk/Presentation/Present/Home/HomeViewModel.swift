@@ -26,10 +26,10 @@ final class HomeViewModel {
                                                                 (.apply, .participation)]
     
     init() {
-        requestMyInfoAPI()
+        requestMyInfoAPI { _ in }
     }
     
-    private func requestMyInfoAPI() {
+    func requestMyInfoAPI(onCompleted: @escaping (String) -> Void) {
         Task {
             let result = await apiManager.requestAPI(
                 router: MeRouter.patchMe(.init(nickname: nil, region: nil)),
@@ -37,6 +37,8 @@ final class HomeViewModel {
             switch result {
             case .success(let response):
                 myRegion = response.data.region
+                
+                onCompleted(myRegion)
                 
                 requestPopularPolicyAPI()
                 

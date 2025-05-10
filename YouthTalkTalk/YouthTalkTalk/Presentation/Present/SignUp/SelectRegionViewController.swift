@@ -45,7 +45,7 @@ final class SelectRegionViewController: RootViewController {
         
         regionTextField.onTapped { [weak self] in
             let vc = RegionBottomSheetViewController(onRegionTapped: { [weak self] selectedRegion in
-                self?.regionTextField.text = selectedRegion
+                self?.regionTextField.text = selectedRegion?.displayName
                 self?.nextButton.isEnabled = selectedRegion != nil
             })
             

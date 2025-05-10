@@ -6,5 +6,18 @@
 //
 
 final class PolicyMainViewModel {
-    
+    func requestMyInfoAPI(onCompleted: @escaping (String) -> Void) {
+        Task {
+            let result = await APIManager().requestAPI(
+                router: MeRouter.patchMe(.init(nickname: nil, region: nil)),
+                type: PatchMeDTO.self)
+            switch result {
+            case .success(let response):
+                onCompleted(response.data.region)
+                
+            case .failure(let error):
+                break
+            }
+        }
+    }
 }

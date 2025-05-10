@@ -98,6 +98,14 @@ final class PolicyMainViewController: UIViewController {
     private let allPolicyfilters = ["전체", "주거", "교육", "일자리", "복지", "참여", "카테고리"]
     private lazy var allPolicypages: [UIViewController] = allPolicyfilters.map { _ in PolicyInfinityPageViewController() }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.requestMyInfoAPI { [weak self] region in
+            DispatchQueue.main.async {
+                self?.selectionRegionLabel.text = region
+            }
+        }
+    }
+                         
     override func viewDidLoad() {
         view.backgroundColor = .white
         
@@ -110,7 +118,7 @@ final class PolicyMainViewController: UIViewController {
                 
                 let vc = RegionBottomSheetViewController(selectedRegion: selectionRegionLabel.text,
                                                          onRegionTapped: { [weak self] selectedRegion in
-                    self?.selectionRegionLabel.text = selectedRegion
+                    self?.selectionRegionLabel.text = selectedRegion?.networkName
                 })
                 
                 if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }

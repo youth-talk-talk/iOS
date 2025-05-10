@@ -9,9 +9,7 @@ import UIKit
 
 final class RegionBottomSheetViewController: UIViewController {
     
-    private let regions = ["전체 지역", "서울", "부산", "대구", "인천", "광주",
-                           "대전", "울산", "경기", "강원", "충북", "충남",
-                           "전북", "전남", "경북", "경남", "제주", "세종"]
+    private let regions = PolicyLocationKR.allCases
     
     private let titleLabel = UILabel().then {
         $0.designed(text: "지역을 선택해 주세요.", font: .p18Semi)
@@ -30,7 +28,7 @@ final class RegionBottomSheetViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
-    private var selectedRegion: String? {
+    private var selectedRegion: PolicyLocationKR? {
         didSet {
             applyButton.isEnabled = selectedRegion != nil
         }
@@ -41,11 +39,11 @@ final class RegionBottomSheetViewController: UIViewController {
         $0.isEnabled = false
     }
     
-    private let onRegionTapped: (String?) -> Void
+    private let onRegionTapped: (PolicyLocationKR?) -> Void
     
     init(selectedRegion: String? = nil,
-         onRegionTapped: @escaping (String?) -> Void) {
-        self.selectedRegion = selectedRegion
+         onRegionTapped: @escaping (PolicyLocationKR?) -> Void) {
+        self.selectedRegion = PolicyLocationKR.allCases.first(where: { $0.networkName == selectedRegion })
         self.onRegionTapped = onRegionTapped
         
         super.init(nibName: nil, bundle: nil)
@@ -64,6 +62,7 @@ final class RegionBottomSheetViewController: UIViewController {
         super.viewDidLoad()
         
         applyButton.onTapped { [weak self] in
+            self?.petchRegion()
             self?.onRegionTapped(self?.selectedRegion)
             self?.dismiss(animated: true)
         }
@@ -97,6 +96,14 @@ final class RegionBottomSheetViewController: UIViewController {
             $0.height.equalTo(46)
         }
     }
+    
+    func petchRegion() {
+        Task {
+            let result = await APIManager().requestAPI(
+                router: MeRouter.patchMe(.init(nickname: nil, region: selectedRegion?.networkName)),
+                type: PatchMeDTO.self)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource & Delegate
@@ -111,7 +118,7 @@ extension RegionBottomSheetViewController: UICollectionViewDataSource, UICollect
             return UICollectionViewCell()
         }
         let region = regions[indexPath.item]
-        cell.configure(with: region, isSelected: region == selectedRegion)
+        cell.configure(with: region.networkName, isSelected: region == selectedRegion)
         return cell
     }
     

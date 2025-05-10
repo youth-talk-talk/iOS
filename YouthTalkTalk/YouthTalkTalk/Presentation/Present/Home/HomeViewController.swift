@@ -87,6 +87,12 @@ final class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        viewModel.requestMyInfoAPI { [weak self] region in
+            DispatchQueue.main.async {
+                self?.selectionRegionLabel.text = region
+            }
+        }
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -98,7 +104,7 @@ final class HomeViewController: UIViewController {
                 
                 let vc = RegionBottomSheetViewController(selectedRegion: selectionRegionLabel.text,
                                                          onRegionTapped: { [weak self] selectedRegion in
-                    self?.selectionRegionLabel.text = selectedRegion
+                    self?.selectionRegionLabel.text = selectedRegion?.networkName
                 })
                 
                 if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
