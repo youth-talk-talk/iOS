@@ -50,6 +50,7 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         $0.isHidden = true
     }
     
+    private let serachResultEmptyView = EmptyView(text: "일치하는 결과가 없습니다.")
     private let recnetSearchEmptyView = EmptyView(text: "최근 검색된 내역이 없습니다.")
     
     private let dividerView = UIView().then {
@@ -58,38 +59,8 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
     }
     
     private let resultCountLabel = UILabel().then {
-        $0.designed(text: "총 0건", font: .p14Regular)
+        $0.designed(font: .p14Regular)
         $0.isHidden = true
-    }
-    
-    // MARK: 최신순 정렬
-    private let sortStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = moderate(2)
-        $0.alignment = .center
-        $0.isHidden = true
-    }
-    
-    private let sortLabel = UILabel().then {
-        $0.designed(text: "최신순", font: .p14Regular)
-    }
-    
-    private let sortArrowImageView = UIImageView(image: .arrowDown.withTintColor(.black))
-    
-    private let sortDropdownView = UIView().then {
-        $0.setShadow()
-        $0.layer.cornerRadius = moderate(6)
-        $0.isHidden = true
-    }
-    
-    private let newImageView = UIImageView(image: .checkGreen)
-    private let newLabel = UILabel().then {
-        $0.designed(text: "최신순", font: .p14Regular, textColor: .green)
-    }
-    
-    private let popularImageView = UIImageView(image: .checkGreen.withTintColor(.white))
-    private let popularLabel = UILabel().then {
-        $0.designed(text: "인기순", font: .p14Regular, textColor: .gray90)
     }
     
     private lazy var resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
@@ -116,15 +87,13 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         setLayout()
         setRecentSearch()
         
-        sortStackView.onTapped { [weak self] in
-            self?.sortDropdownView.isHidden.toggle()
-        }
-        
-        viewModel.onError = { [weak self] error in
-            // TODO: 에러 얼럿 표시
-        }
-        
-        viewModel.onSearched = { [weak self] searchedPolicy in
+        viewModel.onSearched = { [weak self] in
+            DispatchQueue.main.async {
+                let policies = self?.viewModel.policies
+                self?.resultCountLabel.text = "총 \(policies?.count ?? 0)건"
+                self?.serachResultEmptyView.isHidden = !(policies?.isEmpty ?? true)
+                self?.resultCollectionView.reloadData()
+            }
         }
     }
     
@@ -181,12 +150,13 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         }
     }
     
-    private func showSearchResultViews(_ isShow: Bool = true) {
-        searchFilterCollectionView.isHidden = !isShow
-        dividerView.isHidden = !isShow
-        resultCountLabel.isHidden = !isShow
-        sortStackView.isHidden = !isShow
-        resultCollectionView.isHidden = !isShow
+    private func showSearchResultViews() {
+        searchFilterCollectionView.isHidden = false
+        dividerView.isHidden = false
+        resultCountLabel.isHidden = false
+        resultCollectionView.isHidden = false
+        
+        hideRecentSearchView()
     }
     
     private func hideRecentSearchView() {
@@ -196,9 +166,9 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
     }
     
     private func showRecentSearchEmptyView(_ isShow: Bool) {
-        recnetSearchEmptyView.isHidden = isShow
-        recentSearchStackView.isHidden = !isShow
-        deleteRecentLabel.isHidden = !isShow
+        recnetSearchEmptyView.isHidden = !isShow
+        recentSearchStackView.isHidden = isShow
+        deleteRecentLabel.isHidden = isShow
     }
     
     private func setLayout() {
@@ -210,17 +180,8 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
                          searchFilterCollectionView,
                          dividerView,
                          resultCountLabel,
-                         sortStackView,
                          resultCollectionView,
-                         sortDropdownView)
-        
-        sortDropdownView.addSubviews(newLabel,
-                                     newImageView,
-                                     popularLabel,
-                                     popularImageView)
-        
-        sortStackView.addArrangedSubview(sortLabel)
-        sortStackView.addArrangedSubview(sortArrowImageView)
+                         serachResultEmptyView)
         
         searchBarView.addSubviews([searchImageView,
                                    searchTextField])
@@ -260,6 +221,11 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
             $0.centerX.equalToSuperview()
         }
         
+        serachResultEmptyView.snp.makeConstraints {
+            $0.top.equalTo(resultCountLabel.snp.bottom).offset(100)
+            $0.centerX.equalToSuperview()
+        }
+        
         recentSearchStackView.snp.makeConstraints {
             $0.top.equalTo(recentSearchLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
@@ -282,44 +248,10 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
             $0.leading.equalToSuperview().inset(moderate(16))
         }
         
-        sortStackView.snp.makeConstraints {
-            $0.centerY.equalTo(resultCountLabel)
-            $0.trailing.equalToSuperview().inset(moderate(16))
-        }
-        
-        sortArrowImageView.snp.makeConstraints {
-            $0.size.equalTo(moderate(16))
-        }
-        
         resultCollectionView.snp.makeConstraints {
             $0.top.equalTo(resultCountLabel.snp.bottom).offset(moderate(10))
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
             $0.bottom.equalToSuperview()
-        }
-        
-        sortDropdownView.snp.makeConstraints {
-            $0.top.equalTo(sortStackView.snp.bottom).offset(moderate(7))
-            $0.trailing.equalTo(sortStackView)
-            $0.width.equalTo(moderate(120))
-            $0.height.equalTo(moderate(80))
-        }
-        
-        newLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(moderate(10))
-        }
-        
-        newImageView.snp.makeConstraints {
-            $0.trailing.top.equalToSuperview().inset(moderate(10))
-            $0.size.equalTo(20)
-        }
-        
-        popularLabel.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview().inset(moderate(10))
-        }
-        
-        popularImageView.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().inset(moderate(10))
-            $0.size.equalTo(20)
         }
     }
 }
@@ -330,7 +262,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return viewModel.filters.count
             
         } else {
-            return 10
+            return viewModel.policies.count
         }
     }
     
@@ -354,7 +286,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         } else {
             guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
+            let policy = viewModel.policies[indexPath.row]
+            
             cell.setStyle(.border)
+            cell.setData(policy)
 
             return cell
         }
