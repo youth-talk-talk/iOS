@@ -174,6 +174,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         default: return 0
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            let vc = PolicyCollectionViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 private extension HomeViewController {
