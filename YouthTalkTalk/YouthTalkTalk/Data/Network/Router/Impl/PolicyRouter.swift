@@ -15,7 +15,7 @@ enum PolicyRouter: Router {
     }
     
     case fetchHomePolicy(policy: PolicyQuery)
-    case fetchConditionPolicy(page: Int, body: PolicyConditionBody)
+    case fetchConditionPolicy(page: Int, body: PolicyConditionBody, region: String?)
     case fetchPolicyDetail(id: String)
     case updatePolicyScrap(id: String)
     case fetchUpComingDeadlineScrap
@@ -66,8 +66,8 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy(let query):
             return convertToParameters(query)
-        case .fetchConditionPolicy(let page, let body):
-            return convertToParameters(page, body)
+        case .fetchConditionPolicy(let page, let body, let region):
+            return convertToParameters(page, body, region)
         case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost:
             return nil
         }
@@ -91,7 +91,7 @@ enum PolicyRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .fetchConditionPolicy(_, let body):
+        case .fetchConditionPolicy(_, _, _):
             return try? encoder.encode(PolicyConditionBody.init(categories: nil, age: nil, employmentCodeList: nil, isFinished: nil, keyword: nil))
         case .uploadImage(let image):
             return try? encoder.encode(image)
@@ -125,12 +125,16 @@ enum PolicyRouter: Router {
         return params
     }
     
-    private func convertToParameters(_ page: Int, _ body: PolicyConditionBody) -> [String: Any] {
+    private func convertToParameters(_ page: Int, _ body: PolicyConditionBody, _ region: String?) -> [String: Any] {
         var params: [String: Any] = [:]
         
         params["page"] = page
         params["size"] = 20
         params["sort"] = "POPULAR"
+        
+        if let region {
+            params["region"] = region            
+        }
         
         return params
     }

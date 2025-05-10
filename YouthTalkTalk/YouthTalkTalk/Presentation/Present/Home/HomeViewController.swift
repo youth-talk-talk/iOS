@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController {
     private let regionTipImageView = UIImageView(image: .locationTip)
     
     private let selectionRegionLabel = UILabel().then {
-        $0.designed(text: "서울", font: .p18Semi)
+        $0.designed(text: "전체 지역", font: .p18Semi)
     }
     
     private let regionDownArrowImageView = UIImageView(image: .arrowDown.withTintColor(.black))
@@ -68,7 +68,6 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO: fetchMe 하고 userDefaults에 저장해두기 그걸로 내 지역 세팅
         view.backgroundColor = .white
         
         popularPolicyArrowImageView.onTapped { [weak self] in
@@ -78,6 +77,7 @@ final class HomeViewController: UIViewController {
         
         viewModel.onReloadData = { [weak self] in
             DispatchQueue.main.async {
+                self?.selectionRegionLabel.text = self?.viewModel.myRegion
                 self?.popularPolicyCollectionView.reloadData()
             }
         }

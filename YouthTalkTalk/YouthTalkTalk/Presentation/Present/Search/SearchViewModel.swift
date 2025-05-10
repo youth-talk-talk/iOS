@@ -25,7 +25,8 @@ final class SearchViewModel {
         Task {
             let result = await apiManager.requestAPI(
                 router: PolicyRouter.fetchConditionPolicy(page: 0,
-                                                          body: body),
+                                                          body: body,
+                                                          region: nil),
                 type: SearchPolicyDTO.self)
             switch result {
             case .success(let response):
