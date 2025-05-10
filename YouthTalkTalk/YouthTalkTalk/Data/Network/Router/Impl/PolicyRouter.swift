@@ -94,7 +94,11 @@ enum PolicyRouter: Router {
         
         switch self {
         case .fetchConditionPolicy(_, let body):
-            return try? encoder.encode(body)
+            return try? encoder.encode(body == nil ? .init(category: nil,
+                                                           age: nil,
+                                                           employmentCodeList: nil,
+                                                           isFinished: nil,
+                                                           keyword: nil) : body)
         case .uploadImage(let image):
             return try? encoder.encode(image)
         case .uploadPost(let body):
