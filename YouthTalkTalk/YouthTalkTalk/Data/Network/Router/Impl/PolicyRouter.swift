@@ -15,7 +15,7 @@ enum PolicyRouter: Router {
     }
     
     case fetchHomePolicy(policy: PolicyQuery)
-    case fetchConditionPolicy(page: Int, body: PolicyConditionBody, region: String?)
+    case fetchConditionPolicy(param: [String: String], body: PolicyConditionBody?)
     case fetchPolicyDetail(id: String)
     case updatePolicyScrap(id: String)
     case fetchUpComingDeadlineScrap
@@ -66,8 +66,8 @@ enum PolicyRouter: Router {
         switch self {
         case .fetchHomePolicy(let query):
             return convertToParameters(query)
-        case .fetchConditionPolicy(let page, let body, let region):
-            return convertToParameters(page, body, region)
+        case .fetchConditionPolicy(let param, _):
+            return param
         case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost:
             return nil
         }
@@ -90,9 +90,11 @@ enum PolicyRouter: Router {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .useDefaultKeys
         
+        struct EmptyModel: Encodable { }
+        
         switch self {
-        case .fetchConditionPolicy(_, _, _):
-            return try? encoder.encode(PolicyConditionBody.init(categories: nil, age: nil, employmentCodeList: nil, isFinished: nil, keyword: nil))
+        case .fetchConditionPolicy(_, let body):
+            return try? encoder.encode(body)
         case .uploadImage(let image):
             return try? encoder.encode(image)
         case .uploadPost(let body):
@@ -121,20 +123,6 @@ enum PolicyRouter: Router {
         }
         params["page"] = query.page
         params["size"] = query.size
-        
-        return params
-    }
-    
-    private func convertToParameters(_ page: Int, _ body: PolicyConditionBody, _ region: String?) -> [String: Any] {
-        var params: [String: Any] = [:]
-        
-        params["page"] = page
-        params["size"] = 20
-        params["sort"] = "POPULAR"
-        
-        if let region {
-            params["region"] = region            
-        }
         
         return params
     }

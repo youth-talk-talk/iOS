@@ -17,7 +17,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
     private let policyUseCase: PolicyUseCase
     
     private var page = 0
-    private var body = PolicyConditionBody(categories: [], age: nil, employmentCodeList: [], isFinished: nil, keyword: "")
+    private var body = PolicyConditionBody(category: [], age: nil, employmentCodeList: [], isFinished: nil, keyword: "")
     
     // Input
     var keyword: String
@@ -58,7 +58,7 @@ final class ResultPolicyViewModel: ResultSearchInterface {
             .withUnretained(self)
             .flatMap { owner, _ in
                 
-                owner.body.categories = type.map { $0.rawValue }
+                owner.body.category = type.map { $0.rawValue }
                 owner.body.keyword = owner.keyword
                 
                 return owner.policyUseCase.fetchConditionPolicies(page: owner.page, body: owner.body)

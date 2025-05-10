@@ -8,22 +8,16 @@
 import UIKit
 
 final class PolicyCollectionViewController: RootViewController {
+    
+    private let viewModel: PolicyCollectionViewModel
         
     // MARK: 정책 카테고리
-    private var selectedCategory: String
-    private(set) var filters: [String] = ["정책분야", "지역", "취업상태", "학력", "특화 분야", "연령 및 소득"]
     private let categoryCellSize = CGSize(width: moderate(64), height: moderate(94))
     private lazy var categoryCollectionView = makeCollectionView(categoryCellSize).then {
         $0.register(cells: CategoryCell.self)
     }
     
     // MARK: 검색 결과 필터
-    private(set) var categories: [(UIImage, String)] = [(.total, "전체"),
-                                                        (.home, "주거"),
-                                                        (.education, "교육"),
-                                                        (.work, "일자리"),
-                                                        (.culture, "복지"),
-                                                        (.apply, "참여 권리")]
     private lazy var searchFilterCollectionView = SearchFilterCollectionView().then {
         $0.delegate = self
         $0.dataSource = self
@@ -35,7 +29,7 @@ final class PolicyCollectionViewController: RootViewController {
     }
     
     private let resultCountLabel = UILabel().then {
-        $0.designed(text: "총 0건", font: .p14Regular)
+        $0.designed(font: .p14Regular)
     }
     
     // MARK: 정책 리스트
@@ -44,8 +38,8 @@ final class PolicyCollectionViewController: RootViewController {
         $0.register(cells: PolicyCell.self)
     }
     
-    init(selectedCategory: String) {
-        self.selectedCategory = selectedCategory
+    init(viewModel: PolicyCollectionViewModel) {
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,6 +52,13 @@ final class PolicyCollectionViewController: RootViewController {
         super.viewDidLoad()
         
         setMenuTitle("정책 모아보기")
+        
+        viewModel.onReloadData = { [weak self] in
+            DispatchQueue.main.async {
+                self?.resultCountLabel.text = "총 \(self?.viewModel.policies.count ?? 0)건"
+                self?.policyCollectionView.reloadData()
+            }
+        }
         
         view.addSubviews(categoryCollectionView,
                          searchFilterCollectionView,
@@ -117,13 +118,13 @@ final class PolicyCollectionViewController: RootViewController {
 extension PolicyCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == searchFilterCollectionView {
-            return filters.count
+            return viewModel.filters.count
             
         } else if collectionView == categoryCollectionView {
-            return categories.count
+            return viewModel.categories.count
             
         } else {
-            return 10
+            return viewModel.policies.count
         }
     }
     
@@ -131,7 +132,7 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
         if collectionView == searchFilterCollectionView {
             guard let cell: SearchFilterCell = collectionView.dequeueCell(for: indexPath) else { return .init() }
             
-            let filterTitle = filters[indexPath.row]
+            let filterTitle = viewModel.filters[indexPath.row]
             
             cell.setTitle(filterTitle)
             
@@ -148,18 +149,20 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
         } else if collectionView == categoryCollectionView {
             guard let cell: CategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
-            let category = categories[indexPath.row]
-            let isSelected = (category.1 == selectedCategory)
+            let category = viewModel.categories[indexPath.row]
+            let isSelected = (category.1 == viewModel.selectedCategory)
             
-            cell.setData(categoryImage: category.0, categoryName: category.1, isSelected: isSelected)
+            cell.setData(categoryImage: category.0, categoryName: category.1.name, isSelected: isSelected)
             
             return cell
             
         } else {
             guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
+            let policy = viewModel.policies[indexPath.row]
+            
             cell.setStyle(.border)
-//            cell.setData(.)
+            cell.setData(policy)
 
             return cell
         }
@@ -167,7 +170,7 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-            selectedCategory = categories[indexPath.row].1
+            viewModel.didTapCategory(index: indexPath.row)
             categoryCollectionView.reloadData()
         }
     }

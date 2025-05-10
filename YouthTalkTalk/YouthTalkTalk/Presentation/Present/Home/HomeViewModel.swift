@@ -18,12 +18,12 @@ final class HomeViewModel {
     private(set) var popularPolicies: [PolicyDTO] = []
     private(set) var myRegion: String = ""
 
-    private(set) var categories: [(UIImage, String)] = [(.total, "전체"),
-                                                        (.home, "주거"),
-                                                        (.education, "교육"),
-                                                        (.work, "일자리"),
-                                                        (.culture, "복지"),
-                                                        (.apply, "참여 권리")]
+    private(set) var categories: [(UIImage, PolicyCategory)] = [(.total, .all),
+                                                                (.home, .dwelling),
+                                                                (.education, .education),
+                                                                (.work, .job),
+                                                                (.culture, .life),
+                                                                (.apply, .participation)]
     
     init() {
         requestMyInfoAPI()
@@ -47,18 +47,15 @@ final class HomeViewModel {
     }
     
     private func requestPopularPolicyAPI() {
-        let body: PolicyConditionBody = .init(categories: nil,
-                                              age: nil,
-                                              employmentCodeList: nil,
-                                              isFinished: nil,
-                                              keyword: nil,
-                                              sort: nil)
+        let param: [String: String] = [
+            "page": "0",
+            "size": "20",
+            "sort": "POPULAR"
+        ]
         
         Task {
             let result = await apiManager.requestAPI(
-                router: PolicyRouter.fetchConditionPolicy(page: 0,
-                                                          body: body,
-                                                          region: myRegion),
+                router: PolicyRouter.fetchConditionPolicy(param: param, body: nil),
                 type: SearchPolicyDTO.self)
             switch result {
             case .success(let response):

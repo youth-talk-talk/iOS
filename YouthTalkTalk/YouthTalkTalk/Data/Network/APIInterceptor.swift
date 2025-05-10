@@ -18,7 +18,7 @@ class APIInterceptor: RequestInterceptor {
         
         var adaptedRequest = urlRequest
         let accessToken = keyChainHelper.loadTokenInfo(type: .accessToken)
-        print("|| [Token] \(accessToken)")
+        print("|| [Access Token] \(accessToken)")
         adaptedRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
         completion(.success(adaptedRequest))

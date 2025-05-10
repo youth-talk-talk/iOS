@@ -9,7 +9,7 @@ import Foundation
 
 
 enum PolicyCategory: String, CaseIterable, Encodable {
-    
+    case all = ""
     case job = "JOB"
     case education = "EDUCATION"
     case life = "LIFE"
@@ -29,6 +29,8 @@ enum PolicyCategory: String, CaseIterable, Encodable {
             return "참여"
         case .dwelling:
             return "주거"
+        case .all:
+            return "전체"
         }
     }
 }

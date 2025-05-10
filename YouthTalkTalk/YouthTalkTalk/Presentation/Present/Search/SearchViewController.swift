@@ -125,7 +125,6 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
         }
         
         viewModel.onSearched = { [weak self] searchedPolicy in
-            print("|| \(searchedPolicy)")
         }
     }
     

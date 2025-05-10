@@ -148,7 +148,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             let category = viewModel.categories[indexPath.row]
             
-            cell.setData(categoryImage: category.0, categoryName: category.1)
+            cell.setData(categoryImage: category.0, categoryName: category.1.name)
             
             return cell
             
@@ -179,7 +179,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let category = viewModel.categories[indexPath.row].1
         
         if collectionView == categoryCollectionView {
-            let vc = PolicyCollectionViewController(selectedCategory: category)
+            let vm = PolicyCollectionViewModel(selectedCategory: category)
+            let vc = PolicyCollectionViewController(viewModel: vm)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

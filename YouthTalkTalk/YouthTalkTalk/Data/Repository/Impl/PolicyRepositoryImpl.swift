@@ -24,8 +24,13 @@ final class PolicyRepositoryImpl: PolicyRepository {
     }
     
     func fetchConditionPolicies(page:Int, body: PolicyConditionBody) -> Observable<Result<ConditionPolicyDTO, APIError>> {
+        let param: [String: String] = [
+            "page": "0",
+            "size": "20",
+            "sort": "POPULAR"
+        ]
         
-        let router = PolicyRouter.fetchConditionPolicy(page: page, body: body, region: nil)
+        let router = PolicyRouter.fetchConditionPolicy(param: param, body: nil)
         
         return apiManager.request(router: router, type: ConditionPolicyDTO.self).asObservable()
     }

@@ -15,15 +15,15 @@ struct PolicyConditionBody: Encodable {
     // "isFinished": false, // null의 경우 전체 선택
     // "keyword": "전세" // null의 경우 키워드 제한X
     
-    var categories: [String]?
+    var category: [String]?
     var age: Int?
     var employmentCodeList: [String]?
     var isFinished: Bool?
     var keyword: String?
     var sort: String?
     
-    init(categories: [String]?, age: Int?, employmentCodeList: [String]?, isFinished: Bool?, keyword: String?, sort: String? = nil) {
-        self.categories = categories
+    init(category: [String]?, age: Int?, employmentCodeList: [String]?, isFinished: Bool?, keyword: String?, sort: String? = nil) {
+        self.category = category
         self.age = age
         self.employmentCodeList = employmentCodeList
         self.isFinished = isFinished

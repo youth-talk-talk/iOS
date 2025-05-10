@@ -15,22 +15,19 @@ final class SearchViewModel {
     var onSearched: (([PolicyDTO]) -> Void)?
     
     func requestSearchAPI(_ keyword: String) {
-        let body: PolicyConditionBody = .init(categories: [],
-                                              age: nil,
-                                              employmentCodeList: [],
-                                              isFinished: nil,
-                                              keyword: keyword,
-                                              sort: nil)
+        let param: [String: String] = [
+            "page": "0",
+            "size": "20",
+            "sort": "POPULAR"
+        ]
         
         Task {
             let result = await apiManager.requestAPI(
-                router: PolicyRouter.fetchConditionPolicy(page: 0,
-                                                          body: body,
-                                                          region: nil),
+                router: PolicyRouter.fetchConditionPolicy(param: param, body: nil),
                 type: SearchPolicyDTO.self)
             switch result {
             case .success(let response):
-                onSearched?(response.data.policyList) // TODO: 액세스 토큰 재발급 해보기
+                onSearched?(response.data.policyList)
             case .failure(let error):
                 onError?(error)
             }
