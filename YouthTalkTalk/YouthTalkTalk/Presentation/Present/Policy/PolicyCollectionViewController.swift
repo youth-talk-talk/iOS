@@ -8,8 +8,9 @@
 import UIKit
 
 final class PolicyCollectionViewController: RootViewController {
-    
+        
     // MARK: 정책 카테고리
+    private var selectedCategory: String
     private(set) var filters: [String] = ["정책분야", "지역", "취업상태", "학력", "특화 분야", "연령 및 소득"]
     private let categoryCellSize = CGSize(width: moderate(64), height: moderate(94))
     private lazy var categoryCollectionView = makeCollectionView(categoryCellSize).then {
@@ -41,6 +42,16 @@ final class PolicyCollectionViewController: RootViewController {
     private let popularPolicyCellSize = CGSize(width: UIScreen.main.bounds.width - moderate(32), height: moderate(121))
     private lazy var policyCollectionView = makeCollectionView(popularPolicyCellSize, direction: .vertical).then {
         $0.register(cells: PolicyCell.self)
+    }
+    
+    init(selectedCategory: String) {
+        self.selectedCategory = selectedCategory
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -96,6 +107,7 @@ final class PolicyCollectionViewController: RootViewController {
             $0.contentInset.left = 16
             $0.contentInset.right = 16
             $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
         }
         
         return collectionView
@@ -137,8 +149,9 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
             guard let cell: CategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
             let category = categories[indexPath.row]
+            let isSelected = (category.1 == selectedCategory)
             
-            cell.setData(categoryImage: category.0, categoryName: category.1)
+            cell.setData(categoryImage: category.0, categoryName: category.1, isSelected: isSelected)
             
             return cell
             
@@ -149,6 +162,13 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
 //            cell.setData(.)
 
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            selectedCategory = categories[indexPath.row].1
+            categoryCollectionView.reloadData()
         }
     }
 }

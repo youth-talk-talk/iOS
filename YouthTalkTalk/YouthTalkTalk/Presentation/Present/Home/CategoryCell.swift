@@ -35,8 +35,13 @@ final class CategoryCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func setData(categoryImage: UIImage, categoryName: String) {
+    func setData(categoryImage: UIImage, categoryName: String, isSelected: Bool = false) {
         categoryImageView.image = categoryImage
         categoryLabel.text = categoryName
+        setSelection(isSelected)
+    }
+    
+    func setSelection(_ isSelected: Bool) {
+        categoryLabel.designed(font: isSelected ? .p14Bold : .p14Regular, textColor: isSelected ? .green : .gray90)
     }
 }

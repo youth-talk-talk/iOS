@@ -176,8 +176,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let category = viewModel.categories[indexPath.row].1
+        
         if collectionView == categoryCollectionView {
-            let vc = PolicyCollectionViewController()
+            let vc = PolicyCollectionViewController(selectedCategory: category)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -13,11 +13,13 @@ extension UILabel {
     
     func designed(text: String = "", font: FontType, textColor: FontColor = .gray100, applyLineHeight: Bool = true) {
         
-        self.text = text
+        if text != "" {
+            self.text = text            
+        }
         self.textColor = textColor.value
         self.font = FontManager.font(font)
         
-        if applyLineHeight {
+        if applyLineHeight, text != "" {
             self.setTextWithLineHeight(text: text, lineHeight: FontManager.lineHeight(font))
         }
     }
