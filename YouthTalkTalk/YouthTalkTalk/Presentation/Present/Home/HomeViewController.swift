@@ -46,7 +46,7 @@ final class HomeViewController: UIViewController {
         $0.register(cells: PolicyCell.self)
     }
     
-    // MARK: 실시간 정책 톡톡!
+    // MARK: 지금뜨는 정책톡톡!
     private let reviewPolicyView = ReviewPolicyView()
     
     // MARK: 청년톡톡 Best
@@ -212,7 +212,7 @@ private extension HomeViewController {
         containerView.addSubview(popularPolicyArrowImageView)
         containerView.addSubview(popularPolicyCollectionView)
         
-        // MARK: 실시간 정책 톡톡!
+        // MARK: 지금뜨는 정책톡톡!
         containerView.addSubview(reviewPolicyView)
         
         // MARK: 청년톡톡 Bset

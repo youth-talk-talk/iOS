@@ -9,7 +9,7 @@ import UIKit
 
 final class ReviewPolicyView: UIView {
     private let reviewPolicyTitleLabel = UILabel().then {
-        $0.designed(text: "실시간 정책 톡톡!", font: .p16SemiBold, textColor: .gray100)
+        $0.designed(text: "지금뜨는 정책톡톡", font: .p16SemiBold, textColor: .gray100)
     }
     
     private let reviewPolicyBaseView = UIView().then {
