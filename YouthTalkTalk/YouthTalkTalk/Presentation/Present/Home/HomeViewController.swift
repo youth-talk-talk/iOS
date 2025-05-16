@@ -46,6 +46,53 @@ final class HomeViewController: UIViewController {
         $0.register(cells: PolicyCell.self)
     }
     
+    // MARK: 따끈따끈한 새로운 정책 (newPolicy)
+    private let newPolicyLabel = UILabel().then {
+        $0.designed(text: "따끈따끈한 새로운 정책", font: .p16SemiBold, textColor: .gray100)
+    }
+    
+    private let newPolicyCategories = ["전체", "주거", "교육", "일자리", "복지", "참여"]
+
+    private lazy var newPolicyCategoryCollectionView = SearchFilterCollectionView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(cells: NewCategoryCell.self)
+    }
+    
+    private let newPolicyDateLabel = UILabel().then {
+        let dateString = DateFormatter().then {
+            $0.dateFormat = "yyyy.MM.dd"
+        }.string(from: Calendar.current.date(byAdding: .day, value: -7, to: Date())!)
+        
+        $0.designed(text: "\(dateString) 기준", font: .p14Regular, textColor: .gray80)
+    }
+    
+    private let newPolicyImageView = UIImageView(image: .chevronRight)
+    
+    private var newPolicyCurrentIndex: Int = 0
+    private let policies: [PolicyDTO] = [.init(policyId: 0, category: "categr", title: "title1", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
+                                         .init(policyId: 0, category: "categr", title: "title2", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
+                                         .init(policyId: 0, category: "categr", title: "title3", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
+                                         .init(policyId: 0, category: "categr", title: "title4", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
+                                         .init(policyId: 0, category: "categr", title: "title5", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil)]
+    
+    private lazy var newPolicyPages: [UIViewController] = []
+    
+    private lazy var newPolicyPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.didMove(toParent: self)
+        $0.setViewControllers([newPolicyPages[0]], direction: .forward, animated: false)
+    }
+    
+    private let newPolicyPageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPageIndicatorTintColor = .gray90
+        pc.pageIndicatorTintColor = .gray40
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        return pc
+    }()
+    
     // MARK: 지금뜨는 정책톡톡!
     private let reviewPolicyView = ReviewPolicyView()
     
@@ -75,12 +122,20 @@ final class HomeViewController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
+        newPolicyImageView.onTapped { [weak self] in
+            let vc = PopularPolicyListViewController(policies: self?.viewModel.allPopularPolicies ?? [])
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         viewModel.onReloadData = { [weak self] in
             DispatchQueue.main.async {
                 self?.selectionRegionLabel.text = self?.viewModel.myRegion
                 self?.popularPolicyCollectionView.reloadData()
             }
         }
+        
+        setupPages()
+        setupPageControl()
         
         setLayout()
         setTapEvents()
@@ -136,6 +191,29 @@ final class HomeViewController: UIViewController {
         
         return collectionView
     }
+    
+    private func setupPages() {
+        var chunkedGroups: [[PolicyDTO]] = []
+        var startIndex = 0
+
+        while startIndex < policies.count {
+            let endIndex = min(startIndex + 4, policies.count)
+            let group = Array(policies[startIndex..<endIndex])
+            chunkedGroups.append(group)
+            startIndex += 4
+        }
+
+        newPolicyPages = chunkedGroups.enumerated().map { index, fourData in
+            let vc = NewPolicyPageViewController(policies: fourData)
+            vc.view.tag = index
+            return vc
+        }
+    }
+    
+    private func setupPageControl() {
+        newPolicyPageControl.numberOfPages = newPolicyPages.count
+        newPolicyPageControl.currentPage = 0
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -143,6 +221,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         switch collectionView {
         case categoryCollectionView:        return viewModel.categories.count
         case popularPolicyCollectionView:   return viewModel.popularPolicies.count
+        case newPolicyCategoryCollectionView:   return newPolicyCategories.count
             
         default: return 0
         }
@@ -166,6 +245,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.setData(policyData)
             
             return cell
+        } else if collectionView == newPolicyCategoryCollectionView {
+            guard let cell: NewCategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
+            
+            cell.label.text = newPolicyCategories[indexPath.row]
+            
+            return cell
         } else {
             return .init()
         }
@@ -182,9 +267,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let category = viewModel.categories[indexPath.row].1
-        
         if collectionView == categoryCollectionView {
+            let category = viewModel.categories[indexPath.row].1
+
             let vm = PolicyCollectionViewModel(selectedCategory: category)
             let vc = PolicyCollectionViewController(viewModel: vm)
             navigationController?.pushViewController(vc, animated: true)
@@ -193,8 +278,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 private extension HomeViewController {
-    
     func setLayout() {
+        addChild(newPolicyPageViewController)
+
         view.addSubview(baseScrollView)
         baseScrollView.addSubview(containerView)
         
@@ -211,6 +297,13 @@ private extension HomeViewController {
         containerView.addSubview(popularPolicyLabel)
         containerView.addSubview(popularPolicyArrowImageView)
         containerView.addSubview(popularPolicyCollectionView)
+        
+        // MARK: 따끈따끈한 새로운 정책 (newPolicy)
+        containerView.addSubview(newPolicyLabel)
+        containerView.addSubview(newPolicyDateLabel)
+        containerView.addSubview(newPolicyCategoryCollectionView)
+        containerView.addSubview(newPolicyPageViewController.view)
+        containerView.addSubview(newPolicyPageControl)
         
         // MARK: 지금뜨는 정책톡톡!
         containerView.addSubview(reviewPolicyView)
@@ -276,26 +369,74 @@ private extension HomeViewController {
             $0.height.equalTo(180)
         }
         
+        newPolicyLabel.snp.makeConstraints {
+            $0.top.equalTo(popularPolicyCollectionView.snp.bottom).offset(moderate(40))
+            $0.leading.equalToSuperview().inset(moderate(16))
+        }
+        
+        newPolicyDateLabel.snp.makeConstraints {
+            $0.top.equalTo(newPolicyLabel.snp.bottom).offset(6)
+            $0.leading.equalTo(newPolicyLabel)
+        }
+        
+        newPolicyCategoryCollectionView.snp.makeConstraints {
+            $0.top.equalTo(newPolicyDateLabel.snp.bottom).offset(moderate(10))
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(moderate(32))
+        }
+        
+        newPolicyPageViewController.view.snp.makeConstraints {
+            $0.top.equalTo(newPolicyCategoryCollectionView.snp.bottom).offset(moderate(20))
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(moderate(526))
+        }
+        
+        newPolicyPageControl.snp.makeConstraints {
+            $0.top.equalTo(newPolicyPageViewController.view.snp.bottom).offset(moderate(20))
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(moderate(6))
+        }
+        
         reviewPolicyView.snp.makeConstraints {
-            $0.top.equalTo(popularPolicyCollectionView.snp.bottom).offset(40)
+            $0.top.equalTo(newPolicyPageControl.snp.bottom).offset(moderate(40))
             $0.leading.trailing.equalToSuperview()
         }
         
         bestTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(reviewPolicyView.snp.bottom).offset(40)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(reviewPolicyView.snp.bottom).offset(moderate(40))
+            $0.leading.trailing.equalToSuperview().inset(moderate(16))
         }
         
         bestArrowImageView.snp.makeConstraints {
             $0.centerY.equalTo(bestTitleLabel)
-            $0.size.equalTo(24)
-            $0.trailing.equalToSuperview().inset(16)
+            $0.size.equalTo(moderate(24))
+            $0.trailing.equalToSuperview().inset(moderate(16))
         }
         
         bestStackView.snp.makeConstraints {
-            $0.top.equalTo(bestTitleLabel.snp.bottom).offset(14)
+            $0.top.equalTo(bestTitleLabel.snp.bottom).offset(moderate(14))
             $0.leading.trailing.equalTo(bestTitleLabel)
-            $0.bottom.equalToSuperview().inset(30)
+            $0.bottom.equalToSuperview().inset(moderate(30))
         }
+    }
+}
+
+extension HomeViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    func pageViewController(_ pvc: UIPageViewController, viewControllerBefore vc: UIViewController) -> UIViewController? {
+        guard let index = newPolicyPages.firstIndex(of: vc), index > 0 else { return nil }
+        return newPolicyPages[index - 1]
+    }
+
+    func pageViewController(_ pvc: UIPageViewController, viewControllerAfter vc: UIViewController) -> UIViewController? {
+        guard let index = newPolicyPages.firstIndex(of: vc), index < newPolicyPages.count - 1 else { return nil }
+        return newPolicyPages[index + 1]
+    }
+
+    func pageViewController(_ pvc: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard completed, let currentVC = pvc.viewControllers?.first,
+              let index = newPolicyPages.firstIndex(of: currentVC) else { return }
+        
+        newPolicyCurrentIndex = index
+        newPolicyPageControl.currentPage = index
     }
 }

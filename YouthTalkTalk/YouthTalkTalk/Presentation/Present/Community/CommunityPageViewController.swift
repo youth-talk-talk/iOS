@@ -28,7 +28,7 @@ final class CommunityPageViewController: UIViewController {
         $0.backgroundColor = .gray30
     }
     
-    private let filters = ["전체", "주거", "교육", "일자리", "복지", "참여", "카테고리"]
+    private let filters = ["전체", "주거", "교육", "일자리", "복지", "참여"]
 
     private lazy var filterCollectionView = SearchFilterCollectionView().then {
         $0.delegate = self

@@ -95,7 +95,7 @@ final class PolicyMainViewController: UIViewController {
     }
     
     private var allPolicycurrentIndex: Int = 0
-    private let allPolicyfilters = ["전체", "주거", "교육", "일자리", "복지", "참여", "카테고리"]
+    private let allPolicyfilters = ["전체", "주거", "교육", "일자리", "복지", "참여"]
     private lazy var allPolicypages: [UIViewController] = allPolicyfilters.map { _ in PolicyInfinityPageViewController() }
     
     override func viewWillAppear(_ animated: Bool) {

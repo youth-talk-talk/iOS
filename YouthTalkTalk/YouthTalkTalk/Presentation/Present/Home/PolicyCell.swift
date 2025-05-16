@@ -145,10 +145,10 @@ final class NewPolicyView: UIView {
         scrapCountLabel.text = String(data.scrapCount)
         totalScrapLabel.text = "총 \(data.scrapCount)회 스크랩 됐어요!"
 
-        if data.departmentImgUrl == "default" {
+        if data.departmentImgUrl == "default" || data.departmentImgUrl == nil {
             hostImageView.image = .govermentNull
         } else {
-            hostImageView.kf.setImage(with: URL(string: data.departmentImgUrl))
+            hostImageView.kf.setImage(with: URL(string: data.departmentImgUrl!))
         }
         
         if data.deadlineStatus != "" {

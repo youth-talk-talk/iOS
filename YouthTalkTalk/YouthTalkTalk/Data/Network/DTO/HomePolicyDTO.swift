@@ -39,7 +39,7 @@ struct HomePolicyDataDTO: Decodable {
     }
 }
 
-struct PolicyDTO: Decodable {
+struct PolicyDTO: Decodable, Equatable {
     let policyId: Int
     let category: String
     let title: String
@@ -47,6 +47,6 @@ struct PolicyDTO: Decodable {
     let hostDep: String
     let scrap: Bool
     let scrapCount: Int
-    let departmentImgUrl: String
+    let departmentImgUrl: String?
 }
 

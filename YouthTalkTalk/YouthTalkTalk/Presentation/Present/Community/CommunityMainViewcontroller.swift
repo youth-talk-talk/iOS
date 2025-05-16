@@ -65,16 +65,14 @@ final class CommunityMainViewcontroller: UIViewController {
         $0.designed(text: "글쓰기", font: .p16Regular16, textColor: .white)
     }
     
+    private var currentIndex: Int = 0
+    private lazy var pages: [UIViewController] = [CommunityPageViewController(), CommunityPageViewController()]
     private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
         $0.delegate = self
         $0.dataSource = self
         $0.didMove(toParent: self)
         $0.setViewControllers([pages[0]], direction: .forward, animated: false)
     }
-    
-    private var currentIndex: Int = 0
-    private let filters = ["전체", "주거", "교육", "일자리 카테고리", "복지", "참여", "카테고리"]
-    private lazy var pages: [UIViewController] = filters.map { _ in CommunityPageViewController() }
     
     override func viewDidLoad() {
         super.viewDidLoad()
