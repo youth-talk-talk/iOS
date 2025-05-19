@@ -97,14 +97,10 @@ final class HomeViewController: UIViewController {
     
     private let bestArrowImageView = UIImageView(image: .chevronRight)
     
-    private lazy var bestStackView = UIStackView(arrangedSubviews: [bestPostView1,
-                                                                    bestPostView2]).then {
+    private lazy var bestStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 16
     }
-    
-    private let bestPostView1 = PostView()
-    private let bestPostView2 = PostView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,6 +125,13 @@ final class HomeViewController: UIViewController {
                 // MARK: 새로운 정책 데이터 세팅
                 self?.setupPages()
                 self?.setupPageControl()
+                
+                // MARK: 청년톡톡 Best 데이터 세팅
+                print("|| \(self?.viewModel.bestPosts)")
+                self?.viewModel.bestPosts.forEach { bestPost in
+                    let postView = PostView(post: bestPost)
+                    self?.bestStackView.addArrangedSubview(postView)
+                }
             }
         }
         

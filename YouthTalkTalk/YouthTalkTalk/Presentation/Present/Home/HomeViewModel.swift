@@ -17,6 +17,8 @@ final class HomeViewModel {
     private(set) var allPopularPolicies: [PolicyDTO] = []
     private(set) var popularPolicies: [PolicyDTO] = []
     private(set) var newPolicies: [PolicyDTO] = []
+    private(set) var policiesWithReviews: [PolicyWithReviewsDTO] = []
+    private(set) var bestPosts: [BestPostDTO] = []
     private(set) var myRegion: String = ""
 
     private(set) var categories: [(UIImage, PolicyCategory)] = [(.total, .all),
@@ -29,6 +31,7 @@ final class HomeViewModel {
     init() {
         requestMyInfoAPI { _ in }
         getNewPolicies()
+        getHomePolicies()
     }
     
     func requestMyInfoAPI(onCompleted: @escaping (String) -> Void) {
@@ -41,31 +44,6 @@ final class HomeViewModel {
                 myRegion = response.data.region
                 
                 onCompleted(myRegion)
-                
-                requestPopularPolicyAPI()
-                
-            case .failure(let error):
-                onError?(error)
-            }
-        }
-    }
-    
-    private func requestPopularPolicyAPI() {
-        let param: [String: String] = [
-            "page": "0",
-            "size": "20",
-            "sort": "POPULAR"
-        ]
-        
-        Task {
-            let result = await apiManager.requestAPI(
-                router: PolicyRouter.fetchConditionPolicy(param: param, body: nil),
-                type: SearchPolicyDTO.self)
-            switch result {
-            case .success(let response):
-                allPopularPolicies = response.data.policyList
-                popularPolicies = Array(response.data.policyList.prefix(10))
-                onReloadData?()
                 
             case .failure(let error):
                 onError?(error)
@@ -81,6 +59,26 @@ final class HomeViewModel {
             switch result {
             case .success(let response):
                 newPolicies = response.data["ALL"] ?? []
+                onReloadData?()
+                
+            case .failure(let error):
+                onError?(error)
+            }
+        }
+    }
+    
+    private func getHomePolicies() {
+        Task {
+            let result = await apiManager.requestAPI(
+                router: PolicyRouter.homePolicies,
+                type: HomePolicyDTO.self)
+            switch result {
+            case .success(let response):
+                allPopularPolicies = response.data.popularPolicies
+                popularPolicies = Array(response.data.popularPolicies.prefix(10))
+                policiesWithReviews = response.data.policiesWithReviews
+                bestPosts = response.data.bestPosts
+                
                 onReloadData?()
                 
             case .failure(let error):

@@ -34,13 +34,13 @@ final class PolicyUseCaseImpl: PolicyUseCase {
                             return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
                         }
                     
-                    let recentPolicies = homePolicyDTO.data.recentPolicies
-                        .map { dto in
-                            return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
-                        }
+//                    let recentPolicies = homePolicyDTO.data.policiesWithReviews
+//                        .map { dto in
+//                            return PolicyEntity(policyId: dto.policyId, category: dto.category, title: dto.title, deadlineStatus: dto.deadlineStatus, hostDep: dto.hostDep, scrap: dto.scrap)
+//                        }
                     
                     let homePolicy = HomePolicyEntity(popularPolicies: popularPolicies,
-                                                      recentPolicies: recentPolicies)
+                                                      recentPolicies: [])
                     
                     return .success(homePolicy)
                     

@@ -10,39 +10,46 @@ import UIKit
 final class PostView: UIView {
     
     private let postTypeLabel = UILabel().then {
-        $0.designed(text: "게시글 타입", font: .p12Regular, textColor: .gray80)
+        $0.designed(font: .p12Regular, textColor: .gray80)
     }
     
     private let titleLabel = UILabel().then {
-        $0.designed(text: "리뷰 게시글 타이틀입니다.", font: .p16Regular16)
+        $0.designed(font: .p16Regular16)
         $0.numberOfLines = 1
     }
     
     private let contentLabel = UILabel().then {
-        $0.designed(text: "리뷰 게시글 내용입니다.", font: .p12Regular, textColor: .gray80)
+        $0.designed(font: .p12Regular, textColor: .gray80)
         $0.numberOfLines = 1
     }
     
     private let commentImageView = UIImageView(image: .comments.withTintColor(.gray80))
     private let commentCountLabel = UILabel().then {
-        $0.designed(text: "코멘트 개수", font: .p12Regular, textColor: .gray80)
+        $0.designed(font: .p12Regular, textColor: .gray80)
     }
     
     private let scrapImageView = UIImageView(image: .bookmarkLine.withTintColor(.gray80))
     private let scrapCountLabel = UILabel().then {
-        $0.designed(text: "스크랩 개수", font: .p12Regular, textColor: .gray80)
+        $0.designed(font: .p12Regular, textColor: .gray80)
     }
     
     private let dateLabel = UILabel().then {
-        $0.designed(text: "게시글 날짜", font: .p12Regular, textColor: .gray80)
+        $0.designed(font: .p12Regular, textColor: .gray80)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(post: BestPostDTO) {
+        super.init(frame: .zero)
         
         backgroundColor = .white
         layer.cornerRadius = 12
         setShadow()
+        
+        postTypeLabel.text = post.title
+        titleLabel.text = post.title
+        contentLabel.text = post.contentPreview
+        commentCountLabel.text = String(post.comments)
+        scrapCountLabel.text = String(post.scraps ?? 0)
+        dateLabel.text = String(post.createdAt)
         
         addSubviews([postTypeLabel,
                      titleLabel, contentLabel,

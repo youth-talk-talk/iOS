@@ -29,14 +29,9 @@ struct SearchPolicyDataDTO: Decodable {
 
 
 struct HomePolicyDataDTO: Decodable {
-    
     let popularPolicies: [PolicyDTO]
-    let recentPolicies: [PolicyDTO]
-    
-    enum CodingKeys: String, CodingKey {
-        case popularPolicies = "top5Policies"
-        case recentPolicies = "allPolicies"
-    }
+    let policiesWithReviews: [PolicyWithReviewsDTO]
+    let bestPosts: [BestPostDTO]
 }
 
 struct PolicyDTO: Decodable, Equatable {
@@ -56,4 +51,34 @@ struct NewPolicyDTO: Decodable {
     let message: String
     let code: String
     let data: [String: [PolicyDTO]]
+}
+
+struct PolicyWithReviewsDTO: Decodable {
+    let policyId: Int
+    let title: String
+    let departmentImgUrl: String?
+    let reviews: [ReviewDTO]
+}
+
+struct ReviewDTO: Decodable {
+    let postId: Int
+    let title: String
+    let contentPreview: String
+    let commentCount: Int
+    let scrapCount: Int
+    let scrap: Bool
+    let createdAt: String
+}
+
+struct BestPostDTO: Decodable {
+    let postId: Int
+    let title: String
+    let writerId: Int
+    let policyId: Int?
+    let policyTitle: String?
+    let comments: Int
+    let contentPreview: String
+    let scraps: Int?
+    let scrap: Bool
+    let createdAt: String
 }
