@@ -47,6 +47,13 @@ struct PolicyDTO: Decodable, Equatable {
     let hostDep: String
     let scrap: Bool
     let scrapCount: Int
+    var region: String?
     let departmentImgUrl: String?
 }
 
+struct NewPolicyDTO: Decodable {
+    let status: Int
+    let message: String
+    let code: String
+    let data: [String: [PolicyDTO]]
+}

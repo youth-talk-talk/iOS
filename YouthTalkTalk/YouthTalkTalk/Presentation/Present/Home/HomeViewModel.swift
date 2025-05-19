@@ -16,6 +16,7 @@ final class HomeViewModel {
     
     private(set) var allPopularPolicies: [PolicyDTO] = []
     private(set) var popularPolicies: [PolicyDTO] = []
+    private(set) var newPolicies: [PolicyDTO] = []
     private(set) var myRegion: String = ""
 
     private(set) var categories: [(UIImage, PolicyCategory)] = [(.total, .all),
@@ -27,6 +28,7 @@ final class HomeViewModel {
     
     init() {
         requestMyInfoAPI { _ in }
+        getNewPolicies()
     }
     
     func requestMyInfoAPI(onCompleted: @escaping (String) -> Void) {
@@ -63,6 +65,22 @@ final class HomeViewModel {
             case .success(let response):
                 allPopularPolicies = response.data.policyList
                 popularPolicies = Array(response.data.policyList.prefix(10))
+                onReloadData?()
+                
+            case .failure(let error):
+                onError?(error)
+            }
+        }
+    }
+    
+    private func getNewPolicies() {
+        Task {
+            let result = await apiManager.requestAPI(
+                router: PolicyRouter.newPolicies,
+                type: NewPolicyDTO.self)
+            switch result {
+            case .success(let response):
+                newPolicies = response.data["ALL"] ?? []
                 onReloadData?()
                 
             case .failure(let error):

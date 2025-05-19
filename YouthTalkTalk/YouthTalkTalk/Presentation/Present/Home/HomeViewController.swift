@@ -70,11 +70,6 @@ final class HomeViewController: UIViewController {
     private let newPolicyImageView = UIImageView(image: .chevronRight)
     
     private var newPolicyCurrentIndex: Int = 0
-    private let policies: [PolicyDTO] = [.init(policyId: 0, category: "categr", title: "title1", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
-                                         .init(policyId: 0, category: "categr", title: "title2", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
-                                         .init(policyId: 0, category: "categr", title: "title3", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
-                                         .init(policyId: 0, category: "categr", title: "title4", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil),
-                                         .init(policyId: 0, category: "categr", title: "title5", deadlineStatus: "aewf", hostDep: "awef", scrap: true, scrapCount: 12, departmentImgUrl: nil)]
     
     private lazy var newPolicyPages: [UIViewController] = []
     
@@ -82,7 +77,6 @@ final class HomeViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.didMove(toParent: self)
-        $0.setViewControllers([newPolicyPages[0]], direction: .forward, animated: false)
     }
     
     private let newPolicyPageControl: UIPageControl = {
@@ -131,11 +125,12 @@ final class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.selectionRegionLabel.text = self?.viewModel.myRegion
                 self?.popularPolicyCollectionView.reloadData()
+                
+                // MARK: 새로운 정책 데이터 세팅
+                self?.setupPages()
+                self?.setupPageControl()
             }
         }
-        
-        setupPages()
-        setupPageControl()
         
         setLayout()
         setTapEvents()
@@ -196,9 +191,9 @@ final class HomeViewController: UIViewController {
         var chunkedGroups: [[PolicyDTO]] = []
         var startIndex = 0
 
-        while startIndex < policies.count {
-            let endIndex = min(startIndex + 4, policies.count)
-            let group = Array(policies[startIndex..<endIndex])
+        while startIndex < viewModel.newPolicies.count {
+            let endIndex = min(startIndex + 4, viewModel.newPolicies.count)
+            let group = Array(viewModel.newPolicies[startIndex..<endIndex])
             chunkedGroups.append(group)
             startIndex += 4
         }
@@ -208,6 +203,9 @@ final class HomeViewController: UIViewController {
             vc.view.tag = index
             return vc
         }
+        
+        guard newPolicyPages.count > 0 else { return }
+        newPolicyPageViewController.setViewControllers([newPolicyPages[0]], direction: .forward, animated: false)
     }
     
     private func setupPageControl() {
@@ -219,8 +217,8 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case categoryCollectionView:        return viewModel.categories.count
-        case popularPolicyCollectionView:   return viewModel.popularPolicies.count
+        case categoryCollectionView:            return viewModel.categories.count
+        case popularPolicyCollectionView:       return viewModel.popularPolicies.count
         case newPolicyCategoryCollectionView:   return newPolicyCategories.count
             
         default: return 0

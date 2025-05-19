@@ -23,6 +23,7 @@ enum PolicyRouter: Router {
     case uploadImage(image: String)
     case uploadPost(body: UploadPostBody)
     case editPost(_ postId: Int, _ postData: PostEditRequestModel)
+    case newPolicies
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -48,12 +49,14 @@ enum PolicyRouter: Router {
             return "/posts"
         case .editPost(let postId, _):
             return "/posts/\(postId)"
+        case .newPolicies:
+            return "/home/new-policies"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy :
+        case .fetchHomePolicy, .fetchPolicyDetail, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .newPolicies:
             return .get
         case .fetchConditionPolicy, .updatePolicyScrap, .uploadImage, .uploadPost:
             return .post
@@ -68,14 +71,14 @@ enum PolicyRouter: Router {
             return convertToParameters(query)
         case .fetchConditionPolicy(let param, _):
             return param
-        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost:
+        case .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadImage, .uploadPost, .editPost, .newPolicies:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadPost, .editPost:
+        case .fetchHomePolicy, .fetchConditionPolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .uploadPost, .editPost, .newPolicies:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
             
@@ -105,7 +108,7 @@ enum PolicyRouter: Router {
             return try? encoder.encode(body)
         case .editPost(_, let body):
             return try? encoder.encode(body)
-        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy:
+        case .fetchHomePolicy, .fetchPolicyDetail, .updatePolicyScrap, .fetchUpComingDeadlineScrap, .fetchScrapPolicy, .newPolicies:
             return nil
         }
     }
