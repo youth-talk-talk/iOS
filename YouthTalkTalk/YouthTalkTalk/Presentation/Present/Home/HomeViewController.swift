@@ -88,7 +88,7 @@ final class HomeViewController: UIViewController {
     }()
     
     // MARK: 지금뜨는 정책톡톡!
-    private let reviewPolicyView = ReviewPolicyView()
+    private var reviewPolicyView = ReviewPolicyView()
     
     // MARK: 청년톡톡 Best
     private let bestTitleLabel = UILabel().then {
@@ -126,8 +126,10 @@ final class HomeViewController: UIViewController {
                 self?.setupPages()
                 self?.setupPageControl()
                 
+                // MARK: 지금뜨는 정책톡톡 데이터 세팅
+                self?.reviewPolicyView.setData(policyWithReviews: self?.viewModel.policiesWithReviews ?? [])
+                
                 // MARK: 청년톡톡 Best 데이터 세팅
-                print("|| \(self?.viewModel.bestPosts)")
                 self?.viewModel.bestPosts.forEach { bestPost in
                     let postView = PostView(post: bestPost)
                     self?.bestStackView.addArrangedSubview(postView)
@@ -182,8 +184,8 @@ final class HomeViewController: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = .white
-            $0.contentInset.left = 16
-            $0.contentInset.right = 16
+            $0.contentInset.left = moderate(16)
+            $0.contentInset.right = moderate(16)
             $0.showsHorizontalScrollIndicator = false
         }
         
@@ -260,8 +262,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         switch collectionView {
-        case categoryCollectionView:        return 20
-        case popularPolicyCollectionView:   return 14
+        case categoryCollectionView:        return moderate(20)
+        case popularPolicyCollectionView:   return moderate(14)
             
         default: return 0
         }

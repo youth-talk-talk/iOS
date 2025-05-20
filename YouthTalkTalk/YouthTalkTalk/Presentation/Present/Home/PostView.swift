@@ -44,7 +44,7 @@ final class PostView: UIView {
         layer.cornerRadius = 12
         setShadow()
         
-        postTypeLabel.text = post.title
+        postTypeLabel.text = post.policyId == nil ? "자유게시글" : "후기게시글"
         titleLabel.text = post.title
         contentLabel.text = post.contentPreview
         commentCountLabel.text = String(post.comments)
