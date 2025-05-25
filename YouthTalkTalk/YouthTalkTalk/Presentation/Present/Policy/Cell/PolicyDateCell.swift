@@ -43,4 +43,9 @@ final class PolicyDateCell: UICollectionViewCell {
         todayLabel.textColor = isGreen ? .white : .gray80
         dateLabel.textColor = isGreen ? .white : .gray70
     }
+    
+    func setData(date: (String, Int)) {
+        todayLabel.text = date.0
+        dateLabel.text = String(date.1)
+    }
 }

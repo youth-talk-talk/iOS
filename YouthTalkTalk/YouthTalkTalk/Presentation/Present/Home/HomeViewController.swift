@@ -51,6 +51,8 @@ final class HomeViewController: UIViewController {
         $0.designed(text: "따끈따끈한 새로운 정책", font: .p16SemiBold, textColor: .gray100)
     }
     
+    private let newPolicyEmptyView = EmptyView(text: "최근 새로 올라온 공고가 없어요.")
+    
     private let newPolicyCategories = ["전체", "주거", "교육", "일자리", "복지", "참여"]
 
     private lazy var newPolicyCategoryCollectionView = SearchFilterCollectionView().then {
@@ -117,6 +119,13 @@ final class HomeViewController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
+        bestArrowImageView.onTapped { [weak self] in
+            // MARK: 커뮤니티 탭으로 이동
+            if let tabBarController = self?.tabBarController {
+                tabBarController.selectedIndex = 2
+            }
+        }
+        
         viewModel.onReloadData = { [weak self] in
             DispatchQueue.main.async {
                 self?.selectionRegionLabel.text = self?.viewModel.myRegion
@@ -125,6 +134,11 @@ final class HomeViewController: UIViewController {
                 // MARK: 새로운 정책 데이터 세팅
                 self?.setupPages()
                 self?.setupPageControl()
+                let isNewPoliciesEmpty = self?.viewModel.newPolicies.isEmpty ?? true
+                self?.newPolicyEmptyView.isHidden = !isNewPoliciesEmpty
+                self?.newPolicyPageViewController.view.snp.updateConstraints {
+                    $0.height.equalTo(moderate(isNewPoliciesEmpty ? 200 : 526))
+                }
                 
                 // MARK: 지금뜨는 정책톡톡 데이터 세팅
                 self?.reviewPolicyView.setData(policyWithReviews: self?.viewModel.policiesWithReviews ?? [])
@@ -307,6 +321,7 @@ private extension HomeViewController {
         containerView.addSubview(newPolicyCategoryCollectionView)
         containerView.addSubview(newPolicyPageViewController.view)
         containerView.addSubview(newPolicyPageControl)
+        containerView.addSubview(newPolicyEmptyView)
         
         // MARK: 지금뜨는 정책톡톡!
         containerView.addSubview(reviewPolicyView)
@@ -398,6 +413,11 @@ private extension HomeViewController {
             $0.top.equalTo(newPolicyPageViewController.view.snp.bottom).offset(moderate(20))
             $0.centerX.equalToSuperview()
             $0.height.equalTo(moderate(6))
+        }
+        
+        newPolicyEmptyView.snp.makeConstraints {
+            $0.top.equalTo(newPolicyCategoryCollectionView.snp.bottom).offset(moderate(100))
+            $0.centerX.width.equalToSuperview()
         }
         
         reviewPolicyView.snp.makeConstraints {

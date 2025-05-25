@@ -73,7 +73,7 @@ struct ReviewDTO: Decodable {
 struct BestPostDTO: Decodable {
     let postId: Int
     let title: String
-    let writerId: Int
+    let writerId: Int?
     let policyId: Int?
     let policyTitle: String?
     let comments: Int

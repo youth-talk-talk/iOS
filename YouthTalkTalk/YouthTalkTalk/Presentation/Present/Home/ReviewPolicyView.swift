@@ -30,7 +30,7 @@ final class ReviewPolicyView: UIView {
     
     private let reviewPolicyLabel = UILabel().then {
         $0.designed(text: "정책 타이틀입니다.", font: .p16SemiBold)
-        $0.numberOfLines = 0
+        $0.numberOfLines = 2
     }
     
     private let reviewPostStackView = UIStackView().then {
@@ -113,7 +113,7 @@ final class ReviewPolicyView: UIView {
         reviewPostStackView.snp.makeConstraints {
             $0.top.equalTo(reviewPolicyImageView.snp.bottom).offset(moderate(35))
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
-            $0.bottom.equalTo(morePolicyView.snp.top).offset(moderate(-30))
+            $0.bottom.equalTo(morePolicyView.snp.top).offset(moderate(-10))
         }
         
         morePolicyView.snp.makeConstraints {

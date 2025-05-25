@@ -19,6 +19,8 @@ enum MeRouter: Router {
     case requestMe
     case deleteAccount
     case patchMe(ChangedRegion)
+    case seePolicies
+    case endPolicies
     
     var baseURL: String {
         return APIKey.baseURL.rawValue
@@ -28,12 +30,16 @@ enum MeRouter: Router {
         switch self {
         case .requestMe, .deleteAccount, .patchMe:
             return "/members/me"
+        case .seePolicies:
+            return "/policies/recent-view"
+        case .endPolicies:
+            return "/policies/scrapped/upcoming-deadline"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .requestMe:
+        case .requestMe, .seePolicies, .endPolicies:
             return .get
         case .deleteAccount:
             return .post  
@@ -44,14 +50,14 @@ enum MeRouter: Router {
     
     var parameters: Parameters? {
         switch self {
-        case .requestMe, .deleteAccount, .patchMe:
+        case .requestMe, .deleteAccount, .patchMe, .seePolicies, .endPolicies:
             return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .requestMe, .deleteAccount, .patchMe:
+        case .requestMe, .deleteAccount, .patchMe, .seePolicies, .endPolicies:
             return ["Content-Type": "application/json",
                     "Authorization": "Bearer \(keyChainHelper.loadTokenInfo(type: .accessToken))"]
         }
@@ -63,7 +69,7 @@ enum MeRouter: Router {
         encoder.keyEncodingStrategy = .useDefaultKeys
         
         switch self {
-        case .requestMe:
+        case .requestMe, .seePolicies, .endPolicies:
             return nil
         case .deleteAccount:
             // TODO: 애플/ 카카오 로그인 유저 구분해서 바디 생성
