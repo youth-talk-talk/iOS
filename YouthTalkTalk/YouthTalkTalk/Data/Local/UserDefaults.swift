@@ -29,6 +29,11 @@ enum WriteType {
     case edit
 }
 
+enum communityType {
+    case review
+    case free
+}
+
 enum MainContentsType: Encodable {
     
     case policy

@@ -14,7 +14,7 @@ final class NewPostCell: UICollectionViewCell {
         $0.alignment = .leading
     }
     
-    private let categoryLabel = PaddedLabel(topBottom: 2, leftRight: 6) .then {
+    private let categoryLabel = PaddedLabel(topBottom: 0, leftRight: 6) .then {
         $0.designed(text: "카테고리", font: .p12Regular, textColor: .gray80)
         $0.layer.cornerRadius = moderate(4)
         $0.backgroundColor = .gray30
@@ -85,8 +85,13 @@ final class NewPostCell: UICollectionViewCell {
                                      scrapCountLabel,
                                      dateLabel)
         
+        categoryLabel.snp.makeConstraints {
+            $0.height.equalTo(moderate(21))
+        }
+        
         contentStackView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview().inset(moderate(20))
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(dividerView.snp.top).offset(-moderate(20))
         }
         
@@ -140,5 +145,17 @@ final class NewPostCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setData(_ post: RPDTO) {
+        titleLabel.text = post.title
+        policyLabel.text = post.policyTitle
+        contentLabel.text = post.contentPreview
+        commentCountLabel.text = String(post.comments)
+        scrapCountLabel.text = String(post.scraps ?? 0)
+        categoryLabel.text = PolicyCategory(rawValue: post.category ?? "")?.name
+        categoryLabel.isHidden = post.category == nil
+        policyView.isHidden = post.policyTitle == nil
+        dateLabel.text = String(post.createAt?.prefix(10) ?? "")
     }
 }

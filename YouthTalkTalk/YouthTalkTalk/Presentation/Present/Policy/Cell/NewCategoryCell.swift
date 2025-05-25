@@ -30,4 +30,10 @@ final class NewCategoryCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func changeColor(isGreen: Bool) {
+        backgroundColor = isGreen ? .greenNormal : .white
+        label.textColor = isGreen ? .white : .gray80
+        layer.borderWidth = isGreen ? 0 : 1
+    }
 }

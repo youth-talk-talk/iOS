@@ -238,6 +238,7 @@ final class CreatePostViewController: RootViewController {
         view.addSubview(addPhotoImageView)
         view.addSubview(writePostLabel)
         view.addSubview(addPhotoView)
+        view.addSubview(searchPolicyView)
         
         pageTitleLabel.snp.makeConstraints {
             $0.centerY.equalTo(backImageView)
@@ -301,6 +302,10 @@ final class CreatePostViewController: RootViewController {
         
         addPhotoView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        searchPolicyView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 }

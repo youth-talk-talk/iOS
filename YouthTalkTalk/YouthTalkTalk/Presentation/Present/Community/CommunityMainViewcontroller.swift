@@ -10,6 +10,8 @@ import SnapKit
 
 final class CommunityMainViewcontroller: UIViewController {
     
+    private let viewModel = CommunityMainViewModel()
+    
     private let titleLabel = UILabel().then {
         $0.designed(text: "커뮤니티", font: .p18Semi)
     }
@@ -66,7 +68,9 @@ final class CommunityMainViewcontroller: UIViewController {
     }
     
     private var currentIndex: Int = 0
-    private lazy var pages: [UIViewController] = [CommunityPageViewController(), CommunityPageViewController()]
+    private let reviewPostVC = CommunityPageViewController()
+    private let freePostVC = CommunityPageViewController()
+    private lazy var pages: [UIViewController] = [reviewPostVC, freePostVC]
     private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
         $0.delegate = self
         $0.dataSource = self
@@ -80,6 +84,10 @@ final class CommunityMainViewcontroller: UIViewController {
         view.backgroundColor = .white
                 
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        reviewPostVC.onReloadByCategory = { [weak self] selectedCategory in
+            self?.viewModel.getReviewPosts(selectedCategory: selectedCategory)
+        }
         
         searchBarStackView.onTapped { [weak self] in
             let searchVC = SearchViewController()
@@ -99,7 +107,19 @@ final class CommunityMainViewcontroller: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
+        viewModel.onReloaded = { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                
+                (pages[0] as? CommunityPageViewController)?.reloadData(hotPosts: viewModel.reviewHotPosts, posts: viewModel.reviewPosts, type: .review)
+                (pages[1] as? CommunityPageViewController)?.reloadData(hotPosts: viewModel.freeHotPosts, posts: viewModel.freePosts, type: .free)
+            }
+        }
+        
         setLayout()
+        
+        viewModel.getFreePosts()
+        viewModel.getReviewPosts()
     }
     
     override func viewDidAppear(_ animated: Bool) {

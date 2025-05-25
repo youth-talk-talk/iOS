@@ -50,6 +50,7 @@
 		6A918F232DBF015D0047ED55 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F222DBF015B0047ED55 /* EmptyView.swift */; };
 		6A918F272DC058300047ED55 /* SearchFilterCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */; };
 		6A918F292DC089750047ED55 /* SearchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A918F282DC089730047ED55 /* SearchFilterCell.swift */; };
+		6A9634DD2DE2D1ED00EAC49D /* CommunityMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9634DC2DE2D1E700EAC49D /* CommunityMainViewModel.swift */; };
 		6AB43A2B2DCEEB7900AB69BD /* PolicyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB43A2A2DCEEB6D00AB69BD /* PolicyCollectionViewController.swift */; };
 		6AB43A2D2DCEFDC900AB69BD /* PolicyCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB43A2C2DCEFDC500AB69BD /* PolicyCollectionViewModel.swift */; };
 		6AB69EDB2DC9AEAF00279C1C /* EditMyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB69EDA2DC9AE9300279C1C /* EditMyInfoViewController.swift */; };
@@ -351,6 +352,7 @@
 		6A918F222DBF015B0047ED55 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		6A918F262DC058240047ED55 /* SearchFilterCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterCollectionView.swift; sourceTree = "<group>"; };
 		6A918F282DC089730047ED55 /* SearchFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterCell.swift; sourceTree = "<group>"; };
+		6A9634DC2DE2D1E700EAC49D /* CommunityMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityMainViewModel.swift; sourceTree = "<group>"; };
 		6AB43A2A2DCEEB6D00AB69BD /* PolicyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCollectionViewController.swift; sourceTree = "<group>"; };
 		6AB43A2C2DCEFDC500AB69BD /* PolicyCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyCollectionViewModel.swift; sourceTree = "<group>"; };
 		6AB69EDA2DC9AE9300279C1C /* EditMyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyInfoViewController.swift; sourceTree = "<group>"; };
@@ -968,6 +970,7 @@
 		AC604BD12C63962D00804950 /* Community */ = {
 			isa = PBXGroup;
 			children = (
+				6A9634DC2DE2D1E700EAC49D /* CommunityMainViewModel.swift */,
 				6A6206F12DC38C15009BF82A /* NewPostCell.swift */,
 				6A6206EF2DC3852F009BF82A /* PopularPostCell.swift */,
 				6A6206ED2DC3846F009BF82A /* CommunityPageViewController.swift */,
@@ -1738,6 +1741,7 @@
 				6A90810F2CEEA3EA00B52C91 /* AddPhotoView.swift in Sources */,
 				ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */,
 				AC0AA5CC2CCFF09D00DB032E /* RootViewController.swift in Sources */,
+				6A9634DD2DE2D1ED00EAC49D /* CommunityMainViewModel.swift in Sources */,
 				AC579B762C53B2B100D1C9FC /* DetailPolicyInterface.swift in Sources */,
 				AC604BDF2C63A7F800804950 /* CommunityLayout.swift in Sources */,
 				AC579B582C45284A00D1C9FC /* PolicyQeury.swift in Sources */,

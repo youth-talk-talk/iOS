@@ -31,14 +31,12 @@ struct RPDTO: Decodable {
     let title: String
     let content: String?
     let writerID: Int?
-    let scraps: Int
-    let scrap: Bool
+    let scraps: Int?
+    let scrap: Bool 
     let comments: Int
-    let policyId: String?
+    let contentPreview: String?
+    let policyId: Int?
     let policyTitle: String?
-    
-    func translateEntity() -> RPEntity {
-        
-        return RPEntity(postId: postId, title: title, content: content ?? "", writerID: writerID, scraps: scraps, scrap: scrap, comments: comments, policyId: policyId, policyTitle: policyTitle)
-    }
+    let category: String?
+    let createAt: String?
 }
