@@ -8,6 +8,11 @@
 import UIKit
 
 final class NewMyPageViewController: RootViewController {
+    
+    private var myInfo: MeDTO?
+    
+    private let viewModel = MyPageViewModel()
+    
     private let titleLabel = UILabel().then {
         $0.designed(text: "마이페이지", font: .p18Semi)
     }
@@ -15,13 +20,7 @@ final class NewMyPageViewController: RootViewController {
     private let profileImageView = UIImageView(image: .profileLogo)
     
     private let nameLabel = UILabel().then {
-        $0.designed(text: "유저닉네임", font: .p18Semi)
-    }
-    
-    private let snsImageView = UIImageView(image: .kakao)
-    
-    private let emailLabel = UILabel().then {
-        $0.designed(text: "유저 이메일", font: .p12Regular)
+        $0.designed(font: .p18Semi)
     }
     
     private let rightArrowImageView = UIImageView(image: .chevronRight.withTintColor(.gray100))
@@ -66,7 +65,8 @@ final class NewMyPageViewController: RootViewController {
         super.viewDidLoad()
         
         rightArrowImageView.onTapped { [weak self] in
-            let vc = EditMyInfoViewController()
+            guard let myInfo = self?.myInfo else { return }
+            let vc = EditMyInfoViewController(myInfo, self!.viewModel)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -79,12 +79,19 @@ final class NewMyPageViewController: RootViewController {
         setMenuViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.getMyInfo { [weak self] myInfo in
+            DispatchQueue.main.async {
+                self?.nameLabel.text = myInfo.data.nickname
+                self?.myInfo = myInfo
+            }
+        }
+    }
+    
     private func setLayout() {
         view.addSubviews(titleLabel,
                          profileImageView,
                          nameLabel,
-                         snsImageView,
-                         emailLabel,
                          rightArrowImageView,
                          scrapView,
                          notiView,
@@ -113,18 +120,7 @@ final class NewMyPageViewController: RootViewController {
         
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImageView.snp.trailing).offset(moderate(10))
-            $0.top.equalTo(profileImageView).offset(moderate(5))
-        }
-        
-        snsImageView.snp.makeConstraints {
-            $0.leading.equalTo(nameLabel)
-            $0.size.equalTo(moderate(16))
-            $0.bottom.equalTo(profileImageView).offset(moderate(-6))
-        }
-        
-        emailLabel.snp.makeConstraints {
-            $0.centerY.equalTo(snsImageView)
-            $0.leading.equalTo(snsImageView.snp.trailing).offset(moderate(6))
+            $0.centerY.equalTo(profileImageView)
         }
         
         rightArrowImageView.snp.makeConstraints {

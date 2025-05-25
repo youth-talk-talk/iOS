@@ -18,7 +18,7 @@ class APIInterceptor: RequestInterceptor {
         
         var adaptedRequest = urlRequest
         let accessToken = keyChainHelper.loadTokenInfo(type: .accessToken)
-        print("|| [Access Token] \(accessToken)")
+        print("[Access Token] \(accessToken)")
         adaptedRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
         completion(.success(adaptedRequest))
@@ -56,9 +56,18 @@ class APIInterceptor: RequestInterceptor {
                 completion(.retry)
                 
             case .failure:
-                
                 print("❗️ 엑세스 토큰 재발급 실패")
-                completion(.doNotRetryWithError(error))
+                // MARK: 로그인 페이지로 이동
+                let uc = SignInUseCaseImpl()
+                let vm = SignInViewModel(signInUseCase: uc)
+                let vc = SignInViewController(viewModel: vm)
+                
+                guard let sceneDelegate = UIApplication.shared.connectedScenes
+                        .first?.delegate as? SceneDelegate else { return }
+
+                let nav = UINavigationController(rootViewController: vc)
+                sceneDelegate.window?.rootViewController = nav
+                sceneDelegate.window?.makeKeyAndVisible()
             }
         }
     }
