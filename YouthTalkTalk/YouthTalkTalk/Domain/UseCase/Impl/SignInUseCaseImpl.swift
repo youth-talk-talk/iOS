@@ -48,9 +48,6 @@ final class SignInUseCaseImpl: NSObject, SignInUseCase {
         
         return convertedData
     }
-}
-
-extension SignInUseCaseImpl {
     
     // 카카오 SDK 로그인 요청 - 앱으로 시도
     private func kakaoAppLoginRequest() {
@@ -122,16 +119,19 @@ extension SignInUseCaseImpl {
             }.disposed(by: disposeBag)
         
     }
-}
-
-// MARK: 카카오 관련 로직
-extension SignInUseCaseImpl {
     
     private func getKakaoUserIdentifier(user: User) -> String {
         
         guard let id = user.id else { return "" }
-        
+        userDefaults.set(String(id), forKey: "kakaoId")
         return String(id)
+    }
+}
+
+extension SignInUseCaseImpl: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        // 적절한 UIWindow를 반환해야 함
+        return UIApplication.shared.windows.first { $0.isKeyWindow } ?? UIWindow()
     }
 }
 
@@ -147,8 +147,9 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
+        controller.presentationContextProvider = self
         controller.performRequests()
-        
+
         return appleSignIn
     }
     
@@ -161,12 +162,10 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
             .subscribe(with: self) { owner, result in
                 
                 switch result {
-                case .success(let userData):
-                    
+                case .success:
                     // 로그인 처리 -> 홈화면 이동
                     owner.appleSignIn.accept(true)
-                case .failure(let error):
-                    
+                case .failure:
                     // 회원가입 -> 약관 동의 페이지 이동
                     owner.userDefaults.saveSignUpType(signUpType: .apple)
                     owner.appleSignIn.accept(false)
@@ -174,12 +173,8 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
             }.disposed(by: disposeBag)
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        
-    }
-    
     private func requestSignInApple(credentials: ASAuthorizationAppleIDCredential) -> Single<Result<SignInEntity, APIError>> {
-        
+
         let userIdentifier = credentials.user
         let identityToken = tokenToString(data: credentials.identityToken)
         let authorizationCode = tokenToString(data: credentials.authorizationCode)
@@ -188,7 +183,7 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
         keyChainHelper.saveAppleInfo(saveData: userIdentifier, type: .appleIdentifier)
         keyChainHelper.saveAppleInfo(saveData: identityToken, type: .appleIdentifierToken)
         keyChainHelper.saveAppleInfo(saveData: authorizationCode, type: .authorizationCode)
-        
+
         return signInRepository.requestAppleSignIn(userIdentifier: userIdentifier,
                                                    authorizationCode: authorizationCode,
                                                    identityToken: identityToken)
@@ -197,12 +192,9 @@ extension SignInUseCaseImpl: ASAuthorizationControllerDelegate {
             switch result {
                 
             case .success(let signInDTO):
-                let signInEntity = Mapper.mapSingIn(dto: signInDTO)
-                
-                return .success(signInEntity)
+                return .success(Mapper.mapSingIn(dto: signInDTO))
                 
             case .failure(let error):
-                
                 return .failure(error)
             }
         }

@@ -108,6 +108,8 @@ final class PolicyMainViewController: UIViewController {
                 self?.selectionRegionLabel.text = region
             }
         }
+        
+        tabBarController?.tabBar.isHidden = false
     }
                          
     override func viewDidLoad() {
@@ -435,6 +437,19 @@ extension PolicyMainViewController: UICollectionViewDelegate, UICollectionViewDa
             
         } else {
             return moderate(10)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == seePolicyCollectionView {
+            let policyId = viewModel.seePolicies[indexPath.row].policyId
+            let vc = PolicyDetailViewController(policyId: String(policyId))
+            navigationController?.pushViewController(vc, animated: true)
+            
+        } else if collectionView == endPolicyCollectionView {
+            let policyId = viewModel.endPolicies[indexPath.row].policyId
+            let vc = PolicyDetailViewController(policyId: String(policyId))
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

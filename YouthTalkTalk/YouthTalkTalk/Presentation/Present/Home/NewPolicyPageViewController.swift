@@ -34,6 +34,12 @@ final class NewPolicyPageViewController: UIViewController {
             view.setData(policy)
             
             stackView.addArrangedSubview(view)
+            
+            view.onTapped { [weak self] in
+                let policyId = policy.policyId
+                let vc = PolicyDetailViewController(policyId: String(policyId))
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
 
             view.snp.makeConstraints {
                 $0.leading.trailing.equalToSuperview()

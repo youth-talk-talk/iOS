@@ -214,16 +214,16 @@ final class CreatePostViewController: RootViewController {
     }
     
     private func checkUploadButtonValid() {
-        writePostLabel.backgroundColor = isUploadValid() ? .lime40 : FontColor.gray20.value
+        writePostLabel.textColor = isUploadValid() ? .lime60 : FontColor.gray20.value
     }
     
     private func showAlertGoToSetting() {
-//        showAlertView("현재 카메라 사용에 대한 접근 권한이 없습니다.") {
-//            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
-//                UIApplication.shared.canOpenURL(settingURL)
-//            else { return }
-//            UIApplication.shared.open(settingURL, options: [:])
-//        }
+        showAlert(title: "현재 카메라 사용에 대한 접근 권한이 없습니다.", content: "권한을 확인해주세요!", onAction: {
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
+                  UIApplication.shared.canOpenURL(settingURL)
+            else { return }
+            UIApplication.shared.open(settingURL, options: [:])
+        })
     }
     
     private func layout() {
@@ -305,7 +305,7 @@ final class CreatePostViewController: RootViewController {
         }
         
         searchPolicyView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }

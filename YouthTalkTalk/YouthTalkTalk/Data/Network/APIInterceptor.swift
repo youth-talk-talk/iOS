@@ -55,19 +55,28 @@ class APIInterceptor: RequestInterceptor {
                 // 새로 발급 받은 엑세스 토큰과 리프레쉬 토큰을 저장해서 다시 시도
                 completion(.retry)
                 
-            case .failure:
+            case .failure(let error):
                 print("❗️ 엑세스 토큰 재발급 실패")
-                // MARK: 로그인 페이지로 이동
-                let uc = SignInUseCaseImpl()
-                let vm = SignInViewModel(signInUseCase: uc)
-                let vc = SignInViewController(viewModel: vm)
-                
-                guard let sceneDelegate = UIApplication.shared.connectedScenes
-                        .first?.delegate as? SceneDelegate else { return }
 
-                let nav = UINavigationController(rootViewController: vc)
-                sceneDelegate.window?.rootViewController = nav
-                sceneDelegate.window?.makeKeyAndVisible()
+                // 로그인 실패 시 회원가입 api를 호출하기 위한 조건
+                if !((response.response?.url?.absoluteString.contains("members/me")) != nil) {
+                    print("❗️ 엑세스 토큰 재발급 실패하여 초기페이지(로그인)로 이동")
+                    // MARK: 로그인 페이지로 이동
+                    let uc = SignInUseCaseImpl()
+                    let vm = SignInViewModel(signInUseCase: uc)
+                    let vc = SignInViewController(viewModel: vm)
+                    
+                    guard let sceneDelegate = UIApplication.shared.connectedScenes
+                        .first?.delegate as? SceneDelegate else { return }
+                    
+                    let nav = UINavigationController(rootViewController: vc)
+                    sceneDelegate.window?.rootViewController = nav
+                    sceneDelegate.window?.makeKeyAndVisible()
+                    
+                } else {
+                    // 회원가입을 위한 실패
+                    completion(.doNotRetryWithError(error))
+                }
             }
         }
     }

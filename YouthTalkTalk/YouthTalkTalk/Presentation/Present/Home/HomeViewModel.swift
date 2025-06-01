@@ -16,6 +16,7 @@ final class HomeViewModel {
     
     private(set) var allPopularPolicies: [PolicyDTO] = []
     private(set) var popularPolicies: [PolicyDTO] = []
+    private(set) var newAllPolicies: [String: [PolicyDTO]] = [:]
     private(set) var newPolicies: [PolicyDTO] = []
     private(set) var policiesWithReviews: [PolicyWithReviewsDTO] = []
     private(set) var bestPosts: [BestPostDTO] = []
@@ -58,6 +59,7 @@ final class HomeViewModel {
                 type: NewPolicyDTO.self)
             switch result {
             case .success(let response):
+                newAllPolicies = response.data
                 newPolicies = response.data["ALL"] ?? []
                 onReloadData?()
                 
@@ -65,6 +67,11 @@ final class HomeViewModel {
                 onError?(error)
             }
         }
+    }
+    
+    func setNewPoliciesByCategory(category: String) {
+        newPolicies = newAllPolicies[category] ?? newPolicies
+        onReloadData?()
     }
     
     private func getHomePolicies() {

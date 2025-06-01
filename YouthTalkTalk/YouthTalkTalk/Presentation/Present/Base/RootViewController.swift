@@ -32,10 +32,12 @@ class RootViewController: UIViewController {
     
     private let alertTitleLabel = UILabel().then {
         $0.designed(font: .p16SemiBold)
+        $0.numberOfLines = 0
     }
     
     private let alertContentLabel = UILabel().then {
         $0.designed(font: .p14Regular)
+        $0.numberOfLines = 0
     }
     
     private let alertButtonStackView = UIStackView().then {
@@ -99,6 +101,7 @@ class RootViewController: UIViewController {
                    content: String,
                    cancelText: String? = nil,
                    actionText: String? = nil,
+                   actionColor: UIColor = .greenNormal,
                    onCancel: (() -> Void)? = nil,
                    onAction: (() -> Void)? = nil) {
         
@@ -106,7 +109,8 @@ class RootViewController: UIViewController {
             .compactMap({ $0 as? UIWindowScene })
             .flatMap({ $0.windows })
             .first(where: { $0.isKeyWindow }) else { return }
-
+        
+        alertActionButton.backgroundColor = actionColor
         
         if alertDimView.superview == nil {
             window.addSubview(alertDimView)
@@ -169,5 +173,25 @@ class RootViewController: UIViewController {
             $0.bottom.equalToSuperview().inset(moderate(24))
             $0.height.equalTo(moderate(46))
         }
+    }
+    
+    func goLoginPage() {
+        // MARK: 로그아웃/탈퇴 전 토큰 제거
+        let keyChainHelper = KeyChainHelper()
+        
+        keyChainHelper.deleteTokenInfo(type: .accessToken)
+        keyChainHelper.deleteTokenInfo(type: .refreshToken)
+        
+        // MARK: 로그인 페이지로 이동
+        let uc = SignInUseCaseImpl()
+        let vm = SignInViewModel(signInUseCase: uc)
+        let vc = SignInViewController(viewModel: vm)
+        
+        guard let sceneDelegate = UIApplication.shared.connectedScenes
+                .first?.delegate as? SceneDelegate else { return }
+
+        let nav = UINavigationController(rootViewController: vc)
+        sceneDelegate.window?.rootViewController = nav
+        sceneDelegate.window?.makeKeyAndVisible()
     }
 }

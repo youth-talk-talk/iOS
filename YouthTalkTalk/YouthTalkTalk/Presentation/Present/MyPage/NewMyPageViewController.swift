@@ -49,7 +49,10 @@ final class NewMyPageViewController: RootViewController {
         $0.backgroundColor = .gray30
     }
     
-    private let menuScrollView = UIScrollView()
+    private let menuScrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.contentInset.bottom = moderate(30)
+    }
     
     private let menuStackView = UIStackView().then {
         $0.axis = .vertical
@@ -175,12 +178,11 @@ final class NewMyPageViewController: RootViewController {
         menuScrollView.snp.makeConstraints {
             $0.top.equalTo(scrapView.snp.bottom).offset(moderate(24))
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(moderate(30))
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         menuStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.edges.width.equalToSuperview()
         }
     }
     
@@ -251,7 +253,7 @@ final class NewMyPageViewController: RootViewController {
         // 관리 메뉴
         [("약관 및 정책", UIViewController()),
          ("문의하기", UIViewController()),
-         ("기타 관리", UIViewController())].forEach { title, moveToVC in
+         ("기타 관리", SettingViewController())].forEach { title, moveToVC in
             let menuView = self.titleArrowView(text: title, onTapped: { [weak self] in
                 self?.navigationController?.pushViewController(moveToVC, animated: true)
             })
@@ -265,8 +267,10 @@ final class NewMyPageViewController: RootViewController {
         }
     }
     
-    private func titleArrowView(text: String, onTapped: () -> Void) -> UIView {
+    private func titleArrowView(text: String, onTapped: @escaping () -> Void) -> UIView {
         let view = UIView()
+        
+        view.onTapped { onTapped() }
         
         let titleLabel = UILabel().then {
             $0.designed(text: text, font: .p16Regular16, textColor: .gray90)

@@ -125,7 +125,8 @@ final class SignInViewController: UIViewController {
             SceneDelegate.makeRootVC()
             
         } else { // 로그인 실패 시 회원가입 이동
-            
+            let vc = TermViewController()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

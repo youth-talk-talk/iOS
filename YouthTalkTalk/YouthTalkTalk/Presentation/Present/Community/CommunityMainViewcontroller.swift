@@ -246,5 +246,6 @@ extension CommunityMainViewcontroller: UIPageViewControllerDelegate, UIPageViewC
               let index = pages.firstIndex(of: currentVC) else { return }
         
         currentIndex = index
+        moveIndicator(to: index == 0 ? reviewLabel : freeLabel)
     }
 }

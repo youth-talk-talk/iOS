@@ -55,7 +55,8 @@ final class NewPolicyView: UIView {
     
     let tagStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.spacing = 8    }
+        $0.spacing = 8
+    }
     
     let scrapImageView = UIImageView(image: .bookmarkLine)
     

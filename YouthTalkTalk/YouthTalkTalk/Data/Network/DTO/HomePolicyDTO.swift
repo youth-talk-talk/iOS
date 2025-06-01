@@ -39,7 +39,7 @@ struct PolicyDTO: Decodable, Equatable {
     let category: String
     let title: String
     let deadlineStatus: String
-    let hostDep: String
+    let hostDep: String?
     let scrap: Bool
     let scrapCount: Int
     var region: String?

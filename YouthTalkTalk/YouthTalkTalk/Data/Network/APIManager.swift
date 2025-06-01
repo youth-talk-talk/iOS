@@ -54,13 +54,12 @@ final class APIManager: APIInterface {
             
             guard let self else { return Disposables.create() }
             
-            session.request(router, interceptor: interceptor).validate(statusCode: 200 ... 399)
+            session.request(router, interceptor: interceptor).validate(statusCode: 200 ... 900)
                 .responseDecodable(of: type.self) { response in
                     
                     switch response.result {
                         
                     case .success(let success):
-                        
                         self.handleResponseHeaders(response.response)
                         single(.success(.success(success)))
                         

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class CommunityPageViewController: UIViewController {
     
@@ -20,8 +21,10 @@ final class CommunityPageViewController: UIViewController {
     
     private let containerView = UIView()
     
+    private var postCollectionViewTopConstraint: Constraint?
+    
     private let titleLabel = UILabel().then {
-        $0.designed(text: "🔥 인기 후기 게시물", font: .p16SemiBold)
+        $0.designed(font: .p16SemiBold)
     }
     
     private lazy var popularPostCollectionView = makeCollectionView(layout: popularLayout()).then {
@@ -42,7 +45,6 @@ final class CommunityPageViewController: UIViewController {
     
     private lazy var postCollectionView = makeCollectionView(layout: postListLayout()).then {
         $0.register(cells: NewPostCell.self)
-        $0.contentInset.top = moderate(52)
     }
     
     override func viewDidLoad() {
@@ -92,7 +94,7 @@ final class CommunityPageViewController: UIViewController {
         }
         
         postCollectionView.snp.makeConstraints {
-            $0.top.equalTo(dividerView.snp.bottom)
+            postCollectionViewTopConstraint = $0.top.equalTo(dividerView.snp.bottom).constraint
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.greaterThanOrEqualTo(400)
         }
@@ -106,7 +108,13 @@ final class CommunityPageViewController: UIViewController {
         postCollectionView.reloadData()
         
         filterCollectionView.isHidden = type == .free
-        postCollectionView.contentInset.top = (type == .free) ? 0 : moderate(52)
+        titleLabel.text = type == .free ? "🔥 인기 자유 게시물" : "🔥 인기 후기 게시물"
+        
+        if type == .free {
+            postCollectionViewTopConstraint?.update(offset: 0)
+        } else {
+            postCollectionViewTopConstraint?.update(offset: moderate(20) + moderate(32))
+        }
     }
     
     private func makeCollectionView(layout: UICollectionViewLayout) -> UICollectionView {

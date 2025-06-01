@@ -40,13 +40,18 @@ final class WriteNickNameViewController: RootViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         
+        nextButton.onTapped { [weak self] in
+            let vc = SelectRegionViewController(name: self?.nickNameTextField.text ?? "")
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         view.addSubview(titleLabel)
         view.addSubview(subTitleLabel)
         view.addSubview(nickNameTextField)
         view.addSubview(nextButton)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(backImageView.snp.bottom).offset(moderate(20))
             $0.leading.equalToSuperview().inset(16)
         }
         

@@ -159,4 +159,10 @@ extension PolicyInfinityPageViewController: UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return moderate(16)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let policyId = policies[indexPath.row].policyId
+        let vc = PolicyDetailViewController(policyId: String(policyId))
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

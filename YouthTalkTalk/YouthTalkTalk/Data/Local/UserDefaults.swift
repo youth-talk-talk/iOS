@@ -118,4 +118,8 @@ extension UserDefaults {
         
         return self.array(forKey: type.key) as? [String] ?? [String]()
     }
+    
+    func getKakaoId() -> String {
+        return self.string(forKey: "kakaoId") as? String ?? ""
+    }
 }
