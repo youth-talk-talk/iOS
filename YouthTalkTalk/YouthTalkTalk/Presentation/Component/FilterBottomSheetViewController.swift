@@ -13,7 +13,6 @@ final class FilterBottomSheetViewController: UIViewController {
   // MARK: - Properties
   private let indicatorView = UIView().then {
     $0.backgroundColor = .gray50
-    $0.layer.cornerRadius = 31
   }
   
   private let titleLabel = UILabel().then {
@@ -60,6 +59,11 @@ final class FilterBottomSheetViewController: UIViewController {
     setupCategories()
     setupPageViewController()
     setupIndicatorBar()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    indicatorView.layer.cornerRadius = indicatorView.bounds.height * 0.7
   }
   
   // MARK: - Layout

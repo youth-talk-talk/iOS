@@ -137,9 +137,9 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
             cell.setTitle(filterTitle)
             
             cell.onTapped { [weak self] in
-                let vc = DetailFilterBottomSheetViewController()
+                let vc = FilterBottomSheetViewController()
                 
-                if let sheet = vc.sheetPresentationController { sheet.detents = [.medium()] }
+              if let sheet = vc.sheetPresentationController { sheet.detents = [.custom { _ in 572 }] }
                 
                 self?.present(vc, animated: true, completion: nil)
             }
