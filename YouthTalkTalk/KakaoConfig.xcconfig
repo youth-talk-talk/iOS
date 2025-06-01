@@ -1,0 +1,10 @@
+//
+//  KakaoConfig.xcconfig
+//  YouthTalkTalk
+//
+//  Created by 이중엽 on 6/26/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+KAKAO_NATIVE_APP_KEY = 5c741e88d33eee9a3f19ce5e95232031

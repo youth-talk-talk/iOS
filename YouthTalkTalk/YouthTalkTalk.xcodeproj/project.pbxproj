@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1380F2772DEAC15E0012F7E5 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1380F2752DEAC15E0012F7E5 /* APIKey.swift */; };
+		1380F2782DEAC15E0012F7E5 /* KakaoConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1380F2762DEAC15E0012F7E5 /* KakaoConfig.xcconfig */; };
 		6A177B9C2DB7A08C0016BF41 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A177B9B2DB7A0870016BF41 /* TermViewController.swift */; };
 		6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */; };
 		6A3BAE9C2DD4125400D1E15F /* NewPolicyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BAE9B2DD4125300D1E15F /* NewPolicyPageViewController.swift */; };
@@ -39,8 +41,6 @@
 		6A7A6F5B2DA5F4A9004C15FA /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */; };
 		6A7A6F5D2DA67CF8004C15FA /* RegionBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5C2DA67CF0004C15FA /* RegionBottomSheetViewController.swift */; };
 		6A7A6F5F2DA67E22004C15FA /* RegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A6F5E2DA67E1E004C15FA /* RegionCell.swift */; };
-		6A8C1DDC2DC4D15200B0624D /* KakaoConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C1DDB2DC4D15200B0624D /* KakaoConfig.xcconfig */; };
-		6A8C1DDD2DC4D15200B0624D /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C1DDA2DC4D15200B0624D /* APIKey.swift */; };
 		6A8C1DDF2DC5AFEC00B0624D /* NewMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C1DDE2DC5AFE800B0624D /* NewMyPageViewController.swift */; };
 		6A90810B2CEDF3AD00B52C91 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6A90810A2CEDF3AD00B52C91 /* BSImagePicker */; };
 		6A90810D2CEDF3C700B52C91 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */; };
@@ -310,6 +310,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1380F2752DEAC15E0012F7E5 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		1380F2762DEAC15E0012F7E5 /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 		6A177B9B2DB7A0870016BF41 /* TermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewController.swift; sourceTree = "<group>"; };
 		6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedOrMyCommentListViewController.swift; sourceTree = "<group>"; };
 		6A3BAE9B2DD4125300D1E15F /* NewPolicyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPolicyPageViewController.swift; sourceTree = "<group>"; };
@@ -341,8 +343,6 @@
 		6A7A6F5A2DA5F48D004C15FA /* SelectRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
 		6A7A6F5C2DA67CF0004C15FA /* RegionBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionBottomSheetViewController.swift; sourceTree = "<group>"; };
 		6A7A6F5E2DA67E1E004C15FA /* RegionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCell.swift; sourceTree = "<group>"; };
-		6A8C1DDA2DC4D15200B0624D /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		6A8C1DDB2DC4D15200B0624D /* KakaoConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KakaoConfig.xcconfig; sourceTree = "<group>"; };
 		6A8C1DDE2DC5AFE800B0624D /* NewMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMyPageViewController.swift; sourceTree = "<group>"; };
 		6A90810C2CEDF3C700B52C91 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6A90810E2CEEA3EA00B52C91 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
@@ -853,8 +853,8 @@
 		AC5A7BE52BF0FDB500A13991 = {
 			isa = PBXGroup;
 			children = (
-				6A8C1DDA2DC4D15200B0624D /* APIKey.swift */,
-				6A8C1DDB2DC4D15200B0624D /* KakaoConfig.xcconfig */,
+				1380F2752DEAC15E0012F7E5 /* APIKey.swift */,
+				1380F2762DEAC15E0012F7E5 /* KakaoConfig.xcconfig */,
 				AC5A7BF02BF0FDB500A13991 /* YouthTalkTalk */,
 				AC5A7C072BF0FDB700A13991 /* YouthTalkTalkTests */,
 				AC5A7C112BF0FDB700A13991 /* YouthTalkTalkUITests */,
@@ -1650,7 +1650,7 @@
 				ACF2A2772C2451DD00FE8D63 /* GmarketSansBold.otf in Resources */,
 				AC5A7BFE2BF0FDB600A13991 /* Base in Resources */,
 				AC4B42F52C18904F005FC370 /* Pretendard-Regular.otf in Resources */,
-				6A8C1DDC2DC4D15200B0624D /* KakaoConfig.xcconfig in Resources */,
+				1380F2782DEAC15E0012F7E5 /* KakaoConfig.xcconfig in Resources */,
 				AC4B42F42C18904F005FC370 /* Pretendard-SemiBold.otf in Resources */,
 				6A5B05A42DB74EB10096F608 /* splash.json in Resources */,
 				AC604C652C79F83500804950 /* GmarketSansMedium.otf in Resources */,
@@ -1733,6 +1733,7 @@
 				AC4B43162C1D7036005FC370 /* TermsView.swift in Sources */,
 				AC579B3D2C3E7E9B00D1C9FC /* MeDTO.swift in Sources */,
 				AC579B342C3D707200D1C9FC /* RecentSearchLayout.swift in Sources */,
+				1380F2772DEAC15E0012F7E5 /* APIKey.swift in Sources */,
 				6A753C232CEC77F1009A4D40 /* SearchPolicyView.swift in Sources */,
 				ACF2A2732C229DBB00FE8D63 /* CategoryButtonHeaderView.swift in Sources */,
 				6A90810F2CEEA3EA00B52C91 /* AddPhotoView.swift in Sources */,
@@ -1844,7 +1845,6 @@
 				ACF2A2E62C31432200FE8D63 /* DebugViewController.swift in Sources */,
 				AC579B692C51349A00D1C9FC /* PolicyViewController.swift in Sources */,
 				ACF2A28D2C2822E400FE8D63 /* SignInInput.swift in Sources */,
-				6A8C1DDD2DC4D15200B0624D /* APIKey.swift in Sources */,
 				AC4B43032C19C829005FC370 /* Flex++.swift in Sources */,
 				ACF2A2F22C31613200FE8D63 /* SignInRouter.swift in Sources */,
 				ACF2A3202C37D27700FE8D63 /* SignUpDTO.swift in Sources */,
