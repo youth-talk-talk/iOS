@@ -23,7 +23,8 @@ enum FontType {
     
     case p14Bold
     case p14Regular
-    
+    case p14SemiBold
+  
     case p12Bold
     case p12Regular
     
@@ -108,6 +109,10 @@ final class FontManager {
         case .p16Bold:
             fontWeight = "Bold"
             fontSize = 16
+          
+        case .p14SemiBold:
+          fontWeight = "SemiBold"
+          fontSize = 14
             
         case .p16SemiBold:
             fontWeight = "SemiBold"
@@ -198,6 +203,8 @@ final class FontManager {
             lineHeight = 24
         case .g18Medium:
             lineHeight = 24
+        case .p14SemiBold:
+          lineHeight = 24
         }
         
         return lineHeight
