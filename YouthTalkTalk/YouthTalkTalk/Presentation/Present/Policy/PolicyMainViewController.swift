@@ -40,6 +40,8 @@ final class PolicyMainViewController: UIViewController {
         $0.register(cells: PolicyCell.self)
     }
     
+    private lazy var seePolicyEmptyView = EmptyView(text: "최근에 본 정책이 없어요.")
+    
     private let dividerView = UIView().then {
         $0.backgroundColor = .gray30
     }
@@ -64,6 +66,8 @@ final class PolicyMainViewController: UIViewController {
         $0.backgroundColor = .gray30
     }
     
+    private lazy var endPolicyEmptyView = EmptyView(text: "마감 예정인 정책이 없어요.")
+    
     // MARK: 모든 정책 보기
     private let allPolicyHeaderView = TitleArrowView(text: "모든 정책 한눈에 보기")
     
@@ -83,7 +87,7 @@ final class PolicyMainViewController: UIViewController {
     
     private var filterTitleLabels: [UILabel] = []
     
-    private let indicatorBar = UIView().then {
+    private let allPolicyIndicatorBar = UIView().then {
         $0.backgroundColor = .greenNormal
     }
     
@@ -95,7 +99,7 @@ final class PolicyMainViewController: UIViewController {
     }
     
     private var allPolicycurrentIndex: Int = 0
-    private let allPolicyfilters = ["전체", "주거", "교육", "일자리", "복지", "참여"]
+    private let allPolicyfilters: [PolicyCategory] = PolicyCategory.allCases
     private lazy var allPolicypages: [UIViewController] = allPolicyfilters.map { _ in PolicyInfinityPageViewController() }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,12 +108,29 @@ final class PolicyMainViewController: UIViewController {
                 self?.selectionRegionLabel.text = region
             }
         }
+        
+        tabBarController?.tabBar.isHidden = false
     }
                          
     override func viewDidLoad() {
         view.backgroundColor = .white
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        viewModel.onReloaded = { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                
+                seePolicyCollectionView.reloadData()
+                seePolicyEmptyView.isHidden = !viewModel.seePolicies.isEmpty
+                
+                endPolicyCollectionView.reloadData()
+                endPolicyEmptyView.isHidden = !viewModel.endPolicies.isEmpty
+                
+                let showedVC = allPolicypages[allPolicycurrentIndex] as? PolicyInfinityPageViewController
+                showedVC?.reloadData(policies: viewModel.allPolicies)
+            }
+        }
         
         // MARK: 지역 선택
         [regionTipImageView, selectionRegionLabel, regionDownArrowImageView].forEach {
@@ -133,18 +154,22 @@ final class PolicyMainViewController: UIViewController {
         }
         
         setLayout()
-        setupFilterTitles()
-        setupIndicatorBar()
+        setAllPolicyFilterTitles()
+        setAllPolicyIndicatorBar()
+        
+        viewModel.getSeePolicies()
+        viewModel.getEndPolicies()
+        viewModel.getAllPolicy()
     }
     
-    private func setupFilterTitles() {
-        for (index, title) in allPolicyfilters.enumerated() {
+    private func setAllPolicyFilterTitles() {
+        for (index, filter) in allPolicyfilters.enumerated() {
             let filterLabel = UILabel().then {
                 if index == 0 {
-                    $0.designed(text: title, font: .p14Bold, textColor: .green)
+                    $0.designed(text: filter.name, font: .p14Bold, textColor: .green)
                     
                 } else {
-                    $0.designed(text: title, font: .p14Regular, textColor: .gray70)
+                    $0.designed(text: filter.name, font: .p14Regular, textColor: .gray70)
                 }
             }
             
@@ -155,7 +180,8 @@ final class PolicyMainViewController: UIViewController {
                 allPolicyPageViewController.setViewControllers([allPolicypages[index]], direction: direction, animated: true)
                 
                 allPolicycurrentIndex = index
-                moveIndicator(to: filterLabel)
+                moveAllPolicyIndicator(to: filterLabel)
+                viewModel.selectedCategory = allPolicyfilters[allPolicycurrentIndex]
             }
             
             filterTitleStackView.addArrangedSubview(filterLabel)
@@ -163,18 +189,18 @@ final class PolicyMainViewController: UIViewController {
         }
     }
 
-    private func setupIndicatorBar() {
+    private func setAllPolicyIndicatorBar() {
         guard let firstLabel = filterTitleLabels.first else { return }
         
-        indicatorBar.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
-            $0.height.equalTo(2)
+        allPolicyIndicatorBar.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(moderate(38))
+            $0.height.equalTo(moderate(2))
             $0.width.equalTo(firstLabel)
             $0.centerX.equalTo(firstLabel)
         }
     }
 
-    private func moveIndicator(to label: UILabel) {
+    private func moveAllPolicyIndicator(to label: UILabel) {
         filterTitleLabels.forEach {
             if $0 == label {
                 $0.designed(text: $0.text ?? "", font: .p14Bold, textColor: .green)
@@ -184,9 +210,9 @@ final class PolicyMainViewController: UIViewController {
             }
         }
         
-        indicatorBar.snp.remakeConstraints {
-            $0.top.equalToSuperview().inset(38)
-            $0.height.equalTo(2)
+        allPolicyIndicatorBar.snp.remakeConstraints {
+            $0.top.equalToSuperview().inset(moderate(38))
+            $0.height.equalTo(moderate(2))
             $0.width.equalTo(label)
             $0.centerX.equalTo(label)
         }
@@ -206,8 +232,8 @@ final class PolicyMainViewController: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = .white
-            $0.contentInset.left = 16
-            $0.contentInset.right = 16
+            $0.contentInset.left = moderate(16)
+            $0.contentInset.right = moderate(16)
             $0.showsHorizontalScrollIndicator = false
         }
         
@@ -229,12 +255,14 @@ final class PolicyMainViewController: UIViewController {
         containerView.addSubview(seePolicyLabel)
         containerView.addSubview(seePolicyArrowImageView)
         containerView.addSubview(seePolicyCollectionView)
+        containerView.addSubview(seePolicyEmptyView)
         containerView.addSubview(dividerView)
         
         // 곧 마감되는 정책
         containerView.addSubview(endPolicyHeaderView)
         containerView.addSubview(endPolicyCollectionView)
         containerView.addSubview(endPolicyListCollectionView)
+        containerView.addSubview(endPolicyEmptyView)
         containerView.addSubview(dividerView2)
         
         // 모든 정책 보기
@@ -243,7 +271,7 @@ final class PolicyMainViewController: UIViewController {
         containerView.addSubview(allPolicyDividerView)
         containerView.addSubview(allPolicyPageViewController.view)
         filterTitleScrollView.addSubview(filterTitleStackView)
-        filterTitleScrollView.addSubview(indicatorBar)
+        filterTitleScrollView.addSubview(allPolicyIndicatorBar)
 
         baseScrollView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -295,6 +323,10 @@ final class PolicyMainViewController: UIViewController {
             $0.height.equalTo(moderate(123))
         }
         
+        seePolicyEmptyView.snp.makeConstraints {
+            $0.center.equalTo(seePolicyCollectionView)
+        }
+        
         dividerView.snp.makeConstraints {
             $0.top.equalTo(seePolicyCollectionView.snp.bottom).offset(moderate(30))
             $0.leading.trailing.equalToSuperview()
@@ -315,7 +347,11 @@ final class PolicyMainViewController: UIViewController {
         endPolicyListCollectionView.snp.makeConstraints {
             $0.top.equalTo(endPolicyCollectionView.snp.bottom).offset(moderate(20))
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
-            $0.height.equalTo(540)
+            $0.height.equalTo(moderate(540))
+        }
+        
+        endPolicyEmptyView.snp.makeConstraints {
+            $0.center.equalTo(endPolicyListCollectionView)
         }
         
         dividerView2.snp.makeConstraints {
@@ -349,8 +385,8 @@ final class PolicyMainViewController: UIViewController {
         allPolicyPageViewController.view.snp.makeConstraints {
             $0.top.equalTo(filterTitleStackView.snp.bottom).offset(moderate(10))
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
-            $0.height.greaterThanOrEqualTo(moderate(600))
-            $0.bottom.equalToSuperview().inset(moderate(30))
+            $0.height.equalTo(moderate(600))
+            $0.bottom.equalToSuperview()
         }
     }
 }
@@ -358,23 +394,38 @@ final class PolicyMainViewController: UIViewController {
 extension PolicyMainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == endPolicyListCollectionView {
-            return 4
+            return viewModel.endPolicies.count
+        } else if collectionView == seePolicyCollectionView {
+            return viewModel.seePolicies.count
+        } else if collectionView == endPolicyCollectionView {
+            return viewModel.date.count
         } else {
-            return 7
+            return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == seePolicyCollectionView || collectionView == endPolicyListCollectionView {
+        if collectionView == seePolicyCollectionView {
             guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
             cell.setStyle(.border)
+            cell.setData(viewModel.seePolicies[indexPath.row])
             
             return cell
+            
+        } else if collectionView == endPolicyListCollectionView {
+            guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
+            
+            cell.setStyle(.border)
+            cell.setData(viewModel.endPolicies[indexPath.row])
+            
+            return cell
+            
         } else {
             guard let cell: PolicyDateCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
             cell.changeGreen(indexPath.row == 0)
+            cell.setData(date: viewModel.date[indexPath.row])
             
             return cell
         }
@@ -386,6 +437,19 @@ extension PolicyMainViewController: UICollectionViewDelegate, UICollectionViewDa
             
         } else {
             return moderate(10)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == seePolicyCollectionView {
+            let policyId = viewModel.seePolicies[indexPath.row].policyId
+            let vc = PolicyDetailViewController(policyId: String(policyId))
+            navigationController?.pushViewController(vc, animated: true)
+            
+        } else if collectionView == endPolicyCollectionView {
+            let policyId = viewModel.endPolicies[indexPath.row].policyId
+            let vc = PolicyDetailViewController(policyId: String(policyId))
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
@@ -406,6 +470,7 @@ extension PolicyMainViewController: UIPageViewControllerDelegate, UIPageViewCont
               let index = allPolicypages.firstIndex(of: currentVC) else { return }
         
         allPolicycurrentIndex = index
-        moveIndicator(to: filterTitleLabels[index])
+        moveAllPolicyIndicator(to: filterTitleLabels[index])
+        viewModel.selectedCategory = allPolicyfilters[allPolicycurrentIndex]
     }
 }

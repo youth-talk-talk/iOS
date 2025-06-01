@@ -70,6 +70,11 @@ final class TermViewController: RootViewController {
             arrowImageView.image = isTermVisible ? .arrowUpBlack : .arrowDown.withTintColor(.black)
         }
         
+        nextButton.onTapped { [weak self] in
+            let vc = WriteNickNameViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         view.addSubview(titleLabel)
         view.addSubview(checkImageView)
         view.addSubview(termLabel)
@@ -81,7 +86,7 @@ final class TermViewController: RootViewController {
         termContainerView.addSubview(termTextView)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(backImageView.snp.bottom).offset(moderate(20))
             $0.leading.equalToSuperview().inset(16)
         }
         

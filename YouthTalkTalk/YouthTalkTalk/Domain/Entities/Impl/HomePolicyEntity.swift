@@ -19,7 +19,7 @@ struct PolicyEntity: Hashable {
     let category: String
     let title: String
     let deadlineStatus: String
-    let hostDep: String
+    let hostDep: String?
     var scrap: Bool
     
     static func mockupData() -> PolicyEntity {

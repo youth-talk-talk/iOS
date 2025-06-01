@@ -40,12 +40,15 @@ final class SelectRegionViewController: RootViewController {
         $0.isEnabled = false
     }
     
-    init() {
+    private let keyChainHelper: KeyChainHelper = KeyChainHelper()
+    private let userDefaults: UserDefaults = UserDefaults.standard
+    
+    init(name: String) {
         super.init(nibName: nil, bundle: nil)
         
         regionTextField.onTapped { [weak self] in
             let vc = RegionBottomSheetViewController(onRegionTapped: { [weak self] selectedRegion in
-                self?.regionTextField.text = selectedRegion?.displayName
+                self?.regionTextField.text = selectedRegion?.networkName
                 self?.nextButton.isEnabled = selectedRegion != nil
             })
             
@@ -54,13 +57,42 @@ final class SelectRegionViewController: RootViewController {
             self?.present(vc, animated: true, completion: nil)
         }
         
+        nextButton.onTapped { [weak self] in
+            // 회원가입 시작
+            Task {
+                let type = self?.userDefaults.signUpType
+                let kakaoId = self?.userDefaults.getKakaoId()
+                let id = type == .apple ? self?.keyChainHelper.loadAppleInfo(type: .appleIdentifier) : kakaoId
+                let token = type == .apple ? self?.keyChainHelper.loadAppleInfo(type: .appleIdentifierToken) : nil
+                
+
+                let bodyData = SignUpBody(
+                    socialType: type == .apple ? .apple : .kakao,
+                    socialId: id ?? "",
+                    nickname: name,
+                    region: self?.regionTextField.text ?? "",
+                    idToken: token)
+                
+                let result = await APIManager().requestAPI(
+                    router: SignUpRouter.requestAppleSignUp(signUp: bodyData),
+                    type: SignUpDTO.self)
+                switch result {
+                case .success:
+                    self?.navigationController?.popToRootViewController(animated: true)
+                    
+                case .failure:
+                    break
+                }
+            }
+        }
+        
         view.addSubview(titleLabel)
         view.addSubview(subTitleLabel)
         view.addSubview(regionTextField)
         view.addSubview(nextButton)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(backImageView.snp.bottom).offset(moderate(20))
             $0.leading.equalToSuperview().inset(16)
         }
         

@@ -49,7 +49,7 @@ final class PostView: UIView {
         contentLabel.text = post.contentPreview
         commentCountLabel.text = String(post.comments)
         scrapCountLabel.text = String(post.scraps ?? 0)
-        dateLabel.text = String(post.createdAt)
+        dateLabel.text = String(post.createdAt.prefix(10))
         
         addSubviews([postTypeLabel,
                      titleLabel, contentLabel,

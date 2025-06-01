@@ -192,17 +192,13 @@ final class CreatePostViewController: RootViewController {
                                                                                       policyId: "\(selectedPolicyId)",
                                                                                                 contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]), writeType, postId: postData?.postId ?? 0)
             } else {
-//                showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
-//                    self?.alertView.isHidden = true
-//                })
+                showAlert(title: "알림", content: "모두 작성되어야\n게시글 등록이 가능합니다")
             }
         }
         
-//        setBackButtonTapped { [weak self] in
-//            self?.showAlertView("글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다", okAction: { [weak self] in
-//                self?.navigationController?.popViewController(animated: true)
-//            })
-//        }
+        showAlert(title: "알림", content: "글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다") {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func isUploadValid() -> Bool {
@@ -214,16 +210,16 @@ final class CreatePostViewController: RootViewController {
     }
     
     private func checkUploadButtonValid() {
-        writePostLabel.backgroundColor = isUploadValid() ? .lime40 : FontColor.gray20.value
+        writePostLabel.textColor = isUploadValid() ? .lime60 : FontColor.gray20.value
     }
     
     private func showAlertGoToSetting() {
-//        showAlertView("현재 카메라 사용에 대한 접근 권한이 없습니다.") {
-//            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
-//                UIApplication.shared.canOpenURL(settingURL)
-//            else { return }
-//            UIApplication.shared.open(settingURL, options: [:])
-//        }
+        showAlert(title: "현재 카메라 사용에 대한 접근 권한이 없습니다.", content: "권한을 확인해주세요!", onAction: {
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString),
+                  UIApplication.shared.canOpenURL(settingURL)
+            else { return }
+            UIApplication.shared.open(settingURL, options: [:])
+        })
     }
     
     private func layout() {
@@ -238,6 +234,7 @@ final class CreatePostViewController: RootViewController {
         view.addSubview(addPhotoImageView)
         view.addSubview(writePostLabel)
         view.addSubview(addPhotoView)
+        view.addSubview(searchPolicyView)
         
         pageTitleLabel.snp.makeConstraints {
             $0.centerY.equalTo(backImageView)
@@ -300,6 +297,10 @@ final class CreatePostViewController: RootViewController {
         }
         
         addPhotoView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        searchPolicyView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }

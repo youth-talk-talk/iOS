@@ -9,6 +9,11 @@ import UIKit
 
 final class PopularPostCell: UICollectionViewCell {
     
+    private let stackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = moderate(6)
+    }
+    
     private let policyLabel = UILabel().then {
         $0.designed(text: "정책 타이틀", font: .p12Regular)
     }
@@ -40,40 +45,40 @@ final class PopularPostCell: UICollectionViewCell {
         $0.designed(text: "게시글 날짜", font: .p12Regular, textColor: .gray80)
     }
     
+    private let actionView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setShadow()
         
         layer.cornerRadius = moderate(12)
+        addSubview(stackView)
         
-        addSubviews(policyLabel,
-                    titleLabel,
-                    contentLabel,
-                    commentImageView,
-                    commentCountLabel,
-                    scrapImageView,
-                    scrapCountLabel,
-                    dateLabel)
+        stackView.addArrangedSubviews(
+            policyLabel,
+            titleLabel,
+            contentLabel,
+            actionView
+        )
         
-        policyLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(moderate(20))
+        actionView.addSubviews(commentImageView,
+                               commentCountLabel,
+                               scrapImageView,
+                               scrapCountLabel,
+                               dateLabel)
+        
+        stackView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(moderate(20))
             $0.leading.trailing.equalToSuperview().inset(moderate(16))
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(policyLabel.snp.bottom).offset(moderate(6))
-            $0.leading.equalTo(policyLabel)
-            $0.trailing.equalTo(policyLabel)
-        }
-        
-        contentLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(moderate(4))
-            $0.leading.trailing.equalTo(titleLabel)
+        actionView.snp.makeConstraints {
+            $0.height.equalTo(moderate(16))
         }
         
         commentImageView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(moderate(20))
+            $0.centerY.equalToSuperview()
             $0.size.equalTo(moderate(16))
             $0.leading.equalTo(contentLabel)
         }
@@ -84,7 +89,7 @@ final class PopularPostCell: UICollectionViewCell {
         }
         
         scrapImageView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(moderate(20))
+            $0.centerY.equalToSuperview()
             $0.size.equalTo(moderate(16))
             $0.leading.equalTo(commentCountLabel.snp.trailing).offset(moderate(10))
         }
@@ -97,5 +102,14 @@ final class PopularPostCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setData(_ post: RPDTO) {
+        titleLabel.text = post.title
+        policyLabel.text = post.policyTitle
+        policyLabel.isHidden = post.policyId == nil
+        contentLabel.text = post.contentPreview
+        commentCountLabel.text = String(post.comments)
+        scrapCountLabel.text = String(post.scraps ?? 0)
     }
 }

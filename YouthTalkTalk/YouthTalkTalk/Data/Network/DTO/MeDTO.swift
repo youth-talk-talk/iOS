@@ -19,6 +19,7 @@ struct MeDataDTO: Decodable {
     
     let nickname: String
     let email: String?
+    let profileImgUrl: String?
     let region: String
 }
 

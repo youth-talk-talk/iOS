@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import SnapKit
 
 final class CommunityPageViewController: UIViewController {
+    
+    private var hotPosts: [RPDTO] = []
+    private var posts: [RPDTO] = []
+    
+    var onReloadByCategory: ((PolicyCategory) -> Void)?
     
     private let baseScrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
@@ -15,12 +21,13 @@ final class CommunityPageViewController: UIViewController {
     
     private let containerView = UIView()
     
+    private var postCollectionViewTopConstraint: Constraint?
+    
     private let titleLabel = UILabel().then {
-        $0.designed(text: "🔥 인기 후기 게시물", font: .p16SemiBold)
+        $0.designed(font: .p16SemiBold)
     }
     
-    private let popularPostCellSize = CGSize(width: UIScreen.main.bounds.width - moderate(122), height: moderate(155))
-    private lazy var popularPostCollectionView = makeCollectionView(popularPostCellSize).then {
+    private lazy var popularPostCollectionView = makeCollectionView(layout: popularLayout()).then {
         $0.register(cells: PopularPostCell.self)
     }
     
@@ -28,7 +35,7 @@ final class CommunityPageViewController: UIViewController {
         $0.backgroundColor = .gray30
     }
     
-    private let filters = ["전체", "주거", "교육", "일자리", "복지", "참여"]
+    private let filters: [PolicyCategory] = PolicyCategory.allCases
 
     private lazy var filterCollectionView = SearchFilterCollectionView().then {
         $0.delegate = self
@@ -36,10 +43,8 @@ final class CommunityPageViewController: UIViewController {
         $0.register(cells: NewCategoryCell.self)
     }
     
-    private let postCellSize = CGSize(width: UIScreen.main.bounds.width - moderate(32), height: moderate(186))
-    private lazy var postCollectionView = makeCollectionView(postCellSize, direction: .vertical).then {
+    private lazy var postCollectionView = makeCollectionView(layout: postListLayout()).then {
         $0.register(cells: NewPostCell.self)
-        $0.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
@@ -53,8 +58,8 @@ final class CommunityPageViewController: UIViewController {
         containerView.addSubviews(titleLabel,
                                   popularPostCollectionView,
                                   dividerView,
-                                  filterCollectionView,
-                                  postCollectionView)
+                                  postCollectionView,
+                                  filterCollectionView)
         
         baseScrollView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
@@ -89,30 +94,80 @@ final class CommunityPageViewController: UIViewController {
         }
         
         postCollectionView.snp.makeConstraints {
-            $0.top.equalTo(filterCollectionView.snp.bottom).offset(moderate(20))
-            $0.leading.trailing.equalToSuperview()
-            $0.height.greaterThanOrEqualTo(1000)
-            $0.bottom.equalToSuperview().inset(moderate(30))
+            postCollectionViewTopConstraint = $0.top.equalTo(dividerView.snp.bottom).constraint
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.greaterThanOrEqualTo(400)
         }
     }
     
-    private func makeCollectionView(_ itemSize: CGSize, direction: UICollectionView.ScrollDirection = .horizontal) -> UICollectionView {
+    func reloadData(hotPosts: [RPDTO], posts: [RPDTO], type: communityType) {
+        self.hotPosts = hotPosts
+        self.posts = posts
+        
+        popularPostCollectionView.reloadData()
+        postCollectionView.reloadData()
+        
+        filterCollectionView.isHidden = type == .free
+        titleLabel.text = type == .free ? "🔥 인기 자유 게시물" : "🔥 인기 후기 게시물"
+        
+        if type == .free {
+            postCollectionViewTopConstraint?.update(offset: 0)
+        } else {
+            postCollectionViewTopConstraint?.update(offset: moderate(20) + moderate(32))
+        }
+    }
+    
+    private func makeCollectionView(layout: UICollectionViewLayout) -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = direction
-            layout.minimumLineSpacing = moderate(20)
-            layout.itemSize = itemSize
-
             $0.collectionViewLayout = layout
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = .white
-            $0.contentInset.left = moderate(16)
-            $0.contentInset.right = moderate(16)
             $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
         }
         
         return collectionView
+    }
+    
+    private func postListLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { section, environment in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(32)),
+                                                  heightDimension: .estimated(moderate(165)))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(32)),
+                                                   heightDimension: .estimated(moderate(165)))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: moderate(8), leading: moderate(16), bottom: 0, trailing: moderate(16))
+
+            return section
+        }
+        
+        return layout
+    }
+    
+    private func popularLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { section, environment in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(122)),
+                                                  heightDimension: .estimated(moderate(155)))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(122)),
+                                                   heightDimension: .estimated(moderate(155)))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+            let section = NSCollectionLayoutSection(group: group)
+            section.orthogonalScrollingBehavior = .continuous
+            section.interGroupSpacing = 12
+            section.contentInsets = NSDirectionalEdgeInsets(top: moderate(8), leading: moderate(16), bottom: 0, trailing: moderate(16))
+            
+            return section
+        }
+        
+        return layout
     }
 }
 
@@ -121,8 +176,14 @@ extension CommunityPageViewController: UICollectionViewDelegate, UICollectionVie
         if collectionView == filterCollectionView {
             return filters.count
             
+        } else if collectionView == popularPostCollectionView {
+            return hotPosts.count
+            
+        } else if collectionView == postCollectionView {
+            return posts.count
+            
         } else {
-            return 5
+            return 0
         }
     }
     
@@ -130,17 +191,25 @@ extension CommunityPageViewController: UICollectionViewDelegate, UICollectionVie
         if collectionView == filterCollectionView {
             guard let cell: NewCategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
-            cell.label.text = filters[indexPath.row]
+            cell.label.text = filters[indexPath.row].name
+            
+            if indexPath.row == 0 {
+                cell.changeColor(isGreen: true)
+            }
             
             return cell
             
         } else if collectionView == postCollectionView {
             guard let cell: NewPostCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
+            cell.setData(posts[indexPath.row])
+            
             return cell
             
         } else {
             guard let cell: PopularPostCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
+            
+            cell.setData(hotPosts[indexPath.row])
             
             return cell
         }
@@ -152,6 +221,21 @@ extension CommunityPageViewController: UICollectionViewDelegate, UICollectionVie
             
         } else {
             return moderate(16)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == filterCollectionView {
+            for i in 0..<filters.count {
+                let cellIndexPath = IndexPath(item: i, section: 0)
+                if let cell = collectionView.cellForItem(at: cellIndexPath) as? NewCategoryCell {
+                    cell.changeColor(isGreen: i == indexPath.item)
+                    
+                    if i == indexPath.item {
+                        onReloadByCategory?(filters[i])
+                    }
+                }
+            }
         }
     }
 }

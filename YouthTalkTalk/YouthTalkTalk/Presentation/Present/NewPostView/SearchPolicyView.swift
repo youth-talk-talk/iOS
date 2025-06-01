@@ -36,26 +36,19 @@ final class SearchPolicyView: UIView {
     
     private var dataSource: UITableViewDiffableDataSource<SearchPolicySection, SearchPolicyItem>!
     
-    private lazy var containerView = UIView().then {
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 20
-    }
-    
     private lazy var titleLabel = UILabel().then {
-        $0.font = FontManager.font(.g20Bold)
-        $0.textColor = FontColor.gray60.value
-        $0.text = "정책검색"
+        $0.designed(text: "정책 검색", font: .p18Semi)
     }
     
-    private lazy var closeButton = UIImageView(image: UIImage(named: "littleXmark"))
+    private lazy var closeButton = UIImageView(image: .littleXmark)
     
     private lazy var textFieldBackgroundView = UIView().then {
-        $0.backgroundColor = FontColor.gray10.value
-        $0.layer.cornerRadius = 25
+        $0.backgroundColor = .gray30
+        $0.layer.cornerRadius = moderate(6)
     }
     
     private lazy var policyTextField = UITextField().then {
-        $0.designedPlaceholder(placeholder: "정책명을 검색해주세요", font: .p16Regular16)
+        $0.designedPlaceholder(placeholder: "정책명을 검색해 주세요", font: .p16Regular16)
         $0.delegate = self
     }
     
@@ -70,16 +63,7 @@ final class SearchPolicyView: UIView {
         $0.backgroundColor = .white
         $0.prefetchDataSource = self
         $0.delegate = self
-    }
-    
-    private lazy var addButton = UILabel().then {
-        $0.backgroundColor = .lime40
-        $0.text = "추가하기"
-        $0.textAlignment = .center
-        $0.layer.cornerRadius = 25
-        $0.clipsToBounds = true
-        $0.textColor = .black
-        $0.font = FontManager.font(.p16Regular16)
+        $0.showsVerticalScrollIndicator = false
     }
     
     init(onPolicyTapped: @escaping (SearchPolicyItem) -> Void) {
@@ -88,7 +72,6 @@ final class SearchPolicyView: UIView {
         super.init(frame: .zero)
         
         isHidden = true
-        backgroundColor = .black.withAlphaComponent(0.5)
         
         layout()
         addTapEvents()
@@ -96,13 +79,9 @@ final class SearchPolicyView: UIView {
         dataSource = UITableViewDiffableDataSource<SearchPolicySection, SearchPolicyItem>(tableView: policyTableView, cellProvider: { tableView, indexPath, itemIdentifier in
             let cell = tableView.dequeueReusableCell(withIdentifier: "sampleIdentifier", for: indexPath)
             
-            let bgColorView = UIView()
-            bgColorView.backgroundColor = .lime20
-            
-            cell.selectedBackgroundView = bgColorView
-            cell.textLabel?.text = itemIdentifier.policyTitle
-            cell.textLabel?.textColor = .black
+            cell.selectionStyle = .none
             cell.backgroundColor = .white
+            cell.textLabel?.designed(text: itemIdentifier.policyTitle, font: .p14Regular)
             
             return cell
         })
@@ -137,10 +116,6 @@ final class SearchPolicyView: UIView {
         closeButton.onTapped { [weak self] in
             self?.isHidden = true
         }
-        
-        addButton.onTapped{ [weak self] in
-            self?.isHidden = true
-        }
     }
     
     private func searchPolicy() {
@@ -151,25 +126,19 @@ final class SearchPolicyView: UIView {
     }
     
     private func layout() {
-        addSubview(containerView)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(closeButton)
-        containerView.addSubview(textFieldBackgroundView)
-        containerView.addSubview(policyTableView)
-        containerView.addSubview(addButton)
+        backgroundColor = .white
+        
+        addSubview(titleLabel)
+        addSubview(closeButton)
+        addSubview(textFieldBackgroundView)
+        addSubview(policyTableView)
         
         textFieldBackgroundView.addSubview(policyTextField)
         textFieldBackgroundView.addSubview(searchIconImageView)
         
-        containerView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(17)
-            $0.height.equalTo(525)
-            $0.center.equalToSuperview()
-        }
-        
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(moderate(68))
         }
         
         closeButton.snp.makeConstraints {
@@ -182,7 +151,7 @@ final class SearchPolicyView: UIView {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(50)
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.leading.trailing.equalToSuperview().inset(moderate(16))
         }
         
         policyTextField.snp.makeConstraints {
@@ -198,16 +167,9 @@ final class SearchPolicyView: UIView {
         }
         
         policyTableView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(textFieldBackgroundView.snp.bottom).offset(20)
-            $0.bottom.equalTo(addButton.snp.top).offset(-20)
-        }
-        
-        addButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(20)
-            $0.leading.trailing.equalToSuperview().inset(27)
-            $0.height.equalTo(50)
-            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }
@@ -226,6 +188,7 @@ extension SearchPolicyView: UITableViewDataSourcePrefetching, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        isHidden = true
         onPolicyTapped(dataSource.snapshot().itemIdentifiers[indexPath.item])
     }
 }

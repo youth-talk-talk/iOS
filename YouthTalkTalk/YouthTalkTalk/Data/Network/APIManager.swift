@@ -60,7 +60,6 @@ final class APIManager: APIInterface {
                     switch response.result {
                         
                     case .success(let success):
-                        
                         self.handleResponseHeaders(response.response)
                         single(.success(.success(success)))
                         
@@ -77,23 +76,29 @@ final class APIManager: APIInterface {
     
     public func postUploadImage(stringURL: String, image: Data) -> Single<Result<String, APIError>> {
         return Single.create { [weak self] single in
-            let defaultHeader: HTTPHeaders = ["Content-Type": "multipart/form-data",
-                                              "Authorization": "Bearer \(self!.keyChainHelper.loadTokenInfo(type: .accessToken))"]
+
+            let defaultHeader: HTTPHeaders = ["Authorization": "Bearer \(KeyChainHelper().loadTokenInfo(type: .accessToken))"]
             
             AF.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(image, withName: "image", fileName: "image.png")
-                
+                multipartFormData.append(image, withName: "image", fileName: "image.png", mimeType: "image/png")
+
             }, to: "\(APIKey.baseURL.rawValue)\(stringURL)", method: .post, headers: defaultHeader)
             .validate(statusCode: 200..<900)
             .responseJSON { response in
                 switch response.result {
                 case .success:
+                    print("|| \(response.response.debugDescription)")
+                    print("|| \(response.response?.url)")
+                    print("|| \(response.response?.statusCode)")
+                    print("|| \(response.response?.allHeaderFields)")
+                    print("|| \(response.response?.headers)")
+
                     if let responseData = response.data {
                          do {
                              let decoder = JSONDecoder()
                              let decodedResponse = try decoder.decode(UploadImageDTO.self, from: responseData)
 
-                             single(.success(.success(decodedResponse.data)))
+                             single(.success(.success(decodedResponse.data ?? "")))
                          } catch {
                              print("Error decoding response:", error)
                              single(.success(.failure(APIError(code: "999"))))

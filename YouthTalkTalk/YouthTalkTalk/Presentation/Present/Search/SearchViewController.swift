@@ -136,6 +136,12 @@ final class SearchViewController: RootViewController, UITextFieldDelegate {
                 }
             }
             
+            recentSearchItem.onTapped { [weak self] in
+                self?.searchTextField.text = recentSearch
+                self?.viewModel.requestSearchAPI(recentSearch)
+                self?.showSearchResultViews()
+            }
+            
             recentSearchStackView.addArrangedSubview(recentSearchItem)
         }
         

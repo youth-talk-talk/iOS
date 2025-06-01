@@ -118,134 +118,134 @@ class CommunityViewController: BaseViewController<CommunityView>, RemoveReported
     
     //MARK: Cell Registration
     private func cellRegistration() {
-        
-        // 인기정책 Section
-        let popularSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self else { return }
-            
-            cell.configure(data: itemIdentifier.data)
-            
-            cell.scrapButton.onTapped { [weak self] in
-                guard let postId = itemIdentifier.data?.postId else { return }
-                
-                self?.viewModel.input.updatePostScrap.accept(String(postId))
-            }
-            
-            // 셀 선택
-            cell.tapGesture.rx.event
-                .bind(with: self) { owner, _ in
-                    
-                    guard let item = itemIdentifier.data else { return }
-                    
-                    let repository = ReviewRepositoryImpl()
-                    let commentRepository = CommentRepositoryImpl()
-                    let useCase = ReviewUseCaseImpl(reviewRepository: repository)
-                    let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
-                    let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-                    resultDetailVC.delegate = self
-                    owner.navigationController?.pushViewController(resultDetailVC, animated: true)
-                }
-                .disposed(by: cell.disposeBag)
-            
-            // cell에 적용(스크롤시에도 유지)
-            if let postId = itemIdentifier.data?.postId,
-               let scrapCount = itemIdentifier.data?.scraps,
-               let scrap = viewModel.output.scrapStatus[String(postId)] {
-                cell.updateScrapStatus(scrap, scrapCount)
-            }
-            
-            // cell에 즉시 적용
-            viewModel.output.scrapStatusRelay
-                .bind(with: self) { owner, scrapStatus in
-                    if let postId = itemIdentifier.data?.postId,
-                       let scrapCount = itemIdentifier.data?.scraps,
-                       let scrap = scrapStatus[String(postId)] {
-                        cell.updateScrapStatus(scrap, scrapCount)
-                    }
-                }
-                .disposed(by: self.disposeBag)
-        }
-        
-        // 최근 업데이트 Section
-        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self else { return }
-            
-            cell.configure(data: itemIdentifier.data)
-            
-            cell.scrapButton.onTapped { [weak self] in
-                guard let postId = itemIdentifier.data?.postId else { return }
-                
-                self?.viewModel.input.updatePostScrap.accept(String(postId))
-            }
-            
-            // 셀 선택
-            cell.tapGesture.rx.event
-                .bind(with: self) { owner, _ in
-                    
-                    guard let item = itemIdentifier.data else { return }
-                    
-                    let repository = ReviewRepositoryImpl()
-                    let commentRepository = CommentRepositoryImpl()
-                    let useCase = ReviewUseCaseImpl(reviewRepository: repository)
-                    let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
-                    let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-                    resultDetailVC.delegate = self
-                    owner.navigationController?.pushViewController(resultDetailVC, animated: true)
-                }
-                .disposed(by: cell.disposeBag)
-            
-            // cell에 적용(스크롤시에도 유지)
-            if let postId = itemIdentifier.data?.postId,
-               let scrapCount = itemIdentifier.data?.scraps,
-               let scrap = viewModel.output.scrapStatus[String(postId)] {
-                
-                cell.updateScrapStatus(scrap, scrapCount)
-            }
-            
-            // cell에 즉시 적용
-            viewModel.output.scrapStatusRelay
-                .bind(with: self) { owner, scrapStatus in
-                    if let postId = itemIdentifier.data?.postId,
-                       let scrapCount = itemIdentifier.data?.scraps,
-                       let scrap = scrapStatus[String(postId)] {
-                        cell.updateScrapStatus(scrap, scrapCount)
-                    }
-                }
-                .disposed(by: self.disposeBag)
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
-            
-            guard let section = CommunityLayout(rawValue: indexPath.section) else { return nil }
-            
-            if section == .search { return nil }
-            
-            if section == .popular {
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: popularSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                cell.layer.cornerRadius = 10
-                cell.layer.masksToBounds = true
-                
-                return cell
-            }
-            
-            if section == .recent {
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
-                
-                cell.layer.cornerRadius = 10
-                cell.layer.masksToBounds = true
-                
-                return cell
-            }
-            
-            return nil
-        }
+//        
+//        // 인기정책 Section
+//        let popularSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
+//            
+//            guard let self else { return }
+//            
+//            cell.configure(data: itemIdentifier.data)
+//            
+//            cell.scrapButton.onTapped { [weak self] in
+//                guard let postId = itemIdentifier.data?.postId else { return }
+//                
+//                self?.viewModel.input.updatePostScrap.accept(String(postId))
+//            }
+//            
+//            // 셀 선택
+//            cell.tapGesture.rx.event
+//                .bind(with: self) { owner, _ in
+//                    
+//                    guard let item = itemIdentifier.data else { return }
+//                    
+//                    let repository = ReviewRepositoryImpl()
+//                    let commentRepository = CommentRepositoryImpl()
+//                    let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+//                    let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+//                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+//                    let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+//                    resultDetailVC.delegate = self
+//                    owner.navigationController?.pushViewController(resultDetailVC, animated: true)
+//                }
+//                .disposed(by: cell.disposeBag)
+//            
+//            // cell에 적용(스크롤시에도 유지)
+//            if let postId = itemIdentifier.data?.postId,
+//               let scrapCount = itemIdentifier.data?.scraps,
+//               let scrap = viewModel.output.scrapStatus[String(postId)] {
+//                cell.updateScrapStatus(scrap, scrapCount)
+//            }
+//            
+//            // cell에 즉시 적용
+//            viewModel.output.scrapStatusRelay
+//                .bind(with: self) { owner, scrapStatus in
+//                    if let postId = itemIdentifier.data?.postId,
+//                       let scrapCount = itemIdentifier.data?.scraps,
+//                       let scrap = scrapStatus[String(postId)] {
+//                        cell.updateScrapStatus(scrap, scrapCount)
+//                    }
+//                }
+//                .disposed(by: self.disposeBag)
+//        }
+//        
+//        // 최근 업데이트 Section
+//        let recentSectionRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, CommunitySectionItems> { [weak self] cell, indexPath, itemIdentifier in
+//            
+//            guard let self else { return }
+//            
+//            cell.configure(data: itemIdentifier.data)
+//            
+//            cell.scrapButton.onTapped { [weak self] in
+//                guard let postId = itemIdentifier.data?.postId else { return }
+//                
+//                self?.viewModel.input.updatePostScrap.accept(String(postId))
+//            }
+//            
+//            // 셀 선택
+//            cell.tapGesture.rx.event
+//                .bind(with: self) { owner, _ in
+//                    
+//                    guard let item = itemIdentifier.data else { return }
+//                    
+//                    let repository = ReviewRepositoryImpl()
+//                    let commentRepository = CommentRepositoryImpl()
+//                    let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+//                    let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+//                    let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+//                    let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+//                    resultDetailVC.delegate = self
+//                    owner.navigationController?.pushViewController(resultDetailVC, animated: true)
+//                }
+//                .disposed(by: cell.disposeBag)
+//            
+//            // cell에 적용(스크롤시에도 유지)
+//            if let postId = itemIdentifier.data?.postId,
+//               let scrapCount = itemIdentifier.data?.scraps,
+//               let scrap = viewModel.output.scrapStatus[String(postId)] {
+//                
+//                cell.updateScrapStatus(scrap, scrapCount)
+//            }
+//            
+//            // cell에 즉시 적용
+//            viewModel.output.scrapStatusRelay
+//                .bind(with: self) { owner, scrapStatus in
+//                    if let postId = itemIdentifier.data?.postId,
+//                       let scrapCount = itemIdentifier.data?.scraps,
+//                       let scrap = scrapStatus[String(postId)] {
+//                        cell.updateScrapStatus(scrap, scrapCount)
+//                    }
+//                }
+//                .disposed(by: self.disposeBag)
+//        }
+//        
+//        dataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.collectionView) { collectionView, indexPath, itemIdentifier in
+//            
+//            guard let section = CommunityLayout(rawValue: indexPath.section) else { return nil }
+//            
+//            if section == .search { return nil }
+//            
+//            if section == .popular {
+//                
+//                let cell = collectionView.dequeueConfiguredReusableCell(using: popularSectionRegistration, for: indexPath, item: itemIdentifier)
+//                
+//                cell.layer.cornerRadius = 10
+//                cell.layer.masksToBounds = true
+//                
+//                return cell
+//            }
+//            
+//            if section == .recent {
+//                
+//                let cell = collectionView.dequeueConfiguredReusableCell(using: recentSectionRegistration, for: indexPath, item: itemIdentifier)
+//                
+//                cell.layer.cornerRadius = 10
+//                cell.layer.masksToBounds = true
+//                
+//                return cell
+//            }
+//            
+//            return nil
+//        }
     }
     
     //MARK: Header Registration
@@ -398,13 +398,13 @@ extension CommunityViewController: UICollectionViewDataSourcePrefetching {
 extension CommunityViewController: EventDelegate {
     // MARK: 게시글 작성 완료 후 게시글 상세로 이동
     func eventDelegate(item: RPEntity) {
-        let repository = ReviewRepositoryImpl()
-        let commentRepository = CommentRepositoryImpl()
-        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
-        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
-        let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
-        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
-        resultDetailVC.delegate = self
-        navigationController?.pushViewController(resultDetailVC, animated: true)
+//        let repository = ReviewRepositoryImpl()
+//        let commentRepository = CommentRepositoryImpl()
+//        let useCase = ReviewUseCaseImpl(reviewRepository: repository)
+//        let commentUseCase = CommentUseCaseImpl(commentRepository: commentRepository)
+//        let viewModel = PosetDetailViewModel(data: item, useCase: useCase, commnetUseCase: commentUseCase)
+//        let resultDetailVC = PostDetailViewController(viewModel: viewModel)
+//        resultDetailVC.delegate = self
+//        navigationController?.pushViewController(resultDetailVC, animated: true)
     }
 }

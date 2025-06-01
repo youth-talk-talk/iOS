@@ -43,8 +43,24 @@ final class MyScrapViewController: UIViewController {
         return collectionView
     }
     
+    private var scrapPolicies: [PolicyDTO] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Task {
+            let result = await APIManager().requestAPI(
+                router: PolicyRouter.fetchScrapPolicy,
+                type: ScrapPolicyDTO.self)
+            switch result {
+            case .success(let scrap):
+                scrapPolicies = scrap.data
+                scrapCollectionView.reloadData()
+                
+            case .failure:
+                break
+            }
+        }
         
         view.backgroundColor = .white
         
@@ -56,7 +72,8 @@ final class MyScrapViewController: UIViewController {
         
         view.addSubviews([titleLabel,
                           xImageView,
-                          scrapCollectionView])
+                          scrapCollectionView,
+                          emptyView])
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -73,19 +90,25 @@ final class MyScrapViewController: UIViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(moderate(29))
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+        emptyView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
 }
 
 extension MyScrapViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: 0일 시 EmptyView 표시
-        return 7
+        emptyView.isHidden = !scrapPolicies.isEmpty
+        
+        return scrapPolicies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
         
         cell.setStyle(.border)
+        cell.setData(scrapPolicies[indexPath.row])
         
         return cell
     }
@@ -94,3 +117,4 @@ extension MyScrapViewController: UICollectionViewDelegate, UICollectionViewDataS
         return moderate(16)
     }
 }
+

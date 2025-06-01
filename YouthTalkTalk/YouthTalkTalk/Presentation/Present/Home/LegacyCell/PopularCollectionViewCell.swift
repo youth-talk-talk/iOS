@@ -77,7 +77,7 @@ final class PopularCollectionViewCell: BaseCollectionViewCell {
         
         let policyCategory = PolicyCategory(rawValue: data.category) ?? .life
         
-        regionLabel.designed(text: data.hostDep, font: .p12Regular, textColor: .gray60)
+        regionLabel.designed(text: data.hostDep ?? "", font: .p12Regular, textColor: .gray60)
         policyTitleLabel.designed(text: data.title, font: .p18Bold, textColor: .black)
         categoryLabel.designed(text: policyCategory.name, font: .p12Bold, textColor: .gray40)
         scrapButton.designedByImage(data.scrap ? .bookmarkFill : .bookmark)

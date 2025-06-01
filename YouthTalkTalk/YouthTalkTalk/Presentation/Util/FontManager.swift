@@ -50,6 +50,7 @@ enum FontColor {
     case black
     case green
     case redLight
+    case subRed
     case accentRed
     case greenLight
     
@@ -68,6 +69,7 @@ enum FontColor {
         case .gray100:      return .gray100
         case .black:        return .black
         case .green:        return .greenNormal
+        case .subRed:       return .subRed
         case .greenLight:   return .greenLight
         case .redLight:     return .redLight
         case .accentRed:    return .accentRed

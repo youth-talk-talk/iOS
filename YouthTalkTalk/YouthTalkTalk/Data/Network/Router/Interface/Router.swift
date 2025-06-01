@@ -45,7 +45,7 @@ extension Router {
             }
         }
         
-        print("[☑️ Request 실행] \(urlRequest.url ?? URL(string: ""))")
+        print("[✅ API] \(urlRequest.url!)")
 
         return urlRequest
     }

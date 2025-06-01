@@ -2,294 +2,311 @@
 //  MyPageViewController.swift
 //  YouthTalkTalk
 //
-//  Created by 이중엽 on 10/29/24.
+//  Created by 김유진 on 5/3/25.
 //
 
 import UIKit
-import FlexLayout
-import PinLayout
-import RxSwift
-import RxCocoa
+import Kingfisher
 
-class MyPageViewController: RootViewController {
+final class MyPageViewController: RootViewController {
     
-    enum FavoriteList: String, CaseIterable, Hashable {
-        case scrapPolicy = "스크랩한 정책"
-        case scrapPost = "스크랩한 게시물"
-        case myPost = "작성한 게시물"
-        case myComment = "작성한 댓글"
-        case likeComment = "좋아요한 댓글"
+    private var myInfo: MeDTO?
+    
+    private let viewModel = MyPageViewModel()
+    
+    private let titleLabel = UILabel().then {
+        $0.designed(text: "마이페이지", font: .p18Semi)
     }
     
-    enum MyPageItemType: Hashable {
-        case policy(PolicyEntity)
-        case favorite(FavoriteList)
+    private let profileImageView = UIImageView(image: .profileLogo).then {
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = moderate(30)
     }
     
-    private var viewModel: MyPageInterface
-    private var dataSource: UICollectionViewDiffableDataSource<MyPageSection, MyPageItemType>!
-    private var snapshot = NSDiffableDataSourceSnapshot<MyPageSection, MyPageItemType>()
-    
-    let nicknameLabel = UILabel()
-    let settingButton = UIButton()
-    
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: MyPageSection.layout()).then {
-        $0.backgroundColor = .clear
+    private let nameLabel = UILabel().then {
+        $0.designed(font: .p18Semi)
     }
     
-    init(viewModel: MyPageInterface) {
-        self.viewModel = viewModel
+    private let rightArrowImageView = UIImageView(image: .chevronRight.withTintColor(.gray100))
+    
+    private let verticalDividerView = UIView().then {
+        $0.backgroundColor = .gray40
+    }
+    
+    private let scrapView = UIView()
+    private let scrapImageView = UIImageView(image: .bookmark)
+    private let scrapLabel = UILabel().then {
+        $0.designed(text: "스크랩한 정책", font: .p14Regular)
+    }
+    
+    private let notiView = UIView()
+    private let notiImageView = UIImageView(image: .noti)
+    private let notiLabel = UILabel().then {
+        $0.designed(text: "알림함", font: .p14Regular)
+    }
+    
+    private let dividerView = UIView().then {
+        $0.backgroundColor = .gray30
+    }
+    
+    private let dividerView2 = UIView().then {
+        $0.backgroundColor = .gray30
+    }
+    
+    private let menuScrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.contentInset.bottom = moderate(30)
+    }
+    
+    private let menuStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .leading
+        $0.spacing = moderate(24)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        rightArrowImageView.onTapped { [weak self] in
+            guard let myInfo = self?.myInfo else { return }
+            let vc = EditMyInfoViewController(myInfo, self!.viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        scrapView.onTapped { [weak self] in
+            let vc = MyScrapViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        setLayout()
+        setMenuViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = false
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        if !snapshot.itemIdentifiers(inSection: .policy).isEmpty {
-         
-            let items = snapshot.itemIdentifiers(inSection: .policy)
-            self.snapshot.deleteItems(items)
-            self.dataSource.apply(snapshot)
+        viewModel.getMyInfo { [weak self] myInfo in
+            DispatchQueue.main.async {
+                if let url = URL(string: myInfo.data.profileImgUrl ?? "") {
+                    self?.profileImageView.kf.setImage(with: url)
+                }
+                self?.nameLabel.text = myInfo.data.nickname
+                self?.myInfo = myInfo
+            }
         }
         
-        viewModel.input.fetchUpcomingScrapEvent.accept(())
-    }
-//    
-//    override func configureView() {
-//        
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
-//        
-//        snapshot.appendSections([.policy, .favorite])
-//        
-//        view.backgroundColor = .white
-//        flexView.backgroundColor = .white
-//        
-//        nicknameLabel.designed(text: "abc", font: .p18Bold, textColor: .black)
-//        settingButton.designWithImage(title: "계정 관리", image: UIImage.setting, bgColor: .clear, titleColor: .black, fontType: .p14Regular)
-//        
-//        settingButton.layer.cornerRadius = 18
-//        settingButton.layer.masksToBounds = true
-//        settingButton.layer.borderColor = UIColor.gray30.cgColor
-//        settingButton.layer.borderWidth = 1
-//        
-//        let recentCellRegistration = UICollectionView.CellRegistration<PostListCollectionViewCell, PolicyEntity> { cell, indexPath, itemIdentifier in
-//            
-//            cell.layer.cornerRadius = 10
-//            cell.layer.masksToBounds = true
-//            cell.configure(data: itemIdentifier)
-//            
-//            let data = itemIdentifier.policyId
-//            
-//            cell.scrapButton.rx.tap
-//                .bind(with: self) { owner, _ in
-//                    
-//                    owner.viewModel.input.updatePolicyScrap.accept(data)
-//                }
-//                .disposed(by: cell.disposeBag)
-//            
-//            cell.tapGesture.rx.event
-//                .bind(with: self) { owner, _ in
-//                    
-//                    let repository = PolicyRepositoryImpl()
-//                    let useCase = PolicyUseCaseImpl(policyRepository: repository)
-//                    let viewModel = PolicyViewModel(policyID: itemIdentifier.policyId, policyUseCase: useCase)
-//                    let nextVC = PolicyViewController(viewModel: viewModel)
-//                    
-//                    self.navigationController?.pushViewController(nextVC, animated: true)
-//                }
-//                .disposed(by: cell.disposeBag)
-//        }
-//        
-//        let favoriteCellRegistration = UICollectionView.CellRegistration<FavoriteCollectionViewCell, String> { cell, indexPath, itemIdentifier in
-//            
-//            cell.configure(title: itemIdentifier)
-//        }
-//        
-//        let headerRegistration = UICollectionView.SupplementaryRegistration<TitleHeaderView>(elementKind: TitleHeaderView.identifier) {
-//            supplementaryView, elementKind, indexPath in
-//            
-//            guard let section = MyPageSection(rawValue: indexPath.section) else { return }
-//            
-//            supplementaryView.setTitle(section.title)
-//        }
-//        
-//        dataSource = UICollectionViewDiffableDataSource<MyPageSection, MyPageItemType>(collectionView: collectionView) {
-//            collectionView, indexPath, itemIdentifier in
-//            
-//            switch itemIdentifier {
-//            case .policy(let policyEntity):
-//                return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: policyEntity)
-//            case .favorite(let favorite):
-//                return collectionView.dequeueConfiguredReusableCell(using: favoriteCellRegistration, for: indexPath, item: favorite.rawValue)
-//            }
-//        }
-//        
-//        dataSource.supplementaryViewProvider = { view, kind, index in
-//            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
-//        }
-//    }
-//    
-//    override func configureLayout() {
-//        
-//        flexView.flex.define { flex in
-//            
-//            flex.addItem().define { row in
-//                
-//                row.addItem(nicknameLabel)
-//                    .alignSelf(.center)
-//                    .grow(1)
-//                
-//                row.addItem(settingButton)
-//                    .width(115)
-//                    .height(36)
-//                    .alignSelf(.center)
-//            }
-//            .direction(.row)
-//            .marginHorizontal(17)
-//            .justifyContent(.spaceBetween)
-//            .height(100)
-//            
-//            flex.addItem(collectionView)
-//                .width(100%)
-//                .grow(1)
-//        }
-//    }
-//    
-//    override func bind() {
-//        
-//        let items = FavoriteList.allCases.map { MyPageItemType.favorite($0) }
-//        update(section: .favorite, items: items)
-//        
-//        collectionView.rx.itemSelected
-//            .bind(with: self) { owner, indexPath in
-//                
-//                let sectionType = MyPageSection(rawValue: indexPath.section) ?? .policy
-//                let items = owner.snapshot.itemIdentifiers(inSection: sectionType)
-//                let item = items[indexPath.item]
-//                
-//                switch item {
-//                case .favorite(let favorite):
-//                    let commentUseCase = CommentUseCaseImpl(commentRepository: CommentRepositoryImpl())
-//                    
-//                    switch favorite {
-//                        
-//                    case .scrapPolicy:
-//                        let useCase = PolicyUseCaseImpl(policyRepository: PolicyRepositoryImpl())
-//                        let viewModel = MyScrapViewModel(useCase: useCase)
-//                        let vc = MyScrapViewController(viewModel: viewModel)
-//                        
-//                        owner.navigationController?.pushViewController(vc, animated: true)
-//                    case .scrapPost:
-//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .scrapPost)
-//                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .scrapPost)
-//                        
-//                        owner.navigationController?.pushViewController(vc, animated: true)
-//                        
-//                    case .myPost:
-//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .myPost)
-//                        let vc = MyPolicyOrPostListViewController(viewModel: viewModel, listType: .myPost)
-//                        
-//                        owner.navigationController?.pushViewController(vc, animated: true)
-//                        
-//                    case .myComment:
-//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .myWrittenComment)
-//                        let vc = LikedOrMyCommentListViewController(viewModel: viewModel, listType: .myWrittenComment)
-//                        
-//                        owner.navigationController?.pushViewController(vc, animated: true)
-//                        
-//                    case .likeComment:
-//                        let useCase = PostUseCaseImpl(postRepository: PostRepositoryImpl())
-//                        let viewModel = PostCommentListViewModel(useCase: useCase, commentUseCase: commentUseCase, listType: .likedComment)
-//                        let vc = LikedOrMyCommentListViewController(viewModel: viewModel, listType: .likedComment)
-//                        
-//                        owner.navigationController?.pushViewController(vc, animated: true)
-//                    }
-//                    
-//                default: break
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        // 마감일 임박 리스트 호출
-//        viewModel.output.upcomingScrapPolicies
-//            .bind(with: self) { owner, upcomingEntities in
-//                
-//                let items = upcomingEntities.map { MyPageItemType.policy($0) }
-//                
-//                owner.update(section: .policy, items: items)
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        // 스크랩 취소
-//        viewModel.output.canceledScrapEntity
-//            .bind(with: self) { owner, scrapEntity in
-//                
-//                let policyItems = owner.snapshot.itemIdentifiers(inSection: .policy)
-//                    .compactMap { item in
-//                        switch item {
-//                        case .policy(let policyEntity):
-//                            return policyEntity
-//                        case .favorite:
-//                            return nil
-//                        }
-//                    }
-//                
-//                guard let item = policyItems.filter({ $0.policyId == scrapEntity.id }).first else { return }
-//                
-//                let pageItemType = MyPageItemType.policy(item)
-//                
-//                owner.delete(item: pageItemType)
-//                
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        // 내 정보
-//        viewModel.output.meEntity
-//            .bind(with: self) { owner, meEntity in
-//                owner.nicknameLabel.designed(text: meEntity.nickname, font: .p18Bold, textColor: .black)
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        settingButton.rx.tap
-//            .withLatestFrom(viewModel.output.meEntity)
-//            .bind(with: self) { [weak self] owner, meEntity in
-//                guard let self else { return }
-//                
-//                let vc = SettingViewController(data: meEntity, viewModel: viewModel)
-//                owner.navigationController?.pushViewController(vc, animated: true)
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        viewModel.input.fetchMe.accept(())
-//    }
-}
-
-
-extension MyPageViewController {
-    
-    func update(section: MyPageSection, items: [MyPageItemType]) {
-        
-        snapshot.appendItems(items, toSection: section)
-        
-        self.dataSource.apply(snapshot, animatingDifferences: true)
+        tabBarController?.tabBar.isHidden = false
     }
     
-    func delete(item: MyPageItemType) {
+    private func setLayout() {
+        view.addSubviews(titleLabel,
+                         profileImageView,
+                         nameLabel,
+                         rightArrowImageView,
+                         scrapView,
+                         notiView,
+                         dividerView,
+                         menuScrollView,
+                         verticalDividerView)
         
-        snapshot.deleteItems([item])
+        menuScrollView.addSubview(menuStackView)
         
-        self.dataSource.apply(snapshot)
+        scrapView.addSubview(scrapImageView)
+        scrapView.addSubview(scrapLabel)
+        
+        notiView.addSubview(notiImageView)
+        notiView.addSubview(notiLabel)
+        
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(backImageView)
+            $0.centerX.equalToSuperview()
+        }
+        
+        profileImageView.snp.makeConstraints {
+            $0.top.equalTo(backImageView.snp.bottom).offset(moderate(32))
+            $0.size.equalTo(moderate(60))
+            $0.leading.equalToSuperview().inset(moderate(16))
+        }
+        
+        nameLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(moderate(10))
+            $0.centerY.equalTo(profileImageView)
+        }
+        
+        rightArrowImageView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(moderate(16))
+            $0.centerY.equalTo(profileImageView)
+            $0.size.equalTo(24)
+        }
+        
+        scrapView.snp.makeConstraints {
+            $0.width.equalToSuperview().dividedBy(2.4)
+            $0.top.equalTo(profileImageView.snp.bottom).offset(moderate(28))
+            $0.leading.equalToSuperview().inset(moderate(16))
+            $0.height.equalTo(moderate(50))
+        }
+        
+        scrapImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(moderate(24))
+            $0.top.equalToSuperview()
+        }
+        
+        scrapLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
+        notiView.snp.makeConstraints {
+            $0.width.equalToSuperview().dividedBy(2.4)
+            $0.top.equalTo(profileImageView.snp.bottom).offset(moderate(28))
+            $0.trailing.equalToSuperview().inset(moderate(16))
+            $0.height.equalTo(moderate(50))
+        }
+        
+        notiImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(moderate(24))
+            $0.top.equalToSuperview()
+        }
+        
+        notiLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
+        verticalDividerView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(scrapView)
+            $0.height.equalTo(moderate(52))
+            $0.width.equalTo(moderate(1))
+        }
+        
+        menuScrollView.snp.makeConstraints {
+            $0.top.equalTo(scrapView.snp.bottom).offset(moderate(24))
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        menuStackView.snp.makeConstraints {
+            $0.edges.width.equalToSuperview()
+        }
+    }
+    
+    private func setMenuViews() {
+        let dividerView = UIView().then {
+            $0.backgroundColor = .gray40
+        }
+        
+        let communityLabel = UILabel().then {
+            $0.designed(text: "커뮤니티 활동", font: .p16SemiBold)
+        }
+        
+        menuStackView.addArrangedSubviews(dividerView,
+                                          communityLabel)
+        menuStackView.setCustomSpacing(moderate(20), after: communityLabel)
+        
+        communityLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(moderate(16))
+        }
+        
+        dividerView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalTo(moderate(10))
+            $0.leading.equalToSuperview()
+        }
+        
+        // 커뮤니티 메뉴
+        [("작성한 글", UIViewController()),
+         ("스크랩한 게시글", MyScrapViewController()),
+         ("좋아요한 댓글", UIViewController()),
+         ("내 댓글", UIViewController())].forEach { title, moveToVC in
+            let menuView = self.titleArrowView(text: title, onTapped: { [weak self] in
+                self?.navigationController?.pushViewController(moveToVC, animated: true)
+            })
+            
+            menuStackView.addArrangedSubview(menuView)
+            
+            menuView.snp.makeConstraints {
+                $0.width.equalToSuperview()
+                $0.height.equalTo(moderate(24))
+            }
+        }
+        
+        let dividerView2 = UIView().then {
+            $0.backgroundColor = .gray40
+        }
+        
+        let manageLabel = UILabel().then {
+            $0.designed(text: "관리", font: .p16SemiBold)
+        }
+        
+        menuStackView.addArrangedSubviews(dividerView2,
+                                          manageLabel)
+        
+        dividerView2.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalTo(moderate(10))
+            $0.leading.equalToSuperview()
+        }
+        
+        manageLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(moderate(16))
+        }
+        
+        menuStackView.setCustomSpacing(moderate(20), after: dividerView)
+        menuStackView.setCustomSpacing(moderate(20), after: manageLabel)
+        
+        // 관리 메뉴
+        [("약관 및 정책", SettingTermViewController()),
+         ("문의하기", UIViewController()),
+         ("기타 관리", SettingViewController())].forEach { title, moveToVC in
+            let menuView = self.titleArrowView(text: title, onTapped: { [weak self] in
+                if title == "문의하기" {
+                    if let url = URL(string: "https://forms.gle/GuK3MUu6Hqzfv5mR9") {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                } else {
+                    self?.navigationController?.pushViewController(moveToVC, animated: true)
+                }
+            })
+            
+            menuStackView.addArrangedSubview(menuView)
+            
+            menuView.snp.makeConstraints {
+                $0.width.equalToSuperview()
+                $0.height.equalTo(moderate(24))
+            }
+        }
+    }
+    
+    private func titleArrowView(text: String, onTapped: @escaping () -> Void) -> UIView {
+        let view = UIView()
+        
+        view.onTapped { onTapped() }
+        
+        let titleLabel = UILabel().then {
+            $0.designed(text: text, font: .p16Regular16, textColor: .gray90)
+        }
+        
+        let arrowImageView = UIImageView(image: .chevronRight.withTintColor(.gray100))
+        
+        view.addSubviews(titleLabel, arrowImageView)
+        
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(moderate(16))
+            $0.centerY.equalToSuperview()
+        }
+        
+        arrowImageView.snp.makeConstraints {
+            $0.size.equalTo(moderate(24))
+            $0.centerY.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(moderate(16))
+        }
+        
+        return view
     }
 }

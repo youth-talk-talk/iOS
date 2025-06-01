@@ -20,7 +20,10 @@ struct DetailPolicyDataDTO: Decodable {
     let title: String
     let introduction: String?
     let supportDetail: String?
+    let category: String
+    let region: String
     let applyTerm: String?
+    let recruitmentType: String
     let operationTerm: String?
     let age: String
     let addrIncome: String?
@@ -31,9 +34,10 @@ struct DetailPolicyDataDTO: Decodable {
     let applLimit: String?
     let addition: String?
     let applStep: String?
+    let marriage: String?
     let evaluation: String?
     let applUrlv: String?
-    let submitDocv: String?
+    let submitDoc: String?
     let etcv: String?
     let hostDep: String?
     let operatingOrg: String?
@@ -41,6 +45,8 @@ struct DetailPolicyDataDTO: Decodable {
     let refUrl2: String?
     let formattedApplUrl: String?
     let isScrap: Bool
+    let etc: String?
+    let earnEtc: String?
     
     func translateDetailPolicyEntity() -> DetailPolicyEntity {
         
@@ -63,7 +69,7 @@ struct DetailPolicyDataDTO: Decodable {
         let method = DetailPolicyEntity.PolicyMethod(applStep: self.applStep,
                                                      evaluation: self.evaluation,
                                                      applUrl: self.applUrlv,
-                                                     submitDoc: self.submitDocv)
+                                                     submitDoc: self.submitDoc)
         
         let detail = DetailPolicyEntity.PolicyDetail(etc: self.etcv,
                                                      hostDep: self.hostDep,

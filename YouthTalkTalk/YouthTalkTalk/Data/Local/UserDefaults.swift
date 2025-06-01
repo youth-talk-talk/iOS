@@ -29,6 +29,11 @@ enum WriteType {
     case edit
 }
 
+enum communityType {
+    case review
+    case free
+}
+
 enum MainContentsType: Encodable {
     
     case policy
@@ -112,5 +117,9 @@ extension UserDefaults {
     func getRecentSearchList(type: MainContentsType) -> [String] {
         
         return self.array(forKey: type.key) as? [String] ?? [String]()
+    }
+    
+    func getKakaoId() -> String {
+        return self.string(forKey: "kakaoId") as? String ?? ""
     }
 }

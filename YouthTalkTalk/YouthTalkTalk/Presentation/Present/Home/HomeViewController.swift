@@ -51,7 +51,9 @@ final class HomeViewController: UIViewController {
         $0.designed(text: "따끈따끈한 새로운 정책", font: .p16SemiBold, textColor: .gray100)
     }
     
-    private let newPolicyCategories = ["전체", "주거", "교육", "일자리", "복지", "참여"]
+    private let newPolicyEmptyView = EmptyView(text: "최근 새로 올라온 공고가 없어요.")
+    
+    private let newPolicyCategories: [PolicyCategory] = PolicyCategory.allCases
 
     private lazy var newPolicyCategoryCollectionView = SearchFilterCollectionView().then {
         $0.delegate = self
@@ -88,7 +90,10 @@ final class HomeViewController: UIViewController {
     }()
     
     // MARK: 지금뜨는 정책톡톡!
-    private var reviewPolicyView = ReviewPolicyView()
+    private lazy var reviewPolicyView = ReviewPolicyView { [weak self] policyId in
+        let vc = PolicyDetailViewController(policyId: policyId)
+        self?.navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: 청년톡톡 Best
     private let bestTitleLabel = UILabel().then {
@@ -117,6 +122,13 @@ final class HomeViewController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
+        bestArrowImageView.onTapped { [weak self] in
+            // MARK: 커뮤니티 탭으로 이동
+            if let tabBarController = self?.tabBarController {
+                tabBarController.selectedIndex = 2
+            }
+        }
+        
         viewModel.onReloadData = { [weak self] in
             DispatchQueue.main.async {
                 self?.selectionRegionLabel.text = self?.viewModel.myRegion
@@ -125,6 +137,11 @@ final class HomeViewController: UIViewController {
                 // MARK: 새로운 정책 데이터 세팅
                 self?.setupPages()
                 self?.setupPageControl()
+                let isNewPoliciesEmpty = self?.viewModel.newPolicies.isEmpty ?? true
+                self?.newPolicyEmptyView.isHidden = !isNewPoliciesEmpty
+                self?.newPolicyPageViewController.view.snp.updateConstraints {
+                    $0.height.equalTo(moderate(isNewPoliciesEmpty ? 200 : 526))
+                }
                 
                 // MARK: 지금뜨는 정책톡톡 데이터 세팅
                 self?.reviewPolicyView.setData(policyWithReviews: self?.viewModel.policiesWithReviews ?? [])
@@ -148,6 +165,7 @@ final class HomeViewController: UIViewController {
             }
         }
         
+        tabBarController?.tabBar.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -251,7 +269,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if collectionView == newPolicyCategoryCollectionView {
             guard let cell: NewCategoryCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
             
-            cell.label.text = newPolicyCategories[indexPath.row]
+            cell.label.text = newPolicyCategories[indexPath.row].name
+            cell.changeColor(isGreen: indexPath.row == 0)
             
             return cell
         } else {
@@ -275,6 +294,22 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
             let vm = PolicyCollectionViewModel(selectedCategory: category)
             let vc = PolicyCollectionViewController(viewModel: vm)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        } else if collectionView == newPolicyCategoryCollectionView {
+            for i in 0..<newPolicyCategories.count {
+                let cellIndexPath = IndexPath(item: i, section: 0)
+                if let cell = collectionView.cellForItem(at: cellIndexPath) as? NewCategoryCell {
+                    cell.changeColor(isGreen: i == indexPath.item)
+                    
+                    if i == indexPath.item {
+                        viewModel.setNewPoliciesByCategory(category: newPolicyCategories[i].rawValue)
+                    }
+                }
+            }
+        } else if collectionView == popularPolicyCollectionView {
+            let policyId = viewModel.popularPolicies[indexPath.row].policyId
+            let vc = PolicyDetailViewController(policyId: String(policyId))
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -307,6 +342,7 @@ private extension HomeViewController {
         containerView.addSubview(newPolicyCategoryCollectionView)
         containerView.addSubview(newPolicyPageViewController.view)
         containerView.addSubview(newPolicyPageControl)
+        containerView.addSubview(newPolicyEmptyView)
         
         // MARK: 지금뜨는 정책톡톡!
         containerView.addSubview(reviewPolicyView)
@@ -398,6 +434,11 @@ private extension HomeViewController {
             $0.top.equalTo(newPolicyPageViewController.view.snp.bottom).offset(moderate(20))
             $0.centerX.equalToSuperview()
             $0.height.equalTo(moderate(6))
+        }
+        
+        newPolicyEmptyView.snp.makeConstraints {
+            $0.top.equalTo(newPolicyCategoryCollectionView.snp.bottom).offset(moderate(100))
+            $0.centerX.width.equalToSuperview()
         }
         
         reviewPolicyView.snp.makeConstraints {

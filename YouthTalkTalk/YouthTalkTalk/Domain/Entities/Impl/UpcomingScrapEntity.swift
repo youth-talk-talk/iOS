@@ -13,6 +13,6 @@ struct UpcomingScrapEntity: Hashable {
     let category: String
     let title: String
     let deadlineStatus: String
-    let hostDep: String
+    let hostDep: String?
     let scrap: Bool
 }

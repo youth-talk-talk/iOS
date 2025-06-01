@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import SnapKit
 
 final class PolicyInfinityPageViewController: UIViewController {
+
+    private var policies: [PolicyDTO] = []
 
     private let resultCountLabel = UILabel().then {
         $0.designed(text: "총 0건", font: .p14Regular)
@@ -46,7 +49,6 @@ final class PolicyInfinityPageViewController: UIViewController {
                                         height: moderate(123))
     private lazy var policyCollectionView = makeCollectionView(policyCellSize, direction: .vertical).then {
         $0.register(cells: PolicyCell.self)
-        $0.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
@@ -56,63 +58,71 @@ final class PolicyInfinityPageViewController: UIViewController {
             self?.sortDropdownView.isHidden.toggle()
         }
         
-        view.addSubview(resultCountLabel)
-        view.addSubview(sortStackView)
         view.addSubview(policyCollectionView)
-        view.addSubview(sortDropdownView)
+//        view.addSubview(resultCountLabel)
+//        view.addSubview(sortStackView)
+//        view.addSubview(sortDropdownView)
 
-        sortStackView.addArrangedSubview(sortLabel)
-        sortStackView.addArrangedSubview(sortArrowImageView)
+//        sortStackView.addArrangedSubview(sortLabel)
+//        sortStackView.addArrangedSubview(sortArrowImageView)
         
-        sortDropdownView.addSubviews(newLabel,
-                                     newImageView,
-                                     popularLabel,
-                                     popularImageView)
-        
-        resultCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(moderate(10))
-            $0.leading.equalToSuperview()
-        }
-        
-        sortStackView.snp.makeConstraints {
-            $0.centerY.equalTo(resultCountLabel)
-            $0.trailing.equalToSuperview()
-        }
-        
-        sortArrowImageView.snp.makeConstraints {
-            $0.size.equalTo(moderate(16))
-        }
-        
-        sortDropdownView.snp.makeConstraints {
-            $0.top.equalTo(sortStackView.snp.bottom).offset(moderate(7))
-            $0.trailing.equalTo(sortStackView)
-            $0.width.equalTo(moderate(120))
-            $0.height.equalTo(moderate(80))
-        }
-        
-        newLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(moderate(10))
-        }
-        
-        newImageView.snp.makeConstraints {
-            $0.trailing.top.equalToSuperview().inset(moderate(10))
-            $0.size.equalTo(20)
-        }
-        
-        popularLabel.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview().inset(moderate(10))
-        }
-        
-        popularImageView.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().inset(moderate(10))
-            $0.size.equalTo(20)
-        }
-        
+//        sortDropdownView.addSubviews(newLabel,
+//                                     newImageView,
+//                                     popularLabel,
+//                                     popularImageView)
+//        
+//        resultCountLabel.snp.makeConstraints {
+//            $0.top.equalToSuperview().offset(moderate(10))
+//            $0.leading.equalToSuperview()
+//        }
+//        
+//        sortStackView.snp.makeConstraints {
+//            $0.centerY.equalTo(resultCountLabel)
+//            $0.trailing.equalToSuperview()
+//        }
+//        
+//        sortArrowImageView.snp.makeConstraints {
+//            $0.size.equalTo(moderate(16))
+//        }
+//        
+//        sortDropdownView.snp.makeConstraints {
+//            $0.top.equalTo(sortStackView.snp.bottom).offset(moderate(7))
+//            $0.trailing.equalTo(sortStackView)
+//            $0.width.equalTo(moderate(120))
+//            $0.height.equalTo(moderate(80))
+//        }
+//        
+//        newLabel.snp.makeConstraints {
+//            $0.leading.top.equalToSuperview().inset(moderate(10))
+//        }
+//        
+//        newImageView.snp.makeConstraints {
+//            $0.trailing.top.equalToSuperview().inset(moderate(10))
+//            $0.size.equalTo(20)
+//        }
+//        
+//        popularLabel.snp.makeConstraints {
+//            $0.leading.bottom.equalToSuperview().inset(moderate(10))
+//        }
+//        
+//        popularImageView.snp.makeConstraints {
+//            $0.trailing.bottom.equalToSuperview().inset(moderate(10))
+//            $0.size.equalTo(20)
+//        }
+//        
         policyCollectionView.snp.makeConstraints {
-            $0.top.equalTo(resultCountLabel.snp.bottom).offset(moderate(10))
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.top.equalToSuperview().offset(moderate(10))
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(moderate(600))
         }
+    }
+    
+    func reloadData(policies: [PolicyDTO]) {
+        self.policies = policies
+        
+        policyCollectionView.reloadData()
+        
+//        resultCountLabel.designed(text: "총 \(policies.count)건", font: .p14Regular)
     }
     
     private func makeCollectionView(_ itemSize: CGSize, direction: UICollectionView.ScrollDirection = .horizontal) -> UICollectionView {
@@ -125,7 +135,7 @@ final class PolicyInfinityPageViewController: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = .white
-            $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
         }
         
         return collectionView
@@ -134,18 +144,25 @@ final class PolicyInfinityPageViewController: UIViewController {
 
 extension PolicyInfinityPageViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return policies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: PolicyCell = collectionView.dequeueCell(for: indexPath) else { return UICollectionViewCell() }
         
         cell.setStyle(.border)
+        cell.setData(policies[indexPath.row])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return moderate(16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let policyId = policies[indexPath.row].policyId
+        let vc = PolicyDetailViewController(policyId: String(policyId))
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

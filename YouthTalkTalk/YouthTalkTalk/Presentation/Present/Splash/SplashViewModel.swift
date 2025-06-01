@@ -37,6 +37,6 @@ final class SplashViewModel: SplashInterface {
             }
         .subscribe(with: self) { owner, isLogined in
             autoSignIn.accept(isLogined)
-        }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag) // 자동 로그인안되게 처리
     }
 }
