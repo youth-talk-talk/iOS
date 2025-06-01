@@ -35,7 +35,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.window?.rootViewController = naviVC
+          // TODO: - 다시 원복해야 함
+//            self.window?.rootViewController = naviVC
+          self.window?.rootViewController = HomeViewController()
             self.window?.makeKeyAndVisible()
         }
     }
