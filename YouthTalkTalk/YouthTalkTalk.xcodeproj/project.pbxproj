@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6A177B9C2DB7A08C0016BF41 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A177B9B2DB7A0870016BF41 /* TermViewController.swift */; };
-		6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */; };
 		6A3BAE9C2DD4125400D1E15F /* NewPolicyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BAE9B2DD4125300D1E15F /* NewPolicyPageViewController.swift */; };
 		6A3BFB0E2DEBC29A000776AA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BFB0D2DEBC28E000776AA /* SettingViewController.swift */; };
 		6A3BFB102DEC0D80000776AA /* SettingTermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BFB0F2DEC0D7A000776AA /* SettingTermViewController.swift */; };
+		6A3BFB122DEC0FEE000776AA /* MyOrScrapPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BFB112DEC0FE9000776AA /* MyOrScrapPostViewController.swift */; };
+		6A3BFB142DEC1B5A000776AA /* MyOrLikedCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BFB132DEC1B4C000776AA /* MyOrLikedCommentViewController.swift */; };
+		6A3BFB162DEC1C2E000776AA /* NewCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BFB152DEC1C23000776AA /* NewCommentCell.swift */; };
 		6A42F9B42DC25D3300BFC347 /* DetailFilterBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B32DC25D2D00BFC347 /* DetailFilterBottomSheetViewController.swift */; };
 		6A42F9B62DC2DE4A00BFC347 /* GrabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B52DC2DE4800BFC347 /* GrabView.swift */; };
 		6A42F9B82DC2E0A800BFC347 /* DetailFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */; };
@@ -221,8 +223,6 @@
 		ACC46CAC2CD2803F0004ED5C /* MyScrapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */; };
 		ACC46CAF2CD2805B0004ED5C /* MyScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */; };
 		ACC46CB12CD282880004ED5C /* ScrapPolicyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */; };
-		ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */; };
-		ACC46CB62CD287ED0004ED5C /* PostCommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB52CD287ED0004ED5C /* PostCommentListViewModel.swift */; };
 		ACC46CB82CD288A80004ED5C /* ScrapPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */; };
 		ACC46CBB2CD28AC40004ED5C /* MyRPScrapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */; };
 		ACC46CBD2CD290340004ED5C /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC46CBC2CD290270004ED5C /* MemberRepository.swift */; };
@@ -312,10 +312,12 @@
 
 /* Begin PBXFileReference section */
 		6A177B9B2DB7A0870016BF41 /* TermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewController.swift; sourceTree = "<group>"; };
-		6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedOrMyCommentListViewController.swift; sourceTree = "<group>"; };
 		6A3BAE9B2DD4125300D1E15F /* NewPolicyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPolicyPageViewController.swift; sourceTree = "<group>"; };
 		6A3BFB0D2DEBC28E000776AA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		6A3BFB0F2DEC0D7A000776AA /* SettingTermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTermViewController.swift; sourceTree = "<group>"; };
+		6A3BFB112DEC0FE9000776AA /* MyOrScrapPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrScrapPostViewController.swift; sourceTree = "<group>"; };
+		6A3BFB132DEC1B4C000776AA /* MyOrLikedCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrLikedCommentViewController.swift; sourceTree = "<group>"; };
+		6A3BFB152DEC1C23000776AA /* NewCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCommentCell.swift; sourceTree = "<group>"; };
 		6A42F9B32DC25D2D00BFC347 /* DetailFilterBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterBottomSheetViewController.swift; sourceTree = "<group>"; };
 		6A42F9B52DC2DE4800BFC347 /* GrabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabView.swift; sourceTree = "<group>"; };
 		6A42F9B72DC2E0A300BFC347 /* DetailFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterViewController.swift; sourceTree = "<group>"; };
@@ -520,8 +522,6 @@
 		ACC46CAB2CD2803F0004ED5C /* MyScrapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapViewModel.swift; sourceTree = "<group>"; };
 		ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrapInterface.swift; sourceTree = "<group>"; };
 		ACC46CB02CD282880004ED5C /* ScrapPolicyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPolicyDTO.swift; sourceTree = "<group>"; };
-		ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPolicyOrPostListViewController.swift; sourceTree = "<group>"; };
-		ACC46CB52CD287ED0004ED5C /* PostCommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentListViewModel.swift; sourceTree = "<group>"; };
 		ACC46CB72CD288A80004ED5C /* ScrapPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostDTO.swift; sourceTree = "<group>"; };
 		ACC46CBA2CD28AC40004ED5C /* MyRPScrapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRPScrapInterface.swift; sourceTree = "<group>"; };
 		ACC46CBC2CD290270004ED5C /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
@@ -653,6 +653,9 @@
 		AC0AA5C82CCFF04E00DB032E /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				6A3BFB152DEC1C23000776AA /* NewCommentCell.swift */,
+				6A3BFB132DEC1B4C000776AA /* MyOrLikedCommentViewController.swift */,
+				6A3BFB112DEC0FE9000776AA /* MyOrScrapPostViewController.swift */,
 				6A3BFB0F2DEC0D7A000776AA /* SettingTermViewController.swift */,
 				6A3BFB0D2DEBC28E000776AA /* SettingViewController.swift */,
 				6AB69EDA2DC9AE9300279C1C /* EditMyInfoViewController.swift */,
@@ -919,7 +922,6 @@
 			isa = PBXGroup;
 			children = (
 				ACC46CC62CD294870004ED5C /* Setting */,
-				ACC46CB22CD286DF0004ED5C /* MyScrapRP */,
 				ACC46CA62CD27DA40004ED5C /* MyScrap */,
 				AC0AA5C82CCFF04E00DB032E /* MyPage */,
 				AC5A7C232BF102B800A13991 /* Base */,
@@ -1106,16 +1108,6 @@
 				ACC46CAE2CD2805B0004ED5C /* MyScrapInterface.swift */,
 			);
 			path = MyScrap;
-			sourceTree = "<group>";
-		};
-		ACC46CB22CD286DF0004ED5C /* MyScrapRP */ = {
-			isa = PBXGroup;
-			children = (
-				ACC46CB32CD287000004ED5C /* MyPolicyOrPostListViewController.swift */,
-				ACC46CB52CD287ED0004ED5C /* PostCommentListViewModel.swift */,
-				6A2B651C2D09084700989F82 /* LikedOrMyCommentListViewController.swift */,
-			);
-			path = MyScrapRP;
 			sourceTree = "<group>";
 		};
 		ACC46CB92CD28AB10004ED5C /* MyRPScrap */ = {
@@ -1705,6 +1697,7 @@
 				AC579B9F2C5CB9F600D1C9FC /* MethodTableViewCell.swift in Sources */,
 				AC579B6B2C5134A200D1C9FC /* PolicyView.swift in Sources */,
 				AC579B992C5CB90B00D1C9FC /* BaseTableViewCell.swift in Sources */,
+				6A3BFB162DEC1C2E000776AA /* NewCommentCell.swift in Sources */,
 				AC604C742C7A24CE00804950 /* ResultSearchInterface.swift in Sources */,
 				AC579B4E2C451CA500D1C9FC /* HomeOutput.swift in Sources */,
 				AC579B2A2C3BE10500D1C9FC /* SearchInput.swift in Sources */,
@@ -1716,7 +1709,6 @@
 				6A8C1DDF2DC5AFEC00B0624D /* MyPageViewController.swift in Sources */,
 				AC579BA12C5CBA0A00D1C9FC /* TargetTableViewCell.swift in Sources */,
 				ACF2A2C72C2D58AF00FE8D63 /* SplashView.swift in Sources */,
-				6A2B651D2D09084700989F82 /* LikedOrMyCommentListViewController.swift in Sources */,
 				ACF2A28A2C281E4800FE8D63 /* SignInInterface.swift in Sources */,
 				AC579B472C44FC9900D1C9FC /* APIError.swift in Sources */,
 				AC0AA5BB2CCE227200DB032E /* CommentRouter.swift in Sources */,
@@ -1776,7 +1768,6 @@
 				AC579B742C53B29800D1C9FC /* DetailPolicyOutput.swift in Sources */,
 				6AE67EE52D51956900888F87 /* SettingNicknameViewController.swift in Sources */,
 				ACF2A2C52C2D58A600FE8D63 /* SplashViewController.swift in Sources */,
-				ACC46CB62CD287ED0004ED5C /* PostCommentListViewModel.swift in Sources */,
 				AC579B562C45266200D1C9FC /* HomePolicyDTO.swift in Sources */,
 				AC604C782C7B1CD000804950 /* ConditionPolicyDTO.swift in Sources */,
 				AC604C672C7A01F300804950 /* ResultSearchLayout.swift in Sources */,
@@ -1806,6 +1797,7 @@
 				6A42F9B62DC2DE4A00BFC347 /* GrabView.swift in Sources */,
 				AC5A7C2C2BF1093B00A13991 /* CoordinatorType.swift in Sources */,
 				6A42F9C52DC337B800BFC347 /* PolicyDateCell.swift in Sources */,
+				6A3BFB122DEC0FEE000776AA /* MyOrScrapPostViewController.swift in Sources */,
 				AC579B3B2C3E7D1E00D1C9FC /* MeRouter.swift in Sources */,
 				AC579B492C451C4B00D1C9FC /* HomeViewModel.swift in Sources */,
 				6A9634DF2DE3F0F400EAC49D /* PolicyDetailViewController.swift in Sources */,
@@ -1838,6 +1830,7 @@
 				AC5A7C2A2BF108AF00A13991 /* Coordinator.swift in Sources */,
 				ACF2A2A82C2AB01800FE8D63 /* SignUpInput.swift in Sources */,
 				ACF2A2632C215A3F00FE8D63 /* HomeViewController.swift in Sources */,
+				6A3BFB142DEC1B5A000776AA /* MyOrLikedCommentViewController.swift in Sources */,
 				6AB69EDB2DC9AEAF00279C1C /* EditMyInfoViewController.swift in Sources */,
 				AC604BE22C63A9EB00804950 /* SearchHeaderView.swift in Sources */,
 				AC604C2F2C6A3C0D00804950 /* NewPostView.swift in Sources */,
@@ -1896,7 +1889,6 @@
 				AC579B3F2C40156100D1C9FC /* SignUpUseCaseImpl.swift in Sources */,
 				AC0AA5A02CC508F300DB032E /* PosetDetailViewModel.swift in Sources */,
 				ACF2A25E2C21533B00FE8D63 /* UITextField++.swift in Sources */,
-				ACC46CB42CD287000004ED5C /* MyPolicyOrPostListViewController.swift in Sources */,
 				AC0AA59A2CC374D100DB032E /* PostDetailView.swift in Sources */,
 				AC0AA5B52CCE19AC00DB032E /* CommentTableViewCell.swift in Sources */,
 				6A478CCB2DBDFE5A00AF8494 /* CategoryCell.swift in Sources */,

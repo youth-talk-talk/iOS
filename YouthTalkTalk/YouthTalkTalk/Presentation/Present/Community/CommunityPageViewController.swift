@@ -47,6 +47,38 @@ final class CommunityPageViewController: UIViewController {
         $0.register(cells: NewPostCell.self)
     }
     
+    private func makeCollectionView(layout: UICollectionViewLayout) -> UICollectionView {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
+            $0.collectionViewLayout = layout
+            $0.delegate = self
+            $0.dataSource = self
+            $0.backgroundColor = .white
+            $0.showsHorizontalScrollIndicator = false
+            $0.showsVerticalScrollIndicator = false
+        }
+        
+        return collectionView
+    }
+    
+    private func postListLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { section, environment in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(32)),
+                                                  heightDimension: .estimated(moderate(165)))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(32)),
+                                                   heightDimension: .estimated(moderate(165)))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: moderate(8), leading: moderate(16), bottom: 0, trailing: moderate(16))
+
+            return section
+        }
+        
+        return layout
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -115,38 +147,6 @@ final class CommunityPageViewController: UIViewController {
         } else {
             postCollectionViewTopConstraint?.update(offset: moderate(20) + moderate(32))
         }
-    }
-    
-    private func makeCollectionView(layout: UICollectionViewLayout) -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-            $0.collectionViewLayout = layout
-            $0.delegate = self
-            $0.dataSource = self
-            $0.backgroundColor = .white
-            $0.showsHorizontalScrollIndicator = false
-            $0.showsVerticalScrollIndicator = false
-        }
-        
-        return collectionView
-    }
-    
-    private func postListLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { section, environment in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(32)),
-                                                  heightDimension: .estimated(moderate(165)))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - moderate(32)),
-                                                   heightDimension: .estimated(moderate(165)))
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: moderate(8), leading: moderate(16), bottom: 0, trailing: moderate(16))
-
-            return section
-        }
-        
-        return layout
     }
     
     private func popularLayout() -> UICollectionViewLayout {

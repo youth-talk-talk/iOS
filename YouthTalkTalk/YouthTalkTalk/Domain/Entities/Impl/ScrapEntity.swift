@@ -24,15 +24,21 @@ struct ScrapEntity {
 }
 
 struct LikedComment: Decodable {
-    let status: Int
-    let message, code: String
-    let data: [LikedCommentData]
+    let data: LikedCommentDetail?
 }
 
+struct LikedCommentDetail: Decodable {
+    let commentCount: Int
+    let comments: [LikedCommentData]
+}
 struct LikedCommentData: Decodable, Hashable {
     let commentId: Int
     let nickname: String
     var content: String
     let policyId: String?
-    let postID: Int?
+    let articleId: Int?
+    let articleType: String
+    let articleTitle: String
+    let isLikedByMember: Bool
+    let likeCount: Int
 }
