@@ -124,7 +124,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let policyVC = UINavigationController(rootViewController: PolicyMainViewController())
                 
         // 마이페이지 탭
-        let myPageNaviVC = UINavigationController(rootViewController: NewMyPageViewController())
+        let myPageNaviVC = UINavigationController(rootViewController: MyPageViewController())
         
         // 탭 구성요소
         let tabItems: [TabItem] = [

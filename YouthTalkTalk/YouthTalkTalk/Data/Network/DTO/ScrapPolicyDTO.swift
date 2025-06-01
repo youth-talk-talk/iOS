@@ -17,7 +17,7 @@ struct ScrapPolicyDTO: Decodable {
 
 struct UploadImageDTO: Decodable {
     let status: Int
-    let message: String
-    let code: String
-    let data: String
+    let message: String?
+    let code: String?
+    let data: String?
 }

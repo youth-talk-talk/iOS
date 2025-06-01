@@ -192,17 +192,13 @@ final class CreatePostViewController: RootViewController {
                                                                                       policyId: "\(selectedPolicyId)",
                                                                                                 contentList: [.init(content: contentsTextView.text ?? "", type: "TEXT")]), writeType, postId: postData?.postId ?? 0)
             } else {
-//                showAlertView("모두 작성되어야\n게시글 등록이 가능합니다", okAction: { [weak self] in
-//                    self?.alertView.isHidden = true
-//                })
+                showAlert(title: "알림", content: "모두 작성되어야\n게시글 등록이 가능합니다")
             }
         }
         
-//        setBackButtonTapped { [weak self] in
-//            self?.showAlertView("글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다", okAction: { [weak self] in
-//                self?.navigationController?.popViewController(animated: true)
-//            })
-//        }
+        showAlert(title: "알림", content: "글쓰기를 중단하시겠습니까?\n작성중이던 글이 사라집니다") {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func isUploadValid() -> Bool {

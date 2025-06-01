@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import BSImagePicker
+import Photos
+import RxSwift
+import AVFoundation
+import Kingfisher
 
 final class EditMyInfoViewController: RootViewController {
     
     private let viewModel: MyPageViewModel
-    
+    private var disposeBag = DisposeBag()
+
     private let titleLabel = UILabel().then {
         $0.designed(text: "내 계정", font: .p18Semi)
     }
@@ -19,7 +25,11 @@ final class EditMyInfoViewController: RootViewController {
         $0.designed(text: "저장", font: .p12Regular, textColor: .green)
     }
     
-    private let profileImageView = UIImageView(image: .profileLogo)
+    private let profileImageView = UIImageView(image: .profileLogo).then {
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = moderate(47)
+        $0.clipsToBounds = true
+    }
     
     private let photoImageView = UIImageView(image: .camera)
     
@@ -64,9 +74,17 @@ final class EditMyInfoViewController: RootViewController {
         $0.image = .arrowDown
     }
     
+    private var imagePickerController: ImagePickerProtocol?
+    
+    private var profileImageData: Data?
+    
     init(_ myInfo: MeDTO, _ viewModel: MyPageViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        if let url = URL(string: myInfo.data.profileImgUrl ?? "") {
+            profileImageView.kf.setImage(with: url)
+        }
         
         nameTextField.text = myInfo.data.nickname
         regionSelectLabel.text = myInfo.data.region
@@ -78,6 +96,10 @@ final class EditMyInfoViewController: RootViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePickerController = ImagePicker(presentationController: self,
+                                            delegate: self,
+                                            width: nil)
         
         logoutLabel.onTapped { [weak self] in
             self?.goLoginPage()
@@ -99,14 +121,49 @@ final class EditMyInfoViewController: RootViewController {
                             cancelText: "닫기",
                             actionText: "저장하기",
                             onAction: { [weak self] in
-                self?.viewModel.editMyInfo(nickname: self?.nameTextField.text,
-                                           region: self?.regionSelectLabel.text ?? "서울",
-                                           onSuccess: { [weak self] in
-                    DispatchQueue.main.async {
-                        self?.navigationController?.popViewController(animated: true)
-                    }
-                })
+                
+                if let image = self?.profileImageData {
+                    // 새로 등록한 이미지가 있다면 이미지 등록 API 호출
+                    APIManager().postUploadImage(stringURL: "/members/profile", image: image)
+                        .subscribe({ [weak self] result in
+                            guard let self else { return }
+                            
+                            switch result {
+                            case.success(let data):
+                                switch data {
+                                case .success(let url):
+                                    viewModel.editMyInfo(nickname: nameTextField.text,
+                                                         region: regionSelectLabel.text ?? "서울",
+                                                         onSuccess: { [weak self] in
+                                        DispatchQueue.main.async {
+                                            self?.navigationController?.popViewController(animated: true)
+                                        }
+                                    })
+                                case .failure:
+                                    break
+                                }
+                                
+                            case .failure:
+                                break
+                            }
+                        })
+                        .disposed(by: self?.disposeBag ?? .init())
+                    
+                } else {
+                    // 이미지가 없으면 바로 내 정보 수정 API 호출
+                    self?.viewModel.editMyInfo(nickname: self?.nameTextField.text,
+                                               region: self?.regionSelectLabel.text ?? "서울",
+                                               onSuccess: { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.navigationController?.popViewController(animated: true)
+                        }
+                    })
+                }
             })
+        }
+        
+        profileImageView.onTapped { [weak self] in
+            self?.checkPermission()
         }
         
         regionArrowImageView.onTapped { [weak self] in
@@ -125,6 +182,7 @@ final class EditMyInfoViewController: RootViewController {
         view.addSubviews(titleLabel,
                          saveLabel,
                          profileImageView,
+                         photoImageView,
                          nameLabel,
                          nameView,
                          regionLabel,
@@ -136,8 +194,6 @@ final class EditMyInfoViewController: RootViewController {
         
         regionView.addSubview(regionSelectLabel)
         regionView.addSubview(regionArrowImageView)
-        
-        profileImageView.addSubview(photoImageView)
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalTo(backImageView)
@@ -156,7 +212,7 @@ final class EditMyInfoViewController: RootViewController {
         }
         
         photoImageView.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview()
+            $0.bottom.trailing.equalTo(profileImageView)
             $0.size.equalTo(moderate(20))
         }
         
@@ -208,6 +264,100 @@ final class EditMyInfoViewController: RootViewController {
         logoutLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(dividerView.snp.bottom).offset(moderate(20))
+        }
+    }
+}
+
+extension EditMyInfoViewController {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            picker.dismiss(animated: true)
+            return
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditMyInfoViewController: UIImagePickerControllerDelegate,
+                                 UINavigationControllerDelegate,
+                                 ImagePickerDelegate {
+    func didSelect(assets: [PHAsset]?, deletedAssets: [PHAsset]?) {
+        if assets != nil, let firstImage = assets?.first {
+            let uiimage = getAssetThumbnail(asset: firstImage)
+            profileImageView.image = getAssetThumbnail(asset: firstImage)
+            profileImageData = uiimage.pngData()
+        }
+    }
+    
+    private func getAssetThumbnail(asset: PHAsset) -> UIImage {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        option.isSynchronous = true
+        manager.requestImage(for: asset, targetSize: CGSize(width: 641, height: 415), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+            thumbnail = result!
+        })
+        return thumbnail
+    }
+    
+    private func checkPermission() {
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        switch status {
+        case .limited:
+            let actionSheet = UIAlertController(title: "",
+                                                message: "더 많은 사진을 선택하거나 모든 사진에 대한 액세스를 허용하려면 설정으로 이동해주세요.",
+                                                preferredStyle: .actionSheet)
+            
+            let selectPhotosAction = UIAlertAction(title: "더 많은 사진 선택",
+                                                   style: .default) { [weak self] _ in
+                guard let self = self else { return }
+                if #available(iOS 15, *) {
+                    PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self) { [weak self] _ in
+                        self?.imagePickerController?.present()
+                    }
+                } else {
+                    imagePickerController?.present()
+                }
+            }
+            actionSheet.addAction(selectPhotosAction)
+            
+            let allowFullAccessAction = UIAlertAction(title: "권한 설정으로 이동",
+                                                      style: .default) { _ in
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString),
+                      UIApplication.shared.canOpenURL(settingsURL) else { return }
+                UIApplication.shared.open(settingsURL, completionHandler: nil)
+            }
+            actionSheet.addAction(allowFullAccessAction)
+            
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel) { [weak self] _ in
+                self?.imagePickerController?.present()
+            }
+            actionSheet.addAction(cancelAction)
+            
+            present(actionSheet, animated: true, completion: nil)
+            
+        case .authorized:
+            imagePickerController?.present()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization() { [weak self] newStatus in
+                guard let selfRef = self else { return }
+                if newStatus == PHAuthorizationStatus.authorized {
+                    selfRef.imagePickerController?.present()
+                }
+            }
+        default:
+            let alertView = TwoButtonAlertView(title: "사진을 불러올 수 없습니다. \n사진 접근 권한을 허용해주세요.") {
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString),
+                      UIApplication.shared.canOpenURL(settingsURL) else { return }
+                UIApplication.shared.open(settingsURL, completionHandler: nil)
+            }
+            
+            view.addSubview(alertView)
+            
+            alertView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
         }
     }
 }
