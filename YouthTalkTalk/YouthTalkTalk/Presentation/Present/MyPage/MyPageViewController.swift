@@ -220,10 +220,11 @@ final class MyPageViewController: RootViewController {
         }
         
         // 커뮤니티 메뉴
-        [("작성한 글", UIViewController()),
-         ("스크랩한 게시글", MyScrapViewController()),
-         ("좋아요한 댓글", UIViewController()),
-         ("내 댓글", UIViewController())].forEach { title, moveToVC in
+        [("작성한 글", MyOrScrapPostViewController(type: .myPost)),
+         ("스크랩한 게시글", MyOrScrapPostViewController(type: .scrapPost)),
+         ("좋아요한 댓글", MyOrLikedCommentViewController(type: .likedComment)),
+         ("내 댓글", MyOrLikedCommentViewController(type: .myComment))].forEach { title, moveToVC in
+            
             let menuView = self.titleArrowView(text: title, onTapped: { [weak self] in
                 self?.navigationController?.pushViewController(moveToVC, animated: true)
             })

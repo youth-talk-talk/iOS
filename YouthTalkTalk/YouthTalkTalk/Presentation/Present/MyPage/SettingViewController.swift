@@ -20,7 +20,10 @@ final class SettingViewController: RootViewController {
     }
     
     private lazy var versionLabel = UILabel().then {
-        $0.designed(text: "버전", font: .p16Regular16, textColor: .gray90)
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+           let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            $0.designed(text: version + "(" + build + ")", font: .p16Regular16, textColor: .gray90)
+        }
     }
     
     private lazy var exitLabel = UILabel().then {

@@ -87,12 +87,7 @@ final class APIManager: APIInterface {
             .responseJSON { response in
                 switch response.result {
                 case .success:
-                    print("|| \(response.response.debugDescription)")
-                    print("|| \(response.response?.url)")
-                    print("|| \(response.response?.statusCode)")
-                    print("|| \(response.response?.allHeaderFields)")
-                    print("|| \(response.response?.headers)")
-
+                    
                     if let responseData = response.data {
                          do {
                              let decoder = JSONDecoder()

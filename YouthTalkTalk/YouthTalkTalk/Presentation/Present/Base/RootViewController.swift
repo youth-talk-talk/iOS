@@ -10,6 +10,9 @@ import UIKit
 class RootViewController: UIViewController {
     
     private(set) var backImageView = UIImageView(image: .back)
+    private(set) var xImageView = UIImageView(image: .littleXmark).then {
+        $0.isHidden = true
+    }
     
     private let titleLabel = UILabel().then {
         $0.designed(font: .p18Semi)
@@ -72,11 +75,12 @@ class RootViewController: UIViewController {
         
         view.addSubview(backImageView)
         view.addSubview(titleLabel)
+        view.addSubview(xImageView)
         
         backImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(33)
-            $0.leading.equalToSuperview().inset(16)
-            $0.size.equalTo(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(moderate(33))
+            $0.leading.equalToSuperview().inset(moderate(16))
+            $0.size.equalTo(moderate(24))
         }
         
         titleLabel.snp.makeConstraints {
@@ -84,7 +88,17 @@ class RootViewController: UIViewController {
             $0.centerY.equalTo(backImageView)
         }
         
+        xImageView.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(moderate(16))
+            $0.size.equalTo(moderate(24))
+        }
+        
         backImageView.onTapped { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        xImageView.onTapped { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
     }
