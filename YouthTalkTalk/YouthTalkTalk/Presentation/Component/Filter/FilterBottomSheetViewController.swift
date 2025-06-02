@@ -45,19 +45,21 @@ final class FilterBottomSheetViewController: UIViewController {
     }
     
     private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    
     private lazy var pages: [UIViewController] = categories.map { category in
-        // TODO: - 뷰컨
+        // TODO: - 뷰컨적용하기
         switch category {
         case "정책분야": return PolicyFieldCategoryViewController()
-        case "지역": return UIViewController()
-        case "학력": return UIViewController()
-        case "취업상태": return UIViewController()
-        case "특화 분야": return UIViewController()
+        case "지역": return RegionCategoryViewController()
+        case "학력": return EducationCategoryViewController()
+        case "취업상태": return EmploymentStatusCategoryViewController()
+        case "특화 분야": return SpecializationCategoryViewController()
         case "연령 및 소득": return UIViewController()
         default: return UIViewController()
         }
         
     }
+    
     private var currentIndex: Int = 0
     
     // MARK: - Bottom Buttons

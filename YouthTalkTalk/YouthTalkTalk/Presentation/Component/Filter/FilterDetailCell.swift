@@ -56,8 +56,18 @@ final class FilterDetailCell: UICollectionViewCell {
     }
     
     // MARK: - Configue
-    func configure(with text: String) {
-        self.titleLabel.text = text
+    func configure(with model: FilterDetailItem) {
+        self.titleLabel.text = model.title
+        
+        if model.isSelected {
+            contentView.backgroundColor = .greenNormal
+            titleLabel.textColor = .gray10
+            contentView.layer.borderWidth = 0
+        } else {
+            contentView.backgroundColor = .gray10
+            titleLabel.textColor = .gray80
+            contentView.layer.borderWidth = 1
+        }
     }
     
     // MARK: - Private
