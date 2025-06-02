@@ -20,6 +20,7 @@ enum FontType {
     case p16SemiBold
     case p16Regular24
     case p16Regular16
+    case p16Medium
     
     case p14Bold
     case p14Regular
@@ -114,6 +115,10 @@ final class FontManager {
           fontWeight = "SemiBold"
           fontSize = 14
             
+        case .p16Medium:
+            fontWeight = "Medium"
+            fontSize = 16
+            
         case .p16SemiBold:
             fontWeight = "SemiBold"
             fontSize = 16
@@ -171,6 +176,8 @@ final class FontManager {
         var lineHeight: CGFloat = 0
         
         switch fontType {
+        case .p16Medium:
+            lineHeight = 24
         case .p24Bold:
             lineHeight = 24
         case .p18Bold:
