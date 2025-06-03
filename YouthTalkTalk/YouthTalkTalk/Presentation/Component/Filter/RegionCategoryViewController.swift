@@ -26,6 +26,7 @@ final class RegionCategoryViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: FilterCategorySectionLayout.createTwoSectionLayout()
     ).then {
+        $0.allowsMultipleSelection = true
         $0.dataSource = self
         $0.delegate = self
         $0.register(FilterDetailCell.self, forCellWithReuseIdentifier: FilterDetailCell.identifier)
@@ -80,6 +81,19 @@ extension RegionCategoryViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        print("cell 선택됨: \(self.dataSource[indexPath.section][indexPath.item])")
+        let isAllSelect = (indexPath.section == 0)
+        if isAllSelect {
+            // 전체 지역 클릭 시: 나머지 지역 선택 해제, 전체만 선택
+            for item in 0..<dataSource[1].count {
+                let otherIndexPath = IndexPath(item: item, section: 1)
+                collectionView.deselectItem(at: otherIndexPath, animated: false)
+            }
+            // 전체 지역만 남기기
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        } else {
+            // 나머지 지역 클릭 시: 전체 지역 해제
+            let allSelectIndexPath = IndexPath(item: 0, section: 0)
+            collectionView.deselectItem(at: allSelectIndexPath, animated: false)
+        }
     }
 }
