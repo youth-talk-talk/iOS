@@ -54,7 +54,7 @@ final class FilterBottomSheetViewController: UIViewController {
         case "학력": return EducationCategoryViewController()
         case "취업상태": return EmploymentStatusCategoryViewController()
         case "특화 분야": return SpecializationCategoryViewController()
-        case "연령 및 소득": return UIViewController()
+        case "연령 및 소득": return AgeAndIncomeCategoryViewController()
         default: return UIViewController()
         }
         

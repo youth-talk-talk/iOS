@@ -9,11 +9,21 @@ import UIKit
 import SnapKit
 import Then
 
+protocol FilterDetailCellDelegate: AnyObject {
+    func didTapCell()
+}
+
 final class FilterDetailCell: UICollectionViewCell {
     // MARK: - Properties
     private let titleLabel = UILabel().then {
         $0.font = FontManager.font(.p14Regular)
         $0.textColor = .gray80
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            self.updateStyle(isSelected: isSelected)
+        }
     }
 
     // MARK: - LifeCycle
@@ -55,11 +65,15 @@ final class FilterDetailCell: UICollectionViewCell {
         contentView.layer.borderWidth = 1
     }
     
-    // MARK: - Configue
+    // MARK: - Helper
     func configure(with model: FilterDetailItem) {
         self.titleLabel.text = model.title
         
-        if model.isSelected {
+        self.updateStyle(isSelected: model.isSelected)
+    }
+    
+    func updateStyle(isSelected: Bool) {
+        if isSelected {
             contentView.backgroundColor = .greenNormal
             titleLabel.textColor = .gray10
             contentView.layer.borderWidth = 0
@@ -71,6 +85,8 @@ final class FilterDetailCell: UICollectionViewCell {
     }
     
     // MARK: - Private
+    
+    
     // label text가 길어져서 cell width가 최대 지정 width를 넘어간다면, cell width를 고정해줍니다.
     private func calculateTagSize(
       to layoutAttributes: UICollectionViewLayoutAttributes

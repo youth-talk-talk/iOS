@@ -30,5 +30,5 @@ struct FilterDetailItem {
 
 struct SpecializationCategoryDataSource {
     let section: SpecializationSection
-    let items: [FilterDetailItem]
+    var items: [FilterDetailItem]
 }

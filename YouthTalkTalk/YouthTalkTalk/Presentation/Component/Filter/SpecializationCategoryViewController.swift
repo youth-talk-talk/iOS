@@ -23,6 +23,7 @@ final class SpecializationCategoryViewController: UIViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: EmploymentStatusCategoryHeaderView.identifier
         )
+        $0.allowsMultipleSelection = true
     }
     
     private var dataSource: [SpecializationCategoryDataSource] = [
@@ -103,6 +104,14 @@ extension SpecializationCategoryViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        print("cell 선택됨: \(self.dataSource[indexPath.section].items[indexPath.item].title)")
+        // 같은 section에서 이미 선택된 cell 찾기
+        if let selectedIndexPaths = collectionView.indexPathsForSelectedItems {
+            for selected in selectedIndexPaths {
+                if selected.section == indexPath.section, selected != indexPath {
+                    // 같은 section의 다른 cell은 선택 해제
+                    collectionView.deselectItem(at: selected, animated: false)
+                }
+            }
+        }
     }
 }

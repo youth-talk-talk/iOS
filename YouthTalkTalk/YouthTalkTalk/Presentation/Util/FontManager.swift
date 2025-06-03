@@ -24,11 +24,12 @@ enum FontType {
     
     case p14Bold
     case p14Regular
+    case p14Medium
     case p14SemiBold
   
     case p12Bold
     case p12Regular
-    
+    case p12Medium
     case p10Regular
     
     case g20Bold
@@ -91,6 +92,12 @@ final class FontManager {
         var fontSize: CGFloat = 0
         
         switch fontType {
+        case .p12Medium:
+            fontWeight = "Medium"
+            fontSize = 12
+        case .p14Medium:
+            fontWeight = "Medium"
+            fontSize = 14
         case .p24Bold:
             fontWeight = "Bold"
             fontSize = 24
@@ -212,6 +219,10 @@ final class FontManager {
             lineHeight = 24
         case .p14SemiBold:
           lineHeight = 24
+        case .p14Medium:
+            lineHeight = 24
+        case .p12Medium:
+            lineHeight = 24
         }
         
         return lineHeight

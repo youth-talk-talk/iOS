@@ -23,6 +23,7 @@ final class PolicyFieldCategoryViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: FilterCategorySectionLayout.createTwoSectionLayout()
     ).then {
+        $0.allowsMultipleSelection = true
         $0.dataSource = self
         $0.delegate = self
         $0.register(FilterDetailCell.self, forCellWithReuseIdentifier: FilterDetailCell.identifier)
