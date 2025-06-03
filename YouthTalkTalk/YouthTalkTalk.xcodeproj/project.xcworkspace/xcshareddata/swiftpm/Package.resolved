@@ -1,5 +1,5 @@
 {
-  "originHash" : "4e04f6432dbb6fc5cf140c10ffccf77b3f03183522ad54db21a09b19a2a60e2f",
+  "originHash" : "82fcfb2474ef08bc7bce831653638d746c2b22f9406842ff94e3f5ea0dcdefdb",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -65,6 +65,15 @@
       }
     },
     {
+      "identity" : "multislider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yonat/MultiSlider",
+      "state" : {
+        "revision" : "b16ea48cbccd86ee6e4cc07f9e0e536683f90e8e",
+        "version" : "2.2.0"
+      }
+    },
+    {
       "identity" : "ohhttpstubs",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AliSoftware/OHHTTPStubs.git",
@@ -116,6 +125,15 @@
       "state" : {
         "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
         "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "sweeterswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yonat/SweeterSwift",
+      "state" : {
+        "revision" : "c9e34c454ba4d5b7b6a81c766bb3337fb6e21dfc",
+        "version" : "1.2.6"
       }
     },
     {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1380F2772DEAC15E0012F7E5 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1380F2752DEAC15E0012F7E5 /* APIKey.swift */; };
 		1380F2782DEAC15E0012F7E5 /* KakaoConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1380F2762DEAC15E0012F7E5 /* KakaoConfig.xcconfig */; };
+		13CB90D22DEEE20C00AEAA07 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 13CB90D12DEEE20C00AEAA07 /* MultiSlider */; };
 		6A177B9C2DB7A08C0016BF41 /* TermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A177B9B2DB7A0870016BF41 /* TermViewController.swift */; };
 		6A3BAE9C2DD4125400D1E15F /* NewPolicyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BAE9B2DD4125300D1E15F /* NewPolicyPageViewController.swift */; };
 		6A3BFB0E2DEBC29A000776AA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3BFB0D2DEBC28E000776AA /* SettingViewController.swift */; };
@@ -601,6 +602,7 @@
 				6A5B05A72DB74EE20096F608 /* Lottie in Frameworks */,
 				ACF2A2B82C2C184D00FE8D63 /* RxKakaoSDKUser in Frameworks */,
 				6AF137602CDE2177004E927B /* Then in Frameworks */,
+				13CB90D22DEEE20C00AEAA07 /* MultiSlider in Frameworks */,
 				AC4B43092C1B147F005FC370 /* RxCocoa in Frameworks */,
 				AC4B42DD2C183AF4005FC370 /* PinLayout in Frameworks */,
 				AC0AA5AD2CCE015500DB032E /* Kingfisher in Frameworks */,
@@ -1547,6 +1549,7 @@
 				6AFE80762CDE26D30039A01B /* SnapKit */,
 				6A90810A2CEDF3AD00B52C91 /* BSImagePicker */,
 				6A5B05A62DB74EE20096F608 /* Lottie */,
+				13CB90D12DEEE20C00AEAA07 /* MultiSlider */,
 			);
 			productName = YouthTalkTalk;
 			productReference = AC5A7BEE2BF0FDB500A13991 /* YouthTalkTalk.app */;
@@ -1632,6 +1635,7 @@
 				6AFE80752CDE26D30039A01B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6A9081092CEDF3AD00B52C91 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				6A5B05A52DB74EE20096F608 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				13CB90D02DEEE20C00AEAA07 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 			);
 			productRefGroup = AC5A7BEF2BF0FDB500A13991 /* Products */;
 			projectDirPath = "";
@@ -2301,6 +2305,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		13CB90D02DEEE20C00AEAA07 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yonat/MultiSlider";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 		6A5B05A52DB74EE20096F608 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -2392,6 +2404,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		13CB90D12DEEE20C00AEAA07 /* MultiSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13CB90D02DEEE20C00AEAA07 /* XCRemoteSwiftPackageReference "MultiSlider" */;
+			productName = MultiSlider;
+		};
 		6A5B05A62DB74EE20096F608 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6A5B05A52DB74EE20096F608 /* XCRemoteSwiftPackageReference "lottie-ios" */;
