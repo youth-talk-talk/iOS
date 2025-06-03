@@ -27,6 +27,7 @@ final class EducationCategoryViewController: UIViewController {
             )
         )
     ).then {
+        $0.allowsMultipleSelection = true
         $0.dataSource = self
         $0.delegate = self
         $0.register(FilterDetailCell.self, forCellWithReuseIdentifier: FilterDetailCell.identifier)
@@ -77,6 +78,19 @@ extension EducationCategoryViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        print("cell 선택됨: \(self.dataSource[indexPath.item])")
+        let isAllSelect = (indexPath.item == 0)
+        if isAllSelect {
+            // 전체 선택 클릭 시: 나머지 태그 선택 해제, 전체만 선택
+            for item in 1..<dataSource.count {
+                let otherIndexPath = IndexPath(item: item, section: 0)
+                collectionView.deselectItem(at: otherIndexPath, animated: false)
+            }
+            // 전체 선택만 남기기
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        } else {
+            // 나머지 태그 클릭 시: 전체 선택 해제
+            let allSelectIndexPath = IndexPath(item: 0, section: 0)
+            collectionView.deselectItem(at: allSelectIndexPath, animated: false)
+        }
     }
 }

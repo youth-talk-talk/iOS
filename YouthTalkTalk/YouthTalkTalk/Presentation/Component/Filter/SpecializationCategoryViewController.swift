@@ -19,9 +19,9 @@ final class SpecializationCategoryViewController: UIViewController {
         $0.delegate = self
         $0.register(FilterDetailCell.self, forCellWithReuseIdentifier: FilterDetailCell.identifier)
         $0.register(
-            EmploymentStatusCategoryHeaderView.self,
+            SpecializationCategoryHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: EmploymentStatusCategoryHeaderView.identifier
+            withReuseIdentifier: SpecializationCategoryHeaderView.identifier
         )
         $0.allowsMultipleSelection = true
     }
@@ -88,9 +88,9 @@ extension SpecializationCategoryViewController: UICollectionViewDataSource {
         if kind == UICollectionView.elementKindSectionHeader,
            let headerView = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
-            withReuseIdentifier: EmploymentStatusCategoryHeaderView.identifier,
+            withReuseIdentifier: SpecializationCategoryHeaderView.identifier,
             for: indexPath
-           ) as? EmploymentStatusCategoryHeaderView {
+           ) as? SpecializationCategoryHeaderView {
             headerView.configure(text: self.dataSource[indexPath.section].section.title)
             return headerView
         }
@@ -104,14 +104,20 @@ extension SpecializationCategoryViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        // 같은 section에서 이미 선택된 cell 찾기
-        if let selectedIndexPaths = collectionView.indexPathsForSelectedItems {
-            for selected in selectedIndexPaths {
-                if selected.section == indexPath.section, selected != indexPath {
-                    // 같은 section의 다른 cell은 선택 해제
-                    collectionView.deselectItem(at: selected, animated: false)
-                }
+        let isAllSelect = (indexPath.item == 0)
+        if isAllSelect {
+            // 해당 section의 전체 선택 클릭 시: 나머지 태그 선택 해제, 전체만 선택
+            let itemCount = dataSource[indexPath.section].items.count
+            for item in 1..<itemCount {
+                let otherIndexPath = IndexPath(item: item, section: indexPath.section)
+                collectionView.deselectItem(at: otherIndexPath, animated: false)
             }
+            // 전체 선택만 남기기
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        } else {
+            // 나머지 태그 클릭 시: 해당 section의 전체 선택 해제
+            let allSelectIndexPath = IndexPath(item: 0, section: indexPath.section)
+            collectionView.deselectItem(at: allSelectIndexPath, animated: false)
         }
     }
 }

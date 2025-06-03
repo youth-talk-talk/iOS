@@ -84,6 +84,7 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray50.cgColor
         $0.placeholder = "20"
+        $0.keyboardType = .numberPad
     }
     
     private let ageSuffixLabel = UILabel().then {
@@ -105,6 +106,8 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         applyThumbShadow()
         annualIncomeSlider.addTarget(self, action: #selector(incomeSliderChanged), for: .valueChanged)
         updateIncomeLabel()
+        setupKeyboardDismissGesture()
+        setupTextFieldAccessory()
     }
     
     // MARK: - SetupUI
@@ -205,5 +208,26 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         return numberFormatter.string(from: NSNumber(value: value)) ?? "\(value)"
+    }
+    
+    // 화면 탭 시 키보드 내리기
+    private func setupKeyboardDismissGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // 키보드에 확인 버튼 추가
+    private func setupTextFieldAccessory() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(dismissKeyboard))
+        toolbar.items = [flexSpace, doneButton]
+        ageTextField.inputAccessoryView = toolbar
     }
 }

@@ -47,7 +47,6 @@ final class FilterBottomSheetViewController: UIViewController {
     private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     private lazy var pages: [UIViewController] = categories.map { category in
-        // TODO: - 뷰컨적용하기
         switch category {
         case "정책분야": return PolicyFieldCategoryViewController()
         case "지역": return RegionCategoryViewController()

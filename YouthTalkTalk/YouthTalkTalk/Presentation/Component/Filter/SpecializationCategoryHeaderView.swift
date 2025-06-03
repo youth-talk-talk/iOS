@@ -1,5 +1,5 @@
 //
-//  EmploymentStatusCategoryHeaderView.swift
+//  SpecializationCategoryHeaderView.swift
 //  YouthTalkTalk
 //
 //  Created by SeokHyun on 6/2/25.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class EmploymentStatusCategoryHeaderView: UICollectionReusableView {
+final class SpecializationCategoryHeaderView: UICollectionReusableView {
     let titleLabel = UILabel().then {
         $0.font = FontManager.font(.p14SemiBold)
         $0.textColor = .gray100
