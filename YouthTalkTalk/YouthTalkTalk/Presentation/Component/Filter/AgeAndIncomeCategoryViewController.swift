@@ -24,17 +24,25 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         $0.text = "0만원 이상"
     }
     
+    private let incomeSteps: [Int] = [
+        0,
+        1200, 1400, 1600, 1800, 2000,
+        2100, 2200, 2300, 2400, 2500,
+        2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000
+    ]
+    
     private lazy var annualIncomeSlider = MultiSlider().then {
         $0.minimumValue = 0
-        $0.maximumValue = 5000
-        $0.value = [0, 5000]
+        $0.maximumValue = CGFloat(incomeSteps.count - 1)
+        $0.value = [0, CGFloat(incomeSteps.count - 1)]
+        $0.snapStepSize = 1
         $0.tintColor = .greenNormal
         $0.outerTrackColor = .gray70
         $0.trackWidth = 4
+        $0.thumbTintColor = .white
         $0.keepsDistanceBetweenThumbs = true
         $0.orientation = .horizontal
-        $0.snapStepSize = 100
-        
+        $0.distanceBetweenThumbs = 1 // 두 원의 사이 최소 간격
         let thumbImage = self.makeCircleImage(diameter: 16, color: .white)
         $0.thumbImage = thumbImage
     }
@@ -95,6 +103,8 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         applyThumbShadow()
+        annualIncomeSlider.addTarget(self, action: #selector(incomeSliderChanged), for: .valueChanged)
+        updateIncomeLabel()
     }
     
     // MARK: - SetupUI
@@ -171,5 +181,29 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         let spacer = UIView()
         spacer.snp.makeConstraints { $0.height.equalTo(height) }
         return spacer
+    }
+    
+    @objc private func incomeSliderChanged() {
+        updateIncomeLabel()
+    }
+    
+    private func updateIncomeLabel() {
+        let minIndex = Int(annualIncomeSlider.value[0])
+        let maxIndex = Int(annualIncomeSlider.value[1])
+        let minValue = incomeSteps[minIndex]
+        let maxValue = incomeSteps[maxIndex]
+        if maxIndex == incomeSteps.count - 1 {
+            slidedAnnualIncomeLabel.text = "\(formatIncome(maxValue))만원 이상"
+        } else if minIndex == maxIndex {
+            slidedAnnualIncomeLabel.text = "\(formatIncome(minValue))만원"
+        } else {
+            slidedAnnualIncomeLabel.text = "\(formatIncome(minValue))만원 ~ \(formatIncome(maxValue))만원"
+        }
+    }
+    
+    private func formatIncome(_ value: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: value)) ?? "\(value)"
     }
 }
