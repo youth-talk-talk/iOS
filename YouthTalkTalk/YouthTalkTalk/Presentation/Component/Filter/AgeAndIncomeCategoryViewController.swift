@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import MultiSlider
 
 final class AgeAndIncomeCategoryViewController: UIViewController {
     // MARK: - Properties
@@ -23,13 +24,19 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         $0.text = "0만원 이상"
     }
     
-    private let annualIncomeSlider = UISlider().then {
+    private lazy var annualIncomeSlider = MultiSlider().then {
         $0.minimumValue = 0
         $0.maximumValue = 5000
-        $0.value = 0
-        $0.minimumTrackTintColor = .greenNormal
-        $0.maximumTrackTintColor = .gray70
-        $0.thumbTintColor = .white
+        $0.value = [0, 5000]
+        $0.tintColor = .greenNormal
+        $0.outerTrackColor = .gray70
+        $0.trackWidth = 4
+        $0.keepsDistanceBetweenThumbs = true
+        $0.orientation = .horizontal
+        $0.snapStepSize = 100
+        
+        let thumbImage = self.makeCircleImage(diameter: 16, color: .white)
+        $0.thumbImage = thumbImage
     }
     private let annualIncomeMinLabel = UILabel().then {
         $0.font = FontManager.font(.p12Medium)
@@ -87,9 +94,20 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        applyThumbShadow()
     }
     
     // MARK: - SetupUI
+    private func applyThumbShadow() {
+      for thumb in annualIncomeSlider.thumbViews {
+        thumb.layer.shadowColor = UIColor.black.cgColor
+        thumb.layer.shadowOpacity = 0.15
+        thumb.layer.shadowOffset = CGSize(width: 0, height: 2)
+        thumb.layer.shadowRadius = 4
+        thumb.layer.masksToBounds = false
+      }
+    }
+    
     private func setupLayout() {
         view.addSubview(verticalStackView)
         verticalStackView.snp.makeConstraints {
@@ -105,9 +123,9 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         verticalStackView.addArrangedSubview(incomeTitleRow)
         verticalStackView.addArrangedSubview(self.makeSpacer(height: 10)) // spacer
         
-        // 연소득 슬라이더
+        // 연소득 MultiSlider
         verticalStackView.addArrangedSubview(annualIncomeSlider)
-        annualIncomeSlider.snp.makeConstraints { $0.height.equalTo(18) }
+        annualIncomeSlider.snp.makeConstraints { $0.height.equalTo(32) }
         
         verticalStackView.addArrangedSubview(self.makeSpacer(height: 6)) // spacer
         
@@ -134,6 +152,19 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         verticalStackView.addArrangedSubview(ageInputRow)
         ageTextField.snp.makeConstraints { $0.width.equalTo(120); $0.height.equalTo(46) }
+    }
+    
+    
+    // MARK: - Private
+    private func makeCircleImage(diameter: CGFloat, color: UIColor) -> UIImage {
+        let rect = CGRect(origin: .zero, size: CGSize(width: diameter, height: diameter))
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fillEllipse(in: rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
     }
     
     private func makeSpacer(height: CGFloat) -> UIView {
