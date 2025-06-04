@@ -21,7 +21,7 @@ final class FilterBottomSheetViewController: UIViewController {
         $0.textColor = .gray100
     }
     
-    private let categories = ["정책분야", "지역", "학력", "취업상태", "특화 분야", "연령 및 소득"]
+    private let categories = FilterCategory.allCases.map { $0.rawValue }
     
     private let categoryScrollView = UIScrollView().then {
         $0.showsHorizontalScrollIndicator = false
@@ -100,8 +100,8 @@ final class FilterBottomSheetViewController: UIViewController {
         view.backgroundColor = .white
         setupLayout()
         setupCategories()
-        setupPageViewController()
         setupIndicatorBar()
+        setupPageViewController()
     }
     
     override func viewDidLayoutSubviews() {
@@ -205,9 +205,11 @@ final class FilterBottomSheetViewController: UIViewController {
     }
     
     private func setupPageViewController() {
-        pageViewController.setViewControllers([pages[0]], direction: .forward, animated: false)
+        pageViewController.setViewControllers([self.pages[self.currentIndex]], direction: .forward, animated: false)
         pageViewController.delegate = self
         pageViewController.dataSource = self
+        updateCategorySelection(to: self.currentIndex)
+        scrollToCategory(at: self.currentIndex)
     }
     
     private func setupIndicatorBar() {
