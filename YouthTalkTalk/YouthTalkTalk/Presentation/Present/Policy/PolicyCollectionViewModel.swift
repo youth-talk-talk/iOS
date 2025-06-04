@@ -18,8 +18,7 @@ final class PolicyCollectionViewModel {
                                                                 (.work, .job),
                                                                 (.culture, .life),
                                                                 (.apply, .participation)]
-    
-    private(set) var filters: [String] = ["정책분야", "지역", "취업상태", "학력", "특화 분야", "연령 및 소득"]
+    private(set) var filters: [FilterCategory] = FilterCategory.allCases
     
     private(set) var policies: [PolicyDTO] = []
     

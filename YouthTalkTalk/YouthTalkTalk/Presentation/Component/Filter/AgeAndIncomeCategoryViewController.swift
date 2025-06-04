@@ -85,6 +85,7 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         $0.layer.borderColor = UIColor.gray50.cgColor
         $0.placeholder = "20"
         $0.keyboardType = .numberPad
+        $0.isUserInteractionEnabled = true
     }
     
     private let ageSuffixLabel = UILabel().then {
@@ -107,8 +108,9 @@ final class AgeAndIncomeCategoryViewController: UIViewController {
         annualIncomeSlider.addTarget(self, action: #selector(incomeSliderChanged), for: .valueChanged)
         updateIncomeLabel()
         setupKeyboardDismissGesture()
-        setupTextFieldAccessory()
+//        setupTextFieldAccessory()
     }
+    
     
     // MARK: - SetupUI
     private func applyThumbShadow() {

@@ -59,9 +59,9 @@ final class FilterBottomSheetViewController: UIViewController {
         
     }
     
-    private var currentIndex: Int = 0
+    private var currentIndex: Int
     
-    // MARK: - Bottom Buttons
+    // Bottom Buttons
     private let resetButton = UIButton(type: .system).then {
         $0.setTitle("초기화", for: .normal)
         $0.setTitleColor(.gray70, for: .normal)
@@ -85,6 +85,16 @@ final class FilterBottomSheetViewController: UIViewController {
     }
     
     // MARK: - LifeCycle
+    init(currentIndex: Int = 0) {
+        self.currentIndex = currentIndex
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

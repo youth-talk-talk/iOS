@@ -132,7 +132,7 @@ extension PolicyCollectionViewController: UICollectionViewDelegate, UICollection
         if collectionView == searchFilterCollectionView {
             guard let cell: SearchFilterCell = collectionView.dequeueCell(for: indexPath) else { return .init() }
             
-            let filterTitle = viewModel.filters[indexPath.row]
+            let filterTitle = viewModel.filters[indexPath.row].rawValue
             
             cell.setTitle(filterTitle)
             
